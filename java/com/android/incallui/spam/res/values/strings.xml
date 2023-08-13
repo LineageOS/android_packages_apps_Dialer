@@ -31,10 +31,6 @@
   <string name="spam_notification_non_spam_call_expanded_text">This is the first time this number called you. If this call was spam, you can block this number and report it.</string>
   <!-- Text displayed in the collapsed notification to the user after a spam call ends. [CHAR LIMIT=100] -->
   <string name="spam_notification_spam_call_collapsed_text">Tap to report as not spam or block it</string>
-  <!-- Text for the reporting spam action in the after call prompt. [CHAR LIMIT=20] -->
-  <string name="spam_notification_report_spam_action_text">Block &amp; report</string>
-  <!-- Text for the adding to contacts action in the after call prompt. [CHAR LIMIT=20] -->
-  <string name="spam_notification_add_contact_action_text">Add contact</string>
   <!-- Text for the adding to contacts action in the after call dialog. [CHAR LIMIT=40] -->
   <string name="spam_notification_dialog_add_contact_action_text">Add to contacts</string>
   <!-- Text for the blocking and reporting spam action in the after call dialog. [CHAR LIMIT=40] -->

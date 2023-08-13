@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">PANAIKINTI BLOKAVIMĄ</string>
   <string name="block_report_number_alert_title">Blokuoti numerį %1$s?</string>
   <string name="block_report_number_alert_details">Nebegausite skambučių iš šio numerio.</string>
-  <string name="block_number_alert_details">%1$s Apie šį skambutį bus pranešta kaip apie šlamštą.</string>
   <string name="unblock_number_alert_details">Šio nr. blok. bus pan. ir apie jį bus pran. kaip ne apie šl. siunt. Būs. sk. nebus nust. kaip šl.</string>
   <string name="unblock_report_number_alert_title">Panaikinti numerio %1$s blokavimą?</string>
   <string name="report_not_spam_alert_button">Pranešti</string>

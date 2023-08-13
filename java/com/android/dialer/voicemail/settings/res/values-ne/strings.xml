@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">भ्वाइस मेल (%s)</string>
   <string name="voicemail_settings_title">भ्वाइस मेल</string>
   <string name="voicemail_notifications_preference_title">सूचनाहरू</string>
   <string name="voicemail_change_greeting_preference_title">भ्वाइस मेलको अभिभावदन</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">PIN परिवर्तन गर्नुहोस्</string>
   <string name="voicemail_change_pin_preference_summary_disable">PIN परिवर्तन गर्न  भिजुअल भ्वाइस मेल अनिवार्य रूपमा सक्षम पारिएको हुनु पर्छ</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">भिजुअल भ्वाइस मेल अझै सक्रिय गरिएको छैन, कृपया पछि फेरि प्रयास गर्नुहोस्</string>
-  <string name="vm_change_pin_old_pin">पुरानो PIN</string>
-  <string name="vm_change_pin_new_pin">नयाँ PIN</string>
   <string name="vm_change_pin_progress_message">कृपया प्रतीक्षा गर्नुहोस्।</string>
   <string name="vm_change_pin_error_too_short">नयाँ PIN अत्यन्त छोटो छ।</string>
   <string name="vm_change_pin_error_too_long">नयाँ PIN अत्यन्त लामो छ।</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN हरू मेल खाँदैनन्</string>
   <string name="change_pin_succeeded">भ्वाइस मेलको PIN अद्यावधिक गरियो</string>
   <string name="change_pin_system_error">PIN सेट गर्न सकिएन</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">भ्वाइस मेलको ट्रान्स्क्रिप्सन</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">भ्वाइस मेलको ट्रान्स्क्रिप्सनसम्बन्धी विश्लेषण</string>
   <string name="voicemail_activating_summary_info">भ्वाइस मेल सक्रिय गरिँदै छ</string>
-  <string name="voicemail_transcription_preference_summary_info">Google को ट्रान्स्क्रिप्सन सेवा प्रयोग गरी आफ्नो भ्वाइस मेलका ट्रान्स्क्रिप्टहरू प्राप्त गर्नुहोस्। %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">ट्रान्स्क्रिप्सनको शुद्धतामा सुधार गर्न Google लाई आफ्नो भ्वाइस मेलका सन्देशहरू समीक्षा गर्न दिनुहोस्। तपाईंको भ्वाइस मेलका सन्देशहरूलाई बेनामी रूपमा भण्डारण गरिन्छ। %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">भिजुअल भ्वाइस मेल निष्क्रिय पार्नुहोस्</string>
   <string name="confirm_disable_voicemail_dialog_message">यस कार्यले यो अनुप्रयोगमा भण्डारण गरिएको सबै भ्वाइस मेल र Google ट्रान्सक्रिप्टहरू मेट्नेछ। तपाईंको सेवा प्रदायकले आफ्ना प्रतिलिपिहरू आफूसँग राख्न पनि सक्नेछ।</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">निष्क्रिय पार्नु…</string>

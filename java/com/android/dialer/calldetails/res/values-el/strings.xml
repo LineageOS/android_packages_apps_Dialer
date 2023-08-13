@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Αντιγραφή αριθμού</string>
   <string name="call_details_edit_number">Επεξεργασία αριθμού πριν από την κλήση</string>
   <string name="call_details_report_call_id">Αναφορά ανακριβούς αριθμού</string>
-  <string name="sent_a_photo">Έγινε αποστολή φωτογραφίας</string>
-  <string name="received_a_photo">Έγινε λήψη φωτογραφίας</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Αναφορά λανθασμένου αριθμού</string>
   <string name="report_caller_id_failed">Δεν ήταν δυνατή η αναφορά του αριθμού</string>
   <string name="report_caller_id_toast">Υποβλήθηκε αναφορά για τον αριθμό</string>

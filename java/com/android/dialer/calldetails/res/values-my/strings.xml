@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">နံပါတ်ကိုကူးယူရန်</string>
   <string name="call_details_edit_number">မခေါ်ဆိုမီ နံပါတ်ကိုပြင်ဆင်ရန်</string>
   <string name="call_details_report_call_id">မတိကျသော နံပါတ်ကို တိုင်ကြားရန်</string>
-  <string name="sent_a_photo">ဓာတ်ပုံ ပို့လိုက်သည်</string>
-  <string name="received_a_photo">ဓာတ်ပုံ လက်ခံရရှိသည်</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">မမှန်ကန်သည့် နံပါတ်ကို တိုင်ကြားရန်</string>
   <string name="report_caller_id_failed">နံပါတ်ကို မတိုင်ကြားနိုင်ပါ</string>
   <string name="report_caller_id_toast">နံပါတ်ကို တိုင်ကြားပြီးပါပြီ</string>

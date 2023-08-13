@@ -17,12 +17,6 @@
 
 <resources>
 
-  <style name="voicemail_media_player_buttons">
-    <item name="android:layout_width">@dimen/voicemail_media_player_width</item>
-    <item name="android:layout_height">@dimen/voicemail_media_player_height</item>
-    <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
-  </style>
-
   <style name="TosTitleStyle">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">20sp</item>

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">مکرراً تماس‌گرفته‌ها پاک شود؟</string>
   <string name="clearFrequentsConfirmation">فهرست افرادی را که مکرر با آن‌ها تماس گرفته‌اید در برنامه‌های «مخاطبین» و «تلفن» پاک خواهید کرد و برنامه‌های رایانامه مجبور می‌شوند که تنظیمات برگزیده آدرس‌دهی شما را از اول یاد بگیرند.</string>
   <string name="clearFrequentsProgress_title">درحال پاک کردن مکرراً تماس‌گرفته…</string>
-  <string name="status_available">در دسترس</string>
-  <string name="status_away">غایب</string>
-  <string name="status_busy">مشغول</string>
-  <string name="contactsList">مخاطبین</string>
-  <string name="contact_suggestions">پیشنهادهای برتر</string>
-  <string name="local_invisible_directory">سایر موارد</string>
   <string name="directory_search_label">فهرست</string>
   <string name="directory_search_label_work">فهرست کار</string>
-  <string name="local_search_label">همه مخاطبین</string>
-  <string name="local_suggestions_search_label">پیشنهادها</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">من</string>
   <string name="missing_name">(بدون نام)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">مشاهده مخاطب</string>
-  <string name="list_filter_phones">همه مخاطبین دارای شماره تلفن</string>
-  <string name="list_filter_phones_work">مخاطبین نمایه کاری</string>
   <string name="view_updates_from_group">مشاهده به‌روزرسانی‌ها</string>
   <string name="account_phone">فقط دستگاه، بدون همگام‌سازی</string>
   <string name="nameLabelsGroup">نام</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">‏گپ با استفاده از ICQ</string>
   <string name="chat_jabber">‏گپ با استفاده از Jabber</string>
   <string name="chat">گپ</string>
-  <string name="list_filter_all_accounts">همه مخاطبین</string>
-  <string name="listAllContactsInAccount">مخاطبین در %s</string>
-  <string name="listCustomView">مخاطبین در نمای سفارشی</string>
-  <string name="listSingleContact">مخاطب تکی</string>
   <string name="display_options_sort_list_by">مرتب‌سازی براساس</string>
   <string name="display_options_sort_by_given_name">نام</string>
   <string name="display_options_sort_by_family_name">نام خانوادگی</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">پاک کردن جستجو</string>
   <string name="select_account_dialog_title">حساب</string>
   <string name="set_default_account">همیشه این سیم برای تماس‌ استفاده شود</string>
-  <string name="select_phone_account_for_calls">سیم‌کارتی برای این تماس انتخاب کنید</string>
-  <string name="select_phone_account_for_calls_remember">این گزینه به خاطر سپرده شود</string>
   <string name="call_with_a_note">تماس به همراه یادداشت</string>
   <string name="call_subject_hint">یادداشتی بنویسید که همراه تماس ارسال شود…</string>
   <string name="send_and_call_button">ارسال و تماس</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> برگه «%1$s». %2$d مورد خوانده‌نشده. </item>
   </plurals>
   <string name="description_search_video_call">تماس ویدیویی</string>
-  <string name="description_search_call_and_share">اشتراک‌گذاری و تماس</string>
 </resources>

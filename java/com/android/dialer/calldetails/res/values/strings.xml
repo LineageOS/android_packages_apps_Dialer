@@ -30,15 +30,6 @@
   <!-- Label for action to report a number with inaccurate caller id information. [CHAR LIMIT=48] -->
   <string name="call_details_report_call_id">Report inaccurate number</string>
 
-  <!-- String shown when the call details show a image that was sent -->
-  <string name="sent_a_photo">Sent a photo</string>
-
-  <!-- String shown when the call details show a image that was received -->
-  <string name="received_a_photo">Received a photo</string>
-
-  <!-- Messages shown to the user are wrapped in quotes, e.g. the user would see "Some text" -->
-  <string name="message_in_quotes">\"<xliff:g id="message">%1$s</xliff:g>\"</string>
-
   <!-- Title of dialog that confirms whether a user wants to report an incorrect number.
        [CHAR LIMIT=NONE] -->
   <string name="report_caller_id_dialog_title">Report incorrect number</string>

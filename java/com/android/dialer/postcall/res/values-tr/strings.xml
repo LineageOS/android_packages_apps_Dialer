@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Acil bir durum var. Beni geri arayın.</string>
   <string name="post_call_message_2">Zamanınız olduğunda beni geri arayın.</string>
   <string name="post_call_message_3">Acil bir durum yok. Daha sonra konuşuruz.</string>
-  <string name="post_call_add_message">Mesaj ekleyin</string>
-  <string name="post_call_send_message">Mesaj gönder</string>
+    <string name="post_call_send_message">Mesaj gönder</string>
   <string name="post_call_message_sent">Mesaj gönderildi</string>
   <string name="view">Görüntüle</string>
 </resources>

@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Është urgjente. Më telefono.</string>
   <string name="post_call_message_2">Më telefono kur të kesh kohë.</string>
   <string name="post_call_message_3">Nuk është urgjente, mund të bisedojmë më vonë.</string>
-  <string name="post_call_add_message">Shto një mesazh</string>
-  <string name="post_call_send_message">Dërgo mesazh</string>
+    <string name="post_call_send_message">Dërgo mesazh</string>
   <string name="post_call_message_sent">Mesazhi u dërgua</string>
   <string name="view">Shiko</string>
 </resources>

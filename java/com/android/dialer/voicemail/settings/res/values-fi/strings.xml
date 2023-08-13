@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Vastaaja (%s)</string>
   <string name="voicemail_settings_title">Vastaaja</string>
   <string name="voicemail_notifications_preference_title">Ilmoitukset</string>
   <string name="voicemail_change_greeting_preference_title">Vastaajatervehdys</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Vaihda PIN-koodi</string>
   <string name="voicemail_change_pin_preference_summary_disable">Ota visuaalinen puhelinvastaaja käyttöön, jotta voit vaihtaa PIN-koodin.</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Visuaalista puhelinvastaajaa ei ole vielä aktivoitu. Yritä myöhemmin uudelleen.</string>
-  <string name="vm_change_pin_old_pin">Vanha PIN-koodi</string>
-  <string name="vm_change_pin_new_pin">Uusi PIN-koodi</string>
   <string name="vm_change_pin_progress_message">Odota.</string>
   <string name="vm_change_pin_error_too_short">Uusi PIN-koodi on liian lyhyt.</string>
   <string name="vm_change_pin_error_too_long">Uusi PIN-koodi on liian pitkä.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN-koodit eivät täsmää.</string>
   <string name="change_pin_succeeded">Vastaajan PIN-koodi päivitetty</string>
   <string name="change_pin_system_error">PIN-koodin määrittäminen epäonnistui.</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Puhelinvastaajan transkriptio</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Vastaajaviestien transkriptioanalyysi</string>
   <string name="voicemail_activating_summary_info">Aktivoidaan puhelinvastaajaa</string>
-  <string name="voicemail_transcription_preference_summary_info">Tilaa vastaajaviestiesi transkriptiot Googlen transkriptiopalvelun avulla. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Myönnä Googlelle oikeus tarkastella vastaajaviestejäsi, jotta transkription tarkkuutta voidaan parantaa. Vastaajaviestit tallennetaan nimettöminä. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Poista visuaalinen vastaaja käytöstä</string>
   <string name="confirm_disable_voicemail_dialog_message">Kaikki tähän sovellukseen tallennetut vastaajaviestit ja Google-transkriptiot poistetaan. Operaattorisi saattaa säilyttää omat kopionsa.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">POISTA KÄYTÖSTÄ</string>

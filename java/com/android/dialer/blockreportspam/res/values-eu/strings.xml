@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">DESBLOKEATU</string>
   <string name="block_report_number_alert_title">%1$s blokeatu nahi duzu?</string>
   <string name="block_report_number_alert_details">Aurrerantzean, ez duzu jasoko zenbaki horren deirik.</string>
-  <string name="block_number_alert_details">%1$s Dei hau spama dela salatuko da.</string>
   <string name="unblock_number_alert_details">Desblokeatu egingo da zenbakia. Aurrerantzean, deiak ez dira identifikatuko spam gisa.</string>
   <string name="unblock_report_number_alert_title">%1$s desblokeatu nahi duzu?</string>
   <string name="report_not_spam_alert_button">Salatu</string>

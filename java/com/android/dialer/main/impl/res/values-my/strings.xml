@@ -18,12 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="main_activity_label" msgid="3121599977875141886">"ဖုန်း"</string>
-    <string name="search" msgid="3570654445331155513">"@android:string/search_go"</string>
-    <string name="description_search" msgid="3443578912463129718">"အဆက်အသွယ်များနှင့် နေရာများကို ရှာဖွေရန်"</string>
-    <string name="contacts" msgid="4464246185723317911">"အဆက်အသွယ်များ"</string>
-    <string name="description_contacts" msgid="12768481422137448">"အဆက်အသွယ်များကို ကြည့်ရှုရန်"</string>
     <string name="tab_title_call_history" msgid="5191872501729332994">"ခေါ်ဆိုမှု"</string>
     <string name="tab_title_speed_dial" msgid="1968484500112572774">"နံပါတ်ကွက်"</string>
     <string name="tab_title_voicemail" msgid="4777655983569268504">"အသံမေးလ်"</string>
-    <string name="settings" msgid="7614336599112169779">"ဆက်တင်များ"</string>
 </resources>

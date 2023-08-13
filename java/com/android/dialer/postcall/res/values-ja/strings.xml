@@ -4,8 +4,7 @@
   <string name="post_call_message_1">至急お伝えしたいことがあるので、折り返しお電話ください。</string>
   <string name="post_call_message_2">お時間のあるときにお電話ください。</string>
   <string name="post_call_message_3">急ぎではないので、また後でかけ直します。</string>
-  <string name="post_call_add_message">メッセージを追加できます</string>
-  <string name="post_call_send_message">メッセージを送信</string>
+    <string name="post_call_send_message">メッセージを送信</string>
   <string name="post_call_message_sent">メッセージを送信しました</string>
   <string name="view">表示</string>
 </resources>

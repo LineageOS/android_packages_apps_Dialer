@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Sürgős. Hívjon vissza.</string>
   <string name="post_call_message_2">Hívjon vissza, ha alkalmas.</string>
   <string name="post_call_message_3">Nem sürgős, ráér később.</string>
-  <string name="post_call_add_message">Üzenet hozzáadása</string>
-  <string name="post_call_send_message">Üzenet küldése</string>
+    <string name="post_call_send_message">Üzenet küldése</string>
   <string name="post_call_message_sent">Üzenet elküldve</string>
   <string name="view">Megtekintés</string>
 </resources>

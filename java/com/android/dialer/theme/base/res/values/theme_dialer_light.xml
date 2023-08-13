@@ -73,10 +73,6 @@
     <item name="colorIconSecondary">@color/google_grey_400</item>
     <item name="colorTextOnUnthemedDarkBackground">@*android:color/system_neutral1_0</item>
     <item name="colorIconOnUnthemedDarkBackground">@*android:color/system_neutral1_0</item>
-    <item name="colorMobileTerminatingChatText">@color/google_grey_900</item>
-    <item name="colorMobileTerminatingChatBackground">@color/google_grey_100</item>
-    <item name="colorMobileOriginatingChatText">@color/google_blue_900</item>
-    <item name="colorMobileOriginatingChatBackground">@color/google_blue_100</item>
     <item name="colorPrimary20pct">@color/dialer_theme_color_20pct</item>
   </style>
 

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">اکثر رابطہ کردہ کو صاف کریں؟</string>
   <string name="clearFrequentsConfirmation">آپ رابطے اور فون ایپس میں اکثر رابطہ کردہ فہرست کو صاف کر دیں گے اور ای میل ایپس کو از سر نو اپنے پتے کی ترجیحات جاننے پر مجبور کریں گے۔</string>
   <string name="clearFrequentsProgress_title">اکثر رابطہ کردہ کو صاف کر رہا ہے…</string>
-  <string name="status_available">دستیاب</string>
-  <string name="status_away">دور</string>
-  <string name="status_busy">مصروف</string>
-  <string name="contactsList">رابطے</string>
-  <string name="contact_suggestions">سرفہرست تجویز کردہ</string>
-  <string name="local_invisible_directory">دیگر</string>
   <string name="directory_search_label">ڈائریکٹری</string>
   <string name="directory_search_label_work">دفتری ڈائرکٹری</string>
-  <string name="local_search_label">سبھی رابطے</string>
-  <string name="local_suggestions_search_label">تجاویز</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">میں</string>
   <string name="missing_name">(کوئی نام نہیں)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">رابطہ دیکھیں</string>
-  <string name="list_filter_phones">فون نمبرز کے ساتھ سبھی رابطے</string>
-  <string name="list_filter_phones_work">دفتری پروفائل رابطے</string>
   <string name="view_updates_from_group">اپ ڈیٹس دیکھیں</string>
   <string name="account_phone">صرف آلہ۔ غیر مطابقت پذیر</string>
   <string name="nameLabelsGroup">نام</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">‏ICQ کے ذریعے چیٹ کریں</string>
   <string name="chat_jabber">‏Jabber کے ذریعے چیٹ کریں</string>
   <string name="chat">چیٹ کریں</string>
-  <string name="list_filter_all_accounts">سبھی رابطے</string>
-  <string name="listAllContactsInAccount">%s میں رابطے</string>
-  <string name="listCustomView">حسب ضرورت منظر میں رابطے</string>
-  <string name="listSingleContact">واحد رابطہ</string>
   <string name="display_options_sort_list_by">ترتیب دیں بلحاظ</string>
   <string name="display_options_sort_by_given_name">پہلا نام</string>
   <string name="display_options_sort_by_family_name">آخری نام</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">تلاش صاف کریں</string>
   <string name="select_account_dialog_title">اکاؤنٹ</string>
   <string name="set_default_account">کالز کیلئے ہمیشہ اس کا استعمال کریں</string>
-  <string name="select_phone_account_for_calls">‏اس کال کیلئے SIM منتخب کریں</string>
-  <string name="select_phone_account_for_calls_remember">یہ انتخاب یاد رکھیں</string>
   <string name="call_with_a_note">ایک نوٹ کے ساتھ کال کریں</string>
   <string name="call_subject_hint">کال کے ساتھ بھیجنے کیلئے ایک نوٹ ٹائپ کریں…</string>
   <string name="send_and_call_button">بھیجیں اور کال کریں</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s ٹیب۔ %2$d بغیر پڑھی ہوئی آئٹمز۔ </item>
   </plurals>
   <string name="description_search_video_call">ویڈیو کال</string>
-  <string name="description_search_call_and_share">اشتراک کریں اور کال کریں</string>
 </resources>

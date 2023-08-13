@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Kopiér nummeret</string>
   <string name="call_details_edit_number">Rediger nummeret før du ringer</string>
   <string name="call_details_report_call_id">Rapportér feil nummer</string>
-  <string name="sent_a_photo">Et bilde ble sendt</string>
-  <string name="received_a_photo">Et bilde ble mottatt</string>
-  <string name="message_in_quotes">«%1$s»</string>
   <string name="report_caller_id_dialog_title">Rapportér feil nummer</string>
   <string name="report_caller_id_failed">Kunne ikke rapportere nummeret</string>
   <string name="report_caller_id_toast">Nummeret er rapportert</string>

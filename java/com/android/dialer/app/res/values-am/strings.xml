@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">ስልክ</string>
-  <string name="launcherDialpadActivityLabel">የስልክ የቁልፍ ሰሌዳ</string>
   <string name="callHistoryIconLabel">የጥሪ ታሪክ</string>
   <string name="action_copy_number_text">ቁጥር ቅዳ</string>
   <string name="action_edit_number_before_call">ከመደወል በፊት ቁጥር አርትዕ</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">ተጨማሪ አማራጮች</string>
   <string name="action_menu_dialpad_button">ቁልፍ ሰሌዳ</string>
   <string name="dialer_settings_label">ቅንብሮች</string>
-  <string name="simulator_submenu_label">ማስመሰያ</string>
-  <string name="new_ui_launcher_shortcut_label">አዲስ የዩአይ አቋራጭ ፍጠር</string>
   <string name="description_entering_bulk_action_mode">ወደ የጅምላ እርምጃ ሁነታ በመግባት ላይ</string>
   <string name="description_leaving_bulk_action_mode">ከጅምላ እርምጃ ሁነታ ለቀው ወጥተዋል</string>
   <string name="description_selecting_bulk_action_mode">%1$s ተመርጧል</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">የቪዲዮ ጥሪ።</string>
   <string name="description_start_voice_search">በድምፅ ፍለጋ ይጀምሩ</string>
   <string name="voicemail">የድምፅ መልዕክት  </string>
-  <string name="description_cancel_multi_select">የጅምላ እርምጃ ሁነታ ይቅር</string>
   <string name="voicemailMultiSelectDeleteConfirm">ሰርዝ</string>
   <string name="voicemailMultiSelectDeleteCancel">ይቅር</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s ተመርጠዋል</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">የድምጽ ፍለጋ አይገኝም</string>
   <string name="dialer_hint_find_contact">ዕውቅያዎችን ፈልግ</string>
-  <string name="block_number_search_hint">ቁጥር ያክሉ ወይም እውቂያዎችን ይፈልጉ</string>
   <string name="call_log_all_empty">የእርስዎ የጥሪ ታሪክ ባዶ ነው</string>
   <string name="call_log_all_empty_action">ደውል</string>
   <string name="call_log_missed_empty">ምንም ያመለጡዎት ጥሪዎች የሉዎትም።</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">የስልክ ጥሪ ታሪክ</string>
   <string name="call_log_all_title">ሁሉም</string>
   <string name="call_log_missed_title">ያመለጡ</string>
-  <string name="tab_speed_dial">ፈጣን ደውል</string>
-  <string name="tab_history">የጥሪ ታሪክ</string>
   <string name="tab_all_contacts">ዕውቂያዎች</string>
-  <string name="tab_voicemail">የድምፅ መልዕክት</string>
-  <string name="search_shortcut_call_number">ደውል%s</string>
   <string name="search_shortcut_create_new_contact">አዲስ እውቂያ ይፍጠሩ</string>
   <string name="search_shortcut_add_to_contact">ወደ እውቂያ አክል</string>
   <string name="search_shortcut_send_sms_message">ኤስኤምኤስ ላክ</string>
   <string name="search_shortcut_make_video_call">የቪዲዮ ጥሪ አድርግ</string>
-  <string name="search_shortcut_block_number">ቁጥርን አግድ</string>
-  <string name="speed_dial_empty">በፈጥኖ መደወያ ላይ ገና ማንም የለዎትም</string>
-  <string name="speed_dial_empty_add_favorite_action">ተወዳጅ አክል</string>
-  <string name="remove_contact">አስወግድ</string>
   <string name="select_all">ሁሉንም ምረጥ</string>
   <string name="call_log_action_video_call">የቪዲዮ ጥሪ</string>
-  <string name="call_log_action_set_up_video">የቪዲዮ ጥሪ ያዋቅሩ</string>
-  <string name="call_log_action_invite_video">ወደ የቪዲዮ ጥሪ ይጋብዙ</string>
   <string name="call_log_action_send_message">መልዕክት ላክ</string>
   <string name="call_log_action_details">የጥሪ ዝርዝሮች</string>
   <string name="call_log_action_share_voicemail">ላክ ወደ…</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">ጥሪዎች</string>
   <string name="manage_blocked_numbers_label">የታገዱ ቁጥሮች</string>
   <string name="voicemail_settings_label">የድምፅ መልዕክት</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">ጥሪን ማገድ ለጊዜው ተሰናክሏል</string>
-  <string name="blocked_numbers_disabled_emergency_desc">ባለፉት 48 ሰዓቶች ውስጥ ከዚህ ስልክ ሆነው የአስቸኳይ አደጋ አገልግሎቶችን ስላነጋገሩ ጥሪን ማገድ ተሰናክሏል። አንዴ የ48 ሰዓቱ ጊዜ ካለፈ በኋላ በራስ-ሰር ዳግም ይነቃል።</string>
-  <string name="import_send_to_voicemail_numbers_label">ቁጥሮችን አስመጣ</string>
-  <string name="blocked_call_settings_import_description">ከዚህ ቀደም አንዳንድ ደዋዮች በሌሎች መተግበሪያዎች በኩል በራስ-ሰር ወደ የድምፅ መልዕክት እንዲላኩ ምልክት አድርገባቸው ነበር።</string>
-  <string name="blocked_call_settings_view_numbers_button">ቁጥሮችን ይመልከቱ</string>
-  <string name="blocked_call_settings_import_button">አስመጣ</string>
-  <string name="description_blocked_number_list_delete">ቁጥርን አታግድ</string>
-  <string name="addBlockedNumber">ቁጥር አክል</string>
-  <string name="block_number_footer_message_vvm">ከእነዚህ ቁትሮች የሚመጡ ጥሪዎች ይታገዳሉ፣ እና የድምጽ መልዕክቶች በራስ-ሰር ይሰረዛሉ።</string>
-  <string name="block_number_footer_message_no_vvm">ከእነዚህ ቁትሮች የሚመጡ ጥሪዎች ይታገዳሉ፣ ነገር ግን አሁንም የድምጽ መልዕክቶችን ሊተዉልዎ ይችላሉ።</string>
-  <string name="block_list">የታገዱ ቁጥሮች</string>
-  <string name="alreadyBlocked">%1$s ቀድሞውኑ ታግዷል።</string>
   <string name="phone_account_settings_label">የመደወያ መለያዎች</string>
-  <string name="permission_no_speeddial">ፈጥኖ መደወያን ለማንቃት የእውቂያዎች ፍቃዱን ያብሩ።</string>
   <string name="permission_no_calllog">የጥሪ ምዝግብ ማስታወአሽዎን ለማየት የስልክ ፍቃዱን ያብሩ።</string>
-  <string name="permission_no_search">የእርስዎን እውቂያዎች ለመከታተል የእውቂያዎች ፍቃዶችን ያብሩ።</string>
-  <string name="permission_place_call">ስልክ ለመደወል የስልክ ፍቃዱን ያብሩ።</string>
   <string name="toast_cannot_write_system_settings">የስልክ መተግበሪያ ወደ የስርዓት ቅንብሮች የመጻፍ ፍቃድ የለውም።</string>
   <string name="blocked_number_call_log_label">ታግዷል</string>
   <string name="call_log_action_block_report_number">አይፈለጌ መልእክትን አግድ/ሪፖርት አድርግ</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">አይፈለጌ መልዕክት አይደለም</string>
   <string name="call_log_action_unblock_number">ቁጥርን አታግድ</string>
   <string name="spam_number_call_log_label">አይፈለጌ መልዕክት</string>
-  <string name="call_composer_connection_failed">%1$s ከመስመር ውጭ ነው እና ሊደረስበት አይችልም</string>
-  <string name="about_phone_label">ስለ</string>
-  <string name="voicemail_transcription_branding_text">በGoogle ወደ ጽሁፍ የተለወጠ</string>
-  <string name="voicemail_transcription_in_progress">ወደ ፅሁፍ በመገልበጥ ላይ…</string>
-  <string name="voicemail_transcription_failed">ወደ ጽሁፍ ግልባጭ የለም።</string>
-  <string name="voicemail_transcription_failed_language_not_supported">ወደ ጽሁፍ ግልባጭ የለም። ቋንቋ አይደገፍም።</string>
-  <string name="voicemail_transcription_failed_no_speech">ወደ ጽሁፍ ግልባጭ የለም። ምንም ንግግር አልተደመጠም።</string>
-  <string name="voicemail_donation_promo_title">ወደ ጽሁፍ ግልበጣን ጥራት ለማሻሻል ያግዛሉ?</string>
-  <string name="voicemail_donation_promo_content">Google ይህን እና የወደፊት የድምጽ መልዕክቶችን ወደ ጽሁፍ ግለበጣን በመጠቀም እንዲገመግም ይፍቀዱ። የማንነታቸው ሳይገለጽ ይቀመጣሉ። ቅንብሮችን በማንኛውም ጊዜ ይቀይሩ። %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">አዎ ገብቼያለሁ</string>
-  <string name="voicemail_donation_promo_opt_out">አይ አመሰግናለሁ</string>
-  <string name="voicemail_transcription_rating">ወደ ጽሁፍ የመገልበጥ ጥራትን ደረጃ ይስጡ</string>
-  <string name="voicemail_transcription_rating_thanks">ለግብረመልስዎ እናመሰግናለን</string>
-  <string name="description_rating_good">ውደድ</string>
-  <string name="description_rating_bad">አይውደዱ</string>
-  <string name="view_conversation">አሳይ</string>
-  <string name="ec_data_deleted">ጥሪ ተሰርዟል። በዚህ ጥሪ ወቅት በመልዕክቶች ውስጥ የተጋሩ አባሪዎችን ይመልከቱ እንዲሁም ይሰርዙ።</string>
-  <string name="multiple_ec_data_deleted">ጥሪ ተሰርዟል። በዚህ ጥሪ ወቅት በመልዕክቶች ውስጥ የተጋሩ አባሪዎችን ይመልከቱ እንዲሁም ይሰርዙ።</string>
 </resources>

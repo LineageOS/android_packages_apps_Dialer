@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Dit is dringend. Bel my terug.</string>
   <string name="post_call_message_2">Bel my terug wanneer jy \'n tydjie het.</string>
   <string name="post_call_message_3">Nie dringend nie, ons kan later klets.</string>
-  <string name="post_call_add_message">Voeg boodskap by</string>
-  <string name="post_call_send_message">Stuur boodskap</string>
+    <string name="post_call_send_message">Stuur boodskap</string>
   <string name="post_call_message_sent">Boodskap is gestuur</string>
   <string name="view">Bekyk</string>
 </resources>

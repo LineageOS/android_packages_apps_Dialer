@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Brisati podatke o čestim kontaktima?</string>
   <string name="clearFrequentsConfirmation">Izbrisat ćete popis osoba s kojima često kontaktirate u aplikacijama Kontakti i Osobe, pa će aplikacije e-pošte morati ispočetka učiti vaše postavke adresiranja.</string>
   <string name="clearFrequentsProgress_title">Brisanje često kontaktiranih...</string>
-  <string name="status_available">Dostupan</string>
-  <string name="status_away">Odsutan</string>
-  <string name="status_busy">Zauzet</string>
-  <string name="contactsList">Kontakti</string>
-  <string name="contact_suggestions">Najbolji prijedlozi</string>
-  <string name="local_invisible_directory">Drugo</string>
   <string name="directory_search_label">Direktorij</string>
   <string name="directory_search_label_work">Poslovni direktorij</string>
-  <string name="local_search_label">Svi kontakti</string>
-  <string name="local_suggestions_search_label">Prijedlozi</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ja</string>
   <string name="missing_name">(Bez imena)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Prikaži kontakt</string>
-  <string name="list_filter_phones">Svi kontakti s telefonskim brojevima</string>
-  <string name="list_filter_phones_work">Poslovni kontakti</string>
   <string name="view_updates_from_group">Prikaži ažuriranja</string>
   <string name="account_phone">Samo uređaj, bez sinkronizacije</string>
   <string name="nameLabelsGroup">Ime</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Chatajte pomoću ICQ-a</string>
   <string name="chat_jabber">Chatajte uz Jabber</string>
   <string name="chat">Chat</string>
-  <string name="list_filter_all_accounts">Svi kontakti</string>
-  <string name="listAllContactsInAccount">Kontakti na računu %s</string>
-  <string name="listCustomView">Kontakti u prilagođenom prikazu</string>
-  <string name="listSingleContact">Jedan kontakt</string>
   <string name="display_options_sort_list_by">Poredaj po</string>
   <string name="display_options_sort_by_given_name">Ime</string>
   <string name="display_options_sort_by_family_name">Prezime</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Brisanje pretraživanja</string>
   <string name="select_account_dialog_title">Račun</string>
   <string name="set_default_account">Uvijek upotrebljavaj za pozive</string>
-  <string name="select_phone_account_for_calls">Odabir SIM-a za ovaj poziv</string>
-  <string name="select_phone_account_for_calls_remember">Zapamti ovaj odabir</string>
   <string name="call_with_a_note">Poziv uz bilješku</string>
   <string name="call_subject_hint">Napišite bilješku koju ćete poslati uz poziv...</string>
   <string name="send_and_call_button">POŠALJI I NAZOVI</string>
@@ -142,5 +124,4 @@
     <item quantity="other"> Kartica %1$s. %2$d nepročitanih stavki. </item>
   </plurals>
   <string name="description_search_video_call">Videopoziv</string>
-  <string name="description_search_call_and_share">Dijeli i pozovi</string>
 </resources>

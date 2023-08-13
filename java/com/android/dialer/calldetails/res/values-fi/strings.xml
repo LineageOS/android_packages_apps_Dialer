@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Kopioi numero</string>
   <string name="call_details_edit_number">Muokkaa numeroa ennen puhelua</string>
   <string name="call_details_report_call_id">Ilmoita epätarkasta numerosta</string>
-  <string name="sent_a_photo">Lähetetty kuva</string>
-  <string name="received_a_photo">Vastaanotettu kuva</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Ilmoita väärästä numerosta</string>
   <string name="report_caller_id_failed">Numerosta ilmoittaminen epäonnistui.</string>
   <string name="report_caller_id_toast">Numeroa koskeva ilmoitus lähetettiin.</string>

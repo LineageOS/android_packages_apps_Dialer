@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">اختيار نوع المكالمة</string>
   <string name="disambig_option_video_call">فيديو</string>
   <string name="disambig_option_voice_call">اتصال</string>
-  <string name="add_favorite_activity_title">إضافة إلى المُفضلة</string>
   <string name="contact_menu_voice_call">مكالمة صوتية</string>
   <string name="contact_menu_video_call">مكالمة فيديو</string>
   <string name="contact_menu_message">رسالة</string>

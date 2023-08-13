@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Copia el número</string>
   <string name="call_details_edit_number">Edita el número abans de trucar</string>
   <string name="call_details_report_call_id">Informa d\'un número incorrecte</string>
-  <string name="sent_a_photo">S\'ha enviat una foto</string>
-  <string name="received_a_photo">S\'ha rebut una foto</string>
-  <string name="message_in_quotes">%1$s</string>
   <string name="report_caller_id_dialog_title">Informa d\'un número incorrecte</string>
   <string name="report_caller_id_failed">No s\'ha pogut informar del número</string>
   <string name="report_caller_id_toast">S\'ha informat del número</string>

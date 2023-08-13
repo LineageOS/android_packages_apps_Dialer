@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">განბლოკვა</string>
   <string name="block_report_number_alert_title">გსურთ, დაბლოკოთ %1$s?</string>
   <string name="block_report_number_alert_details">ამ ნომრიდან ზარებს აღარ მიიღებთ.</string>
-  <string name="block_number_alert_details">%1$s ეს ზარი მოინიშნება სპამად.</string>
   <string name="unblock_number_alert_details">ეს ნომერი განიბლოკება და გაიგზავნება სპამის გაუქმ. შეტყობინება. მომავალი ზარები სპამად არ ჩაითვლება.</string>
   <string name="unblock_report_number_alert_title">გსურთ, განბლოკოთ %1$s?</string>
   <string name="report_not_spam_alert_button">ანგარიში</string>

@@ -22,14 +22,4 @@
   <string name="rtt_promotion_details">RTT assists callers who are deaf, hard of hearing, have a speech
     disability, or need more than voice alone. RTT messaging transcripts are stored on your device
     in the call history. <xliff:g exmaple="Learn More">%1$s</xliff:g></string>
-
-  <!-- Header on the Duo disclosure card. [CHAR_LIMIT=60] -->
-  <string name="duo_disclosure_title">
-    Make video calls with Duo
-  </string>
-
-  <!-- Details on the Duo disclosure card. [CHAR_LIMIT=200] -->
-  <string name="duo_disclosure_details">
-    Google Duo video calling lets you chat with friends and family face-to-face. Data charges may apply. <xliff:g example="Learn More">%1$s</xliff:g>
-  </string>
 </resources>

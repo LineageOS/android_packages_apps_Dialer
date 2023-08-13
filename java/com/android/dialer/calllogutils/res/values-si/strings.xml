@@ -34,27 +34,7 @@
   <string name="voicemail_string">හඬ තැපෑල</string>
   <string name="just_now">මේ දැන්</string>
   <string name="new_call_log_carrier_video">වාහක වීඩියෝව</string>
-  <string name="new_call_log_duo_video">Duo වීඩියෝව</string>
   <string name="new_call_log_unknown">නොදන්නා</string>
   <string name="new_call_log_secondary_blocked">අවහිර කරන ලදි</string>
   <string name="new_call_log_secondary_spam">අයාචිත</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">ඇමතුම් ^1කි, නවතම එක වන්නේ ^2 වෙතින් මගහැරුණු ඇමතුමකි</item>
-    <item quantity="other">ඇමතුම් ^1කි, නවතම එක වන්නේ ^2 වෙතින් මගහැරුණු ඇමතුමකි</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">ඇමතුම් ^1කි, නවතම එක වන්නේ ^2 වෙතින් පිළිතුරු දුන් ඇමතුමකි</item>
-    <item quantity="other">ඇමතුම් ^1කි, නවතම එක වන්නේ ^2 වෙතින් පිළිතුරු දුන් ඇමතුමකි</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">ඇමතුම් ^1කි, නවතම එක වන්නේ ^2 වෙත යන ඇමතුමකි</item>
-    <item quantity="other">ඇමතුම් ^1කි, නවතම එක වන්නේ ^2 වෙත යන ඇමතුමකි</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">ඇමතුම් ^1කි, නවතම එක වන්නේ ^2 වෙතින් අවහිර කළ ඇමතුමකි</item>
-    <item quantity="other">ඇමතුම් ^1කි, නවතම එක වන්නේ ^2 වෙතින් අවහිර කළ ඇමතුමකි</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1 මත, ^2 හරහා</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

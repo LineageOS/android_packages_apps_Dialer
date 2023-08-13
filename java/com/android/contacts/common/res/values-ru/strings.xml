@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Очистить список популярных контактов?</string>
   <string name="clearFrequentsConfirmation">Список популярных контактов в приложениях \"Контакты\" и \"Телефон\" будет очищен, а приложения электронной почты начнут запоминать адреса заново.</string>
   <string name="clearFrequentsProgress_title">Подождите…</string>
-  <string name="status_available">Доступен</string>
-  <string name="status_away">Отсутствует</string>
-  <string name="status_busy">Не беспокоить</string>
-  <string name="contactsList">Контакты</string>
-  <string name="contact_suggestions">Топ рекомендуемых</string>
-  <string name="local_invisible_directory">Другое</string>
   <string name="directory_search_label">Каталог</string>
   <string name="directory_search_label_work">Каталог контактов из рабочего профиля</string>
-  <string name="local_search_label">Все контакты</string>
-  <string name="local_suggestions_search_label">Рекомендуемые</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Вы</string>
   <string name="missing_name">Имя не указано</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Посмотреть контакт</string>
-  <string name="list_filter_phones">Контакты с номерами телефонов</string>
-  <string name="list_filter_phones_work">Контакты из рабочего профиля</string>
   <string name="view_updates_from_group">Просмотреть обновления</string>
   <string name="account_phone">Только на устройстве, не синхронизируется</string>
   <string name="nameLabelsGroup">Имя</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Чат через ICQ</string>
   <string name="chat_jabber">Чат через Jabber</string>
   <string name="chat">Чат</string>
-  <string name="list_filter_all_accounts">Все контакты</string>
-  <string name="listAllContactsInAccount">Контакты аккаунта \"%s\"</string>
-  <string name="listCustomView">Пользовательский фильтр</string>
-  <string name="listSingleContact">Один контакт</string>
   <string name="display_options_sort_list_by">Сортировка</string>
   <string name="display_options_sort_by_given_name">По имени</string>
   <string name="display_options_sort_by_family_name">По фамилии</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Очистить условия поиска</string>
   <string name="select_account_dialog_title">Аккаунт</string>
   <string name="set_default_account">Всегда использовать для звонков</string>
-  <string name="select_phone_account_for_calls">Выберите SIM-карту для вызова</string>
-  <string name="select_phone_account_for_calls_remember">Запомнить выбор</string>
   <string name="call_with_a_note">Написать сообщение абоненту</string>
   <string name="call_subject_hint">Введите текст…</string>
   <string name="send_and_call_button">ОТПРАВИТЬ И ПОЗВОНИТЬ</string>
@@ -143,5 +125,4 @@
     <item quantity="other">Вкладка %1$s. %2$d непрочитанного элемента. </item>
   </plurals>
   <string name="description_search_video_call">Видеовызов</string>
-  <string name="description_search_call_and_share">Поделиться и позвонить</string>
 </resources>

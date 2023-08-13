@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Parkér</string>
   <string name="incall_label_add_call">Tilføj opkald</string>
   <string name="incall_label_mute">Slå lyden fra</string>
-  <string name="incall_label_end_call">Læg på</string>
   <string name="incall_label_dialpad">Tastatur</string>
   <string name="incall_talkback_speaker_on">, er til</string>
   <string name="incall_talkback_speaker_off">, er fra</string>

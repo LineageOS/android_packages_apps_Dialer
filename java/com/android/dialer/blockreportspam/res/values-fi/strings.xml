@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">KUMOA ESTO</string>
   <string name="block_report_number_alert_title">Estetäänkö %1$s?</string>
   <string name="block_report_number_alert_details">Tästä numerosta tulevat puhelut estetään.</string>
-  <string name="block_number_alert_details">%1$s. Puhelu ilmoitetaan häirikköpuheluksi.</string>
   <string name="unblock_number_alert_details">Numeron esto ja häirikkötila kumotaan. Puhelut tästä numerosta eivät enää ole häirikköpuheluja.</string>
   <string name="unblock_report_number_alert_title">Kumotaanko numeron %1$s esto?</string>
   <string name="report_not_spam_alert_button">Ilmoita</string>

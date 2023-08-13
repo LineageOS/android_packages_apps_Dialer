@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Kopírovat číslo</string>
   <string name="call_details_edit_number">Před voláním upravit číslo</string>
   <string name="call_details_report_call_id">Nahlásit nesprávné číslo</string>
-  <string name="sent_a_photo">Byla poslána fotka</string>
-  <string name="received_a_photo">Byla přijata fotka</string>
-  <string name="message_in_quotes">„%1$s“</string>
   <string name="report_caller_id_dialog_title">Nahlásit nesprávné číslo</string>
   <string name="report_caller_id_failed">Číslo se nepodařilo nahlásit</string>
   <string name="report_caller_id_toast">Číslo bylo nahlášeno</string>

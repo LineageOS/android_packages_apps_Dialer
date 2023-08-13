@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Պատճենել համարը</string>
   <string name="call_details_edit_number">Փոփոխել համարը զանգելուց առաջ</string>
   <string name="call_details_report_call_id">Հաղորդել սխալ համարի մասին</string>
-  <string name="sent_a_photo">Ուղարկվել է լուսանկար</string>
-  <string name="received_a_photo">Ստացվել է լուսանկար</string>
-  <string name="message_in_quotes">«%1$s»</string>
   <string name="report_caller_id_dialog_title">Հաղորդում սխալ համարի մասին</string>
   <string name="report_caller_id_failed">Չհաջողվեց ուղարկել հաղորդումը</string>
   <string name="report_caller_id_toast">Հաղորդումն ուղարկվեց</string>

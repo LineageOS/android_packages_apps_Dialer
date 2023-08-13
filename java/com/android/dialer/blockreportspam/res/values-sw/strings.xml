@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">ACHA KUZUIA</string>
   <string name="block_report_number_alert_title">Ungependa kuzuia nambari %1$s?</string>
   <string name="block_report_number_alert_details">Hutapokea tena simu kutoka kwenye nambari hii.</string>
-  <string name="block_number_alert_details">%1$s Simu hii itaripotiwa kuwa ni taka.</string>
   <string name="unblock_number_alert_details">Kizuizi kitaondolewa; nambari itaripotiwa kuwa si taka. Simu hazitajumuishwa miongoni mwa taka tena.</string>
   <string name="unblock_report_number_alert_title">Ungependa kuacha kuzuia nambari %1$s?</string>
   <string name="report_not_spam_alert_button">Ripoti</string>

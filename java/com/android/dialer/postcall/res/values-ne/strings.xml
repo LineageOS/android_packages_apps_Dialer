@@ -4,8 +4,7 @@
   <string name="post_call_message_1">जरुरी काम छ। मलाई कल गरिहाल्नुहोस्।</string>
   <string name="post_call_message_2">तपाईंलाई अलि फुर्सद भएका बेला मलाई कल गर्नुहोस्।</string>
   <string name="post_call_message_3">जरुरी छैन, पछि कुरा गर्दा हुन्छ।</string>
-  <string name="post_call_add_message">सन्देश थप्नुहोस्</string>
-  <string name="post_call_send_message">सन्देश पठाउनुहोस्</string>
+    <string name="post_call_send_message">सन्देश पठाउनुहोस्</string>
   <string name="post_call_message_sent">सन्देश पठाइयो</string>
   <string name="view">हेर्नुहोस्</string>
 </resources>

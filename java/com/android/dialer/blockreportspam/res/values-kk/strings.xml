@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">БӨГЕУДЕН ШЫҒАРУ</string>
   <string name="block_report_number_alert_title">%1$s нөмірін бөгеу қажет пе?</string>
   <string name="block_report_number_alert_details">Бұдан былай бұл нөмірден қоңыраулар алмайтын боласыз.</string>
-  <string name="block_number_alert_details">%1$s Бұл қоңырау \"спам\" деп хабарланады.</string>
   <string name="unblock_number_alert_details">Бұл нөмірдің бөгеуі жойылып, \"спам емес\" деп белгіленеді. Алдағы қоңыраулар спам қалтасына жіберілмейді.</string>
   <string name="unblock_report_number_alert_title">%1$s бөгеуін алу қажет пе?</string>
   <string name="report_not_spam_alert_button">Хабарлау</string>

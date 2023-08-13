@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Želite izbrisati seznam pog. stikov?</string>
   <string name="clearFrequentsConfirmation">Izbrisali boste seznam pogostih stikov v aplikacijah Stiki in Telefon, zato bodo e-poštne aplikacije začele shranjevati pogoste naslovnike od začetka.</string>
   <string name="clearFrequentsProgress_title">Brisanje seznama pogost. stikov ...</string>
-  <string name="status_available">Dosegljiv</string>
-  <string name="status_away">Odsoten</string>
-  <string name="status_busy">Zaseden</string>
-  <string name="contactsList">Stiki</string>
-  <string name="contact_suggestions">Najboljši predlogi</string>
-  <string name="local_invisible_directory">Drugo</string>
   <string name="directory_search_label">Imenik</string>
   <string name="directory_search_label_work">Delovni imenik</string>
-  <string name="local_search_label">Vsi stiki</string>
-  <string name="local_suggestions_search_label">Predlogi</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Jaz</string>
   <string name="missing_name">(Ni imena)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Ogled stika</string>
-  <string name="list_filter_phones">Vsi stiki s telefonskimi številkami</string>
-  <string name="list_filter_phones_work">Stiki za delovni profil</string>
   <string name="view_updates_from_group">Prikaži posodobitve</string>
   <string name="account_phone">Samo v napravi; se ne sinhronizira</string>
   <string name="nameLabelsGroup">Ime</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Klepet s storitvijo ICQ</string>
   <string name="chat_jabber">Klepet s storitvijo Jabber</string>
   <string name="chat">Klepet</string>
-  <string name="list_filter_all_accounts">Vsi stiki</string>
-  <string name="listAllContactsInAccount">Stiki v %s</string>
-  <string name="listCustomView">Stiki v pogledu po meri</string>
-  <string name="listSingleContact">Posamezen stik</string>
   <string name="display_options_sort_list_by">Razvrsti glede na</string>
   <string name="display_options_sort_by_given_name">Ime</string>
   <string name="display_options_sort_by_family_name">Priimek</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Počisti iskalno polje</string>
   <string name="select_account_dialog_title">Račun</string>
   <string name="set_default_account">Vedno uporabi to možnost za klice</string>
-  <string name="select_phone_account_for_calls">Izbira kartice SIM za ta klic</string>
-  <string name="select_phone_account_for_calls_remember">Zapomni si to izbiro</string>
   <string name="call_with_a_note">Klic z zapiskom</string>
   <string name="call_subject_hint">Vnesite zapisek, ki ga želite poslati s klicem ...</string>
   <string name="send_and_call_button">POŠLJI IN KLIČI</string>
@@ -143,5 +125,4 @@
     <item quantity="other"> Zavihek »%1$s«. %2$d neprebranih elementov. </item>
   </plurals>
   <string name="description_search_video_call">Videoklic</string>
-  <string name="description_search_call_and_share">Klic s skupno rabo</string>
 </resources>
