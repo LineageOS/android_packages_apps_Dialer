@@ -275,7 +275,7 @@ public class LookupProvider extends ContentProvider {
         }
       }, Looper.getMainLooper());
 
-      return locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+      return locationManager.getLastKnownLocation(LocationManager.FUSED_PROVIDER);
     } catch (IllegalArgumentException e) {
       return null;
     }
@@ -303,7 +303,7 @@ public class LookupProvider extends ContentProvider {
     } catch (UnsupportedEncodingException e) {
     }
 
-    ArrayList<ContactInfo> results = null;
+    ArrayList<ContactInfo> results = new ArrayList<>();
     if ((type == NEARBY || type == NEARBY_AND_PEOPLE) && lastLocation != null) {
       ForwardLookup fl = ForwardLookup.getInstance(getContext());
       List<ContactInfo> nearby = fl.lookup(getContext(), filter, lastLocation);
