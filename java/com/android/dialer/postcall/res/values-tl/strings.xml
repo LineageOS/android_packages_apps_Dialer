@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Apurahan ito. Tawagan mo ko.</string>
   <string name="post_call_message_2">Tawagan mo ako kapag may oras ka.</string>
   <string name="post_call_message_3">Hindi agaran, maaari tayong mag-chat sa ibang pagkakataon.</string>
-  <string name="post_call_add_message">Magdagdag ng mensahe</string>
-  <string name="post_call_send_message">Magpadala ng mensahe</string>
+    <string name="post_call_send_message">Magpadala ng mensahe</string>
   <string name="post_call_message_sent">Naipadala ang mensahe</string>
   <string name="view">Tingnan</string>
 </resources>

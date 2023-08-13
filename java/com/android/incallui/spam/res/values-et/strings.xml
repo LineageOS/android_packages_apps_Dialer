@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Puudutage kontaktide lisamiseks või rämpsposti saatva numbri blokeerimiseks.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Teile helistati sellelt numbrilt esimest korda. Kui see kõne oli rämpspost, blokeerige see number ja teavitage meid sellest.</string>
   <string name="spam_notification_spam_call_collapsed_text">Puudutage, kui see pole rämpskõne, või blokeerige see</string>
-  <string name="spam_notification_report_spam_action_text">Blokeeri ja teavita</string>
-  <string name="spam_notification_add_contact_action_text">Lisa kontakt</string>
   <string name="spam_notification_dialog_add_contact_action_text">Lisa kontaktidesse</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokeeri ja teavita rämpspostist</string>
   <string name="spam_notification_was_not_spam_action_text">Ei, see pole rämpskõne</string>

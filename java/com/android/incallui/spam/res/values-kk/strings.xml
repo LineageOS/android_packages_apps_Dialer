@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Контактілерге қосу немесе спам нөмірді бөгеу үшін түртіңіз.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Бұл нөмір сізге алғаш рет қоңырау шалып тұр. Егер қоңырау спам болса, нөмірді бөгеп, \"спам\" деп белгілеуге болады.</string>
   <string name="spam_notification_spam_call_collapsed_text">\"Спам емес\" деп белгілеу не бөгеу үшін түртіңіз</string>
-  <string name="spam_notification_report_spam_action_text">Бөгеу және хабарлау</string>
-  <string name="spam_notification_add_contact_action_text">Контакт қосу</string>
   <string name="spam_notification_dialog_add_contact_action_text">Контактілерге қосу</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Бөгеу және спам туралы хабарлау</string>
   <string name="spam_notification_was_not_spam_action_text">Жоқ, спам емес</string>

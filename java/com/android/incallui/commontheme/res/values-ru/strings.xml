@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">Камера выключена</string>
   <string name="incall_content_description_swap_video">Включить/выключить камеру</string>
   <string name="incall_label_speaker">Динамик</string>
-  <string name="incall_label_audio">Звук</string>
 </resources>

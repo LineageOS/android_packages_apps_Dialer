@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">वॉइसमेल (%s)</string>
   <string name="voicemail_settings_title">वॉइसमेल</string>
   <string name="voicemail_notifications_preference_title">सूचनाएं</string>
   <string name="voicemail_change_greeting_preference_title">वॉइसमेल अभिवादन</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">पिन बदलें</string>
   <string name="voicemail_change_pin_preference_summary_disable">पिन बदलने के लिए विज़ुअल वॉइसमेल चालू होना चाहिए</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">विज़ुअल वॉइसमेल अभी तक सक्रिय नहीं किया गया है, कृपया बाद में फिर कोशिश करें</string>
-  <string name="vm_change_pin_old_pin">पुराना पिन</string>
-  <string name="vm_change_pin_new_pin">नया पिन</string>
   <string name="vm_change_pin_progress_message">कृपया इंतज़ार करें.</string>
   <string name="vm_change_pin_error_too_short">नया पिन बहुत छोटा है.</string>
   <string name="vm_change_pin_error_too_long">नया पिन बहुत बड़ा है.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">पिन मेल नहीं खाते</string>
   <string name="change_pin_succeeded">वॉइसमेल पिन अपडेट किया गया</string>
   <string name="change_pin_system_error">पिन सेट नहीं किया जा सकता</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">वॉइसमेल को लेख में बदलना</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">वॉइसमेल ट्रांसक्रिप्शन विश्लेषण</string>
   <string name="voicemail_activating_summary_info">वॉइसमेल सक्रिय किया जा रहा है</string>
-  <string name="voicemail_transcription_preference_summary_info">Google की वॉइसमेल को लेख में बदलने की सेवा का इस्तेमाल करके अपने वॉइसमेल को लेख में बदलें. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Google को आपके वॉइसमेल मैसेज की समीक्षा करने दें, ताकि वॉइसमेल को लेख में बदलने के काम को और भी सटीक बनाया जा सके. आपके वॉइसमेल मैसेज गुमनाम रूप से संग्रहित किए जाते हैं. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">विज़ुअल वॉइसमेल बंद करें</string>
   <string name="confirm_disable_voicemail_dialog_message">अगर आप इसे बंद करते हैं, तो इस ऐप में मौजूद वॉइसमेल और Google ट्रांसक्रिप्ट मिटा दिए जाएंगे. आपका वाहक अपने पास उनकी कॉपी रख सकता है.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">बंद करें</string>

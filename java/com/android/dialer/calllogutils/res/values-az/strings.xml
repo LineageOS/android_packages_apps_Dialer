@@ -34,27 +34,7 @@
   <string name="voicemail_string">Səsli e-məktub</string>
   <string name="just_now">İndicə</string>
   <string name="new_call_log_carrier_video">Operator video</string>
-  <string name="new_call_log_duo_video">Duo video</string>
   <string name="new_call_log_unknown">Naməlum</string>
   <string name="new_call_log_secondary_blocked">Blok edilib</string>
   <string name="new_call_log_secondary_spam">Spam</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 buraxılmış zəng: ^2</item>
-    <item quantity="other">Sonuncu, ^2 adlı istifadəçidən buraxılmış zəng olmaqla, ^1 zəng</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^2 tərəfindən ^1 cavab verilmiş zəng</item>
-    <item quantity="other">Sonuncu, ^2 tərəfindən cavab verilmiş zəng olmaqla, ^1 zəng</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 ^2 adlı istifadəçiyə gedən zəng</item>
-    <item quantity="other">Sonuncu, ^2 adlı istifadəçiyə gedən zəng olmaqla, ^1 zəng</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^2 tərəfindən ^1 blok edilmiş zəng</item>
-    <item quantity="other">Sonuncu, ^2 tərəfindən blok edilmiş zəng olmaqla, ^1 zəng</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^2 vasitəsilə ^1 hesabında</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

@@ -19,10 +19,6 @@
   <dimen name="call_log_action_icon_dimen">24dp</dimen>
   <dimen name="call_log_action_horizontal_padding">24dp</dimen>
 
-  <dimen name="call_log_primary_text_size">16sp</dimen>
-  <dimen name="call_log_detail_text_size">12sp</dimen>
-  <dimen name="call_log_day_group_heading_size">14sp</dimen>
-  <dimen name="call_log_voicemail_transcription_text_size">14sp</dimen>
   <!-- Height of the call log actions section for each call log entry -->
   <dimen name="call_log_action_height">48dp</dimen>
   <dimen name="call_log_day_group_padding_top">15dp</dimen>
@@ -34,22 +30,14 @@
   <dimen name="action_bar_height_large">64dp</dimen>
   <dimen name="action_bar_elevation">3dp</dimen>
   <dimen name="tab_height">48dp</dimen>
-  <!-- actionbar height + tab height -->
-  <dimen name="actionbar_contentInsetStart">72dp</dimen>
 
   <dimen name="call_log_icon_margin">2dp</dimen>
 
   <item name="alpha_enabled" format="float" type="dimen">1.0</item>
   <item name="alpha_hiden" format="float" type="dimen">0.54</item>
 
-  <!-- Minimum height required for all row elements in Dialer lists. -->
-  <dimen name="dialer_list_item_min_height">56dp</dimen>
-
   <!-- Minimum a11y height and width required for all touch targets. -->
   <dimen name="dialer_touch_target_min_size">48dp</dimen>
-
-  <!-- Minimum width for material compliant buttons. -->
-  <dimen name="dialer_button_min_width">72dp</dimen>
 
   <!-- Padding to be applied to the bottom of lists to make space for the floating action
      button -->

@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Hou aan</string>
   <string name="incall_label_add_call">Voeg oproep by</string>
   <string name="incall_label_mute">Demp</string>
-  <string name="incall_label_end_call">Beëindig oproep</string>
   <string name="incall_label_dialpad">Sleutelblok</string>
   <string name="incall_talkback_speaker_on">, is aan</string>
   <string name="incall_talkback_speaker_off">, is af</string>

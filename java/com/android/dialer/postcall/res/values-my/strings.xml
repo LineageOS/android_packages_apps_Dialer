@@ -4,8 +4,7 @@
   <string name="post_call_message_1">အရေးကြီးသည်။ ကျွန်ုပ်ကို ပြန်ခေါ်ပါ။</string>
   <string name="post_call_message_2">သင်အချိန်ရလျှင် ကျွန်ုပ်ကို ပြန်ခေါ်ပါ။</string>
   <string name="post_call_message_3">အရေးမကြီးပါ၊ နောက်မှ ကျွန်ုပ်တို့ ချတ်လုပ်နိုင်ပါသည်။</string>
-  <string name="post_call_add_message">မက်ဆေ့ဂျ် ထည့်သွင်းပါ</string>
-  <string name="post_call_send_message">မက်ဆေ့ဂျ် ပို့မလား</string>
+    <string name="post_call_send_message">မက်ဆေ့ဂျ် ပို့မလား</string>
   <string name="post_call_message_sent">မက်ဆေ့ဂျ် ပို့ပြီးပါပြီ</string>
   <string name="view">ကြည့်ရန်</string>
 </resources>

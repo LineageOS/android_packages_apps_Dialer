@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">پست صوتی (%s)</string>
   <string name="voicemail_settings_title">پست صوتی</string>
   <string name="voicemail_notifications_preference_title">اعلان‌ها</string>
   <string name="voicemail_change_greeting_preference_title">خوشامدگویی پست صوتی</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">تغییر پین</string>
   <string name="voicemail_change_pin_preference_summary_disable">برای تغییر پین، پست صوتی تصویری باید فعال شود</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">پست صوتی تصویری هنوز فعال نشده است، لطفاً بعداً دوباره امتحان کنید</string>
-  <string name="vm_change_pin_old_pin">پین قدیمی</string>
-  <string name="vm_change_pin_new_pin">پین جدید</string>
   <string name="vm_change_pin_progress_message">لطفاً منتظر بمانید.</string>
   <string name="vm_change_pin_error_too_short">پین جدید خیلی کوتاه است.</string>
   <string name="vm_change_pin_error_too_long">پین جدید خیلی طولانی است.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">پین‌ها با یکدیگر مطابقت ندارند</string>
   <string name="change_pin_succeeded">پین پست صوتی به‌روزرسانی شد</string>
   <string name="change_pin_system_error">پین تنظیم نشد</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">ترانویسی پست‌ صوتی</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">تجزیه‌وتحلیل ترانویسی پست صوتی</string>
   <string name="voicemail_activating_summary_info">فعال کردن پست صوتی</string>
-  <string name="voicemail_transcription_preference_summary_info">‏با استفاده از سرویس ترانویسی Google، ترانوشت پست صوتی‌تان را دریافت کنید. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">‏برای بهبود دقت ترانویسی، به Google اجازه دهید پیام‌های پست صوتی شما را مرور کند. پیام‌های پست صوتی‌تان به‌صورت ناشناس ذخیره می‌شوند. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">خاموش کردن پست صوتی تصویری</string>
   <string name="confirm_disable_voicemail_dialog_message">‏با این کار پست‌های صوتی و آوانویسی‌های Google ذخیره‌شده در این برنامه حذف خواهند شد. ممکن است شرکت مخابراتی‌تان نسخه‌های خود را نگه‌دارد.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">خاموش کردن</string>

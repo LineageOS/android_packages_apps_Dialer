@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">OPPHEV BLOKKERINGEN</string>
   <string name="block_report_number_alert_title">Vil du blokkere %1$s?</string>
   <string name="block_report_number_alert_details">Du får ingen flere anrop eller meldinger fra dette telefonnummeret.</string>
-  <string name="block_number_alert_details">%1$s Dette anropet blir rapportert som useriøst.</string>
   <string name="unblock_number_alert_details">Blokkeringen oppheves, og nummeret rapporteres som «ikke useriøst». Fremtidige anrop blir ikke identifisert som useriøse.</string>
   <string name="unblock_report_number_alert_title">Vil du oppheve blokkeringen av %1$s?</string>
   <string name="report_not_spam_alert_button">Rapport</string>

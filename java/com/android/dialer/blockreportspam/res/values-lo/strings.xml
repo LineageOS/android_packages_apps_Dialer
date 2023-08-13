@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">​ປົດ​ບລັອກ</string>
   <string name="block_report_number_alert_title">ບລັອກ %1$s ບໍ?</string>
   <string name="block_report_number_alert_details">ທ່ານຈະບໍ່ໄດ້ຮັບສາຍຈາກເບີໂທນີ້ອີກຕໍ່ໄປ.</string>
-  <string name="block_number_alert_details">%1$s ການໂທນີ້ຈະຖືກລາຍງານວ່າເປັນສະແປມ.</string>
   <string name="unblock_number_alert_details">ເບີໂທນີ້ຈະຖືກປົດບລັອກ ແລະ ລາຍງານວ່າບໍ່ແມ່ນສະແປມ. ການໂທໃນອະນາຄົດຈະບໍ່ຖືກລະບຸວ່າເປັນສະແປມ.</string>
   <string name="unblock_report_number_alert_title">ປົດບລັອກ %1$s ບໍ?</string>
   <string name="report_not_spam_alert_button">ລາຍງານ</string>

@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Ada hal penting. Hubungi saya balik.</string>
   <string name="post_call_message_2">Hubungi saya balik apabila ada kelapangan.</string>
   <string name="post_call_message_3">Tidak penting, kita boleh bersembang kemudian.</string>
-  <string name="post_call_add_message">Tambah mesej</string>
-  <string name="post_call_send_message">Hantar mesej</string>
+    <string name="post_call_send_message">Hantar mesej</string>
   <string name="post_call_message_sent">Mesej dihantar</string>
   <string name="view">Lihat</string>
 </resources>

@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">BLOKDAN ÇIXARIN</string>
   <string name="block_report_number_alert_title">%1$s blok edilsin?</string>
   <string name="block_report_number_alert_details">Bu nömrədən daha zəng almayacaqsınız.</string>
-  <string name="block_number_alert_details">%1$s Bu zəng spam kimi qeyd olunacaq.</string>
   <string name="unblock_number_alert_details">Bu nömrə blokdan çıxarılacaq və spam kimi qeyd olunmayacaq. Gələcək zənglər spam kimi göstərilməyəcək.</string>
   <string name="unblock_report_number_alert_title">%1$s blokdan çıxarılsın?</string>
   <string name="report_not_spam_alert_button">Bildirin</string>

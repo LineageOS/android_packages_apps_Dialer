@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Շտապ է: Հետ զանգիր ինձ:</string>
   <string name="post_call_message_2">Հետ զանգիր, երբ ժամանակ ունենաս:</string>
   <string name="post_call_message_3">Շտապ չէ, կարող ենք հետո խոսել:</string>
-  <string name="post_call_add_message">Ավելացնել հաղորդագրություն</string>
-  <string name="post_call_send_message">Ուղարկել հաղորդագրություն</string>
+    <string name="post_call_send_message">Ուղարկել հաղորդագրություն</string>
   <string name="post_call_message_sent">Հաղորդագրությունն ուղարկվել է</string>
   <string name="view">Դիտել</string>
 </resources>

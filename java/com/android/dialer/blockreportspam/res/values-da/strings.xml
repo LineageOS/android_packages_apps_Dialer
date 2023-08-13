@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">FJERN BLOKERING</string>
   <string name="block_report_number_alert_title">Vil du blokere %1$s?</string>
   <string name="block_report_number_alert_details">Du modtager ikke længere opkald fra dette nummer.</string>
-  <string name="block_number_alert_details">%1$s Dette opkald rapporteres som spam.</string>
   <string name="unblock_number_alert_details">Blokeringen af nummeret ophæves, og spam rapporteres ikke. Nye opkald registreres ikke som spam.</string>
   <string name="unblock_report_number_alert_title">Vil du fjerne blokeringen af %1$s?</string>
   <string name="report_not_spam_alert_button">Rapportér</string>

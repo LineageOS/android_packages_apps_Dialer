@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">رابطوں میں شامل کرنے یا اسپام نمبر کو مسدود کرنے کیلئے تھپتھپائیں۔</string>
   <string name="spam_notification_non_spam_call_expanded_text">آپ کو اس نمبر سے پہلی بار کال آئی ہے۔ اگر یہ کال اسپام تھی، تو آپ اس نمبر کو مسدود کر سکتے ہیں اور اس کی اطلاع دے سکتے ہیں۔</string>
   <string name="spam_notification_spam_call_collapsed_text">اسپام نہیں ہے کے بطور اطلاع دینے کیلئے تھپتھپائیں یا اسے مسدود کریں</string>
-  <string name="spam_notification_report_spam_action_text">مسدود کریں اور اطلاع دیں</string>
-  <string name="spam_notification_add_contact_action_text">رابطہ شامل کریں</string>
   <string name="spam_notification_dialog_add_contact_action_text">رابطوں میں شامل کریں</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">مسدود کریں اور اسپام کی اطلاع دیں</string>
   <string name="spam_notification_was_not_spam_action_text">نہیں، اسپام نہیں ہے</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Тэлефон</string>
-  <string name="launcherDialpadActivityLabel">Клавіятура тэлефона</string>
   <string name="callHistoryIconLabel">Гісторыя выклікаў</string>
   <string name="action_copy_number_text">Скапіраваць нумар</string>
   <string name="action_edit_number_before_call">Змяніць нумар перад тым, як тэлефанаваць</string>
@@ -38,8 +37,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Дадатковыя параметры</string>
   <string name="action_menu_dialpad_button">клавіятура</string>
   <string name="dialer_settings_label">Налады</string>
-  <string name="simulator_submenu_label">Сродак мадэліравання</string>
-  <string name="new_ui_launcher_shortcut_label">Ярлык новага карыст. інтэрфейсу</string>
   <string name="description_entering_bulk_action_mode">Уваход у рэжым групавога дзеяння</string>
   <string name="description_leaving_bulk_action_mode">Выхад з рэжыму групавога дзеяння</string>
   <string name="description_selecting_bulk_action_mode">Выбрана: %1$s</string>
@@ -50,7 +47,6 @@
   <string name="description_video_call">Відэавыклік.</string>
   <string name="description_start_voice_search">Пачаць галасавы пошук</string>
   <string name="voicemail">Галасавая пошта</string>
-  <string name="description_cancel_multi_select">Скасаваць рэжым пакетных дзеянняў</string>
   <string name="voicemailMultiSelectDeleteConfirm">Выдаліць</string>
   <string name="voicemailMultiSelectDeleteCancel">Скасаваць</string>
   <string name="voicemailMultiSelectActionBarTitle">Выбрана: %1$s</string>
@@ -66,7 +62,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Галасавы пошук недаступны</string>
   <string name="dialer_hint_find_contact">Пошук кантактаў</string>
-  <string name="block_number_search_hint">Дадайце нумар ці шукайце ў кантактах</string>
   <string name="call_log_all_empty">Ваша гісторыя выклікаў пустая</string>
   <string name="call_log_all_empty_action">Зрабіць выклік</string>
   <string name="call_log_missed_empty">У вас няма прапушчаных выклікаў.</string>
@@ -74,23 +69,13 @@
   <string name="call_log_activity_title">Гісторыя выклікаў</string>
   <string name="call_log_all_title">Усе</string>
   <string name="call_log_missed_title">Прапушчаныя</string>
-  <string name="tab_speed_dial">Хуткі набор</string>
-  <string name="tab_history">Гісторыя выклікаў</string>
   <string name="tab_all_contacts">Кантакты</string>
-  <string name="tab_voicemail">Галасавая пошта</string>
-  <string name="search_shortcut_call_number">Выклікаць %s</string>
   <string name="search_shortcut_create_new_contact">Новы кантакт</string>
   <string name="search_shortcut_add_to_contact">Дадаць у кантакт</string>
   <string name="search_shortcut_send_sms_message">Адправiць SMS</string>
   <string name="search_shortcut_make_video_call">Зрабіць відэавыклік</string>
-  <string name="search_shortcut_block_number">Заблакіраваць нумар</string>
-  <string name="speed_dial_empty">У вас пакуль нікога няма на хуткім наборы</string>
-  <string name="speed_dial_empty_add_favorite_action">Дадаць улюбёны</string>
-  <string name="remove_contact">Выдаліць</string>
   <string name="select_all">Выбраць усё</string>
   <string name="call_log_action_video_call">Відэавыклік</string>
-  <string name="call_log_action_set_up_video">Наладзіць відэавыклікі</string>
-  <string name="call_log_action_invite_video">Запрасіць у відэавыклік</string>
   <string name="call_log_action_send_message">Адправiць паведамленне</string>
   <string name="call_log_action_details">Падрабязнасці выкліку</string>
   <string name="call_log_action_share_voicemail">Адпраўляецца да…</string>
@@ -129,23 +114,8 @@
   <string name="call_settings_label">Выклікі</string>
   <string name="manage_blocked_numbers_label">Заблакіраваныя нумары</string>
   <string name="voicemail_settings_label">Галасавая пошта</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Блакіроўка выклікаў часова адключана</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Блакіроўка выклікаў будзе адключана, таму што вы выклікалі экстранныя службы з гэтага тэлефона на працягу апошніх 48 гадзін. Яна будзе аўтаматычна адноўлена пасля заканчэння перыяду ў 48 гадзін.</string>
-  <string name="import_send_to_voicemail_numbers_label">Імпартаваць нумары</string>
-  <string name="blocked_call_settings_import_description">Вы пазначалі праз іншыя праграмы некаторых абанентаў, якіх трэба аўтаматычна адпраўляць у галасавую пошту .</string>
-  <string name="blocked_call_settings_view_numbers_button">Прагледзець нумары</string>
-  <string name="blocked_call_settings_import_button">Імпартаваць</string>
-  <string name="description_blocked_number_list_delete">Разблакіраваць нумар</string>
-  <string name="addBlockedNumber">Дадаць нумар</string>
-  <string name="block_number_footer_message_vvm">Выклікі з гэтых нумароў будуць блакіравацца, а паведамленні галасавой пошты - аўтаматычна выдаляцца.</string>
-  <string name="block_number_footer_message_no_vvm">Выклікі з гэтых нумароў будуць блакіравацца, але з іх яшчэ можна пакінуць вам паведамленні галасавой пошты.</string>
-  <string name="block_list">Заблакіраваныя нумары</string>
-  <string name="alreadyBlocked">%1$s ужо заблакіраваны.</string>
   <string name="phone_account_settings_label">Уліковыя запісы для выклікаў</string>
-  <string name="permission_no_speeddial">Каб уключыць хуткі набор, уключыце дазвол для Кантактаў.</string>
   <string name="permission_no_calllog">Каб прагледзець свой журнал выклікаў, уключыце дазволы Тэлефона.</string>
-  <string name="permission_no_search">Каб шукаць свае кантакты, уключыце дазвол для Кантактаў.</string>
-  <string name="permission_place_call">Каб зрабіць выклік, уключыце дазвол для Тэлефона.</string>
   <string name="toast_cannot_write_system_settings">Праграма Тэлефон не мае дазволу на запіс у налады сістэмы.</string>
   <string name="blocked_number_call_log_label">Заблакiравана</string>
   <string name="call_log_action_block_report_number">Заблакір./паведаміць пра спам</string>
@@ -153,22 +123,4 @@
   <string name="call_log_action_remove_spam">Не спам</string>
   <string name="call_log_action_unblock_number">Разблакіраваць нумар</string>
   <string name="spam_number_call_log_label">Спам</string>
-  <string name="call_composer_connection_failed">Карыстальнік %1$s па-за сеткай і не даступны</string>
-  <string name="about_phone_label">Інфармацыя</string>
-  <string name="voicemail_transcription_branding_text">Расшыфравана Google</string>
-  <string name="voicemail_transcription_in_progress">Ідзе расшыфроўка…</string>
-  <string name="voicemail_transcription_failed">Расшыфроўка недаступная.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Расшыфроўка недаступная. Мова не падтрымліваецца.</string>
-  <string name="voicemail_transcription_failed_no_speech">Расшыфроўка недаступная. Маўленне не выяўлена.</string>
-  <string name="voicemail_donation_promo_title">Дапамажыце палепшыць якасць расшыфроўкі</string>
-  <string name="voicemail_donation_promo_content">Дайце Google доступ да расшыфраваных паведамленняў галасавой пошты. Яны будуць захоўвацца ананімна. Гэты параметр заўсёды можна змяніць у наладах. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Так, згаджаюся</string>
-  <string name="voicemail_donation_promo_opt_out">Не, дзякуй</string>
-  <string name="voicemail_transcription_rating">Ацаніце якасць транскрыпцыі</string>
-  <string name="voicemail_transcription_rating_thanks">Дзякуй за водгук</string>
-  <string name="description_rating_good">Падабаецца</string>
-  <string name="description_rating_bad">Не падабаецца</string>
-  <string name="view_conversation">Праглядзець</string>
-  <string name="ec_data_deleted">Выклік выдалены. У \"Паведамленнях\" праглядзіце і выдаліце далучэнні, якія былі абагулены падчас гэтага выкліку.</string>
-  <string name="multiple_ec_data_deleted">Выклікі выдалены. У \"Паведамленнях\" праглядзіце і выдаліце далучэнні, якія былі абагулены падчас гэтых выклікаў.</string>
 </resources>

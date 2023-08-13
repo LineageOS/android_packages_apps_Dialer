@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">ניתן להקיש כדי להוסיף את המספר לאנשי הקשר או לחסום אותו כספאם.</string>
   <string name="spam_notification_non_spam_call_expanded_text">זוהי הפעם הראשונה שמתקשרים אליך מהמספר הזה. אם השיחה הזו הייתה ספאם, באפשרותך לחסום את המספר הזה ולדווח עליו.</string>
   <string name="spam_notification_spam_call_collapsed_text">ניתן להקיש כדי לדווח שזה לא ספאם או כדי לחסום את המספר.</string>
-  <string name="spam_notification_report_spam_action_text">חסימה ודיווח</string>
-  <string name="spam_notification_add_contact_action_text">הוספת איש קשר</string>
   <string name="spam_notification_dialog_add_contact_action_text">הוספה לאנשי הקשר</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">חסימה ודיווח כספאם</string>
   <string name="spam_notification_was_not_spam_action_text">לא, זה לא ספאם</string>

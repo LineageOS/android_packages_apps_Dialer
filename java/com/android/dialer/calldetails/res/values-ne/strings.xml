@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">नम्बर प्रतिलिपि गर्नुहोस्</string>
   <string name="call_details_edit_number">कल गर्नु अघि नम्बर सम्पादन गर्नुहोस्</string>
   <string name="call_details_report_call_id">गलत नम्बरको रिपोर्ट गर्नुहोस्</string>
-  <string name="sent_a_photo">एउटा तस्बिर पठाइयो</string>
-  <string name="received_a_photo">एउटा तस्बिर प्राप्त भयो</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">गलत नम्बरको रिपोर्ट गर्नुहोस्</string>
   <string name="report_caller_id_failed">नम्बरको रिपोर्ट गर्न सकिएन</string>
   <string name="report_caller_id_toast">नम्बरको रिपोर्ट गरियो</string>

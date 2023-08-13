@@ -34,27 +34,7 @@
   <string name="voicemail_string">Posta zanore</string>
   <string name="just_now">Pikërisht tani</string>
   <string name="new_call_log_carrier_video">Video e operatorit celular</string>
-  <string name="new_call_log_duo_video">Video e Duo</string>
   <string name="new_call_log_unknown">I panjohur</string>
   <string name="new_call_log_secondary_blocked">Bllokuar</string>
   <string name="new_call_log_secondary_spam">Postë e bezdisshme</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 telefonatë e humbur nga ^2</item>
-    <item quantity="other">^1 telefonata, e fundit është një telefonatë e humbur nga ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 telefonatë e përgjigjur nga ^2</item>
-    <item quantity="other">^1 telefonata, e fundit është një telefonatë e përgjigjur nga ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 telefonatë dalëse për ^2</item>
-    <item quantity="other">^1 telefonata, e fundit është një telefonatë dalëse për ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 telefonatë e bllokuar nga ^2</item>
-    <item quantity="other">^1 telefonata, e fundit është një telefonatë e bllokuar nga ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">në ^1, nëpërmjet ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

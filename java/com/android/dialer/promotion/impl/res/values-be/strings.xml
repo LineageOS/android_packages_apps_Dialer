@@ -4,6 +4,4 @@
   <string name="rtt_promotion_details">Функцыя RTT дапамагае карыстальнікам з парушэннямі слыху і маўлення.
     Расшыфроўкі паведамленняў RTT захоўваюцца на прыладзе
     ў гісторыі выклікаў. %1$s</string>
-  <string name="duo_disclosure_title">Рабіце відэавыклікі з дапамогай Duo</string>
-  <string name="duo_disclosure_details">Гаварыце з сябрамі і роднымі ў відэавыкліках Google Duo. Можа спаганяцца аплата за перадачу даных. %1$s</string>
 </resources>

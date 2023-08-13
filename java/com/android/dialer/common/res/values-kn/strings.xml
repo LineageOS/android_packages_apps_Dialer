@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">ವೈಫೈ</string>
-  <string name="network_name_mobile">ಮೊಬೈಲ್</string>
   <string name="content_description_overflow">ಇನ್ನಷ್ಟು ಆಯ್ಕೆಗಳು</string>
   <string name="snackbar_undo">ರದ್ದುಮಾಡಿ</string>
   <string name="ok_got_it">ಸರಿ, ಅರ್ಥವಾಯಿತು</string>

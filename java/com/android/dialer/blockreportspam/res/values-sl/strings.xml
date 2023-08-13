@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">ODBLOKIRAJ</string>
   <string name="block_report_number_alert_title">Želite blokirati številko %1$s?</string>
   <string name="block_report_number_alert_details">Ne boste več prejemali klicev s te številke.</string>
-  <string name="block_number_alert_details">%1$s Ta klic bo prijavljen kot neželen.</string>
   <string name="unblock_number_alert_details">Številka bo odblokirana in ne bo obravnavana kot neželena. Klici ne bodo več zaznani kot neželeni.</string>
   <string name="unblock_report_number_alert_title">Želite odblokirati številko %1$s?</string>
   <string name="report_not_spam_alert_button">Prijavi</string>

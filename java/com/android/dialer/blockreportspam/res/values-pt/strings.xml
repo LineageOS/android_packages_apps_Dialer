@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">DESBLOQUEAR</string>
   <string name="block_report_number_alert_title">Bloquear %1$s?</string>
   <string name="block_report_number_alert_details">Você não receberá mais chamadas deste número.</string>
-  <string name="block_number_alert_details">%1$s Esta chamada será denunciada como spam.</string>
   <string name="unblock_number_alert_details">O número será desbloqueado/marcado como não spam. As chamadas futuras não serão tratadas como spam.</string>
   <string name="unblock_report_number_alert_title">Desbloquear %1$s?</string>
   <string name="report_not_spam_alert_button">Denunciar</string>

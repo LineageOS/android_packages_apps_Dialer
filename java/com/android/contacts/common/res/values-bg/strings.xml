@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Да се изчистят ли често търсените?</string>
   <string name="clearFrequentsConfirmation">Ще изчистите списъка с често търсените в приложенията Контакти и Телефон и ще принудите приложенията за имейл да научат предпочитанията ви за адресите, започвайки отначало.</string>
   <string name="clearFrequentsProgress_title">Често търсените се изчистват…</string>
-  <string name="status_available">Налице</string>
-  <string name="status_away">Отсъства</string>
-  <string name="status_busy">Зает/а</string>
-  <string name="contactsList">Контакти</string>
-  <string name="contact_suggestions">Водещи предложения</string>
-  <string name="local_invisible_directory">Други</string>
   <string name="directory_search_label">Директория</string>
   <string name="directory_search_label_work">Служебен указател</string>
-  <string name="local_search_label">Всички контакти</string>
-  <string name="local_suggestions_search_label">Предложения</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Аз</string>
   <string name="missing_name">(Няма име)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Преглед на контакта</string>
-  <string name="list_filter_phones">Всички контакти с телефонни номера</string>
-  <string name="list_filter_phones_work">Контакти в служебния потребителски профил</string>
   <string name="view_updates_from_group">Преглед на актуализациите</string>
   <string name="account_phone">Само на устройството, несинхронизиран</string>
   <string name="nameLabelsGroup">Име</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Чат по ICQ</string>
   <string name="chat_jabber">Чат по Jabber</string>
   <string name="chat">Чат</string>
-  <string name="list_filter_all_accounts">Всички контакти</string>
-  <string name="listAllContactsInAccount">Контакти във: %s</string>
-  <string name="listCustomView">Контакти в персонал. изглед</string>
-  <string name="listSingleContact">Един контакт</string>
   <string name="display_options_sort_list_by">Сортиране по</string>
   <string name="display_options_sort_by_given_name">Собствено име</string>
   <string name="display_options_sort_by_family_name">Фамилно име</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Изчистване на търсенето</string>
   <string name="select_account_dialog_title">Профил</string>
   <string name="set_default_account">Винаги да се използва за обаждания</string>
-  <string name="select_phone_account_for_calls">Изберете SIM карта за това обаждане</string>
-  <string name="select_phone_account_for_calls_remember">Запомняне на този избор</string>
   <string name="call_with_a_note">Обаждане, включващо бележка</string>
   <string name="call_subject_hint">Напишете придружаваща бележка, която ще се изпрати при извършване на обаждането...</string>
   <string name="send_and_call_button">ИЗПРАЩАНЕ И ОБАЖДАНЕ</string>
@@ -141,5 +123,4 @@
     <item quantity="other">Раздел „%1$s“. %2$d непрочетени елемента. </item>
   </plurals>
   <string name="description_search_video_call">Видеообаждане</string>
-  <string name="description_search_call_and_share">Споделяне и обаждане</string>
 </resources>

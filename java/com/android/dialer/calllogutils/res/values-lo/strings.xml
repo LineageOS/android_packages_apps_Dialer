@@ -34,28 +34,7 @@
   <string name="voicemail_string">ຂໍ້ຄວາມສຽງ</string>
   <string name="just_now">ຕອນນີ້</string>
   <string name="new_call_log_carrier_video">ວິດີໂອຜູ້ໃຫ້ບໍລິການ</string>
-  <string name="new_call_log_duo_video">ວິດີໂອ Duo</string>
   <string name="new_call_log_unknown">ບໍ່ຮູ້ຈັກ</string>
   <string name="new_call_log_secondary_blocked">ບລັອກແລ້ວ</string>
   <string name="new_call_log_secondary_spam">ສະແປມ</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 ສາຍບໍ່ໄດ້ຮັບຈາກ ^2</item>
-    <item quantity="other">^1 ສາຍ, ສາຍຫຼ້າສຸດແມ່ນສາຍບໍ່ໄດ້ຮັບຈາກ ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 ສາຍທີ່ຮັບຈາກ ^2</item>
-    <item quantity="other">^1 ສາຍ, ສາຍຫຼ້າສຸດແມ່ນສາຍທີ່ຮັບຈາກ ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 ສາຍໂທອອກຫາ ^2</item>
-    <item quantity="other">^1 ສາຍ, ສາຍຫຼ້າສຸດແມ່ນສາຍທີ່ໂທອອກຫາ ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 ສາຍທີ່ບລັອກຈາກ ^2</item>
-    <item quantity="other">^1 ສາຍ, ສາຍຫຼ້າສຸດແມ່ນສາຍທີ່ບລັອກຈາກ ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">ຢູ່ ^1,
-    ຜ່ານ ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

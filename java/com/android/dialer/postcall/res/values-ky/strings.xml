@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Бул шашылыш нерсе. Мага кайра чалыңыз.</string>
   <string name="post_call_message_2">Убактыңыз болгондо мага кайра чалып коюңуз.</string>
   <string name="post_call_message_3">Шашылыш эмес, биз кийинчерээк маектеше алабыз.</string>
-  <string name="post_call_add_message">Билдирүүнү кошуңуз</string>
-  <string name="post_call_send_message">Билдирүү жөнөтүү</string>
+    <string name="post_call_send_message">Билдирүү жөнөтүү</string>
   <string name="post_call_message_sent">Билдирүү жөнөтүлдү</string>
   <string name="view">Карап көрүү</string>
 </resources>

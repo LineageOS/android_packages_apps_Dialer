@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">నంబర్‌ను కాపీ చేయి</string>
   <string name="call_details_edit_number">కాల్ చేసే ముందు నంబర్‌ను సవరించు</string>
   <string name="call_details_report_call_id">అనిర్దిష్టంగా ఉండే నంబర్‌ను నివేదించు</string>
-  <string name="sent_a_photo">ఫోటో పంపబడింది</string>
-  <string name="received_a_photo">ఫోటో స్వీకరించబడింది</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">చెల్లని నంబర్‌ను నివేదించండి</string>
   <string name="report_caller_id_failed">నంబర్‌ను నివేదించడం సాధ్యపడలేదు</string>
   <string name="report_caller_id_toast">నంబర్ నివేదించబడింది</string>

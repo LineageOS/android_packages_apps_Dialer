@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Det här är brådskande. Ring tillbaka.</string>
   <string name="post_call_message_2">Ring tillbaka när du har tid.</string>
   <string name="post_call_message_3">Inte brådskande, vi kan prata senare.</string>
-  <string name="post_call_add_message">Lägg till meddelande</string>
-  <string name="post_call_send_message">Skicka meddelande</string>
+    <string name="post_call_send_message">Skicka meddelande</string>
   <string name="post_call_message_sent">Meddelandet skickat</string>
   <string name="view">Visa</string>
 </resources>

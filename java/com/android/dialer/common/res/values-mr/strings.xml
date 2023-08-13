@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">वायफाय</string>
-  <string name="network_name_mobile">मोबाईल</string>
   <string name="content_description_overflow">आणखी पर्याय</string>
   <string name="snackbar_undo">पहिल्यासारखे करा</string>
   <string name="ok_got_it">ओके, समजले</string>

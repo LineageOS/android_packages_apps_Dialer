@@ -18,12 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="main_activity_label" msgid="3121599977875141886">"Chaqiruv"</string>
-    <string name="search" msgid="3570654445331155513">"@android:string/search_go"</string>
-    <string name="description_search" msgid="3443578912463129718">"Kontakt va joylarni qidirish"</string>
-    <string name="contacts" msgid="4464246185723317911">"Kontaktlar"</string>
-    <string name="description_contacts" msgid="12768481422137448">"Kontaktlarni ko‘rish"</string>
     <string name="tab_title_call_history" msgid="5191872501729332994">"Tarix"</string>
     <string name="tab_title_speed_dial" msgid="1968484500112572774">"Tez. ter."</string>
     <string name="tab_title_voicemail" msgid="4777655983569268504">"Ov. pochta"</string>
-    <string name="settings" msgid="7614336599112169779">"Sozlamalar"</string>
 </resources>

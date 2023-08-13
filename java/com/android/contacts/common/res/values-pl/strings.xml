@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Wyczyścić częste kontakty?</string>
   <string name="clearFrequentsConfirmation">Wyczyścisz listę częstych kontaktów w aplikacjach Kontakty i Telefon. Aplikacje pocztowe będą musiały od nowa poznać Twoje preferencje adresowe.</string>
   <string name="clearFrequentsProgress_title">Czyszczę częste kontakty…</string>
-  <string name="status_available">Dostępny</string>
-  <string name="status_away">Nieobecny</string>
-  <string name="status_busy">Zajęty</string>
-  <string name="contactsList">Kontakty</string>
-  <string name="contact_suggestions">Najlepsze sugestie</string>
-  <string name="local_invisible_directory">Inny</string>
   <string name="directory_search_label">Katalog</string>
   <string name="directory_search_label_work">Katalog służbowy</string>
-  <string name="local_search_label">Wszystkie kontakty</string>
-  <string name="local_suggestions_search_label">Sugestie</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ja</string>
   <string name="missing_name">(Bez nazwy)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Pokaż kontakt</string>
-  <string name="list_filter_phones">Wszystkie kontakty z numerami telefonów</string>
-  <string name="list_filter_phones_work">Kontakty w profilu służbowym</string>
   <string name="view_updates_from_group">Pokaż aktualizacje</string>
   <string name="account_phone">Tylko na urządzeniu – bez synchronizacji</string>
   <string name="nameLabelsGroup">Imię i nazwisko</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Czat w ICQ</string>
   <string name="chat_jabber">Czat w Jabberze</string>
   <string name="chat">Czat</string>
-  <string name="list_filter_all_accounts">Wszystkie kontakty</string>
-  <string name="listAllContactsInAccount">Kontakty na koncie %s</string>
-  <string name="listCustomView">Kontakty spełniające kryteria</string>
-  <string name="listSingleContact">Jeden kontakt</string>
   <string name="display_options_sort_list_by">Sortuj według</string>
   <string name="display_options_sort_by_given_name">Imię</string>
   <string name="display_options_sort_by_family_name">Nazwisko</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Wyczyść wyszukiwanie</string>
   <string name="select_account_dialog_title">Konto</string>
   <string name="set_default_account">Zawsze używaj do połączeń</string>
-  <string name="select_phone_account_for_calls">Wybierz kartę SIM, aby zadzwonić</string>
-  <string name="select_phone_account_for_calls_remember">Zapamiętaj ten wybór</string>
   <string name="call_with_a_note">Połącz i wyślij notatkę</string>
   <string name="call_subject_hint">Wpisz notatkę, którą chcesz wysłać razem z połączeniem...</string>
   <string name="send_and_call_button">WYŚLIJ I ZADZWOŃ</string>
@@ -143,5 +125,4 @@
     <item quantity="other"> Karta %1$s. %2$d nieprzeczytanego elementu. </item>
   </plurals>
   <string name="description_search_video_call">Rozmowa wideo</string>
-  <string name="description_search_call_and_share">Udostępnij i zadzwoń</string>
 </resources>
