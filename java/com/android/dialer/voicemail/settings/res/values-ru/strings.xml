@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Голосовая почта (%s)</string>
   <string name="voicemail_settings_title">Голосовая почта</string>
   <string name="voicemail_notifications_preference_title">Уведомления</string>
   <string name="voicemail_change_greeting_preference_title">Приветствие в голосовой почте</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Изменение PIN-кода</string>
   <string name="voicemail_change_pin_preference_summary_disable">Чтобы изменить PIN-код, включите визуальную голосовую почту</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Визуальная голосовая почта пока не активирована, повторите попытку позже</string>
-  <string name="vm_change_pin_old_pin">Прежний PIN-код</string>
-  <string name="vm_change_pin_new_pin">Новый PIN-код</string>
   <string name="vm_change_pin_progress_message">Подождите…</string>
   <string name="vm_change_pin_error_too_short">Новый PIN-код слишком короткий.</string>
   <string name="vm_change_pin_error_too_long">Новый PIN-код слишком длинный.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN-коды не совпадают.</string>
   <string name="change_pin_succeeded">PIN-код голосовой почты обновлен</string>
   <string name="change_pin_system_error">Не удалось установить PIN-код</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Транскрипция голосовой почты</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Анализ транскрипций голосовой почты</string>
   <string name="voicemail_activating_summary_info">Активация голосовой почты</string>
-  <string name="voicemail_transcription_preference_summary_info">Разрешить расшифровку голосовых сообщений с помощью специального сервиса Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Разрешить Google просматривать ваши расшифрованные сообщения голосовой почты, чтобы улучшить качество транскрипции. Сообщения хранятся анонимно. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Отключить визуальную голосовую почту?</string>
   <string name="confirm_disable_voicemail_dialog_message">Будут удалены все сохраненные в этом приложении голосовые сообщения и расшифровки аудиозаписей, которые были созданы с помощью специальной службы Google. У вашего оператора связи могут сохраниться копии этих данных.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">ОТКЛЮЧИТЬ</string>

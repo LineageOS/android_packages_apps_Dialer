@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Þetta er áríðandi. Hringdu í mig.</string>
   <string name="post_call_message_2">Hringdu í mig þegar þú hefur tíma.</string>
   <string name="post_call_message_3">Ekkert áríðandi, við getum spjallað síðar.</string>
-  <string name="post_call_add_message">Senda skilaboð</string>
-  <string name="post_call_send_message">Senda skilaboð</string>
+    <string name="post_call_send_message">Senda skilaboð</string>
   <string name="post_call_message_sent">Skilaboð send</string>
   <string name="view">Skoða</string>
 </resources>

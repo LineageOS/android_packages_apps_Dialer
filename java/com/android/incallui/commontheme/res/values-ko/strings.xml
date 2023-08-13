@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">동영상 꺼짐</string>
   <string name="incall_content_description_swap_video">동영상 전환</string>
   <string name="incall_label_speaker">스피커</string>
-  <string name="incall_label_audio">소리</string>
 </resources>

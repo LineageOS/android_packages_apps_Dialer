@@ -4,8 +4,7 @@
   <string name="post_call_message_1">ഇതൊരു അത്യാവശ്യ കോളാണ്. എന്നെ തിരിച്ച് വിളിക്കുക.</string>
   <string name="post_call_message_2">നിങ്ങൾക്ക് സമയം കിട്ടുമ്പോൾ എന്നെ തിരിച്ച് വിളിക്കൂ.</string>
   <string name="post_call_message_3">അത്യാവശ്യമില്ല, നമുക്ക് പിന്നീട് ചാറ്റുചെയ്യാം.</string>
-  <string name="post_call_add_message">സന്ദേശം ചേർക്കുക</string>
-  <string name="post_call_send_message">സന്ദേശം അയയ്‌ക്കുക</string>
+    <string name="post_call_send_message">സന്ദേശം അയയ്‌ക്കുക</string>
   <string name="post_call_message_sent">സന്ദേശം അയച്ചു</string>
   <string name="view">കാണുക</string>
 </resources>

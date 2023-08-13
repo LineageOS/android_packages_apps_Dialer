@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Көп чалынгандар тизмеси тазалансынбы?</string>
   <string name="clearFrequentsConfirmation">Байланыштар жана Телефон колдонмолорунан көп байланышкан адамдар тизмесин тазалап, даректүү жеке жөндөөлөр тууралуу билүү үчүн электрондук почта колдонмолорун иштетиңиз.</string>
   <string name="clearFrequentsProgress_title">Көп чалынгандар тизмеси тазаланууда…</string>
-  <string name="status_available">Жеткиликтүү</string>
-  <string name="status_away">Чыгып кетти</string>
-  <string name="status_busy">Бош эмес</string>
-  <string name="contactsList">Байланыштар</string>
-  <string name="contact_suggestions">Эң көп сунушталгандар</string>
-  <string name="local_invisible_directory">Башка</string>
   <string name="directory_search_label">Директорий</string>
   <string name="directory_search_label_work">Жумуш профилиндеги байланыштар китепчеси</string>
-  <string name="local_search_label">Бардык байланыштар</string>
-  <string name="local_suggestions_search_label">Сунуштар</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Мен</string>
   <string name="missing_name">(Аты жок)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Байланыштын чоо-жайын карап көрүү</string>
-  <string name="list_filter_phones">Телефон номерлери бар бардык байланыштар</string>
-  <string name="list_filter_phones_work">Жумуш профилиндеги байланыштар</string>
   <string name="view_updates_from_group">Жаңыртууларды көрүү</string>
   <string name="account_phone">Түзмөктө гана, шайкештирилбеген</string>
   <string name="nameLabelsGroup">Аты</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ аркылуу чатташуу</string>
   <string name="chat_jabber">Jabber аркылуу чатташуу</string>
   <string name="chat">Чат</string>
-  <string name="list_filter_all_accounts">Бардык байланыштар</string>
-  <string name="listAllContactsInAccount">%s байланыштары</string>
-  <string name="listCustomView">Байланыштардын ыңгайлаштырылган көрүнүшү</string>
-  <string name="listSingleContact">Жалгыз байланыш</string>
   <string name="display_options_sort_list_by">Төмөнкү боюнча иреттештирүү</string>
   <string name="display_options_sort_by_given_name">Ысымы</string>
   <string name="display_options_sort_by_family_name">Фамилиясы</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Издөөнү тазалоо</string>
   <string name="select_account_dialog_title">Каттоо эсеби</string>
   <string name="set_default_account">Бул ар дайым чалуулр үчн колдонулсн</string>
-  <string name="select_phone_account_for_calls">Бул чалуу үчүн SIM картаны тандоо</string>
-  <string name="select_phone_account_for_calls_remember">Бул тандоону эстеп калуу</string>
   <string name="call_with_a_note">Кыска жазуу менен чалуу</string>
   <string name="call_subject_hint">Чалуу менен жөнөтүлө турган кыска жазууну териңиз …</string>
   <string name="send_and_call_button">ЖӨНӨТҮҮ ЖАНА ЧАЛУУ</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> \"%1$s\" өтмөгү. %2$d нерсе окула элек. </item>
   </plurals>
   <string name="description_search_video_call">Видео чалуу</string>
-  <string name="description_search_call_and_share">Бөлүшүү жана чалуу</string>
 </resources>

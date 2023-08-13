@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">کپی کردن شماره</string>
   <string name="call_details_edit_number">ویرایش شماره قبل از تماس</string>
   <string name="call_details_report_call_id">گزارش شماره نادرست</string>
-  <string name="sent_a_photo">عکسی ارسال کرد</string>
-  <string name="received_a_photo">عکسی دریافت کرد</string>
-  <string name="message_in_quotes">«%1$s»</string>
   <string name="report_caller_id_dialog_title">گزارش شماره نادرست</string>
   <string name="report_caller_id_failed">شماره گزارش نشد</string>
   <string name="report_caller_id_toast">شماره گزارش شد</string>

@@ -29,10 +29,6 @@ public class PhotoDataItem extends DataItem {
     super(values);
   }
 
-  public Long getPhotoFileId() {
-    return getContentValues().getAsLong(Photo.PHOTO_FILE_ID);
-  }
-
   public byte[] getPhoto() {
     return getContentValues().getAsByteArray(Photo.PHOTO);
   }

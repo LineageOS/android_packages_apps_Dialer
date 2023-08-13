@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2016 The Android Open Source Project
+  ~ Copyright (C) 2017 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,25 +14,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-  <item
-    android:bottom="2dp"
-    android:left="2dp"
-    android:right="2dp"
-    android:top="2dp">
-    <shape android:shape="oval">
-      <size
-        android:height="44dp"
-        android:width="44dp"/>
-      <solid android:color="?android:attr/colorBackgroundFloating"/>
-    </shape>
-  </item>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+  <background android:drawable="@color/shortcut_add_contact_background_color"/>
 
-  <item
-    android:bottom="12dp"
-    android:left="10dp"
-    android:right="14dp"
-    android:top="12dp"
-    android:drawable="@drawable/quantum_ic_person_add_vd_theme_24"
-    android:tint="?android:attr/colorPrimary"/>
-</layer-list>
+  <foreground android:drawable="@drawable/quantum_ic_person_add_vd_theme_24"
+      android:tint="?android:attr/colorPrimary"/>
+</adaptive-icon>

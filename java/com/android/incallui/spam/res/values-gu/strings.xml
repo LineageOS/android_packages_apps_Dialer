@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">સંપર્કોમાં ઉમેરવા માટે ટૅપ કરો અથવા સ્પામ નંબરને અવરોધિત કરો.</string>
   <string name="spam_notification_non_spam_call_expanded_text">આ નંબરથી તમને પહેલી વાર કૉલ કરવામાં આવ્યો છે. જો આ કૉલ સ્પામ હોય, તો તમે આ નંબરને અવરોધિત કરી અને તેની જાણ કરી શકો છો.</string>
   <string name="spam_notification_spam_call_collapsed_text">સ્પામ નથી તરીકે જાણ કરવા માટે ટૅપ કરો અથવા તેને બ્લૉક કરો</string>
-  <string name="spam_notification_report_spam_action_text">અવરોધિત અને જાણ કરો</string>
-  <string name="spam_notification_add_contact_action_text">સંપર્ક ઉમેરો</string>
   <string name="spam_notification_dialog_add_contact_action_text">સંપર્કોમાં ઉમેરો</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">અવરોધિત કરો અને સ્પામ તરીકે જાણ કરો</string>
   <string name="spam_notification_was_not_spam_action_text">ના, આ સ્પામ નથી</string>

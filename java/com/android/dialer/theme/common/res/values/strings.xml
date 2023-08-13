@@ -29,10 +29,6 @@
   <!-- String used to display calls from emergency numbers in the call log and incallui -->
   <string name="emergency_number">Emergency number</string>
 
-  <!-- Title for the activity that dials the phone.  This is the name
-       used in the Launcher icon. -->
-  <string name="launcherActivityLabel">Phone</string>
-
   <!-- Label shown on the 'positive' button for the dialog. Indicates that the call will proceed -->
   <string name="call">Call</string>
 

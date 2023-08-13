@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">ঘন ঘন যোগাযোগ করা হয়েছে এমন পরিচিতিগুলিকে সাফ করবেন?</string>
   <string name="clearFrequentsConfirmation">পরিচিতি এবং ফোন অ্যাপ্লিকেশানগুলি থেকে আপনি ঘন ঘন যোগাযোগ করা পরিচিতির তালিকা সাফ করবেন, এবং ইমেল অ্যাপ্লিকেশানগুলিকে আবার শুরু থেকে আপনার ঠিকানা অভিরুচি জানতে বাধ্য করবেন৷</string>
   <string name="clearFrequentsProgress_title">ঘন ঘন যোগাযোগ করা পরিচিতিগুলিকে সাফ করা হচ্ছে…</string>
-  <string name="status_available">উপলব্ধ</string>
-  <string name="status_away">অন্যত্র</string>
-  <string name="status_busy">ব্যস্ত</string>
-  <string name="contactsList">পরিচিতিগুলি</string>
-  <string name="contact_suggestions">শীর্ষস্থানীয় প্রস্তাবনা</string>
-  <string name="local_invisible_directory">অন্যান্য</string>
   <string name="directory_search_label">ডিরেক্টরি</string>
   <string name="directory_search_label_work">কাজের সংগ্রহ</string>
-  <string name="local_search_label">সকল পরিচিতি</string>
-  <string name="local_suggestions_search_label">প্রস্তাবনাগুলি</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">আমি</string>
   <string name="missing_name">(কোনও নাম নেই)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">পরিচিতি দেখুন</string>
-  <string name="list_filter_phones">ফোন নম্বর সহ সমস্ত পরিচিতি</string>
-  <string name="list_filter_phones_work">কর্মস্থলের প্রোফাইলের পরিচিতিগুলি</string>
   <string name="view_updates_from_group">আপডেটগুলি দেখুন</string>
   <string name="account_phone">শুধুমাত্র ডিভাইসে রয়েছে, সিঙ্ক করা হয়নি</string>
   <string name="nameLabelsGroup">নাম</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ ব্যবহার করে চ্যাট করুন</string>
   <string name="chat_jabber">Jabber ব্যবহার করে চ্যাট করুন</string>
   <string name="chat">চ্যাট করুন</string>
-  <string name="list_filter_all_accounts">সকল পরিচিতি</string>
-  <string name="listAllContactsInAccount">%s এ পরিচিতিগুলি</string>
-  <string name="listCustomView">কাস্টম দৃশ্যে পরিচিতিগুলি</string>
-  <string name="listSingleContact">একক পরিচিতি</string>
   <string name="display_options_sort_list_by">এই অনুসারে বাছুন</string>
   <string name="display_options_sort_by_given_name">প্রথম নাম</string>
   <string name="display_options_sort_by_family_name">পদবি</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">সার্চ সাফ করুন</string>
   <string name="select_account_dialog_title">অ্যাকাউন্ট</string>
   <string name="set_default_account">কলের জন্য সবসময় এটি ব্যবহার করুন</string>
-  <string name="select_phone_account_for_calls">এই কলের জন্য সিম বেছে নিন</string>
-  <string name="select_phone_account_for_calls_remember">এই পছন্দটি মনে রাখব</string>
   <string name="call_with_a_note">একটি নোট সহ কল করুন</string>
   <string name="call_subject_hint">কলের সাথে পাঠানোর জন্য একটি নোট লিখুন ...</string>
   <string name="send_and_call_button">পাঠান এবং কল করুন</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s ট্যাব৷ %2$dটি অপঠিত আইটেম৷ </item>
   </plurals>
   <string name="description_search_video_call">ভিডিও কল</string>
-  <string name="description_search_call_and_share">শেয়ার এবং কল করুন</string>
 </resources>

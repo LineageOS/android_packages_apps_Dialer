@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">ล้างรายชื่อที่ติดต่อบ่อยไหม</string>
   <string name="clearFrequentsConfirmation">คุณจะล้างรายชื่อของผู้ที่ติดต่อด้วยบ่อยๆ ในแอปพลิเคชัน Contacts  และ Phone และบังคับให้แอปพลิเคชันอีเมลเรียนรู้ค่ากำหนดที่อยู่ของคุณใหม่ตั้งแต่ต้น</string>
   <string name="clearFrequentsProgress_title">กำลังล้างรายชื่อที่ติดต่อบ่อย…</string>
-  <string name="status_available">พร้อมใช้งาน</string>
-  <string name="status_away">ไม่อยู่</string>
-  <string name="status_busy">ไม่ว่าง</string>
-  <string name="contactsList">รายชื่อติดต่อ</string>
-  <string name="contact_suggestions">รายการแนะนำยอดนิยม</string>
-  <string name="local_invisible_directory">อื่นๆ</string>
   <string name="directory_search_label">ไดเรกทอรี</string>
   <string name="directory_search_label_work">ไดเรกทอรีที่ทำงาน</string>
-  <string name="local_search_label">รายชื่อติดต่อทั้งหมด</string>
-  <string name="local_suggestions_search_label">รายการแนะนำ</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">ฉัน</string>
   <string name="missing_name">(ไม่มีชื่อ)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">ดูผู้ติดต่อ</string>
-  <string name="list_filter_phones">รายชื่อติดต่อทั้งหมดที่มีหมายเลขโทรศัพท์</string>
-  <string name="list_filter_phones_work">รายชื่อติดต่อในโปรไฟล์งาน</string>
   <string name="view_updates_from_group">ดูการอัปเดต</string>
   <string name="account_phone">อุปกรณ์เท่านั้น ไม่ซิงค์</string>
   <string name="nameLabelsGroup">ชื่อ</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">แชทโดยใช้ ICQ</string>
   <string name="chat_jabber">แชทโดยใช้ Jabber</string>
   <string name="chat">แชท</string>
-  <string name="list_filter_all_accounts">รายชื่อติดต่อทั้งหมด</string>
-  <string name="listAllContactsInAccount">รายชื่อติดต่อใน %s</string>
-  <string name="listCustomView">รายชื่อติดต่อในมุมมองที่กำหนดเอง</string>
-  <string name="listSingleContact">รายชื่อติดต่อเดียว</string>
   <string name="display_options_sort_list_by">จัดเรียงตาม</string>
   <string name="display_options_sort_by_given_name">ชื่อ</string>
   <string name="display_options_sort_by_family_name">นามสกุล</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">ล้างการค้นหา</string>
   <string name="select_account_dialog_title">บัญชี</string>
   <string name="set_default_account">ใช้ในการโทรทุกครั้ง</string>
-  <string name="select_phone_account_for_calls">เลือกซิมสำหรับการโทรนี้</string>
-  <string name="select_phone_account_for_calls_remember">จำตัวเลือกนี้</string>
   <string name="call_with_a_note">โทรพร้อมโน้ต</string>
   <string name="call_subject_hint">พิมพ์โน้ตเพื่อส่งพร้อมการโทร ...</string>
   <string name="send_and_call_button">ส่งและโทร</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> แท็บ %1$s ยังไม่อ่าน %2$d รายการ </item>
   </plurals>
   <string name="description_search_video_call"> Hangouts วิดีโอ</string>
-  <string name="description_search_call_and_share">แชร์และโทร</string>
 </resources>

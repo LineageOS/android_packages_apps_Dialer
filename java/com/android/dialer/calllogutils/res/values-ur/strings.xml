@@ -34,28 +34,7 @@
   <string name="voicemail_string">صوتی میل</string>
   <string name="just_now">ابھی ابھی</string>
   <string name="new_call_log_carrier_video">کیرئیر ویڈیو</string>
-  <string name="new_call_log_duo_video">‏Duo ویڈیو</string>
   <string name="new_call_log_unknown">نامعلوم</string>
   <string name="new_call_log_secondary_blocked">مسدود</string>
   <string name="new_call_log_secondary_spam">اسپام</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^2 کی جانب سے ^1 چھوٹی ہوئی کال</item>
-    <item quantity="other">^1 کالز، تازہ ترین ^2 کی جانب سے چھوٹی ہوئی کال ہے</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^2 کی جانب سے ^1 جواب دی گئی کالز</item>
-    <item quantity="other">^1 کالز، تازہ ترین ^2 کی جانب سے جواب دی گئی کال ہے</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^2 کو باہر جانے والی ^1 کال</item>
-    <item quantity="other">^1 کالز، تازہ ترین ^2 کو باہر جانے والی کال ہے</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^2 کی جانب سے ^1 مسدود کردہ کال</item>
-    <item quantity="other">^1 کالز، تازہ ترین ^2 کی جانب سے مسدود کردہ کال ہے</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1 پر،
-    بذریعہ ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1، ^2۔</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1، ^2، ^3۔</string>
 </resources>

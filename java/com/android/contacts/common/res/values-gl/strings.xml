@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Borrar contactados con frecuencia?</string>
   <string name="clearFrequentsConfirmation">Borra a lista de persoas coas que contactaches frecuentemente das aplicacións Contactos e Teléfono, e obriga ás aplicacións de correo electrónico a que memoricen as túas preferencias de enderezos desde cero.</string>
   <string name="clearFrequentsProgress_title">Borrando contactados frecuencia...</string>
-  <string name="status_available">Dispoñible</string>
-  <string name="status_away">Ausente</string>
-  <string name="status_busy">Ocupado</string>
-  <string name="contactsList">Contactos</string>
-  <string name="contact_suggestions">Suxestións destacadas</string>
-  <string name="local_invisible_directory">Outro</string>
   <string name="directory_search_label">Directorio</string>
   <string name="directory_search_label_work">Directorio de traballo</string>
-  <string name="local_search_label">Todos os contactos</string>
-  <string name="local_suggestions_search_label">Suxestións</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Eu</string>
   <string name="missing_name">(Sen nome)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Ver contacto</string>
-  <string name="list_filter_phones">Todos os contactos con números de teléfono</string>
-  <string name="list_filter_phones_work">Contactos do perfil de traballo</string>
   <string name="view_updates_from_group">Ver actualizacións</string>
   <string name="account_phone">Só no dispositivo, sen sincronizar</string>
   <string name="nameLabelsGroup">Nome</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Chatear con ICQ</string>
   <string name="chat_jabber">Chatear con Jabber</string>
   <string name="chat">Chatear</string>
-  <string name="list_filter_all_accounts">Todos os contactos</string>
-  <string name="listAllContactsInAccount">Contactos en %s</string>
-  <string name="listCustomView">Contactos na vista personalizada</string>
-  <string name="listSingleContact">Un só contacto</string>
   <string name="display_options_sort_list_by">Ordenar por</string>
   <string name="display_options_sort_by_given_name">Nome</string>
   <string name="display_options_sort_by_family_name">Apelidos</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Borrar busca</string>
   <string name="select_account_dialog_title">Conta</string>
   <string name="set_default_account">Usar sempre para as chamadas</string>
-  <string name="select_phone_account_for_calls">Escolle a SIM para esta chamada</string>
-  <string name="select_phone_account_for_calls_remember">Lembrar esta opción</string>
   <string name="call_with_a_note">Chamar cunha nota</string>
   <string name="call_subject_hint">Escribe unha nota para enviala coa chamada…</string>
   <string name="send_and_call_button">ENVIAR E CHAMAR</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> Pestana %1$s. %2$d elementos non lidos. </item>
   </plurals>
   <string name="description_search_video_call">Videochamada</string>
-  <string name="description_search_call_and_share">Comparte e chama</string>
 </resources>

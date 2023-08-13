@@ -921,13 +921,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     return false;
   }
 
-  private static boolean isNonContactEntry(ContactInfo info) {
-    if (info == null || info.sourceType != Type.SOURCE_TYPE_DIRECTORY) {
-      return true;
-    }
-    return false;
-  }
-
   private DialerContact buildContact() {
     DialerContact.Builder contact = DialerContact.newBuilder();
     contact.setPhotoId(info.photoId);

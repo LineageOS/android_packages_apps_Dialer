@@ -63,8 +63,6 @@ public class ExternalAccountType extends BaseAccountType {
   private static final String TAG_CONTACTS_DATA_KIND = "ContactsDataKind";
   private static final String TAG_EDIT_SCHEMA = "EditSchema";
 
-  private static final String ATTR_EDIT_CONTACT_ACTIVITY = "editContactActivity";
-  private static final String ATTR_CREATE_CONTACT_ACTIVITY = "createContactActivity";
   private static final String ATTR_INVITE_CONTACT_ACTIVITY = "inviteContactActivity";
   private static final String ATTR_INVITE_CONTACT_ACTION_LABEL = "inviteContactActionLabel";
   private static final String ATTR_VIEW_CONTACT_NOTIFY_SERVICE = "viewContactNotifyService";
@@ -79,10 +77,6 @@ public class ExternalAccountType extends BaseAccountType {
   private static final String ATTR_ACCOUNT_LABEL = "accountTypeLabel";
   private static final String ATTR_ACCOUNT_ICON = "accountTypeIcon";
 
-  private final boolean mIsExtension;
-
-  private String mEditContactActivityClassName;
-  private String mCreateContactActivityClassName;
   private String mInviteContactActivity;
   private String mInviteActionLabelAttribute;
   private int mInviteActionLabelResId;
@@ -96,8 +90,8 @@ public class ExternalAccountType extends BaseAccountType {
   private boolean mHasContactsMetadata;
   private boolean mHasEditSchema;
 
-  public ExternalAccountType(Context context, String resPackageName, boolean isExtension) {
-    this(context, resPackageName, isExtension, null);
+  public ExternalAccountType(Context context, String resPackageName) {
+    this(context, resPackageName, null);
   }
 
   /**
@@ -109,9 +103,7 @@ public class ExternalAccountType extends BaseAccountType {
   ExternalAccountType(
       Context context,
       String packageName,
-      boolean isExtension,
       XmlResourceParser injectedMetadata) {
-    this.mIsExtension = isExtension;
     this.resourcePackageName = packageName;
     this.syncAdapterPackageName = packageName;
 
@@ -277,11 +269,6 @@ public class ExternalAccountType extends BaseAccountType {
   }
 
   @Override
-  public boolean isExtension() {
-    return mIsExtension;
-  }
-
-  @Override
   public boolean areContactsWritable() {
     return mHasEditSchema;
   }
@@ -289,16 +276,6 @@ public class ExternalAccountType extends BaseAccountType {
   /** Whether this account type has the android.provider.CONTACTS_STRUCTURE metadata xml. */
   public boolean hasContactsMetadata() {
     return mHasContactsMetadata;
-  }
-
-  @Override
-  public String getEditContactActivityClassName() {
-    return mEditContactActivityClassName;
-  }
-
-  @Override
-  public String getCreateContactActivityClassName() {
-    return mCreateContactActivityClassName;
   }
 
   @Override
@@ -363,11 +340,7 @@ public class ExternalAccountType extends BaseAccountType {
         String attr = parser.getAttributeName(i);
         String value = parser.getAttributeValue(i);
         LogUtil.d(TAG, attr + "=" + value);
-        if (ATTR_EDIT_CONTACT_ACTIVITY.equals(attr)) {
-          mEditContactActivityClassName = value;
-        } else if (ATTR_CREATE_CONTACT_ACTIVITY.equals(attr)) {
-          mCreateContactActivityClassName = value;
-        } else if (ATTR_INVITE_CONTACT_ACTIVITY.equals(attr)) {
+        if (ATTR_INVITE_CONTACT_ACTIVITY.equals(attr)) {
           mInviteContactActivity = value;
         } else if (ATTR_INVITE_CONTACT_ACTION_LABEL.equals(attr)) {
           mInviteActionLabelAttribute = value;

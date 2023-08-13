@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Thepha ukwengeza koxhumana nabo noma ukuvimbela inombolo engugaxekile.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Okokuqala le nombolo ikushayela. Uma le kholi kade ingugaxekile, ungakwazi ukuvimbela le nombolo futhi uyibike.</string>
   <string name="spam_notification_spam_call_collapsed_text">Thepha ukubika njengokungeyena ugaxekile noma vimbela</string>
-  <string name="spam_notification_report_spam_action_text">Vimba futhi ubike</string>
-  <string name="spam_notification_add_contact_action_text">Engeza oxhumana naye</string>
   <string name="spam_notification_dialog_add_contact_action_text">Engeza koxhumana nabo</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Vimba futhi ubike ugaxekile</string>
   <string name="spam_notification_was_not_spam_action_text">Cha, akuyena ugaxekile</string>

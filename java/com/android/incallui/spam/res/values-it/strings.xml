@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Tocca per aggiungere ai contatti o per bloccare il numero come spam.</string>
   <string name="spam_notification_non_spam_call_expanded_text">È la prima volta che vieni chiamato da questo numero. Se la chiamata era spam, puoi bloccare il numero e segnalarlo.</string>
   <string name="spam_notification_spam_call_collapsed_text">Tocca per segnalare il numero come non spam o per bloccarlo.</string>
-  <string name="spam_notification_report_spam_action_text">Blocca e segnala</string>
-  <string name="spam_notification_add_contact_action_text">Aggiungi contatto</string>
   <string name="spam_notification_dialog_add_contact_action_text">Aggiungi a contatti</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blocca e segnala spam</string>
   <string name="spam_notification_was_not_spam_action_text">No, non era spam</string>

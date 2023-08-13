@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">DEBLOCAȚI</string>
   <string name="block_report_number_alert_title">Blocați %1$s?</string>
   <string name="block_report_number_alert_details">Nu veți mai primi apeluri de la acest număr.</string>
-  <string name="block_number_alert_details">%1$s Acest apel va fi raportat ca spam.</string>
   <string name="unblock_number_alert_details">Acest număr va fi deblocat și raportat ca nefiind spam. Apelurile viitoare nu sunt considerate spam.</string>
   <string name="unblock_report_number_alert_title">Deblocați %1$s?</string>
   <string name="report_not_spam_alert_button">Raportați</string>

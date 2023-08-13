@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">Wi-Fi</string>
-  <string name="network_name_mobile">Thiết bị di động</string>
   <string name="content_description_overflow">Tùy chọn khác</string>
   <string name="snackbar_undo">HOÀN TÁC</string>
   <string name="ok_got_it">Ok, đã hiểu</string>

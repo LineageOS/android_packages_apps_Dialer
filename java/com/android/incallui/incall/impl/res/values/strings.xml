@@ -36,10 +36,6 @@
      [CHAR LIMIT=12] -->
   <string name="incall_label_mute">Mute</string>
 
-  <!-- Button shown during a phone call to end the call.
-     [CHAR LIMIT=12] -->
-  <string name="incall_label_end_call">End call</string>
-
   <!-- Button shown during a phone call to show the dialpad.
      [CHAR LIMIT=12] -->
   <string name="incall_label_dialpad">Keypad</string>

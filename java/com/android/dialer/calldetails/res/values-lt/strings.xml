@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Kopijuoti numerį</string>
   <string name="call_details_edit_number">Redaguoti numerį prieš skambinant</string>
   <string name="call_details_report_call_id">Pranešti apie netikslų numerį</string>
-  <string name="sent_a_photo">Išsiuntė nuotrauką</string>
-  <string name="received_a_photo">Gavo nuotrauką</string>
-  <string name="message_in_quotes">„%1$s“</string>
   <string name="report_caller_id_dialog_title">Pranešimas apie netinkamą numerį</string>
   <string name="report_caller_id_failed">Nepavyko pranešti apie numerį</string>
   <string name="report_caller_id_toast">Apie numerį pranešta</string>

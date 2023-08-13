@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Copy number</string>
   <string name="call_details_edit_number">Edit number before call</string>
   <string name="call_details_report_call_id">Report inaccurate number</string>
-  <string name="sent_a_photo">Sent a photo</string>
-  <string name="received_a_photo">Received a photo</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Report incorrect number</string>
   <string name="report_caller_id_failed">Couldn\'t report number</string>
   <string name="report_caller_id_toast">Number reported</string>

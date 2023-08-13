@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Шұғыл шаруа. Маған қайта қоңырау шалыңыз.</string>
   <string name="post_call_message_2">Уақытыңыз болғанда, маған қайта қоңырау шалыңыз.</string>
   <string name="post_call_message_3">Шұғыл емес, кейінірек сөйлесерміз.</string>
-  <string name="post_call_add_message">Хабар қосу</string>
-  <string name="post_call_send_message">Хабарды жіберу</string>
+    <string name="post_call_send_message">Хабарды жіберу</string>
   <string name="post_call_message_sent">Хабар жіберілді</string>
   <string name="view">Көру</string>
 </resources>

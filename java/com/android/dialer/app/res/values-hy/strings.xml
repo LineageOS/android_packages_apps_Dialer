@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Հեռախոս</string>
-  <string name="launcherDialpadActivityLabel">Հեռախոսի ստեղնաշար</string>
   <string name="callHistoryIconLabel">Զանգերի պատմություն</string>
   <string name="action_copy_number_text">Պատճենել համարը</string>
   <string name="action_edit_number_before_call">Փոփոխել համարը զանգելուց առաջ</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Այլ ընտրանքներ</string>
   <string name="action_menu_dialpad_button">ստեղնաշար</string>
   <string name="dialer_settings_label">Կարգավորումներ</string>
-  <string name="simulator_submenu_label">Նմանակիչ</string>
-  <string name="new_ui_launcher_shortcut_label">Ստեղծել միջերեսի նոր դյուրանցում</string>
   <string name="description_entering_bulk_action_mode">Դուք մտել եք զանգվածային գործողության ռեժիմ</string>
   <string name="description_leaving_bulk_action_mode">Դուք դուրս եկաք զանգվածային գործողությունների ռեժիմից</string>
   <string name="description_selecting_bulk_action_mode">Ընտրվեց՝ %1$s</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Տեսազանգ</string>
   <string name="description_start_voice_search">Սկսկեք ձայնային որոնումը</string>
   <string name="voicemail">Ձայնային փոստ</string>
-  <string name="description_cancel_multi_select">Չեղարկել փաթեթային գործողությունների ռեժիմը</string>
   <string name="voicemailMultiSelectDeleteConfirm">Ջնջել</string>
   <string name="voicemailMultiSelectDeleteCancel">Չեղարկել</string>
   <string name="voicemailMultiSelectActionBarTitle">Ընտրվել է՝ %1$s</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Ձայնային որոնումը հասանելի չէ</string>
   <string name="dialer_hint_find_contact">Կոնտակտների որոնում</string>
-  <string name="block_number_search_hint">Ավելացրեք համար/որոնեք կոնտակտներ</string>
   <string name="call_log_all_empty">Զանգերի մատյանը դատարկ է</string>
   <string name="call_log_all_empty_action">Զանգել</string>
   <string name="call_log_missed_empty">Բաց թողնված զանգեր չունեք:</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Զանգերի պատմությունը</string>
   <string name="call_log_all_title">Բոլորը</string>
   <string name="call_log_missed_title">Բաց թողնված</string>
-  <string name="tab_speed_dial">Արագ համարարկում</string>
-  <string name="tab_history">Զանգերի պատմությունը</string>
   <string name="tab_all_contacts">Կոնտակտներ</string>
-  <string name="tab_voicemail">Ձայնային փոստ</string>
-  <string name="search_shortcut_call_number">Զանգել %s-ին</string>
   <string name="search_shortcut_create_new_contact">Ստեղծել նոր կոնտակտ</string>
   <string name="search_shortcut_add_to_contact">Ավելացնել կոնտակտին</string>
   <string name="search_shortcut_send_sms_message">Ուղարկել SMS</string>
   <string name="search_shortcut_make_video_call">Տեսազանգ սկսել</string>
-  <string name="search_shortcut_block_number">Արգելափակել համարը</string>
-  <string name="speed_dial_empty">Արագ համարահավաքման ցանկը դատարկ է</string>
-  <string name="speed_dial_empty_add_favorite_action">Ավելացնել կոնտակտ</string>
-  <string name="remove_contact">Հեռացնել</string>
   <string name="select_all">Ընտրել բոլորը</string>
   <string name="call_log_action_video_call">Տեսազանգ</string>
-  <string name="call_log_action_set_up_video">Կարգավորել տեսազանգը</string>
-  <string name="call_log_action_invite_video">Հրավիրել տեսազանգի</string>
   <string name="call_log_action_send_message">Ուղարկել հաղորդագրություն</string>
   <string name="call_log_action_details">Զանգի մանրամասները</string>
   <string name="call_log_action_share_voicemail">Ուղարկել…</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Զանգեր</string>
   <string name="manage_blocked_numbers_label">Արգելափակված համարներ</string>
   <string name="voicemail_settings_label">Ձայնային փոստ</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Զանգերի արգելափակումը կասեցվել է</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Զանգերի արգելափակումը կասեցվել է, քանի որ վերջին 48 ժամվա ընթացքում դուք այս հեռախոսից զանգել եք արտակարգ իրավիճակների ծառայություններին: 48 ժամ տևողությամբ ժամանակահատվածի ավարտից հետո այն ավտոմատ կերպով կվերամիացվի:</string>
-  <string name="import_send_to_voicemail_numbers_label">Ներմուծել համարները</string>
-  <string name="blocked_call_settings_import_description">Համաձայն ձեր նախկին կարգավորումների՝ որոշ զանգողների պետք է ավտոմատ ուղարկվի ձայնային փոստ այլ հավելվածների միջոցով:</string>
-  <string name="blocked_call_settings_view_numbers_button">Կոնտակտների թիվը</string>
-  <string name="blocked_call_settings_import_button">Ներմուծում</string>
-  <string name="description_blocked_number_list_delete">Արգելաբացել համարը</string>
-  <string name="addBlockedNumber">Ավելացնել համար</string>
-  <string name="block_number_footer_message_vvm">Այս համարներից զանգերը կարգելափակվեն, իսկ ձայնային փոստի հաղորդագրություններն ավտոմատ կերպով կջնջվեն:</string>
-  <string name="block_number_footer_message_no_vvm">Այս համարներից զանգերը կարգելափակվեն, սակայն նրանք կկարողանան ձեզ համար ձայնային փոստի հաղորդագրություններ թողնել:</string>
-  <string name="block_list">Արգելափակված համարներ</string>
-  <string name="alreadyBlocked">%1$s համարն արդեն արգելափակված է:</string>
   <string name="phone_account_settings_label">Հաշիվներ զանգերի համար</string>
-  <string name="permission_no_speeddial">Արագ համարահավաքը թույլատրելու համար միացրեք Կոնտակտների թույլտվությունը:</string>
   <string name="permission_no_calllog">Ձեր զանգերի մատյանը տեսնելու համար միացրեք Հեռախոսի թույլտվությունը:</string>
-  <string name="permission_no_search">Կոնտակտները որոնելու համար միացրեք Կոնտակտների թույլտվությունները:</string>
-  <string name="permission_place_call">Զանգ կատարելու համար միացրեք Հեռախոսի թույլտվությունը:</string>
   <string name="toast_cannot_write_system_settings">Հեռախոս հավելվածը համակարգի կարգավորումները գրելու թույլտվություն չունի:</string>
   <string name="blocked_number_call_log_label">Արգելափակված է</string>
   <string name="call_log_action_block_report_number">Արգելափակել/Նշել որպես սպամ</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Սպամ չէ</string>
   <string name="call_log_action_unblock_number">Արգելաբացել համարը</string>
   <string name="spam_number_call_log_label">Սպամ</string>
-  <string name="call_composer_connection_failed">%1$s օգտատերը միացած չէ ցանցին և անհասանելի է</string>
-  <string name="about_phone_label">Հավելվածի մասին</string>
-  <string name="voicemail_transcription_branding_text">Տառադրումն ըստ Google-ի</string>
-  <string name="voicemail_transcription_in_progress">Տառադրում…</string>
-  <string name="voicemail_transcription_failed">Տառադրումն անհասանելի է:</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Տառադրումն անհասանելի է: Լեզուն չի աջակցվում:</string>
-  <string name="voicemail_transcription_failed_no_speech">Տառադրումն անհասանելի է: Խոսք չի գտնվել:</string>
-  <string name="voicemail_donation_promo_title">Կօգնե՞ք բարելավել տառադրման ճշգրտությունը</string>
-  <string name="voicemail_donation_promo_content">Թույլ տվեք Google-ին ստուգել տառադրում ունեցող այս և հետագա ձայնային հաղորդագրությունները: Դրանք կպահվեն անանուն կերպով: Ցանկացած պահի կարող եք փոխել կարգավորումները: %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Այո</string>
-  <string name="voicemail_donation_promo_opt_out">Ոչ</string>
-  <string name="voicemail_transcription_rating">Գնահատեք տառադրման որակը</string>
-  <string name="voicemail_transcription_rating_thanks">Շնորհակալ ենք արձագանքի համար</string>
-  <string name="description_rating_good">Հավանել</string>
-  <string name="description_rating_bad">Չհավանել</string>
-  <string name="view_conversation">Դիտել</string>
-  <string name="ec_data_deleted">Զանգը ջնջվեց: Դիտեք և ջնջեք զանգի ընթացքում ստացված կցորդները Messages հավելվածում:</string>
-  <string name="multiple_ec_data_deleted">Զանգերը ջնջվեցին: Դիտեք և ջնջեք զանգերի ընթացքում ստացված կցորդները Messages հավելվածում:</string>
 </resources>

@@ -95,14 +95,6 @@ public class DataItem implements Collapser.Collapsible<DataItem> {
     return mContentValues;
   }
 
-  public Long getRawContactId() {
-    return mContentValues.getAsLong(Data.RAW_CONTACT_ID);
-  }
-
-  public void setRawContactId(long rawContactId) {
-    mContentValues.put(Data.RAW_CONTACT_ID, rawContactId);
-  }
-
   /** Returns the data id. */
   public long getId() {
     return mContentValues.getAsLong(Data._ID);
@@ -140,16 +132,6 @@ public class DataItem implements Collapser.Collapsible<DataItem> {
   }
 
   /**
-   * Indicates the carrier presence value for the current {@link DataItem}.
-   *
-   * @return {@link Data#CARRIER_PRESENCE_VT_CAPABLE} if the {@link DataItem} supports carrier video
-   *     calling, {@code 0} otherwise.
-   */
-  public int getCarrierPresence() {
-    return mContentValues.getAsInteger(Data.CARRIER_PRESENCE);
-  }
-
-  /**
    * This builds the data string depending on the type of data item by using the generic DataKind
    * object underneath.
    */
@@ -161,23 +143,8 @@ public class DataItem implements Collapser.Collapsible<DataItem> {
     return actionBody == null ? null : actionBody.toString();
   }
 
-  /**
-   * This builds the data string(intended for display) depending on the type of data item. It
-   * returns the same value as {@link #buildDataString} by default, but certain data items can
-   * override it to provide their version of formatted data strings.
-   *
-   * @return Data string representing the data item, possibly formatted for display
-   */
-  public String buildDataStringForDisplay(Context context, DataKind kind) {
-    return buildDataString(context, kind);
-  }
-
   public DataKind getDataKind() {
     return mKind;
-  }
-
-  public void setDataKind(DataKind kind) {
-    mKind = kind;
   }
 
   public Integer getTimesUsed() {

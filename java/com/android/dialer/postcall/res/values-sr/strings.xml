@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Хитно је. Узвратите ми позив.</string>
   <string name="post_call_message_2">Позовите ме кад будете имали времена.</string>
   <string name="post_call_message_3">Није хитно, можемо да ћаскамо касније.</string>
-  <string name="post_call_add_message">Додај поруку</string>
-  <string name="post_call_send_message">Пошаљите поруку</string>
+    <string name="post_call_send_message">Пошаљите поруку</string>
   <string name="post_call_message_sent">Порука је послата</string>
   <string name="view">Прикажи</string>
 </resources>

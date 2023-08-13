@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">გსურთ ხშირი კონტაქტების წაშლა?</string>
   <string name="clearFrequentsConfirmation">თქვენ წაშლით ხშირად დაკავშირებულთა სიას კონტაქტებიდან და ტელეფონის აპლიკაციიდან და აიძულებთ ელ-ფოსტის აპლიკაციებს შეისწავლონ თქვენი ადრესატების პრიორიტეტები ნულიდან.</string>
   <string name="clearFrequentsProgress_title">ხშირი კონტაქტები იშლება…</string>
-  <string name="status_available">ხელმისაწვდომი</string>
-  <string name="status_away">გასული</string>
-  <string name="status_busy">დაკავებული</string>
-  <string name="contactsList">კონტაქტები</string>
-  <string name="contact_suggestions">საუკეთესო შეთავაზებები</string>
-  <string name="local_invisible_directory">სხვა</string>
   <string name="directory_search_label">კატალოგი</string>
   <string name="directory_search_label_work">სამსახურის კატალოგი</string>
-  <string name="local_search_label">ყველა კონტაქტი</string>
-  <string name="local_suggestions_search_label">შეთავაზებები</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">მე</string>
   <string name="missing_name">(სახელის გარეშე)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">კონტაქტის ნახვა</string>
-  <string name="list_filter_phones">ყველა ტელეფონის ნომრიანი კონტაქტი</string>
-  <string name="list_filter_phones_work">სამსახურის პროფილის კონტაქტები</string>
   <string name="view_updates_from_group">განახლებების ნახვა</string>
   <string name="account_phone">მხოლოდ მოწყობილობაზე, სინქრონიზაციის გარეშე</string>
   <string name="nameLabelsGroup">სახელი</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ჩეთი ICQ-ით</string>
   <string name="chat_jabber">ჩეთი Jabber-ით</string>
   <string name="chat">ჩეთი</string>
-  <string name="list_filter_all_accounts">ყველა კონტაქტი</string>
-  <string name="listAllContactsInAccount">კონტაქტები %s-ში</string>
-  <string name="listCustomView">კონტაქტები მორგებულ ხედში</string>
-  <string name="listSingleContact">ერთი კონტაქტი</string>
   <string name="display_options_sort_list_by">სორტირება:</string>
   <string name="display_options_sort_by_given_name">სახელით</string>
   <string name="display_options_sort_by_family_name">გვარით</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">ძიების გასუფთავება</string>
   <string name="select_account_dialog_title">ანგარიში</string>
   <string name="set_default_account">ზარებისთვის მუდამ ამის გამოყენება</string>
-  <string name="select_phone_account_for_calls">აირჩიეთ SIM ამ ზარისთვის</string>
-  <string name="select_phone_account_for_calls_remember">ამ არჩევანის დამახსოვრება</string>
   <string name="call_with_a_note">ზარი შენიშვნასთან ერთად</string>
   <string name="call_subject_hint">აკრიფეთ შენიშვნა ზართან ერთად გასაგზავნად ...</string>
   <string name="send_and_call_button">გაგზავნა და დარეკვა</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s ცხრ. %2$d წაუკითხავი ერთეული. </item>
   </plurals>
   <string name="description_search_video_call">ვიდეოზარი</string>
-  <string name="description_search_call_and_share">გაზიარება და დარეკვა</string>
 </resources>

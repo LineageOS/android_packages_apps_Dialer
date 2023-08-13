@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">האם למחוק אנשי קשר קבועים?</string>
   <string name="clearFrequentsConfirmation">הפעולה הזו תמחק מהאפליקציות \'אנשים\' ו\'טלפון\' את רשימת אנשי הקשר שאיתם אתה יוצר קשר בתדירות גבוהה, ויהיה עליך ללמד מחדש את אפליקציות האימייל את הכתובות המועדפות עליך.</string>
   <string name="clearFrequentsProgress_title">מוחק אנשי קשר קבועים…</string>
-  <string name="status_available">זמין</string>
-  <string name="status_away">לא נמצא</string>
-  <string name="status_busy">לא פנוי</string>
-  <string name="contactsList">אנשי קשר</string>
-  <string name="contact_suggestions">הצעות מובילות</string>
-  <string name="local_invisible_directory">אחר</string>
   <string name="directory_search_label">ספריה</string>
   <string name="directory_search_label_work">ספריית עבודה</string>
-  <string name="local_search_label">כל אנשי הקשר</string>
-  <string name="local_suggestions_search_label">הצעות</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">אני</string>
   <string name="missing_name">(ללא שם)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">הצג איש קשר</string>
-  <string name="list_filter_phones">כל אנשי הקשר עם מספרי טלפון</string>
-  <string name="list_filter_phones_work">אנשי הקשר של פרופיל העבודה</string>
   <string name="view_updates_from_group">הצג עדכונים</string>
   <string name="account_phone">במכשיר בלבד, ללא סנכרון</string>
   <string name="nameLabelsGroup">שם</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">‏שוחח בצ\'אט באמצעות ICQ</string>
   <string name="chat_jabber">‏שוחח בצ\'אט באמצעות Jabber</string>
   <string name="chat">צ\'אט</string>
-  <string name="list_filter_all_accounts">כל אנשי הקשר</string>
-  <string name="listAllContactsInAccount">אנשי קשר ב-%s</string>
-  <string name="listCustomView">אנשי קשר בתצוגה מותאמת אישית</string>
-  <string name="listSingleContact">איש קשר יחיד</string>
   <string name="display_options_sort_list_by">מיון לפי</string>
   <string name="display_options_sort_by_given_name">שם פרטי</string>
   <string name="display_options_sort_by_family_name">שם משפחה</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">נקה חיפוש</string>
   <string name="select_account_dialog_title">חשבון</string>
   <string name="set_default_account">השתמש תמיד עבור שיחות</string>
-  <string name="select_phone_account_for_calls">‏בחירת כרטיס SIM לשיחה הזו</string>
-  <string name="select_phone_account_for_calls_remember">אני רוצה להשתמש באפשרות הזו גם בעתיד</string>
   <string name="call_with_a_note">התקשר עם הערה</string>
   <string name="call_subject_hint">הקלד הערה לשליחה עם השיחה...</string>
   <string name="send_and_call_button">שלח והתקשר</string>
@@ -143,5 +125,4 @@
     <item quantity="other">הכרטיסייה %1$s. %2$d פריטים שלא נקראו. </item>
   </plurals>
   <string name="description_search_video_call">שיחת וידאו</string>
-  <string name="description_search_call_and_share">שיתוף והתקשרות</string>
 </resources>

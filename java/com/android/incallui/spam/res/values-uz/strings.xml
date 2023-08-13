@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Raqamni kontaktlarga qo‘shish yoki uni spam tarqatuvchi deb bloklash uchun bosing.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Bu raqamdan sizga birinchi marta qo‘ng‘iroq qilindi. Agar u spam bo‘lsa, uni spam deb belgilang va raqamni bloklang.</string>
   <string name="spam_notification_spam_call_collapsed_text">Chaqiruvni spam emas deb belgilash yoki raqamni bloklash uchun bosing.</string>
-  <string name="spam_notification_report_spam_action_text">Bloklash/xabar ber.</string>
-  <string name="spam_notification_add_contact_action_text">Kontaktl-ga qo‘shish</string>
   <string name="spam_notification_dialog_add_contact_action_text">Kontaktlarga saqlash</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Bloklash va spam haqida xabar berish</string>
   <string name="spam_notification_was_not_spam_action_text">Spam emas</string>

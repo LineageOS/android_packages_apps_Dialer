@@ -48,10 +48,6 @@ public class AppCompatPreferenceActivity extends PreferenceActivity {
     getDelegate().onPostCreate(savedInstanceState);
   }
 
-  public void setSupportActionBar(Toolbar toolbar) {
-    getDelegate().setSupportActionBar(toolbar);
-  }
-
   @Override
   public MenuInflater getMenuInflater() {
     return getDelegate().getMenuInflater();

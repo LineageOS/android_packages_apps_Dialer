@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Raqamni nusxalash</string>
   <string name="call_details_edit_number">Chaqiruvdan oldin raqamni tahrirlash</string>
   <string name="call_details_report_call_id">Raqamdagi xatolik haqida xabar berish</string>
-  <string name="sent_a_photo">Rasm yuborildi</string>
-  <string name="received_a_photo">Rasm qabul qilindi</string>
-  <string name="message_in_quotes">“%1$s”</string>
   <string name="report_caller_id_dialog_title">Noto‘g‘ri raqam</string>
   <string name="report_caller_id_failed">Raqamdagi xatolik haqida xabar yuborib bo‘lmadi</string>
   <string name="report_caller_id_toast">Raqamdagi xatolik haqida xabar yuborildi</string>

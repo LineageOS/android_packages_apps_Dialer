@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">電話番号をコピー</string>
   <string name="call_details_edit_number">発信前に電話番号を編集</string>
   <string name="call_details_report_call_id">情報が間違っている番号を報告</string>
-  <string name="sent_a_photo">写真を送信しました</string>
-  <string name="received_a_photo">写真を受信しました</string>
-  <string name="message_in_quotes">「%1$s」</string>
   <string name="report_caller_id_dialog_title">間違った番号の報告</string>
   <string name="report_caller_id_failed">番号を報告できませんでした</string>
   <string name="report_caller_id_toast">番号を報告しました</string>
