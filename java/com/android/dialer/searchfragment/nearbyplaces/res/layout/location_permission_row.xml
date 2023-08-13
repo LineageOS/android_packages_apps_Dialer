@@ -16,13 +16,9 @@
   -->
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginTop="8dp"
-    app:cardElevation="2dp">
+    style="@style/LocationPermCardStyle">
 
   <RelativeLayout
       android:layout_width="match_parent"
@@ -52,26 +48,23 @@
     <Button
         android:id="@+id/location_permission_allow"
         android:layout_width="wrap_content"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/permission_text"
         android:layout_marginTop="18dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:text="@string/nearby_places_allow"/>
+        android:text="@string/nearby_places_allow"
+        style="@style/DialerPrimaryFlatButtonStyle"/>
 
     <Button
         android:id="@+id/location_permission_dismiss"
         android:layout_width="wrap_content"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_toStartOf="@+id/location_permission_allow"
         android:layout_below="@id/permission_text"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="18dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
         android:text="@string/nearby_places_dismiss"
         android:textColor="?android:attr/colorPrimary"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+        style="@style/DialerFlatButtonStyle"/>
   </RelativeLayout>
 </android.support.v7.widget.CardView>
