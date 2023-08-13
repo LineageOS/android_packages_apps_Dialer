@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefoni</string>
-  <string name="launcherDialpadActivityLabel">Blloku i tasteve i telefonit</string>
   <string name="callHistoryIconLabel">Historiku i telefonatave</string>
   <string name="action_copy_number_text">Kopjo numrin</string>
   <string name="action_edit_number_before_call">Redakto numrin para telefonatës</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Opsione të tjera</string>
   <string name="action_menu_dialpad_button">blloku i tasteve</string>
   <string name="dialer_settings_label">Cilësimet</string>
-  <string name="simulator_submenu_label">Simuluesi</string>
-  <string name="new_ui_launcher_shortcut_label">Krijo një shkurtore për ndërfaqen e re të përdoruesit</string>
   <string name="description_entering_bulk_action_mode">Po hyn në modalitetin e veprimit në masë</string>
   <string name="description_leaving_bulk_action_mode">U largove nga modaliteti i veprimit në masë</string>
   <string name="description_selecting_bulk_action_mode">U zgjodh %1$s</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Telefonatë me video.</string>
   <string name="description_start_voice_search">Nis kërkimin me zë</string>
   <string name="voicemail">Posta zanore</string>
-  <string name="description_cancel_multi_select">Anulo modalitetin e veprimeve në grup</string>
   <string name="voicemailMultiSelectDeleteConfirm">Fshi</string>
   <string name="voicemailMultiSelectDeleteCancel">Anulo</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s të zgjedhura</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Kërkimi me zë nuk mundësohet</string>
   <string name="dialer_hint_find_contact">Kërko për kontakte</string>
-  <string name="block_number_search_hint">Shto një numër ose kërko te kontaktet</string>
   <string name="call_log_all_empty">Historiku i telefonatave është bosh</string>
   <string name="call_log_all_empty_action">Bëj një telefonatë</string>
   <string name="call_log_missed_empty">Nuk ke thirrje të humbura.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Historiku i telefonatave</string>
   <string name="call_log_all_title">Të gjitha</string>
   <string name="call_log_missed_title">Të humbura</string>
-  <string name="tab_speed_dial">Telefonatë e shpejtë</string>
-  <string name="tab_history">Historiku i telefonatave</string>
   <string name="tab_all_contacts">Kontaktet</string>
-  <string name="tab_voicemail">Posta zanore</string>
-  <string name="search_shortcut_call_number">Telefono %s</string>
   <string name="search_shortcut_create_new_contact">Krijo një kontakt të ri</string>
   <string name="search_shortcut_add_to_contact">Shto te një kontakt</string>
   <string name="search_shortcut_send_sms_message">Dërgo SMS</string>
   <string name="search_shortcut_make_video_call">Bëj një telefonatë me video</string>
-  <string name="search_shortcut_block_number">Blloko numrin</string>
-  <string name="speed_dial_empty">Askush nuk është ende në thirrjen tënde të shpejtuar</string>
-  <string name="speed_dial_empty_add_favorite_action">Shto një të preferuar</string>
-  <string name="remove_contact">Hiq</string>
   <string name="select_all">Zgjidh të gjitha</string>
   <string name="call_log_action_video_call">Telefonatë me video</string>
-  <string name="call_log_action_set_up_video">Konfiguro telefonatat me video</string>
-  <string name="call_log_action_invite_video">Fto në telefonatë me video</string>
   <string name="call_log_action_send_message">Dërgo një mesazh</string>
   <string name="call_log_action_details">Detajet e telefonatës</string>
   <string name="call_log_action_share_voicemail">Dërgo te ...</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Telefonatat</string>
   <string name="manage_blocked_numbers_label">Numrat e bllokuar</string>
   <string name="voicemail_settings_label">Posta zanore</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Bllokimi i telefonatave është përkohësisht joaktiv</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Bllokimi i telefonatave është çaktivizuar sepse kontaktove me shërbimet e urgjencës nga ky telefon brenda 48 orëve të fundit. Ai do të riaktivizohet automatikisht pas skadimit të periudhës prej 48 orë.</string>
-  <string name="import_send_to_voicemail_numbers_label">Importo numrat</string>
-  <string name="blocked_call_settings_import_description">Disa telefonues i ke shënuar më parë që të dërgohen automatikisht drejt postës zanore përmes aplikacioneve të tjera.</string>
-  <string name="blocked_call_settings_view_numbers_button">Shiko numrat</string>
-  <string name="blocked_call_settings_import_button">Importo</string>
-  <string name="description_blocked_number_list_delete">Zhblloko numrin</string>
-  <string name="addBlockedNumber">Shto një numër</string>
-  <string name="block_number_footer_message_vvm">Telefonatat nga këta numra do të bllokohen dhe mesazhet zanore do të fshihen automatikisht.</string>
-  <string name="block_number_footer_message_no_vvm">Telefonatat nga këta numra do të bllokohen, por mund të jenë ende në gjendje të lënë mesazhe zanore.</string>
-  <string name="block_list">Numrat e bllokuar</string>
-  <string name="alreadyBlocked">%1$s është i bllokuar tashmë.</string>
   <string name="phone_account_settings_label">Llogaritë e telefonatave</string>
-  <string name="permission_no_speeddial">Për të aktivizuar thirrjen e shpejtuar, aktivizo lejen e Kontakteve.</string>
   <string name="permission_no_calllog">Për të parë evidencën e telefonatave, aktivizo lejen e Telefonit.</string>
-  <string name="permission_no_search">Për të kërkuar kontaktet, aktivizo lejet e Kontakteve</string>
-  <string name="permission_place_call">Për të kryer një telefonatë, aktivizo lejen e Telefonit.</string>
   <string name="toast_cannot_write_system_settings">Aplikacionet e telefonit nuk kanë leje të shkruajnë në cilësimet e sistemit.</string>
   <string name="blocked_number_call_log_label">I bllokuar</string>
   <string name="call_log_action_block_report_number">Blloko/raporto të padëshiruar</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Nuk është i padëshiruar</string>
   <string name="call_log_action_unblock_number">Zhblloko numrin</string>
   <string name="spam_number_call_log_label">E bezdisshme</string>
-  <string name="call_composer_connection_failed">%1$s është jashtë linje dhe nuk mund të kontaktohet</string>
-  <string name="about_phone_label">Rreth</string>
-  <string name="voicemail_transcription_branding_text">Transkriptuar nga Google</string>
-  <string name="voicemail_transcription_in_progress">Po transkriptohet…</string>
-  <string name="voicemail_transcription_failed">Transkripti nuk ofrohet.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transkripti nuk ofrohet. Gjuha nuk mbështetet.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transkripti nuk ofrohet. Nuk u zbulua asnjë e folur.</string>
-  <string name="voicemail_donation_promo_title">Do të ndihmosh në përmirësimin e saktësisë së transkriptimit?</string>
-  <string name="voicemail_donation_promo_content">Lejo që Google ta rishikojë këtë dhe mesazhet e ardhshme të postës zanore me transkripte. Ato do të ruhen në mënyrë anonime. Ndrysho \"Cilësimet\" në çdo kohë. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Po, jam dakord</string>
-  <string name="voicemail_donation_promo_opt_out">Jo, faleminderit</string>
-  <string name="voicemail_transcription_rating">Vlerëso cilësinë</string>
-  <string name="voicemail_transcription_rating_thanks">Faleminderit për komentin tënd</string>
-  <string name="description_rating_good">Pëlqej</string>
-  <string name="description_rating_bad">Nuk më pëlqen</string>
-  <string name="view_conversation">Shiko</string>
-  <string name="ec_data_deleted">Telefonata u fshi. Shiko dhe fshi bashkëngjitjet e ndara gjatë kësaj telefonate te \"Mesazhet\".</string>
-  <string name="multiple_ec_data_deleted">Telefonatat u fshinë. Shiko dhe fshi bashkëngjitjet e ndara gjatë telefonatave te \"Mesazhet\".</string>
 </resources>

@@ -15,54 +15,8 @@
  ~ limitations under the License
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!--
-    A string to describe available action for accessibility user. It will be read as "call number".
-  -->
-  <string name="a11y_voicemail_entry_call">Call number</string>
-
-  <!--
-    A string to describe available action for accessibility user. It will be read as "delete".
-  -->
-  <string name="a11y_voicemail_entry_delete">Delete</string>
-
-  <!--
-    A string to describe available action for accessibility user.
-    It will be read as "expand menu for this voicemail entry".
-  -->
-  <string name="a11y_voicemail_entry_expand_menu">
-    Expand menu for this voicemail entry
-  </string>
-
-  <!-- A string to describe available action for accessibility user. It will be read as "pause". -->
-  <string name="a11y_voicemail_entry_pause">Pause</string>
-
-  <!-- A string to describe available action for accessibility user. It will be read as "play". -->
-  <string name="a11y_voicemail_entry_play">Play</string>
-
-  <!--
-    A string to describe available action for accessibility user. It will be read as "speaker".
-  -->
-  <string name="a11y_voicemail_entry_speaker">Speaker</string>
-
-  <!-- String used to display voicemails from unknown numbers in the voicemail tab.  [CHAR LIMIT=30] -->
-  <string name="voicemail_entry_unknown">Unknown</string>
-
   <!-- Format for duration of voicemails which are displayed when viewing voicemail. For example "01:22" -->
   <string name="voicemailDurationFormat"><xliff:g example="10" id="minutes">%1$02d</xliff:g>:<xliff:g example="20" id="seconds">%2$02d</xliff:g></string>
-
-  <!-- TODO(ubdullah): Confirm string with UX before allowing translation -->
-  <!-- String used to display the state of the voicemail media player -->
-  <string name="voicemail_media_player_state" translatable="false">Loading Voicemail</string>
-
-  <!-- String used to display the default staring point of a voicemail-->
-  <string name="voicemail_media_player_inital_start_position" translatable="false">00:00</string>
-
-  <!-- Header in voicemail tab to group calls from the current day.  [CHAR LIMIT=30] -->
-  <string name="new_voicemail_header_today">Today</string>
-  <!-- Header in voicemail tab to group calls from yesterday.  [CHAR LIMIT=30] -->
-  <string name="new_voicemail_header_yesterday">Yesterday</string>
-  <!-- Header in voicemail tab to group calls from before yesterday.  [CHAR LIMIT=30] -->
-  <string name="new_voicemail_header_older">Older</string>
 
   <string translatable="false" name="verizon_terms_and_conditions_1.1_english">
 Visual Voice Mail (VVM) is a service that provides access to voice mail messages directly on the device, without the need to call *86. This service requires traditional Voice Mail but does not support all traditional Voice Mail features, which you can access by dialing *86 from your handset. Use of this feature will be billed on a per-megabyte basis, or according to any data package you have. Mobile to mobile minutes do not apply. Standard rates apply to any calls, emails or messages initiated from Visual Voice Mail.\n
@@ -80,12 +34,6 @@ If you do not accept all of these terms and conditions, do not use Visual Voice 
   <string translatable="false" name="verizon_terms_and_conditions_decline_english">No Thanks</string>
 
   <string translatable="false" name="verizon_terms_and_conditions_accept_english">Turn On</string>
-
-  <!-- Label indicating who provided the voicemail transcription [CHAR LIMIT=64] -->
-  <string name="voicemail_transcription_branding_text">Transcribed by Google</string>
-
-  <!-- Text displayed when the list of voicemails is empty [CHAR LIMIT=NONE] -->
-  <string name="empty_voicemail_tab_text">Your voicemail inbox is empty.</string>
 
   <!-- Text for snackbar to undo a voicemail delete. [CHAR LIMIT=30] -->
   <string name="snackbar_voicemail_deleted">Voicemail deleted</string>

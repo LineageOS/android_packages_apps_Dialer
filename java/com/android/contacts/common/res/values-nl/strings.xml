@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Lijst regelmatige contacten wissen?</string>
   <string name="clearFrequentsConfirmation">Je wist de lijst met contacten waarmee je regelmatig contact opneemt in de apps Contacten en Telefoon, en e-mailapps moeten je voorkeursadressen weer opnieuw leren.</string>
   <string name="clearFrequentsProgress_title">Regelmatige contacten wissen...</string>
-  <string name="status_available">Beschikbaar</string>
-  <string name="status_away">Niet beschikbaar</string>
-  <string name="status_busy">Bezet</string>
-  <string name="contactsList">Contacten</string>
-  <string name="contact_suggestions">Populaire suggesties</string>
-  <string name="local_invisible_directory">Overig</string>
   <string name="directory_search_label">Directory</string>
   <string name="directory_search_label_work">Zakelijke contactenlijst</string>
-  <string name="local_search_label">Alle contacten</string>
-  <string name="local_suggestions_search_label">Suggesties</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ik</string>
   <string name="missing_name">(Geen naam)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Contact weergeven</string>
-  <string name="list_filter_phones">Alle contacten met telefoonnummers</string>
-  <string name="list_filter_phones_work">Contacten uit werkprofiel</string>
   <string name="view_updates_from_group">Updates bekijken</string>
   <string name="account_phone">Alleen op apparaat, niet gesynchroniseerd</string>
   <string name="nameLabelsGroup">Naam</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Chatten via ICQ</string>
   <string name="chat_jabber">Chatten via Jabber</string>
   <string name="chat">Chat</string>
-  <string name="list_filter_all_accounts">Alle contacten</string>
-  <string name="listAllContactsInAccount">Contacten in %s</string>
-  <string name="listCustomView">Contacten in aangepaste weergave</string>
-  <string name="listSingleContact">Eén contact</string>
   <string name="display_options_sort_list_by">Sorteren op</string>
   <string name="display_options_sort_by_given_name">Voornaam</string>
   <string name="display_options_sort_by_family_name">Achternaam</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Zoekopdracht wissen</string>
   <string name="select_account_dialog_title">Account</string>
   <string name="set_default_account">Altijd gebruiken voor oproepen</string>
-  <string name="select_phone_account_for_calls">Simkaart voor deze oproep kiezen</string>
-  <string name="select_phone_account_for_calls_remember">Deze keuze onthouden</string>
   <string name="call_with_a_note">Oproep met een notitie</string>
   <string name="call_subject_hint">Typ een notitie om te verzenden met de oproep...</string>
   <string name="send_and_call_button">VERZENDEN EN BELLEN</string>
@@ -141,5 +123,4 @@
     <item quantity="other">Tabblad %1$s. %2$d ongelezen items. </item>
   </plurals>
   <string name="description_search_video_call">Videogesprek</string>
-  <string name="description_search_call_and_share">Delen en bellen</string>
 </resources>

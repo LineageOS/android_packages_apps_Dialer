@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Копиране на номера</string>
   <string name="call_details_edit_number">Редактиране на номера преди обаждане</string>
   <string name="call_details_report_call_id">Подаване на сигнал за неточен номер</string>
-  <string name="sent_a_photo">Изпратена бе снимка</string>
-  <string name="received_a_photo">Получена бе снимка</string>
-  <string name="message_in_quotes">„%1$s“</string>
   <string name="report_caller_id_dialog_title">Подаване на сигнал за неправилен номер</string>
   <string name="report_caller_id_failed">Сигналът за номера не можа да бъде подаден</string>
   <string name="report_caller_id_toast">За номера бе подаден сигнал</string>

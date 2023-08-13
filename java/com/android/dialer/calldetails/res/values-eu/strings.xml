@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Kopiatu zenbakia</string>
   <string name="call_details_edit_number">Editatu zenbakia deitu aurretik</string>
   <string name="call_details_report_call_id">Jakinarazi zenbakiaren informazioa okerra dela</string>
-  <string name="sent_a_photo">Argazki bat bidali duzu</string>
-  <string name="received_a_photo">Argazki bat jaso duzu</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Jakinarazi zenbakia okerra dela</string>
   <string name="report_caller_id_failed">Ezin izan da bidali jakinarazpena</string>
   <string name="report_caller_id_toast">Bidali da jakinarazpena</string>

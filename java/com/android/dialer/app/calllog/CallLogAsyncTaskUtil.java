@@ -148,11 +148,8 @@ public class CallLogAsyncTaskUtil {
   /** The enumeration of {@link AsyncTask} objects used in this class. */
   public enum Tasks {
     DELETE_VOICEMAIL,
-    DELETE_CALL,
     MARK_VOICEMAIL_READ,
     MARK_CALL_READ,
-    GET_CALL_DETAILS,
-    UPDATE_DURATION,
   }
 
   /** TODO(calderwoodra): documentation */

@@ -34,28 +34,7 @@
   <string name="voicemail_string">Говорна пошта</string>
   <string name="just_now">Пред малку</string>
   <string name="new_call_log_carrier_video">Видеоповик преку оператор</string>
-  <string name="new_call_log_duo_video">Видеоповик на Duo</string>
   <string name="new_call_log_unknown">Непознато</string>
   <string name="new_call_log_secondary_blocked">Блокирано</string>
   <string name="new_call_log_secondary_spam">Спам</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 повик. Последниот е пропуштен повик од ^2</item>
-    <item quantity="other">^1 повици. Последниот е пропуштен повик од ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 повик. Последниот е одговорен повик од ^2</item>
-    <item quantity="other">^1 повици. Последниот е одговорен повик од ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 повик. Последниот е појдовен повик до ^2</item>
-    <item quantity="other">^1 повици. Последниот е појдовен повик до ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 повик. Последниот е блокиран повик од ^2</item>
-    <item quantity="other">^1 повици. Последниот е блокиран повик од ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">на ^1,
-    на ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

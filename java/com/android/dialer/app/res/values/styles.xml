@@ -16,7 +16,9 @@
   -->
 <resources>
   <style name="DialtactsTheme" parent="Dialer.ThemeBase.ActionBar">
-    <!-- todo(calderwoodra): fill this in with dialpad theme and call log card theme -->
+    <item name="android:windowLightNavigationBar">true</item>
+    <item name="android:navigationBarColor">?android:attr/windowBackground</item>
+    <item name="android:navigationBarDividerColor">@null</item>
   </style>
 
   <style name="DialpadTheme" parent="DialtactsTheme">
@@ -31,12 +33,6 @@
     <item name="android:windowIsTranslucent">true</item>
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowIsFloating">true</item>
-  </style>
-
-  <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode">
-    <item name="android:background">?android:attr/colorPrimary</item>
-    <item name="background">?android:attr/colorPrimary</item>
-    <item name="closeItemLayout">@layout/action_mode_close_button</item>
   </style>
 
   <style name="DialtactsSearchBarThemeOverlay" parent="ThemeOverlay.AppCompat.Light"/>
@@ -89,40 +85,6 @@
     <item name="android:importantForAccessibility">no</item>
   </style>
 
-  <style name="ManageBlockedNumbersStyle" parent="SettingsStyle">
-    <!-- Styles that require AppCompat compatibility, remember to update both sets -->
-    <item name="android:windowActionBarOverlay">true</item>
-    <item name="windowActionBarOverlay">true</item>
-    <item name="android:actionBarStyle">@style/ManageBlockedNumbersActionBarStyle</item>
-    <item name="android:fastScrollTrackDrawable">@null</item>
-  </style>
-
-  <style name="ManageBlockedNumbersActionBarStyle" parent="DialerActionBarBaseStyle">
-    <!-- Styles that require AppCompat compatibility, remember to update both sets -->
-    <item name="android:height">@dimen/action_bar_height</item>
-    <item name="height">@dimen/action_bar_height</item>
-
-    <!-- Styles that require AppCompat compatibility, remember to update both sets -->
-    <item name="android:displayOptions"></item>
-    <item name="displayOptions"></item>
-    <!-- Override ActionBar title offset to keep search box aligned left -->
-    <item name="android:contentInsetStart">0dp</item>
-    <item name="contentInsetStart">0dp</item>
-    <item name="android:contentInsetEnd">0dp</item>
-    <item name="contentInsetEnd">0dp</item>
-
-    <!-- Styles that require AppCompat compatibility, remember to update both sets -->
-    <item name="android:background">?android:attr/colorPrimary</item>
-    <item name="background">?android:attr/colorPrimary</item>
-    <item name="android:titleTextStyle">@style/DialtactsActionBarTitleText</item>
-    <item name="titleTextStyle">@style/DialtactsActionBarTitleText</item>
-    <item name="android:elevation">@dimen/action_bar_elevation</item>
-    <item name="elevation">@dimen/action_bar_elevation</item>
-    <!-- Empty icon -->
-    <item name="android:icon">@android:color/transparent</item>
-    <item name="icon">@android:color/transparent</item>
-  </style>
-
   <style name="VoicemailPlaybackLayoutButtonStyle">
     <item name="android:layout_width">56dp</item>
     <item name="android:layout_height">56dp</item>
@@ -144,18 +106,5 @@
     <item name="android:paddingEnd">@dimen/button_horizontal_padding</item>
     <item name="android:paddingStart">@dimen/button_horizontal_padding</item>
     <item name="android:textColor">@android:color/white</item>
-  </style>
-
-  <style name="BlockedNumbersDescriptionTextStyle">
-    <item name="android:lineSpacingMultiplier">1.43</item>
-    <item name="android:paddingTop">8dp</item>
-    <item name="android:paddingBottom">8dp</item>
-    <item name="android:textSize">@dimen/blocked_number_settings_description_text_size</item>
-  </style>
-
-  <style name="FullWidthDivider">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">1dp</item>
-    <item name="android:background">?android:attr/listDivider</item>
   </style>
 </resources>

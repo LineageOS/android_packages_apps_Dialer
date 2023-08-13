@@ -92,11 +92,6 @@
   <!-- Menu item used to call a contact, containing the number of the contact to call -->
   <string name="menu_callNumber">Call <xliff:g id="number">%s</xliff:g></string>
 
-
-  <!-- Regular expression for prohibiting certain phone numbers in dialpad.
-       Ignored if empty. -->
-  <string name="config_prohibited_phone_number_regexp" translatable="false"></string>
-
   <!-- Warning hint shown in the dialpad input field when emergency call (911, etc.) cannot be made over wifi.
        [CHAR_LIMIT=60] -->
   <string name="dialpad_hint_emergency_calling_not_available">Can\'t make emergency calls over WiFi</string>

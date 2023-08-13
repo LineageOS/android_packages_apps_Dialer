@@ -4,8 +4,7 @@
   <string name="post_call_message_1">ਇਹ ਜ਼ਰੂਰੀ ਹੈ। ਮੈਨੂੰ ਵਾਪਸ ਕਾਲ ਕਰੋ।</string>
   <string name="post_call_message_2">ਜਦੋਂ ਤੁਹਾਡੇ ਕੋਲ ਕੁਝ ਸਮਾਂ ਹੋਵੇ ਤਾਂ ਮੈਨੂੰ ਵਾਪਸ ਕਾਲ ਕਰੋ।</string>
   <string name="post_call_message_3">ਜ਼ਰੂਰੀ ਨਹੀਂ ਹੈ, ਅਸੀਂ ਬਾਅਦ ਵਿੱਚ ਚੈਟ ਕਰ ਸਕਦੇ ਹਾਂ।</string>
-  <string name="post_call_add_message">ਸੁਨੇਹਾ ਸ਼ਾਮਲ ਕਰੋ</string>
-  <string name="post_call_send_message">ਸੁਨੇਹਾ ਭੇਜੋ</string>
+    <string name="post_call_send_message">ਸੁਨੇਹਾ ਭੇਜੋ</string>
   <string name="post_call_message_sent">ਸੁਨੇਹਾ ਭੇਜਿਆ ਗਿਆ</string>
   <string name="view">ਵੇਖੋ</string>
 </resources>

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">తరచుగా సంప్రదించినవాటిని క్లియర్ చేయాలా?</string>
   <string name="clearFrequentsConfirmation">మీరు పరిచయాలు మరియు ఫోన్ అనువర్తనాల్లో తరచుగా సంప్రదించిన పరిచయాల జాబితాను తీసివేస్తారు మరియు స్క్రాచ్ నుండి మీ చిరునామా ప్రాధాన్యతలను తెలుసుకునేలా ఇమెయిల్ అనువర్తనాలను నిర్బంధిస్తారు.</string>
   <string name="clearFrequentsProgress_title">తరచుగా సంప్రదించినవాటిని క్లియర్ చేస్తోంది…</string>
-  <string name="status_available">అందుబాటులో ఉన్నారు</string>
-  <string name="status_away">దూరంగా ఉన్నారు</string>
-  <string name="status_busy">బిజీగా ఉన్నారు</string>
-  <string name="contactsList">పరిచయాలు</string>
-  <string name="contact_suggestions">ఉత్తమ సూచనలు</string>
-  <string name="local_invisible_directory">ఇతరం</string>
   <string name="directory_search_label">డైరెక్టరీ</string>
   <string name="directory_search_label_work">కార్యాలయ డైరెక్టరీ</string>
-  <string name="local_search_label">అన్ని పరిచయాలు</string>
-  <string name="local_suggestions_search_label">సూచనలు</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">నేను</string>
   <string name="missing_name">(పేరు లేదు)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">పరిచయాన్ని వీక్షించండి</string>
-  <string name="list_filter_phones">ఫోన్ నంబర్‌లు గల అన్ని పరిచయాలు</string>
-  <string name="list_filter_phones_work">కార్యాలయ ప్రొఫైల్ పరిచయాలు</string>
   <string name="view_updates_from_group">నవీకరణలను వీక్షించండి</string>
   <string name="account_phone">పరికరంలో మాత్రమే ఉంటుంది, సమకాలీకరించబడదు</string>
   <string name="nameLabelsGroup">పేరు</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQని ఉపయోగించి చాట్ చేయండి</string>
   <string name="chat_jabber">Jabberని ఉపయోగించి చాట్ చేయండి</string>
   <string name="chat">చాట్ చేయండి</string>
-  <string name="list_filter_all_accounts">అన్ని పరిచయాలు</string>
-  <string name="listAllContactsInAccount">%sలో పరిచయాలు</string>
-  <string name="listCustomView">అనుకూల వీక్షణలో పరిచయాలు</string>
-  <string name="listSingleContact">ఒక పరిచయం</string>
   <string name="display_options_sort_list_by">ఇలా క్రమబద్ధీకరించు</string>
   <string name="display_options_sort_by_given_name">మొదటి పేరు</string>
   <string name="display_options_sort_by_family_name">చివరి పేరు</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">శోధనను క్లియర్ చేయి</string>
   <string name="select_account_dialog_title">ఖాతా</string>
   <string name="set_default_account">కాల్‌ల కోసం ఎల్లప్పుడూ దీన్ని ఉపయోగించు</string>
-  <string name="select_phone_account_for_calls">ఈ కాల్ కోసం SIMని ఎంచుకోండి</string>
-  <string name="select_phone_account_for_calls_remember">ఈ ఎంపికను గుర్తుంచుకో</string>
   <string name="call_with_a_note">గమనికతో కాల్ చేయి</string>
   <string name="call_subject_hint">కాల్‌తో పాటు పంపడానికి గమనికను టైప్ చేయండి ...</string>
   <string name="send_and_call_button">పంపు &amp; కాల్ చేయి</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s ట్యాబ్. %2$d చదవని అంశాలు. </item>
   </plurals>
   <string name="description_search_video_call">వీడియో కాల్</string>
-  <string name="description_search_call_and_share">భాగస్వామ్యం చేసి, కాల్ చేయి</string>
 </resources>

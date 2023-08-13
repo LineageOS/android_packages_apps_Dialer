@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Telefonsvarer (%s)</string>
   <string name="voicemail_settings_title">Telefonsvarer</string>
   <string name="voicemail_notifications_preference_title">Underretninger</string>
   <string name="voicemail_change_greeting_preference_title">Telefonsvarerhilsen</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Skift pinkode</string>
   <string name="voicemail_change_pin_preference_summary_disable">Visuel telefonsvarer skal være aktiveret, for at du kan skifte pinkode</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Visuel telefonsvarer er ikke aktiveret endnu. Prøv igen senere</string>
-  <string name="vm_change_pin_old_pin">Gammel pinkode</string>
-  <string name="vm_change_pin_new_pin">Ny pinkode</string>
   <string name="vm_change_pin_progress_message">Vent et øjeblik.</string>
   <string name="vm_change_pin_error_too_short">Den nye pinkode er for kort.</string>
   <string name="vm_change_pin_error_too_long">Den nye pinkode er for lang.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">Pinkoderne er ikke ens</string>
   <string name="change_pin_succeeded">Pinkoden til din telefonsvarer blev opdateret</string>
   <string name="change_pin_system_error">Pinkoden kunne ikke angives</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Transskription af talebeskeder</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Analyse af talebeskedstransskription</string>
   <string name="voicemail_activating_summary_info">Telefonsvareren aktiveres</string>
-  <string name="voicemail_transcription_preference_summary_info">Få transskription af dine talebeskeder ved hjælp af Googles transskriptionstjeneste. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Tillad, at Google gennemgår dine talebeskeder for at forbedre nøjagtigheden af transskriptioner. Dine talebeskeder gemmes anonymt. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Slå visuel telefonsvarer fra</string>
   <string name="confirm_disable_voicemail_dialog_message">Dette sletter eventuelle talebeskeder og Google-transskriptioner, der er gemt i appen. Dit mobilselskab gemmer muligvis separate kopier.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">SLÅ FRA</string>

@@ -5,7 +5,6 @@
   <string name="incall_label_hold">ধরে থাকুন</string>
   <string name="incall_label_add_call">কল যোগ করুন</string>
   <string name="incall_label_mute">নিঃশব্দ করুন</string>
-  <string name="incall_label_end_call">কল শেষ করুন</string>
   <string name="incall_label_dialpad">কীপ্যাড</string>
   <string name="incall_talkback_speaker_on">, চালু রয়েছে</string>
   <string name="incall_talkback_speaker_off">, বন্ধ রয়েছে</string>

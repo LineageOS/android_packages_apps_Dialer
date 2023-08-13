@@ -134,9 +134,6 @@
   <!-- Text to show in call log for a carrier video call. [CHAR LIMIT=31] -->
   <string name="new_call_log_carrier_video">Carrier video</string>
 
-  <!-- Text to show in call log for a duo video call. [CHAR LIMIT=30] -->
-  <string name="new_call_log_duo_video">Duo video</string>
-
   <!-- String used to display calls from unknown numbers in the call log.  [CHAR LIMIT=30] -->
   <string name="new_call_log_unknown">Unknown</string>
 
@@ -145,67 +142,4 @@
 
   <!-- String used to display calls from spam numbers in the call log.   [CHAR LIMIT=30] -->
   <string name="new_call_log_secondary_spam">Spam</string>
-
-  <!--
-    String introducing to a11y users a call log entry in which the latest call is a missed call.
-    [CHAR LIMIT=NONE]
-  -->
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> missed call from <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
-    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> calls, the latest is a missed call from <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
-  </plurals>
-
-  <!--
-    String introducing to a11y users a call log entry in which the latest call is an answered call.
-    [CHAR LIMIT=NONE]
-  -->
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> answered call from <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
-    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> calls, the latest is an answered call from <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
-  </plurals>
-
-  <!--
-    String introducing to a11y users a call log entry in which the latest call is an outgoing call.
-    [CHAR LIMIT=NONE]
-  -->
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> outgoing call to <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
-    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> calls, the latest is an outgoing call to <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
-  </plurals>
-
-  <!--
-    String introducing to a11y users a call log entry in which the latest call is a blocked call.
-    [CHAR LIMIT=NONE]
-  -->
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> blocked call from <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
-    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> calls, the latest is a blocked call from <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
-  </plurals>
-
-
-  <!--
-    String describing to a11y users the phone account used to make/receive the latest call in a call
-    log entry.
-    [CHAR LIMIT=NONE]
-  -->
-  <string name="a11y_new_call_log_entry_phone_account">
-    on <xliff:g example="SIM 1" id="phoneAccount">^1</xliff:g>,
-    via <xliff:g example="(555) 555-5555" id="number">^2</xliff:g>
-  </string>
-
-  <!--
-    String template describing to a11y users a call log entry without phone account info.
-    [CHAR LIMIT=NONE]
-  -->
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">
-    <xliff:g example="A missed call from Jane Smith" id="primaryDescriptionForEntry">^1</xliff:g>, <xliff:g example="mobile, 30 minutes ago" id="secondaryDescriptionForEntry">^2</xliff:g>.
-  </string>
-
-  <!--
-    String template describing to a11y users a call log entry with phone account info.
-    [CHAR LIMIT=NONE]
-  -->
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">
-    <xliff:g example="A missed call from Jane Smith" id="primaryDescriptionForEntry">^1</xliff:g>, <xliff:g example="mobile, 30 minutes ago" id="secondaryDescriptionForEntry">^2</xliff:g>, <xliff:g example="on SIM 1, via (555) 555-5555">^3</xliff:g>.
-  </string>
 </resources>

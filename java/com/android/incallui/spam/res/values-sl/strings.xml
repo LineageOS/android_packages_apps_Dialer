@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Dotaknite se, da dodate med stike ali blokirate neželeno številko.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Klic s te številke ste prejeli prvič. Če je bil ta klic neželen, lahko blokirate številko in jo prijavite.</string>
   <string name="spam_notification_spam_call_collapsed_text">Dotaknite se, da klic prijavite kot »ni neželeni klic« ali ga blokirate</string>
-  <string name="spam_notification_report_spam_action_text">Blokiraj in prijavi</string>
-  <string name="spam_notification_add_contact_action_text">Dodaj stik</string>
   <string name="spam_notification_dialog_add_contact_action_text">Dodaj med stike</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokiraj in prijavi neželeni klic</string>
   <string name="spam_notification_was_not_spam_action_text">Ne, ni neželeni klic</string>

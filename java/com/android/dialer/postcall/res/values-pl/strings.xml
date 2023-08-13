@@ -4,8 +4,7 @@
   <string name="post_call_message_1">To pilne. Zadzwoń do mnie.</string>
   <string name="post_call_message_2">Zadzwoń do mnie, jak znajdziesz czas.</string>
   <string name="post_call_message_3">Nic ważnego, pogadamy później.</string>
-  <string name="post_call_add_message">Dodaj wiadomość</string>
-  <string name="post_call_send_message">Wyślij wiadomość</string>
+    <string name="post_call_send_message">Wyślij wiadomość</string>
   <string name="post_call_message_sent">Wiadomość została wysłana</string>
   <string name="view">Wyświetl</string>
 </resources>

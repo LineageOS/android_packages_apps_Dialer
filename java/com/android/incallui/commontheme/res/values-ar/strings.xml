@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">الفيديو ليس قيد التشغيل</string>
   <string name="incall_content_description_swap_video">تبديل الفيديو</string>
   <string name="incall_label_speaker">مكبر الصوت</string>
-  <string name="incall_label_audio">صوت</string>
 </resources>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">WLAN</string>
-  <string name="network_name_mobile">移动网络</string>
   <string name="content_description_overflow">更多选项</string>
   <string name="snackbar_undo">撤消</string>
   <string name="ok_got_it">知道了</string>

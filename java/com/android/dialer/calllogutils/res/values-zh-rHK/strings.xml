@@ -34,28 +34,7 @@
   <string name="voicemail_string">留言</string>
   <string name="just_now">剛剛</string>
   <string name="new_call_log_carrier_video">流動網絡供應商視像</string>
-  <string name="new_call_log_duo_video">Duo 視像</string>
   <string name="new_call_log_unknown">不明</string>
   <string name="new_call_log_secondary_blocked">已封鎖</string>
   <string name="new_call_log_secondary_spam">垃圾號碼</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">來自^2的 ^1 通未接來電</item>
-    <item quantity="other">^1 通來電，最新的一通是來自^2的未接來電</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">來自^2 ^1 通已接來電</item>
-    <item quantity="other">^1 通來電，最新的一通是來自^2的已接來電</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">撥給^2的 ^1 通電話</item>
-    <item quantity="other">^1 通電話，最新的一通是撥給^2的電話</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">來自^2的 ^1 通已封鎖來電</item>
-    <item quantity="other">^1 通來電，最新的一通是來自^2的已封鎖來電</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">在 ^1 上
-    透過 ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1，^2。</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1，^2，^3。</string>
 </resources>

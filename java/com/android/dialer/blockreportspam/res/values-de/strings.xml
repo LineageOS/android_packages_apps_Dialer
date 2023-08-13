@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">BLOCKIERUNG AUFHEBEN</string>
   <string name="block_report_number_alert_title">%1$s blockieren?</string>
   <string name="block_report_number_alert_details">Du erhältst von dieser Nummer keine Anrufe mehr.</string>
-  <string name="block_number_alert_details">%1$s Dieser Anruf wird als Spam gemeldet.</string>
   <string name="unblock_number_alert_details">Die Nummer wird nicht mehr blockiert und nicht als Spam gemeldet. Zukünftige Anrufe sind kein Spam.</string>
   <string name="unblock_report_number_alert_title">Blockierung von %1$s aufheben?</string>
   <string name="report_not_spam_alert_button">Melden</string>

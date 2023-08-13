@@ -21,11 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogReceiver;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.interactions.PhoneNumberInteraction.DisambigDialogDismissedListener;
-import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
-import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorListener;
 import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
 import com.android.dialer.R;
@@ -34,10 +30,7 @@ import com.android.dialer.util.TransactionSafeActivity;
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
 // TODO(calderwoodra): Do not extend TransactionSafeActivity after new SpeedDial is launched
 public class MainActivity extends TransactionSafeActivity
-    implements MainActivityPeer.PeerSupplier,
-        // TODO(calderwoodra): remove these 2 interfaces when we migrate to new speed dial fragment
-        InteractionErrorListener,
-        DisambigDialogDismissedListener {
+    implements MainActivityPeer.PeerSupplier {
 
   private MainActivityPeer activePeer;
 
@@ -115,28 +108,6 @@ public class MainActivity extends TransactionSafeActivity
       return;
     }
     super.onBackPressed();
-  }
-
-  @Override
-  public void interactionError(@InteractionErrorCode int interactionErrorCode) {
-    switch (interactionErrorCode) {
-      case InteractionErrorCode.USER_LEAVING_ACTIVITY:
-        // This is expected to happen if the user exits the activity before the interaction occurs.
-        return;
-      case InteractionErrorCode.CONTACT_NOT_FOUND:
-      case InteractionErrorCode.CONTACT_HAS_NO_NUMBER:
-      case InteractionErrorCode.OTHER_ERROR:
-      default:
-        // All other error codes are unexpected. For example, it should be impossible to start an
-        // interaction with an invalid contact from this activity.
-        throw Assert.createIllegalStateFailException(
-            "PhoneNumberInteraction error: " + interactionErrorCode);
-    }
-  }
-
-  @Override
-  public void onDisambigDialogDismissed() {
-    // Don't do anything; the app will remain open with favorites tiles displayed.
   }
 
   @Override

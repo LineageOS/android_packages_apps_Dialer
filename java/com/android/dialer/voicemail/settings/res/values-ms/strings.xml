@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Mel suara (%s)</string>
   <string name="voicemail_settings_title">Mel suara</string>
   <string name="voicemail_notifications_preference_title">Pemberitahuan</string>
   <string name="voicemail_change_greeting_preference_title">Sapaan mel suara</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Tukar PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">Mel suara visual mesti didayakan untuk menukar PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Mel suara visual belum diaktifkan. Sila cuba sebentar lagi</string>
-  <string name="vm_change_pin_old_pin">PIN lama</string>
-  <string name="vm_change_pin_new_pin">PIN baharu</string>
   <string name="vm_change_pin_progress_message">Sila tunggu.</string>
   <string name="vm_change_pin_error_too_short">PIN baharu terlalu pendek.</string>
   <string name="vm_change_pin_error_too_long">PIN baharu terlalu panjang.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN tidak sepadan</string>
   <string name="change_pin_succeeded">PIN mel suara dikemas kini</string>
   <string name="change_pin_system_error">Tidak dapat menetapkan PIN</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Transkripsi mel suara</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Analisis transkripsi mel suara</string>
   <string name="voicemail_activating_summary_info">Mengaktifkan mel suara</string>
-  <string name="voicemail_transcription_preference_summary_info">Dapatkan transkrip mel suara anda menggunakan perkhidmatan transkripsi Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Benarkan Google menyemak mesej mel suara anda bagi meningkatkan ketepatan transkripsi. Mesej mel suara anda disimpan secara awanama. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Matikan mel suara visual</string>
   <string name="confirm_disable_voicemail_dialog_message">Tindakan ini akan memadamkan sebarang mel suara dan transkrip Google yang disimpan dalam apl ini. Pembawa anda mungkin menyimpan salinannya sendiri.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">MATIKAN</string>

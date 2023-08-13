@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">रोक हटाउनुहोस्</string>
   <string name="block_report_number_alert_title">%1$s माथि रोक लगाउने हो?</string>
   <string name="block_report_number_alert_details">तपाईं अब उप्रान्त यस नम्बरबाट कलहरू प्राप्त गर्नु हुने छैन।</string>
-  <string name="block_number_alert_details">%1$s यस कललाई स्प्याम भनी रिपोर्ट गरिने छ।</string>
   <string name="unblock_number_alert_details">यो नम्बरमाथिको रोक हटाइने छ र यसलाई स्प्याम होइन भनी रिपोर्ट गरिने छ। आगामी कलहरूलाई स्प्याम भनी पहिचान गरिने छैन।</string>
   <string name="unblock_report_number_alert_title">%1$s माथिको रोक हटाउने हो?</string>
   <string name="report_not_spam_alert_button">रिपोर्ट गर्नुहोस्</string>

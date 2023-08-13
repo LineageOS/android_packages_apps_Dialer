@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">ສຳເນົາເບີໂທ</string>
   <string name="call_details_edit_number">ແກ້ໄຂເບີກ່ອນໂທ</string>
   <string name="call_details_report_call_id">ລາຍງານເບີໂທທີ່ບໍ່ຖືກຕ້ອງ</string>
-  <string name="sent_a_photo">ສົ່ງຮູບພາບ</string>
-  <string name="received_a_photo">ໄດ້ຮັບຮູບພາບແລ້ວ</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">​ລາຍ​ງານ​ເບີ​ໂທບໍ່​ຖືກ​ຕ້ອງ</string>
   <string name="report_caller_id_failed">ບໍ່ສາມາດລາຍງານເບີໂທໄດ້</string>
   <string name="report_caller_id_toast">ລາຍງານເບີໂທແລ້ວ</string>

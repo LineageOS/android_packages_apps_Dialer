@@ -34,28 +34,7 @@
   <string name="voicemail_string">വോയ്‌സ്‌മെയിൽ</string>
   <string name="just_now">ഇപ്പോൾ</string>
   <string name="new_call_log_carrier_video">കാരിയർ വീഡിയോ</string>
-  <string name="new_call_log_duo_video">Duo വീഡിയോ</string>
   <string name="new_call_log_unknown">അജ്ഞാതം</string>
   <string name="new_call_log_secondary_blocked">ബ്ലോക്ക് ചെയ്‌തു</string>
   <string name="new_call_log_secondary_spam">സ്‌പാം</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^2-ൽ നിന്ന് ^1 മിസ്‌ഡ് കോൾ</item>
-    <item quantity="other">^1 കോളുകൾ, ഏറ്റവും പുതിയത് ^2-ൽ നിന്നുള്ള മിസ്‌ഡ് കോളാണ്</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^2-ൽ നിന്ന് ^1 മറുപടി നൽകിയ കോൾ</item>
-    <item quantity="other">^1 കോളുകൾ, ഏറ്റവും പുതിയത് ^2-ൽ നിന്ന് മറുപടി നൽകിയ കോളാണ്</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^2-ലേക്ക് ^1 ഔട്ട്‌ഗോയിംഗ് കോൾ</item>
-    <item quantity="other">^1 കോളുകൾ, ഏറ്റവും പുതിയത് ^2-ലേക്കുള്ള ഔട്ട്‌ഗോയിംഗ് കോളാണ്</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^2-ൽ നിന്നുള്ള ^1 ബ്ലോക്ക് ചെയ്‌ത കോൾ</item>
-    <item quantity="other">^1 കോളുകൾ, ഏറ്റവും പുതിയത് ^2-ൽ നിന്നുള്ള ബ്ലോക്ക് ചെയ്‌ത കോൾ</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1 നമ്പർ വഴി,
-    ^2 അക്കൗണ്ടിൽ</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

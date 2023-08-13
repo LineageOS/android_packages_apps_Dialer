@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">नंबर कॉपी करा</string>
   <string name="call_details_edit_number">कॉल करण्यापूर्वी नंबर संपादित करा</string>
   <string name="call_details_report_call_id">चुकीच्या नंबरचा अहवाल द्या</string>
-  <string name="sent_a_photo">एक फोटो पाठविला</string>
-  <string name="received_a_photo">एक फोटो प्राप्त झाला</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">चुकीच्या नंबरचा अहवाल द्या</string>
   <string name="report_caller_id_failed">नंबरचा अहवाल देऊ शकलो नाही</string>
   <string name="report_caller_id_toast">नंबरचा अहवाल दिला</string>

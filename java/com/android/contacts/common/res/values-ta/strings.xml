@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">அடிக்கடி தொடர்புகொண்ட தொடர்பை அழிக்கவா?</string>
   <string name="clearFrequentsConfirmation">தொடர்புகள் மற்றும் ஃபோன் பயன்பாடுகளில் உள்ள அடிக்கடி தொடர்பு கொண்டவர்களின் பட்டியல் அழிக்கப்பட்டு, தொடக்கத்திலிருந்து மீண்டும் உங்கள் முகவரியிடல் விருப்பத்தேர்வுகளை மின்னஞ்சல் பயன்பாடுகள் அறியும்படி செய்யப்படும்.</string>
   <string name="clearFrequentsProgress_title">அடிக்கடித் தொடர்புகொண்ட தொடர்பை அழிக்கிறது…</string>
-  <string name="status_available">இருக்கிறார்</string>
-  <string name="status_away">வெளியே</string>
-  <string name="status_busy">பணிமிகுதி</string>
-  <string name="contactsList">தொடர்புகள்</string>
-  <string name="contact_suggestions">அதிகம் பரிந்துரைத்தவை</string>
-  <string name="local_invisible_directory">மற்றவை</string>
   <string name="directory_search_label">கோப்பகம்</string>
   <string name="directory_search_label_work">பணிக் கோப்பகம்</string>
-  <string name="local_search_label">எல்லா தொடர்புகளும்</string>
-  <string name="local_suggestions_search_label">பரிந்துரைகள்</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">எனக்கு</string>
   <string name="missing_name">(பெயர் இல்லை)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">தொடர்பைக் காட்டும் பொத்தான்</string>
-  <string name="list_filter_phones">மொபைல் எண்களுடனான எல்லா தொடர்புகளும்</string>
-  <string name="list_filter_phones_work">பணிச் சுயவிவரத் தொடர்புகள்</string>
   <string name="view_updates_from_group">புதுப்பிப்புகளைக் காட்டு</string>
   <string name="account_phone">சாதனத்தில் மட்டும், ஒத்திசைக்கப்படாது</string>
   <string name="nameLabelsGroup">பெயர்</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ இல் அரட்டையடி</string>
   <string name="chat_jabber">Jabber இல் அரட்டையடி</string>
   <string name="chat">அரட்டை</string>
-  <string name="list_filter_all_accounts">எல்லா தொடர்புகளும்</string>
-  <string name="listAllContactsInAccount">%s இல் உள்ள தொடர்புகள்</string>
-  <string name="listCustomView">தனிப்பயன் காட்சியில் உள்ள தொடர்புகள்</string>
-  <string name="listSingleContact">ஒரு தொடர்பு</string>
   <string name="display_options_sort_list_by">வரிசைப்படுத்து</string>
   <string name="display_options_sort_by_given_name">முதல் பெயர்</string>
   <string name="display_options_sort_by_family_name">இறுதிப் பெயர்</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">தேடலை அழி</string>
   <string name="select_account_dialog_title">கணக்கு</string>
   <string name="set_default_account">அழைப்புகளுக்கு எப்போதும் இதைப் பயன்படுத்து</string>
-  <string name="select_phone_account_for_calls">இந்த அழைப்பிற்கான சிம்மைத் தேர்வுசெய்க</string>
-  <string name="select_phone_account_for_calls_remember">இந்த விருப்பத்தை நினைவில்கொள்</string>
   <string name="call_with_a_note">குறிப்புடன் அழைக்கவும்</string>
   <string name="call_subject_hint">அழைப்புடன் சேர்த்து அனுப்ப, குறிப்பை உள்ளிடவும்...</string>
   <string name="send_and_call_button">அனுப்பி அழை</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s தாவல். படிக்காதவை (%2$d). </item>
   </plurals>
   <string name="description_search_video_call">வீடியோ அழைப்பைத் தொடங்குவதற்கான பொத்தான்</string>
-  <string name="description_search_call_and_share">பகிர்ந்து அழைப்பதற்கான பொத்தான்</string>
 </resources>

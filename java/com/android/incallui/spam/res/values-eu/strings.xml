@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Sakatu kontaktuetan gehitzeko edo blokeatu spam-zenbakia.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Zenbaki honek deitu dizun lehenengo aldia izan da. Spama bada, blokeatu eta salatu egin dezakezu.</string>
   <string name="spam_notification_spam_call_collapsed_text">\"Ez da spama\" gisa markatzeko edo zenbakia blokeatzeko, sakatu hau</string>
-  <string name="spam_notification_report_spam_action_text">Blokeatu eta salatu</string>
-  <string name="spam_notification_add_contact_action_text">Gehitu kontaktua</string>
   <string name="spam_notification_dialog_add_contact_action_text">Gehitu kontaktuetan</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokeatu eta salatu spama dela</string>
   <string name="spam_notification_was_not_spam_action_text">Ez, ez da spama</string>

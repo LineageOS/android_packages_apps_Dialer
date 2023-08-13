@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Det haster. Ring tilbage til mig.</string>
   <string name="post_call_message_2">Ring tilbage til mig, når du har tid.</string>
   <string name="post_call_message_3">Det haster ikke. Vi kan tale sammen senere.</string>
-  <string name="post_call_add_message">Tilføj besked</string>
-  <string name="post_call_send_message">Send besked</string>
+    <string name="post_call_send_message">Send besked</string>
   <string name="post_call_message_sent">Beskeden blev sendt</string>
   <string name="view">Se</string>
 </resources>

@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Gusa ili uongeze kwenye anwani au uzuie nambari taka.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Hii ndiyo mara ya kwanza nambari hii imekupigia. Ikiwa ilikuwa simu taka, unaweza kuzuia nambari hii na uiripoti.</string>
   <string name="spam_notification_spam_call_collapsed_text">Gusa ili uripoti kuwa si taka au uizuie</string>
-  <string name="spam_notification_report_spam_action_text">Zuia na uripoti</string>
-  <string name="spam_notification_add_contact_action_text">Ongeza anwani</string>
   <string name="spam_notification_dialog_add_contact_action_text">Ongeza kwenye anwani</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Zuia na uripoti taka</string>
   <string name="spam_notification_was_not_spam_action_text">Hapana, si taka</string>

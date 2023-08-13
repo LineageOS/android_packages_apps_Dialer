@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Ձայնային փոստ (%s)</string>
   <string name="voicemail_settings_title">Ձայնային փոստ</string>
   <string name="voicemail_notifications_preference_title">Ծանուցումներ</string>
   <string name="voicemail_change_greeting_preference_title">Ձայնային փոստի ողջույն</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Փոխեք PIN կոդը</string>
   <string name="voicemail_change_pin_preference_summary_disable">PIN կոդը փոխելու համար ձայնային փոստի ցուցադրումը պետք է միացված լինի</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Ձայնային փոստի ցուցադրումը դեռ ակտիվացված չէ: Փորձեք ավելի ուշ:</string>
-  <string name="vm_change_pin_old_pin">Հին PIN կոդ</string>
-  <string name="vm_change_pin_new_pin">Նոր PIN կոդ</string>
   <string name="vm_change_pin_progress_message">Սպասեք:</string>
   <string name="vm_change_pin_error_too_short">Նոր PIN կոդը չափազանց կարճ է:</string>
   <string name="vm_change_pin_error_too_long">Նոր PIN կոդը չափազանց երկար է:</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN կոդերը չեն համընկնում</string>
   <string name="change_pin_succeeded">Ձայնային փոստի PIN կոդը թարմացվեց</string>
   <string name="change_pin_system_error">Չհաջողվեց սահմանել PIN կոդ</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Ձայնային փոստի տառադրում</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Ձայնային փոստի տառադրման վերլուծություն</string>
   <string name="voicemail_activating_summary_info">Ձայնային փոստի ակտիվացում</string>
-  <string name="voicemail_transcription_preference_summary_info">Կատարեք ձայնային հաղորդագրությունների տառադրում Google-ի տառադրման ծառայության օգնությամբ: %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Թույլ տվեք Google-ին ստուգել ձեր ձայնային հաղորդագրությունները՝ տառադրման ճշգրտությունը բարելավելու համար: Ձեր ձայնային հաղորդագրությունները անանուն կերպով են պահվում: %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Անջատել ձայնային փոստի ցուցադրումը</string>
   <string name="confirm_disable_voicemail_dialog_message">Կջնջվեն այս հավելվածում պահված ամբողջ ձայնային փոստն ու ձայնագրությունների տեքստերը՝ տառադրված Google-ի հատուկ ծառայության միջոցով: Դրանց պատճենները հնարավոր է մնան ձեր օպերատորի մոտ:</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">ԱՆՋԱՏԵԼ</string>

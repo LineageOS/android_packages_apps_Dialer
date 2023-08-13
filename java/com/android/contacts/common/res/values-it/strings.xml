@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Cancellare contattati di frequente?</string>
   <string name="clearFrequentsConfirmation">Verrà cancellato l\'elenco dei contatti frequenti nelle app Contatti e Telefono e le app email dovranno apprendere da zero le tue preferenze di comunicazione.</string>
   <string name="clearFrequentsProgress_title">Cancellazione contattati di frequente…</string>
-  <string name="status_available">Disponibile</string>
-  <string name="status_away">Assente</string>
-  <string name="status_busy">Occupato</string>
-  <string name="contactsList">Contatti</string>
-  <string name="contact_suggestions">Suggerimenti più popolari</string>
-  <string name="local_invisible_directory">Altro</string>
   <string name="directory_search_label">Directory</string>
   <string name="directory_search_label_work">Directory di lavoro</string>
-  <string name="local_search_label">Tutti i contatti</string>
-  <string name="local_suggestions_search_label">Suggerimenti</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Io</string>
   <string name="missing_name">(Nessun nome)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Visualizza contatto</string>
-  <string name="list_filter_phones">Tutti i contatti con numeri di telefono</string>
-  <string name="list_filter_phones_work">Contatti del profilo di lavoro</string>
   <string name="view_updates_from_group">Visualizza aggiornamenti</string>
   <string name="account_phone">Solo dispositivo, non sincronizzato</string>
   <string name="nameLabelsGroup">Nome</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Chatta su ICQ</string>
   <string name="chat_jabber">Chatta su Jabber</string>
   <string name="chat">Chat</string>
-  <string name="list_filter_all_accounts">Tutti i contatti</string>
-  <string name="listAllContactsInAccount">Contatti in %s</string>
-  <string name="listCustomView">Contatti in visualizzazione personalizzata</string>
-  <string name="listSingleContact">Contatto singolo</string>
   <string name="display_options_sort_list_by">Ordina per</string>
   <string name="display_options_sort_by_given_name">Nome</string>
   <string name="display_options_sort_by_family_name">Cognome</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Cancella ricerca</string>
   <string name="select_account_dialog_title">Account</string>
   <string name="set_default_account">Usa sempre questa per chiamare</string>
-  <string name="select_phone_account_for_calls">Scegli la SIM per questa chiamata</string>
-  <string name="select_phone_account_for_calls_remember">Memorizza questa scelta</string>
   <string name="call_with_a_note">Chiama e invia una nota</string>
   <string name="call_subject_hint">Digita una nota da inviare con la chiamata...</string>
   <string name="send_and_call_button">INVIA E CHIAMA</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> Scheda %1$s. %2$d elementi da leggere. </item>
   </plurals>
   <string name="description_search_video_call">Videochiamata</string>
-  <string name="description_search_call_and_share">Condividi e chiama</string>
 </resources>

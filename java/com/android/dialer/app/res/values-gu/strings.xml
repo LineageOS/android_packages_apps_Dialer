@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">ફોન</string>
-  <string name="launcherDialpadActivityLabel">ફોન કીપેડ</string>
   <string name="callHistoryIconLabel">કૉલ ઇતિહાસ</string>
   <string name="action_copy_number_text">નંબર કૉપિ કરો</string>
   <string name="action_edit_number_before_call">કૉલ કરતાં પહેલાં નંબર સંપાદિત કરો</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">વધુ વિકલ્પો</string>
   <string name="action_menu_dialpad_button">કી પેડ</string>
   <string name="dialer_settings_label">સેટિંગ્સ</string>
-  <string name="simulator_submenu_label">સિમ્યુલેટર</string>
-  <string name="new_ui_launcher_shortcut_label">નવું UI શૉર્ટકટ્સ બનાવો</string>
   <string name="description_entering_bulk_action_mode">બલ્ક ક્રિયા મોડમાં દાખલ થઈ રહ્યાં છે</string>
   <string name="description_leaving_bulk_action_mode">બલ્ક ક્રિયા મોડ છોડી દીધો</string>
   <string name="description_selecting_bulk_action_mode">%1$s પસંદ કર્યો</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">વિડિઓ કૉલ.</string>
   <string name="description_start_voice_search">વૉઇસ શોધ શરૂ કરો</string>
   <string name="voicemail">વૉઇસમેઇલ</string>
-  <string name="description_cancel_multi_select">બૅચ ક્રિયા મોડ રદ કરો</string>
   <string name="voicemailMultiSelectDeleteConfirm">કાઢી નાખો</string>
   <string name="voicemailMultiSelectDeleteCancel">રદ કરો</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s પસંદ કરી</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">વૉઇસ શોધ ઉપલબ્ધ નથી</string>
   <string name="dialer_hint_find_contact">સંપર્કો શોધો</string>
-  <string name="block_number_search_hint">નંબર ઉમેરો અથવા સંપર્કો શોધો</string>
   <string name="call_log_all_empty">તમારો કૉલ ઇતિહાસ ખાલી છે</string>
   <string name="call_log_all_empty_action">કૉલ કરો</string>
   <string name="call_log_missed_empty">તમારી પાસે કોઇ છૂટેલાં કૉલ્સ નથી.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">કૉલ ઇતિહાસ</string>
   <string name="call_log_all_title">તમામ</string>
   <string name="call_log_missed_title">છૂટેલ</string>
-  <string name="tab_speed_dial">સ્પીડ ડાયલ</string>
-  <string name="tab_history">કૉલ ઇતિહાસ</string>
   <string name="tab_all_contacts">સંપર્કો</string>
-  <string name="tab_voicemail">વૉઇસમેઇલ</string>
-  <string name="search_shortcut_call_number">%s ને કૉલ કરો</string>
   <string name="search_shortcut_create_new_contact">નવો સંપર્ક બનાવો</string>
   <string name="search_shortcut_add_to_contact">સંપર્કમાં ઉમેરો</string>
   <string name="search_shortcut_send_sms_message">SMS મોકલો</string>
   <string name="search_shortcut_make_video_call">વિડિઓ કૉલ કરો</string>
-  <string name="search_shortcut_block_number">નંબર અવરોધિત કરો</string>
-  <string name="speed_dial_empty">તમારા ઝડપી ડાયલ પર હજી સુધી કોઇ નથી</string>
-  <string name="speed_dial_empty_add_favorite_action">એક મનપસંદ ઉમેરો</string>
-  <string name="remove_contact">દૂર કરો</string>
   <string name="select_all">તમામ પસંદ કરો</string>
   <string name="call_log_action_video_call">વિડિઓ કૉલ</string>
-  <string name="call_log_action_set_up_video">વીડિઓ કૉલિંગ સેટ કરો</string>
-  <string name="call_log_action_invite_video">વીડિઓ કૉલ માટે આમંત્રિત કરો</string>
   <string name="call_log_action_send_message">એક સંદેશ મોકલો</string>
   <string name="call_log_action_details">કૉલની વિગતો</string>
   <string name="call_log_action_share_voicemail">આને મોકલો ...</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">કૉલ્સ</string>
   <string name="manage_blocked_numbers_label">બ્લૉક કરેલ નંબર</string>
   <string name="voicemail_settings_label">વૉઇસમેઇલ</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">કૉલ અવરોધિત કરવાનું અસ્થાયીરૂપે બંધ છે</string>
-  <string name="blocked_numbers_disabled_emergency_desc">કૉલ અવરોધિત કરવાનું અક્ષમ કરવામાં આવ્યું છે કારણ કે તમે આ ફોનમાંથી છેલ્લા 48 કલાકમાં કટોકટીની સેવાઓનો સંપર્ક કર્યો હતો. એકવાર 48 કલાકનો સમયગાળો સમાપ્ત થાય, પછી તે આપમેળે ફરીથી સક્ષમ કરવામાં આવશે.</string>
-  <string name="import_send_to_voicemail_numbers_label">નંબર્સ આયાત કરો</string>
-  <string name="blocked_call_settings_import_description">તમે પહેલાં કેટલાક કૉલર્સને અન્ય ઍપ્લિકેશનો મારફતે વૉઇસમેઇલ પર આપમેળે મોકલવા માટે ચિહ્નિત કર્યા.</string>
-  <string name="blocked_call_settings_view_numbers_button">સંખ્યા જુઓ</string>
-  <string name="blocked_call_settings_import_button">આયાત કરો</string>
-  <string name="description_blocked_number_list_delete">નંબર અનાવરોધિત કરો</string>
-  <string name="addBlockedNumber">નંબર ઉમેરો</string>
-  <string name="block_number_footer_message_vvm">આ નંબરથી આવનારા કૉલ્સ અવરોધિત કરવામાં આવશે અને વૉઇસમેઇલ્સ આપમેળે કાઢી નાખવામાં આવશે.</string>
-  <string name="block_number_footer_message_no_vvm">આ નંબરથી આવનારા કૉલ્સ અવરોધિત કરવામાં આવશે, પરંતુ તેઓ હજી પણ તમારા માટે વૉઇસમેઇલ્સ મૂકવામાં સમર્થ હોઈ શકે છે.</string>
-  <string name="block_list">અવરોધિત નંબરો</string>
-  <string name="alreadyBlocked">%1$s ને પહેલેથી અવરોધિત કરવામાં આવ્યો છે.</string>
   <string name="phone_account_settings_label">કૉલિંગ એકાઉન્ટ્સ</string>
-  <string name="permission_no_speeddial">ઝડપી ડાયલ સક્ષમ કરવા માટે, સંપર્કોની પરવાનગી ચાલુ કરો.</string>
   <string name="permission_no_calllog">તમારો કૉલ લૉગ જોવા માટે, ફોન પરવાનગી ચાલુ કરો.</string>
-  <string name="permission_no_search">તમારા સંપર્કો શોધવા માટે, સંપર્કોની પરવાનગીઓ ચાલુ કરો.</string>
-  <string name="permission_place_call">કૉલ કરવા માટે, ફોન પરવાનગી ચાલુ કરો.</string>
   <string name="toast_cannot_write_system_settings">ફોન એપ્લિકેશનને સિસ્ટમ સેટિંગ્સ પર લખવાની પરવાનગી નથી.</string>
   <string name="blocked_number_call_log_label">અવરોધિત</string>
   <string name="call_log_action_block_report_number">સ્પામની જાણ કરો/અવરોધિત કરો</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">સ્પામ નથી</string>
   <string name="call_log_action_unblock_number">નંબર અનાવરોધિત કરો</string>
   <string name="spam_number_call_log_label">સ્પામ</string>
-  <string name="call_composer_connection_failed">%1$s ઑફલાઇન છે અને તેના સુધી પહોંચી શકતાં નથી</string>
-  <string name="about_phone_label">વિશે</string>
-  <string name="voicemail_transcription_branding_text">Google દ્વારા ટ્રાન્સ્ક્રાઇબ કરેલ</string>
-  <string name="voicemail_transcription_in_progress">ટ્રાન્સ્ક્રાઇબ કરી રહ્યાં છીએ…</string>
-  <string name="voicemail_transcription_failed">ટ્રાન્સક્રિપ્ટ ઉપલબ્ધ નથી.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">ટ્રાન્સક્રિપ્ટ ઉપલબ્ધ નથી. ભાષા સમર્થિત નથી.</string>
-  <string name="voicemail_transcription_failed_no_speech">ટ્રાન્સક્રિપ્ટ ઉપલબ્ધ નથી. કોઈ ધ્વનિ સંભળાયો નથી.</string>
-  <string name="voicemail_donation_promo_title">ટ્રાન્સક્રિપ્શનની સચોટતા બહેતર બનાવવામાં સહાય કરવા ઈચ્છો છો?</string>
-  <string name="voicemail_donation_promo_content">Googleને આ અને ભાવિ વૉઇસમેઇલ સંદેશા ટ્રાન્સક્રિપ્ટ વડે રિવ્યૂ કરવા દો. તે અજ્ઞાત રૂપે સ્ટોર કરવામાં આવશે. ગમે ત્યારે સેટિંગમાં જઈને બદલો. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">હા, ઠીક છે</string>
-  <string name="voicemail_donation_promo_opt_out">ના, આભાર</string>
-  <string name="voicemail_transcription_rating">ટ્રાન્સક્રિપ્શનની ક્વૉલિટીને રેટ કરો</string>
-  <string name="voicemail_transcription_rating_thanks">તમારા પ્રતિસાદ બદલ આભાર</string>
-  <string name="description_rating_good">પસંદ</string>
-  <string name="description_rating_bad">નાપસંદ</string>
-  <string name="view_conversation">જુઓ</string>
-  <string name="ec_data_deleted">કૉલ કાઢી નાખ્યો. આ કૉલ દરમિયાન સંદેશામાં શેર કરેલ જોડાણ જુઓ અને કાઢી નાખો.</string>
-  <string name="multiple_ec_data_deleted">કૉલ કાઢી નાખ્યા. કૉલ દરમિયાન સંદેશામાં શેર કરેલ જોડાણ જુઓ અને કાઢી નાખો.</string>
 </resources>

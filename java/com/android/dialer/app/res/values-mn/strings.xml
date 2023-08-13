@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Гар утас</string>
-  <string name="launcherDialpadActivityLabel">Утасны товчлуур</string>
   <string name="callHistoryIconLabel">Дуудлагын түүх</string>
   <string name="action_copy_number_text">Дугаар хуулах</string>
   <string name="action_edit_number_before_call">Залгахын өмнө дугаар засах</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Нэмэлт сонголтууд</string>
   <string name="action_menu_dialpad_button">Товчлуур</string>
   <string name="dialer_settings_label">Тохиргоо</string>
-  <string name="simulator_submenu_label">Симулятор</string>
-  <string name="new_ui_launcher_shortcut_label">Шинэ UI үүсгэх товчлол</string>
   <string name="description_entering_bulk_action_mode">Багц үйлдлийн горимд орж байна</string>
   <string name="description_leaving_bulk_action_mode">Багц үйлдлийн горимоос гарсан</string>
   <string name="description_selecting_bulk_action_mode">%1$s сонгосон</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Видео дуудлага.</string>
   <string name="description_start_voice_search">Дуун хайлтыг эхлүүлэх</string>
   <string name="voicemail">Дуут шуудан</string>
-  <string name="description_cancel_multi_select">Багц үйлдлийн горимыг цуцлах</string>
   <string name="voicemailMultiSelectDeleteConfirm">Устгах</string>
   <string name="voicemailMultiSelectDeleteCancel">Цуцлах</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s сонгосон</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Дуут хайлт хийх боломжгүй байна</string>
   <string name="dialer_hint_find_contact">Харилцагчдаас хайх</string>
-  <string name="block_number_search_hint">Дугаар нэмэх болон харилцагч хайх</string>
   <string name="call_log_all_empty">Таны дуудлагын түүх хоосон байна</string>
   <string name="call_log_all_empty_action">Дуудлага хийх</string>
   <string name="call_log_missed_empty">Танд аваагүй дуудлага байхгүй байна.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Дуудлагын түүх</string>
   <string name="call_log_all_title">Бүгд</string>
   <string name="call_log_missed_title">Аваагүй</string>
-  <string name="tab_speed_dial">Түргэн залгалт</string>
-  <string name="tab_history">Дуудлагын түүх</string>
   <string name="tab_all_contacts">Харилцагчид</string>
-  <string name="tab_voicemail">Дуут шуудан</string>
-  <string name="search_shortcut_call_number">%s руу залгах</string>
   <string name="search_shortcut_create_new_contact">Шинэ хаяг үүсгэх</string>
   <string name="search_shortcut_add_to_contact">Харилцагчийн хаягт нэмэх</string>
   <string name="search_shortcut_send_sms_message">Мессеж илгээх</string>
   <string name="search_shortcut_make_video_call">Видео дуудлага хийх</string>
-  <string name="search_shortcut_block_number">Дугаар блоклох</string>
-  <string name="speed_dial_empty">Таны яаралтай залгах тохиргоон дээр одоогоор харилцагч байхгүй байна</string>
-  <string name="speed_dial_empty_add_favorite_action">Таалагдсан хэсэгт нэмэх</string>
-  <string name="remove_contact">Хасах</string>
   <string name="select_all">Бүгдийг сонгох</string>
   <string name="call_log_action_video_call">Видео дуудлага</string>
-  <string name="call_log_action_set_up_video">Видео дуудлагад бэлтгэх</string>
-  <string name="call_log_action_invite_video">Видео дуудлагад урих</string>
   <string name="call_log_action_send_message">Зурвас илгээх</string>
   <string name="call_log_action_details">Дуудлагын мэдээлэл</string>
   <string name="call_log_action_share_voicemail">Илгээх ...</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Дуудлага</string>
   <string name="manage_blocked_numbers_label">Хориглосон дугаар</string>
   <string name="voicemail_settings_label">Дуут шуудан</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Дуудлага блоклох тохиргоог түр хугацаагаар унтраасан</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Та сүүлийн 48 цагийн дотор энэ утсаар тусламжийн дуудлага хийсэн тул дуудлага блоклох тохиргоог идэвхгүй болгосон. Энэ тохиргоо нь 48 цагийн хугацаа дуусахад автоматаар идэвхэжнэ.</string>
-  <string name="import_send_to_voicemail_numbers_label">Импортын тоо</string>
-  <string name="blocked_call_settings_import_description">Тань руу залгасан зарим хүмүүсийг бусад апп ашиглан автоматаар дуут шуудан илгээж байхаар өмнө нь тэмдэглэсэн.</string>
-  <string name="blocked_call_settings_view_numbers_button">Дугаар харах</string>
-  <string name="blocked_call_settings_import_button">Импортлох</string>
-  <string name="description_blocked_number_list_delete">Дугаар блокноос гаргах</string>
-  <string name="addBlockedNumber">Дугаар нэмэх</string>
-  <string name="block_number_footer_message_vvm">Эдгээр дугаараас ирэх дуудлагыг блоклож, дуут шууданг автоматаар устгана.</string>
-  <string name="block_number_footer_message_no_vvm">Эдгээр дугаараас ирэх дуудлагыг блоклож, харин танд дуут шуудан илгээх боломжтой.</string>
-  <string name="block_list">Блоклосон дугаар</string>
-  <string name="alreadyBlocked">%1$s-г аль хэдийн блоклосон байна.</string>
   <string name="phone_account_settings_label">Дуудах бүртгэл</string>
-  <string name="permission_no_speeddial">Яаралтай дуудлагыг идэвхжүүлэхийн тулд Харилцагчдын зөвшөөрлийг идэвхжүүлнэ үү.</string>
   <string name="permission_no_calllog">Дуудлагын жагсаалтыг харахын тулд утасны зөвшөөрлийг идэвхжүүлнэ үү.</string>
-  <string name="permission_no_search">Харилцагчаа хайхын тулд, Харилцагчийн жагсаалтын зөвшөөрлийг идэвхжүүлнэ үү.</string>
-  <string name="permission_place_call">Залгахын тулд Утасны зөвшөөрлийг идэвхжүүлнэ үү.</string>
   <string name="toast_cannot_write_system_settings">Гар утасны апп-д системийн тохиргоо бичих зөвшөөрөл алга.</string>
   <string name="blocked_number_call_log_label">Хориглогдсон</string>
   <string name="call_log_action_block_report_number">Спам гэж мэдээлэх/хориглох</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Спам биш</string>
   <string name="call_log_action_unblock_number">Дугаар блокноос гаргах</string>
   <string name="spam_number_call_log_label">Спам</string>
-  <string name="call_composer_connection_failed">%1$s офлайн, холбогдох боломжгүй байна</string>
-  <string name="about_phone_label">Тухай</string>
-  <string name="voicemail_transcription_branding_text">Google-с сийрүүлсэн</string>
-  <string name="voicemail_transcription_in_progress">Сийрүүлж байна...</string>
-  <string name="voicemail_transcription_failed">Сийрүүлэг ашиглах боломжгүй.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Сийрүүлэг ашиглах боломжгүй. Тухайн хэл дэмжигдээгүй.</string>
-  <string name="voicemail_transcription_failed_no_speech">Сийрүүлэг ашиглах боломжгүй. Яриа танигдаагүй.</string>
-  <string name="voicemail_donation_promo_title">Сийрүүлгийн нарийвчлалыг сайжруулахад туслах уу?</string>
-  <string name="voicemail_donation_promo_content">Google-д энэ болон цаашдын дуут шуудангийн зурвасуудыг сийрүүлгээр хянах боломж олгох. Тэдгээрийг нэр заахгүй хадгалах болно. Дуртай үедээ Тохиргоог өөрчлөх боломжтой. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Тийм, би зөвшөөрч байна</string>
-  <string name="voicemail_donation_promo_opt_out">Үгүй</string>
-  <string name="voicemail_transcription_rating">Сийрүүлгийн чанарыг үнэлэх</string>
-  <string name="voicemail_transcription_rating_thanks">Санал хүсэлт ирүүлсэнд баярлалаа</string>
-  <string name="description_rating_good">Таалагдсан</string>
-  <string name="description_rating_bad">Таалагдаагүй</string>
-  <string name="view_conversation">Үзэх</string>
-  <string name="ec_data_deleted">Дуудлагыг устгасан. Энэ дуудлагын явцад Зурвас дотор хуваалцсан хавсралтуудыг үзэх болон устгах.</string>
-  <string name="multiple_ec_data_deleted">Дуудлагуудыг устгасан. Энэ дуудлагын явцад Зурвас дотор хуваалцсан хавсралтуудыг үзэх болон устгах.</string>
 </resources>

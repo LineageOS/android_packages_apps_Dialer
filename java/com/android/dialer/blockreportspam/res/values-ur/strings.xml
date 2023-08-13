@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">غیر مسدود کریں</string>
   <string name="block_report_number_alert_title">%1$s مسدود کریں؟</string>
   <string name="block_report_number_alert_details">آپ کو اس نمبر سے مزید کالز موصول نہیں ہوں گی۔</string>
-  <string name="block_number_alert_details">%1$s اس کال کی بطور سپام اطلاع دی جائے گی۔</string>
   <string name="unblock_number_alert_details">یہ نمبر غیر مسدود ہو جائے گا اور اس کی \'سپام نہیں\' کے بطور اطلاع دی جائے گی۔ مستقبل میں کالز کی شناخت بطور سپام نہیں کی جائے گی۔</string>
   <string name="unblock_report_number_alert_title">%1$s غیر مسدود کریں؟</string>
   <string name="report_not_spam_alert_button">اطلاع دیں</string>

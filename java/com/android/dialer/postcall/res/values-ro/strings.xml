@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Este ceva urgent. Sună-mă.</string>
   <string name="post_call_message_2">Sună-mă când ai puțin timp.</string>
   <string name="post_call_message_3">Nu e ceva urgent. Putem vorbi mai târziu.</string>
-  <string name="post_call_add_message">Adăugați un mesaj</string>
-  <string name="post_call_send_message">Trimiteți un mesaj</string>
+    <string name="post_call_send_message">Trimiteți un mesaj</string>
   <string name="post_call_message_sent">Mesaj trimis</string>
   <string name="view">Afișați</string>
 </resources>

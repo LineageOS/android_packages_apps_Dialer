@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">Vypnuté video</string>
   <string name="incall_content_description_swap_video">Přepnout video</string>
   <string name="incall_label_speaker">Reproduktor</string>
-  <string name="incall_label_audio">Zvuk</string>
 </resources>

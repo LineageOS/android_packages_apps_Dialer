@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">選擇通話類型</string>
   <string name="disambig_option_video_call">視像通話</string>
   <string name="disambig_option_voice_call">通話</string>
-  <string name="add_favorite_activity_title">新增我的最愛</string>
   <string name="contact_menu_voice_call">語音通話</string>
   <string name="contact_menu_video_call">視像通話</string>
   <string name="contact_menu_message">訊息</string>

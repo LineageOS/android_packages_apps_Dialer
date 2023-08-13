@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">РАЗБЛАКІРАВАЦЬ</string>
   <string name="block_report_number_alert_title">Заблакіраваць нумар %1$s?</string>
   <string name="block_report_number_alert_details">Вы больш не будзеце атрымліваць выклікі з гэтага нумара.</string>
-  <string name="block_number_alert_details">%1$s Гэты выклік будзе заяўлены як спам.</string>
   <string name="unblock_number_alert_details">Гэты нумар будзе разблакіраваны і заяўлены як не спам. Будучыя выклікі не будуць вызначацца як спам.</string>
   <string name="unblock_report_number_alert_title">Разблакіраваць нумар %1$s?</string>
   <string name="report_not_spam_alert_button">Паведаміць</string>
