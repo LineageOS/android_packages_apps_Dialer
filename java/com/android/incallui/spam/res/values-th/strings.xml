@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">แตะเพื่อเพิ่มลงในรายชื่อติดต่อหรือบล็อกหมายเลขสแปม</string>
   <string name="spam_notification_non_spam_call_expanded_text">หมายเลขนี้โทรหาคุณเป็นครั้งแรก หากเป็นสแปม คุณสามารถบล็อกและรายงานหมายเลขนี้ได้</string>
   <string name="spam_notification_spam_call_collapsed_text">แตะเพื่อรายงานว่าไม่ใช่สแปมหรือบล็อก</string>
-  <string name="spam_notification_report_spam_action_text">บล็อกและรายงาน</string>
-  <string name="spam_notification_add_contact_action_text">เพิ่มผู้ติดต่อ</string>
   <string name="spam_notification_dialog_add_contact_action_text">เพิ่มในรายชื่อติดต่อ</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">บล็อกและรายงานสแปม</string>
   <string name="spam_notification_was_not_spam_action_text">ไม่ใช่สแปม</string>

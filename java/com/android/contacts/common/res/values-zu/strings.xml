@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Sula oxhumana nabo njalo?</string>
   <string name="clearFrequentsConfirmation">Uzosula uhlu loxhumana nabo kakhulu kuzinhelo zokusebenza zokuxhumana noma zefoni, futhi uphoqelele izinhlelo zokusebenza ze-imeyili ukufunda izintandokazi zakho zekheli kusuka ekuqaleni.</string>
   <string name="clearFrequentsProgress_title">Isula oxhumana nabo njalo…</string>
-  <string name="status_available">Ngiyatholakala</string>
-  <string name="status_away">Ngiphumile</string>
-  <string name="status_busy">Ngimatasa</string>
-  <string name="contactsList">Othi tana nabo</string>
-  <string name="contact_suggestions">Okuphezulu okuphakanyisiwe</string>
-  <string name="local_invisible_directory">Okunye</string>
   <string name="directory_search_label">Uhla lwemibhalo</string>
   <string name="directory_search_label_work">Uhla lwemibhalo lomsebenzi</string>
-  <string name="local_search_label">Bonke othintana nabo</string>
-  <string name="local_suggestions_search_label">Iziphakamiso</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Mina</string>
   <string name="missing_name">(Alikho igama)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Buka oxhumana naye</string>
-  <string name="list_filter_phones">Bonke othintana nabo kanye nezinombolo zabo zefoni</string>
-  <string name="list_filter_phones_work">Oxhumana nabo bephrofayela yomsebenzi</string>
   <string name="view_updates_from_group">Buka okubuyekeziwe</string>
   <string name="account_phone">Idivayisi kuphela, akuvunyelanisiwe</string>
   <string name="nameLabelsGroup">Igama</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Xoxa usebenzisa i-ICQ</string>
   <string name="chat_jabber">Xoxa usebenzisa i-Jabber</string>
   <string name="chat">Xoxa</string>
-  <string name="list_filter_all_accounts">Bonke oxhumana nabo</string>
-  <string name="listAllContactsInAccount">Oxhumana nabo ku-%s</string>
-  <string name="listCustomView">Oxhumana nabo ekubukweni okwenziwe ngendlela oyifisayo</string>
-  <string name="listSingleContact">Oyedwa oxhumana naye</string>
   <string name="display_options_sort_list_by">Hlunga nge-</string>
   <string name="display_options_sort_by_given_name">Igama lokuqala</string>
   <string name="display_options_sort_by_family_name">Isibongo</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Sula usesho</string>
   <string name="select_account_dialog_title">I-Akhawunti</string>
   <string name="set_default_account">Njalo sebenzisa lokhu kumakholi</string>
-  <string name="select_phone_account_for_calls">Khetha i-SIM yale kholi</string>
-  <string name="select_phone_account_for_calls_remember">Khumbula lokhu okukhethiwe</string>
   <string name="call_with_a_note">Shaya ngenothi</string>
   <string name="call_subject_hint">Thayipha inothi ukuthumela nekholi ...</string>
   <string name="send_and_call_button">THUMELA FUTHI YENZA IKHOLI</string>
@@ -141,5 +123,4 @@
     <item quantity="other">%1$s ithebhu. %2$d izinto ezingafundiwe. </item>
   </plurals>
   <string name="description_search_video_call">Ikholi yevidiyo</string>
-  <string name="description_search_call_and_share">Yabelana uphinde ushaye</string>
 </resources>

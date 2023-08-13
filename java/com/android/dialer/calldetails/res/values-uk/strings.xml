@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Копіювати номер</string>
   <string name="call_details_edit_number">Редагувати номер перед дзвінком</string>
   <string name="call_details_report_call_id">Повідомити про неправильний номер</string>
-  <string name="sent_a_photo">Надіслано фотографію</string>
-  <string name="received_a_photo">Отримано фотографію</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Повідомити про неправильний номер</string>
   <string name="report_caller_id_failed">Не вдалося повідомити про неправильний номер</string>
   <string name="report_caller_id_toast">Ви повідомили про неправильний номер</string>

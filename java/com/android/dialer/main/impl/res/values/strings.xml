@@ -21,16 +21,6 @@
   <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
   <string name="dialpad_activity_title">Phone Keypad</string>
 
-  <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
-  <string name="search">@android:string/search_go</string>
-  <!-- A11y announcement to let users know a button will let them search for contacts and places [CHAR LIMIT=NONE] -->
-  <string name="description_search">Search contacts and places</string>
-
-  <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
-  <string name="contacts">Contacts</string>
-  <!-- A11y announcement to let users know a button will let them view their contacts [CHAR LIMIT=NONE] -->
-  <string name="description_contacts">View Contacts</string>
-
   <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
   <string name="voice_search_not_available">Voice search not available</string>
 

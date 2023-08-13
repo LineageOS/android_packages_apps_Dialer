@@ -64,41 +64,6 @@
   <string name="notification_incoming_video_call">Incoming video call</string>
   <!-- The "label" of the in-call Notification for an incoming ringing call on a device with multiple SIMs. [CHAR LIMIT=60] -->
   <string name="notification_incoming_call_mutli_sim">Incoming call via <xliff:g id="sim_label" example="SIM 1">%1$s</xliff:g></string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
-  <string name="notification_incoming_call_with_photo">Incoming call with photo</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
-  <string name="notification_incoming_call_with_message">Incoming call with message</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
-  <string name="notification_incoming_call_with_location">Incoming call with location</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <string name="notification_incoming_call_with_photo_message">Incoming call with photo and message</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <string name="notification_incoming_call_with_photo_location">Incoming call with photo and location</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <string name="notification_incoming_call_with_message_location">Incoming call with message and location</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <string name="notification_incoming_call_with_photo_message_location">Incoming call with photo, message and location</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
-  <string name="notification_incoming_call_attachments">Incoming call with attachments</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
-  <string name="important_notification_incoming_call">Important incoming call</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". -->
-  <string name="important_notification_incoming_call_with_photo">Important incoming call with photo</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". -->
-  <string name="important_notification_incoming_call_with_message">Important incoming call with message</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". -->
-  <string name="important_notification_incoming_call_with_location">Important incoming call with location</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <string name="important_notification_incoming_call_with_photo_message">Important incoming call with photo and message</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <string name="important_notification_incoming_call_with_photo_location">Important incoming call with photo and location</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <string name="important_notification_incoming_call_with_message_location">Important incoming call with message and location</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <string name="important_notification_incoming_call_with_photo_message_location">Important incoming call with photo, message and location</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". -->
-  <string name="important_notification_incoming_call_attachments">Important incoming call with attachments</string>
-
 
   <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=60] -->
   <string name="notification_incoming_work_call">Incoming work call</string>
@@ -193,9 +158,6 @@
     data charges may apply.
   </string>
   <string name="video_call_lte_to_wifi_failed_do_not_show">Do not show this again</string>
-
-  <!-- Text for bubble return-to-call button -->
-  <string name="bubble_return_to_call">Back to call</string>
 
   <!-- Title for RTT request dialog. [CHAR LIMIT=60] -->
   <string name="rtt_request_dialog_title">Join RTT call?</string>

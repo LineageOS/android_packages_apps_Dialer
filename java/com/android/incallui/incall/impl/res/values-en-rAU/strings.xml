@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Hold</string>
   <string name="incall_label_add_call">Add call</string>
   <string name="incall_label_mute">Mute</string>
-  <string name="incall_label_end_call">End call</string>
   <string name="incall_label_dialpad">Keypad</string>
   <string name="incall_talkback_speaker_on">, is on</string>
   <string name="incall_talkback_speaker_off">, is off</string>

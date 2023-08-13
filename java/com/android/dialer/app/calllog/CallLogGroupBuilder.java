@@ -16,7 +16,6 @@
 
 package com.android.dialer.app.calllog;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.telephony.PhoneNumberUtils;
@@ -29,7 +28,6 @@ import com.android.contacts.common.util.DateUtils;
 import com.android.dialer.calllogutils.CallbackActionHelper;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import java.util.Objects;
@@ -59,12 +57,10 @@ public class CallLogGroupBuilder {
   /** Instance of the time object used for time calculations. */
   private static final Time TIME = new Time();
 
-  private final Context appContext;
   /** The object on which the groups are created. */
   private final GroupCreator groupCreator;
 
-  public CallLogGroupBuilder(@ApplicationContext Context appContext, GroupCreator groupCreator) {
-    this.appContext = appContext;
+  public CallLogGroupBuilder(GroupCreator groupCreator) {
     this.groupCreator = groupCreator;
   }
 

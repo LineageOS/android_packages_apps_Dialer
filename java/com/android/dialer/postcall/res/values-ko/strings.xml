@@ -4,8 +4,7 @@
   <string name="post_call_message_1">급한 용무이니 전화해 주세요.</string>
   <string name="post_call_message_2">시간 나실 때 전화해 주세요.</string>
   <string name="post_call_message_3">급한 용무는 아니니 나중에 다시 연락드릴게요.</string>
-  <string name="post_call_add_message">메시지를 추가하시겠습니까?</string>
-  <string name="post_call_send_message">메시지 보내기</string>
+    <string name="post_call_send_message">메시지 보내기</string>
   <string name="post_call_message_sent">메시지 전송됨</string>
   <string name="view">보기</string>
 </resources>

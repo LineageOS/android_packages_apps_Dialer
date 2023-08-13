@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Voicemail (%s)</string>
   <string name="voicemail_settings_title">Voicemail</string>
   <string name="voicemail_notifications_preference_title">Notifications</string>
   <string name="voicemail_change_greeting_preference_title">Voicemail greeting</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Change PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">Visual voicemail must be enabled to change PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Visual voicemail is not activated yet. Please try again later</string>
-  <string name="vm_change_pin_old_pin">Old PIN</string>
-  <string name="vm_change_pin_new_pin">New PIN</string>
   <string name="vm_change_pin_progress_message">Please wait.</string>
   <string name="vm_change_pin_error_too_short">The new PIN is too short.</string>
   <string name="vm_change_pin_error_too_long">The new PIN is too long.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PINs don\'t match</string>
   <string name="change_pin_succeeded">Voicemail PIN updated</string>
   <string name="change_pin_system_error">Unable to set PIN</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Voicemail transcription</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Voicemail transcription analysis</string>
   <string name="voicemail_activating_summary_info">Activating voicemail</string>
-  <string name="voicemail_transcription_preference_summary_info">Get transcripts of your voicemail using Google\'s transcription service. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Let Google review your voicemail messages to improve transcription accuracy. Your voicemail messages are stored anonymously. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Turn off visual voicemail</string>
   <string name="confirm_disable_voicemail_dialog_message">This will delete any voicemail and Google transcripts stored within this app. Your operator may keep its own copies.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">TURN OFF</string>

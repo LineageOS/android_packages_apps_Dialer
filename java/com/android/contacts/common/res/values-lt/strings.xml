@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Išvalyti dažniausius kontaktus?</string>
   <string name="clearFrequentsConfirmation">Išvalysite dažniausių kontaktų sąrašą Kontaktų ir Telefono programose, o el. pašto programoms reikės iš naujo gauti adresavimo nuostatas.</string>
   <string name="clearFrequentsProgress_title">Valomi dažniausi kontaktai…</string>
-  <string name="status_available">Galima</string>
-  <string name="status_away">Pasišalinęs</string>
-  <string name="status_busy">Užsiėmęs</string>
-  <string name="contactsList">Adresinė</string>
-  <string name="contact_suggestions">Populiariausi siūlomi</string>
-  <string name="local_invisible_directory">Kita</string>
   <string name="directory_search_label">Katalogas</string>
   <string name="directory_search_label_work">Darbo katalogas</string>
-  <string name="local_search_label">Visi kontaktai</string>
-  <string name="local_suggestions_search_label">Pasiūlymai</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Aš</string>
   <string name="missing_name">(Nėra pavadinimo)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Žr. išsamią kontaktinę informaciją</string>
-  <string name="list_filter_phones">Visi kontaktai su telefonų numeriais</string>
-  <string name="list_filter_phones_work">Darbo profilio kontaktai</string>
   <string name="view_updates_from_group">Peržiūrėti naujinius</string>
   <string name="account_phone">Tik įrenginys, nesinchronizuojama</string>
   <string name="nameLabelsGroup">Pavadinimas</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Kalbėti naudojant ICQ</string>
   <string name="chat_jabber">Kalbėti naudojant „Jabber“</string>
   <string name="chat">Pokalbis</string>
-  <string name="list_filter_all_accounts">Visi kontaktai</string>
-  <string name="listAllContactsInAccount">%s kontaktai</string>
-  <string name="listCustomView">Kontaktai tinkintame rodinyje</string>
-  <string name="listSingleContact">Vienas kontaktas</string>
   <string name="display_options_sort_list_by">Rūšiuoti pagal</string>
   <string name="display_options_sort_by_given_name">Vardas</string>
   <string name="display_options_sort_by_family_name">Pavardė</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Išvalyti paiešką</string>
   <string name="select_account_dialog_title">Paskyra</string>
   <string name="set_default_account">Visada naudoti tai skambučiams</string>
-  <string name="select_phone_account_for_calls">Pasir. SIM k., kad gal. atl. šį skamb.</string>
-  <string name="select_phone_account_for_calls_remember">Atsiminti šį pasirinkimą</string>
   <string name="call_with_a_note">Skambutis su užrašu</string>
   <string name="call_subject_hint">Įveskite užrašą, kurį galima išsiųsti skambinant...</string>
   <string name="send_and_call_button">SIŲSTI IR SKAMBINTI</string>
@@ -143,5 +125,4 @@
     <item quantity="other"> Skirtukas „%1$s“. %2$d neskaitytų elementų. </item>
   </plurals>
   <string name="description_search_video_call">Vaizdo skambutis</string>
-  <string name="description_search_call_and_share">Bendrinti ir skambinti</string>
 </resources>

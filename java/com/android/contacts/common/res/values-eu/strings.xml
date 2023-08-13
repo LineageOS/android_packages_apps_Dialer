@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Sarri erabilitako kontaktuak garbitu?</string>
   <string name="clearFrequentsConfirmation">Kontaktuak eta Telefonoa aplikazioetako sarri erabilitako kontaktuen zerrenda garbituko duzu; beraz, posta elektronikoaren aplikazioek helbideen hobespenak hutsetik ikasi beharko dituzte.</string>
   <string name="clearFrequentsProgress_title">Sarri erabilitako kontaktuak garbitzen…</string>
-  <string name="status_available">Libre</string>
-  <string name="status_away">Kanpoan</string>
-  <string name="status_busy">Okupatuta</string>
-  <string name="contactsList">Kontaktuak</string>
-  <string name="contact_suggestions">Iradokizun garrantzitsuenak</string>
-  <string name="local_invisible_directory">Beste bat</string>
   <string name="directory_search_label">Direktorioa</string>
   <string name="directory_search_label_work">Laneko kontaktuak</string>
-  <string name="local_search_label">Kontaktu guztiak</string>
-  <string name="local_suggestions_search_label">Iradokizunak</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ni</string>
   <string name="missing_name">(Izenik ez)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Ikusi kontaktua</string>
-  <string name="list_filter_phones">Telefono-zenbakiak dituzten kontaktu guztiak</string>
-  <string name="list_filter_phones_work">Laneko profileko kontaktuak</string>
   <string name="view_updates_from_group">Ikusi berritasunak</string>
   <string name="account_phone">Gailuan soilik egongo da; ez da sinkronizatuko</string>
   <string name="nameLabelsGroup">Izena</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Txateatu ICQ bidez</string>
   <string name="chat_jabber">Txateatu Jabber bidez</string>
   <string name="chat">Txateatu</string>
-  <string name="list_filter_all_accounts">Kontaktu guztiak</string>
-  <string name="listAllContactsInAccount">Kontu honetako kontaktuak: %s</string>
-  <string name="listCustomView">Ikuspegi pertsonalizatuko kontaktuak</string>
-  <string name="listSingleContact">Kontaktu bakarra</string>
   <string name="display_options_sort_list_by">Ordenatzeko irizpidea</string>
   <string name="display_options_sort_by_given_name">Izena</string>
   <string name="display_options_sort_by_family_name">Abizena</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Garbitu bilaketa</string>
   <string name="select_account_dialog_title">Kontua</string>
   <string name="set_default_account">Erabili beti hau deietarako</string>
-  <string name="select_phone_account_for_calls">Aukeratu dei hau egiteko SIM txartela</string>
-  <string name="select_phone_account_for_calls_remember">Gogoratu aukera hau</string>
   <string name="call_with_a_note">Egin deia oharrarekin</string>
   <string name="call_subject_hint">Idatzi deiarekin batera bidali beharreko oharra…</string>
   <string name="send_and_call_button">BIDALI ETA DEITU</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s fitxa. Irakurri gabeko %2$d elementu. </item>
   </plurals>
   <string name="description_search_video_call">Bideo-deia</string>
-  <string name="description_search_call_and_share">Partekatu eta deitu</string>
 </resources>

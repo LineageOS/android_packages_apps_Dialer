@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Телефон</string>
-  <string name="launcherDialpadActivityLabel">Набор номера</string>
   <string name="callHistoryIconLabel">Журнал звонков.</string>
   <string name="action_copy_number_text">Скопировать номер</string>
   <string name="action_edit_number_before_call">Изменить номер и позвонить</string>
@@ -38,8 +37,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Ещё</string>
   <string name="action_menu_dialpad_button">клавиатура</string>
   <string name="dialer_settings_label">Настройки</string>
-  <string name="simulator_submenu_label">Симулятор</string>
-  <string name="new_ui_launcher_shortcut_label">Создать ярлык для нового интерфейса</string>
   <string name="description_entering_bulk_action_mode">Вы вошли в режим массового действия</string>
   <string name="description_leaving_bulk_action_mode">Вы вышли из режима массового действия</string>
   <string name="description_selecting_bulk_action_mode">Выбран объект %1$s</string>
@@ -50,7 +47,6 @@
   <string name="description_video_call">Видеовстреча</string>
   <string name="description_start_voice_search">Начать голосовой поиск</string>
   <string name="voicemail">Голосовая почта</string>
-  <string name="description_cancel_multi_select">Отмена режима массового действия</string>
   <string name="voicemailMultiSelectDeleteConfirm">Удалить</string>
   <string name="voicemailMultiSelectDeleteCancel">Отмена</string>
   <string name="voicemailMultiSelectActionBarTitle">Выбрано: %1$s</string>
@@ -66,7 +62,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Голосовой поиск недоступен</string>
   <string name="dialer_hint_find_contact">Поиск в контактах</string>
-  <string name="block_number_search_hint">Найдите контакт или введите номер</string>
   <string name="call_log_all_empty">В журнале пока нет звонков</string>
   <string name="call_log_all_empty_action">Позвонить</string>
   <string name="call_log_missed_empty">Нет пропущенных звонков</string>
@@ -74,23 +69,13 @@
   <string name="call_log_activity_title">Журнал звонков</string>
   <string name="call_log_all_title">Все</string>
   <string name="call_log_missed_title">Пропущенные</string>
-  <string name="tab_speed_dial">Быстрый набор</string>
-  <string name="tab_history">Журнал звонков</string>
   <string name="tab_all_contacts">Контакты</string>
-  <string name="tab_voicemail">Голосовая почта</string>
-  <string name="search_shortcut_call_number">Позвонить: %s</string>
   <string name="search_shortcut_create_new_contact">Создать контакт</string>
   <string name="search_shortcut_add_to_contact">Добавить к контакту</string>
   <string name="search_shortcut_send_sms_message">Отправить SMS</string>
   <string name="search_shortcut_make_video_call">Начать видеовстречу</string>
-  <string name="search_shortcut_block_number">Заблокировать номер</string>
-  <string name="speed_dial_empty">Нет номеров для быстрого набора</string>
-  <string name="speed_dial_empty_add_favorite_action">Настроить быстрый набор</string>
-  <string name="remove_contact">Удалить</string>
   <string name="select_all">Выбрать все</string>
   <string name="call_log_action_video_call">Видеовстреча</string>
-  <string name="call_log_action_set_up_video">Настроить видеосвязь</string>
-  <string name="call_log_action_invite_video">Пригласить на видеовстречу</string>
   <string name="call_log_action_send_message">Отправить сообщение</string>
   <string name="call_log_action_details">Сведения о вызове</string>
   <string name="call_log_action_share_voicemail">Отправить</string>
@@ -129,23 +114,8 @@
   <string name="call_settings_label">Вызовы</string>
   <string name="manage_blocked_numbers_label">Заблокированные номера</string>
   <string name="voicemail_settings_label">Голосовая почта</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Блокировка вызовов временно отключена</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Блокировка вызовов отключена, поскольку вы недавно набирали номер экстренной службы. Когда с момента звонка пройдет 48 часов, эта функция включится автоматически.</string>
-  <string name="import_send_to_voicemail_numbers_label">Импортировать номера</string>
-  <string name="blocked_call_settings_import_description">Вы настроили перенаправление вызовов от некоторых абонентов в голосовую почту в других приложениях.</string>
-  <string name="blocked_call_settings_view_numbers_button">Просмотреть номера</string>
-  <string name="blocked_call_settings_import_button">Импортировать</string>
-  <string name="description_blocked_number_list_delete">Разблокировать номер</string>
-  <string name="addBlockedNumber">Добавить номер</string>
-  <string name="block_number_footer_message_vvm">Вызовы с этих номеров будут блокироваться, а голосовые сообщения – автоматически удаляться.</string>
-  <string name="block_number_footer_message_no_vvm">Вызовы с этих номеров будут блокироваться, но абоненты смогут оставлять вам голосовые сообщения.</string>
-  <string name="block_list">Заблокированные номера</string>
-  <string name="alreadyBlocked">%1$s уже заблокирован.</string>
   <string name="phone_account_settings_label">Аккаунты для звонков</string>
-  <string name="permission_no_speeddial">Чтобы настроить быстрый набор, предоставьте приложению разрешение \"Контакты\".</string>
   <string name="permission_no_calllog">Чтобы открыть список вызовов, предоставьте приложению разрешение \"Телефон\".</string>
-  <string name="permission_no_search">Для поиска контактов включите разрешение \"Контакты\".</string>
-  <string name="permission_place_call">Чтобы позвонить, предоставьте приложению разрешение \"Телефон\".</string>
   <string name="toast_cannot_write_system_settings">У приложения \"Телефон\" нет разрешения на изменение системных настроек.</string>
   <string name="blocked_number_call_log_label">Заблокировано</string>
   <string name="call_log_action_block_report_number">Заблокировать/сообщить о спаме</string>
@@ -153,22 +123,4 @@
   <string name="call_log_action_remove_spam">Не спам</string>
   <string name="call_log_action_unblock_number">Разблокировать номер</string>
   <string name="spam_number_call_log_label">Спам</string>
-  <string name="call_composer_connection_failed">%1$s сейчас офлайн и не ответит на вызов</string>
-  <string name="about_phone_label">О приложении</string>
-  <string name="voicemail_transcription_branding_text">Расшифровано Google</string>
-  <string name="voicemail_transcription_in_progress">Выполняется запись текста…</string>
-  <string name="voicemail_transcription_failed">Транскрипция недоступна.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Транскрипция недоступна. Язык не поддерживается.</string>
-  <string name="voicemail_transcription_failed_no_speech">Транскрипция недоступна. Речь не найдена.</string>
-  <string name="voicemail_donation_promo_title">Помогите сделать расшифровки более точными</string>
-  <string name="voicemail_donation_promo_content">Предоставьте Google доступ к этому и последующим сообщениям голосовой почты с расшифровками. Они будут храниться анонимно. Изменить настройки можно в любое время. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">ОК</string>
-  <string name="voicemail_donation_promo_opt_out">Нет</string>
-  <string name="voicemail_transcription_rating">Оцените качество транскрипции:</string>
-  <string name="voicemail_transcription_rating_thanks">Благодарим за отзыв</string>
-  <string name="description_rating_good">Мне понравилось</string>
-  <string name="description_rating_bad">Мне не понравилось</string>
-  <string name="view_conversation">Посмотреть</string>
-  <string name="ec_data_deleted">Вызов удален. Посмотреть и удалить прикрепленные к нему файлы можно в приложении \"Сообщения\".</string>
-  <string name="multiple_ec_data_deleted">Вызовы удалены. Посмотреть и удалить прикрепленные к ним файлы можно в приложении \"Сообщения\".</string>
 </resources>

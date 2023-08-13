@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Tap untuk menambahkan ke kontak atau memblokir nomor spam.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Nomor ini baru pertama kali menghubungi Anda. Jika panggilan termasuk spam, Anda dapat memblokir nomor ini dan melaporkannya.</string>
   <string name="spam_notification_spam_call_collapsed_text">Tap untuk melaporkan sebagai bukan spam, atau blokir</string>
-  <string name="spam_notification_report_spam_action_text">Blokir &amp; laporkan</string>
-  <string name="spam_notification_add_contact_action_text">Tambahkan kontak</string>
   <string name="spam_notification_dialog_add_contact_action_text">Tambahkan ke kontak</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokir &amp; laporkan sebagai spam</string>
   <string name="spam_notification_was_not_spam_action_text">Tidak, bukan spam</string>

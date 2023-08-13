@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Kopjo numrin</string>
   <string name="call_details_edit_number">Redakto numrin para telefonatës</string>
   <string name="call_details_report_call_id">Raporto numrin e pasaktë</string>
-  <string name="sent_a_photo">U dërgua një fotografi</string>
-  <string name="received_a_photo">U mor një fotografi</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Raporto numrin e pasaktë</string>
   <string name="report_caller_id_failed">Numri nuk mund të raportohej</string>
   <string name="report_caller_id_toast">Numri u raportua</string>

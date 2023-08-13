@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">Wi-Fi</string>
-  <string name="network_name_mobile">Мобилни уређаји</string>
   <string name="content_description_overflow">Још опција</string>
   <string name="snackbar_undo">ОПОЗОВИ</string>
   <string name="ok_got_it">Важи</string>

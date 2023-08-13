@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">ATBLOĶĒT</string>
   <string name="block_report_number_alert_title">Vai bloķēt numuru %1$s?</string>
   <string name="block_report_number_alert_details">Jūs vairs nesaņemsiet zvanus no šī numura.</string>
-  <string name="block_number_alert_details">%1$s Šis zvans tiks atzīmēts kā nevēlams.</string>
   <string name="unblock_number_alert_details">Numurs tiks atbloķēts un netiks atzīmēts kā nevēlams. Turpmākie zvani netiks atzīmēti kā nevēlami.</string>
   <string name="unblock_report_number_alert_title">Vai atbloķēt numuru %1$s?</string>
   <string name="report_not_spam_alert_button">Ziņot</string>

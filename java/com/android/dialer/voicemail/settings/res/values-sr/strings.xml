@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Говорна пошта (%s)</string>
   <string name="voicemail_settings_title">Говорна пошта</string>
   <string name="voicemail_notifications_preference_title">Обавештења</string>
   <string name="voicemail_change_greeting_preference_title">Поздравна порука говорне поште</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Промените PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">Морате да омогућите визуелну говорну пошту да бисте променили PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Визуелна говорна пошта још увек није активирана, пробајте поново касније</string>
-  <string name="vm_change_pin_old_pin">Стари PIN</string>
-  <string name="vm_change_pin_new_pin">Нови PIN</string>
   <string name="vm_change_pin_progress_message">Сачекајте.</string>
   <string name="vm_change_pin_error_too_short">Нови PIN је прекратак.</string>
   <string name="vm_change_pin_error_too_long">Нови PIN је предугачак.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN-ови се не подударају</string>
   <string name="change_pin_succeeded">PIN кôд говорне поште је ажуриран</string>
   <string name="change_pin_system_error">Подешавање PIN-а није успело</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Транскрипција говорне поште</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Анализа транскрипције говорне поште</string>
   <string name="voicemail_activating_summary_info">Активира се визуелна говорна пошта</string>
-  <string name="voicemail_transcription_preference_summary_info">Добијајте транскрипте говорних порука помоћу Google-ове услуге транскрипције. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Дозволите Google-у да прегледа ваше говорне поруке да би побољшао тачност транскрипције. Говорне поруке чувамо анонимно. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Искључите визуелну говорну пошту</string>
   <string name="confirm_disable_voicemail_dialog_message">Ово ће избрисати све говорне поруке и Google транскрипте сачуване у овој апликацији. Мобилни оператер може да задржи своје копије.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">ИСКЉУЧИ</string>

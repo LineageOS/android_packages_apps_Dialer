@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">ביטול חסימה</string>
   <string name="block_report_number_alert_title">לחסום את %1$s?</string>
   <string name="block_report_number_alert_details">לא יגיעו אליך יותר שיחות מהמספר הזה.</string>
-  <string name="block_number_alert_details">%1$s השיחה הזו תדווח כספאם.</string>
   <string name="unblock_number_alert_details">החסימה של המספר הזה תבוטל וידווח שהוא אינו ספאם. שיחות שיתקבלו ממנו לא יזוהו כספאם.</string>
   <string name="unblock_report_number_alert_title">לבטל את החסימה של %1$s?</string>
   <string name="report_not_spam_alert_button">דיווח</string>

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Futa unaowasiliana nao mara kwa mara?</string>
   <string name="clearFrequentsConfirmation">Utafuta orodha ya unaowasiliana nao mara kwa mara katika programu za Anwani na Simu, na ulazimishe programu za barua pepe zitambue mapendeleo yako ya anwani kutoka mwanzo.</string>
   <string name="clearFrequentsProgress_title">Inafuta unaowasiliana nao mara kwa mara...</string>
-  <string name="status_available">Inapatikana</string>
-  <string name="status_away">Mbali</string>
-  <string name="status_busy">Ana shughuli</string>
-  <string name="contactsList">Anwani</string>
-  <string name="contact_suggestions">Mapendekezo Maarufu</string>
-  <string name="local_invisible_directory">Nyingineyo</string>
   <string name="directory_search_label">Saraka</string>
   <string name="directory_search_label_work">Anwani za kazi</string>
-  <string name="local_search_label">Anwani zote</string>
-  <string name="local_suggestions_search_label">Mapendekezo</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Mimi</string>
   <string name="missing_name">(Hakuna jina)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Angalia maelezo ya mawasiliano</string>
-  <string name="list_filter_phones">Anwani zote zilizo na nambari ya simu</string>
-  <string name="list_filter_phones_work">Anwani za watu wa kazini</string>
   <string name="view_updates_from_group">Ona sasisho</string>
   <string name="account_phone">Kwenye kifaa tu, haijasawazishwa</string>
   <string name="nameLabelsGroup">Jina</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Piga gumzo kutumia ICQ</string>
   <string name="chat_jabber">Piga gumzo kutumia Jabber</string>
   <string name="chat">Gumzo</string>
-  <string name="list_filter_all_accounts">Anwani zote</string>
-  <string name="listAllContactsInAccount">Anwani kwenye %s</string>
-  <string name="listCustomView">Anwani katika mwoneko maalum</string>
-  <string name="listSingleContact">Anwani moja</string>
   <string name="display_options_sort_list_by">Panga kulingana na</string>
   <string name="display_options_sort_by_given_name">Jina la kwanza</string>
   <string name="display_options_sort_by_family_name">Jina la mwisho</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Futa utafutaji</string>
   <string name="select_account_dialog_title">Akaunti</string>
   <string name="set_default_account">Tumia hii kwa simu wakati wote</string>
-  <string name="select_phone_account_for_calls">Chagua SIM kwa ajili ya simu hii</string>
-  <string name="select_phone_account_for_calls_remember">Kumbuka chaguo hili</string>
   <string name="call_with_a_note">Piga simu inayoambatana na dokezo</string>
   <string name="call_subject_hint">Andika dokezo litakaloambatana na simu utakayopiga ...</string>
   <string name="send_and_call_button">TUMA na UPIGE SIMU</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> Kichupo cha %1$s. Vipengee %2$d havijasomwa. </item>
   </plurals>
   <string name="description_search_video_call">Simu ya video</string>
-  <string name="description_search_call_and_share">Shiriki na upige simu</string>
 </resources>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">Wi-Fi</string>
-  <string name="network_name_mobile">行動網路</string>
   <string name="content_description_overflow">更多選項</string>
   <string name="snackbar_undo">復原</string>
   <string name="ok_got_it">好，我知道了</string>

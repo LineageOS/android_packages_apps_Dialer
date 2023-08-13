@@ -5,7 +5,6 @@
   <string name="incall_label_hold">대기</string>
   <string name="incall_label_add_call">통화 추가</string>
   <string name="incall_label_mute">음소거</string>
-  <string name="incall_label_end_call">통화 종료</string>
   <string name="incall_label_dialpad">키패드</string>
   <string name="incall_talkback_speaker_on">, 켜짐</string>
   <string name="incall_talkback_speaker_off">, 꺼짐</string>

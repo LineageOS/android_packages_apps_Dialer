@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Күттіру</string>
   <string name="incall_label_add_call">Қоңырау қосу</string>
   <string name="incall_label_mute">Дыбысын өшіру</string>
-  <string name="incall_label_end_call">Қоңырауды аяқтау</string>
   <string name="incall_label_dialpad">Пернетақта</string>
   <string name="incall_talkback_speaker_on">, қосулы</string>
   <string name="incall_talkback_speaker_off">, өшірулі</string>

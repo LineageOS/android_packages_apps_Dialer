@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">შეეხეთ კონტაქტებში დასამატებლად ან სპამის ნომრის დასაბლოკად.</string>
   <string name="spam_notification_non_spam_call_expanded_text">ამ ნომრიდან პირველად დაგირეკეს. თუ ეს ზარი სპამი იყო, შეგიძლიათ დაბლოკოთ ეს ნომერი და შეგვატყობინოთ.</string>
   <string name="spam_notification_spam_call_collapsed_text">შეეხეთ, რათა გვაცნობოთ, რომ „სპამი არ არის“, ან დაბლოკოთ</string>
-  <string name="spam_notification_report_spam_action_text">დაბლოკვა და შეტყობ.</string>
-  <string name="spam_notification_add_contact_action_text">კონტაქტის დამატება</string>
   <string name="spam_notification_dialog_add_contact_action_text">კონტაქტებში დამატება</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">დაბლოკვა და სპამის შესახებ შეტყობინება</string>
   <string name="spam_notification_was_not_spam_action_text">არა, სპამი არ არის</string>

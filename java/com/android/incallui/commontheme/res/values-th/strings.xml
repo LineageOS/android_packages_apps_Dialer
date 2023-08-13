@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">ปิดวิดีโอ</string>
   <string name="incall_content_description_swap_video">สลับวิดีโอ</string>
   <string name="incall_label_speaker">ลำโพง</string>
-  <string name="incall_label_audio">เสียง</string>
 </resources>

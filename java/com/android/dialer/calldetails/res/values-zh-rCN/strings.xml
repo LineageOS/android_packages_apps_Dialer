@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">复制号码</string>
   <string name="call_details_edit_number">拨打电话之前修改号码</string>
   <string name="call_details_report_call_id">报告错误的号码</string>
-  <string name="sent_a_photo">发送了一张照片</string>
-  <string name="received_a_photo">收到了一张照片</string>
-  <string name="message_in_quotes">“%1$s”</string>
   <string name="report_caller_id_dialog_title">报告错误号码</string>
   <string name="report_caller_id_failed">无法报告错误的号码</string>
   <string name="report_caller_id_toast">已报告错误的号码</string>

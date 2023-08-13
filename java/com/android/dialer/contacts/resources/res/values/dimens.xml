@@ -14,34 +14,15 @@
   ~ limitations under the License
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
-
-  <!-- Padding between the action bar's bottom edge and the first header
-       in contacts/group lists. -->
-  <dimen name="list_header_extra_top_padding">0dip</dimen>
+<resources>
 
   <!-- Minimum height used with @drawable/list_section_divider_holo_custom.
        Right now the drawable has implicit 32dip minimal height, which is confusing.
        This value is for making the hidden configuration explicit in xml. -->
   <dimen name="list_section_divider_min_height">32dip</dimen>
 
-  <dimen name="directory_header_extra_top_padding">18dp</dimen>
-  <dimen name="directory_header_extra_bottom_padding">8dp</dimen>
-
-  <!-- Padding to be used between a visible scrollbar and the contact list -->
-  <dimen name="list_visible_scrollbar_padding">32dip</dimen>
-
-  <dimen name="contact_browser_list_header_left_margin">16dip</dimen>
-  <dimen name="contact_browser_list_header_right_margin">@dimen/list_visible_scrollbar_padding
-  </dimen>
-  <dimen name="contact_browser_list_item_text_indent">8dip</dimen>
-  <!-- Width of a contact list item section header. -->
-  <dimen name="contact_list_section_header_width">56dp</dimen>
-
   <!-- contact browser list margins -->
-  <dimen name="contact_browser_list_item_text_size">16sp</dimen>
   <dimen name="contact_browser_list_item_photo_size">40dp</dimen>
-  <dimen name="contact_browser_list_item_gap_between_image_and_text">15dp</dimen>
 
   <!-- Height of the floating action button -->
   <dimen name="floating_action_button_height">56dp</dimen>
@@ -65,21 +46,6 @@
   <dimen name="tab_unread_count_margin_top">2dp</dimen>
   <dimen name="tab_unread_count_text_size">12sp</dimen>
   <dimen name="tab_unread_count_text_padding">2dp</dimen>
-
-  <!-- Size of the icon (voice search, back arrow) in the search box. -->
-  <dimen name="search_box_icon_size">48dp</dimen>
-  <!-- Size of the close icon.-->
-  <dimen name="search_box_close_icon_size">56dp</dimen>
-  <!-- Padding around the close button. It's visible size without padding is 24dp. -->
-  <dimen name="search_box_close_icon_padding">16dp</dimen>
-  <!-- Padding around back arrow icon in the search box -->
-  <dimen name="search_box_navigation_icon_margin">14dp</dimen>
-  <!-- Left margin of the text field in the search box. -->
-  <dimen name="search_box_text_left_margin">15dp</dimen>
-  <!-- Search box text size -->
-  <dimen name="search_text_size">16sp</dimen>
-
-  <dimen name="contact_list_card_elevation">2dp</dimen>
 
   <!-- Padding used around the periphery of the call subject dialog, as well as in between the
        items. -->

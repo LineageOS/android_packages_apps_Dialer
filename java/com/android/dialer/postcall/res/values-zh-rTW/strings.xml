@@ -4,8 +4,7 @@
   <string name="post_call_message_1">緊急狀況，請回電給我。</string>
   <string name="post_call_message_2">有空時請回電給我。</string>
   <string name="post_call_message_3">不急，我們可以晚點再聊。</string>
-  <string name="post_call_add_message">加入訊息</string>
-  <string name="post_call_send_message">傳送訊息</string>
+    <string name="post_call_send_message">傳送訊息</string>
   <string name="post_call_message_sent">訊息成功送出</string>
   <string name="view">查看</string>
 </resources>

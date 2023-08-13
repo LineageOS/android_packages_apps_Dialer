@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">សម្អាត​ទំនាក់ទំនង​ញឹកញាប់?</string>
   <string name="clearFrequentsConfirmation">អ្នកនឹងជម្រះបញ្ជីដែលអ្នកទាក់ទងជាញឹកញាប់នៅក្នុងកម្មវិធីទូរស័ព្ទ និងទំនាក់ទំនង ហើយបង្ខំឲ្យកម្មវិធីអ៊ីមែលស្វែងយល់ពីចំណូលចិត្តទំនាក់ទំនងរបស់អ្នកតាំងពីដំបូង។</string>
   <string name="clearFrequentsProgress_title">សម្អាត​ទំនាក់ទំនង​ញឹកញាប់...</string>
-  <string name="status_available">ទំនេរ</string>
-  <string name="status_away">ចាក​ឆ្ងាយ</string>
-  <string name="status_busy">រវល់</string>
-  <string name="contactsList">ទំនាក់ទំនង</string>
-  <string name="contact_suggestions">បាន​ណែនាំ​​កម្រិត​ខ្ពស់</string>
-  <string name="local_invisible_directory">ផ្សេងៗ</string>
   <string name="directory_search_label">ថត</string>
   <string name="directory_search_label_work">ថតកន្លែងការងារ</string>
-  <string name="local_search_label">ទំនាក់ទំនង​ទាំងអស់</string>
-  <string name="local_suggestions_search_label">ការ​ណែនាំ</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">ខ្ញុំ</string>
   <string name="missing_name">(គ្មាន​ឈ្មោះ)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">មើល​ទំនាក់ទំនង</string>
-  <string name="list_filter_phones">ទំនាក់ទំនង​ទាំងអស់​ដែល​មាន​លេខ​ទូរស័ព្ទ</string>
-  <string name="list_filter_phones_work">ទំនាក់ទំនងប្រវត្តិរូបការងារ</string>
   <string name="view_updates_from_group">មើល​បច្ចុប្បន្នភាព</string>
   <string name="account_phone">សម្រាប់​តែ​ឧបករណ៍ មិន​បាន​ធ្វើ​សមកាលកម្ម</string>
   <string name="nameLabelsGroup">ឈ្មោះ</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ជជែក​ដោយ​ប្រើ ICQ</string>
   <string name="chat_jabber">ជជែក​ដោយ​ប្រើ Jabber</string>
   <string name="chat">ជជែក​​</string>
-  <string name="list_filter_all_accounts">ទំនាក់ទំនងទាំងអស់</string>
-  <string name="listAllContactsInAccount">ទំនាក់ទំនង​នៅ​ក្នុង %s</string>
-  <string name="listCustomView">ទំនាក់ទំនង​ក្នុង​ទិដ្ឋភាព​ផ្ទាល់ខ្លួន</string>
-  <string name="listSingleContact">ទំនាក់ទំនង​ទោល</string>
   <string name="display_options_sort_list_by">តម្រៀប​តាម</string>
   <string name="display_options_sort_by_given_name">នាម​ខ្លួន</string>
   <string name="display_options_sort_by_family_name">នាមត្រកូល</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">សម្អាត​ការ​ស្វែងរក</string>
   <string name="select_account_dialog_title">គណនី</string>
   <string name="set_default_account">ប្រើ​វា​សម្រាប់​ការ​ហៅ​ជា​និច្ច</string>
-  <string name="select_phone_account_for_calls">ជ្រើសរើសស៊ីមសម្រាប់​ការហៅ​ទូរសព្ទ​នេះ</string>
-  <string name="select_phone_account_for_calls_remember">ចងចាំ​ជម្រើស​នេះ</string>
   <string name="call_with_a_note">ការហៅព្រមជាមួយចំណាំ</string>
   <string name="call_subject_hint">វាយបញ្ចូលចំណាំដែលត្រូវផ្ញើជាមួយការហៅទូរស័ព្ទ ...</string>
   <string name="send_and_call_button">ផ្ញើ &amp; ហៅ</string>
@@ -141,5 +123,4 @@
     <item quantity="other">ផ្ទាំង %1$s។ ធាតុមិនទាន់​អាន %2$d </item>
   </plurals>
   <string name="description_search_video_call">ការ​ហៅវីដេអូ</string>
-  <string name="description_search_call_and_share">ចែករំលែក និង​ហៅ​ទូរសព្ទ</string>
 </resources>

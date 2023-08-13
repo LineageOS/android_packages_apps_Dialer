@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Puhelin</string>
-  <string name="launcherDialpadActivityLabel">Puhelimen näppäimistö</string>
   <string name="callHistoryIconLabel">Soittohistoria</string>
   <string name="action_copy_number_text">Kopioi numero</string>
   <string name="action_edit_number_before_call">Muokkaa numeroa ennen puhelua</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Lisää vaihtoehtoja</string>
   <string name="action_menu_dialpad_button">näppäimistö</string>
   <string name="dialer_settings_label">Asetukset</string>
-  <string name="simulator_submenu_label">Simulaattori</string>
-  <string name="new_ui_launcher_shortcut_label">Luo uusi UI-pikakuvake</string>
   <string name="description_entering_bulk_action_mode">Siirrytään joukkotoimintotilaan.</string>
   <string name="description_leaving_bulk_action_mode">Poistuttiin joukkotoimintotilasta.</string>
   <string name="description_selecting_bulk_action_mode">%1$s valittiin.</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Videopuhelu.</string>
   <string name="description_start_voice_search">Aloita puhehaku</string>
   <string name="voicemail">Vastaaja</string>
-  <string name="description_cancel_multi_select">Peruuta joukkotoimintotila.</string>
   <string name="voicemailMultiSelectDeleteConfirm">Poista</string>
   <string name="voicemailMultiSelectDeleteCancel">Peruuta</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s valittu</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Puhehaku ei ole käytettävissä</string>
   <string name="dialer_hint_find_contact">Hae yhteystiedoista</string>
-  <string name="block_number_search_hint">Lisää numero tai hae yhteystiedoista</string>
   <string name="call_log_all_empty">Soittohistoriasi on tyhjä.</string>
   <string name="call_log_all_empty_action">Soita puhelu</string>
   <string name="call_log_missed_empty">Sinulla ei ole vastaamattomia puheluita.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Soittohistoria</string>
   <string name="call_log_all_title">Kaikki</string>
   <string name="call_log_missed_title">Vastaamattomat</string>
-  <string name="tab_speed_dial">Pikavalinta</string>
-  <string name="tab_history">Soittohistoria</string>
   <string name="tab_all_contacts">Yhteystiedot</string>
-  <string name="tab_voicemail">Puhelinvastaaja</string>
-  <string name="search_shortcut_call_number">Soita %s</string>
   <string name="search_shortcut_create_new_contact">Luo uusi yhteystieto</string>
   <string name="search_shortcut_add_to_contact">Lisää yhteystietoihin</string>
   <string name="search_shortcut_send_sms_message">Lähetä tekstiviesti</string>
   <string name="search_shortcut_make_video_call">Soita videopuhelu</string>
-  <string name="search_shortcut_block_number">Estä numero</string>
-  <string name="speed_dial_empty">Pikavalinnassa ei ole vielä yhtään yhteystietoa.</string>
-  <string name="speed_dial_empty_add_favorite_action">Lisää suosikki</string>
-  <string name="remove_contact">Poista</string>
   <string name="select_all">Valitse kaikki</string>
   <string name="call_log_action_video_call">Videopuhelu</string>
-  <string name="call_log_action_set_up_video">Aloita videopuhelu</string>
-  <string name="call_log_action_invite_video">Kutsu muita videopuheluun</string>
   <string name="call_log_action_send_message">Lähetä viesti</string>
   <string name="call_log_action_details">Puhelun tiedot</string>
   <string name="call_log_action_share_voicemail">Vastaanottaja: …</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Puhelut</string>
   <string name="manage_blocked_numbers_label">Estetyt numerot</string>
   <string name="voicemail_settings_label">Vastaaja</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Puheluesto väliaikaisesti pois käytöstä</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Puheluiden estäminen on poistettu käytöstä, koska olet ottanut yhteyttä hätäpalveluihin tästä puhelimesta viimeisen 48 tunnin aikana. Esto otetaan automaattisesti uudelleen käyttöön, kun puhelusta on kulunut 48 tuntia.</string>
-  <string name="import_send_to_voicemail_numbers_label">Tuo numerot</string>
-  <string name="blocked_call_settings_import_description">Valitsit aiemmin muilla sovelluksilla, että tiettyjen soittajien puhelut siirretään automaattisesti vastaajaan.</string>
-  <string name="blocked_call_settings_view_numbers_button">Näytä numerot</string>
-  <string name="blocked_call_settings_import_button">Tuo</string>
-  <string name="description_blocked_number_list_delete">Poista numeron esto</string>
-  <string name="addBlockedNumber">Lisää numero</string>
-  <string name="block_number_footer_message_vvm">Näistä numeroista tulevat puhelut estetään, ja vastaajaviestit poistetaan automaattisesti.</string>
-  <string name="block_number_footer_message_no_vvm">Näistä numeroista tulevat puhelut estetään, mutta soittajat voivat silti mahdollisesti jättää vastaajaviestejä.</string>
-  <string name="block_list">Estetyt numerot</string>
-  <string name="alreadyBlocked">%1$s on jo estetty.</string>
   <string name="phone_account_settings_label">Puhelutilit</string>
-  <string name="permission_no_speeddial">Jos haluat käyttää pikavalintaa, ota Yhteystiedot-käyttöoikeus käyttöön.</string>
   <string name="permission_no_calllog">Jos haluat katsella puhelulokiasi, ota Puhelin-käyttöoikeus käyttöön.</string>
-  <string name="permission_no_search">Jos haluat hakea kontaktejasi, ota käyttöön kontaktien käyttöoikeudet.</string>
-  <string name="permission_place_call">Jos haluat soittaa puheluja, ota Puhelin-käyttöoikeus käyttöön.</string>
   <string name="toast_cannot_write_system_settings">Puhelinsovelluksella ei ole oikeutta muokata järjestelmän asetuksia.</string>
   <string name="blocked_number_call_log_label">Estetty</string>
   <string name="call_log_action_block_report_number">Estä / ilmoita häiriköinnistä</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Ei ole häirikkösoittaja</string>
   <string name="call_log_action_unblock_number">Poista numeron esto</string>
   <string name="spam_number_call_log_label">Roskaposti</string>
-  <string name="call_composer_connection_failed">%1$s on offline-tilassa, eikä siihen saada yhteyttä.</string>
-  <string name="about_phone_label">Tietoja</string>
-  <string name="voicemail_transcription_branding_text">Googlen litteroima</string>
-  <string name="voicemail_transcription_in_progress">Litteroidaan…</string>
-  <string name="voicemail_transcription_failed">Transkriptio ei ole saatavilla.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transkriptio ei ole saatavilla. Kieltä ei tueta.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transkriptio ei ole saatavilla. Puhetta ei tunnistettu.</string>
-  <string name="voicemail_donation_promo_title">Haluatko auttaa transkriptioiden tarkkuuden parantamisessa?</string>
-  <string name="voicemail_donation_promo_content">Anna Googlen arvioida tämä vastaajaviesti ja tulevat viestit transkriptioiden avulla. Tiedot tallennetaan nimettöminä. Voit muuttaa asetusta milloin tahansa. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Kyllä</string>
-  <string name="voicemail_donation_promo_opt_out">Ei kiitos</string>
-  <string name="voicemail_transcription_rating">Arvioi transkription laatu</string>
-  <string name="voicemail_transcription_rating_thanks">Kiitos palautteestasi</string>
-  <string name="description_rating_good">Tykkään</string>
-  <string name="description_rating_bad">En tykkää</string>
-  <string name="view_conversation">Näytä</string>
-  <string name="ec_data_deleted">Puhelu poistettu. Voit tarkastella ja poistaa puhelun aikana jaettuja liitteitä Viesteissä.</string>
-  <string name="multiple_ec_data_deleted">Puhelut poistettu. Voit tarkastella ja poistaa puhelujen aikana jaettuja liitteitä Viesteissä.</string>
 </resources>

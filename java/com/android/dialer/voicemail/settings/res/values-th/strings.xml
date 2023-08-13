@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">ข้อความเสียง (%s)</string>
   <string name="voicemail_settings_title">ข้อความเสียง</string>
   <string name="voicemail_notifications_preference_title">การแจ้งเตือน</string>
   <string name="voicemail_change_greeting_preference_title">คำทักทายผู้ฝากข้อความเสียง</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">เปลี่ยน PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">ต้องเปิดใช้ข้อความเสียงพร้อมภาพเพื่อเปลี่ยน PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">ยังไม่ได้เปิดใช้งานข้อความเสียงพร้อมภาพ โปรดลองอีกครั้งในภายหลัง</string>
-  <string name="vm_change_pin_old_pin">PIN เก่า</string>
-  <string name="vm_change_pin_new_pin">PIN ใหม่</string>
   <string name="vm_change_pin_progress_message">โปรดรอสักครู่</string>
   <string name="vm_change_pin_error_too_short">PIN ใหม่สั้นเกินไป</string>
   <string name="vm_change_pin_error_too_long">PIN ใหม่ยาวเกินไป</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN ไม่ตรงกัน</string>
   <string name="change_pin_succeeded">อัปเดต PIN ข้อความเสียงแล้ว</string>
   <string name="change_pin_system_error">ตั้งค่า PIN ไม่</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">การถอดข้อความเสียง</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">การวิเคราะห์การถอดข้อความเสียง</string>
   <string name="voicemail_activating_summary_info">กำลังเปิดใช้ข้อความเสียง</string>
-  <string name="voicemail_transcription_preference_summary_info">รับบริการถอดข้อความเสียงของคุณเมื่อใช้บริการถอดเสียงของ Google%1$s</string>
-  <string name="voicemail_donate_preference_summary_info">ให้ Google ตรวจสอบข้อความเสียงเพื่อปรับปรุงความถูกต้องของการถอดเสียง ระบบจะจัดเก็บข้อความเสียงของคุณในแบบไม่ระบุตัวตน%1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">ปิดข้อความเสียงพร้อมภาพ</string>
   <string name="confirm_disable_voicemail_dialog_message">วิธีนี้จะลบข้อความเสียงและการถอดเสียงของ Google ที่เก็บในแอปนี้ แต่ผู้ให้บริการอาจเก็บสำเนาของตนเองไว้ได้</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">ปิด</string>

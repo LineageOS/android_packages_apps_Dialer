@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">અનાવરોધિત કરો</string>
   <string name="block_report_number_alert_title">%1$sને બ્લૉક કરીએ?</string>
   <string name="block_report_number_alert_details">હવેથી તમે આ નંબર પરથી કૉલ પ્રાપ્ત કરશો નહીં.</string>
-  <string name="block_number_alert_details">%1$s આ કૉલની સ્પામ તરીકે જાણ કરવામાં આવશે.</string>
   <string name="unblock_number_alert_details">આ નંબરને અનબ્લૉક કરીને સ્પામ નથી તરીકે જાણ કરાશે. ભાવિ કૉલ સ્પામ તરીકે ઓળખવામાં આવશે નહીં.</string>
   <string name="unblock_report_number_alert_title">%1$s ને અનબ્લૉક કરીએ?</string>
   <string name="report_not_spam_alert_button">જાણ કરો</string>

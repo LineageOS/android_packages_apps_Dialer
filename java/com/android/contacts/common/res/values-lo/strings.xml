@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">ລຶບລາຍຊື່ທີ່ຕິດຕໍ່ເລື້ອຍໆອອກ?</string>
   <string name="clearFrequentsConfirmation">ທ່ານຈະລຶບຂໍ້ມູນລາຍຊື່ທີ່ຕິດຕໍ່ຫາເລື້ອຍໆຢູ່ໃນແອັບຯລາຍ​ຊື່ ແລະໂທ​ລະ​ສັບ ພ້ອມທັງບັງຄັບໃຫ້ແອັບຯອີເມວເລີ່ມຮຽນຮູ້ຄ່າກຳນົດທີ່ຢູ່ຂອງທ່ານໃໝ່ຕັ້ງແຕ່ຕົ້ນ.</string>
   <string name="clearFrequentsProgress_title">ກຳລັງລຶບລ້າງລາຍຊື່ທີ່ຕິດຕໍ່ຫາເລື້ອຍໆ...</string>
-  <string name="status_available">ສາມາດໃຊ້ໄດ້</string>
-  <string name="status_away">ບໍ່ຢູ່</string>
-  <string name="status_busy">ບໍ່ຫວ່າງ</string>
-  <string name="contactsList">ລາຍຊື່ຜູ້ຕິດຕໍ່</string>
-  <string name="contact_suggestions">ແນະນຳຫຼາຍທີ່ສຸດ</string>
-  <string name="local_invisible_directory">ອື່ນໆ</string>
   <string name="directory_search_label">ໄດເຣັກທໍຣີ</string>
   <string name="directory_search_label_work">ໄດເຣັກທໍຣີບ່ອນເຮັດວຽກ</string>
-  <string name="local_search_label">ລາຍຊື່ຜູ້ຕິດຕໍ່ທັງໝົດ</string>
-  <string name="local_suggestions_search_label">ຄຳແນະນຳ</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">ຂ້ອຍ</string>
   <string name="missing_name">(ບໍ່ມີຊື່)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">ເບິ່ງລາຍຊື່ຜູ້ຕິດຕໍ່</string>
-  <string name="list_filter_phones">ລາຍຊື່ຜູ່ຕິດຕໍ່ທັງໝົດທີ່ມີເບີໂທລະສັບ</string>
-  <string name="list_filter_phones_work">ລາຍຊື່ຜູ້ຕິດຕໍ່ຂອງໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ</string>
   <string name="view_updates_from_group">ເບິ່ງອັບເດດ</string>
   <string name="account_phone">ອຸປະກອນເທົ່ານັ້ນ, ບໍ່ຊິ້ງຂໍ້ມູນ</string>
   <string name="nameLabelsGroup">ຊື່</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ສົນທະນາໂດຍໃຊ້ ICQ</string>
   <string name="chat_jabber">ສົນທະນາໂດຍໃຊ້ Jabber</string>
   <string name="chat">ສົນທະນາ</string>
-  <string name="list_filter_all_accounts">ລາຍ​ຊື່​ຜູ້ຕິດ​ຕໍ່​ທັງ​ໝົດ</string>
-  <string name="listAllContactsInAccount">ລາຍຊື່ຜູ່ຕິດຕໍ່ໃນ %s</string>
-  <string name="listCustomView">ລາຍຊື່ຜູ່ຕິດຕໍ່ໃນມຸມມອງກຳນົດເອງ</string>
-  <string name="listSingleContact">ລາຍຊື່ຜູ່ຕິດຕໍ່ດ່ຽວ</string>
   <string name="display_options_sort_list_by">ຮຽງຕາມ</string>
   <string name="display_options_sort_by_given_name">ຊື່</string>
   <string name="display_options_sort_by_family_name">ນາມສະກຸນ</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">ລຶບ​ການ​ຊອກ​ຫາ</string>
   <string name="select_account_dialog_title">ບັນຊີ</string>
   <string name="set_default_account">ໃຊ້​ຊິມ​ນີ້​ເພື່ອ​ການໂທທຸກ​ເທື່ອ</string>
-  <string name="select_phone_account_for_calls">ເລືອກ SIM ສຳລັບສາຍນີ້</string>
-  <string name="select_phone_account_for_calls_remember">ຈື່ການເລືອກນີ້ໄວ້</string>
   <string name="call_with_a_note">ໂທ​ດ້ວຍ​ບັນ​ທຶກ</string>
   <string name="call_subject_hint">ພິມ​ບັນ​ທຶກ ເພື່ອ​ສົ່ງ​ກັບ​ການ​ໂທ ...</string>
   <string name="send_and_call_button">ສົ່ງ ແລະ ໂທ</string>
@@ -141,5 +123,4 @@
     <item quantity="other">ແຖບ %1$s. %2$d ລາຍການບໍ່ທັນໄດ້ອ່ານ. </item>
   </plurals>
   <string name="description_search_video_call">ໂທວິດີໂອ</string>
-  <string name="description_search_call_and_share">ແບ່ງປັນ ແລະ ໂທ</string>
 </resources>

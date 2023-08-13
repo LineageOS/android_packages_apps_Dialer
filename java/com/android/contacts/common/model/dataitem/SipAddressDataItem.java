@@ -30,10 +30,6 @@ public class SipAddressDataItem extends DataItem {
     super(values);
   }
 
-  public String getSipAddress() {
-    return getContentValues().getAsString(SipAddress.SIP_ADDRESS);
-  }
-
   public String getLabel() {
     return getContentValues().getAsString(SipAddress.LABEL);
   }
