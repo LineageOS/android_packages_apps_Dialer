@@ -4,8 +4,7 @@
   <string name="post_call_message_1">ತುರ್ತಾಗಿ ನನಗೆ ತಕ್ಷಣ ಕರೆ ಮಾಡಿ.</string>
   <string name="post_call_message_2">ನಿಮಗೆ ಸಮಯವಿದ್ದಾಗ ನನಗೆ ಕರೆ ಮಾಡಿ.</string>
   <string name="post_call_message_3">ಅವಸರವಿಲ್ಲ, ನಾವು ನಂತರ ಚಾಟ್ ಮಾಡಬಹುದು.</string>
-  <string name="post_call_add_message">ಸಂದೇಶವನ್ನು ಸೇರಿಸಿ</string>
-  <string name="post_call_send_message">ಸಂದೇಶ ಕಳುಹಿಸಿ</string>
+    <string name="post_call_send_message">ಸಂದೇಶ ಕಳುಹಿಸಿ</string>
   <string name="post_call_message_sent">ಸಂದೇಶ ಕಳುಹಿಸಲಾಗಿದೆ</string>
   <string name="view">ವೀಕ್ಷಿಸಿ</string>
 </resources>

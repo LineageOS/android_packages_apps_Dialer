@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">BỎ CHẶN</string>
   <string name="block_report_number_alert_title">Chặn %1$s?</string>
   <string name="block_report_number_alert_details">Bạn sẽ không nhận được cuộc gọi từ số này nữa.</string>
-  <string name="block_number_alert_details">%1$s Cuộc gọi này sẽ được báo cáo là spam.</string>
   <string name="unblock_number_alert_details">Sẽ bỏ chặn số này và báo cáo không phải spam. Các cuộc gọi trong tương lai sẽ không bị coi là spam.</string>
   <string name="unblock_report_number_alert_title">Bỏ chặn %1$s?</string>
   <string name="report_not_spam_alert_button">Báo cáo</string>

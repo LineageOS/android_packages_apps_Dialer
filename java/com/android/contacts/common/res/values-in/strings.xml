@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Hapus yang sering dihubungi?</string>
   <string name="clearFrequentsConfirmation">Anda akan menghapus daftar yang sering dihubungi pada aplikasi Kontak dan Ponsel, serta memaksa aplikasi email untuk mempelajari preferensi penanganan dari awal.</string>
   <string name="clearFrequentsProgress_title">Menghapus yang sering dihubungi...</string>
-  <string name="status_available">Ada</string>
-  <string name="status_away">Keluar</string>
-  <string name="status_busy">Sibuk</string>
-  <string name="contactsList">Kontak</string>
-  <string name="contact_suggestions">Paling Disarankan</string>
-  <string name="local_invisible_directory">Lainnya</string>
   <string name="directory_search_label">Direktori</string>
   <string name="directory_search_label_work">Direktori kerja</string>
-  <string name="local_search_label">Semua kontak</string>
-  <string name="local_suggestions_search_label">Saran</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Saya</string>
   <string name="missing_name">(Tanpa nama)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Lihat kontak</string>
-  <string name="list_filter_phones">Semua kontak dengan nomor telepon</string>
-  <string name="list_filter_phones_work">Kontak profil kerja</string>
   <string name="view_updates_from_group">Lihat pembaruan</string>
   <string name="account_phone">Hanya perangkat, tidak disinkronkan</string>
   <string name="nameLabelsGroup">Nama</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Ngobrol menggunakan ICQ</string>
   <string name="chat_jabber">Ngobrol menggunakan Jabber</string>
   <string name="chat">Ngobrol</string>
-  <string name="list_filter_all_accounts">Semua kontak</string>
-  <string name="listAllContactsInAccount">Kontak di %s</string>
-  <string name="listCustomView">Kontak dalam tampilan khusus</string>
-  <string name="listSingleContact">Kontak tunggal</string>
   <string name="display_options_sort_list_by">Urutkan menurut</string>
   <string name="display_options_sort_by_given_name">Nama depan</string>
   <string name="display_options_sort_by_family_name">Nama belakang</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Hapus penelusuran</string>
   <string name="select_account_dialog_title">Akun</string>
   <string name="set_default_account">Selalu gunakan ini untuk telepon</string>
-  <string name="select_phone_account_for_calls">Pilih SIM untuk panggilan ini</string>
-  <string name="select_phone_account_for_calls_remember">Ingat pilihan ini</string>
   <string name="call_with_a_note">Telepon dengan catatan</string>
   <string name="call_subject_hint">Ketik catatan untuk dikirim dengan panggilan telepon ...</string>
   <string name="send_and_call_button">KIRIM &amp; TELEPON</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> Tab %1$s. %2$d item belum dibaca. </item>
   </plurals>
   <string name="description_search_video_call">Video call</string>
-  <string name="description_search_call_and_share">Membagikan dan menelepon</string>
 </resources>

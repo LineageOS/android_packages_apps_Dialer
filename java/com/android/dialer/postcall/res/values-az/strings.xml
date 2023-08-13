@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Bu çox vacibdir. Mənə geri zəng edin.</string>
   <string name="post_call_message_2">Vaxtın olanda mənə geri zəng edin.</string>
   <string name="post_call_message_3">Vacib deyil, daha sonra söhbət edə bilərik.</string>
-  <string name="post_call_add_message">Mesaj əlavə edin</string>
-  <string name="post_call_send_message">Mesaj göndərin</string>
+    <string name="post_call_send_message">Mesaj göndərin</string>
   <string name="post_call_message_sent">Mesaj göndərildi</string>
   <string name="view">Baxın</string>
 </resources>

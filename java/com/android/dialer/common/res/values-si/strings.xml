@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">WiFi</string>
-  <string name="network_name_mobile">ජංගම</string>
   <string name="content_description_overflow">තව විකල්ප</string>
   <string name="snackbar_undo">පසුගමනය ක.</string>
   <string name="ok_got_it">හරි, තේරුණා</string>

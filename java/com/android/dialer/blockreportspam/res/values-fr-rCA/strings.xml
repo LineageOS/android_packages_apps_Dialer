@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">DÉBLOQUER</string>
   <string name="block_report_number_alert_title">Bloquer le numéro %1$s?</string>
   <string name="block_report_number_alert_details">Vous ne recevrez plus d\'appels de ce numéro.</string>
-  <string name="block_number_alert_details">%1$s Cet appel sera signalé comme importun.</string>
   <string name="unblock_number_alert_details">Ce numéro sera débloqué, et les futurs appels ne seront pas signalés comme importuns.</string>
   <string name="unblock_report_number_alert_title">Débloquer le numéro %1$s?</string>
   <string name="report_not_spam_alert_button">Signaler</string>

@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">DEBLOKEERI</string>
   <string name="block_report_number_alert_title">Kas soovite blokeerida numbri %1$s?</string>
   <string name="block_report_number_alert_details">Te ei saa enam sellelt numbrilt kõnesid.</string>
-  <string name="block_number_alert_details">%1$s See kõne liigitatakse rämpspostiks.</string>
   <string name="unblock_number_alert_details">Number deblokeeritakse ja seda ei liigit. rämpspostiks. Tulevasi kõnesid ei liigitata rämpspostiks.</string>
   <string name="unblock_report_number_alert_title">Kas soovite deblokeerida numbri %1$s?</string>
   <string name="report_not_spam_alert_button">Teavita</string>

@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Sao chép số</string>
   <string name="call_details_edit_number">Chỉnh sửa số trước khi gọi</string>
   <string name="call_details_report_call_id">Báo cáo số không chính xác</string>
-  <string name="sent_a_photo">Đã gửi một ảnh</string>
-  <string name="received_a_photo">Đã nhận một ảnh</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Báo cáo số không chính xác</string>
   <string name="report_caller_id_failed">Không thể báo cáo số</string>
   <string name="report_caller_id_toast">Đã báo cáo số</string>

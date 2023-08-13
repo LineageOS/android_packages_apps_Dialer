@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">انتخاب نوع تماس</string>
   <string name="disambig_option_video_call">تماس ویدیویی</string>
   <string name="disambig_option_voice_call">تماس</string>
-  <string name="add_favorite_activity_title">افزودن مورد دلخواه</string>
   <string name="contact_menu_voice_call">تماس صوتی</string>
   <string name="contact_menu_video_call">تماس ویدیویی</string>
   <string name="contact_menu_message">پیام</string>

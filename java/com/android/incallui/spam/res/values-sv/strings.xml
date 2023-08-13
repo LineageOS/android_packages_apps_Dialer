@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Tryck för att lägga till kontakter eller blockera spamnummer.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Det här var första gången det här numret ringde dig. Om det var spam går det att blockera numret och rapportera det.</string>
   <string name="spam_notification_spam_call_collapsed_text">Tryck för att rapportera som inte spam eller blockera det</string>
-  <string name="spam_notification_report_spam_action_text">Blockera, rapportera</string>
-  <string name="spam_notification_add_contact_action_text">Lägg till kontakt</string>
   <string name="spam_notification_dialog_add_contact_action_text">Lägg till i Kontakter</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blockera och rapportera spam</string>
   <string name="spam_notification_was_not_spam_action_text">Nej, inte spam</string>

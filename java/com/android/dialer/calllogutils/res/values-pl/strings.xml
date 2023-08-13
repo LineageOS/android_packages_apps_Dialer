@@ -38,35 +38,7 @@
   <string name="voicemail_string">Poczta głosowa</string>
   <string name="just_now">Przed chwilą</string>
   <string name="new_call_log_carrier_video">Rozmowa wideo w sieci operatora</string>
-  <string name="new_call_log_duo_video">Rozmowa wideo w Duo</string>
   <string name="new_call_log_unknown">Nieznany</string>
   <string name="new_call_log_secondary_blocked">Zablokowany</string>
   <string name="new_call_log_secondary_spam">Spam</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 nieodebrane połączenie od: ^2</item>
-    <item quantity="few">^1 nieodebrane połączenia od: ^2</item>
-    <item quantity="many">^1 nieodebranych połączeń od: ^2</item>
-    <item quantity="other">^1 nieodebranego połączenia od: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 odebrane połączenie od: ^2</item>
-    <item quantity="few">^1 połączenia – ostatnie to odebrane połączenie od: ^2</item>
-    <item quantity="many">^1 połączeń – ostatnie to odebrane połączenie od: ^2</item>
-    <item quantity="other">^1 połączenia – ostatnie to odebrane połączenie od: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 połączenie wychodzące z: ^2</item>
-    <item quantity="few">^1 połączenia – ostatnie to połączenie wychodzące z: ^2</item>
-    <item quantity="many">^1 połączeń – ostatnie to połączenie wychodzące z: ^2</item>
-    <item quantity="other">^1 połączenia – ostatnie to połączenie wychodzące z: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 zablokowane połączenie od: ^2</item>
-    <item quantity="few">^1 połączenia – ostatnie to zablokowane połączenie od: ^2</item>
-    <item quantity="many">^1 połączeń – ostatnie to zablokowane połączenie od: ^2</item>
-    <item quantity="other">^1 połączenia – ostatnie to zablokowane połączenie od: ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">na koncie ^1, przez ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

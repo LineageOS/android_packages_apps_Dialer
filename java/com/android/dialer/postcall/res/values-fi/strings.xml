@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Asia on kiireinen. Soittakaa minulle takaisin.</string>
   <string name="post_call_message_2">Soittakaa minulle takaisin, kun teillä on hetki aikaa.</string>
   <string name="post_call_message_3">Asia ei ole kiireellinen, voimme puhua myöhemmin.</string>
-  <string name="post_call_add_message">Lisää viesti</string>
-  <string name="post_call_send_message">Lähetä viesti</string>
+    <string name="post_call_send_message">Lähetä viesti</string>
   <string name="post_call_message_sent">Viesti lähetetty</string>
   <string name="view">Näytä</string>
 </resources>

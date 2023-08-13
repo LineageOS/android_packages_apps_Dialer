@@ -4,8 +4,7 @@
   <string name="post_call_message_1">हे खूप महत्वाचे आहे. मला परत कॉल करा.</string>
   <string name="post_call_message_2">आपल्याकडे वेळ असेल तेव्हा मला परत कॉल करा.</string>
   <string name="post_call_message_3">काही महत्वाचे नाही, आपण नंतर चॅट करू शकतो.</string>
-  <string name="post_call_add_message">मेसेज जोडा</string>
-  <string name="post_call_send_message">मेसेज पाठवा</string>
+    <string name="post_call_send_message">मेसेज पाठवा</string>
   <string name="post_call_message_sent">मेसेज पाठविला</string>
   <string name="view">पहा</string>
 </resources>

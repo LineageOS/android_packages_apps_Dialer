@@ -4,6 +4,4 @@
   <string name="rtt_promotion_details">Okamžitý text pomáha volajúcim, ktorí nepočujú, majú problémy so sluchom,
     rečovú poruchu alebo potrebujú viac ako samotný hlas. Prepisy správ s okamžitým textom sa ukladajú
     vo vašom zariadení v histórii hovorov. %1$s</string>
-  <string name="duo_disclosure_title">Uskutočňujte videohovory v aplikácii Duo</string>
-  <string name="duo_disclosure_details">Vďaka videohovorom v aplikácii Google Duo môžete bezprostredne četovať s priateľmi a rodinou. Môžu sa účtovať poplatky za dátový prenos. %1$s</string>
 </resources>

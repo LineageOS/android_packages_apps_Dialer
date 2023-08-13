@@ -50,27 +50,13 @@ public class CallIntentBuilder implements Parcelable {
   private final Bundle inCallUiIntentExtras = new Bundle();
   private final Bundle placeCallExtras = new Bundle();
 
-  private static int lightbringerButtonAppearInExpandedCallLogItemCount = 0;
-  private static int lightbringerButtonAppearInCollapsedCallLogItemCount = 0;
-  private static int lightbringerButtonAppearInSearchCount = 0;
-
   public CallIntentBuilder(@NonNull Uri uri, @NonNull CallSpecificAppData callSpecificAppData) {
     this.uri = Assert.isNotNull(uri);
     Assert.isNotNull(callSpecificAppData);
     Assert.checkArgument(
         callSpecificAppData.getCallInitiationType() != CallInitiationType.Type.UNKNOWN_INITIATION);
 
-    CallSpecificAppData.Builder builder =
-        CallSpecificAppData.newBuilder(callSpecificAppData)
-            .setLightbringerButtonAppearInExpandedCallLogItemCount(
-                lightbringerButtonAppearInExpandedCallLogItemCount)
-            .setLightbringerButtonAppearInCollapsedCallLogItemCount(
-                lightbringerButtonAppearInCollapsedCallLogItemCount)
-            .setLightbringerButtonAppearInSearchCount(lightbringerButtonAppearInSearchCount);
-    lightbringerButtonAppearInExpandedCallLogItemCount = 0;
-    lightbringerButtonAppearInCollapsedCallLogItemCount = 0;
-    lightbringerButtonAppearInSearchCount = 0;
-
+    CallSpecificAppData.Builder builder = CallSpecificAppData.newBuilder(callSpecificAppData);
     this.callSpecificAppData = builder.build();
   }
 
@@ -157,10 +143,6 @@ public class CallIntentBuilder implements Parcelable {
     return this;
   }
 
-  public String getCallSubject() {
-    return callSubject;
-  }
-
   /** Additional data the in call UI can read with {@link Details#getIntentExtras()} */
   public Bundle getInCallUiIntentExtras() {
     return inCallUiIntentExtras;
@@ -210,14 +192,6 @@ public class CallIntentBuilder implements Parcelable {
     CallSpecificAppData callSpecificAppData =
         CallSpecificAppData.newBuilder().setCallInitiationType(callInitiationType).build();
     return callSpecificAppData;
-  }
-
-  public static void increaseLightbringerCallButtonAppearInExpandedCallLogItemCount() {
-    CallIntentBuilder.lightbringerButtonAppearInExpandedCallLogItemCount++;
-  }
-
-  public static void increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount() {
-    CallIntentBuilder.lightbringerButtonAppearInCollapsedCallLogItemCount++;
   }
 
   @Override

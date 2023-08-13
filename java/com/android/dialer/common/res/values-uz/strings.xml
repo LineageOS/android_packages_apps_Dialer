@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">WI-FI</string>
-  <string name="network_name_mobile">Mobil</string>
   <string name="content_description_overflow">Boshqa parametrlar</string>
   <string name="snackbar_undo">BEKOR QILISH</string>
   <string name="ok_got_it">OK</string>

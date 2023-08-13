@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Numarayı kopyala</string>
   <string name="call_details_edit_number">Telefon etmeden önce numarayı düzenleyin</string>
   <string name="call_details_report_call_id">Hatalı numarayı bildir</string>
-  <string name="sent_a_photo">Bir fotoğraf gönderildi</string>
-  <string name="received_a_photo">Bir fotoğraf alındı</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Yanlış numarayı bildir</string>
   <string name="report_caller_id_failed">Numara bildirilemedi</string>
   <string name="report_caller_id_toast">Numara bildirildi</string>

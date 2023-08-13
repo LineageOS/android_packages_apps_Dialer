@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Hili ni la dharura. Nipigie.</string>
   <string name="post_call_message_2">Nipigie ukipata nafasi.</string>
   <string name="post_call_message_3">Si jambo la dharura, tunaweza kuzungumza baadaye.</string>
-  <string name="post_call_add_message">Ongeza ujumbe</string>
-  <string name="post_call_send_message">Tuma ujumbe</string>
+    <string name="post_call_send_message">Tuma ujumbe</string>
   <string name="post_call_message_sent">Ujumbe umetumwa</string>
   <string name="view">Uangalie</string>
 </resources>

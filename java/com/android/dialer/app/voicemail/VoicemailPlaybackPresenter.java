@@ -109,7 +109,6 @@ public class VoicemailPlaybackPresenter
   private static final String IS_SPEAKERPHONE_ON_KEY =
       VoicemailPlaybackPresenter.class.getName() + ".IS_SPEAKER_PHONE_ON";
   private static final String VOICEMAIL_SHARE_FILE_NAME_DATE_FORMAT = "MM-dd-yy_hhmmaa";
-  private static final String CONFIG_SHARE_VOICEMAIL_ALLOWED = "share_voicemail_allowed";
 
   private static VoicemailPlaybackPresenter instance;
   private static ScheduledExecutorService scheduledExecutorService;

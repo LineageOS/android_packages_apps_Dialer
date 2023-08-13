@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Klepnutím pridáte číslo medzi kontakty alebo zablokujte ako spam.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Toto bol prvý hovor z tohto čísla. Ak bol tento hovor spam, môžete toto číslo zablokovať a nahlásiť ho.</string>
   <string name="spam_notification_spam_call_collapsed_text">Klepnutím môžete nahlásiť, že číslo nie je spam, alebo ho môžete zablokovať</string>
-  <string name="spam_notification_report_spam_action_text">Blokovať a nahlásiť</string>
-  <string name="spam_notification_add_contact_action_text">Pridať kontakt</string>
   <string name="spam_notification_dialog_add_contact_action_text">Pridať medzi kontakty</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokovať a nahlásiť spam</string>
   <string name="spam_notification_was_not_spam_action_text">Nie, nebol to spam</string>

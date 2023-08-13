@@ -4,8 +4,7 @@
   <string name="post_call_message_1">É urgente. Ligue-me de volta.</string>
   <string name="post_call_message_2">Ligue-me de volta quando tiver algum tempo.</string>
   <string name="post_call_message_3">Não é urgente, podemos conversar mais tarde.</string>
-  <string name="post_call_add_message">Adicionar mensagem</string>
-  <string name="post_call_send_message">Enviar mensagem</string>
+    <string name="post_call_send_message">Enviar mensagem</string>
   <string name="post_call_message_sent">Mensagem enviada</string>
   <string name="view">Ver</string>
 </resources>

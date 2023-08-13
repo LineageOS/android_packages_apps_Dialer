@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Выдалiць частыя кантакты?</string>
   <string name="clearFrequentsConfirmation">Вы выдалiце найчасцей ужываныя кантакты ў праграмах Кантакты i Тэлефон i прымусiце праграмы па працы з электроннай поштай вывучыць вашы налады адрасацыi з нуля.</string>
   <string name="clearFrequentsProgress_title">Выдаленне частых кантактаў...</string>
-  <string name="status_available">Даступны</string>
-  <string name="status_away">Адсутнічае</string>
-  <string name="status_busy">Заняты</string>
-  <string name="contactsList">Кантакты</string>
-  <string name="contact_suggestions">Лепшыя прапановы</string>
-  <string name="local_invisible_directory">Іншае</string>
   <string name="directory_search_label">Дырэкторыя</string>
   <string name="directory_search_label_work">Працоўны каталог</string>
-  <string name="local_search_label">Усе кантакты</string>
-  <string name="local_suggestions_search_label">Прапановы</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Я</string>
   <string name="missing_name">(Без назвы)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Прагледзець кантакт</string>
-  <string name="list_filter_phones">Усе кантакты з нумарамі тэлефонаў</string>
-  <string name="list_filter_phones_work">Кантакты працоўнага профілю</string>
   <string name="view_updates_from_group">Прагляд абнаўленняў</string>
   <string name="account_phone">Толькі прылада, несінхранізаваная</string>
   <string name="nameLabelsGroup">Імя</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Чат праз ICQ</string>
   <string name="chat_jabber">Чат у Jabber</string>
   <string name="chat">Гутарка</string>
-  <string name="list_filter_all_accounts">Усе кантакты</string>
-  <string name="listAllContactsInAccount">Кантакты карыстальнiка %s</string>
-  <string name="listCustomView">Кантакты ў карыстальнiцкiм выглядзе</string>
-  <string name="listSingleContact">Адзіночны кантакт</string>
   <string name="display_options_sort_list_by">Сартаваць па</string>
   <string name="display_options_sort_by_given_name">Імені</string>
   <string name="display_options_sort_by_family_name">Прозвішчы</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Ачысціць пошук</string>
   <string name="select_account_dialog_title">Уліковы запіс</string>
   <string name="set_default_account">Заўсёды выкарыст. гэта для выклікаў</string>
-  <string name="select_phone_account_for_calls">Выбраць SIM-карту для выкліку</string>
-  <string name="select_phone_account_for_calls_remember">Запомніць гэты выбар</string>
   <string name="call_with_a_note">Выклік з нататкай</string>
   <string name="call_subject_hint">Увесці нататку для адпраўкі з выклікам…</string>
   <string name="send_and_call_button">АДПРАВІЦЬ І ВЫКЛІКАЦЬ</string>
@@ -143,5 +125,4 @@
     <item quantity="other">Укладка %1$s. %2$d непрачытанага элемента. </item>
   </plurals>
   <string name="description_search_video_call">Відэавыклік</string>
-  <string name="description_search_call_and_share">Абагуліць і выклікаць</string>
 </resources>

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Διαγραφή ατόμων με συχνή επικοινωνία;</string>
   <string name="clearFrequentsConfirmation">Θα διαγράψετε τη λίστα συχνών επαφών στις εφαρμογές Επαφές και Τηλέφωνο και θα επιβάλλετε στις εφαρμογές ηλεκτρονικού ταχυδρομείου να μάθουν τις προτιμήσεις διευθύνσεών σας από την αρχή,</string>
   <string name="clearFrequentsProgress_title">Διαγρ. ατόμων με συχνή επικοινωνία…</string>
-  <string name="status_available">Διαθέσιμος</string>
-  <string name="status_away">Μη διαθέσιμος</string>
-  <string name="status_busy">Απασχολημένος</string>
-  <string name="contactsList">Επαφές</string>
-  <string name="contact_suggestions">Κορυφαίες προτάσεις</string>
-  <string name="local_invisible_directory">Άλλο</string>
   <string name="directory_search_label">Κατάλογος</string>
   <string name="directory_search_label_work">Κατάλογος εργασίας</string>
-  <string name="local_search_label">Όλες οι επαφές</string>
-  <string name="local_suggestions_search_label">Προτάσεις</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Εγώ</string>
   <string name="missing_name">(Χωρίς όνομα)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Προβολή επαφής</string>
-  <string name="list_filter_phones">Όλες οι επαφές με αριθμούς τηλεφώνου</string>
-  <string name="list_filter_phones_work">Επαφές προφίλ εργασίας</string>
   <string name="view_updates_from_group">Προβολή ενημερώσεων</string>
   <string name="account_phone">Μόνο στη συσκευή, χωρίς συγχρονισμό</string>
   <string name="nameLabelsGroup">Όνομα</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Συζήτηση μέσω ICQ</string>
   <string name="chat_jabber">Συζήτηση μέσω Jabber</string>
   <string name="chat">Συζήτηση</string>
-  <string name="list_filter_all_accounts">Όλες οι επαφές</string>
-  <string name="listAllContactsInAccount">Επαφές στο %s</string>
-  <string name="listCustomView">Επαφές σε προσ/νη προβολή</string>
-  <string name="listSingleContact">Μία επαφή</string>
   <string name="display_options_sort_list_by">Ταξινόμηση κατά</string>
   <string name="display_options_sort_by_given_name">Όνομα</string>
   <string name="display_options_sort_by_family_name">Επώνυμο</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Διαγραφή αναζητήσεων</string>
   <string name="select_account_dialog_title">Λογαριασμός</string>
   <string name="set_default_account">Χρήση πάντα για κλήσεις</string>
-  <string name="select_phone_account_for_calls">Επιλέξτε SIM για αυτήν την κλήση</string>
-  <string name="select_phone_account_for_calls_remember">Διατήρηση αυτής της ρύθμισης</string>
   <string name="call_with_a_note">Κλήση με σημείωση</string>
   <string name="call_subject_hint">Πληκτρολογήστε μια σημείωση για αποστολή με την κλήση…</string>
   <string name="send_and_call_button">ΑΠΟΣΤΟΛΗ ΚΑΙ ΚΛΗΣΗ</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> Καρτέλα %1$s. %2$d μη αναγνωσμένα στοιχεία. </item>
   </plurals>
   <string name="description_search_video_call">Βιντεοκλήση</string>
-  <string name="description_search_call_and_share">Κοινοποίηση και κλήση</string>
 </resources>

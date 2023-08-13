@@ -34,28 +34,7 @@
   <string name="voicemail_string">Hangposta</string>
   <string name="just_now">Éppen most</string>
   <string name="new_call_log_carrier_video">Szolgáltatói videohívás</string>
-  <string name="new_call_log_duo_video">Duo-videohívás</string>
   <string name="new_call_log_unknown">Ismeretlen</string>
   <string name="new_call_log_secondary_blocked">Letiltva</string>
   <string name="new_call_log_secondary_spam">Spam</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 nem fogadott hívás a következőtől: ^2</item>
-    <item quantity="other">^1 hívás, a legutóbbi egy nem fogadott hívás a következőtől: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 fogadott hívás a következőtől: ^2</item>
-    <item quantity="other">^1 hívás, a legutóbbi egy fogadott hívás a következőtől: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 kimenő hívás a következőnek: ^2</item>
-    <item quantity="other">^1 hívás, a legutóbbi egy kimenő hívás a következőnek: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 letiltott hívás a következőtől: ^2</item>
-    <item quantity="other">^1 hívás, a legutóbbi egy letiltott hívás a következőtől: ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">fiók: ^1,
-    szám: ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

@@ -4,8 +4,7 @@
   <string name="post_call_message_1">มีเรื่องด่วน โปรดโทรกลับ</string>
   <string name="post_call_message_2">ว่างแล้วโปรดโทรกลับ</string>
   <string name="post_call_message_3">ไม่ด่วนอะไร ไว้แชททีหลังก็ได้</string>
-  <string name="post_call_add_message">เพิ่มข้อความ</string>
-  <string name="post_call_send_message">ส่งข้อความ</string>
+    <string name="post_call_send_message">ส่งข้อความ</string>
   <string name="post_call_message_sent">ส่งข้อความแล้ว</string>
   <string name="view">ดู</string>
 </resources>

@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">Video aus</string>
   <string name="incall_content_description_swap_video">Video wechseln</string>
   <string name="incall_label_speaker">Lautsprecher</string>
-  <string name="incall_label_audio">Tonausgabe</string>
 </resources>

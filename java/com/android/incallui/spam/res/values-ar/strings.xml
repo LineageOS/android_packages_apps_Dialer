@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">انقر للإضافة إلى جهات الاتصال أو لحظر الرقم غير المرغوب فيه.</string>
   <string name="spam_notification_non_spam_call_expanded_text">هذه هي المرة الأولى التي تتلقى فيها اتصالاً من هذا الرقم. إذا كانت هذه المكالمة غير مرغوب فيها، يمكنك حظر هذا الرقم والإبلاغ عنه.</string>
   <string name="spam_notification_spam_call_collapsed_text">انقر للإبلاغ عن المكالمة باعتبارها مرغوب فيها أو احظرها.</string>
-  <string name="spam_notification_report_spam_action_text">حظر وإبلاغ</string>
-  <string name="spam_notification_add_contact_action_text">إضافة جهة اتصال</string>
   <string name="spam_notification_dialog_add_contact_action_text">إضافة إلى جهات الاتصال</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">حظر الرقم والإبلاغ عنه كرقم غير مرغوب فيه</string>
   <string name="spam_notification_was_not_spam_action_text">لا، مرغوب فيها</string>

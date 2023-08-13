@@ -34,28 +34,7 @@
   <string name="voicemail_string">ხმოვანი ფოსტა</string>
   <string name="just_now">ახლახან</string>
   <string name="new_call_log_carrier_video">ოპერატორის ვიდეო</string>
-  <string name="new_call_log_duo_video">Duo-ს ვიდეო</string>
   <string name="new_call_log_unknown">უცნობი</string>
   <string name="new_call_log_secondary_blocked">დაბლოკილი</string>
   <string name="new_call_log_secondary_spam">სპამი</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 გამოტოვებული ზარი ^2-ისგან</item>
-    <item quantity="other">^1 ზარი, ბოლო არის გამოტოვებული ზარი ^2-ისგან</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 პასუხგაცემული ზარი ^2-ისგან</item>
-    <item quantity="other">^1 ზარი, ბოლო არის პასუხგაცემული ზარი ^2-ისგან</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 გამავალი ზარი ^2-თან</item>
-    <item quantity="other">^1 ზარი, ბოლო არის გამავალი ზარი ^2-თან</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 დაბლოკილი ზარი ^2-ისგან</item>
-    <item quantity="other">^1 ზარი, ბოლო არის დაბლოკილი ზარი ^2-ისგან</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1-ზე,
-   ^2-ით</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

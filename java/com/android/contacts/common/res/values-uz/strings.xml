@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Bu ro‘yxat tozalansinmi?</string>
   <string name="clearFrequentsConfirmation">Kontaktlar va Telefon ilovalaridagi tez-tez aloqa qilingan kontaktlar ro‘yxati tozalanadi hamda e-pochta ilovalari manzillarni eslab qolishni qaytadan boshlaydi.</string>
   <string name="clearFrequentsProgress_title">Ko‘p gaplashilganlar tozalanmoqda…</string>
-  <string name="status_available">Aloqada</string>
-  <string name="status_away">Tashqarida</string>
-  <string name="status_busy">Band</string>
-  <string name="contactsList">Kontaktlar</string>
-  <string name="contact_suggestions">Eng faol</string>
-  <string name="local_invisible_directory">Boshqa</string>
   <string name="directory_search_label">Direktoriya</string>
   <string name="directory_search_label_work">Ishchi katalogi</string>
-  <string name="local_search_label">Barcha kontaktlar</string>
-  <string name="local_suggestions_search_label">Takliflar</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Men</string>
   <string name="missing_name">(Ismi yo‘q)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Kontaktni ko‘rish</string>
-  <string name="list_filter_phones">Telefon raqamli kontaktlar</string>
-  <string name="list_filter_phones_work">Ishchi profili kontaktlari</string>
   <string name="view_updates_from_group">Yangilanishlarni ko‘rish</string>
   <string name="account_phone">Faqat qurilmalarda, sinxronlanmaydi</string>
   <string name="nameLabelsGroup">Ism</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ’da suhbatlashish</string>
   <string name="chat_jabber">Jabber’da suhbatlashish</string>
   <string name="chat">Suhbatlashish</string>
-  <string name="list_filter_all_accounts">Barcha kontaktlar</string>
-  <string name="listAllContactsInAccount">%sdagi kontaktlar</string>
-  <string name="listCustomView">Filtrlangan kontaktlar</string>
-  <string name="listSingleContact">Bitta kontakt</string>
   <string name="display_options_sort_list_by">Saralash</string>
   <string name="display_options_sort_by_given_name">Ismi asosida</string>
   <string name="display_options_sort_by_family_name">Familiyasi asosida</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Izlashni tozalash</string>
   <string name="select_account_dialog_title">Hisob</string>
   <string name="set_default_account">Har doim qo‘ng‘iroqlar u-n foyd-sin</string>
-  <string name="select_phone_account_for_calls">Chaqiruv uchun SIM kartani tanlang</string>
-  <string name="select_phone_account_for_calls_remember">Shu tanlov eslab qolinsin</string>
   <string name="call_with_a_note">Qo‘ng‘iroq va izoh</string>
   <string name="call_subject_hint">Qo‘ng‘iroqqa qo‘shib yuborish uchun izoh yozing ...</string>
   <string name="send_and_call_button">YUBORISH va QO‘NG‘IROQ QILISH</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s ichki oynasi. %2$d ta o‘qilmagan narsa. </item>
   </plurals>
   <string name="description_search_video_call">Video suhbat</string>
-  <string name="description_search_call_and_share">Ulashish va chaqirish</string>
 </resources>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">វ៉ាយហ្វាយ</string>
-  <string name="network_name_mobile">ចល័ត</string>
   <string name="content_description_overflow">ជម្រើស​ច្រើនទៀត</string>
   <string name="snackbar_undo">ត្រឡប់​វិញ</string>
   <string name="ok_got_it">យល់ព្រម យល់ហើយ</string>

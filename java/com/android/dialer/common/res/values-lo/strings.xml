@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">Wifi</string>
-  <string name="network_name_mobile">ມືຖື</string>
   <string name="content_description_overflow">ຕົວເລືອກເພີ່ມເຕີມ</string>
   <string name="snackbar_undo">ຍົກເລີກ</string>
   <string name="ok_got_it">ຕົກລົງ, ເຂົ້າໃຈແລ້ວ</string>

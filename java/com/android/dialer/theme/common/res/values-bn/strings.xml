@@ -3,7 +3,6 @@
   <string name="unknown_counter">%1$s %2$d</string>
   <string name="payphone">পে ফোন</string>
   <string name="emergency_number">জরুরি নম্বর</string>
-  <string name="launcherActivityLabel">ফোন</string>
   <string name="call">কল করুন</string>
   <string name="video_call_lte_to_wifi_handover_toast">ওয়াই-ফাই দিয়ে কল জারি রাখা হচ্ছে…</string>
   <string name="rtt_call_not_available_toast">এই কলের জন্য RTT সুবিধা উপলভ্য নয়</string>

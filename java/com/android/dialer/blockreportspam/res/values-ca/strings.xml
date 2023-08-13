@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">DESBLOQUEJA</string>
   <string name="block_report_number_alert_title">Vols bloquejar el número %1$s?</string>
   <string name="block_report_number_alert_details">Deixaràs de rebre trucades d\'aquest número.</string>
-  <string name="block_number_alert_details">%1$s Aquesta trucada es marcarà com a brossa.</string>
   <string name="unblock_number_alert_details">El número es desbloquejarà i s\'indicarà que aquesta trucada (i les properes) no són brossa.</string>
   <string name="unblock_report_number_alert_title">Vols desbloquejar el número %1$s?</string>
   <string name="report_not_spam_alert_button">Informa</string>

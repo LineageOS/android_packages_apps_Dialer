@@ -16,7 +16,6 @@
 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:ex="http://schemas.android.com/apk/res/com.android.dialer"
   android:id="@+id/call_stats_info"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"

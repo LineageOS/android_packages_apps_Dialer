@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Mailbox (%s)</string>
   <string name="voicemail_settings_title">Mailbox</string>
   <string name="voicemail_notifications_preference_title">Benachrichtigungen</string>
   <string name="voicemail_change_greeting_preference_title">Mailboxbegrüßung</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">PIN ändern</string>
   <string name="voicemail_change_pin_preference_summary_disable">Die visuelle Mailbox muss aktiviert sein, um die PIN zu ändern</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Die visuelle Mailbox wurde noch nicht aktiviert, bitte versuche es später noch einmal</string>
-  <string name="vm_change_pin_old_pin">Alte PIN</string>
-  <string name="vm_change_pin_new_pin">Neue PIN</string>
   <string name="vm_change_pin_progress_message">Bitte warten.</string>
   <string name="vm_change_pin_error_too_short">Die neue PIN ist zu kurz.</string>
   <string name="vm_change_pin_error_too_long">Die neue PIN ist zu lang.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">Die PINs stimmen nicht überein</string>
   <string name="change_pin_succeeded">Mailbox-PIN aktualisiert</string>
   <string name="change_pin_system_error">Festlegen der PIN nicht möglich</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Mailboxnachrichten transkribieren</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Analyse transkribierter Mailboxnachrichten</string>
   <string name="voicemail_activating_summary_info">Mailbox wird aktiviert</string>
-  <string name="voicemail_transcription_preference_summary_info">Der Transkriptionsdienst von Google liefert dir deine Mailboxnachrichten als geschriebenen Text. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Google darf deine Mailboxnachrichten analysieren, damit die Genauigkeit der Transkriptionen verbessert werden kann. Deine Mailboxnachrichten werden anonym gespeichert. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Visuelle Mailbox deaktivieren</string>
   <string name="confirm_disable_voicemail_dialog_message">Hiermit werden alle Mailbox-Nachrichten und Google-Transkripte gelöscht, die in dieser App gespeichert wurden. Möglicherweise speichert dein Mobilfunkanbieter eigene Kopien.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">DEAKTIVIEREN</string>

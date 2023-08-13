@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">අංකය පිටපත් කරන්න</string>
   <string name="call_details_edit_number">ඇමතුමට පෙර අංකය සංස්කරණය කරන්න</string>
   <string name="call_details_report_call_id">වැරදි අංකය වාර්තා කරන්න</string>
-  <string name="sent_a_photo">ඡායාරූපයක් යැවිණි</string>
-  <string name="received_a_photo">ඡායාරූපයක් ලැබිණි</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">වැරදි අංකය වාර්තා කරන්න</string>
   <string name="report_caller_id_failed">අංකය වාර්තා කිරීමට නොහැකි විය</string>
   <string name="report_caller_id_toast">අංකය වාර්තා කරන ලදී</string>

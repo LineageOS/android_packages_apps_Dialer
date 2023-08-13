@@ -34,28 +34,7 @@
   <string name="voicemail_string">Messagerie vocale</string>
   <string name="just_now">À l\'instant</string>
   <string name="new_call_log_carrier_video">Vidéo via l\'opérateur</string>
-  <string name="new_call_log_duo_video">Vidéo Duo</string>
   <string name="new_call_log_unknown">Numéro inconnu</string>
   <string name="new_call_log_secondary_blocked">Appels bloqués</string>
   <string name="new_call_log_secondary_spam">Indésirables</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 appel manqué de ^2</item>
-    <item quantity="other">^1 appels manqués de ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 appel, le dernier provenait de ^2 et a bien été reçu</item>
-    <item quantity="other">^1 appels, le dernier provenait de ^2 et a bien été reçu</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 appel, le dernier est un appel sortant vers ^2</item>
-    <item quantity="other">^1 appels, le dernier est un appel sortant vers ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 appel, le dernier est un appel bloqué de ^2</item>
-    <item quantity="other">^1 appels, le dernier est un appel bloqué de ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">dans le compte ^1,
-    avec le numéro ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

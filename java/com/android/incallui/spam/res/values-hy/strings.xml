@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Հպեք՝ կոնտակտներում ավելացնելու համար, կամ արգելափակեք լցոնային համարը:</string>
   <string name="spam_notification_non_spam_call_expanded_text">Այս համարից առաջին անգամ եք զանգ ստանում: Եթե այս զանգը սպամ էր, դուք կարող եք արգելափակել այս համարը և նշել այն որպես սպամ:</string>
   <string name="spam_notification_spam_call_collapsed_text">Հպեք «սպամ չէ» կոճակին՝ համարը որպես ոչ սպամ նշելու համար, կամ արգելափակեք այն</string>
-  <string name="spam_notification_report_spam_action_text">Արգելափակել և նշել սպամ</string>
-  <string name="spam_notification_add_contact_action_text">Ավելացնել կոնտակտ</string>
   <string name="spam_notification_dialog_add_contact_action_text">Ավելացնել կոնտակտներում</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Արգելափակել և նշել որպես սպամ</string>
   <string name="spam_notification_was_not_spam_action_text">Ոչ, սպամ չէ</string>

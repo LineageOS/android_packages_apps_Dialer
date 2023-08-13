@@ -128,26 +128,6 @@ public class ContactsFragment extends Fragment
     return fragment;
   }
 
-  /**
-   * Returns {@link ContactsFragment} with a list of contacts such that:
-   *
-   * <ul>
-   *   <li>Each contact has a phone number
-   *   <li>Contacts are filterable via {@link #updateQuery(String)}
-   *   <li>There is no list header (i.e. {@link Header#NONE}
-   *   <li>Clicking on a contact notifies the parent activity via {@link
-   *       OnContactSelectedListener#onContactSelected(ImageView, Uri, long)}.
-   * </ul>
-   */
-  public static ContactsFragment newAddFavoritesInstance() {
-    ContactsFragment fragment = new ContactsFragment();
-    Bundle args = new Bundle();
-    args.putInt(EXTRA_HEADER, Header.NONE);
-    args.putBoolean(EXTRA_HAS_PHONE_NUMBERS, true);
-    fragment.setArguments(args);
-    return fragment;
-  }
-
   @SuppressWarnings("WrongConstant")
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -235,11 +215,6 @@ public class ContactsFragment extends Fragment
     ContactsCursorLoader cursorLoader = new ContactsCursorLoader(getContext(), hasPhoneNumbers);
     cursorLoader.setQuery(query);
     return cursorLoader;
-  }
-
-  public void updateQuery(String query) {
-    this.query = query;
-    getLoaderManager().restartLoader(0, null, this);
   }
 
   @Override

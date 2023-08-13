@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefon</string>
-  <string name="launcherDialpadActivityLabel">Telefontastatur</string>
   <string name="callHistoryIconLabel">Anropslogg</string>
   <string name="action_copy_number_text">Kopiér nummeret</string>
   <string name="action_edit_number_before_call">Endre nummeret før du ringer</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Flere alternativer</string>
   <string name="action_menu_dialpad_button">Tastatur</string>
   <string name="dialer_settings_label">Innstillinger</string>
-  <string name="simulator_submenu_label">Simulator</string>
-  <string name="new_ui_launcher_shortcut_label">Nytt grensesnitt – lag snarvei</string>
   <string name="description_entering_bulk_action_mode">Starter massehandlingsmodus</string>
   <string name="description_leaving_bulk_action_mode">Massehandlingsmodus er avsluttet</string>
   <string name="description_selecting_bulk_action_mode">Du har valgt %1$s</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Videoanrop.</string>
   <string name="description_start_voice_search">Start talesøk</string>
   <string name="voicemail">Telefonsvarer</string>
-  <string name="description_cancel_multi_select">Avbryt massehandlinsmodus</string>
   <string name="voicemailMultiSelectDeleteConfirm">Slett</string>
   <string name="voicemailMultiSelectDeleteCancel">Avbryt</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s er valgt</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Talesøk er ikke tilgjengelig</string>
   <string name="dialer_hint_find_contact">Søk i kontakter</string>
-  <string name="block_number_search_hint">Legg til nummer eller søk etter kontakter</string>
   <string name="call_log_all_empty">Anropsloggen er tom</string>
   <string name="call_log_all_empty_action">Start en samtale</string>
   <string name="call_log_missed_empty">Du har ingen tapte anrop.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Anropslogg</string>
   <string name="call_log_all_title">Alle</string>
   <string name="call_log_missed_title">Ubesvarte</string>
-  <string name="tab_speed_dial">Hurtigvalg</string>
-  <string name="tab_history">Anropslogg</string>
   <string name="tab_all_contacts">Kontakter</string>
-  <string name="tab_voicemail">Talepostkasse</string>
-  <string name="search_shortcut_call_number">Ring %s</string>
   <string name="search_shortcut_create_new_contact">Opprett ny kontakt</string>
   <string name="search_shortcut_add_to_contact">Legg til for en kontakt</string>
   <string name="search_shortcut_send_sms_message">Send SMS</string>
   <string name="search_shortcut_make_video_call">Start en videosamtale</string>
-  <string name="search_shortcut_block_number">Blokkér nummeret</string>
-  <string name="speed_dial_empty">Du har ingen på hurtigoppringning ennå</string>
-  <string name="speed_dial_empty_add_favorite_action">Legg til en favoritt</string>
-  <string name="remove_contact">Fjern</string>
   <string name="select_all">Velg alle</string>
   <string name="call_log_action_video_call">Videoanrop</string>
-  <string name="call_log_action_set_up_video">Konfigurer videoanrop</string>
-  <string name="call_log_action_invite_video">Inviter til videosamtale</string>
   <string name="call_log_action_send_message">Send en melding</string>
   <string name="call_log_action_details">Samtaleinformasjon</string>
   <string name="call_log_action_share_voicemail">Send til …</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Anrop</string>
   <string name="manage_blocked_numbers_label">Blokkerte numre</string>
   <string name="voicemail_settings_label">Talepost</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Blokkering av anrop er midlertidig slått av</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Blokkering av anrop er slått av fordi du kontaktet nødtjenester fra denne telefonen i løpet av de siste 48 timene. Funksjonen blir automatisk slått på igjen når perioden på 48 timer er utløpt.</string>
-  <string name="import_send_to_voicemail_numbers_label">Importér numre</string>
-  <string name="blocked_call_settings_import_description">Du markerte tidligere noen anropere for automatisk overføring til talepost via andre apper.</string>
-  <string name="blocked_call_settings_view_numbers_button">Se numre</string>
-  <string name="blocked_call_settings_import_button">Importér</string>
-  <string name="description_blocked_number_list_delete">Opphev blokkeringen av nummeret</string>
-  <string name="addBlockedNumber">Legg til nummer</string>
-  <string name="block_number_footer_message_vvm">Anrop fra disse numrene blokkeres, og talepost blir automatisk slettet.</string>
-  <string name="block_number_footer_message_no_vvm">Anrop fra dette nummeret blokkeres, men du kan fortsatt motta talepost.</string>
-  <string name="block_list">Blokkerte numre</string>
-  <string name="alreadyBlocked">%1$s er allerede blokkert.</string>
   <string name="phone_account_settings_label">Ringekontoer</string>
-  <string name="permission_no_speeddial">For å slå på hurtigoppringning, slå på Kontakter-tillatelsen.</string>
   <string name="permission_no_calllog">For å se samtaleloggen din, slå på Telefon-tillatelsen.</string>
-  <string name="permission_no_search">For å søke i kontaktene dine, slå på tillatelser for Kontakter.</string>
-  <string name="permission_place_call">For å ringe, slå på Telefon-tillatelsen.</string>
   <string name="toast_cannot_write_system_settings">Telefonappen har ikke tillatelse til å skrive til systeminnstillinger.</string>
   <string name="blocked_number_call_log_label">Blokkert</string>
   <string name="call_log_action_block_report_number">Blokkér/rapportér som useriøs</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Ikke useriøs</string>
   <string name="call_log_action_unblock_number">Opphev blokkeringen av nummeret</string>
   <string name="spam_number_call_log_label">Nettsøppel</string>
-  <string name="call_composer_connection_failed">%1$s er frakoblet og kan ikke nås</string>
-  <string name="about_phone_label">Om</string>
-  <string name="voicemail_transcription_branding_text">Transkribert av Google</string>
-  <string name="voicemail_transcription_in_progress">Transkriberer …</string>
-  <string name="voicemail_transcription_failed">Ingen transkripsjon.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Ingen transkripsjon. Språket støttes ikke.</string>
-  <string name="voicemail_transcription_failed_no_speech">Ingen transkripsjon. Ingen tale ble registrert.</string>
-  <string name="voicemail_donation_promo_title">Vil du hjelpe oss med å gjøre transkripsjoner mer nøyaktige?</string>
-  <string name="voicemail_donation_promo_content">La Google gå gjennom denne og fremtidige talemeldinger med transkripsjoner. De blir lagret anonymt. Du kan endre innstillingene når som helst. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Ja, jeg er med</string>
-  <string name="voicemail_donation_promo_opt_out">Nei takk</string>
-  <string name="voicemail_transcription_rating">Vurder transkripsjonskvalitet</string>
-  <string name="voicemail_transcription_rating_thanks">Takk for tilbakemeldingen</string>
-  <string name="description_rating_good">Liker</string>
-  <string name="description_rating_bad">Liker ikke</string>
-  <string name="view_conversation">Se</string>
-  <string name="ec_data_deleted">Anropet er slettet. Se og slett vedleggene som ble delt i denne samtalen, i Meldinger.</string>
-  <string name="multiple_ec_data_deleted">Anropene er slettet. Se og slett vedleggene som ble delt i samtalene, i Meldinger.</string>
 </resources>

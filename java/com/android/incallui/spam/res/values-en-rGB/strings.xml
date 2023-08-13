@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Tap to add to contacts or block spam number.</string>
   <string name="spam_notification_non_spam_call_expanded_text">This is the first time that this number has called you. If this call was spam, you can block this number and report it.</string>
   <string name="spam_notification_spam_call_collapsed_text">Tap to report as not spam or block it</string>
-  <string name="spam_notification_report_spam_action_text">Block &amp; report</string>
-  <string name="spam_notification_add_contact_action_text">Add contact</string>
   <string name="spam_notification_dialog_add_contact_action_text">Add to contacts</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Block &amp; report spam</string>
   <string name="spam_notification_was_not_spam_action_text">No, not spam</string>
