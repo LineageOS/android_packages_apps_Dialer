@@ -4,8 +4,7 @@
   <string name="post_call_message_1">إنه أمر عاجل. عاود الاتصال بي.</string>
   <string name="post_call_message_2">عاود الاتصال بي عندما يتوفر لك الوقت.</string>
   <string name="post_call_message_3">الأمر ليس عاجلاً، يمكننا المحادثة لاحقًا.</string>
-  <string name="post_call_add_message">إضافة رسالة</string>
-  <string name="post_call_send_message">إرسال رسالة</string>
+    <string name="post_call_send_message">إرسال رسالة</string>
   <string name="post_call_message_sent">تم إرسال الرسالة</string>
   <string name="view">عرض</string>
 </resources>

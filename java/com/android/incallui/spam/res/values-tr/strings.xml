@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Kişilere eklemek veya spam numarasını engellemek için dokunun.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Bu numaradan ilk kez arandınız. Bu çağrı spam amaçlı olarak yapıldıysa numarayı engelleyip bildirebilirsiniz.</string>
   <string name="spam_notification_spam_call_collapsed_text">Spam değil bildirimi göndermek için dokunun veya numarayı engelleyin</string>
-  <string name="spam_notification_report_spam_action_text">Engelle ve bildir</string>
-  <string name="spam_notification_add_contact_action_text">Kişi olarak ekle</string>
   <string name="spam_notification_dialog_add_contact_action_text">Kişilere ekle</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Engelle ve spam olarak bildir</string>
   <string name="spam_notification_was_not_spam_action_text">Hayır, spam değil</string>

@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">통화 유형 선택</string>
   <string name="disambig_option_video_call">화상 통화 걸기</string>
   <string name="disambig_option_voice_call">전화 걸기</string>
-  <string name="add_favorite_activity_title">즐겨찾기에 추가</string>
   <string name="contact_menu_voice_call">음성 통화</string>
   <string name="contact_menu_video_call">화상 통화</string>
   <string name="contact_menu_message">메시지</string>

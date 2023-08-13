@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Hitno je. Nazovi me.</string>
   <string name="post_call_message_2">Nazovi me kad mogneš.</string>
   <string name="post_call_message_3">Nije hitno, možemo razgovarati kasnije.</string>
-  <string name="post_call_add_message">Dodaj poruku</string>
-  <string name="post_call_send_message">Pošaljite poruku</string>
+    <string name="post_call_send_message">Pošaljite poruku</string>
   <string name="post_call_message_sent">Poruka je poslana</string>
   <string name="view">Prikaži</string>
 </resources>

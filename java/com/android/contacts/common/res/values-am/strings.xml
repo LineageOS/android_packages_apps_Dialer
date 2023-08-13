@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">በተደጋጋሚ የተገኙ ይጽዱ?</string>
   <string name="clearFrequentsConfirmation">በእውቂያዎች እና በስልክ መተግበሪያዎች ውስጥ በተደጋጋሚ ያገኟቸውን ዝርዝር አጽድተው የኢሜይል መተግበሪያዎች ምርጫዎችዎን ከባዶ ተነስተው እንዲያውቁ ያስገድዱዋቸዋል።</string>
   <string name="clearFrequentsProgress_title">በተደጋጋሚ የተገኙትን በማጽዳት ላይ…</string>
-  <string name="status_available">የሚገኝ</string>
-  <string name="status_away">ወጣ ብሏል</string>
-  <string name="status_busy">ተይዟል</string>
-  <string name="contactsList">እውቅያዎች   </string>
-  <string name="contact_suggestions">በብዛት የተጠቆሙ</string>
-  <string name="local_invisible_directory">ሌላ  </string>
   <string name="directory_search_label">ማውጫ</string>
   <string name="directory_search_label_work">የሥራ ስልክ ማውጫ</string>
-  <string name="local_search_label">ሁሉም እውቅያዎች </string>
-  <string name="local_suggestions_search_label">ጥቆማዎች</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">እኔ</string>
   <string name="missing_name">(ስም የለም)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">ዕውቂያ ተመልከት</string>
-  <string name="list_filter_phones">የስልክ ቁጥር ያላቸው ሁሉም ዕውቂያዎች</string>
-  <string name="list_filter_phones_work">የሥራ መገለጫ ዕውቂያዎች</string>
   <string name="view_updates_from_group">ዝማኔዎችን ይመልከቱ</string>
   <string name="account_phone">መሳሪያ-ብቻ፣ አልሰመረም</string>
   <string name="nameLabelsGroup">ስም</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQን በመጠቀም ይወያዩ</string>
   <string name="chat_jabber">Jabberን በመጠቀም 271448</string>
   <string name="chat">ውይይት</string>
-  <string name="list_filter_all_accounts">ሁሉም ዕውቂያዎች</string>
-  <string name="listAllContactsInAccount">በ%s ውስጥ ያሉ ዕውቂያዎች</string>
-  <string name="listCustomView">እውቂያዎች በብጁ እይታ</string>
-  <string name="listSingleContact">ነጠላ እውቂያ</string>
   <string name="display_options_sort_list_by">ደርድር በ</string>
   <string name="display_options_sort_by_given_name">የመጀመሪያ ስም</string>
   <string name="display_options_sort_by_family_name">የመጨረሻ ስም</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">ፍለጋን አጽዳ</string>
   <string name="select_account_dialog_title">መለያ</string>
   <string name="set_default_account">ለጥሪዎች ሁልጊዜ ይህንን ተጠቀም</string>
-  <string name="select_phone_account_for_calls">ለዚህ ጥሪ ሲም ይምረጡ</string>
-  <string name="select_phone_account_for_calls_remember">ይህን ምርጫ አስታውስ</string>
   <string name="call_with_a_note">ከማስታወሻ ጋር ደውል</string>
   <string name="call_subject_hint">ከጥሪ ጋር ለመላክ የማስታወሻ ጽሑፍ ይተይቡ ...</string>
   <string name="send_and_call_button">ላክ እና ደውል</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> የ%1$s ትር። %2$d ያልተነበቡ ንጥሎች። </item>
   </plurals>
   <string name="description_search_video_call">የቪዲዮ ጥሪ</string>
-  <string name="description_search_call_and_share">ያጋሩ እና ይደውሉ</string>
 </resources>

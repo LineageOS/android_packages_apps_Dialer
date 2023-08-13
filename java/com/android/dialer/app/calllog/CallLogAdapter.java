@@ -457,7 +457,7 @@ public class CallLogAdapter extends GroupingListAdapter
         new PhoneCallDetailsHelper(this.activity, resources, this.callLogCache);
     callLogListItemHelper =
         new CallLogListItemHelper(phoneCallDetailsHelper, resources, this.callLogCache);
-    callLogGroupBuilder = new CallLogGroupBuilder(activity.getApplicationContext(), this);
+    callLogGroupBuilder = new CallLogGroupBuilder(this);
     this.filteredNumberAsyncQueryHandler = Assert.isNotNull(filteredNumberAsyncQueryHandler);
 
     blockReportSpamListener =

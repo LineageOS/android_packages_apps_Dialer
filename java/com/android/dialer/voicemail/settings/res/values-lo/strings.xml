@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">ຂໍ້​ຄວາມ​ສຽງ (%s)</string>
   <string name="voicemail_settings_title">ຂໍ້ຄວາມສຽງ</string>
   <string name="voicemail_notifications_preference_title">ການແຈ້ງເຕືອນ</string>
   <string name="voicemail_change_greeting_preference_title">ຄຳທັກທາຍຂໍ້ຄວາມສຽງ</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">​ປ່ຽນ​ລະຫັດ PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">ຈະຕ້ອງເປີດໃຊ້ຂໍ້ຄວາມສຽງສະເໝືອນເພື່ອປ່ຽນ PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">ຍັງບໍໄດ້ເປີດໃຊ້ຂໍ້ຄວາມສຽງສະເໝືອນເທື່ອ, ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ</string>
-  <string name="vm_change_pin_old_pin">ລະຫັດ PIN ເກົ່າ</string>
-  <string name="vm_change_pin_new_pin">ລະຫັດ PIN ໃໝ່</string>
   <string name="vm_change_pin_progress_message">ກະລຸນາລໍຖ້າ.</string>
   <string name="vm_change_pin_error_too_short">ລະຫັດ PIN ໃໝ່ສັ້ນເກີນໄປ.</string>
   <string name="vm_change_pin_error_too_long">ລະຫັດ PIN ໃໝ່ຍາວເກີນໄປ.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">ລະຫັດ PIN ບໍ່ກົງກັນ</string>
   <string name="change_pin_succeeded">ອັບເດດລະຫັດ PIN ຂໍ້ຄວາມສຽງແລ້ວ</string>
   <string name="change_pin_system_error">ບໍ່ສາມາດຕັ້ງລະຫັດ PIN ໄດ້</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">ການຖອດຂໍ້ຄວາມສຽງ</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">ການວິເຄາະການຖອດຂໍ້ຄວາມສຽງ</string>
   <string name="voicemail_activating_summary_info">ກຳລັງເປີດໃຊ້ຂໍ້ຄວາມສຽງ</string>
-  <string name="voicemail_transcription_preference_summary_info">ຮັບການຖອດຂໍ້ຄວາມຂອງຂໍ້ຄວາມສຽງທ່ານໂດຍໃຊ້ບໍລິການຖອດຂໍ້ຄວາມຂອງ Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">ໃຫ້ Google ກວດສອບຂໍ້ຄວາມສຽງຂອງທ່ານເພື່ອປັບປຸງຄວາມຖືກຕ້ອງຂອງການຖອດຂໍ້ຄວາມ. ຂໍ້ຄວາມສຽງຂອງທ່ານຈະຖືກຈັດເກັບໂດຍບໍ່ລະບຸຊື່. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">ປິດຂໍ້ຄວາມສຽງສະເໝືອນ</string>
   <string name="confirm_disable_voicemail_dialog_message">ນີ້ຈະເປັນການລຶບຂໍ້ຄວາມສຽງໃດກໍຕາມທີ່ມີ ແລະ ການຖອດຂໍ້ຄວາມສຽງ Google ທີ່ບັນທຶກໄວ້ພາຍໃນແອັບນີ້. ຜູ້ໃຫ້ບໍລິການຂອງທ່ານອາດມີສຳເນົາຂອງຕົວເອງໄວ້ຢູ່.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">ປິດ</string>

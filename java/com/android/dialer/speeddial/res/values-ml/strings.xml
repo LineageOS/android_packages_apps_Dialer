@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">കോൾ തരം തിരഞ്ഞെടുക്കുക</string>
   <string name="disambig_option_video_call">വീഡിയോ കോള്‍</string>
   <string name="disambig_option_voice_call">വിളിക്കുക</string>
-  <string name="add_favorite_activity_title">പ്രിയപ്പെട്ടവ ചേർക്കുക</string>
   <string name="contact_menu_voice_call">വോയ്‌സ് കോള്‍‌</string>
   <string name="contact_menu_video_call">വീഡിയോ കോള്‍</string>
   <string name="contact_menu_message">സന്ദേശം</string>

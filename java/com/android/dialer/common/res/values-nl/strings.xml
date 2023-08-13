@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">Wifi</string>
-  <string name="network_name_mobile">Mobiel</string>
   <string name="content_description_overflow">Meer opties</string>
   <string name="snackbar_undo">HERSTELLEN</string>
   <string name="ok_got_it">OK</string>

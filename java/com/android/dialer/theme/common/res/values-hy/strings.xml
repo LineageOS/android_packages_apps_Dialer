@@ -3,7 +3,6 @@
   <string name="unknown_counter">%1$s %2$d</string>
   <string name="payphone">Բջջային տերմինալ</string>
   <string name="emergency_number">Արտակարգ ծառայության հեռախոսահամար</string>
-  <string name="launcherActivityLabel">Հեռախոս</string>
   <string name="call">Զանգել</string>
   <string name="video_call_lte_to_wifi_handover_toast">Անցում Wi‑Fi-ին…</string>
   <string name="rtt_call_not_available_toast">RTT գործառույթը հասանելի չէ այս զանգի համար</string>

@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Em espera</string>
   <string name="incall_label_add_call">Adic. cham.</string>
   <string name="incall_label_mute">Desativ. som</string>
-  <string name="incall_label_end_call">Terminar chamada</string>
   <string name="incall_label_dialpad">Teclado</string>
   <string name="incall_talkback_speaker_on">, ativado</string>
   <string name="incall_talkback_speaker_off">, desativado</string>

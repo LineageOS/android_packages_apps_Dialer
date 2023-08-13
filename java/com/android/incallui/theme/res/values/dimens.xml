@@ -35,8 +35,6 @@
 
   <dimen name="conference_call_manager_button_dimension">48dp</dimen>
 
-  <dimen name="return_to_call_initial_offset_y">120dp</dimen>
-
   <!-- Whether or not the landscape mode layout is currently being used -->
   <bool name="is_layout_landscape">false</bool>
 

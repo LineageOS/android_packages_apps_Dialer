@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">Видеото е изключено</string>
   <string name="incall_content_description_swap_video">Размяна на видеото</string>
   <string name="incall_label_speaker">Високогов.</string>
-  <string name="incall_label_audio">Звук</string>
 </resources>

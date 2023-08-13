@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Гласова поща (%s)</string>
   <string name="voicemail_settings_title">Гласова поща</string>
   <string name="voicemail_notifications_preference_title">Известия</string>
   <string name="voicemail_change_greeting_preference_title">Поздрав в гласовата поща</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Промяна на вашия ПИН</string>
   <string name="voicemail_change_pin_preference_summary_disable">За промяна на ПИН трябва да бъде активирана визуалната гласова поща</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Визуалната гласова поща още не е активирана. Моля, опитайте отново по-късно</string>
-  <string name="vm_change_pin_old_pin">Стар ПИН</string>
-  <string name="vm_change_pin_new_pin">Нов ПИН</string>
   <string name="vm_change_pin_progress_message">Моля, изчакайте.</string>
   <string name="vm_change_pin_error_too_short">Новият ПИН е твърде къс.</string>
   <string name="vm_change_pin_error_too_long">Новият ПИН е твърде дълъг.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">ПИН кодовете не съвпадат</string>
   <string name="change_pin_succeeded">ПИН за гласовата поща бе актуализиран</string>
   <string name="change_pin_system_error">ПИН не може да бъде зададен</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Преписи на гласови съобщения</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Анализ на преписите на гласовите съобщ.</string>
   <string name="voicemail_activating_summary_info">Гласовата поща се активира</string>
-  <string name="voicemail_transcription_preference_summary_info">Получавайте преписи на гласовите си съобщения чрез услугата на Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Позволете на Google да преглежда съобщенията в гласовата ви поща, за да подобри точността на преписите. Съобщенията ви се съхраняват анонимно. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Изключване на визуалната гласова поща</string>
   <string name="confirm_disable_voicemail_dialog_message">Това ще изтрие гласовите съобщения и преписите от Google, съхранявани в приложението. Операторът ви може да запази свои копия.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">ИЗКЛЮЧВАНЕ</string>

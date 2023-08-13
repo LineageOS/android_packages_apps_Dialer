@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Hlasová schránka (%s)</string>
   <string name="voicemail_settings_title">Hlasová schránka</string>
   <string name="voicemail_notifications_preference_title">Oznámení</string>
   <string name="voicemail_change_greeting_preference_title">Pozdrav v hlasové schránce</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Změnit kód PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">Pokud chcete kód PIN změnit, musíte mít zapnutou vizuální hlasovou schránku</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Vizuální hlasová schránka zatím není aktivovaná, zkuste to prosím znovu později</string>
-  <string name="vm_change_pin_old_pin">Starý kód PIN</string>
-  <string name="vm_change_pin_new_pin">Nový kód PIN</string>
   <string name="vm_change_pin_progress_message">Počkejte prosím.</string>
   <string name="vm_change_pin_error_too_short">Nový kód PIN je příliš krátký.</string>
   <string name="vm_change_pin_error_too_long">Nový kód PIN je příliš dlouhý.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">Kódy PIN se neshodují</string>
   <string name="change_pin_succeeded">Kód PIN hlasové schránky byl změněn</string>
   <string name="change_pin_system_error">Kód PIN se nepodařilo nastavit</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Přepis hlasových zpráv</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Analýza přepisu hlasových zpráv</string>
   <string name="voicemail_activating_summary_info">Aktivace hlasové schránky</string>
-  <string name="voicemail_transcription_preference_summary_info">Získejte přepisy svých hlasových zpráv poskytované přepisovací službou od Googlu. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Dovolte Googlu kontrolovat vaše hlasové zprávy s cílem zlepšit kvalitu přepisu. Hlasové zprávy se ukládají anonymně. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Vypnout vizuální hlasovou schránku</string>
   <string name="confirm_disable_voicemail_dialog_message">Tím smažete všechny hlasové zprávy a přepisy od Googlu uložené v této aplikaci. Váš operátor si může uchovávat vlastní kopie.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">VYPNOUT</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Телефон</string>
-  <string name="launcherDialpadActivityLabel">Клавіатура телефона</string>
   <string name="callHistoryIconLabel">Історія дзвінків</string>
   <string name="action_copy_number_text">Копіювати номер</string>
   <string name="action_edit_number_before_call">Редагувати номер перед викликом</string>
@@ -38,8 +37,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Інші варіанти</string>
   <string name="action_menu_dialpad_button">клавіатура</string>
   <string name="dialer_settings_label">Налаштування</string>
-  <string name="simulator_submenu_label">Симулятор</string>
-  <string name="new_ui_launcher_shortcut_label">Створити ярлик для нової дії</string>
   <string name="description_entering_bulk_action_mode">Перехід у режим масових дій</string>
   <string name="description_leaving_bulk_action_mode">Ви вийшли з режиму масових дій</string>
   <string name="description_selecting_bulk_action_mode">Вибрано користувача %1$s</string>
@@ -50,7 +47,6 @@
   <string name="description_video_call">Відеодзвінок.</string>
   <string name="description_start_voice_search">Розпочати голосовий пошук</string>
   <string name="voicemail">Голосова пошта</string>
-  <string name="description_cancel_multi_select">Скасувати режим масових дій</string>
   <string name="voicemailMultiSelectDeleteConfirm">Видалити</string>
   <string name="voicemailMultiSelectDeleteCancel">Скасувати</string>
   <string name="voicemailMultiSelectActionBarTitle">Вибрано %1$s</string>
@@ -66,7 +62,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Голосовий пошук недоступний</string>
   <string name="dialer_hint_find_contact">Пошук контактів</string>
-  <string name="block_number_search_hint">Введіть або знайдіть номер</string>
   <string name="call_log_all_empty">Немає історії дзвінків</string>
   <string name="call_log_all_empty_action">Телефонувати</string>
   <string name="call_log_missed_empty">Немає пропущених дзвінків.</string>
@@ -74,23 +69,13 @@
   <string name="call_log_activity_title">Історія викликів</string>
   <string name="call_log_all_title">Усі</string>
   <string name="call_log_missed_title">Пропущені</string>
-  <string name="tab_speed_dial">Швидкий набір</string>
-  <string name="tab_history">Історія дзвінків</string>
   <string name="tab_all_contacts">Контакти</string>
-  <string name="tab_voicemail">Голосова пошта</string>
-  <string name="search_shortcut_call_number">Подзвонити на %s</string>
   <string name="search_shortcut_create_new_contact">Створити контакт</string>
   <string name="search_shortcut_add_to_contact">Додати в контакти</string>
   <string name="search_shortcut_send_sms_message">Надіслати SMS</string>
   <string name="search_shortcut_make_video_call">Здійснити відеодзвінок</string>
-  <string name="search_shortcut_block_number">Заблокувати номер</string>
-  <string name="speed_dial_empty">Немає номерів для швидкого набору</string>
-  <string name="speed_dial_empty_add_favorite_action">Додати номер</string>
-  <string name="remove_contact">Видалити</string>
   <string name="select_all">Вибрати все</string>
   <string name="call_log_action_video_call">Відеодзвінок</string>
-  <string name="call_log_action_set_up_video">Налаштувати відеодзвінки</string>
-  <string name="call_log_action_invite_video">Запросити на відеодзвінок</string>
   <string name="call_log_action_send_message">Надіслати повідомлення</string>
   <string name="call_log_action_details">Деталі виклику</string>
   <string name="call_log_action_share_voicemail">Надіслати в…</string>
@@ -129,23 +114,8 @@
   <string name="call_settings_label">Дзвінки</string>
   <string name="manage_blocked_numbers_label">Заблоковані номери</string>
   <string name="voicemail_settings_label">Голосова пошта</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Блокування дзвінків тимчасово вимкнено</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Блокування дзвінків вимкнено, оскільки ви зверталися з цього телефона в екстрені служби протягом останніх 48 годин. Ця функція автоматично ввімкнеться, коли мине 48 годин.</string>
-  <string name="import_send_to_voicemail_numbers_label">Імпортувати номери</string>
-  <string name="blocked_call_settings_import_description">Ви позначили абонентів, чиї дзвінки мають автоматично спрямовуватися на голосову пошту через інші додатки.</string>
-  <string name="blocked_call_settings_view_numbers_button">Переглянути номери</string>
-  <string name="blocked_call_settings_import_button">Імпортувати</string>
-  <string name="description_blocked_number_list_delete">Розблокувати номер</string>
-  <string name="addBlockedNumber">Додати номер</string>
-  <string name="block_number_footer_message_vvm">Виклики з цих номерів блокуватимуться, а голосові повідомлення автоматично видалятимуться.</string>
-  <string name="block_number_footer_message_no_vvm">Виклики з цих номерів блокуватимуться, але абоненти зможуть залишати голосові повідомлення.</string>
-  <string name="block_list">Заблоковані номери</string>
-  <string name="alreadyBlocked">Номер %1$s уже заблоковано.</string>
   <string name="phone_account_settings_label">Обл. записи для дзвінків</string>
-  <string name="permission_no_speeddial">Щоб активувати швидкий набір, увімкніть дозвіл \"Контакти\".</string>
   <string name="permission_no_calllog">Щоб переглянути журнал викликів, увімкніть дозвіл \"Телефон\".</string>
-  <string name="permission_no_search">Щоб шукати контакти, увімкніть дозвіл \"Контакти\".</string>
-  <string name="permission_place_call">Щоб зателефонувати, увімкніть дозвіл \"Телефон\".</string>
   <string name="toast_cannot_write_system_settings">Додаток Телефон не має дозволу змінювати системні налаштування.</string>
   <string name="blocked_number_call_log_label">Заблоковано</string>
   <string name="call_log_action_block_report_number">Заблокувати/позначити як спам</string>
@@ -153,22 +123,4 @@
   <string name="call_log_action_remove_spam">Не спам</string>
   <string name="call_log_action_unblock_number">Розблокувати номер</string>
   <string name="spam_number_call_log_label">Спам</string>
-  <string name="call_composer_connection_failed">%1$s не в мережі, неможливо встановити зв’язок</string>
-  <string name="about_phone_label">Про додаток</string>
-  <string name="voicemail_transcription_branding_text">Транскрипція від Google</string>
-  <string name="voicemail_transcription_in_progress">Транскрибування…</string>
-  <string name="voicemail_transcription_failed">Транскрипція недоступна.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Транскрипція недоступна. Мова не підтримується.</string>
-  <string name="voicemail_transcription_failed_no_speech">Транскрипція недоступна. Не виявлено мовлення.</string>
-  <string name="voicemail_donation_promo_title">Хочете допомогти покращити якість транскрипції?</string>
-  <string name="voicemail_donation_promo_content">Надайте Google доступ до цього й подальших повідомлень голосової пошти з транскрипцією. Повідомлення зберігатимуться анонімно. Ви можете будь-коли змінити налаштування. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Погоджуюся</string>
-  <string name="voicemail_donation_promo_opt_out">Ні, дякую</string>
-  <string name="voicemail_transcription_rating">Оцініть якість транскрипції</string>
-  <string name="voicemail_transcription_rating_thanks">Дякуємо за ваш відгук</string>
-  <string name="description_rating_good">Подобається</string>
-  <string name="description_rating_bad">Не подобається</string>
-  <string name="view_conversation">Переглянути</string>
-  <string name="ec_data_deleted">Виклик видалено. Переглянути й видалити файли, надіслані під час цього виклику, можна в Повідомленнях.</string>
-  <string name="multiple_ec_data_deleted">Виклики видалено. Переглянути й видалити файли, надіслані під час цих викликів, можна в Повідомленнях.</string>
 </resources>

@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Afrita númer</string>
   <string name="call_details_edit_number">Breyta númeri áður en hringt er</string>
   <string name="call_details_report_call_id">Tilkynna rangt númer</string>
-  <string name="sent_a_photo">Sendi mynd</string>
-  <string name="received_a_photo">Tók á móti mynd</string>
-  <string name="message_in_quotes">„%1$s“</string>
   <string name="report_caller_id_dialog_title">Tilkynna rangt númer</string>
   <string name="report_caller_id_failed">Ekki tókst að tilkynna númerið</string>
   <string name="report_caller_id_toast">Númer tilkynnt</string>

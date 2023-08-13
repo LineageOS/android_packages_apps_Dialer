@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">እውቂያዎችን ለማከል ወይም አይፈለጌ ቁጥር ለማገድ መታ ያድርጉ።</string>
   <string name="spam_notification_non_spam_call_expanded_text">ይህ ቁጥር ሲደውልልዎ ይህ የመጀመሪያ ጊዜ ነው። ይህ ጥሪ አይፈለጌ ነበር፣ ይህን ቁጥር ማገድ እና ሪፖርት ማድረግ ይችላሉ።</string>
   <string name="spam_notification_spam_call_collapsed_text">አይፈለጌ እንዳልሆነ ሪፖርት ለማድረግ ወይም ለማገድ መታ ያድርጉ</string>
-  <string name="spam_notification_report_spam_action_text">አግድ እና ሪፖርት አድርግ</string>
-  <string name="spam_notification_add_contact_action_text">እውቂያ ያክሉ</string>
   <string name="spam_notification_dialog_add_contact_action_text">ወደ እውቂያዎች ያክሉ</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">አግድ እና አይፈለጌ ሪፖርት አድርግ</string>
   <string name="spam_notification_was_not_spam_action_text">አይ፣ አይፈለጌ አይደለም</string>

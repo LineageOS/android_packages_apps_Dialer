@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Zadrži</string>
   <string name="incall_label_add_call">Dodaj klic</string>
   <string name="incall_label_mute">Izklopi zvok</string>
-  <string name="incall_label_end_call">Končaj klic</string>
   <string name="incall_label_dialpad">Tipkovnica</string>
   <string name="incall_talkback_speaker_on">, vklopljen</string>
   <string name="incall_talkback_speaker_off">, izklopljen</string>

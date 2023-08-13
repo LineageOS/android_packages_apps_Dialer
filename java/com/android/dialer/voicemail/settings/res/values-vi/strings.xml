@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Thư thoại %s</string>
   <string name="voicemail_settings_title">Thư thoại</string>
   <string name="voicemail_notifications_preference_title">Thông báo</string>
   <string name="voicemail_change_greeting_preference_title">Lời chào thư thoại</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Thay đổi mã PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">Phải bật thư thoại kèm theo hình ảnh để thay đổi mã PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Thư thoại kèm theo hình ảnh chưa được kích hoạt, hãy thử lại sau</string>
-  <string name="vm_change_pin_old_pin">Mã PIN cũ</string>
-  <string name="vm_change_pin_new_pin">Mã PIN mới</string>
   <string name="vm_change_pin_progress_message">Vui lòng đợi.</string>
   <string name="vm_change_pin_error_too_short">Mã PIN mới quá ngắn.</string>
   <string name="vm_change_pin_error_too_long">Mã PIN mới quá dài.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">Các mã PIN không khớp</string>
   <string name="change_pin_succeeded">Đã cập nhật mã PIN thư thoại</string>
   <string name="change_pin_system_error">Không thể đặt mã PIN</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Bản chép lời thư thoại</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Phân tích bản ghi âm thư thoại</string>
   <string name="voicemail_activating_summary_info">Đang kích hoạt thư thoại</string>
-  <string name="voicemail_transcription_preference_summary_info">Nhận bản chép lời thư thoại của bạn bằng cách sử dụng dịch vụ chép lời của Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Cho phép Google xem xét thư thoại của bạn để cải thiện độ chính xác của bản chép lời. Thư thoại của bạn được lưu trữ ẩn danh. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Tắt thư thoại kèm theo hình ảnh</string>
   <string name="confirm_disable_voicemail_dialog_message">Thao tác này sẽ xóa bất kỳ thư thoại và bản ghi âm Google nào được lưu trữ trong ứng dụng này. Nhà mạng của bạn có thể giữ bản sao riêng.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">TẮT</string>

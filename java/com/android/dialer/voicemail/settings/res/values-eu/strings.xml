@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Erantzungailua (%s)</string>
   <string name="voicemail_settings_title">Erantzungailua</string>
   <string name="voicemail_notifications_preference_title">Jakinarazpenak</string>
   <string name="voicemail_change_greeting_preference_title">Erantzungailuko agurra</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Aldatu PIN kodea</string>
   <string name="voicemail_change_pin_preference_summary_disable">Ikusizko erantzungailuak gaituta egon behar du PIN kodea aldatu ahal izateko</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Oraindik ez dago aktibatuta ikusizko erantzungailua. Saiatu berriro geroago.</string>
-  <string name="vm_change_pin_old_pin">PIN kode zaharra</string>
-  <string name="vm_change_pin_new_pin">PIN kode berria</string>
   <string name="vm_change_pin_progress_message">Itxaron, mesedez.</string>
   <string name="vm_change_pin_error_too_short">Laburregia da PIN kode berria.</string>
   <string name="vm_change_pin_error_too_long">Luzeegia da PIN kode berria.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN kodeak ez datoz bat</string>
   <string name="change_pin_succeeded">Eguneratu da ikusizko erantzungailuaren PIN kodea</string>
   <string name="change_pin_system_error">Ezin da ezarri PIN kodea</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Ahots-mezuen transkripzioa</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Ahots-mezuen transkripzioen analisia</string>
   <string name="voicemail_activating_summary_info">Erantzungailua aktibatzen</string>
-  <string name="voicemail_transcription_preference_summary_info">Lortu ahots-mezuen transkripzioak Google-ren transkripzio-zerbitzuaren bidez. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Utzi Google-ri ahots-mezuak berrikusten, transkripzioak zehatzagoak izan daitezen. Erantzungailuko ahots-mezuak modu anonimoan gordeko dira. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Desaktibatu ikusizko erantzungailua</string>
   <string name="confirm_disable_voicemail_dialog_message">Aplikazio honetan gordetako ahots-mezu eta Google transkripzio guztiak ezabatuko dira. Baliteke operadoreak haien kopiak gordetzea.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">DESAKTIBATU</string>

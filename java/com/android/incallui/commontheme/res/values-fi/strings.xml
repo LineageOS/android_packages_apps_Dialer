@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">Videokuva poissa käytöstä</string>
   <string name="incall_content_description_swap_video">Vaihda videota</string>
   <string name="incall_label_speaker">Kaiutin</string>
-  <string name="incall_label_audio">Ääni</string>
 </resources>

@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">Çağrı türünü seçin</string>
   <string name="disambig_option_video_call">Görünt. görüşm.</string>
   <string name="disambig_option_voice_call">Telefon et</string>
-  <string name="add_favorite_activity_title">Favori ekleyin</string>
   <string name="contact_menu_voice_call">Sesli Çağrı</string>
   <string name="contact_menu_video_call">Görüntülü Çağrı</string>
   <string name="contact_menu_message">Mesaj</string>

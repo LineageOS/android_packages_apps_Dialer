@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Утримувати</string>
   <string name="incall_label_add_call">Дод. виклик</string>
   <string name="incall_label_mute">Без звуку</string>
-  <string name="incall_label_end_call">Завер. викл.</string>
   <string name="incall_label_dialpad">Клавіатура</string>
   <string name="incall_talkback_speaker_on">, увімкнено</string>
   <string name="incall_talkback_speaker_off">, вимкнено</string>

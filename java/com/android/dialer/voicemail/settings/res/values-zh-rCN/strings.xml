@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">语音邮件（%s）</string>
   <string name="voicemail_settings_title">语音邮件</string>
   <string name="voicemail_notifications_preference_title">通知</string>
   <string name="voicemail_change_greeting_preference_title">语音信箱问候语</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">更改 PIN 码</string>
   <string name="voicemail_change_pin_preference_summary_disable">必须启用可视语音信箱才能更改 PIN 码</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">可视语音信箱尚未激活，请稍后再试</string>
-  <string name="vm_change_pin_old_pin">旧 PIN 码</string>
-  <string name="vm_change_pin_new_pin">新 PIN 码</string>
   <string name="vm_change_pin_progress_message">请稍候。</string>
   <string name="vm_change_pin_error_too_short">新的 PIN 码太短。</string>
   <string name="vm_change_pin_error_too_long">新的 PIN 码太长。</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN 码不一致</string>
   <string name="change_pin_succeeded">语音信箱 PIN 码已更新</string>
   <string name="change_pin_system_error">无法设置 PIN 码</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">语音邮件转录</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">语音邮件转录分析</string>
   <string name="voicemail_activating_summary_info">正在激活语音信箱</string>
-  <string name="voicemail_transcription_preference_summary_info">借助 Google 的转录服务获取语音邮件的转录文本。%1$s</string>
-  <string name="voicemail_donate_preference_summary_info">允许 Google 查看您的语音邮件，以提高转录准确度。您的语音邮件会以匿名形式存储。%1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">关闭可视语音信箱</string>
   <string name="confirm_disable_voicemail_dialog_message">这会删除此应用中存储的所有语音邮件和 Google 转录的内容。您的运营商可能会保留自己的副本。</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">关闭</string>

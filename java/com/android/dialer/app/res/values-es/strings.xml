@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Teléfono</string>
-  <string name="launcherDialpadActivityLabel">Teclado del teléfono</string>
   <string name="callHistoryIconLabel">Historial de llamadas</string>
   <string name="action_copy_number_text">Copiar número</string>
   <string name="action_edit_number_before_call">Editar número antes de llamar</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Más opciones</string>
   <string name="action_menu_dialpad_button">teclado</string>
   <string name="dialer_settings_label">Ajustes</string>
-  <string name="simulator_submenu_label">Simulador</string>
-  <string name="new_ui_launcher_shortcut_label">Crear acceso a la interfaz</string>
   <string name="description_entering_bulk_action_mode">Entrando en el modo de acción en bloque</string>
   <string name="description_leaving_bulk_action_mode">Se ha salido del modo de acción en bloque</string>
   <string name="description_selecting_bulk_action_mode">%1$s seleccionado</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Videollamada.</string>
   <string name="description_start_voice_search">Iniciar búsqueda por voz</string>
   <string name="voicemail">Buzón de voz</string>
-  <string name="description_cancel_multi_select">Cancelar el modo de acciones en lote</string>
   <string name="voicemailMultiSelectDeleteConfirm">Eliminar</string>
   <string name="voicemailMultiSelectDeleteCancel">Cancelar</string>
   <string name="voicemailMultiSelectActionBarTitle">Se han seleccionado %1$s</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">La búsqueda por voz no está disponible</string>
   <string name="dialer_hint_find_contact">Buscar contactos</string>
-  <string name="block_number_search_hint">Añade número o busca contactos</string>
   <string name="call_log_all_empty">Tu historial de llamadas está vacío</string>
   <string name="call_log_all_empty_action">Hacer una llamada</string>
   <string name="call_log_missed_empty">No tienes llamadas perdidas.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Historial de llamadas</string>
   <string name="call_log_all_title">Todas</string>
   <string name="call_log_missed_title">Perdidas</string>
-  <string name="tab_speed_dial">Marcación rápida</string>
-  <string name="tab_history">Historial de llamadas</string>
   <string name="tab_all_contacts">Contactos</string>
-  <string name="tab_voicemail">Buzón de voz</string>
-  <string name="search_shortcut_call_number">Llamar a %s</string>
   <string name="search_shortcut_create_new_contact">Crear nuevo contacto</string>
   <string name="search_shortcut_add_to_contact">Añadir a un contacto</string>
   <string name="search_shortcut_send_sms_message">Enviar SMS</string>
   <string name="search_shortcut_make_video_call">Hacer videollamada</string>
-  <string name="search_shortcut_block_number">Bloquear número</string>
-  <string name="speed_dial_empty">Aún no tienes contactos en la función de marcación rápida</string>
-  <string name="speed_dial_empty_add_favorite_action">Añadir un favorito</string>
-  <string name="remove_contact">Eliminar</string>
   <string name="select_all">Seleccionar todo</string>
   <string name="call_log_action_video_call">Videollamada</string>
-  <string name="call_log_action_set_up_video">Configurar una videollamada</string>
-  <string name="call_log_action_invite_video">Invitar a una videollamada</string>
   <string name="call_log_action_send_message">Enviar un mensaje</string>
   <string name="call_log_action_details">Detalles de la llamada</string>
   <string name="call_log_action_share_voicemail">Enviar a…</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Llamadas</string>
   <string name="manage_blocked_numbers_label">Números bloqueados</string>
   <string name="voicemail_settings_label">Buzón de voz</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Bloqueo de llamadas desactivado temporalmente</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Se ha inhabilitado el bloqueo de llamadas porque te has puesto en contacto con los servicios de emergencia desde este teléfono en las últimas 48 horas. Se volverá a habilitar automáticamente cuando finalice este periodo de tiempo.</string>
-  <string name="import_send_to_voicemail_numbers_label">Importar números</string>
-  <string name="blocked_call_settings_import_description">Anteriormente marcaste algunas llamadas para que se enviaran automáticamente al buzón de voz a través de otras aplicaciones.</string>
-  <string name="blocked_call_settings_view_numbers_button">Ver números</string>
-  <string name="blocked_call_settings_import_button">Importar</string>
-  <string name="description_blocked_number_list_delete">Desbloquear número</string>
-  <string name="addBlockedNumber">Añadir número</string>
-  <string name="block_number_footer_message_vvm">Se bloquearán las llamadas de estos números y se eliminarán los mensajes del buzón de voz automáticamente.</string>
-  <string name="block_number_footer_message_no_vvm">Se bloquearán las llamadas de estos números, pero podrán seguir dejando mensajes en el buzón de voz.</string>
-  <string name="block_list">Números bloqueados</string>
-  <string name="alreadyBlocked">%1$s ya está bloqueado.</string>
   <string name="phone_account_settings_label">Cuentas de llamadas</string>
-  <string name="permission_no_speeddial">Para habilitar la marcación rápida, activa el permiso la aplicación Contactos.</string>
   <string name="permission_no_calllog">Para ver el registro de llamadas, habilita el permiso de teléfono.</string>
-  <string name="permission_no_search">Para poder buscar tus contactos, activa los permisos de contactos.</string>
-  <string name="permission_place_call">Para hacer una llamada, activa el permiso de la aplicación Teléfono.</string>
   <string name="toast_cannot_write_system_settings">La aplicación Teléfono no tiene permiso para editar los ajustes del sistema.</string>
   <string name="blocked_number_call_log_label">Bloqueado</string>
   <string name="call_log_action_block_report_number">Bloquear/Marcar como spam</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">No es spam</string>
   <string name="call_log_action_unblock_number">Desbloquear número</string>
   <string name="spam_number_call_log_label">Spam</string>
-  <string name="call_composer_connection_failed">%1$s no tiene conexión y no se puede contactar</string>
-  <string name="about_phone_label">Información</string>
-  <string name="voicemail_transcription_branding_text">Transcrito por Google</string>
-  <string name="voicemail_transcription_in_progress">Transcribiendo…</string>
-  <string name="voicemail_transcription_failed">La transcripción no está disponible.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">La transcripción no está disponible. No se admite el idioma.</string>
-  <string name="voicemail_transcription_failed_no_speech">La transcripción no está disponible. No se detectó ninguna voz.</string>
-  <string name="voicemail_donation_promo_title">¿Quieres ayudarnos a mejorar la precisión de las transcripciones?</string>
-  <string name="voicemail_donation_promo_content">Deja que Google revise este y otros mensajes del buzón de voz que recibas mediante transcripciones. Se guardarán de manera anónima. Puedes cambiar esta opción en Ajustes cuando quieras. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Sí, acepto</string>
-  <string name="voicemail_donation_promo_opt_out">No, gracias</string>
-  <string name="voicemail_transcription_rating">Valora la calidad de transcripción</string>
-  <string name="voicemail_transcription_rating_thanks">Gracias por tus comentarios</string>
-  <string name="description_rating_good">Me gusta</string>
-  <string name="description_rating_bad">No me gusta</string>
-  <string name="view_conversation">Ver</string>
-  <string name="ec_data_deleted">Se ha eliminado la llamada. Si quieres ver y eliminar los archivos adjuntos compartidos durante esta llamada, ve a Mensajes.</string>
-  <string name="multiple_ec_data_deleted">Se han eliminado las llamadas. Si quieres ver y eliminar los archivos adjuntos compartidos durante las llamadas, ve a Mensajes.</string>
 </resources>

@@ -33,9 +33,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
-import java.io.File;
 import java.util.Iterator;
-import java.util.Random;
 
 /** General purpose utility methods for the Dialer. */
 public class DialerUtils {
@@ -45,10 +43,6 @@ public class DialerUtils {
    * Priority Service.
    */
   private static final String WPS_PREFIX = "*272";
-
-  public static final String FILE_PROVIDER_CACHE_DIR = "my_cache";
-
-  private static final Random RANDOM = new Random();
 
   /**
    * Attempts to start an activity and displays a toast with the default error message if the
@@ -202,18 +196,5 @@ public class DialerUtils {
     if (imm != null) {
       imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-  }
-
-  /**
-   * Create a File in the cache directory that Dialer's FileProvider knows about so they can be
-   * shared to other apps.
-   */
-  public static File createShareableFile(Context context) {
-    long fileId = Math.abs(RANDOM.nextLong());
-    File parentDir = new File(context.getCacheDir(), FILE_PROVIDER_CACHE_DIR);
-    if (!parentDir.exists()) {
-      parentDir.mkdirs();
-    }
-    return new File(parentDir, String.valueOf(fileId));
   }
 }

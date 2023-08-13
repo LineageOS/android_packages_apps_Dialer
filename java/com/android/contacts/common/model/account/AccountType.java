@@ -49,12 +49,7 @@ public abstract class AccountType {
   private static final String TAG = "AccountType";
   /** {@link Comparator} to sort by {@link DataKind#weight}. */
   private static Comparator<DataKind> sWeightComparator =
-      new Comparator<DataKind>() {
-        @Override
-        public int compare(DataKind object1, DataKind object2) {
-          return object1.weight - object2.weight;
-        }
-      };
+          Comparator.comparingInt(object -> object.weight);
   /** The {@link RawContacts#ACCOUNT_TYPE} these constraints apply to. */
   public String accountType = null;
   /** The {@link RawContacts#DATA_SET} these constraints apply to. */
@@ -83,9 +78,9 @@ public abstract class AccountType {
   public int iconRes;
   protected boolean mIsInitialized;
   /** Set of {@link DataKind} supported by this source. */
-  private ArrayList<DataKind> mKinds = new ArrayList<>();
+  private final ArrayList<DataKind> mKinds = new ArrayList<>();
   /** Lookup map of {@link #mKinds} on {@link DataKind#mimeType}. */
-  private Map<String, DataKind> mMimeKinds = new ArrayMap<>();
+  private final Map<String, DataKind> mMimeKinds = new ArrayMap<>();
 
   /**
    * Return a string resource loaded from the given package (or the current package if {@code
@@ -137,36 +132,12 @@ public abstract class AccountType {
     return true;
   }
 
-  public boolean isExtension() {
-    return false;
-  }
-
   /**
    * @return True if contacts can be created and edited using this app. If false, there could still
    *     be an external editor as provided by {@link #getEditContactActivityClassName()} or {@link
    *     #getCreateContactActivityClassName()}
    */
   public abstract boolean areContactsWritable();
-
-  /**
-   * Returns an optional custom edit activity.
-   *
-   * <p>Only makes sense for non-embedded account types. The activity class should reside in the
-   * sync adapter package as determined by {@link #syncAdapterPackageName}.
-   */
-  public String getEditContactActivityClassName() {
-    return null;
-  }
-
-  /**
-   * Returns an optional custom new contact activity.
-   *
-   * <p>Only makes sense for non-embedded account types. The activity class should reside in the
-   * sync adapter package as determined by {@link #syncAdapterPackageName}.
-   */
-  public String getCreateContactActivityClassName() {
-    return null;
-  }
 
   /**
    * Returns an optional custom invite contact activity.

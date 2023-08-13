@@ -34,27 +34,7 @@
   <string name="voicemail_string">ข้อความเสียง</string>
   <string name="just_now">เมื่อสักครู่</string>
   <string name="new_call_log_carrier_video">การโทรวิดีโอผ่านผู้ให้บริการ</string>
-  <string name="new_call_log_duo_video">วิดีโอคอลผ่าน Duo</string>
   <string name="new_call_log_unknown">ไม่ทราบ</string>
   <string name="new_call_log_secondary_blocked">ถูกบล็อก</string>
   <string name="new_call_log_secondary_spam">สแปม</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 สายที่ไม่ได้รับจาก ^2</item>
-    <item quantity="other">^1 สาย และสายที่ไม่ได้รับล่าสุดคือสายจาก ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 สายที่ได้รับจาก ^2</item>
-    <item quantity="other">^1 สาย และสายที่ได้รับล่าสุดคือสายจาก ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 สายโทรออกไปยัง ^2</item>
-    <item quantity="other">^1 สาย และสายที่โทรออกล่าสุดคือสายจาก ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 สายที่บล็อกจาก ^2</item>
-    <item quantity="other">^1 สาย และสายที่บล็อกล่าสุดคือสายจาก ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">ใน ^1 ผ่าน ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3</string>
 </resources>

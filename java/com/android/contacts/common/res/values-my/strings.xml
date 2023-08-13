@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">အသုံးများသောလိပ်စာများရှင်းပစ်မလား?</string>
   <string name="clearFrequentsConfirmation">အသုံးများသော အဆက်အသွယ်စာရင်းအား Contacts နှင့် Phone app များမှ သင် ရှင်းလင်းပစ်မှာဖြစ်ပြီး၊ အီးမေးလ် app များအား သင့်နှစ်သက်ရာ ​ပ​ြောဆိုဆက်ဆံမှုပုံစံကို အစမှပြန်လည် လေ့လာခိုင်းမည်။</string>
   <string name="clearFrequentsProgress_title">အသုံးများသောလိပ်စာများ ရှင်းလင်းနေစဉ်</string>
-  <string name="status_available">ဆက်သွယ်နိုင်ပါသည်</string>
-  <string name="status_away">အဝေးရောက်နေပါသည်</string>
-  <string name="status_busy">အလုပ်များနေသည်</string>
-  <string name="contactsList">အဆက်အသွယ်များ</string>
-  <string name="contact_suggestions">ထိပ်တန်း အကြံပြုထားပါသည်</string>
-  <string name="local_invisible_directory">တစ်ခြား</string>
   <string name="directory_search_label">လမ်းညွှန်</string>
   <string name="directory_search_label_work">အလုပ်လမ်းညွှန်</string>
-  <string name="local_search_label">လိပ်စာများအားလုံး</string>
-  <string name="local_suggestions_search_label">အကြံပြုချက်များ</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">ကျွန်ုပ်</string>
   <string name="missing_name">(အမည်မရှိ)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">အဆက်အသွယ်ကိုကြည့်ရန်</string>
-  <string name="list_filter_phones">ဖုန်းနံပါတ်ပါသော လိပ်စာများအားလုံး</string>
-  <string name="list_filter_phones_work">အလုပ်ပရိုဖိုင် အဆက်အသွယ်များ</string>
   <string name="view_updates_from_group">အဆင့်မြှင့်ခြင်းများပြရန်</string>
   <string name="account_phone">ကိရိယာတွင်သာ၊ စင့်ခ်မလုပ်ပါ</string>
   <string name="nameLabelsGroup">အမည်</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ သုံး၍ ချက်တင်ပြုလုပ်ခြင်း</string>
   <string name="chat_jabber">Jabberသုံး၍ ချက်တင်ပြုလုပ်ခြင်း</string>
   <string name="chat">ချက်တင်းပြောသည်</string>
-  <string name="list_filter_all_accounts">ဆက်သွယ်အားလုံး</string>
-  <string name="listAllContactsInAccount">%s ထဲမှ အဆက်အသွယ်များ</string>
-  <string name="listCustomView">မိမိစိတ်ကြိုက် မြင်ကွင်းမှ</string>
-  <string name="listSingleContact">အဆက်အသွယ်တစ်ခုတည်း</string>
   <string name="display_options_sort_list_by">ဖြင့် စီပေးရန်</string>
   <string name="display_options_sort_by_given_name">ပထမ အမည်</string>
   <string name="display_options_sort_by_family_name">နောက်ဆုံး အမည်</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">ရှာဖွေမှုကို ရှင်းပါ</string>
   <string name="select_account_dialog_title">အကောင့်</string>
   <string name="set_default_account">ခေါ်ဆိုမှုများ အတွက် အမြဲတမ်း ဒါကို သုံးရန်</string>
-  <string name="select_phone_account_for_calls">ဤခေါ်ဆိုမှုအတွက် ဆင်းမ်ကဒ် ရွေးချယ်ခြင်း</string>
-  <string name="select_phone_account_for_calls_remember">ဤရွေးချယ်မှုကို မှတ်ထားရန်</string>
   <string name="call_with_a_note">မှတ်စုတစ်ခုဖြင့် ခေါ်ဆိုမည်</string>
   <string name="call_subject_hint">ခေါ်ဆိုမှုဖြင့် ပေးပို့ရန် မှတ်စုတစ်ခု ရိုက်ပါ ...</string>
   <string name="send_and_call_button">ပေးပို့ပြီး ခေါ်ပါ</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s တဘ်။ မဖတ်ရသေးသည့် အရာ %2$d ခု။ </item>
   </plurals>
   <string name="description_search_video_call">ဗီဒီယို ခေါ်ဆိုမှု</string>
-  <string name="description_search_call_and_share">မျှဝေပြီး ခေါ်ဆိုရန်</string>
 </resources>

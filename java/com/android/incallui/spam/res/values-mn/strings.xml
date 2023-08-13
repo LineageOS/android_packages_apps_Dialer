@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Харилцагчдад нэмэх буюу спам дугаарыг хориглох бол товшино уу.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Энэ дугаараас танд анх удаа дуудлага ирсэн. Хэрэв энэ дуудлага спам бол та энэ дугаарыг хориглож, спамаар мэдээлэх боломжтой.</string>
   <string name="spam_notification_spam_call_collapsed_text">Спам биш гэж мэдээлэх эсвэл хориглох бол товшино уу</string>
-  <string name="spam_notification_report_spam_action_text">Хориглож, мэдээлэх</string>
-  <string name="spam_notification_add_contact_action_text">Харилцагч нэмэх</string>
   <string name="spam_notification_dialog_add_contact_action_text">Харилцагчдад нэмэх</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Хориглож, спам гэж мэдээлэх</string>
   <string name="spam_notification_was_not_spam_action_text">Үгүй, спам биш</string>

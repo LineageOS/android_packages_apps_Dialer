@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefoon</string>
-  <string name="launcherDialpadActivityLabel">Toetsenblok van telefoon</string>
   <string name="callHistoryIconLabel">Oproepgeschiedenis</string>
   <string name="action_copy_number_text">Nummer kopiëren</string>
   <string name="action_edit_number_before_call">Nummer bewerken vóór bellen</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Meer opties</string>
   <string name="action_menu_dialpad_button">toetsenblok</string>
   <string name="dialer_settings_label">Instellingen</string>
-  <string name="simulator_submenu_label">Simulator</string>
-  <string name="new_ui_launcher_shortcut_label">Snelkoppeling voor nieuwe UI</string>
   <string name="description_entering_bulk_action_mode">Modus voor bulkacties openen</string>
   <string name="description_leaving_bulk_action_mode">Modus voor bulkacties verlaten</string>
   <string name="description_selecting_bulk_action_mode">%1$s geselecteerd</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Videogesprek.</string>
   <string name="description_start_voice_search">Gesproken zoekopdracht</string>
   <string name="voicemail">Voicemail</string>
-  <string name="description_cancel_multi_select">Modus voor batchacties annuleren</string>
   <string name="voicemailMultiSelectDeleteConfirm">Verwijderen</string>
   <string name="voicemailMultiSelectDeleteCancel">Annuleren</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s geselecteerd</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Gesproken zoekopdracht niet beschikbaar</string>
   <string name="dialer_hint_find_contact">Contacten zoeken</string>
-  <string name="block_number_search_hint">Voeg nummer toe of zoek contacten</string>
   <string name="call_log_all_empty">Je oproepgeschiedenis is leeg</string>
   <string name="call_log_all_empty_action">Bellen</string>
   <string name="call_log_missed_empty">Je hebt geen gemiste oproepen.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Oproepgeschiedenis</string>
   <string name="call_log_all_title">Alle</string>
   <string name="call_log_missed_title">Gemist</string>
-  <string name="tab_speed_dial">Snelkeuze</string>
-  <string name="tab_history">Oproepgeschiedenis</string>
   <string name="tab_all_contacts">Contacten</string>
-  <string name="tab_voicemail">Voicemail</string>
-  <string name="search_shortcut_call_number">%s bellen</string>
   <string name="search_shortcut_create_new_contact">Nieuw contact maken</string>
   <string name="search_shortcut_add_to_contact">Toevoegen aan een contact</string>
   <string name="search_shortcut_send_sms_message">Sms verzenden</string>
   <string name="search_shortcut_make_video_call">Videogesprek starten</string>
-  <string name="search_shortcut_block_number">Nummer blokkeren</string>
-  <string name="speed_dial_empty">Er staat nog niemand in je snelkeuzelijst</string>
-  <string name="speed_dial_empty_add_favorite_action">Een favoriet toevoegen</string>
-  <string name="remove_contact">Verwijderen</string>
   <string name="select_all">Alles selecteren</string>
   <string name="call_log_action_video_call">Videogesprek</string>
-  <string name="call_log_action_set_up_video">Videogesprekken instellen</string>
-  <string name="call_log_action_invite_video">Uitnodigen voor videogesprek</string>
   <string name="call_log_action_send_message">Een bericht verzenden</string>
   <string name="call_log_action_details">Oproepdetails</string>
   <string name="call_log_action_share_voicemail">Verzenden naar…</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Oproepen</string>
   <string name="manage_blocked_numbers_label">Geblokkeerde nummers</string>
   <string name="voicemail_settings_label">Voicemail</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Oproepblokkering tijdelijk uitgeschakeld</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Oproepblokkering is uitgeschakeld omdat je in de afgelopen 48 uur contact met de noodhulpdiensten hebt opgenomen via deze telefoon. De functie wordt automatisch weer ingeschakeld nadat de periode van 48 uur is verstreken.</string>
-  <string name="import_send_to_voicemail_numbers_label">Nummers importeren</string>
-  <string name="blocked_call_settings_import_description">Je hebt via andere apps al aangegeven dat bepaalde bellers moeten worden doorgeschakeld naar de voicemail.</string>
-  <string name="blocked_call_settings_view_numbers_button">Nummers bekijken</string>
-  <string name="blocked_call_settings_import_button">Importeren</string>
-  <string name="description_blocked_number_list_delete">Blokkeren van nummer opheffen</string>
-  <string name="addBlockedNumber">Nummer toevoegen</string>
-  <string name="block_number_footer_message_vvm">Oproepen van deze nummers worden geblokkeerd en voicemails worden automatisch verwijderd.</string>
-  <string name="block_number_footer_message_no_vvm">Oproepen van deze nummers worden geblokkeerd, maar de bellers kunnen nog wel voicemail achterlaten.</string>
-  <string name="block_list">Geblokkeerde nummers</string>
-  <string name="alreadyBlocked">%1$s is al geblokkeerd.</string>
   <string name="phone_account_settings_label">Oproepaccounts</string>
-  <string name="permission_no_speeddial">Als je de snelkeuzefunctie wilt inschakelen, schakel je de machtiging voor Contacten in.</string>
   <string name="permission_no_calllog">Als je je gesprekkenlijst wilt bekijken, schakel je de machtiging voor Telefoon in.</string>
-  <string name="permission_no_search">Als je naar contacten wilt zoeken, schakel je de contacttoestemming in.</string>
-  <string name="permission_place_call">Als je iemand wilt bellen, schakel je de machtiging voor Telefoon in.</string>
   <string name="toast_cannot_write_system_settings">Telefoon-app heeft geen toestemming om systeeminstellingen te schrijven.</string>
   <string name="blocked_number_call_log_label">Geblokkeerd</string>
   <string name="call_log_action_block_report_number">Blokkeren/spam melden</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Geen spam</string>
   <string name="call_log_action_unblock_number">Blokkeren van nummer opheffen</string>
   <string name="spam_number_call_log_label">Spam</string>
-  <string name="call_composer_connection_failed">%1$s is offline en kan niet worden bereikt</string>
-  <string name="about_phone_label">Over</string>
-  <string name="voicemail_transcription_branding_text">Getranscribeerd door Google</string>
-  <string name="voicemail_transcription_in_progress">Transcript maken…</string>
-  <string name="voicemail_transcription_failed">Transcript niet beschikbaar.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transcript niet beschikbaar. Taal niet ondersteund.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transcript niet beschikbaar. Geen spraak gedetecteerd.</string>
-  <string name="voicemail_donation_promo_title">Wil je helpen de nauwkeurigheid van transcripties te verbeteren?</string>
-  <string name="voicemail_donation_promo_content">Laat Google deze en toekomstige voicemailberichten met transcripten controleren. Ze worden anoniem opgeslagen. Je kunt deze instellingen op elk gewenst moment wijzigen. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Ja, is goed</string>
-  <string name="voicemail_donation_promo_opt_out">Nee</string>
-  <string name="voicemail_transcription_rating">Beoordeel transcriptkwaliteit</string>
-  <string name="voicemail_transcription_rating_thanks">Bedankt voor je feedback</string>
-  <string name="description_rating_good">Like</string>
-  <string name="description_rating_bad">Dislike</string>
-  <string name="view_conversation">Weergeven</string>
-  <string name="ec_data_deleted">Gesprek verwijderd. Bijlagen die in dit gesprek zijn gedeeld, kun je bekijken en verwijderen via Berichten.</string>
-  <string name="multiple_ec_data_deleted">Gesprekken verwijderd. Bijlagen die in deze gesprekken zijn gedeeld, kun je bekijken en verwijderen via Berichten.</string>
 </resources>

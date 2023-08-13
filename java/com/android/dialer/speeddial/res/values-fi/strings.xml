@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">Valitse puhelutyyppi</string>
   <string name="disambig_option_video_call">Videopuhelu</string>
   <string name="disambig_option_voice_call">Soita</string>
-  <string name="add_favorite_activity_title">Lisää suosikki</string>
   <string name="contact_menu_voice_call">Äänipuhelu</string>
   <string name="contact_menu_video_call">Videopuhelu</string>
   <string name="contact_menu_message">Viesti</string>

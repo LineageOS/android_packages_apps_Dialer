@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Xóa danh sách liên hệ thường xuyên?</string>
   <string name="clearFrequentsConfirmation">Bạn sẽ xóa danh sách liên hệ thường xuyên trong ứng dụng Danh bạ và điện thoại cũng như buộc các ứng dụng email phải tìm hiểu các tùy chọn gửi của bạn lại từ đầu.</string>
   <string name="clearFrequentsProgress_title">Đang xóa DS liên hệ thường xuyên…</string>
-  <string name="status_available">Có mặt</string>
-  <string name="status_away">Đã ra ngoài</string>
-  <string name="status_busy">Bận</string>
-  <string name="contactsList">Danh bạ</string>
-  <string name="contact_suggestions">Đề xuất hàng đầu</string>
-  <string name="local_invisible_directory">Khác</string>
   <string name="directory_search_label">Thư mục</string>
   <string name="directory_search_label_work">Thư mục công việc</string>
-  <string name="local_search_label">Tất cả liên hệ</string>
-  <string name="local_suggestions_search_label">Đề xuất</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Tôi</string>
   <string name="missing_name">(Không có tên)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Xem liên hệ</string>
-  <string name="list_filter_phones">Tất cả người liên hệ có số điện thoại</string>
-  <string name="list_filter_phones_work">Liên hệ trên hồ sơ công việc</string>
   <string name="view_updates_from_group">Xem thông tin cập nhật</string>
   <string name="account_phone">Chỉ trên thiết bị, chưa đồng bộ hóa</string>
   <string name="nameLabelsGroup">Tên</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Trò chuyện sử dụng ICQ</string>
   <string name="chat_jabber">Trò chuyện sử dụng Jabber</string>
   <string name="chat">Trò chuyện</string>
-  <string name="list_filter_all_accounts">Tất cả liên hệ</string>
-  <string name="listAllContactsInAccount">Danh bạ trong %s</string>
-  <string name="listCustomView">Danh bạ ở chế độ xem tùy chỉnh</string>
-  <string name="listSingleContact">Một liên hệ</string>
   <string name="display_options_sort_list_by">Sắp xếp theo</string>
   <string name="display_options_sort_by_given_name">Tên</string>
   <string name="display_options_sort_by_family_name">Họ</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Xóa tìm kiếm</string>
   <string name="select_account_dialog_title">Tài khoản</string>
   <string name="set_default_account">Luôn sử dụng SIM này để gọi</string>
-  <string name="select_phone_account_for_calls">Chọn SIM cho cuộc gọi này</string>
-  <string name="select_phone_account_for_calls_remember">Nhớ lựa chọn này</string>
   <string name="call_with_a_note">Gọi điện kèm theo ghi chú</string>
   <string name="call_subject_hint">Nhập ghi chú để gửi kèm cuộc gọi...</string>
   <string name="send_and_call_button">GỬI và GỌI</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> Tab %1$s. %2$d mục chưa đọc. </item>
   </plurals>
   <string name="description_search_video_call">Gọi điện video</string>
-  <string name="description_search_call_and_share">Chia sẻ và gọi</string>
 </resources>

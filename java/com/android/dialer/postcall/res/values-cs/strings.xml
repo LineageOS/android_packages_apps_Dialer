@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Zavolej mi, je to naléhavé.</string>
   <string name="post_call_message_2">Zavolej mi, až budeš mít čas.</string>
   <string name="post_call_message_3">Neděje si nic naléhavého, zavoláme si později.</string>
-  <string name="post_call_add_message">Přidat zprávu</string>
-  <string name="post_call_send_message">Poslat zprávu</string>
+    <string name="post_call_send_message">Poslat zprávu</string>
   <string name="post_call_message_sent">Zpráva byla odeslána</string>
   <string name="view">Zobrazit</string>
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefon</string>
-  <string name="launcherDialpadActivityLabel">Tipkovnica telefona</string>
   <string name="callHistoryIconLabel">Zgodovina klicev</string>
   <string name="action_copy_number_text">Kopiranje številke</string>
   <string name="action_edit_number_before_call">Urejanje številke pred klicem</string>
@@ -38,8 +37,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Več možnosti</string>
   <string name="action_menu_dialpad_button">tipkovnica</string>
   <string name="dialer_settings_label">Nastavitve</string>
-  <string name="simulator_submenu_label">Simulator</string>
-  <string name="new_ui_launcher_shortcut_label">Ustvari bliž. za novi up. vm.</string>
   <string name="description_entering_bulk_action_mode">Prehod v način množičnega dejanja</string>
   <string name="description_leaving_bulk_action_mode">Prehod iz načina množičnega dejanja</string>
   <string name="description_selecting_bulk_action_mode">Izbrano: %1$s</string>
@@ -50,7 +47,6 @@
   <string name="description_video_call">Videoklic.</string>
   <string name="description_start_voice_search">Začni glasovno iskanje</string>
   <string name="voicemail">Glasovna pošta</string>
-  <string name="description_cancel_multi_select">Prekliči način množičnega dejanja</string>
   <string name="voicemailMultiSelectDeleteConfirm">Izbriši</string>
   <string name="voicemailMultiSelectDeleteCancel">Prekliči</string>
   <string name="voicemailMultiSelectActionBarTitle">Št. izbranih: %1$s</string>
@@ -66,7 +62,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Glasovno iskanje ni na voljo</string>
   <string name="dialer_hint_find_contact">Iskanje stikov</string>
-  <string name="block_number_search_hint">Dodajte št. ali iščite med st.</string>
   <string name="call_log_all_empty">Zgodovina klicev je prazna</string>
   <string name="call_log_all_empty_action">Klicanje</string>
   <string name="call_log_missed_empty">Nimate neodgovorjenih klicev.</string>
@@ -74,23 +69,13 @@
   <string name="call_log_activity_title">Zgodovina klicev</string>
   <string name="call_log_all_title">Vsi</string>
   <string name="call_log_missed_title">Neodgovorjeni</string>
-  <string name="tab_speed_dial">Hitro izbiranje</string>
-  <string name="tab_history">Zgodovina klicev</string>
   <string name="tab_all_contacts">Stiki</string>
-  <string name="tab_voicemail">Odzivnik</string>
-  <string name="search_shortcut_call_number">Pokliči %s</string>
   <string name="search_shortcut_create_new_contact">Ustvari nov stik</string>
   <string name="search_shortcut_add_to_contact">Dodaj stiku</string>
   <string name="search_shortcut_send_sms_message">Pošlji SMS</string>
   <string name="search_shortcut_make_video_call">Opravi videoklic</string>
-  <string name="search_shortcut_block_number">Blokiraj številko</string>
-  <string name="speed_dial_empty">Na seznamu za hitro klicanje nimate še nikogar</string>
-  <string name="speed_dial_empty_add_favorite_action">Dodajte priljubljenega</string>
-  <string name="remove_contact">Odstrani</string>
   <string name="select_all">Izberi vse</string>
   <string name="call_log_action_video_call">Videoklic</string>
-  <string name="call_log_action_set_up_video">Nastavi videoklicanje</string>
-  <string name="call_log_action_invite_video">Povabi v videoklic</string>
   <string name="call_log_action_send_message">Pošljite sporočilo</string>
   <string name="call_log_action_details">Podrobnosti klica</string>
   <string name="call_log_action_share_voicemail">Pošlji …</string>
@@ -129,23 +114,8 @@
   <string name="call_settings_label">Klici</string>
   <string name="manage_blocked_numbers_label">Blokirane številke</string>
   <string name="voicemail_settings_label">Odzivnik</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Blokiranje klicev je začasno izklopljeno</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Blokiranje klicev je onemogočeno, ker ste se v zadnjih 48 urah s tem telefonom obrnili na nujno pomoč. Ko 48-urno obdobje poteče, bo blokiranje klicev samodejno znova omogočeno.</string>
-  <string name="import_send_to_voicemail_numbers_label">Uvoz številk</string>
-  <string name="blocked_call_settings_import_description">Označili ste, naj nekatere klicatelje druge aplikacije samodejno preusmerijo v odzivnik.</string>
-  <string name="blocked_call_settings_view_numbers_button">Ogled številk</string>
-  <string name="blocked_call_settings_import_button">Uvozi</string>
-  <string name="description_blocked_number_list_delete">Odblokiranje telefonske številke</string>
-  <string name="addBlockedNumber">Dodaj telefonsko številko</string>
-  <string name="block_number_footer_message_vvm">Klici s teh številk bodo blokirani in sporočila v odzivniku bodo samodejno izbrisana.</string>
-  <string name="block_number_footer_message_no_vvm">Klici s teh številk bodo blokirani, klicatelji pa bodo morda še vedno lahko pustil sporočila v odzivniku.</string>
-  <string name="block_list">Blokirane številke</string>
-  <string name="alreadyBlocked">Telefonska številka %1$s je že blokirana.</string>
   <string name="phone_account_settings_label">Računi za klicanje</string>
-  <string name="permission_no_speeddial">Če želite omogočiti hitro klicanje, vklopite dovoljenje za stike.</string>
   <string name="permission_no_calllog">Če si želite ogledati dnevnik klicev, vklopite dovoljenje za telefon.</string>
-  <string name="permission_no_search">Če želite iskati po stikih, vklopite dovoljenje za stike.</string>
-  <string name="permission_place_call">Če želite klicati, vklopite dovoljenje za telefon.</string>
   <string name="toast_cannot_write_system_settings">Aplikacija Telefon nima dovoljenja za pisanje v sistemske nastavitve.</string>
   <string name="blocked_number_call_log_label">Blokirano</string>
   <string name="call_log_action_block_report_number">Blokiraj/prij. než. vsebino</string>
@@ -153,22 +123,4 @@
   <string name="call_log_action_remove_spam">Ni neželena vsebina</string>
   <string name="call_log_action_unblock_number">Odblokiranje telefonske številke</string>
   <string name="spam_number_call_log_label">Vsiljena pošta</string>
-  <string name="call_composer_connection_failed">Oseba %1$s nima vzpostavljene povezave in ni dosegljiva</string>
-  <string name="about_phone_label">Vizitka</string>
-  <string name="voicemail_transcription_branding_text">Prepis je zagotovil Google</string>
-  <string name="voicemail_transcription_in_progress">Ustvarjanje prepisa …</string>
-  <string name="voicemail_transcription_failed">Prepis ni na voljo.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Prepis ni na voljo. Jezik ni podprt.</string>
-  <string name="voicemail_transcription_failed_no_speech">Prepis ni na voljo. Govora ni bilo mogoče zaznati.</string>
-  <string name="voicemail_donation_promo_title">Želite pomagati izboljšati natančnost prepisov?</string>
-  <string name="voicemail_donation_promo_content">Dovolite Googlu, da pregleda ta in prihodnja sporočila v odzivniku s prepisi. Shranjena bodo anonimno. Nastavitve lahko kadar koli spremenite. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Da, sem za</string>
-  <string name="voicemail_donation_promo_opt_out">Ne, hvala</string>
-  <string name="voicemail_transcription_rating">Ocenite kakovost prepisa</string>
-  <string name="voicemail_transcription_rating_thanks">Hvala za povratne informacije</string>
-  <string name="description_rating_good">Všeč mi je</string>
-  <string name="description_rating_bad">Ni mi všeč</string>
-  <string name="view_conversation">Prikaži</string>
-  <string name="ec_data_deleted">Klic je izbrisan. Priloge, ki so bile dane v skupno rabo v tem klicu, si lahko ogledate in izbrišete v aplikaciji Messages.</string>
-  <string name="multiple_ec_data_deleted">Klici so izbrisani. Priloge, ki so bile dane v skupno rabo v teh klicih, si lahko ogledate in izbrišete v aplikaciji Messages.</string>
 </resources>
