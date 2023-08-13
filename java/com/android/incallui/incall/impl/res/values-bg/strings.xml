@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Задържане</string>
   <string name="incall_label_add_call">Ново обажд.</string>
   <string name="incall_label_mute">Без звук</string>
-  <string name="incall_label_end_call">Затваряне</string>
   <string name="incall_label_dialpad">Клавиатура</string>
   <string name="incall_talkback_speaker_on">е включено</string>
   <string name="incall_talkback_speaker_off">е изключено</string>

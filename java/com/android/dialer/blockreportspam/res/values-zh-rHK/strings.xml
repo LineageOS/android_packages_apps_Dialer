@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">解除封鎖</string>
   <string name="block_report_number_alert_title">要封鎖 %1$s 嗎？</string>
   <string name="block_report_number_alert_details">您不會再收到此號碼的來電。</string>
-  <string name="block_number_alert_details">%1$s 此來電將舉報為垃圾來電。</string>
   <string name="unblock_number_alert_details">系統會將此號碼解除封鎖，並舉報為非垃圾號碼。此外，系統不會將日後的來電視為垃圾來電。</string>
   <string name="unblock_report_number_alert_title">要解除封鎖 %1$s 嗎？</string>
   <string name="report_not_spam_alert_button">舉報</string>

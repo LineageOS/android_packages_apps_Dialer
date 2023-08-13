@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Lokhu kuyashesha. Ngishayele futhi.</string>
   <string name="post_call_message_2">Ngishayele futhi uma unesikhathi.</string>
   <string name="post_call_message_3">Akusheshi, singaxoxa kamuva.</string>
-  <string name="post_call_add_message">Engeza umlayezo</string>
-  <string name="post_call_send_message">Thumela umlayezo</string>
+    <string name="post_call_send_message">Thumela umlayezo</string>
   <string name="post_call_message_sent">Umlayezo uthunyelwe</string>
   <string name="view">Buka</string>
 </resources>

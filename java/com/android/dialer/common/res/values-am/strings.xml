@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">ዋይፋይ</string>
-  <string name="network_name_mobile">ሞባይል</string>
   <string name="content_description_overflow">ተጨማሪ አማራጮች</string>
   <string name="snackbar_undo">ቀልብስ</string>
   <string name="ok_got_it">እሺ፣ ገብቶኛል</string>

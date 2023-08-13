@@ -36,32 +36,7 @@
   <string name="voicemail_string">Govorna pošta</string>
   <string name="just_now">Malopre</string>
   <string name="new_call_log_carrier_video">Video poziv preko operatera</string>
-  <string name="new_call_log_duo_video">Duo video poziv</string>
   <string name="new_call_log_unknown">Nepoznati brojevi</string>
   <string name="new_call_log_secondary_blocked">Blokirani</string>
   <string name="new_call_log_secondary_spam">Nepoželjno</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 poziv, poslednji je propušteni poziv od: ^2</item>
-    <item quantity="few">^1 poziva, poslednji je propušteni poziv od: ^2</item>
-    <item quantity="other">^1 poziva, poslednji je propušteni poziv od: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 poziv, poslednji je prihvaćeni poziv od: ^2</item>
-    <item quantity="few">^1 poziva, poslednji je prihvaćeni poziv od: ^2</item>
-    <item quantity="other">^1 poziva, poslednji je prihvaćeni poziv od: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 poziv, poslednji je odlazni poziv za: ^2</item>
-    <item quantity="few">^1 poziva, poslednji je odlazni poziv za: ^2</item>
-    <item quantity="other">^1 poziva, poslednji je odlazni poziv za: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 poziv, poslednji je blokirani poziv od: ^2</item>
-    <item quantity="few">^1 poziva, poslednji je blokirani poziv od: ^2</item>
-    <item quantity="other">^1 poziva, poslednji je blokirani poziv od: ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">na ^1,
-    preko ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

@@ -28,12 +28,4 @@ public class IdentityDataItem extends DataItem {
   /* package */ IdentityDataItem(ContentValues values) {
     super(values);
   }
-
-  public String getIdentity() {
-    return getContentValues().getAsString(Identity.IDENTITY);
-  }
-
-  public String getNamespace() {
-    return getContentValues().getAsString(Identity.NAMESPACE);
-  }
 }

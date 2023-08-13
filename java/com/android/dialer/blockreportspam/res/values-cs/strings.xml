@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">ODBLOKOVAT</string>
   <string name="block_report_number_alert_title">Blokovat číslo %1$s?</string>
   <string name="block_report_number_alert_details">Z tohoto čísla už nebudete přijímat hovory.</string>
-  <string name="block_number_alert_details">%1$s Hovor bude nahlášen jako spam.</string>
   <string name="unblock_number_alert_details">Toto číslo bude odblokováno a bude nahlášeno, že se nejedná o spam. Budoucí hovory nebudou označeny jako spam.</string>
   <string name="unblock_report_number_alert_title">Odblokovat číslo %1$s?</string>
   <string name="report_not_spam_alert_button">Nahlásit</string>

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Sık iletişim kurulanlar silinsin mi?</string>
   <string name="clearFrequentsConfirmation">Kişiler ve Telefon uygulamalarındaki sık iletişim kurulanlar listesini temizleyecek ve e-posta uygulamalarını adres tercihlerinizi en baştan öğrenmeye zorlayacaksınız.</string>
   <string name="clearFrequentsProgress_title">Sık iletişim kurulanlar siliniyor…</string>
-  <string name="status_available">Müsait</string>
-  <string name="status_away">Dışarıda</string>
-  <string name="status_busy">Meşgul</string>
-  <string name="contactsList">Kişiler</string>
-  <string name="contact_suggestions">En Çok Önerilenler</string>
-  <string name="local_invisible_directory">Diğer</string>
   <string name="directory_search_label">Dizin</string>
   <string name="directory_search_label_work">İş dizini</string>
-  <string name="local_search_label">Tüm kişiler</string>
-  <string name="local_suggestions_search_label">Öneriler</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ben</string>
   <string name="missing_name">(Adsız)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Kişiyi görüntüle</string>
-  <string name="list_filter_phones">Telefon numarası olan tüm kişiler</string>
-  <string name="list_filter_phones_work">İş profili kişileri</string>
   <string name="view_updates_from_group">Güncellemeleri görüntüle</string>
   <string name="account_phone">Yalnızca cihaz, senkronize edilmemiş</string>
   <string name="nameLabelsGroup">Adı</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ kullanarak sohbet et</string>
   <string name="chat_jabber">Jabber kullanarak sohbet et</string>
   <string name="chat">Sohbet</string>
-  <string name="list_filter_all_accounts">Tüm kişiler</string>
-  <string name="listAllContactsInAccount">%s hesabındaki kişiler</string>
-  <string name="listCustomView">Özel görünümdeki kişiler</string>
-  <string name="listSingleContact">Tek kişi</string>
   <string name="display_options_sort_list_by">Sıralama ölçütü</string>
   <string name="display_options_sort_by_given_name">Ad</string>
   <string name="display_options_sort_by_family_name">Soyadı</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Aramayı temizle</string>
   <string name="select_account_dialog_title">Hesap</string>
   <string name="set_default_account">Çağrılar için her zaman bunu kullan</string>
-  <string name="select_phone_account_for_calls">Bu görüşme için kullanılacak SIM\'i seçin</string>
-  <string name="select_phone_account_for_calls_remember">Bu tercihi hatırla</string>
   <string name="call_with_a_note">Notla telefon et</string>
   <string name="call_subject_hint">Çağrıyla göndermek için bir not yazın...</string>
   <string name="send_and_call_button">GÖNDER VE ARA</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s sekmesi. %2$d okunmamış öğe. </item>
   </plurals>
   <string name="description_search_video_call">Görüntülü görüşme</string>
-  <string name="description_search_call_and_share">Paylaşır ve telefon eder</string>
 </resources>

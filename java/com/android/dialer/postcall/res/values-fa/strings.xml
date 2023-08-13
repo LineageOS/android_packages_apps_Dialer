@@ -4,8 +4,7 @@
   <string name="post_call_message_1">ضروریه. تماس بگیر.</string>
   <string name="post_call_message_2">با من تماس بگیر هنگامی که وقت کردی.</string>
   <string name="post_call_message_3">ضروری نیست، می‌توانیم بعداً گپ بزنیم.</string>
-  <string name="post_call_add_message">افزودن پیام</string>
-  <string name="post_call_send_message">ارسال پیام</string>
+    <string name="post_call_send_message">ارسال پیام</string>
   <string name="post_call_message_sent">پیام ارسال شد</string>
   <string name="view">مشاهده</string>
 </resources>

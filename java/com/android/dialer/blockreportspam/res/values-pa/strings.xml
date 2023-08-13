@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">ਅਨਬਲੌਕ ਕਰੋ</string>
   <string name="block_report_number_alert_title">ਕੀ %1$s ਬਲਾਕ ਕਰਨਾ ਹੈ?</string>
   <string name="block_report_number_alert_details">ਹੁਣ ਤੁਹਾਨੂੰ ਇਸ ਨੰਬਰ ਤੋਂ ਕਾਲਾਂ ਪ੍ਰਾਪਤ ਨਹੀਂ ਹੋਣਗੀਆਂ।</string>
-  <string name="block_number_alert_details">%1$s ਇਸ ਕਾਲ ਨੂੰ ਸਪੈਮ ਵਜੋਂ ਰਿਪੋਰਟ ਕੀਤਾ ਜਾਵੇਗਾ।</string>
   <string name="unblock_number_alert_details">ਇਹ ਨੰਬਰ ਅਣਬਲਾਕ ਕਰਕੇ \'ਸਪੈਮ ਨਹੀਂ\' ਵਜੋਂ ਰਿਪੋਰਟ ਕੀਤਾ ਜਾਵੇਗਾ। ਭਵਿੱਖੀ ਕਾਲਾਂ ਨੂੰ \'ਸਪੈਮ ਨਹੀਂ\' ਸਮਝਿਆ ਜਾਵੇਗਾ।</string>
   <string name="unblock_report_number_alert_title">ਕੀ %1$s ਅਣਬਲਾਕ ਕਰਨਾ ਹੈ?</string>
   <string name="report_not_spam_alert_button">ਰਿਪੋਰਟ ਕਰੋ</string>

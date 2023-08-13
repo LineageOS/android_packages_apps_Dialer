@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">Wi-Fi</string>
-  <string name="network_name_mobile">Mobilni</string>
   <string name="content_description_overflow">Više opcija</string>
   <string name="snackbar_undo">PONIŠTI</string>
   <string name="ok_got_it">U redu, shvaćam</string>

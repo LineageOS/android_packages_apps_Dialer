@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Жиі қолданылғандар тазартылсын ба?</string>
   <string name="clearFrequentsConfirmation">Контактілер және Телефондар қолданбаларындағы жиі хабарласатындар тізімі тазаланады және электрондық пошта қолданбалары мекенжай параметрлерін басынан үйренуге мәжбүрленеді.</string>
   <string name="clearFrequentsProgress_title">Жиі қолданылғандар тазартылуда…</string>
-  <string name="status_available">Қол жетімді</string>
-  <string name="status_away">Желіден тыс</string>
-  <string name="status_busy">Бос емес</string>
-  <string name="contactsList">Контактілер</string>
-  <string name="contact_suggestions">Үздік ұсыныстар</string>
-  <string name="local_invisible_directory">Басқа</string>
   <string name="directory_search_label">Анықтама</string>
   <string name="directory_search_label_work">Жұмыс каталогы</string>
-  <string name="local_search_label">Барлық контактілер</string>
-  <string name="local_suggestions_search_label">Ұсыныстар</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Мен</string>
   <string name="missing_name">(Атаусыз)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Контактіні көру</string>
-  <string name="list_filter_phones">Телефон нөмірі бар барлық контактілер</string>
-  <string name="list_filter_phones_work">Жұмыс профилінің контактілері</string>
   <string name="view_updates_from_group">Жаңартуларды көру</string>
   <string name="account_phone">Тек қана құрылғыда, синхрондалмаған</string>
   <string name="nameLabelsGroup">Аты-жөні</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ қолданып чаттасу</string>
   <string name="chat_jabber">Jabber қолданып чаттасу</string>
   <string name="chat">Чаттасу</string>
-  <string name="list_filter_all_accounts">Барлық контактілер</string>
-  <string name="listAllContactsInAccount">%s ішіндегі контактілер</string>
-  <string name="listCustomView">Контактілердің жеке көрінісі</string>
-  <string name="listSingleContact">Жалғыз контакт</string>
   <string name="display_options_sort_list_by">Сұрыптау шарты</string>
   <string name="display_options_sort_by_given_name">Аты</string>
   <string name="display_options_sort_by_family_name">Тегі</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Іздеуді өшіру</string>
   <string name="select_account_dialog_title">Есептік жазба</string>
   <string name="set_default_account">Осыны қоңыраулар үшін әрқашан пайд.</string>
-  <string name="select_phone_account_for_calls">Қоңырау шалынатын SIM картасын таңдаңыз</string>
-  <string name="select_phone_account_for_calls_remember">Осы картаны еске сақтау</string>
   <string name="call_with_a_note">Ескертпе бар қоңырау</string>
   <string name="call_subject_hint">Қоңыраумен жіберу үшін ескертпе теріңіз ...</string>
   <string name="send_and_call_button">ЖІБЕРУ ЖӘНЕ ҚОҢЫРАУ ШАЛУ</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s қойындысы. %2$d оқылмаған элемент. </item>
   </plurals>
   <string name="description_search_video_call">Бейне қоңырау</string>
-  <string name="description_search_call_and_share">Бөлісу және қоңырау шалу</string>
 </resources>

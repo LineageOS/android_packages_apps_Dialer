@@ -15,8 +15,6 @@
   ~ limitations under the License
   -->
 <resources>
-  <string name="network_name_wifi">Wifi</string>
-  <string name="network_name_mobile">Mobile</string>
   <!-- Content description for the overflow menu button. [CHAR LIMIT=NONE] -->
   <string name="content_description_overflow">More options</string>
   <!-- Text for undo button in snackbar for voicemail deletion/blocking/unblocking number. [CHAR LIMIT=10] -->

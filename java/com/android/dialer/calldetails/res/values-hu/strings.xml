@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Szám másolása</string>
   <string name="call_details_edit_number">Szám szerkesztése hívás előtt</string>
   <string name="call_details_report_call_id">Pontatlan szám bejelentése</string>
-  <string name="sent_a_photo">Küldött egy fotót</string>
-  <string name="received_a_photo">Kapott egy fotót</string>
-  <string name="message_in_quotes">„%1$s”</string>
   <string name="report_caller_id_dialog_title">Helytelen szám bejelentése</string>
   <string name="report_caller_id_failed">Nem sikerült bejelenteni a számot</string>
   <string name="report_caller_id_toast">Szám bejelentve</string>

@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/videocall_switch_video"
-  style="@style/Incall.Button.VideoCall"
-  android:contentDescription="@string/incall_content_description_swap_video"
-  android:src="@drawable/ic_switch_camera"/>
+    android:id="@+id/videocall_switch_video"
+    style="@style/Incall.Button.VideoCall"
+    android:contentDescription="@string/incall_content_description_swap_video"
+    android:scaleType="center"
+    android:src="@drawable/front_back_switch_button_animation"/>

@@ -38,36 +38,7 @@
   <string name="voicemail_string">Balso paštas</string>
   <string name="just_now">Ką tik</string>
   <string name="new_call_log_carrier_video">Operatoriaus vaizdo skambučiai</string>
-  <string name="new_call_log_duo_video">„Duo“ vaizdo skambučiai</string>
   <string name="new_call_log_unknown">Nežinoma</string>
   <string name="new_call_log_secondary_blocked">Užblokuota</string>
   <string name="new_call_log_secondary_spam">Šlamštas</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 skambutis, paskutinis yra praleistas skambutis nuo ^2</item>
-    <item quantity="few">^1 skambučiai, paskutinis yra praleistas skambutis nuo ^2</item>
-    <item quantity="many">^1 skambučio, paskutinis yra praleistas skambutis nuo ^2</item>
-    <item quantity="other">^1 skambučių, paskutinis yra praleistas skambutis nuo ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 skambutis, paskutinis yra atsakytas skambutis nuo ^2</item>
-    <item quantity="few">^1 skambučiai, paskutinis yra atsakytas skambutis nuo ^2</item>
-    <item quantity="many">^1 skambučio, paskutinis yra atsakytas skambutis nuo ^2</item>
-    <item quantity="other">^1 skambučių, paskutinis yra atsakytas skambutis nuo ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 skambutis, paskutinis yra siunčiamasis skambutis, skirtas ^2</item>
-    <item quantity="few">^1 skambučiai, paskutinis yra siunčiamasis skambutis, skirtas ^2</item>
-    <item quantity="many">^1 skambučio, paskutinis yra siunčiamasis skambutis, skirtas ^2</item>
-    <item quantity="other">^1 skambučių, paskutinis yra siunčiamasis skambutis, skirtas ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 skambutis, paskutinis yra užblokuotas skambutis nuo ^2</item>
-    <item quantity="few">^1 skambučiai, paskutinis yra užblokuotas skambutis nuo ^2</item>
-    <item quantity="many">^1 skambučio, paskutinis yra užblokuotas skambutis nuo ^2</item>
-    <item quantity="other">^1 skambučių, paskutinis yra užblokuotas skambutis nuo ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1,
-    numeriu ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

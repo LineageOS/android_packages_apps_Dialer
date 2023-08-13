@@ -38,36 +38,7 @@
   <string name="voicemail_string">Odzivnik</string>
   <string name="just_now">Pravkar</string>
   <string name="new_call_log_carrier_video">Videoklic prek operaterja</string>
-  <string name="new_call_log_duo_video">Videoklic Duo</string>
   <string name="new_call_log_unknown">Neznano</string>
   <string name="new_call_log_secondary_blocked">Blokirano</string>
   <string name="new_call_log_secondary_spam">Neželeno</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 klic, zadnji od njih je neodgovorjen dohodni klic stika ^2</item>
-    <item quantity="two">^1 klica, zadnji od njih je neodgovorjen dohodni klic stika ^2</item>
-    <item quantity="few">^1 klici, zadnji od njih je neodgovorjen dohodni klic stika ^2</item>
-    <item quantity="other">^1 klicev, zadnji od njih je neodgovorjen dohodni klic stika ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 klic, zadnji od njih je sprejet dohodni klic stika ^2</item>
-    <item quantity="two">^1 klica, zadnji od njih je sprejet dohodni klic stika ^2</item>
-    <item quantity="few">^1 klici, zadnji od njih je sprejet dohodni klic stika ^2</item>
-    <item quantity="other">^1 klicev, zadnji od njih je sprejet dohodni klic stika ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 klic, zadnji od njih je odhodni klic stika ^2</item>
-    <item quantity="two">^1 klica, zadnji od njih je odhodni klic stika ^2</item>
-    <item quantity="few">^1 klici, zadnji od njih je odhodni klic stika ^2</item>
-    <item quantity="other">^1 klicev, zadnji od njih je odhodni klic stika ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 klic, zadnji od njih je blokiran dohodni klic stika ^2</item>
-    <item quantity="two">^1 klica, zadnji od njih je blokiran dohodni klic stika ^2</item>
-    <item quantity="few">^1 klici, zadnji od njih je blokiran dohodni klic stika ^2</item>
-    <item quantity="other">^1 klicev, zadnji od njih je blokiran dohodni klic stika ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">v računu ^1,
-    prek številke ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

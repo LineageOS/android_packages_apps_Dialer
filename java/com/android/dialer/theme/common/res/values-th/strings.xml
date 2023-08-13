@@ -3,7 +3,6 @@
   <string name="unknown_counter">%1$s %2$d</string>
   <string name="payphone">โทรศัพท์สาธารณะ</string>
   <string name="emergency_number">หมายเลขฉุกเฉิน</string>
-  <string name="launcherActivityLabel">โทรศัพท์</string>
   <string name="call">โทร</string>
   <string name="video_call_lte_to_wifi_handover_toast">โทรต่อไปโดยใช้ Wi‑Fi…</string>
   <string name="rtt_call_not_available_toast">RTT ไม่สามารถใช้ได้สำหรับการโทรนี้</string>

@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Bu juda shoshilinch. Menga qayta qo‘ng‘iroq qiling.</string>
   <string name="post_call_message_2">Imkoniyatingiz bo‘lganda, menga qayta qo‘ng‘iroq qiling.</string>
   <string name="post_call_message_3">Bu shoshilinch emas. Keyinroq ham suhbatlashishimiz mumkin.</string>
-  <string name="post_call_add_message">Xabar qo‘shish</string>
-  <string name="post_call_send_message">Xabar yuborish</string>
+    <string name="post_call_send_message">Xabar yuborish</string>
   <string name="post_call_message_sent">Xabar yuborildi</string>
   <string name="view">Ko‘rish</string>
 </resources>

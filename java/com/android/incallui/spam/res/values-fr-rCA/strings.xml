@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Touchez pour ajouter aux contacts, ou bloquez le numéro source de pourriel.</string>
   <string name="spam_notification_non_spam_call_expanded_text">C\'est la première fois que ce numéro vous appelle. Si cet appel était un pourriel, vous pouvez le signaler et bloquer le numéro.</string>
   <string name="spam_notification_spam_call_collapsed_text">Touchez pour signaler que l\'appel n\'est pas importun, ou bloquez le numéro</string>
-  <string name="spam_notification_report_spam_action_text">Bloquer et signaler</string>
-  <string name="spam_notification_add_contact_action_text">Ajouter le contact</string>
   <string name="spam_notification_dialog_add_contact_action_text">Ajouter aux contacts</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Bloquer le numéro et signaler le pourriel</string>
   <string name="spam_notification_was_not_spam_action_text">Non, ce n\'est pas un appel importun</string>

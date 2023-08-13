@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Palieskite, kad pridėtumėte prie kontaktų arba blokuotumėte numerį kaip šlamšto siuntėją.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Tai pirmas kartas, kai jums buvo skambinama iš šio numerio. Jei šis skambutis buvo šlamštas, galite užblokuoti šį numerį ir apie jį pranešti.</string>
   <string name="spam_notification_spam_call_collapsed_text">Palieskite, kad praneštumėte kaip apie ne šlamštą arba užblokuotumėte</string>
-  <string name="spam_notification_report_spam_action_text">Blokuoti ir pranešti</string>
-  <string name="spam_notification_add_contact_action_text">Pridėti kontaktą</string>
   <string name="spam_notification_dialog_add_contact_action_text">Pridėti prie kontaktų</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokuoti ir pranešti apie šlamštą</string>
   <string name="spam_notification_was_not_spam_action_text">Ne, ne šlamštas</string>

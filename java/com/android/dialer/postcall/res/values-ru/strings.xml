@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Это срочно. Пожалуйста, перезвоните мне.</string>
   <string name="post_call_message_2">Перезвоните мне, когда сможете.</string>
   <string name="post_call_message_3">Не срочно, можем поговорить позже.</string>
-  <string name="post_call_add_message">Добавить сообщение</string>
-  <string name="post_call_send_message">Отправить сообщение</string>
+    <string name="post_call_send_message">Отправить сообщение</string>
   <string name="post_call_message_sent">Сообщение отправлено</string>
   <string name="view">Просмотреть</string>
 </resources>

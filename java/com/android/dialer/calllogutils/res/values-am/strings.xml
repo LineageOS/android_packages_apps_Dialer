@@ -34,27 +34,7 @@
   <string name="voicemail_string">የድምፅ መልዕክት</string>
   <string name="just_now">ልክ አሁን</string>
   <string name="new_call_log_carrier_video">የአገልግሎት አቅራቢ ቪዲዮ</string>
-  <string name="new_call_log_duo_video">Duo ቪዲዮ</string>
   <string name="new_call_log_unknown">ያልታወቀ</string>
   <string name="new_call_log_secondary_blocked">የታገደ</string>
   <string name="new_call_log_secondary_spam">አይፈለጌ መልዕክት</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 ጥሪዎች፣ የቅርብ ጊዜው ከ ^2 ያመለጠ ጥሪ ነው</item>
-    <item quantity="other">^1 ጥሪዎች፣ የቅርብ ጊዜ ከ^2 ያመለጠ ጥሪ ነው</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 ጥሪዎች፣ የቅርብ ጊዜው ከ ^2 የተመለሰ ጥሪ ነው</item>
-    <item quantity="other">^1 ጥሪዎች፣ የቅርብ ጊዜው ከ ^2 የተመለሰ ጥሪ ነው</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 ጥሪዎች፣ የቅርብ ጊዜው ወጪ ጥሪ ወደ ^2 ነው</item>
-    <item quantity="other">^1 ጥሪዎች፣ የቅርብ ጊዜው ወጪ ጥሪ ወደ ^2 ነው</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 ጥሪዎች፣ የቅርብ ጊዜው የታገደ ጥሪ ከ ^2 ነው</item>
-    <item quantity="other">^1 ጥሪዎች፣ የቅርብ ጊዜው የታገደ ጥሪ ከ ^2 ነው</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">በ ^1 ላይ፣ በ ^2 በኩል</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1፣ ^2።</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1፣ ^2፣ ^3።</string>
 </resources>

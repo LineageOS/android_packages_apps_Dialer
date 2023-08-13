@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Copiați numărul</string>
   <string name="call_details_edit_number">Modificați numărul înainte de apelare</string>
   <string name="call_details_report_call_id">Raportați numărul ca incorect</string>
-  <string name="sent_a_photo">A fost trimisă o fotografie.</string>
-  <string name="received_a_photo">A fost primită o fotografie.</string>
-  <string name="message_in_quotes">„%1$s”</string>
   <string name="report_caller_id_dialog_title">Raportați un număr incorect</string>
   <string name="report_caller_id_failed">Numărul nu a putut fi raportat.</string>
   <string name="report_caller_id_toast">Numărul a fost raportat.</string>

@@ -34,28 +34,7 @@
   <string name="voicemail_string">ボイスメール</string>
   <string name="just_now">たった今</string>
   <string name="new_call_log_carrier_video">携帯通信会社経由のビデオ通話</string>
-  <string name="new_call_log_duo_video">Duo のビデオ通話</string>
   <string name="new_call_log_unknown">不明</string>
   <string name="new_call_log_secondary_blocked">ブロック中</string>
   <string name="new_call_log_secondary_spam">迷惑電話</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^2 さんからの ^1 件の不在着信</item>
-    <item quantity="other">^1 件の通話、最後の通話は ^2 さんからの不在着信</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^2 さんからの ^1 件の着信</item>
-    <item quantity="other">^1 件の通話、最後の通話は ^2 さんからの着信</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^2 さん宛の ^1 件の発信</item>
-    <item quantity="other">^1 件の通話、最後の通話は ^2 さん宛の発信</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^2 さんから発信されてブロックされた ^1 件の着信</item>
-    <item quantity="other">^1 件の通話、最後の通話は ^2 さんから発信されてブロックされた着信</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1 を使用、
-    ^2 経由</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1、^2。</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1、^2、^3。</string>
 </resources>

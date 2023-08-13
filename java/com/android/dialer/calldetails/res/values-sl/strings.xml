@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Kopiraj številko</string>
   <string name="call_details_edit_number">Pred klicanjem uredi številko</string>
   <string name="call_details_report_call_id">Prijavi netočno številko</string>
-  <string name="sent_a_photo">Poslana fotografija</string>
-  <string name="received_a_photo">Prejeta fotografija</string>
-  <string name="message_in_quotes">»%1$s«</string>
   <string name="report_caller_id_dialog_title">Prijava napačne številke</string>
   <string name="report_caller_id_failed">Številke ni bilo mogoče prijaviti</string>
   <string name="report_caller_id_toast">Številka je prijavljena</string>

@@ -34,28 +34,7 @@
   <string name="voicemail_string">Pesan suara</string>
   <string name="just_now">Baru saja</string>
   <string name="new_call_log_carrier_video">Video operator</string>
-  <string name="new_call_log_duo_video">Video duo</string>
   <string name="new_call_log_unknown">Tidak dikenal</string>
   <string name="new_call_log_secondary_blocked">Diblokir</string>
   <string name="new_call_log_secondary_spam">Spam</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 panggilan tak terjawab dari ^2</item>
-    <item quantity="other">^1 panggilan, yang terakhir panggilan tak terjawab dari ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 panggilan terjawab dari ^2</item>
-    <item quantity="other">^1 panggilan, yang terakhir panggilan terjawab dari ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 panggilan keluar ke ^2</item>
-    <item quantity="other">^1 panggilan, yang terakhir panggilan keluar ke ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 panggilan yang diblokir dari ^2</item>
-    <item quantity="other">^1 panggilan, yang terakhir panggilan diblokir dari ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">di ^1,
-    melalui ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

@@ -95,8 +95,7 @@
         android:gravity="top"
         android:hint="@string/call_subject_hint"
         android:textColor="?android:attr/textColorSecondary"
-        android:textSize="@dimen/call_subject_dialog_secondary_text_size"
-        />
+        android:textSize="@dimen/call_subject_dialog_secondary_text_size"/>
 
       <TextView
         android:id="@+id/character_limit"

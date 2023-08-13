@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Të pastrohen kontaktet e shpeshta?</string>
   <string name="clearFrequentsConfirmation">Do ta pastrosh listën e kontakteve të shpeshta në aplikacionet \"Kontaktet\" dhe \"Telefoni\" dhe do t\'i detyrosh aplikacionet e mail-it të mësojnë preferencat e tua të adresimit nga e para.</string>
   <string name="clearFrequentsProgress_title">Po pastron kontaktet e shpeshta…</string>
-  <string name="status_available">I gatshëm</string>
-  <string name="status_away">I larguar</string>
-  <string name="status_busy">I zënë</string>
-  <string name="contactsList">Kontaktet</string>
-  <string name="contact_suggestions">Sugjerimet kryesore</string>
-  <string name="local_invisible_directory">Tjetër</string>
   <string name="directory_search_label">Direktoria</string>
   <string name="directory_search_label_work">Direktoria e punës</string>
-  <string name="local_search_label">Të gjitha kontaktet</string>
-  <string name="local_suggestions_search_label">Sugjerimet</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Unë</string>
   <string name="missing_name">(Pa emër)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Shiko kontaktin</string>
-  <string name="list_filter_phones">Të gjitha kontaktet me numra telefoni</string>
-  <string name="list_filter_phones_work">Kontaktet e profilit të punës</string>
   <string name="view_updates_from_group">Shiko përditësimet</string>
   <string name="account_phone">Vetëm pajisja, e pasinkronizuar</string>
   <string name="nameLabelsGroup">Emri</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Bisedo me ICQ</string>
   <string name="chat_jabber">Bisedo me Jabber</string>
   <string name="chat">Bisedo</string>
-  <string name="list_filter_all_accounts">Të gjitha kontaktet</string>
-  <string name="listAllContactsInAccount">Kontaktet në %s</string>
-  <string name="listCustomView">Pamja e personalizuar</string>
-  <string name="listSingleContact">Një kontakt i vetëm</string>
   <string name="display_options_sort_list_by">Rendit sipas</string>
   <string name="display_options_sort_by_given_name">Emri</string>
   <string name="display_options_sort_by_family_name">Mbiemri</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Pastro kërkimin</string>
   <string name="select_account_dialog_title">Llogaria</string>
   <string name="set_default_account">Përdor gjithmonë këtë për telefonatat</string>
-  <string name="select_phone_account_for_calls">Zgjidh kartën SIM për këtë telefonatë</string>
-  <string name="select_phone_account_for_calls_remember">Kujtoje këtë zgjedhje</string>
   <string name="call_with_a_note">Telefono me shënim</string>
   <string name="call_subject_hint">Shkruaj një shënim për të dërguar një telefonatë...</string>
   <string name="send_and_call_button">DËRGO DHE TELEFONO</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> Skeda %1$s. %2$d artikuj të palexuar. </item>
   </plurals>
   <string name="description_search_video_call">Telefonatë me video</string>
-  <string name="description_search_call_and_share">Ndaj dhe telefono</string>
 </resources>

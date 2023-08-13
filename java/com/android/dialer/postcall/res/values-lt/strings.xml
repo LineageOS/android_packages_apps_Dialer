@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Tai skubu. Atskambinkite.</string>
   <string name="post_call_message_2">Atskambinkite, kai turėsite šiek tiek laiko.</string>
   <string name="post_call_message_3">Neskubu, galėsime vėliau pasikalbėti.</string>
-  <string name="post_call_add_message">Pridėkite pranešimą</string>
-  <string name="post_call_send_message">Siųsti pranešimą</string>
+    <string name="post_call_send_message">Siųsti pranešimą</string>
   <string name="post_call_message_sent">Pranešimas išsiųstas</string>
   <string name="view">Peržiūrėti</string>
 </resources>

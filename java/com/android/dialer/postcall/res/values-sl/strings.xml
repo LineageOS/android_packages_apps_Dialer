@@ -4,8 +4,7 @@
   <string name="post_call_message_1">To je nujno. Pokliči me.</string>
   <string name="post_call_message_2">Ko si lahko vzameš nekaj časa, me pokliči.</string>
   <string name="post_call_message_3">Ni nujno, klepetava lahko tudi pozneje.</string>
-  <string name="post_call_add_message">Dodaj sporočilo</string>
-  <string name="post_call_send_message">Pošiljanje sporočila</string>
+    <string name="post_call_send_message">Pošiljanje sporočila</string>
   <string name="post_call_message_sent">Sporočilo je bilo poslano</string>
   <string name="view">Prikaži</string>
 </resources>

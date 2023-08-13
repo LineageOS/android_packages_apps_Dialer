@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">Wi-Fi</string>
-  <string name="network_name_mobile">Мобилна</string>
   <string name="content_description_overflow">Още опции</string>
   <string name="snackbar_undo">ОТМЯНА</string>
   <string name="ok_got_it">Добре, разбрах</string>

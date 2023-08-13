@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Tahan</string>
   <string name="incall_label_add_call">Tambahkan panggilan</string>
   <string name="incall_label_mute">Bisukan</string>
-  <string name="incall_label_end_call">Akhiri panggilan</string>
   <string name="incall_label_dialpad">Keypad</string>
   <string name="incall_talkback_speaker_on">, aktif</string>
   <string name="incall_talkback_speaker_off">, Nonaktif</string>
