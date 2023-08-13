@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Нөмірді көшіру</string>
   <string name="call_details_edit_number">Нөмірді қоңырау шалуға дейін өзгерту</string>
   <string name="call_details_report_call_id">Қате нөмір туралы хабарлау</string>
-  <string name="sent_a_photo">Сурет жіберілді</string>
-  <string name="received_a_photo">Сурет қабылданды</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Қате нөмір туралы хабарлау</string>
   <string name="report_caller_id_failed">Нөмір туралы хабар жіберілмеді</string>
   <string name="report_caller_id_toast">Нөмір туралы хабар жіберілді</string>

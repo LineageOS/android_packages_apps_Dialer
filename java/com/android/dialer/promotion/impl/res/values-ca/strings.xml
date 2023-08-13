@@ -4,6 +4,4 @@
   <string name="rtt_promotion_details">La funció RTT ofereix assistència als usuaris que són sords, tenen problemes
     d\'audició o alteracions de la parla, o bé que necessiten un text a banda de la veu. Les transcripcions RTT es desen a l\'historial de trucades
     del dispositiu.%1$s</string>
-  <string name="duo_disclosure_title">Fes videotrucades amb Duo</string>
-  <string name="duo_disclosure_details">Les videotrucades de Google Duo et permeten parlar cara a cara amb els amics i la família. És possible que s\'hi apliquin càrrecs de dades. %1$s</string>
 </resources>

@@ -5,7 +5,6 @@
   <string name="incall_label_hold">În așteptare</string>
   <string name="incall_label_add_call">Încă un apel</string>
   <string name="incall_label_mute">Dezactivați</string>
-  <string name="incall_label_end_call">Încheiați</string>
   <string name="incall_label_dialpad">Tastatură</string>
   <string name="incall_talkback_speaker_on">, e activat</string>
   <string name="incall_talkback_speaker_off">, dezactivat</string>

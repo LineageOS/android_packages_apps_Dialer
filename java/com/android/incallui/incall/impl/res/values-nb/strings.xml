@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Sett på vent</string>
   <string name="incall_label_add_call">Nytt anrop</string>
   <string name="incall_label_mute">Ignorer</string>
-  <string name="incall_label_end_call">Avslutt samtalen</string>
   <string name="incall_label_dialpad">Tastatur</string>
   <string name="incall_talkback_speaker_on">er på</string>
   <string name="incall_talkback_speaker_off">er av</string>

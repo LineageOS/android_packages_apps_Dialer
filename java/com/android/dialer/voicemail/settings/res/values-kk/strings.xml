@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Дауыстық хабар (%s)</string>
   <string name="voicemail_settings_title">Дауыстық хабар</string>
   <string name="voicemail_notifications_preference_title">Хабарландырулар</string>
   <string name="voicemail_change_greeting_preference_title">Дауыстық поштаның сәлемдесу мәтіні</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">PIN кодын өзгерту</string>
   <string name="voicemail_change_pin_preference_summary_disable">PIN кодын өзгерту үшін, визуалды дауыстық хабар функциясын қосу қажет</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Визуалды дауыстық хабар функциясы әлі қосылмаған. Кейінірек қайталап көріңіз</string>
-  <string name="vm_change_pin_old_pin">Ескі PIN коды</string>
-  <string name="vm_change_pin_new_pin">Жаңа PIN коды</string>
   <string name="vm_change_pin_progress_message">Күте тұрыңыз.</string>
   <string name="vm_change_pin_error_too_short">Жаңа PIN коды тым қысқа.</string>
   <string name="vm_change_pin_error_too_long">Жаңа PIN коды тым ұзын.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN кодтары сәйкес емес</string>
   <string name="change_pin_succeeded">Дауыстық пошта PIN коды жаңартылды</string>
   <string name="change_pin_system_error">PIN кодын орнату мүмкін болмады</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Дауыстық хабар транскрипциясы</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Дауыстық хабар транскрипциясын сараптау</string>
   <string name="voicemail_activating_summary_info">Дауыстық хабарды қосу</string>
-  <string name="voicemail_transcription_preference_summary_info">Google транскрипция қызметінің көмегімен дауыстық хабар транскрипцияларын оқыңыз.%1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Транскрипция сапасын арттыру мақсатында дауыстық хабарлардың Google тарапынан тексерілуіне рұқсат беріңіз. Дауыстық хабарлардың құпиялылығы сақталады.%1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Визуалдық дауыстық хабарды өшіру</string>
   <string name="confirm_disable_voicemail_dialog_message">Бұл әрекет осы қолданбада сақталған дауыстық хабарлар мен Google транскрипцияларын жояды. Оператор өз көшірмелерін сақтауы мүмкін.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">ӨШІРУ</string>

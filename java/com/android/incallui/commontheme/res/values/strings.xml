@@ -54,6 +54,5 @@
   <string name="incall_label_speaker">Speaker</string>
   <!-- Button shown during a phone to switch the audio route.
      [CHAR LIMIT=12] -->
-  <string name="incall_label_audio">Sound</string>
 
 </resources>

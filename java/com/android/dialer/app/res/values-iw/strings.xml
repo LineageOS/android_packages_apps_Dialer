@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">טלפון</string>
-  <string name="launcherDialpadActivityLabel">לוח החיוג של הטלפון</string>
   <string name="callHistoryIconLabel">היסטוריית שיחות</string>
   <string name="action_copy_number_text">העתק מספר</string>
   <string name="action_edit_number_before_call">ערוך את המספר לפני השיחה</string>
@@ -38,8 +37,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">אפשרויות נוספות</string>
   <string name="action_menu_dialpad_button">לוח חיוג</string>
   <string name="dialer_settings_label">הגדרות</string>
-  <string name="simulator_submenu_label">סימולטור</string>
-  <string name="new_ui_launcher_shortcut_label">יצירת קיצור דרך לממשק החדש</string>
   <string name="description_entering_bulk_action_mode">עברת למצב של ביצוע פעולות בכמות גדולה</string>
   <string name="description_leaving_bulk_action_mode">עזבת את המצב של ביצוע פעולות בכמות גדולה</string>
   <string name="description_selecting_bulk_action_mode">בחרת את %1$s</string>
@@ -50,7 +47,6 @@
   <string name="description_video_call">שיחת וידאו.</string>
   <string name="description_start_voice_search">התחל חיפוש קולי</string>
   <string name="voicemail">דואר קולי</string>
-  <string name="description_cancel_multi_select">ביטול המצב של ביצוע פעולות בכמות גדולה</string>
   <string name="voicemailMultiSelectDeleteConfirm">מחיקה</string>
   <string name="voicemailMultiSelectDeleteCancel">ביטול</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s נבחרו</string>
@@ -66,7 +62,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">חיפוש קולי אינו זמין</string>
   <string name="dialer_hint_find_contact">חפש אנשי קשר</string>
-  <string name="block_number_search_hint">הוסף מספר או חפש אנשי קשר</string>
   <string name="call_log_all_empty">היסטוריית השיחות שלך ריקה</string>
   <string name="call_log_all_empty_action">התקשר</string>
   <string name="call_log_missed_empty">אין שיחות שלא נענו.</string>
@@ -74,23 +69,13 @@
   <string name="call_log_activity_title">היסטוריית שיחות</string>
   <string name="call_log_all_title">הכל</string>
   <string name="call_log_missed_title">שיחות שלא נענו</string>
-  <string name="tab_speed_dial">חיוג מהיר</string>
-  <string name="tab_history">היסטוריית שיחות</string>
   <string name="tab_all_contacts">אנשי קשר</string>
-  <string name="tab_voicemail">דואר קולי</string>
-  <string name="search_shortcut_call_number">התקשר אל %s</string>
   <string name="search_shortcut_create_new_contact">איש קשר חדש</string>
   <string name="search_shortcut_add_to_contact">הוסף לאיש קשר</string>
   <string name="search_shortcut_send_sms_message">‏שלח SMS</string>
   <string name="search_shortcut_make_video_call">בצע שיחת וידאו</string>
-  <string name="search_shortcut_block_number">חסום מספר</string>
-  <string name="speed_dial_empty">עדיין לא הוגדר חיוג מהיר לאף איש קשר</string>
-  <string name="speed_dial_empty_add_favorite_action">הוסף פריט מועדף</string>
-  <string name="remove_contact">הסר</string>
   <string name="select_all">בחירת הכל</string>
   <string name="call_log_action_video_call">שיחת וידאו</string>
-  <string name="call_log_action_set_up_video">התחלה של שיחת וידאו</string>
-  <string name="call_log_action_invite_video">הזמנה לשיחת וידאו</string>
   <string name="call_log_action_send_message">שלח הודעה</string>
   <string name="call_log_action_details">פרטי שיחה</string>
   <string name="call_log_action_share_voicemail">שלח אל...</string>
@@ -129,23 +114,8 @@
   <string name="call_settings_label">שיחות</string>
   <string name="manage_blocked_numbers_label">מספרים חסומים</string>
   <string name="voicemail_settings_label">דואר קולי</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">חסימת השיחות מושבתת באופן זמני</string>
-  <string name="blocked_numbers_disabled_emergency_desc">חסימת השיחות הושבתה מפני שיצרת קשר מטלפון זה עם שירותי חירום במהלך 48 השעות האחרונות. הפונקציה תופעל מחדש באופן אוטומטי בתום 48 השעות.</string>
-  <string name="import_send_to_voicemail_numbers_label">יבא מספרים</string>
-  <string name="blocked_call_settings_import_description">סימנת בעבר באמצעות יישומים אחרים כמה מתקשרים שיישלחו באופן אוטומטי לדואר קולי.</string>
-  <string name="blocked_call_settings_view_numbers_button">הצג מספרים</string>
-  <string name="blocked_call_settings_import_button">יבא</string>
-  <string name="description_blocked_number_list_delete">בטל חסימת מספר</string>
-  <string name="addBlockedNumber">הוסף מספר</string>
-  <string name="block_number_footer_message_vvm">שיחות ממספרים אלה ייחסמו והודעות דואר קולי יימחקו באופן אוטומטי.</string>
-  <string name="block_number_footer_message_no_vvm">שיחות ממספרים אלה ייחסמו, אבל המתקשרים עדיין יוכלו להשאיר לך הודעות דואר קולי.</string>
-  <string name="block_list">מספרים חסומים</string>
-  <string name="alreadyBlocked">%1$s כבר חסום.</string>
   <string name="phone_account_settings_label">חשבונות לביצוע שיחות</string>
-  <string name="permission_no_speeddial">כדי להפעיל חיוג מהיר, הפעל את ההרשאה \'אנשי קשר\'.</string>
   <string name="permission_no_calllog">כדי לראות את יומן השיחות, הפעל את ההרשאה \'טלפון\'.</string>
-  <string name="permission_no_search">כדי לחפש באנשי הקשר, הפעל את ההרשאה \'אנשי קשר\'.</string>
-  <string name="permission_place_call">כדי להתקשר, הפעל את ההרשאה \'טלפון\'.</string>
   <string name="toast_cannot_write_system_settings">לאפליקציית הטלפון אין הרשאה לכתוב בהגדרות המערכת.</string>
   <string name="blocked_number_call_log_label">חסום</string>
   <string name="call_log_action_block_report_number">חסום/דיווח על ספאם</string>
@@ -153,22 +123,4 @@
   <string name="call_log_action_remove_spam">לא ספאם</string>
   <string name="call_log_action_unblock_number">בטל חסימת מספר</string>
   <string name="spam_number_call_log_label">ספאם</string>
-  <string name="call_composer_connection_failed">לא ניתן להתקשר כי המכשיר של %1$s לא מחובר כרגע</string>
-  <string name="about_phone_label">מידע כללי</string>
-  <string name="voicemail_transcription_branding_text">‏התעתוק בוצע על ידי Google</string>
-  <string name="voicemail_transcription_in_progress">אנחנו מתמללים…</string>
-  <string name="voicemail_transcription_failed">התמלול לא בוצע.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">התמלול לא בוצע מכיוון שהשפה לא נתמכת.</string>
-  <string name="voicemail_transcription_failed_no_speech">התמלול לא בוצע מכיוון שלא זיהינו דיבור.</string>
-  <string name="voicemail_donation_promo_title">רוצה לעזור לנו לשפר את דיוק התמלול?</string>
-  <string name="voicemail_donation_promo_content">‏נשמח לקבל ממך אישור לבדוק את ההודעות הקוליות שלך ואת התמלולים שלהן עכשיו ובעתיד. ההודעות והתמלולים יישמרו באופן אנונימי על ידי Google ואפשר לשנות את ההגדרה הזו מתי שרוצים. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">כן, אני רוצה</string>
-  <string name="voicemail_donation_promo_opt_out">לא תודה</string>
-  <string name="voicemail_transcription_rating">רוצה לדרג את האיכות של התמלול?</string>
-  <string name="voicemail_transcription_rating_thanks">תודה על המשוב</string>
-  <string name="description_rating_good">אהבתי</string>
-  <string name="description_rating_bad">לא אהבתי</string>
-  <string name="view_conversation">הצג</string>
-  <string name="ec_data_deleted">השיחה נמחקה. כדי להציג ולמחוק קבצים מצורפים ששותפו בזמן השיחה, עבור ל\'הודעות\'.</string>
-  <string name="multiple_ec_data_deleted">השיחות נמחקו. כדי להציג ולמחוק קבצים מצורפים ששותפו בזמן השיחות, עבור ל\'הודעות\'.</string>
 </resources>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">വോയ്‌സ്‌മെയിൽ (%s)</string>
   <string name="voicemail_settings_title">വോയ്‌സ്‌മെയിൽ</string>
   <string name="voicemail_notifications_preference_title">അറിയിപ്പുകൾ</string>
   <string name="voicemail_change_greeting_preference_title">വോയ്‌സ്‌മെയിൽ ആശംസ</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">പിൻ മാറ്റുക</string>
   <string name="voicemail_change_pin_preference_summary_disable">പിൻ മാറ്റുന്നതിന് വിഷ്വൽ വോയ്‌സ്‌മെയിൽ പ്രവർത്തനക്ഷമമാക്കേണ്ടതുണ്ട്</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">വിഷ്വൽ വോയ്‌സ്‌മെയിൽ ഇതുവരെ സജീവമാക്കിയിട്ടില്ല, പിന്നീട് വീണ്ടും ശ്രമിച്ചുനോക്കുക</string>
-  <string name="vm_change_pin_old_pin">പഴയ പിൻ</string>
-  <string name="vm_change_pin_new_pin">പുതിയ പിൻ</string>
   <string name="vm_change_pin_progress_message">കാത്തിരിക്കുക.</string>
   <string name="vm_change_pin_error_too_short">പുതിയ പിൻ വളരെ ചെറുതാണ്.</string>
   <string name="vm_change_pin_error_too_long">പുതിയ പിൻ വളരെ ദൈർഘ്യമേറിയതാണ്.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN-കൾ പൊരുത്തപ്പെടുന്നില്ല</string>
   <string name="change_pin_succeeded">വോയ്‌സ്‌മെയിൽ പിൻ അപ്‌ഡേറ്റുചെയ്‌തു</string>
   <string name="change_pin_system_error">പിൻ സജ്ജമാക്കാൻ കഴിയുന്നില്ല</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">വോയ്‌സ്‌മെയിൽ ട്രാൻസ്‌ക്രിപ്ഷൻ</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">വോയ്‌സ്‌മെയിൽ ട്രാൻസ്‌ക്രിപ്ഷൻ അനാലിസിസ്</string>
   <string name="voicemail_activating_summary_info">വോയ്‌സ്‌മെയിൽ സജീവമാക്കുന്നു</string>
-  <string name="voicemail_transcription_preference_summary_info">Google-ന്റെ ട്രാൻസ്‌ക്രിപ്ഷൻ സേവനം ഉപയോഗിച്ച് നിങ്ങളുടെ വോയ്‌സ്‌മെയിലിന്റെ ട്രാൻസ്‌ക്രിപ്റ്റുകൾ നേടുക. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">ട്രാൻസ്‌ക്രിപ്ഷൻ നിലവാരം മെച്ചപ്പെടുത്താനായി, വോയ്‌സ്‌മെയിൽ സന്ദേശങ്ങൾ അവലോകനം ചെയ്യാൻ Google-നെ അനുവദിക്കുക. നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ സന്ദേശങ്ങൾ അജ്ഞാതമായി സംഭരിക്കപ്പെടും. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">വിഷ്വൽ വോയ്‌സ്‌മെയിൽ ഓഫാക്കുക</string>
   <string name="confirm_disable_voicemail_dialog_message">ഇത്, ഈ ആപ്പിനുള്ളിൽ സംഭരിച്ചിരിക്കുന്ന എല്ലാ വോയ്‌സ്‌മെയിലും Google ട്രാൻസ്‌ക്രിപ്റ്റുകളും ഇല്ലാതാക്കും. നിങ്ങളുടെ കാരിയർ അതിന്റെ തന്നെ പകർപ്പുകൾ സൂക്ഷിച്ചേക്കാം.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">ഓഫാക്കുക</string>

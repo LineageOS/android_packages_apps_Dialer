@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">清除常用聯絡人？</string>
   <string name="clearFrequentsConfirmation">您將清除「通訊錄」應用程式和「電話」應用程式中的常用聯絡人名單，並強制電子郵件應用程式重新取得您的寄件偏好設定。</string>
   <string name="clearFrequentsProgress_title">正在清除常用聯絡人…</string>
-  <string name="status_available">在線</string>
-  <string name="status_away">離開</string>
-  <string name="status_busy">忙碌</string>
-  <string name="contactsList">通訊錄</string>
-  <string name="contact_suggestions">熱門建議</string>
-  <string name="local_invisible_directory">其他</string>
   <string name="directory_search_label">名錄</string>
   <string name="directory_search_label_work">工作目錄</string>
-  <string name="local_search_label">所有聯絡人</string>
-  <string name="local_suggestions_search_label">建議</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">我</string>
   <string name="missing_name">(沒有名稱)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">查看聯絡人</string>
-  <string name="list_filter_phones">所有附有電話號碼的聯絡人</string>
-  <string name="list_filter_phones_work">工作設定檔通訊錄</string>
   <string name="view_updates_from_group">瀏覽更新資訊</string>
   <string name="account_phone">僅限裝置，未同步</string>
   <string name="nameLabelsGroup">姓名</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">使用 ICQ 進行即時通訊</string>
   <string name="chat_jabber">使用 Jabber 進行即時通訊</string>
   <string name="chat">即時通訊</string>
-  <string name="list_filter_all_accounts">所有聯絡人</string>
-  <string name="listAllContactsInAccount">%s 中的聯絡人</string>
-  <string name="listCustomView">聯絡人自訂檢視</string>
-  <string name="listSingleContact">單一聯絡人</string>
   <string name="display_options_sort_list_by">排序方式</string>
   <string name="display_options_sort_by_given_name">名字</string>
   <string name="display_options_sort_by_family_name">姓氏</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">清除搜尋</string>
   <string name="select_account_dialog_title">帳戶</string>
   <string name="set_default_account">永遠使用這張 SIM 卡通話</string>
-  <string name="select_phone_account_for_calls">選擇此通話要使用的 SIM 卡</string>
-  <string name="select_phone_account_for_calls_remember">記住這個選擇</string>
   <string name="call_with_a_note">撥號時傳送筆記</string>
   <string name="call_subject_hint">撥號時可以書寫和傳送筆記…</string>
   <string name="send_and_call_button">傳送和撥號</string>
@@ -141,5 +123,4 @@
     <item quantity="other">「%1$s」標籤 (%2$d 個未讀取項目)。</item>
   </plurals>
   <string name="description_search_video_call">視像通話</string>
-  <string name="description_search_call_and_share">分享並通話</string>
 </resources>

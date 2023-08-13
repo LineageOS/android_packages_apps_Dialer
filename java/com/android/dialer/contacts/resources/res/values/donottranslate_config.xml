@@ -18,24 +18,9 @@
   <!-- If true, an option is shown in Display Options UI to choose a sort order -->
   <bool name="config_sort_order_user_changeable">true</bool>
 
-  <!-- If true, the default sort order is primary (i.e. by given name) -->
-  <bool name="config_default_sort_order_primary">true</bool>
-
   <!-- If true, an option is shown in Display Options UI to choose a name display order -->
   <bool name="config_display_order_user_changeable">true</bool>
 
-  <!-- If true, the default sort order is primary (i.e. by given name) -->
-  <bool name="config_default_display_order_primary">true</bool>
-
   <!-- If true, the order of name fields in the editor is primary (i.e. given name first) -->
   <bool name="config_editor_field_order_primary">true</bool>
-
-  <!-- If true, an option is shown in Display Options UI to choose a default account -->
-  <bool name="config_default_account_user_changeable">true</bool>
-
-  <!-- Contacts preferences key for contact editor default account -->
-  <string name="contact_editor_default_account_key">ContactEditorUtils_default_account</string>
-
-  <!-- Contacts preferences key for contact editor anything saved -->
-  <string name="contact_editor_anything_saved_key">ContactEditorUtils_anything_saved</string>
 </resources>

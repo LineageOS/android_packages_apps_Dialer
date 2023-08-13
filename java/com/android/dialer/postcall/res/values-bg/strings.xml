@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Спешно е. Обадете ми се.</string>
   <string name="post_call_message_2">Обадете ми се, когато имате време.</string>
   <string name="post_call_message_3">Не е спешно, можем да говорим по-късно.</string>
-  <string name="post_call_add_message">Добавяне на съобщение</string>
-  <string name="post_call_send_message">Изпращане на съобщение</string>
+    <string name="post_call_send_message">Изпращане на съобщение</string>
   <string name="post_call_message_sent">Съобщението бе изпратено</string>
   <string name="view">Преглед</string>
 </resources>

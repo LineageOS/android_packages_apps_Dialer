@@ -39,9 +39,6 @@
   <!-- Text in alert dialog after clicking on Block/report as spam.  [CHAR LIMIT=100] -->
   <string name="block_report_number_alert_details">You will no longer receive calls from this number.</string>
 
-  <!-- Text in alert dialog after clicking on Block.  [CHAR LIMIT=100] -->
-  <string name="block_number_alert_details"><xliff:g id="text">%1$s</xliff:g> This call will be reported as spam.</string>
-
   <!-- Text in alert dialog after clicking on Unblock.  [CHAR LIMIT=100] -->
   <string name="unblock_number_alert_details">This number will be unblocked and reported as not spam. Future calls won\'t be identified as spam.</string>
 

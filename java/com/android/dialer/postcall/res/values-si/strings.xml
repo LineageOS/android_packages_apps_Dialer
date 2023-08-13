@@ -4,8 +4,7 @@
   <string name="post_call_message_1">මෙය හදිස්සියි. මට ආපසු අමතන්න.</string>
   <string name="post_call_message_2">ඔබට යම් වේලාවක් තිබෙන විට මට ආපසු අමතන්න.</string>
   <string name="post_call_message_3">හදිස්සි නැත, අපට පසුව කතාබස් කිරීමට හැකිය.</string>
-  <string name="post_call_add_message">පණිවිඩය එක් කරන්න</string>
-  <string name="post_call_send_message">පණිවිඩය යවන්න</string>
+    <string name="post_call_send_message">පණිවිඩය යවන්න</string>
   <string name="post_call_message_sent">පණිවිඩය යවන ලදී</string>
   <string name="view">බලන්න</string>
 </resources>

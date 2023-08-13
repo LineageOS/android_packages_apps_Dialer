@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">I-UNBLOCK</string>
   <string name="block_report_number_alert_title">I-block ang %1$s?</string>
   <string name="block_report_number_alert_details">Hindi ka na makakatanggap ng mga tawag mula sa numerong ito.</string>
-  <string name="block_number_alert_details">%1$s Iuulat ang tawag na ito bilang spam.</string>
   <string name="unblock_number_alert_details">Ia-unblock ang numerong ito at iuulat na di spam. Di kikilalaning spam ang darating na tawag.</string>
   <string name="unblock_report_number_alert_title">I-unblock ang %1$s?</string>
   <string name="report_not_spam_alert_button">Iulat</string>

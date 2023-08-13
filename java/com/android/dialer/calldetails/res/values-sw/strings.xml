@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Nakili nambari</string>
   <string name="call_details_edit_number">Hariri nambari kabla ya kupiga</string>
   <string name="call_details_report_call_id">Ripoti nambari isiyo sahihi</string>
-  <string name="sent_a_photo">Picha imetumwa</string>
-  <string name="received_a_photo">Picha imepokelewa</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Ripoti nambari isiyosahihi</string>
   <string name="report_caller_id_failed">Imeshindwa kuripoti nambari</string>
   <string name="report_caller_id_toast">Nambari imeripotiwa</string>

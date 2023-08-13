@@ -4,8 +4,7 @@
   <string name="post_call_message_1">এটি জরুরী৷ আমায় ফোন করুন৷</string>
   <string name="post_call_message_2">আপনার হাতে যখন সময় হবে তখন আমায় ফোন করুন৷</string>
   <string name="post_call_message_3">জরুরী নয়, আমরা পরে চ্যাট করতে পারি৷</string>
-  <string name="post_call_add_message">বার্তা যোগ করুন</string>
-  <string name="post_call_send_message">বার্তা পাঠান</string>
+    <string name="post_call_send_message">বার্তা পাঠান</string>
   <string name="post_call_message_sent">বার্তা পাঠানো হয়েছে</string>
   <string name="view">দেখুন</string>
 </resources>

@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">Відео вимкнено</string>
   <string name="incall_content_description_swap_video">Поміняти відео</string>
   <string name="incall_label_speaker">Динамік</string>
-  <string name="incall_label_audio">Звук</string>
 </resources>

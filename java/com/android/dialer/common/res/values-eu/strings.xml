@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">Wi-Fi</string>
-  <string name="network_name_mobile">Mugikorra</string>
   <string name="content_description_overflow">Aukera gehiago</string>
   <string name="snackbar_undo">DESEGIN</string>
   <string name="ok_got_it">Ados</string>

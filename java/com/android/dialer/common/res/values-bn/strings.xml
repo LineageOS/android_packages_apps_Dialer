@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">ওয়াই ফাই</string>
-  <string name="network_name_mobile">মোবাইল</string>
   <string name="content_description_overflow">আরও বিকল্প</string>
   <string name="snackbar_undo">পূর্বাবস্থায় ফিরুন</string>
   <string name="ok_got_it">ঠিক আছে, বুঝেছি</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefon</string>
-  <string name="launcherDialpadActivityLabel">Telefonbillenyűzet</string>
   <string name="callHistoryIconLabel">Híváslista</string>
   <string name="action_copy_number_text">Szám másolása</string>
   <string name="action_edit_number_before_call">Szám szerkesztése hívás előtt</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">További beállítások</string>
   <string name="action_menu_dialpad_button">billentyűzet</string>
   <string name="dialer_settings_label">Beállítások</string>
-  <string name="simulator_submenu_label">Szimulátor</string>
-  <string name="new_ui_launcher_shortcut_label">Új felh. felület-parancsikon</string>
   <string name="description_entering_bulk_action_mode">Belépés tömeges műveleti módba</string>
   <string name="description_leaving_bulk_action_mode">Kilépett a tömeges műveleti módból</string>
   <string name="description_selecting_bulk_action_mode">Kijelölés: %1$s</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Videohívás.</string>
   <string name="description_start_voice_search">Hangalapú keresés indítása</string>
   <string name="voicemail">Hangposta</string>
-  <string name="description_cancel_multi_select">Köteges művelet mód leállítva</string>
   <string name="voicemailMultiSelectDeleteConfirm">Törlés</string>
   <string name="voicemailMultiSelectDeleteCancel">Mégse</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s kiválasztva</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">A hangalapú keresés nem érhető el</string>
   <string name="dialer_hint_find_contact">Keresés a névjegyek között</string>
-  <string name="block_number_search_hint">Adjon meg egy számot, vagy keressen a névjegyek között</string>
   <string name="call_log_all_empty">A híváslista üres</string>
   <string name="call_log_all_empty_action">Hívásindítás</string>
   <string name="call_log_missed_empty">Nincsenek nem fogadott hívások.</string>
@@ -70,23 +65,12 @@
   <string name="call_log_activity_title">Hívási előzmények</string>
   <string name="call_log_all_title">Összes</string>
   <string name="call_log_missed_title">Nem fogadott </string>
-  <string name="tab_speed_dial">Gyorshívó</string>
-  <string name="tab_history">Híváslista</string>
-  <string name="tab_all_contacts">Címtár</string>
-  <string name="tab_voicemail">Hangposta</string>
-  <string name="search_shortcut_call_number">Hívás: %s</string>
   <string name="search_shortcut_create_new_contact">Új névjegy létrehozása</string>
   <string name="search_shortcut_add_to_contact">Hozzáadás névjegyhez</string>
   <string name="search_shortcut_send_sms_message">SMS küldése</string>
   <string name="search_shortcut_make_video_call">Videohívás kezdeményezése</string>
-  <string name="search_shortcut_block_number">Szám tiltása</string>
-  <string name="speed_dial_empty">Még semelyik telefonszám sincs gyorshívón</string>
-  <string name="speed_dial_empty_add_favorite_action">Kedvenc hozzáadása</string>
-  <string name="remove_contact">Eltávolítás</string>
   <string name="select_all">Az összes kijelölése</string>
   <string name="call_log_action_video_call">Videohívás</string>
-  <string name="call_log_action_set_up_video">Videohívás beállítása</string>
-  <string name="call_log_action_invite_video">Meghívás videohívásba</string>
   <string name="call_log_action_send_message">Üzenet küldése</string>
   <string name="call_log_action_details">Hívás adatai</string>
   <string name="call_log_action_share_voicemail">Címzett…</string>
@@ -125,23 +109,8 @@
   <string name="call_settings_label">Hívások</string>
   <string name="manage_blocked_numbers_label">Letiltott számok</string>
   <string name="voicemail_settings_label">Hangposta</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Hívástiltás átmenetileg felfüggesztve</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Felfüggesztettük a hívások tiltását, mert az elmúlt 48 órában tárcsázta a segélyhívót erről a telefonról. A funkciót automatikusan újból engedélyezzük 48 óra elteltével.</string>
-  <string name="import_send_to_voicemail_numbers_label">Számok importálása</string>
-  <string name="blocked_call_settings_import_description">Más alkalmazásokban korábban beállította, hogy bizonyos személyeket automatikusan a hangpostafiókba irányítsa a rendszer, amikor felhívják Önt.</string>
-  <string name="blocked_call_settings_view_numbers_button">Számok megtekintése</string>
-  <string name="blocked_call_settings_import_button">Importálás</string>
-  <string name="description_blocked_number_list_delete">Szám tiltásának feloldása</string>
-  <string name="addBlockedNumber">Szám hozzáadása</string>
-  <string name="block_number_footer_message_vvm">Az ezekről a számokról érkező hívásokat a rendszer letiltja, továbbá automatikusan törli az onnan érkező hangpostaüzeneteket is.</string>
-  <string name="block_number_footer_message_no_vvm">Az ezekről a számokról érkező hívásokat letiltja a rendszer, azonban a hívó felek továbbra is hagyhatnak hangpostaüzeneteket.</string>
-  <string name="block_list">Letiltott számok</string>
-  <string name="alreadyBlocked">A következő szám már le van tiltva: %1$s.</string>
   <string name="phone_account_settings_label">Telefonos fiókok</string>
-  <string name="permission_no_speeddial">Gyorshívás engedélyezéséhez kapcsolja be a Névjegyek engedélyt.</string>
   <string name="permission_no_calllog">A hívásnapló megtekintéséhez kapcsolja be a Telefon engedélyt.</string>
-  <string name="permission_no_search">A névjegyek kereséséhez adja meg a Névjegyek engedélyeket.</string>
-  <string name="permission_place_call">Hívásindításhoz kapcsolja be a Telefon engedélyt.</string>
   <string name="toast_cannot_write_system_settings">A Telefon alkalmazásnak nincs engedélye szerkeszteni a rendszerbeállításokat.</string>
   <string name="blocked_number_call_log_label">Letiltva</string>
   <string name="call_log_action_block_report_number">Letiltás/spam bejelentése</string>
@@ -149,22 +118,4 @@
   <string name="call_log_action_remove_spam">Nem spam</string>
   <string name="call_log_action_unblock_number">Szám tiltásának feloldása</string>
   <string name="spam_number_call_log_label">Spam</string>
-  <string name="call_composer_connection_failed">%1$s offline, és nem érhető el.</string>
-  <string name="about_phone_label">Névjegy</string>
-  <string name="voicemail_transcription_branding_text">Az átirat készítője a Google</string>
-  <string name="voicemail_transcription_in_progress">Átírás…</string>
-  <string name="voicemail_transcription_failed">Sikertelen átírás.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Sikertelen átírás. A nyelv nem támogatott.</string>
-  <string name="voicemail_transcription_failed_no_speech">Sikertelen átírás. Nem észlelhető beszéd.</string>
-  <string name="voicemail_donation_promo_title">Segítene az átiratok pontosságának javításában?</string>
-  <string name="voicemail_donation_promo_content">Engedélyezze a Google számára, hogy ellenőrizze ezt és a jövőbeli hangpostaüzenetek átiratát. Az üzeneteket anonim módon tároljuk. A beállításoknál ezt bármikor módosíthatja. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Igen, csatlakozom</string>
-  <string name="voicemail_donation_promo_opt_out">Nem</string>
-  <string name="voicemail_transcription_rating">Átirat minőségének értékelése</string>
-  <string name="voicemail_transcription_rating_thanks">Köszönjük a visszajelzését.</string>
-  <string name="description_rating_good">Tetszik</string>
-  <string name="description_rating_bad">Nem tetszik</string>
-  <string name="view_conversation">Megtekintés</string>
-  <string name="ec_data_deleted">Hívás törölve. A hívás során megosztott mellékleteket az Üzenetek alkalmazásban tekintheti meg és törölheti.</string>
-  <string name="multiple_ec_data_deleted">Hívások törölve. A hívások során megosztott mellékleteket az Üzenetek alkalmazásban tekintheti meg és törölheti.</string>
 </resources>

@@ -36,32 +36,7 @@
   <string name="voicemail_string">Govorna pošta</string>
   <string name="just_now">Upravo</string>
   <string name="new_call_log_carrier_video">Video poziv putem operatera</string>
-  <string name="new_call_log_duo_video">Duo video poziv</string>
   <string name="new_call_log_unknown">Nepoznato</string>
   <string name="new_call_log_secondary_blocked">Blokirano</string>
   <string name="new_call_log_secondary_spam">Neželjena pošta</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 poziv. Posljednji poziv je propušteni poziv od osobe ^2</item>
-    <item quantity="few">^1 poziva. Posljednji poziv je propušteni poziv od osobe ^2</item>
-    <item quantity="other">^1 poziva. Posljednji poziv je propušteni poziv od osobe ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 poziv. Posljednji poziv je prihvaćeni poziv od osobe ^2</item>
-    <item quantity="few">^1 poziva. Posljednji poziv je prihvaćeni poziv od osobe ^2</item>
-    <item quantity="other">^1 poziva. Posljednji poziv je prihvaćeni poziv od osobe ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 poziv. Posljednji poziv je odlazni poziv upućen osobi ^2</item>
-    <item quantity="few">^1 poziva. Posljednji poziv je odlazni poziv upućen osobi ^2</item>
-    <item quantity="other">^1 poziva. Posljednji poziv je odlazni poziv upućen osobi ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 poziv. Posljednji poziv je blokirani poziv od osobe ^2</item>
-    <item quantity="few">^1 poziva. Posljednji poziv je blokirani poziv od osobe ^2</item>
-    <item quantity="other">^1 poziva. Posljednji poziv je blokirani poziv od osobe ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">na računu ^1,
-    putem broja ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

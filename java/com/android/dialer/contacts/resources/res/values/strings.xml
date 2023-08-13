@@ -122,56 +122,16 @@
   <!-- Title of the "Clearing frequently contacted" progress-dialog [CHAR LIMIT=35] -->
   <string name="clearFrequentsProgress_title">Clearing frequently contacted\u2026</string>
 
-  <!--  Used to display as default status when the contact is available for chat [CHAR LIMIT=19] -->
-  <string name="status_available">Available</string>
-
-  <!--  Used to display as default status when the contact is away or idle for chat [CHAR LIMIT=19] -->
-  <string name="status_away">Away</string>
-
-  <!--  Used to display as default status when the contact is busy or Do not disturb for chat [CHAR LIMIT=19] -->
-  <string name="status_busy">Busy</string>
-
-  <!-- Directory partition name (also exists in contacts) -->
-  <string name="contactsList">Contacts</string>
-
-  <!-- Directory partition name for p13n suggestions -->
-  <string name="contact_suggestions">Top Suggested</string>
-
-  <!-- The name of the invisible local contact directory -->
-  <string name="local_invisible_directory">Other</string>
-
   <!-- The label in section header in the contact list for a contact directory [CHAR LIMIT=128] -->
   <string name="directory_search_label">Directory</string>
 
   <!-- The label in section header in the contact list for a work contact directory [CHAR LIMIT=128] -->
   <string name="directory_search_label_work">Work directory</string>
 
-  <!-- The label in section header in the contact list for a local contacts [CHAR LIMIT=128] -->
-  <string name="local_search_label">All contacts</string>
-
-  <!-- The label in section header in the contact list for a local suggested contacts [CHAR LIMIT=128] -->
-  <string name="local_suggestions_search_label">Suggestions</string>
-
-  <!-- String describing the text on the header of the profile contact in the contacts list
-       This may be programatically capitalized. [CHAR LIMIT=20] -->
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Me</string>
-
   <!-- Shown as the display name for a person when the name is missing or unknown. [CHAR LIMIT=18]-->
   <string name="missing_name">(No name)</string>
 
-  <!-- String describing a contact picture that introduces users to the contact detail screen.
-
-     Used by AccessibilityService to announce the purpose of the button.
-
-     [CHAR LIMIT=NONE]
-  -->
-  <string msgid="2795575601596468581" name="description_view_contact_detail">View contact</string>
-
-  <!-- Contact list filter selection indicating that the list shows all contacts with phone numbers [CHAR LIMIT=64] -->
-  <string name="list_filter_phones">All contacts with phone numbers</string>
-
   <!-- Contact list filter selection indicating that the list shows all work contacts with phone numbers [CHAR LIMIT=64] -->
-  <string name="list_filter_phones_work">Work profile contacts</string>
 
   <!-- Button to view the updates from the current group on the group detail page [CHAR LIMIT=25] -->
   <string name="view_updates_from_group">View updates</string>
@@ -320,20 +280,6 @@
   <!-- Generic action string for starting an IM chat -->
   <string name="chat">Chat</string>
 
-  <!-- Contact list filter label indicating that the list is showing all available accounts [CHAR LIMIT=64] -->
-  <string name="list_filter_all_accounts">All contacts</string>
-
-  <!-- Displayed at the top of the contacts showing the account filter selected  [CHAR LIMIT=64] -->
-  <string name="listAllContactsInAccount">Contacts in <xliff:g example="abc@gmail.com" id="name">%s</xliff:g></string>
-
-  <!-- Displayed at the top of the contacts showing single contact. [CHAR LIMIT=64] -->
-  <string name="listCustomView">Contacts in custom view</string>
-
-  <!-- Displayed at the top of the contacts showing single contact. [CHAR LIMIT=64] -->
-  <string name="listSingleContact">Single contact</string>
-
-  <!-- Contact preferences related strings -->
-
   <!-- Label of the "sort by" display option -->
   <string name="display_options_sort_list_by">Sort by</string>
 
@@ -362,21 +308,11 @@
   <!--  String describing the icon used to clear the search field -->
   <string name="description_clear_search">Clear search</string>
 
-  <!-- The font-family to use for the text inside the searchbox. -->
-  <string name="search_font_family" translatable="false">sans-serif</string>
-
   <!-- Title for Select Account Dialog [CHAR LIMIT=30] -->
   <string name="select_account_dialog_title">Account</string>
 
   <!-- Label for the check box to toggle default sim card setting [CHAR LIMIT=35]-->
   <string name="set_default_account">Always use this for calls</string>
-
-  <!-- Title for dialog to select Phone Account for outgoing call.  [CHAR LIMIT=40] -->
-  <string name="select_phone_account_for_calls">Choose SIM for this call</string>
-
-  <!-- Checkbox label when selecting a SIM when calling a contact, to use the selected SIM for the
-   same contact and never ask again [CHAR LIMIT=40]-->
-  <string name="select_phone_account_for_calls_remember">Remember this choice</string>
 
   <!-- String used for actions in the dialer call log and the quick contact card to initiate
        a call to an individual.  The user is prompted to enter a note which is sent along with
@@ -420,11 +356,4 @@
 
        [CHAR LIMIT=NONE]-->
   <string name="description_search_video_call">Video call</string>
-
-  <!-- Description string for an action button to initiate an enriched call from search results.
-       Note: AccessibilityServices use this attribute to announce what the view represents.
-       This is especially valuable for views without textual representation like ImageView.
-
-       [CHAR LIMIT=NONE]-->
-  <string name="description_search_call_and_share">Share and call</string>
 </resources>

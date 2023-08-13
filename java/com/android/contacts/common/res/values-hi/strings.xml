@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">अक्‍सर किए जाने वाले संपर्क साफ करें?</string>
   <string name="clearFrequentsConfirmation">आपको संपर्क और फ़ोन ऐप्स से अक्सर संपर्क किए जाने वाली सूची साफ़ करनी होगी, और अपने ईमेल ऐप्स को आपकी पता प्राथमिकताओं को प्रारंभ से जानने के लिए बाध्य करना होगा.</string>
   <string name="clearFrequentsProgress_title">अक्सर किए जाने वाले संपर्क साफ कर रहा है…</string>
-  <string name="status_available">उपलब्ध</string>
-  <string name="status_away">दूर</string>
-  <string name="status_busy">व्यस्त</string>
-  <string name="contactsList">संपर्क</string>
-  <string name="contact_suggestions">शीर्ष सुझाव</string>
-  <string name="local_invisible_directory">अन्य</string>
   <string name="directory_search_label">निर्देशिका</string>
   <string name="directory_search_label_work">कार्य निर्देशिका</string>
-  <string name="local_search_label">सभी संपर्क</string>
-  <string name="local_suggestions_search_label">सुझाव</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">मुझे</string>
   <string name="missing_name">(कोई नाम नहीं)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">संपर्क देखें</string>
-  <string name="list_filter_phones">फ़ोन नंबरों वाले सभी संपर्क</string>
-  <string name="list_filter_phones_work">कार्य प्रोफ़ाइल के संपर्क</string>
   <string name="view_updates_from_group">नई जानकारी देखें</string>
   <string name="account_phone">केवल-डिवाइस के लिए, असमन्वयित</string>
   <string name="nameLabelsGroup">नाम</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ का उपयोग करके बातचीत करें</string>
   <string name="chat_jabber">Jabber का उपयोग करके बातचीत करें</string>
   <string name="chat">बातचीत करें</string>
-  <string name="list_filter_all_accounts">सभी संपर्क</string>
-  <string name="listAllContactsInAccount">%s के संपर्क</string>
-  <string name="listCustomView">कस्टम दृश्य में संपर्क</string>
-  <string name="listSingleContact">एकल संपर्क</string>
   <string name="display_options_sort_list_by">इससे क्रमित करें</string>
   <string name="display_options_sort_by_given_name">नाम</string>
   <string name="display_options_sort_by_family_name">उपनाम</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">खोज साफ़ करें</string>
   <string name="select_account_dialog_title">खाता</string>
   <string name="set_default_account">कॉल के लिए हमेशा इसका उपयोग करें</string>
-  <string name="select_phone_account_for_calls">इस कॉल के लिए सिम चुनें</string>
-  <string name="select_phone_account_for_calls_remember">यह चयन याद रखें</string>
   <string name="call_with_a_note">नोट के साथ कॉल करें</string>
   <string name="call_subject_hint">कॉल के साथ भेजने के लिए नोट लिखें ...</string>
   <string name="send_and_call_button">भेजें और कॉल करें</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s टैब. %2$d नहीं पढ़े गए आइटम. </item>
   </plurals>
   <string name="description_search_video_call">वीडियो कॉल</string>
-  <string name="description_search_call_and_share">शेयर करें और कॉल करें</string>
 </resources>

@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Итно е. Јави ми се.</string>
   <string name="post_call_message_2">Јави ми се кога ќе имаш време.</string>
   <string name="post_call_message_3">Не е итно. Може да разговараме подоцна.</string>
-  <string name="post_call_add_message">Додајте порака</string>
-  <string name="post_call_send_message">Испратете порака</string>
+    <string name="post_call_send_message">Испратете порака</string>
   <string name="post_call_message_sent">Пораката е испратена</string>
   <string name="view">Прикажи</string>
 </resources>

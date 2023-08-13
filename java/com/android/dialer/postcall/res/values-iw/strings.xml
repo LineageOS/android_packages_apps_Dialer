@@ -4,8 +4,7 @@
   <string name="post_call_message_1">זה דחוף. תוכל/י לחזור אלי?</string>
   <string name="post_call_message_2">תוכל/י לחזור אלי כשיהיה לך זמן?</string>
   <string name="post_call_message_3">זה לא דחוף. אנחנו יכולים לדבר אחר כך.</string>
-  <string name="post_call_add_message">הוסף הודעה</string>
-  <string name="post_call_send_message">שליחת הודעה</string>
+    <string name="post_call_send_message">שליחת הודעה</string>
   <string name="post_call_message_sent">ההודעה נשלחה</string>
   <string name="view">הצג</string>
 </resources>

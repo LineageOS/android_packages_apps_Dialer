@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Hreinsa mest notaða tengiliði?</string>
   <string name="clearFrequentsConfirmation">Þetta hreinsar tengiliðina sem þú hefur mest samskipti við úr forritunum Tengiliðir og Sími og þvingar tölvupóstforrit til að læra upp á nýtt hvernig þú notar netföng.</string>
   <string name="clearFrequentsProgress_title">Hreinsar mest notaða tengiliði…</string>
-  <string name="status_available">Laus</string>
-  <string name="status_away">Í burtu</string>
-  <string name="status_busy">Upptekin(n)</string>
-  <string name="contactsList">Tengiliðir</string>
-  <string name="contact_suggestions">Helstu tillögur</string>
-  <string name="local_invisible_directory">Annað</string>
   <string name="directory_search_label">Skrá</string>
   <string name="directory_search_label_work">Vinnuskrá</string>
-  <string name="local_search_label">Allir tengiliðir</string>
-  <string name="local_suggestions_search_label">Tillögur</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ég</string>
   <string name="missing_name">(Nafn vantar)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Skoða tengilið</string>
-  <string name="list_filter_phones">Allir tengiliðir með símanúmer</string>
-  <string name="list_filter_phones_work">Tengiliðir í vinnusniði</string>
   <string name="view_updates_from_group">Skoða uppfærslur</string>
   <string name="account_phone">Eingöngu á tæki, ósamstillt</string>
   <string name="nameLabelsGroup">Nafn</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Spjalla með ICQ</string>
   <string name="chat_jabber">Spjalla með Jabber</string>
   <string name="chat">Spjalla</string>
-  <string name="list_filter_all_accounts">Allir tengiliðir</string>
-  <string name="listAllContactsInAccount">Tengiliðir á %s</string>
-  <string name="listCustomView">Tengiliðir á sérsniðnu yfirliti</string>
-  <string name="listSingleContact">Einn tengiliður</string>
   <string name="display_options_sort_list_by">Raða eftir</string>
   <string name="display_options_sort_by_given_name">Fornafn</string>
   <string name="display_options_sort_by_family_name">Eftirnafn</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Hreinsa leit</string>
   <string name="select_account_dialog_title">Reikningur</string>
   <string name="set_default_account">Nota þetta alltaf fyrir símtöl</string>
-  <string name="select_phone_account_for_calls">Veldu SIM-kort fyrir þetta símtal</string>
-  <string name="select_phone_account_for_calls_remember">Muna þetta val</string>
   <string name="call_with_a_note">Símtal með texta</string>
   <string name="call_subject_hint">Sláðu inn texta til að senda með símtalinu...</string>
   <string name="send_and_call_button">SENDA OG HRINGJA</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> Flipinn %1$s. %2$d ólesin atriði. </item>
   </plurals>
   <string name="description_search_video_call">Hringja myndsímtal</string>
-  <string name="description_search_call_and_share">Deila og hringja</string>
 </resources>

@@ -15,10 +15,6 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
-  <!-- Title of the "Voicemail" settings screen, with a text label identifying which SIM the settings are for. -->
-  <string name="voicemail_settings_with_label">Voicemail (<xliff:g example="Mock Carrier" id="subscriptionlabel">%s</xliff:g>)</string>
-
   <!-- Call settings screen, setting option name -->
   <string name="voicemail_settings_title">Voicemail</string>
 
@@ -76,11 +72,6 @@
   <string name="voicemail_change_pin_preference_summary_disable">Visual voicemail must be enabled to change PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Visual voicemail is not activated yet, please try again later</string>
 
-  <!-- Hint for the old PIN field in the change vociemail PIN dialog -->
-  <string name="vm_change_pin_old_pin">Old PIN</string>
-  <!-- Hint for the new PIN field in the change vociemail PIN dialog -->
-  <string name="vm_change_pin_new_pin">New PIN</string>
-
   <!-- Message on the dialog when PIN changing is in progress -->
   <string name="vm_change_pin_progress_message">Please wait.</string>
   <!-- Error message for the voicemail PIN change if the PIN is too short -->
@@ -121,23 +112,8 @@
   <!-- The error message to show if the server reported an error while attempting to change the voicemail PIN -->
   <string name="change_pin_system_error">Unable to set PIN</string>
 
-  <!-- Title for visual voicemail setting that enables users voicemails to be transcribed by Google.
-       [CHAR LIMIT=40] -->
-  <string name="voicemail_visual_voicemail_transcription_switch_title">
-    Voicemail transcription
-  </string>
-  <!-- Title for visual voicemail setting that enables user to donate their voicemails for analysis.
-       [CHAR LIMIT=40] -->
-  <string name="voicemail_visual_voicemail_donation_switch_title">
-    Voicemail transcription analysis
-  </string>
   <!-- Summary information while visual voicemail is activating after turning it on [CHAR LIMIT=NONE] -->
   <string name="voicemail_activating_summary_info">Activating voicemail</string>
-
-  <!-- Summary information for visual voicemail transcription setting [CHAR LIMIT=NONE] -->
-  <string name="voicemail_transcription_preference_summary_info">Get transcripts of your voicemail using Google\'s transcription service. <xliff:g example="Learn more">%1$s</xliff:g></string>
-  <!-- Summary information for visual voicemail donation setting [CHAR LIMIT=NONE] -->
-  <string name="voicemail_donate_preference_summary_info">Let Google review your voicemail messages to improve transcription accuracy. Your voicemail messages are stored anonymously. <xliff:g example="Learn more">%1$s</xliff:g></string>
 
   <!-- Title for disable visual voicemail confirmation dialog [CHAR LIMIT=40] -->
   <string name="confirm_disable_voicemail_dialog_title">Turn off visual voicemail</string>

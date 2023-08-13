@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Stemboodskap (%s)</string>
   <string name="voicemail_settings_title">Stemboodskap</string>
   <string name="voicemail_notifications_preference_title">Kennisgewings</string>
   <string name="voicemail_change_greeting_preference_title">Stemboodskapgroet</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Verander PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">Visuele stemboodskap moet geaktiveer wees om PIN te verander</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Visuele stemboodskap is nog nie geaktiveer nie, probeer asseblief later weer</string>
-  <string name="vm_change_pin_old_pin">Ou PIN</string>
-  <string name="vm_change_pin_new_pin">Nuwe PIN</string>
   <string name="vm_change_pin_progress_message">Wag asseblief.</string>
   <string name="vm_change_pin_error_too_short">Die nuwe PIN is te kort.</string>
   <string name="vm_change_pin_error_too_long">Die nuwe PIN is te lank.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN\'s stem nie ooreen nie</string>
   <string name="change_pin_succeeded">Stemboodskap-PIN is opgedateer</string>
   <string name="change_pin_system_error">Kan nie PIN stel nie</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Stemboodskaptranskripsie</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Ontleding van stemboodskaptranskripsie</string>
   <string name="voicemail_activating_summary_info">Aktiveer tans stemboodskap</string>
-  <string name="voicemail_transcription_preference_summary_info">Kry transkripsies van jou stemboodskap deur Google se transkripsiediens te gebruik. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Laat Google jou stemboodskapboodskappe hersien om transkripsiegehalte te verbeter. Jou stemboodskapboodskappe word anoniem geberg. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Skakel visuele stemboodskap af</string>
   <string name="confirm_disable_voicemail_dialog_message">Dit sal enige stemboodskap en Google-transkripsies wat in hierdie program geberg is, uitvee. Jou diensverskaffer kan dalk sy eie kopieë hou.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">SKAKEL AF</string>

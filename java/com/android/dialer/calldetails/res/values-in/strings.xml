@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Salin nomor</string>
   <string name="call_details_edit_number">Edit nomor sebelum menelepon</string>
   <string name="call_details_report_call_id">Laporkan nomor yang tidak akurat</string>
-  <string name="sent_a_photo">Mengirim foto</string>
-  <string name="received_a_photo">Menerima foto</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Laporkan nomor yang salah</string>
   <string name="report_caller_id_failed">Tidak dapat melaporkan nomor</string>
   <string name="report_caller_id_toast">Nomor dilaporkan</string>

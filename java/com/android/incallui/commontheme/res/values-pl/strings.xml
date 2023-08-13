@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">Wideo wyłączone</string>
   <string name="incall_content_description_swap_video">Przełącz wideo</string>
   <string name="incall_label_speaker">Głośnik</string>
-  <string name="incall_label_audio">Dźwięk</string>
 </resources>

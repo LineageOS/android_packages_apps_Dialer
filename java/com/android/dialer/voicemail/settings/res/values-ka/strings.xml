@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">ხმოვანი ფოსტა (%s)</string>
   <string name="voicemail_settings_title">ხმოვანი ფოსტა</string>
   <string name="voicemail_notifications_preference_title">შეტყობინებები</string>
   <string name="voicemail_change_greeting_preference_title">ხმოვანი ფოსტის მისალმება</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">PIN-კოდის შეცვლა</string>
   <string name="voicemail_change_pin_preference_summary_disable">PIN-კოდის შესაცვლელად ჩართული უნდა იყოს ვიზუალური ხმოვანი ფოსტა</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">ვიზუალური ხმოვანი ფოსტა ჯერ გააქტიურებული არ არის. გთხოვთ, სცადოთ ხელახლა</string>
-  <string name="vm_change_pin_old_pin">ძველი PIN-კოდი</string>
-  <string name="vm_change_pin_new_pin">ახალი PIN-კოდი</string>
   <string name="vm_change_pin_progress_message">გთხოვთ, დაელოდოთ.</string>
   <string name="vm_change_pin_error_too_short">ახალი PIN-კოდი ძალიან მოკლეა.</string>
   <string name="vm_change_pin_error_too_long">ახალი PIN-კოდი ძალიან გრძელია.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN-კოდები არ ემთხვევა</string>
   <string name="change_pin_succeeded">ხმოვანი ფოსტის PIN-კოდი განახლდა</string>
   <string name="change_pin_system_error">PIN-კოდის დაყენება შეუძლებელია</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">ხმოვანი ფოსტის ტრანსკრიბირება</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">ხმოვანი ფოსტის ტრანსკრიბირების ანალიზი</string>
   <string name="voicemail_activating_summary_info">მიმდინარეობს ხმოვანი ფოსტის აქტივაცია</string>
-  <string name="voicemail_transcription_preference_summary_info">მიიღეთ თქვენი ხმოვანი ფოსტის ტრანსკრიპტები Google-ის ტრანსკრიბირების სერვისის გამოყენებით. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">მიეცით უფლება Google-ს, განიხილოს თქვენი ხმოვანი ფოსტის შეტყობინებები ტრანსკრიბირების სიზუსტის გასაუმჯობესებლად. თქვენი ხმოვანი ფოსტის შეტყობინებები ანონიმურად შეინახება. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">ვიზუალური ხმოვანი ფოსტის გამორთვა</string>
   <string name="confirm_disable_voicemail_dialog_message">ეს წაშლის ამ აპში შენახულ ნებისმიერ ხმოვან შეტყობინებას და Google ტრანსკრიპტს. შესაძლოა თქვენმა ოპერატორმა შეინახოს თავისი ასლები.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">გამორთვა</string>
