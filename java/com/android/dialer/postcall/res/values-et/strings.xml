@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Sellega on kiire. Helistage tagasi.</string>
   <string name="post_call_message_2">Helistage tagasi, kui teil on rohkem aega.</string>
   <string name="post_call_message_3">Sellega pole kiiret, võime hiljem vestalda.</string>
-  <string name="post_call_add_message">Lisage sõnum</string>
-  <string name="post_call_send_message">Saada sõnum</string>
+    <string name="post_call_send_message">Saada sõnum</string>
   <string name="post_call_message_sent">Sõnum on saadetud</string>
   <string name="view">Kuva</string>
 </resources>

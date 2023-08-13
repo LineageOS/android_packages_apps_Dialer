@@ -34,28 +34,7 @@
   <string name="voicemail_string">Bústia de veu</string>
   <string name="just_now">Ara mateix</string>
   <string name="new_call_log_carrier_video">Videotruc. operador tel. mòbil</string>
-  <string name="new_call_log_duo_video">Videotrucada de Duo</string>
   <string name="new_call_log_unknown">Desconegut</string>
   <string name="new_call_log_secondary_blocked">Bloquejats</string>
   <string name="new_call_log_secondary_spam">Trucades brossa</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 trucada perduda de: ^2</item>
-    <item quantity="other">^1 trucades; l\'última és una trucada perduda de: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 trucada resposta de: ^2</item>
-    <item quantity="other">^1 trucades; l\'última és una trucada resposta de: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 trucada sortint feta a ^2</item>
-    <item quantity="other">^1 trucades; l\'última és una trucada sortint feta a ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 trucada bloquejada de: ^2</item>
-    <item quantity="other">^1 trucades; l\'última és una trucada bloquejada de: ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">a ^1,
-    al número ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

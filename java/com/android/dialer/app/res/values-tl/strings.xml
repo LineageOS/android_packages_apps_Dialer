@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telepono</string>
-  <string name="launcherDialpadActivityLabel">Keypad ng Telepono</string>
   <string name="callHistoryIconLabel">History ng tawag</string>
   <string name="action_copy_number_text">Kopyahin ang numero</string>
   <string name="action_edit_number_before_call">I-edit ang numero bago tumawag</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Higit pang mga pagpipilian</string>
   <string name="action_menu_dialpad_button">keypad</string>
   <string name="dialer_settings_label">Mga Setting</string>
-  <string name="simulator_submenu_label">Simulator</string>
-  <string name="new_ui_launcher_shortcut_label">Gawa ng Shortcut ng Bagong UI</string>
   <string name="description_entering_bulk_action_mode">Pumapasok sa bulk action mode</string>
   <string name="description_leaving_bulk_action_mode">Umalis sa bulk action mode</string>
   <string name="description_selecting_bulk_action_mode">Napili %1$s</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Video call.</string>
   <string name="description_start_voice_search">Simulan ang paghahanap gamit ang boses</string>
   <string name="voicemail">Voicemail</string>
-  <string name="description_cancel_multi_select">Kanselahin ang batch actions mode</string>
   <string name="voicemailMultiSelectDeleteConfirm">I-delete</string>
   <string name="voicemailMultiSelectDeleteCancel">Kanselahin</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s ang napili</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Hindi available ang paghahanap gamit ang boses</string>
   <string name="dialer_hint_find_contact">Maghanap ng mga contact</string>
-  <string name="block_number_search_hint">Magdagdag ng numero, maghanap sa contact</string>
   <string name="call_log_all_empty">Walang laman ang iyong history ng tawag</string>
   <string name="call_log_all_empty_action">Tumawag</string>
   <string name="call_log_missed_empty">Wala kang mga hindi nasagot na tawag.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">History ng Tawag</string>
   <string name="call_log_all_title">Lahat</string>
   <string name="call_log_missed_title">Di nasagot</string>
-  <string name="tab_speed_dial">Speed dial</string>
-  <string name="tab_history">History ng Tawag</string>
   <string name="tab_all_contacts">Mga Contact</string>
-  <string name="tab_voicemail">Voicemail</string>
-  <string name="search_shortcut_call_number">Tumawag sa %s</string>
   <string name="search_shortcut_create_new_contact">Gumawa ng bagong contact</string>
   <string name="search_shortcut_add_to_contact">Idagdag sa isang contact</string>
   <string name="search_shortcut_send_sms_message">Magpadala ng SMS</string>
   <string name="search_shortcut_make_video_call">Gumawa ng video call</string>
-  <string name="search_shortcut_block_number">I-block ang numero</string>
-  <string name="speed_dial_empty">Wala pang tao sa iyong speed dial</string>
-  <string name="speed_dial_empty_add_favorite_action">Magdagdag ng paborito</string>
-  <string name="remove_contact">Alisin</string>
   <string name="select_all">Piliin lahat</string>
   <string name="call_log_action_video_call">Mag-video call</string>
-  <string name="call_log_action_set_up_video">Mag-set up ng pag-video call</string>
-  <string name="call_log_action_invite_video">Imbitahan sa video call</string>
   <string name="call_log_action_send_message">Magpadala ng mensahe</string>
   <string name="call_log_action_details">Mga detalye ng tawag</string>
   <string name="call_log_action_share_voicemail">Ibahagi sa …</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Mga Tawag</string>
   <string name="manage_blocked_numbers_label">Mga naka-block na numero</string>
   <string name="voicemail_settings_label">Voicemail</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Pansamantalang na-off ang call blocking</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Na-disable ang pagba-block ng tawag dahil nakipag-ugnayan ka sa mga pang-emergency na serbisyo mula sa teleponong ito sa nakalipas na 48 oras. Awtomatiko itong muling i-enable kapag nag-expire na ang 48 oras.</string>
-  <string name="import_send_to_voicemail_numbers_label">I-import ang mga numero</string>
-  <string name="blocked_call_settings_import_description">Minarkahan mo na dati ang ilang tumatawag na awtomatikong ipadala sa voicemail sa pamamagitan ng iba pang mga app.</string>
-  <string name="blocked_call_settings_view_numbers_button">Tingnan ang Numero</string>
-  <string name="blocked_call_settings_import_button">I-import</string>
-  <string name="description_blocked_number_list_delete">I-unblock ang numero</string>
-  <string name="addBlockedNumber">Magdagdag ng numero</string>
-  <string name="block_number_footer_message_vvm">Iba-block ang mga tawag mula sa mga numerong ito at awtomatikong ide-delete ang mga voicemail.</string>
-  <string name="block_number_footer_message_no_vvm">Iba-block ang mga tawag mula sa numerong ito, ngunit makakapag-iwan pa rin sila sa iyo ng mga voicemail.</string>
-  <string name="block_list">Mga naka-block na numero</string>
-  <string name="alreadyBlocked">Naka-block na ang %1$s</string>
   <string name="phone_account_settings_label">Account sa pagtawag</string>
-  <string name="permission_no_speeddial">Upang i-enable ang speed dial, i-on ang pahintulot ng Mga Contact.</string>
   <string name="permission_no_calllog">Upang makita ang iyong log ng tawag, i-on ang pahintulot ng Telepono.</string>
-  <string name="permission_no_search">Upang hanapin ang iyong mga contact, i-on ang mga pahintulot sa Mga Contact.</string>
-  <string name="permission_place_call">Upang tumawag, i-on ang pahintulot ng Telepono.</string>
   <string name="toast_cannot_write_system_settings">Walang pahintulot ang app ng Telepono na mag-write sa mga setting ng system.</string>
   <string name="blocked_number_call_log_label">Naka-block</string>
   <string name="call_log_action_block_report_number">I-block/iulat ang spam</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Hindi spam</string>
   <string name="call_log_action_unblock_number">I-unblock ang numero</string>
   <string name="spam_number_call_log_label">Spam</string>
-  <string name="call_composer_connection_failed">Offline si %1$s at hindi makontak</string>
-  <string name="about_phone_label">Tungkol dito</string>
-  <string name="voicemail_transcription_branding_text">Na-transcribe ng Google</string>
-  <string name="voicemail_transcription_in_progress">Tina-transcribe…</string>
-  <string name="voicemail_transcription_failed">Hindi available ang transcript.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Hindi available ang transcript. Hindi sinusuportahan ang wika.</string>
-  <string name="voicemail_transcription_failed_no_speech">Hindi available ang transcript. Walang na-detect na pagsasalita.</string>
-  <string name="voicemail_donation_promo_title">Tulungang pagandahin ang katumpakan ng transkripsyon?</string>
-  <string name="voicemail_donation_promo_content">Hayaang suriin ito ng Google at ang mga darating na mensahe sa voicemail na may mga transcript. Ang mga ito ay ii-store nang anonymous. Baguhin ang Mga Setting anumang oras. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Oo, sali ako</string>
-  <string name="voicemail_donation_promo_opt_out">Hindi, salamat</string>
-  <string name="voicemail_transcription_rating">I-rate ang transkripsyon</string>
-  <string name="voicemail_transcription_rating_thanks">Salamat sa iyong feedback</string>
-  <string name="description_rating_good">I-like</string>
-  <string name="description_rating_bad">I-dislike</string>
-  <string name="view_conversation">Tingnan</string>
-  <string name="ec_data_deleted">Dinelete ang tawag. Tingnan at i-delete ang mga attachment na ibinahagi sa tawag na ito sa Messages.</string>
-  <string name="multiple_ec_data_deleted">Dinelete ang mga tawag. Tingnan at i-delete ang mga attachment na ibinahagi sa mga tawag sa Messages.</string>
 </resources>

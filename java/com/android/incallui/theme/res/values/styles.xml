@@ -16,20 +16,6 @@
   -->
 
 <resources>
-  <!-- Theme for the InCallActivity activity. Should have a transparent background for the
-       circular reveal animation for a new outgoing call to work correctly. We don't just use
-       Theme.Black.NoTitleBar directly, since we want any popups or dialogs from the
-       InCallActivity to have the correct Material style. -->
-  <style name="Theme.InCallScreen.Light" parent="@style/Dialer.ThemeBase.NoActionBar">
-    <item name="android:statusBarColor">@android:color/transparent</item>
-    <item name="android:navigationBarColor">@android:color/transparent</item>
-    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    <item name="dialpad_style">@style/InCallDialpad</item>
-    <item name="android:windowAnimationStyle">@null</item>
-    <item name="android:windowBackground">@drawable/incall_background_gradient</item>
-    <item name="android:windowShowWallpaper">true</item>
-  </style>
-
   <style name="Theme.InCallScreen" parent="@style/Dialer.Dark.ThemeBase.NoActionBar">
     <item name="android:textColorPrimary">@android:color/white</item>
     <item name="android:textColorSecondary">#DDFFFFFF</item>
@@ -78,11 +64,6 @@
     <item name="android:colorBackgroundCacheHint">@null</item>
     <item name="android:windowIsTranslucent">true</item>
     <item name="android:windowAnimationStyle">@android:style/Animation</item>
-  </style>
-
-  <style name="AfterCallDialogStyle" parent="@android:style/Theme.Material.Light.Dialog">
-    <!-- This colorAccent is to style text in the dialogs -->
-    <item name="android:colorAccent">?android:attr/colorPrimary</item>
   </style>
 
   <style name="Theme.Incall.DialogHolder" parent="Theme.AppCompat.Translucent">

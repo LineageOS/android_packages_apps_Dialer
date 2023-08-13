@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">संपर्कों में जोड़ने के लिए टैप करें या स्पैम नंबर ब्लॉक करें.</string>
   <string name="spam_notification_non_spam_call_expanded_text">इस नंबर से आपको पहली बार कॉल किया गया है. अगर यह कॉल स्पैम था, तो आप इस नंबर को ब्लॉक कर सकते हैं और उसकी रिपोर्ट कर सकते हैं.</string>
   <string name="spam_notification_spam_call_collapsed_text">उसे स्पैम नहीं के रूप में रिपोर्ट करने या ब्लॉक करने के लिए टैप करें</string>
-  <string name="spam_notification_report_spam_action_text">ब्लॉक व रिपोर्ट करें</string>
-  <string name="spam_notification_add_contact_action_text">संपर्क जोड़ें</string>
   <string name="spam_notification_dialog_add_contact_action_text">संपर्क में जोड़ें</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">स्पैम को ब्लॉक करके उसकी रिपोर्ट करें</string>
   <string name="spam_notification_was_not_spam_action_text">नहीं, स्पैम नहीं है</string>

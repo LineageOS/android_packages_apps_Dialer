@@ -46,10 +46,6 @@ public final class GroupMetaData {
     this.mFavorites = favorites;
   }
 
-  public String getAccountName() {
-    return mAccountName;
-  }
-
   public String getAccountType() {
     return mAccountType;
   }
@@ -58,16 +54,8 @@ public final class GroupMetaData {
     return mDataSet;
   }
 
-  public long getGroupId() {
-    return mGroupId;
-  }
-
   public String getTitle() {
     return mTitle;
-  }
-
-  public boolean isDefaultGroup() {
-    return mDefaultGroup;
   }
 
   public boolean isFavorites() {

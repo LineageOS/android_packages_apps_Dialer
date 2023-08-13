@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">Wifi</string>
-  <string name="network_name_mobile">الجوّال</string>
   <string name="content_description_overflow">خيارات أكثر</string>
   <string name="snackbar_undo">تراجع</string>
   <string name="ok_got_it">موافق، حسنًا</string>

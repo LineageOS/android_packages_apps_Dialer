@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Veuillez me rappeler de toute urgence.</string>
   <string name="post_call_message_2">Veuillez me rappeler dès que vous avez un moment.</string>
   <string name="post_call_message_3">Aucune urgence. On se recontacte ultérieurement.</string>
-  <string name="post_call_add_message">Ajouter un message</string>
-  <string name="post_call_send_message">Envoyer un message</string>
+    <string name="post_call_send_message">Envoyer un message</string>
   <string name="post_call_message_sent">Message envoyé</string>
   <string name="view">Afficher</string>
 </resources>

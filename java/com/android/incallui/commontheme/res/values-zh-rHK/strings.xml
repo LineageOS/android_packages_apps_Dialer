@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">視像已關閉</string>
   <string name="incall_content_description_swap_video">切換視像</string>
   <string name="incall_label_speaker">喇叭</string>
-  <string name="incall_label_audio">音效</string>
 </resources>

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Tyhjennetäänkö usein käytetyt?</string>
   <string name="clearFrequentsConfirmation">Toiminto tyhjentää Yhteystiedot- ja Puhelin-sovellusten usein käytettyjen kontaktien luettelon. Lisäksi sähköpostisovellukset pakotetaan opettelemaan osoiteasetuksesi uudestaan.</string>
   <string name="clearFrequentsProgress_title">Tyhjennetään usein käytetyt...</string>
-  <string name="status_available">Saatavilla</string>
-  <string name="status_away">Poissa</string>
-  <string name="status_busy">Varattu</string>
-  <string name="contactsList">Yhteystiedot</string>
-  <string name="contact_suggestions">Kiinnostavimmat ehdotukset</string>
-  <string name="local_invisible_directory">Muu</string>
   <string name="directory_search_label">Osoitekirja</string>
   <string name="directory_search_label_work">Työhakemisto</string>
-  <string name="local_search_label">Kaikki yhteystiedot</string>
-  <string name="local_suggestions_search_label">Ehdotukset</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Minä</string>
   <string name="missing_name">(Ei nimeä)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Näytä yhteystieto</string>
-  <string name="list_filter_phones">Kaikki kontaktit, joilla on puhelinnumero</string>
-  <string name="list_filter_phones_work">Työprofiilin yhteystiedot</string>
   <string name="view_updates_from_group">Näytä päivitykset</string>
   <string name="account_phone">Vain laitteessa, ei synkronoida</string>
   <string name="nameLabelsGroup">Nimi</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Keskustele ICQ:n avulla</string>
   <string name="chat_jabber">Keskustele Jabberin avulla</string>
   <string name="chat">Keskustelu</string>
-  <string name="list_filter_all_accounts">Yhteystiedot</string>
-  <string name="listAllContactsInAccount">Yhteystiedot tilissä %s</string>
-  <string name="listCustomView">Muokatun näkymän yhteystiedot</string>
-  <string name="listSingleContact">Yksi yhteystieto</string>
   <string name="display_options_sort_list_by">Lajitteluperuste</string>
   <string name="display_options_sort_by_given_name">Etunimi</string>
   <string name="display_options_sort_by_family_name">Sukunimi</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Tyhjennä haku</string>
   <string name="select_account_dialog_title">Tili</string>
   <string name="set_default_account">Käytä kaikille puheluille</string>
-  <string name="select_phone_account_for_calls">Valitse SIM tätä puhelua varten</string>
-  <string name="select_phone_account_for_calls_remember">Muista valinta</string>
   <string name="call_with_a_note">Soita ja lähetä muistiinpano</string>
   <string name="call_subject_hint">Kirjoita muistiinpano lähetettäväksi puhelun kanssa…</string>
   <string name="send_and_call_button">LÄHETÄ JA SOITA</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s-välilehti. %2$d lukematonta kohdetta. </item>
   </plurals>
   <string name="description_search_video_call">Videopuhelu</string>
-  <string name="description_search_call_and_share">Jaa ja soita</string>
 </resources>

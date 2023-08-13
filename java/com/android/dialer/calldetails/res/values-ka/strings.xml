@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">ნომრის კოპირება</string>
   <string name="call_details_edit_number">ნომრის რედაქტირება დარეკვამდე</string>
   <string name="call_details_report_call_id">არაზუსტი ნომრის შეტყობინება</string>
-  <string name="sent_a_photo">ფოტო გაიგზავნა</string>
-  <string name="received_a_photo">მიღებულია ფოტო</string>
-  <string name="message_in_quotes">„%1$s“</string>
   <string name="report_caller_id_dialog_title">არასწორი ნომრის შეტყობინება</string>
   <string name="report_caller_id_failed">ნომრის შეტყობინება ვერ მოხერხდა</string>
   <string name="report_caller_id_toast">ნომერი შეტყობინებულია</string>

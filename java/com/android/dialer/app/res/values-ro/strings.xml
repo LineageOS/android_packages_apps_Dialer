@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefon</string>
-  <string name="launcherDialpadActivityLabel">Tastatura telefonului</string>
   <string name="callHistoryIconLabel">Istoricul apelurilor</string>
   <string name="action_copy_number_text">Copiați numărul</string>
   <string name="action_edit_number_before_call">Modificați numărul înainte de apelare</string>
@@ -37,8 +36,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Mai multe opțiuni</string>
   <string name="action_menu_dialpad_button">tastatură</string>
   <string name="dialer_settings_label">Setări</string>
-  <string name="simulator_submenu_label">Simulator</string>
-  <string name="new_ui_launcher_shortcut_label">Creați comandă rapidă IU nouă</string>
   <string name="description_entering_bulk_action_mode">Se intră în modul acțiune în bloc</string>
   <string name="description_leaving_bulk_action_mode">Ați ieșit din modul acțiune în bloc</string>
   <string name="description_selecting_bulk_action_mode">S-a selectat %1$s</string>
@@ -49,7 +46,6 @@
   <string name="description_video_call">Apel video.</string>
   <string name="description_start_voice_search">Începeți căutarea vocală</string>
   <string name="voicemail">Mesagerie vocală</string>
-  <string name="description_cancel_multi_select">Anulați modul de acțiuni în lot</string>
   <string name="voicemailMultiSelectDeleteConfirm">Ștergeți</string>
   <string name="voicemailMultiSelectDeleteCancel">Anulați</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s selectate</string>
@@ -64,7 +60,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Căutarea vocală nu este disponibilă</string>
   <string name="dialer_hint_find_contact">Căutați în Agendă</string>
-  <string name="block_number_search_hint">Adăugați număr/căutați contacte</string>
   <string name="call_log_all_empty">Istoricul apelurilor este gol</string>
   <string name="call_log_all_empty_action">Apelați</string>
   <string name="call_log_missed_empty">Nu aveți niciun apel nepreluat.</string>
@@ -72,23 +67,13 @@
   <string name="call_log_activity_title">Istoricul apelurilor</string>
   <string name="call_log_all_title">Toate</string>
   <string name="call_log_missed_title">Nepreluate</string>
-  <string name="tab_speed_dial">Apelare rapidă</string>
-  <string name="tab_history">Istoricul apelurilor</string>
   <string name="tab_all_contacts">Agendă</string>
-  <string name="tab_voicemail">Mesagerie vocală</string>
-  <string name="search_shortcut_call_number">Apelați %s</string>
   <string name="search_shortcut_create_new_contact">Creați o intrare nouă</string>
   <string name="search_shortcut_add_to_contact">Adăugați la o intrare</string>
   <string name="search_shortcut_send_sms_message">Trimiteți SMS</string>
   <string name="search_shortcut_make_video_call">Inițiați un apel video</string>
-  <string name="search_shortcut_block_number">Blocați numărul</string>
-  <string name="speed_dial_empty">Nicio persoană de contact setată pentru apelarea rapidă</string>
-  <string name="speed_dial_empty_add_favorite_action">Adăugați o persoană de contact preferată</string>
-  <string name="remove_contact">Eliminați</string>
   <string name="select_all">Selectați tot</string>
   <string name="call_log_action_video_call">Apel video</string>
-  <string name="call_log_action_set_up_video">Configurați apelarea video</string>
-  <string name="call_log_action_invite_video">Invitați la un apel video</string>
   <string name="call_log_action_send_message">Trimiteți un mesaj</string>
   <string name="call_log_action_details">Detaliile apelului</string>
   <string name="call_log_action_share_voicemail">Trimiteți către …</string>
@@ -127,23 +112,8 @@
   <string name="call_settings_label">Apeluri</string>
   <string name="manage_blocked_numbers_label">Numere blocate</string>
   <string name="voicemail_settings_label">Mesagerie vocală</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Blocarea apelurilor e dezactivată temporar</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Blocarea apelurilor a fost dezactivată, deoarece ați contactat serviciile de urgență de pe acest telefon în ultimele 48 de ore. Funcția va fi reactivată automat după ce perioada de 48 de ore va expira.</string>
-  <string name="import_send_to_voicemail_numbers_label">Importați numere</string>
-  <string name="blocked_call_settings_import_description">Anterior, ați marcat câțiva apelanți pentru a fi redirecționați automat spre mesageria vocală prin alte aplicații.</string>
-  <string name="blocked_call_settings_view_numbers_button">Vedeți numerele</string>
-  <string name="blocked_call_settings_import_button">Importați</string>
-  <string name="description_blocked_number_list_delete">Deblocați numărul</string>
-  <string name="addBlockedNumber">Adăugați un număr</string>
-  <string name="block_number_footer_message_vvm">Apelurile de la aceste numere vor fi blocate, iar mesajele vocale vor fi șterse automat.</string>
-  <string name="block_number_footer_message_no_vvm">Apelurile de la aceste numere vor fi blocate, dar apelanții vor putea totuși să vă lase mesaje vocale.</string>
-  <string name="block_list">Numere blocate</string>
-  <string name="alreadyBlocked">%1$s este deja blocat.</string>
   <string name="phone_account_settings_label">Conturi pentru apelare</string>
-  <string name="permission_no_speeddial">Pentru a activa apelarea rapidă, activați permisiunea Agendă.</string>
   <string name="permission_no_calllog">Pentru a vedea jurnalul de apeluri, activați permisiunea Telefon.</string>
-  <string name="permission_no_search">Pentru a căuta în persoanele de contact, activați permisiunea Agendă.</string>
-  <string name="permission_place_call">Pentru a apela, activați permisiunea Telefon.</string>
   <string name="toast_cannot_write_system_settings">Aplicația Telefon nu are permisiunea să modifice setările de sistem.</string>
   <string name="blocked_number_call_log_label">Blocat</string>
   <string name="call_log_action_block_report_number">Blocați/raportați ca spam</string>
@@ -151,22 +121,4 @@
   <string name="call_log_action_remove_spam">Nu este spam</string>
   <string name="call_log_action_unblock_number">Deblocați numărul</string>
   <string name="spam_number_call_log_label">Spam</string>
-  <string name="call_composer_connection_failed">%1$s este offline și nu poate fi contactat(ă)</string>
-  <string name="about_phone_label">Despre</string>
-  <string name="voicemail_transcription_branding_text">Transcris de Google</string>
-  <string name="voicemail_transcription_in_progress">Se transcrie…</string>
-  <string name="voicemail_transcription_failed">Transcrierea nu e disponibilă.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transcrierea nu e disponibilă. Limba nu e acceptată.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transcrierea nu e disponibilă. Nu s-a detectat nimic rostit.</string>
-  <string name="voicemail_donation_promo_title">Vreți să contribuiți la îmbunătățirea acurateței transcrierii?</string>
-  <string name="voicemail_donation_promo_content">Permiteți serviciului Google să examineze aceste mesaj vocal și pe cele viitoare cu transcrieri. Ele vor fi stocate anonim. Puteți modifica setările oricând. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Da, accept</string>
-  <string name="voicemail_donation_promo_opt_out">Nu, mulțumesc</string>
-  <string name="voicemail_transcription_rating">Evaluați calitatea</string>
-  <string name="voicemail_transcription_rating_thanks">Vă mulțumim pentru feedback!</string>
-  <string name="description_rating_good">Apreciez</string>
-  <string name="description_rating_bad">Nu apreciez</string>
-  <string name="view_conversation">Afișați</string>
-  <string name="ec_data_deleted">Apelul a fost șters. Afișați și ștergeți atașamentele trimise în timpul acestui apel în Messages.</string>
-  <string name="multiple_ec_data_deleted">Apelurile au fost șterse. Afișați și ștergeți atașamentele trimise în timpul apelurilor în Messages.</string>
 </resources>

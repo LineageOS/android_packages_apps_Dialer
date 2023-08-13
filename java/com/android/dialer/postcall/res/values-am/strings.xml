@@ -4,8 +4,7 @@
   <string name="post_call_message_1">ይህ አስቸኳይ ነው። መልሰው ይደውሉልኝ።</string>
   <string name="post_call_message_2">ጊዜ ሲኖርዎት መልሰው ይደውሉልኝ።</string>
   <string name="post_call_message_3">አስቸኳይ አይደለም። በኋላ መወያየት እንችላለን።</string>
-  <string name="post_call_add_message">መልዕክት አክል</string>
-  <string name="post_call_send_message">መልዕክት ይላኩ</string>
+    <string name="post_call_send_message">መልዕክት ይላኩ</string>
   <string name="post_call_message_sent">መልዕክት ልከዋል</string>
   <string name="view">አሳይ</string>
 </resources>

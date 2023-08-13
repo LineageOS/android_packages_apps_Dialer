@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">Wifi</string>
-  <string name="network_name_mobile">မိုဘိုင်း</string>
   <string name="content_description_overflow">နောက်ထပ် ရွေးစရာများ</string>
   <string name="snackbar_undo">မလုပ်တော့</string>
   <string name="ok_got_it">ရပါပြီ</string>

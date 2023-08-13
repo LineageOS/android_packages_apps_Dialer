@@ -119,24 +119,10 @@ public abstract class CallIntent implements Parcelable {
 
     abstract ImmutableMap.Builder<String, Long> longPlaceCallExtrasBuilder();
 
-    public Builder addPlaceCallExtra(String key, String value) {
-      stringPlaceCallExtrasBuilder().put(key, value);
-      return this;
-    }
-
-    public Builder addPlaceCallExtra(String key, Long value) {
-      longPlaceCallExtrasBuilder().put(key, value);
-      return this;
-    }
-
     abstract CallIntent autoBuild();
 
     public Intent build() {
-      CallSpecificAppData.Builder builder =
-          CallSpecificAppData.newBuilder(callSpecificAppData())
-              .setLightbringerButtonAppearInExpandedCallLogItemCount(0)
-              .setLightbringerButtonAppearInCollapsedCallLogItemCount(0)
-              .setLightbringerButtonAppearInSearchCount(0);
+      CallSpecificAppData.Builder builder = CallSpecificAppData.newBuilder(callSpecificAppData());
 
       setCallSpecificAppData(builder.build());
 

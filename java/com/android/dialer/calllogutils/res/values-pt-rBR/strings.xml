@@ -34,27 +34,7 @@
   <string name="voicemail_string">Correio de voz</string>
   <string name="just_now">Agora</string>
   <string name="new_call_log_carrier_video">Videochamadas via operadora</string>
-  <string name="new_call_log_duo_video">Videochamadas do Duo</string>
   <string name="new_call_log_unknown">Desconhecidos</string>
   <string name="new_call_log_secondary_blocked">Bloqueados</string>
   <string name="new_call_log_secondary_spam">Spam</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 chamada perdida de ^2</item>
-    <item quantity="other">^1 chamadas, 1 perdida de ^2 (a última)</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 chamada atendida de ^2</item>
-    <item quantity="other">^1 chamadas, 1 atendida de ^2 (a última)</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 chamada realizada para ^2</item>
-    <item quantity="other">^1 chamadas, 1 realizada para ^2 (a última)</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 chamada bloqueada de ^2</item>
-    <item quantity="other">^1 chamadas, 1 bloqueada de ^2 (a última)</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">em ^1, pelo número ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

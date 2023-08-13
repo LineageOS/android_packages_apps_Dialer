@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Скопировать номер</string>
   <string name="call_details_edit_number">Изменить номер перед вызовом</string>
   <string name="call_details_report_call_id">Сообщить об ошибке в номере</string>
-  <string name="sent_a_photo">Отправлена фотография</string>
-  <string name="received_a_photo">Получена фотография</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Неверный номер</string>
   <string name="report_caller_id_failed">Не удалось отправить отчет о неверном номере</string>
   <string name="report_caller_id_toast">Отчет о неверном номере отправлен</string>

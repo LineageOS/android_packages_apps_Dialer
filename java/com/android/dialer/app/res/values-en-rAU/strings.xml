@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Phone</string>
-  <string name="launcherDialpadActivityLabel">Phone keypad</string>
   <string name="callHistoryIconLabel">Call history</string>
   <string name="action_copy_number_text">Copy number</string>
   <string name="action_edit_number_before_call">Edit number before call</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">More options</string>
   <string name="action_menu_dialpad_button">key pad</string>
   <string name="dialer_settings_label">Settings</string>
-  <string name="simulator_submenu_label">Simulator</string>
-  <string name="new_ui_launcher_shortcut_label">Create new UI shortcut</string>
   <string name="description_entering_bulk_action_mode">Entering bulk action mode</string>
   <string name="description_leaving_bulk_action_mode">Left bulk action mode</string>
   <string name="description_selecting_bulk_action_mode">Selected %1$s</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Video call.</string>
   <string name="description_start_voice_search">Start voice search</string>
   <string name="voicemail">Voicemail</string>
-  <string name="description_cancel_multi_select">Cancel batch actions mode</string>
   <string name="voicemailMultiSelectDeleteConfirm">Delete</string>
   <string name="voicemailMultiSelectDeleteCancel">Cancel</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s selected</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Voice search not available</string>
   <string name="dialer_hint_find_contact">Search contacts</string>
-  <string name="block_number_search_hint">Add number or search contacts</string>
   <string name="call_log_all_empty">Your call history is empty</string>
   <string name="call_log_all_empty_action">Make a call</string>
   <string name="call_log_missed_empty">You have no missed calls.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Call history</string>
   <string name="call_log_all_title">All</string>
   <string name="call_log_missed_title">Missed</string>
-  <string name="tab_speed_dial">Speed dial</string>
-  <string name="tab_history">Call history</string>
   <string name="tab_all_contacts">Contacts</string>
-  <string name="tab_voicemail">Voicemail</string>
-  <string name="search_shortcut_call_number">Call %s</string>
   <string name="search_shortcut_create_new_contact">Create new contact</string>
   <string name="search_shortcut_add_to_contact">Add to a contact</string>
   <string name="search_shortcut_send_sms_message">Send SMS</string>
   <string name="search_shortcut_make_video_call">Make video call</string>
-  <string name="search_shortcut_block_number">Block number</string>
-  <string name="speed_dial_empty">No one is on your speed dial yet</string>
-  <string name="speed_dial_empty_add_favorite_action">Add a favourite</string>
-  <string name="remove_contact">Remove</string>
   <string name="select_all">Select all</string>
   <string name="call_log_action_video_call">Video call</string>
-  <string name="call_log_action_set_up_video">Set up video calling</string>
-  <string name="call_log_action_invite_video">Invite to video call</string>
   <string name="call_log_action_send_message">Send a message</string>
   <string name="call_log_action_details">Call details</string>
   <string name="call_log_action_share_voicemail">Send to…</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Calls</string>
   <string name="manage_blocked_numbers_label">Blocked numbers</string>
   <string name="voicemail_settings_label">Voicemail</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Call blocking temporarily off</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Call blocking has been disabled because you contacted emergency services from this phone within the last 48 hours. It will be automatically re-enabled once the 48 hour period expires.</string>
-  <string name="import_send_to_voicemail_numbers_label">Import numbers</string>
-  <string name="blocked_call_settings_import_description">You previously marked some callers to be automatically sent to voicemail via other apps.</string>
-  <string name="blocked_call_settings_view_numbers_button">View Numbers</string>
-  <string name="blocked_call_settings_import_button">Import</string>
-  <string name="description_blocked_number_list_delete">Unblock number</string>
-  <string name="addBlockedNumber">Add number</string>
-  <string name="block_number_footer_message_vvm">Calls from these numbers will be blocked and voicemails will be automatically deleted.</string>
-  <string name="block_number_footer_message_no_vvm">Calls from these numbers will be blocked, but they may still be able to leave you voicemails.</string>
-  <string name="block_list">Blocked numbers</string>
-  <string name="alreadyBlocked">%1$s is already blocked.</string>
   <string name="phone_account_settings_label">Calling accounts</string>
-  <string name="permission_no_speeddial">To enable speed dial, turn on the Contacts permission.</string>
   <string name="permission_no_calllog">To see your call log, turn on the Phone permission.</string>
-  <string name="permission_no_search">To search your contacts, turn on the Contacts permissions.</string>
-  <string name="permission_place_call">To place a call, turn on the Phone permission.</string>
   <string name="toast_cannot_write_system_settings">Phone app does not have permission to write to system settings.</string>
   <string name="blocked_number_call_log_label">Blocked</string>
   <string name="call_log_action_block_report_number">Block/report spam</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Not spam</string>
   <string name="call_log_action_unblock_number">Unblock number</string>
   <string name="spam_number_call_log_label">Spam</string>
-  <string name="call_composer_connection_failed">%1$s is offline and can\'t be reached</string>
-  <string name="about_phone_label">About</string>
-  <string name="voicemail_transcription_branding_text">Transcribed by Google</string>
-  <string name="voicemail_transcription_in_progress">Transcribing…</string>
-  <string name="voicemail_transcription_failed">Transcript not available.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transcript not available. Language not supported.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transcript not available. No speech detected.</string>
-  <string name="voicemail_donation_promo_title">Help improve transcription accuracy?</string>
-  <string name="voicemail_donation_promo_content">Let Google review this and future voicemail messages with transcripts. They\'ll be stored anonymously. Change Settings at any time. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Yes, I\'m in</string>
-  <string name="voicemail_donation_promo_opt_out">No thanks</string>
-  <string name="voicemail_transcription_rating">Rate transcription quality</string>
-  <string name="voicemail_transcription_rating_thanks">Thanks for your feedback</string>
-  <string name="description_rating_good">Like</string>
-  <string name="description_rating_bad">Dislike</string>
-  <string name="view_conversation">View</string>
-  <string name="ec_data_deleted">Call deleted. View and delete attachments shared during this call in Messages.</string>
-  <string name="multiple_ec_data_deleted">Calls deleted. View and delete attachments shared during calls in Messages.</string>
 </resources>

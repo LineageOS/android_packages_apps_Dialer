@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Correio de voz (%s)</string>
   <string name="voicemail_settings_title">Correio de voz</string>
   <string name="voicemail_notifications_preference_title">Notificações</string>
   <string name="voicemail_change_greeting_preference_title">Saudação do correio de voz</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Alterar PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">O correio de voz visual precisa ser ativado para alterar o PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">O correio de voz visual ainda não foi ativado, tente novamente mais tarde</string>
-  <string name="vm_change_pin_old_pin">PIN antigo</string>
-  <string name="vm_change_pin_new_pin">Novo PIN</string>
   <string name="vm_change_pin_progress_message">Aguarde.</string>
   <string name="vm_change_pin_error_too_short">O novo PIN é curto demais.</string>
   <string name="vm_change_pin_error_too_long">O novo PIN é longo demais.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">Os PINs não correspondem</string>
   <string name="change_pin_succeeded">O PIN do correio de voz foi atualizado</string>
   <string name="change_pin_system_error">Não foi possível definir o PIN</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Transcrição do correio de voz</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Análise da transcrição do correio de voz</string>
   <string name="voicemail_activating_summary_info">Ativando correio de voz</string>
-  <string name="voicemail_transcription_preference_summary_info">Transcreva seu correio de voz com o serviço de transcrição do Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Permita que o Google analise suas mensagens do correio de voz para tornar a transcrição mais precisa. Essas mensagens são armazenadas anonimamente. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Desativar o correio de voz visual</string>
   <string name="confirm_disable_voicemail_dialog_message">Isto excluirá qualquer correio de voz e transcrição do Google armazenados neste aplicativo. Sua operadora talvez mantenha cópias.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">DESATIVAR</string>

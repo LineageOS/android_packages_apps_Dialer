@@ -18,7 +18,6 @@ package com.android.dialer.animation;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.Interpolator;
@@ -113,127 +112,6 @@ public class AnimUtils {
     if (durationMs != DEFAULT_DURATION) {
       animator.setDuration(durationMs);
     }
-    animator.start();
-  }
-
-  /**
-   * Scales in the view from scale of 0 to actual dimensions.
-   *
-   * @param view The view to scale.
-   * @param durationMs The duration of the scaling in milliseconds.
-   * @param startDelayMs The delay to applying the scaling in milliseconds.
-   */
-  public static void scaleIn(final View view, int durationMs, int startDelayMs) {
-    AnimatorListenerAdapter listener =
-        (new AnimatorListenerAdapter() {
-          @Override
-          public void onAnimationStart(Animator animation) {
-            view.setVisibility(View.VISIBLE);
-          }
-
-          @Override
-          public void onAnimationCancel(Animator animation) {
-            view.setScaleX(1);
-            view.setScaleY(1);
-          }
-        });
-    scaleInternal(
-        view,
-        0 /* startScaleValue */,
-        1 /* endScaleValue */,
-        durationMs,
-        startDelayMs,
-        listener,
-        EASE_IN);
-  }
-
-  /**
-   * Scales out the view from actual dimensions to 0.
-   *
-   * @param view The view to scale.
-   * @param durationMs The duration of the scaling in milliseconds.
-   */
-  public static void scaleOut(final View view, int durationMs) {
-    AnimatorListenerAdapter listener =
-        new AnimatorListenerAdapter() {
-          @Override
-          public void onAnimationEnd(Animator animation) {
-            view.setVisibility(View.GONE);
-          }
-
-          @Override
-          public void onAnimationCancel(Animator animation) {
-            view.setVisibility(View.GONE);
-            view.setScaleX(0);
-            view.setScaleY(0);
-          }
-        };
-
-    scaleInternal(
-        view,
-        1 /* startScaleValue */,
-        0 /* endScaleValue */,
-        durationMs,
-        NO_DELAY,
-        listener,
-        EASE_OUT);
-  }
-
-  private static void scaleInternal(
-      final View view,
-      int startScaleValue,
-      int endScaleValue,
-      int durationMs,
-      int startDelay,
-      AnimatorListenerAdapter listener,
-      Interpolator interpolator) {
-    view.setScaleX(startScaleValue);
-    view.setScaleY(startScaleValue);
-
-    final ViewPropertyAnimator animator = view.animate();
-    animator.cancel();
-
-    animator
-        .setInterpolator(interpolator)
-        .scaleX(endScaleValue)
-        .scaleY(endScaleValue)
-        .setListener(listener)
-        .withLayer();
-
-    if (durationMs != DEFAULT_DURATION) {
-      animator.setDuration(durationMs);
-    }
-    animator.setStartDelay(startDelay);
-
-    animator.start();
-  }
-
-  /**
-   * Animates a view to the new specified dimensions.
-   *
-   * @param view The view to change the dimensions of.
-   * @param newWidth The new width of the view.
-   * @param newHeight The new height of the view.
-   */
-  public static void changeDimensions(final View view, final int newWidth, final int newHeight) {
-    ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f);
-
-    final int oldWidth = view.getWidth();
-    final int oldHeight = view.getHeight();
-    final int deltaWidth = newWidth - oldWidth;
-    final int deltaHeight = newHeight - oldHeight;
-
-    animator.addUpdateListener(
-        new ValueAnimator.AnimatorUpdateListener() {
-          @Override
-          public void onAnimationUpdate(ValueAnimator animator) {
-            Float value = (Float) animator.getAnimatedValue();
-
-            view.getLayoutParams().width = (int) (value * deltaWidth + oldWidth);
-            view.getLayoutParams().height = (int) (value * deltaHeight + oldHeight);
-            view.requestLayout();
-          }
-        });
     animator.start();
   }
 

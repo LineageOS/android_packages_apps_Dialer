@@ -3,7 +3,6 @@
   <string name="unknown_counter">%1$s %2$d</string>
   <string name="payphone">Teléfono público</string>
   <string name="emergency_number">Número de urxencia</string>
-  <string name="launcherActivityLabel">Teléfono</string>
   <string name="call">Chamar</string>
   <string name="video_call_lte_to_wifi_handover_toast">Continuando a chamada a través da wifi…</string>
   <string name="rtt_call_not_available_toast">A función RTT non está dispoñible para esta chamada</string>

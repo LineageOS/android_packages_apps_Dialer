@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">అన్‌బ్లాక్ చేయి</string>
   <string name="block_report_number_alert_title">%1$sని బ్లాక్ చేయాలా?</string>
   <string name="block_report_number_alert_details">మీరు ఇకపై ఈ నంబర్ నుండి కాల్‌లు స్వీకరించరు.</string>
-  <string name="block_number_alert_details">%1$s ఈ కాల్ స్పామ్ వలె నివేదించబడుతుంది.</string>
   <string name="unblock_number_alert_details">ఈ నంబర్ అన్‌బ్లాక్ చేయబడుతుంది మరియు ఇది స్పామ్ కాదని నివేదించబడుతుంది. భవిష్యత్తు కాల్‌లు స్పామ్‌గా గుర్తించబడవు.</string>
   <string name="unblock_report_number_alert_title">%1$sని అన్‌బ్లాక్ చేయాలా?</string>
   <string name="report_not_spam_alert_button">నివేదించు</string>

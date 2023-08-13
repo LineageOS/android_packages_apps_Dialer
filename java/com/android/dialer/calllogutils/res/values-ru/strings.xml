@@ -38,36 +38,7 @@
   <string name="voicemail_string">Голосовая почта</string>
   <string name="just_now">Только что</string>
   <string name="new_call_log_carrier_video">Видеовызов</string>
-  <string name="new_call_log_duo_video">Видеовызов с помощью Duo</string>
   <string name="new_call_log_unknown">Неизвестный номер</string>
   <string name="new_call_log_secondary_blocked">Заблокированные</string>
   <string name="new_call_log_secondary_spam">Спам</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 вызов. Последний пропущенный – от абонента ^2.</item>
-    <item quantity="few">^1 вызова. Последний пропущенный – от абонента ^2.</item>
-    <item quantity="many">^1 вызовов. Последний пропущенный – от абонента ^2.</item>
-    <item quantity="other">^1 вызова. Последний пропущенный – от абонента ^2.</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 вызов. Последний принятый – от абонента ^2.</item>
-    <item quantity="few">^1 вызова. Последний принятый – от абонента ^2.</item>
-    <item quantity="many">^1 вызовов. Последний принятый – от абонента ^2.</item>
-    <item quantity="other">^1 вызова. Последний принятый – от абонента ^2.</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 вызов. Последний исходящий – абоненту ^2.</item>
-    <item quantity="few">^1 вызова. Последний исходящий – абоненту ^2.</item>
-    <item quantity="many">^1 вызовов. Последний исходящий – абоненту ^2.</item>
-    <item quantity="other">^1 вызова. Последний исходящий – абоненту ^2.</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 вызов. Последний заблокированный – от абонента ^2.</item>
-    <item quantity="few">^1 вызова. Последний заблокированный – от абонента ^2.</item>
-    <item quantity="many">^1 вызовов. Последний заблокированный – от абонента ^2.</item>
-    <item quantity="other">^1 вызова. Последний заблокированный – от абонента ^2.</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1,
-    номер ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

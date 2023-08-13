@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Tryk for at føje til kontaktpersoner eller for at blokere spamnummeret.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Dette er første gang, at dette nummer har ringet til dig. Hvis det var et spamopkald, kan du blokere nummeret og rapportere det.</string>
   <string name="spam_notification_spam_call_collapsed_text">Tryk for at fjerne spammarkeringen, eller bloker nummeret</string>
-  <string name="spam_notification_report_spam_action_text">Bloker og rapportér</string>
-  <string name="spam_notification_add_contact_action_text">Tilføj kontaktperson</string>
   <string name="spam_notification_dialog_add_contact_action_text">Føj til kontaktpersoner</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Bloker og rapportér spam</string>
   <string name="spam_notification_was_not_spam_action_text">Nej, ikke spam</string>

@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">輕按以新增至通訊錄，或封鎖垃圾號碼。</string>
   <string name="spam_notification_non_spam_call_expanded_text">這是此號碼的第一次來電，如果是垃圾來電，您可以封鎖並舉報此號碼。</string>
   <string name="spam_notification_spam_call_collapsed_text">輕按以舉報為非垃圾來電，或加以封鎖</string>
-  <string name="spam_notification_report_spam_action_text">封鎖並舉報</string>
-  <string name="spam_notification_add_contact_action_text">新增聯絡人</string>
   <string name="spam_notification_dialog_add_contact_action_text">加入通訊錄</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">封鎖並舉報垃圾來電</string>
   <string name="spam_notification_was_not_spam_action_text">否，不是垃圾來電</string>

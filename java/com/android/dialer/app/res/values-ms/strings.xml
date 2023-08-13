@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefon</string>
-  <string name="launcherDialpadActivityLabel">Pad Kekunci Telefon</string>
   <string name="callHistoryIconLabel">Sejarah panggilan</string>
   <string name="action_copy_number_text">Salin nombor</string>
   <string name="action_edit_number_before_call">Edit nombor sebelum memanggil</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Lagi pilihan</string>
   <string name="action_menu_dialpad_button">pad kekunci</string>
   <string name="dialer_settings_label">Tetapan</string>
-  <string name="simulator_submenu_label">Simulator</string>
-  <string name="new_ui_launcher_shortcut_label">Buat Pintasan UI Baharu</string>
   <string name="description_entering_bulk_action_mode">Memasuki mod tindakan pukal</string>
   <string name="description_leaving_bulk_action_mode">Meninggalkan mod tindakan pukal</string>
   <string name="description_selecting_bulk_action_mode">%1$s dipilih</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Panggilan video.</string>
   <string name="description_start_voice_search">Mulakan carian suara</string>
   <string name="voicemail">Mel suara</string>
-  <string name="description_cancel_multi_select">Batalkan mod tindakan kelompok</string>
   <string name="voicemailMultiSelectDeleteConfirm">Padam</string>
   <string name="voicemailMultiSelectDeleteCancel">Batal</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s dipilih</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Carian suara tidak tersedia</string>
   <string name="dialer_hint_find_contact">Cari dalam kenalan</string>
-  <string name="block_number_search_hint">Tambahkn no. atau cari kenalan</string>
   <string name="call_log_all_empty">Sejarah panggilan anda kosong</string>
   <string name="call_log_all_empty_action">Buat panggilan</string>
   <string name="call_log_missed_empty">Anda tiada panggilan terlepas.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Sejarah Panggilan</string>
   <string name="call_log_all_title">Semua</string>
   <string name="call_log_missed_title">Tidak dijawab</string>
-  <string name="tab_speed_dial">Dail laju</string>
-  <string name="tab_history">Sejarah Panggilan</string>
   <string name="tab_all_contacts">Kenalan</string>
-  <string name="tab_voicemail">Mel suara</string>
-  <string name="search_shortcut_call_number">Panggil %s</string>
   <string name="search_shortcut_create_new_contact">Buat kenalan baharu</string>
   <string name="search_shortcut_add_to_contact">Tambahkan pada kenalan</string>
   <string name="search_shortcut_send_sms_message">Hantar SMS</string>
   <string name="search_shortcut_make_video_call">Buat panggilan video</string>
-  <string name="search_shortcut_block_number">Sekat nombor</string>
-  <string name="speed_dial_empty">Belum ada sesiapa pada dail pantas anda</string>
-  <string name="speed_dial_empty_add_favorite_action">Tambahkan kegemaran</string>
-  <string name="remove_contact">Alih keluar</string>
   <string name="select_all">Pilih semua</string>
   <string name="call_log_action_video_call">Panggilan video</string>
-  <string name="call_log_action_set_up_video">Sediakan panggilan video</string>
-  <string name="call_log_action_invite_video">Jemput ke panggilan video</string>
   <string name="call_log_action_send_message">Hantar mesej</string>
   <string name="call_log_action_details">Butiran panggilan</string>
   <string name="call_log_action_share_voicemail">Hantar ke ...</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Panggilan</string>
   <string name="manage_blocked_numbers_label">Nombor yang disekat</string>
   <string name="voicemail_settings_label">Mel suara</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Sekatan panggilan dimatikan sementara</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Sekatan panggilan telah dilumpuhkan kerana anda menghubungi perkhidmatan kecemasan daripada telefon ini dalam masa 48 jam yang lalu. Ciri ini akan didayakan semula secara automatik apabila tempoh 48 jam berakhir.</string>
-  <string name="import_send_to_voicemail_numbers_label">Import nombor</string>
-  <string name="blocked_call_settings_import_description">Sebelum ini anda telah menandakan beberapa pemanggil dihantar ke mel suara secara automatik melalui aplikasi lain.</string>
-  <string name="blocked_call_settings_view_numbers_button">Lihat nombor</string>
-  <string name="blocked_call_settings_import_button">Import</string>
-  <string name="description_blocked_number_list_delete">Nyahsekat nombor</string>
-  <string name="addBlockedNumber">Tambah nombor</string>
-  <string name="block_number_footer_message_vvm">Panggilan daripada nombor ini akan disekat dan mel suara akan dipadamkan secara automatik.</string>
-  <string name="block_number_footer_message_no_vvm">Panggilan daripada nombor ini akan disekat, tetapi mereka masih boleh meninggalkan mel suara kepada anda.</string>
-  <string name="block_list">Nombor yang disekat</string>
-  <string name="alreadyBlocked">%1$s sudah disekat.</string>
   <string name="phone_account_settings_label">Akaun panggilan</string>
-  <string name="permission_no_speeddial">Untuk mendayakan dail laju, hidupkan kebenaran Kenalan.</string>
   <string name="permission_no_calllog">Untuk melihat log panggilan anda, hidupkan kebenaran Telefon.</string>
-  <string name="permission_no_search">Untuk mencari kenalan anda, hidupkan kebenaran Kenalan.</string>
-  <string name="permission_place_call">Untuk membuat panggilan, hidupkan kebenaran Telefon.</string>
   <string name="toast_cannot_write_system_settings">Apl telefon tiada kebenaran untuk menulis ke tetapan sistem.</string>
   <string name="blocked_number_call_log_label">Disekat</string>
   <string name="call_log_action_block_report_number">Sekat/laporkan spam</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Bukan spam</string>
   <string name="call_log_action_unblock_number">Nyahsekat nombor</string>
   <string name="spam_number_call_log_label">Spam</string>
-  <string name="call_composer_connection_failed">%1$s di luar talian dan tidak dapat dihubungi</string>
-  <string name="about_phone_label">Perihal</string>
-  <string name="voicemail_transcription_branding_text">Ditranskripsikan oleh Google</string>
-  <string name="voicemail_transcription_in_progress">Mentranskripsi…</string>
-  <string name="voicemail_transcription_failed">Transkrip tidak tersedia.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transkrip tidak tersedia. Bahasa tidak disokong.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transkrip tidak tersedia. Pertuturan tidak dikesan.</string>
-  <string name="voicemail_donation_promo_title">Bantu meningkatkan ketepatan transkripsi?</string>
-  <string name="voicemail_donation_promo_content">Benarkan Google menyemak mesej mel suara ini dan masa hadapan dengan transkrip. Mesej mel suara akan disimpan secara awanama. Tukar Tetapan pada bila-bila masa. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Ya, saya setuju</string>
-  <string name="voicemail_donation_promo_opt_out">Tidak perlu</string>
-  <string name="voicemail_transcription_rating">Nilaikan kualiti transkripsi</string>
-  <string name="voicemail_transcription_rating_thanks">Terima kasih</string>
-  <string name="description_rating_good">Suka</string>
-  <string name="description_rating_bad">Tidak suka</string>
-  <string name="view_conversation">Lihat</string>
-  <string name="ec_data_deleted">Panggilan dipadam. Lihat dan padam lampiran yang dikongsi semasa panggilan ini dalam Mesej.</string>
-  <string name="multiple_ec_data_deleted">Panggilan dipadam. Lihat dan padam lampiran yang dikongsi semasa panggilan dalam Mesej.</string>
 </resources>

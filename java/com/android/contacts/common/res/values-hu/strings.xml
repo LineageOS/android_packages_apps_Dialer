@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Törli a gyakran keresetteket?</string>
   <string name="clearFrequentsConfirmation">Törölni fogja a gyakran keresett személyek listáját a Névjegyek és a Telefon alkalmazásban, és arra kényszeríti az e-mail alkalmazásokat, hogy elölről kezdjék az Ön címzési szokásainak megtanulását.</string>
   <string name="clearFrequentsProgress_title">Gyakran keresettek törlése...</string>
-  <string name="status_available">Elérhető</string>
-  <string name="status_away">Nincs a gépnél</string>
-  <string name="status_busy">Elfoglalt</string>
-  <string name="contactsList">Címtár</string>
-  <string name="contact_suggestions">Legjobb javaslatok</string>
-  <string name="local_invisible_directory">Egyéb</string>
   <string name="directory_search_label">Címtár</string>
   <string name="directory_search_label_work">Munkahelyi névjegyek címtára</string>
-  <string name="local_search_label">Összes névjegy</string>
-  <string name="local_suggestions_search_label">Javaslatok</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Én</string>
   <string name="missing_name">(Nincs név)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Névjegy megtekintése</string>
-  <string name="list_filter_phones">Minden névjegy telefonszámokkal</string>
-  <string name="list_filter_phones_work">Munkaprofilhoz tartozó névjegyek</string>
   <string name="view_updates_from_group">Frissítések megtekintése</string>
   <string name="account_phone">Csak az eszközön, nincs szinkronizálva</string>
   <string name="nameLabelsGroup">Név</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Csevegés az ICQ-n</string>
   <string name="chat_jabber">Csevegés Jabberen</string>
   <string name="chat">Csevegés</string>
-  <string name="list_filter_all_accounts">Az összes névjegy</string>
-  <string name="listAllContactsInAccount">Ismerősök itt: %s</string>
-  <string name="listCustomView">Egyéni nézet névjegyei</string>
-  <string name="listSingleContact">Egyetlen névjegy</string>
   <string name="display_options_sort_list_by">Rendezés alapja</string>
   <string name="display_options_sort_by_given_name">Utónév</string>
   <string name="display_options_sort_by_family_name">Vezetéknév</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Keresés törlése</string>
   <string name="select_account_dialog_title">Fiók</string>
   <string name="set_default_account">Mindig ezt használja hívásokhoz</string>
-  <string name="select_phone_account_for_calls">SIM-kártya kiválasztása a híváshoz</string>
-  <string name="select_phone_account_for_calls_remember">Választás megjegyzése</string>
   <string name="call_with_a_note">Hívás üzenettel</string>
   <string name="call_subject_hint">Írjon üzenetet, amelyet elküldhetünk a hívással együtt…</string>
   <string name="send_and_call_button">KÜLDÉS ÉS HÍVÁS</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s lap. %2$d olvasatlan elem. </item>
   </plurals>
   <string name="description_search_video_call">Videohívás</string>
-  <string name="description_search_call_and_share">Megosztás és hívás</string>
 </resources>

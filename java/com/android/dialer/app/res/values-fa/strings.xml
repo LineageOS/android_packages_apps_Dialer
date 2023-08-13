@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">تلفن</string>
-  <string name="launcherDialpadActivityLabel">صفحه کلید تلفن</string>
   <string name="callHistoryIconLabel">سابقه تماس</string>
   <string name="action_copy_number_text">کپی کردن شماره</string>
   <string name="action_edit_number_before_call">ویرایش شماره قبل از تماس</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">گزینه‌های بیشتر</string>
   <string name="action_menu_dialpad_button">صفحه کلید</string>
   <string name="dialer_settings_label">تنظیمات</string>
-  <string name="simulator_submenu_label">شبیه‌ساز</string>
-  <string name="new_ui_launcher_shortcut_label">ایجاد میان‌بر رابط کاربری جدید</string>
   <string name="description_entering_bulk_action_mode">درحال ورود به حالت اقدام انبوه</string>
   <string name="description_leaving_bulk_action_mode">خروج از حالت اقدام انبوه</string>
   <string name="description_selecting_bulk_action_mode">%1$s انتخاب شد</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">تماس ویدئویی.</string>
   <string name="description_start_voice_search">شروع جستجوی گفتاری</string>
   <string name="voicemail">پست صوتی</string>
-  <string name="description_cancel_multi_select">لغو حالت اقدام‌ دسته‌ای</string>
   <string name="voicemailMultiSelectDeleteConfirm">حذف</string>
   <string name="voicemailMultiSelectDeleteCancel">لغو</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s مورد انتخاب شد</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">جستجوی گفتاری در دسترس نیست</string>
   <string name="dialer_hint_find_contact">جستجوی مخاطبین</string>
-  <string name="block_number_search_hint">افزودن شماره یا جستجوی مخاطب</string>
   <string name="call_log_all_empty">سابقه تماستان خالی است</string>
   <string name="call_log_all_empty_action">برقراری تماس تلفنی</string>
   <string name="call_log_missed_empty">تماس بی‌پاسخی ندارید.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">سابقه تماس</string>
   <string name="call_log_all_title">همه موارد</string>
   <string name="call_log_missed_title">بی‌پاسخ</string>
-  <string name="tab_speed_dial">شماره‌گیری سریع</string>
-  <string name="tab_history">سابقه تماس</string>
   <string name="tab_all_contacts">مخاطبین</string>
-  <string name="tab_voicemail">پست صوتی</string>
-  <string name="search_shortcut_call_number">تماس با %s</string>
   <string name="search_shortcut_create_new_contact">ایجاد مخاطب جدید</string>
   <string name="search_shortcut_add_to_contact">افزودن به مخاطب</string>
   <string name="search_shortcut_send_sms_message">ارسال پیامک</string>
   <string name="search_shortcut_make_video_call">برقراری تماس ویدئویی</string>
-  <string name="search_shortcut_block_number">مسدود کردن شماره</string>
-  <string name="speed_dial_empty">هنوز کسی در فهرست شماره‌گیری سریع شما نیست</string>
-  <string name="speed_dial_empty_add_favorite_action">افزودن مورد دلخواه</string>
-  <string name="remove_contact">حذف</string>
   <string name="select_all">انتخاب همه</string>
   <string name="call_log_action_video_call">تماس ویدئویی</string>
-  <string name="call_log_action_set_up_video">راه‌اندازی تماس ویدیویی</string>
-  <string name="call_log_action_invite_video">دعوت به تماس ویدیویی</string>
   <string name="call_log_action_send_message">ارسال پیام</string>
   <string name="call_log_action_details">جزئیات تماس</string>
   <string name="call_log_action_share_voicemail">ارسال به...</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">تماس‌ها</string>
   <string name="manage_blocked_numbers_label">شماره‌های مسدودشده</string>
   <string name="voicemail_settings_label">پست صوتی</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">انسداد تماس موقتاً خاموش است</string>
-  <string name="blocked_numbers_disabled_emergency_desc">چون در ۴۸ ساعت گذشته با این تلفن با سرویس‌های اضطراری تماس گرفتید، انسداد تماس غیرفعال شده است. پس از گذشت ۴۸ ساعت، این قابلیت دوباره فعال می‌شود.</string>
-  <string name="import_send_to_voicemail_numbers_label">وارد کردن شماره‌ها</string>
-  <string name="blocked_call_settings_import_description">قبلاً ازطریق برنامه‌های دیگر، برخی از تماس‌گیرندگان را برای ارسال خودکار به پست صوتی علامت زده‌اید.</string>
-  <string name="blocked_call_settings_view_numbers_button">مشاهده شماره‌ها</string>
-  <string name="blocked_call_settings_import_button">وارد کردن</string>
-  <string name="description_blocked_number_list_delete">رفع انسداد شماره</string>
-  <string name="addBlockedNumber">افزودن شماره</string>
-  <string name="block_number_footer_message_vvm">تماس‌‌ها از این شماره‌ها مسدود می‌شود و پست‌‌های صوتی به‌طور خودکار حذف می‌شود.</string>
-  <string name="block_number_footer_message_no_vvm">تماس‌‌ها از این شماره‌ها مسدود می‌شود اما ممکن است همچنان بتوانند برای شما پست صوتی بگذارند.</string>
-  <string name="block_list">شماره‌های مسدود‌شده</string>
-  <string name="alreadyBlocked">%1$s درحال‌حاضر مسدود شده است.</string>
   <string name="phone_account_settings_label">حساب‌های تماس</string>
-  <string name="permission_no_speeddial">برای فعال کردن شماره‌گیری سریع، مجوز «مخاطبین» را روشن کنید.</string>
   <string name="permission_no_calllog">برای دیدن گزارش تماستان، مجوز «تلفن» را روشن کنید.</string>
-  <string name="permission_no_search">برای جستجوی مخاطبینتان، مجوزهای مخاطبین را روشن کنید.</string>
-  <string name="permission_place_call">برای برقراری تماس، مجوز «تلفن» را روشن کنید.</string>
   <string name="toast_cannot_write_system_settings">برنامه تلفن اجازه نوشتن در تنظیمات سیستم را ندارد.</string>
   <string name="blocked_number_call_log_label">مسدود شده</string>
   <string name="call_log_action_block_report_number">مسدود کردن/گزارش هرزنامه</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">هرزنامه نیست</string>
   <string name="call_log_action_unblock_number">رفع انسداد شماره</string>
   <string name="spam_number_call_log_label">هرزنامه</string>
-  <string name="call_composer_connection_failed">%1$s آفلاین است و در دسترس نمی‌باشد</string>
-  <string name="about_phone_label">درباره</string>
-  <string name="voicemail_transcription_branding_text">‏رونویسی‌شده توسط Google</string>
-  <string name="voicemail_transcription_in_progress">درحال رونوشت‌برداری…</string>
-  <string name="voicemail_transcription_failed">ترانوشت دردسترس نیست.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">ترانوشت دردسترس نیست. زبان پشتیبانی نمی‌شود.</string>
-  <string name="voicemail_transcription_failed_no_speech">ترانوشت دردسترس نیست. گفتگویی شناسایی نشد.</string>
-  <string name="voicemail_donation_promo_title">به بهبود دقت ترانویسی کمک می‌کنید؟</string>
-  <string name="voicemail_donation_promo_content">‏به Google اجازه دهید این پیام صوتی و پیام‌های صوتی آتی دارای ترانویسی را مرور کند. این پیام‌ها به‌صورت ناشناس ذخیره می‌شوند. هر وقت خواستید «تنظیمات» را تغییر دهید. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">بله، موافقم</string>
-  <string name="voicemail_donation_promo_opt_out">نه متشکرم</string>
-  <string name="voicemail_transcription_rating">به کیفیت ترانویسی رتبه بدهید</string>
-  <string name="voicemail_transcription_rating_thanks">از بازخوردتان سپاسگزاریم</string>
-  <string name="description_rating_good">پسندیدن</string>
-  <string name="description_rating_bad">نپسندیدن</string>
-  <string name="view_conversation">مشاهده</string>
-  <string name="ec_data_deleted">تماس حذف شد. پیوست‌های به اشتراک‌گذاشته‌شده درطول این تماس را در «پیام‌ها» مشاهده و حذف کنید.</string>
-  <string name="multiple_ec_data_deleted">تماس‌ها حذف شدند. پیوست‌های به اشتراک‌گذاشته‌شده درطول تماس‌ها را در «پیام‌ها» مشاهده و حذف کنید.</string>
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Tālrunis</string>
-  <string name="launcherDialpadActivityLabel">Tālruņa cipartastatūra</string>
   <string name="callHistoryIconLabel">Zvanu vēsture</string>
   <string name="action_copy_number_text">Kopēt numuru</string>
   <string name="action_edit_number_before_call">Rediģēt numuru pirms zvanīšanas</string>
@@ -37,8 +36,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Vairāk opciju</string>
   <string name="action_menu_dialpad_button">cipartastatūra</string>
   <string name="dialer_settings_label">Iestatījumi</string>
-  <string name="simulator_submenu_label">Simulators</string>
-  <string name="new_ui_launcher_shortcut_label">Jaunās liet. saskarnes saīsne</string>
   <string name="description_entering_bulk_action_mode">Tiek atvērts lielapjoma darbību režīms</string>
   <string name="description_leaving_bulk_action_mode">Tika aizvērts lielapjoma darbību režīms</string>
   <string name="description_selecting_bulk_action_mode">Atlasīt: %1$s</string>
@@ -49,7 +46,6 @@
   <string name="description_video_call">Videozvans</string>
   <string name="description_start_voice_search">Sākt meklēšanu ar balsi</string>
   <string name="voicemail">Balss pasts</string>
-  <string name="description_cancel_multi_select">Iziet no grupas darbību režīma</string>
   <string name="voicemailMultiSelectDeleteConfirm">Dzēst</string>
   <string name="voicemailMultiSelectDeleteCancel">Atcelt</string>
   <string name="voicemailMultiSelectActionBarTitle">Atlasīti: %1$s</string>
@@ -64,7 +60,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Meklēšana ar balsi nav pieejama.</string>
   <string name="dialer_hint_find_contact">Meklēt kontaktpersonas</string>
-  <string name="block_number_search_hint">Pievienojiet numuru vai meklējiet kontaktpersonas</string>
   <string name="call_log_all_empty">Jūsu zvanu vēsturē nav ierakstu.</string>
   <string name="call_log_all_empty_action">Zvanīt</string>
   <string name="call_log_missed_empty">Jums nav neatbildētu zvanu.</string>
@@ -72,23 +67,13 @@
   <string name="call_log_activity_title">Zvanu vēsture</string>
   <string name="call_log_all_title">Visi</string>
   <string name="call_log_missed_title">Neatb.</string>
-  <string name="tab_speed_dial">Ātrie zvani</string>
-  <string name="tab_history">Zvanu vēsture</string>
   <string name="tab_all_contacts">Kontaktpersonas</string>
-  <string name="tab_voicemail">Balss pasts</string>
-  <string name="search_shortcut_call_number">Zvanīt: %s</string>
   <string name="search_shortcut_create_new_contact">Izveidot jaunu kontaktpersonu</string>
   <string name="search_shortcut_add_to_contact">Pievienot kontaktpersonai</string>
   <string name="search_shortcut_send_sms_message">Sūtīt īsziņu</string>
   <string name="search_shortcut_make_video_call">Veikt videozvanu</string>
-  <string name="search_shortcut_block_number">Bloķēt numuru</string>
-  <string name="speed_dial_empty">Ātro zvanu sarakstā vēl nav nevienas kontaktpersonas.</string>
-  <string name="speed_dial_empty_add_favorite_action">Pievienot izlasei</string>
-  <string name="remove_contact">Noņemt</string>
   <string name="select_all">Atlasīt visu</string>
   <string name="call_log_action_video_call">Videozvans</string>
-  <string name="call_log_action_set_up_video">Iestatīt videozvanu</string>
-  <string name="call_log_action_invite_video">Uzaicināt uz videozvanu</string>
   <string name="call_log_action_send_message">Sūtīt ziņojumu</string>
   <string name="call_log_action_details">Informācija par zvanu</string>
   <string name="call_log_action_share_voicemail">Nosūtīt uz…</string>
@@ -127,23 +112,8 @@
   <string name="call_settings_label">Zvani</string>
   <string name="manage_blocked_numbers_label">Bloķētie numuri</string>
   <string name="voicemail_settings_label">Balss pasts</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Zvanu bloķēšana ir īslaicīgi izslēgta</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Zvanu bloķēšana ir atspējota, jo pēdējo 48 stundu laikā jūs sazinājāties ar ārkārtas palīdzības dienestiem, izmantojot šo tālruni. Zvanu bloķēšana tiks automātiski iespējota, tiklīdz beigsies 48 stundu periods.</string>
-  <string name="import_send_to_voicemail_numbers_label">Importēt numurus</string>
-  <string name="blocked_call_settings_import_description">Jūs iepriekš atzīmējāt dažus zvanītājus, kuri automātiski jānovirza uz balss pastu, izmantojot citas lietotnes.</string>
-  <string name="blocked_call_settings_view_numbers_button">Skatīt numurus</string>
-  <string name="blocked_call_settings_import_button">Importēt</string>
-  <string name="description_blocked_number_list_delete">Atbloķēt numuru</string>
-  <string name="addBlockedNumber">Pievienot numuru</string>
-  <string name="block_number_footer_message_vvm">No šiem numuriem saņemtie zvani tiks bloķēti, un balss pasta ziņojumi tiks automātiski dzēsti.</string>
-  <string name="block_number_footer_message_no_vvm">No šiem numuriem saņemtie zvani tiks bloķēti, taču zvanītāji joprojām varēs jums atstāt balss pasta ziņojumus.</string>
-  <string name="block_list">Bloķētie numuri</string>
-  <string name="alreadyBlocked">%1$s jau ir bloķēts.</string>
   <string name="phone_account_settings_label">Zvanu konti</string>
-  <string name="permission_no_speeddial">Lai iespējotu ātros zvanus, ieslēdziet atļauju Kontaktpersonas.</string>
   <string name="permission_no_calllog">Lai skatītu zvanu žurnālu, ieslēdziet atļauju Tālrunis.</string>
-  <string name="permission_no_search">Lai meklētu savas kontaktpersonas, ieslēdziet atļauju Kontaktpersonas.</string>
-  <string name="permission_place_call">Lai veiktu zvanu, ieslēdziet atļauju Tālrunis.</string>
   <string name="toast_cannot_write_system_settings">Tālruņa lietotnei nav atļaujas rakstīt sistēmas iestatījumos.</string>
   <string name="blocked_number_call_log_label">Bloķēts</string>
   <string name="call_log_action_block_report_number">Bloķēt numuru/ziņot par to</string>
@@ -151,22 +121,4 @@
   <string name="call_log_action_remove_spam">Nav nevēlams numurs</string>
   <string name="call_log_action_unblock_number">Atbloķēt numuru</string>
   <string name="spam_number_call_log_label">Nevēlami zvani</string>
-  <string name="call_composer_connection_failed">Lietotājs %1$s ir bezsaistē un nav sasniedzams</string>
-  <string name="about_phone_label">Par</string>
-  <string name="voicemail_transcription_branding_text">Transkribēja: Google</string>
-  <string name="voicemail_transcription_in_progress">Notiek transkribēšana…</string>
-  <string name="voicemail_transcription_failed">Transkripcija nav pieejama.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transkripcija nav pieejama. Valoda netiek atbalstīta.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transkripcija nav pieejama. Runa nav konstatēta.</string>
-  <string name="voicemail_donation_promo_title">Palīdziet uzlabot transkripcijas precizitāti!</string>
-  <string name="voicemail_donation_promo_content">Ļaujiet Google pārskatīt šo un turpmākos balss pasta ziņojumus ar transkripciju. Tie tiks glabāti anonīmi. Mainiet iestatījumus jebkurā laikā. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Jā, piekrītu</string>
-  <string name="voicemail_donation_promo_opt_out">Nē, paldies</string>
-  <string name="voicemail_transcription_rating">Transkripcijas kvalitāte</string>
-  <string name="voicemail_transcription_rating_thanks">Paldies par atsauksmēm!</string>
-  <string name="description_rating_good">Patīk</string>
-  <string name="description_rating_bad">Nepatīk</string>
-  <string name="view_conversation">Skatīt</string>
-  <string name="ec_data_deleted">Zvans izdzēsts. Skatiet un dzēsiet pielikumus, kas kopīgoti šī zvana laikā, izmantojot lietotni Ziņojumi.</string>
-  <string name="multiple_ec_data_deleted">Zvani izdzēsti. Skatiet un dzēsiet pielikumus, kas kopīgoti šo zvanu laikā, izmantojot lietotni Ziņojumi.</string>
 </resources>

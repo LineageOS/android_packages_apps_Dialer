@@ -34,27 +34,7 @@
   <string name="voicemail_string">Ձայնային փոստ</string>
   <string name="just_now">Հենց նոր</string>
   <string name="new_call_log_carrier_video">Տեսազանգ բջջային ցանցով</string>
-  <string name="new_call_log_duo_video">Duo տեսազանգ</string>
   <string name="new_call_log_unknown">Անհայտ</string>
   <string name="new_call_log_secondary_blocked">Արգելափակված</string>
   <string name="new_call_log_secondary_spam">Սպամ</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 բաց թողնված զանգ ^2-ից</item>
-    <item quantity="other">^1 զանգ, որոնցից վերջինը բաց թողնված զանգ է ^2-ից</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 ընդունված զանգ ^2-ից</item>
-    <item quantity="other">^1 զանգ, որոնցից վերջինը ընդունված զանգ է ^2-ից</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 ելքային զանգ ^2-ին</item>
-    <item quantity="other">^1 զանգ, որոնցից վերջինը ելքային զանգ է ^2-ին</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 արգելափակված զանգ ^2-ից</item>
-    <item quantity="other">^1 զանգ, որոնցից վերջինը արգելափակված զանգ է ^2-ից</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1, համարը՝ ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2:</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3:</string>
 </resources>

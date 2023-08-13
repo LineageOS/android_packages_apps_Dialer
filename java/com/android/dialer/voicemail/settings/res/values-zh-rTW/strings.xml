@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">語音信箱 (%s)</string>
   <string name="voicemail_settings_title">語音信箱</string>
   <string name="voicemail_notifications_preference_title">通知</string>
   <string name="voicemail_change_greeting_preference_title">語音信箱問候語</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">變更語音信箱密碼</string>
   <string name="voicemail_change_pin_preference_summary_disable">必須啟用視覺化語音信箱才能變更語音信箱密碼</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">尚未啟用視覺化語音信箱，請稍後再試</string>
-  <string name="vm_change_pin_old_pin">舊的語音信箱密碼</string>
-  <string name="vm_change_pin_new_pin">新的語音信箱密碼</string>
   <string name="vm_change_pin_progress_message">請稍候。</string>
   <string name="vm_change_pin_error_too_short">新的語音信箱密碼太短。</string>
   <string name="vm_change_pin_error_too_long">新的語音信箱密碼太長。</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">語音信箱密碼不符</string>
   <string name="change_pin_succeeded">已更新語音信箱密碼</string>
   <string name="change_pin_system_error">無法設定語音信箱密碼</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">語音留言轉錄</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">語音留言轉錄分析</string>
   <string name="voicemail_activating_summary_info">正在啟用語音信箱</string>
-  <string name="voicemail_transcription_preference_summary_info">使用 Google 的留言轉錄服務取得你的語音留言轉錄。%1$s</string>
-  <string name="voicemail_donate_preference_summary_info">允許 Google 聽取你的語音留言，以改善轉錄精確度。系統會以匿名方式儲存你的語音留言。%1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">停用視覺化語音信箱</string>
   <string name="confirm_disable_voicemail_dialog_message">這項操作將會刪除儲存在這個應用程式中的所有語音留言和 Google 留言轉錄。請注意，你的電信業者可能會保留複本。</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">停用</string>

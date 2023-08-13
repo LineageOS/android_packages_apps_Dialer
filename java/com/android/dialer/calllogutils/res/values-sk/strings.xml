@@ -38,36 +38,7 @@
   <string name="voicemail_string">Hlasová schránka</string>
   <string name="just_now">Teraz</string>
   <string name="new_call_log_carrier_video">Video operátora</string>
-  <string name="new_call_log_duo_video">Video služby Duo</string>
   <string name="new_call_log_unknown">Neznáme</string>
   <string name="new_call_log_secondary_blocked">Blokované</string>
   <string name="new_call_log_secondary_spam">Spam</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 zmeškaný hovor od kontaktu ^2</item>
-    <item quantity="few">^1 hovory, posledný je zmeškaný hovor od kontaktu ^2</item>
-    <item quantity="many">^1 calls, the latest is a missed call from ^2</item>
-    <item quantity="other">^1 hovorov, posledný je zmeškaný hovor od kontaktu ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 prijatý hovor od kontaktu ^2</item>
-    <item quantity="few">^1 hovory, posledný je prijatý hovor od kontaktu ^2</item>
-    <item quantity="many">^1 calls, the latest is an answered call from ^2</item>
-    <item quantity="other">^1 hovorov, posledný je prijatý hovor od kontaktu ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 odchádzajúci hovor s kontaktom ^2</item>
-    <item quantity="few">^1 hovory, posledný je odchádzajúci hovor s kontaktom ^2</item>
-    <item quantity="many">^1 calls, the latest is an outgoing call to ^2</item>
-    <item quantity="other">^1 hovorov, posledný je odchádzajúci hovor s kontaktom ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 blokovaný hovor od kontaktu ^2</item>
-    <item quantity="few">^1 hovory, posledný je blokovaný hovor od kontaktu ^2</item>
-    <item quantity="many">^1 calls, the latest is a blocked call from ^2</item>
-    <item quantity="other">^1 hovorov, posledný je blokovaný hovor od kontaktu ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">v účte ^1,
-    prostredníctvom čísla ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

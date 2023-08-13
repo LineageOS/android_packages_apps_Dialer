@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">ಪದೇ ಪದೇ ಸಂಪರ್ಕಿಸಿರುವುದನ್ನು ತೆರುವುಗೊಳಿಸುವುದೇ?</string>
   <string name="clearFrequentsConfirmation">ಸಂಪರ್ಕಗಳು ಮತ್ತು ಫೋನ್‌ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಪದೇ ಪದೇ ಸಂಪರ್ಕಪಡಿಸಿರುವ ಪಟ್ಟಿಯನ್ನು ನೀವು ತೆರುವುಗೊಳಿಸುತ್ತೀರಿ ಮತ್ತು ಮೊದಲಿನಿಂದ ನಿಮ್ಮ ವಿಳಾಸ ಪ್ರಾಶಸ್ತ್ಯಗಳನ್ನು ತಿಳಿಯಲು ಇಮೇಲ್‌ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಒತ್ತಾಯಿಸಿ.</string>
   <string name="clearFrequentsProgress_title">ಪದೇ ಪದೇ ಸಂಪರ್ಕಿಸಿರುವುದನ್ನು ತೆರುವುಗೊಳಿಸಲಾಗುತ್ತಿದೆ…</string>
-  <string name="status_available">ಲಭ್ಯವಿದೆ</string>
-  <string name="status_away">ದೂರ</string>
-  <string name="status_busy">ಕಾರ್ಯನಿರತ</string>
-  <string name="contactsList">ಸಂಪರ್ಕಗಳು</string>
-  <string name="contact_suggestions">ಉನ್ನತ ಸಲಹೆ</string>
-  <string name="local_invisible_directory">ಇತರೆ</string>
   <string name="directory_search_label">ಡೈರೆಕ್ಟರಿ</string>
   <string name="directory_search_label_work">ಕೆಲಸದ ಡೈರೆಕ್ಟರಿ</string>
-  <string name="local_search_label">ಎಲ್ಲಾ ಸಂಪರ್ಕಗಳು</string>
-  <string name="local_suggestions_search_label">ಸಲಹೆಗಳು</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">ನಾನು</string>
   <string name="missing_name">(ಯಾವುದೇ ಹೆಸರಿಲ್ಲ)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">ಸಂಪರ್ಕವನ್ನು ವೀಕ್ಷಿಸಿ</string>
-  <string name="list_filter_phones">ಫೋನ್‌ ಸಂಖ್ಯೆಗಳೊಂದಿಗೆ ಎಲ್ಲ ಸಂಪರ್ಕಗಳು</string>
-  <string name="list_filter_phones_work">ಕೆಲಸದ ಪ್ರೊಫೈಲ್ ಸಂಪರ್ಕಗಳು</string>
   <string name="view_updates_from_group">ನವೀಕರಣಗಳನ್ನು ವೀಕ್ಷಿಸಿ</string>
   <string name="account_phone">ಸಾಧನ-ಮಾತ್ರ, ಸಿಂಕ್ ಮಾಡಲಾಗದಿರುವುದು</string>
   <string name="nameLabelsGroup">ಹೆಸರು</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ</string>
   <string name="chat_jabber">Jabber ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ</string>
   <string name="chat">ಚಾಟ್</string>
-  <string name="list_filter_all_accounts">ಎಲ್ಲ ಸಂಪರ್ಕಗಳು</string>
-  <string name="listAllContactsInAccount">%s ನಲ್ಲಿ ಸಂಪರ್ಕಗಳು</string>
-  <string name="listCustomView">ಕಸ್ಟಮ್‌ ವೀಕ್ಷಣೆಯಲ್ಲಿನ ಸಂಪರ್ಕಗಳು</string>
-  <string name="listSingleContact">ಏಕೈಕ ಸಂಪರ್ಕ</string>
   <string name="display_options_sort_list_by">ಈ ಪ್ರಕಾರ ವಿಂಗಡಿಸು</string>
   <string name="display_options_sort_by_given_name">ಮೊದಲ ಹೆಸರು</string>
   <string name="display_options_sort_by_family_name">ಕೊನೆಯ ಹೆಸರು</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">ಹುಡುಕಾಟವನ್ನು ತೆರವುಗೊಳಿಸಿ</string>
   <string name="select_account_dialog_title">ಖಾತೆ</string>
   <string name="set_default_account">ಕರೆಗಳನ್ನು ಮಾಡಲು ಯಾವಾಗಲೂ ಇದನ್ನು ಬಳಸಿ</string>
-  <string name="select_phone_account_for_calls">ಈ ಕರೆಗಾಗಿ ಸಿಮ್ ಆರಿಸಿ</string>
-  <string name="select_phone_account_for_calls_remember">ಈ ಆಯ್ಕೆಯನ್ನು ನೆನಪಿಡಿ</string>
   <string name="call_with_a_note">ಟಿಪ್ಪಣಿಯೊಂದಿಗೆ ಕರೆ</string>
   <string name="call_subject_hint">ಕರೆ ಕಳುಹಿಸಲು ಟಿಪ್ಪಣಿಯನ್ನು ಟೈಪ್ ಮಾಡಿ ...</string>
   <string name="send_and_call_button">ಕಳುಹಿಸು ಮತ್ತು ಕರೆಮಾಡು</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s ಟ್ಯಾಬ್. %2$d ಓದದಿರುವ ಐಟಂಗಳು. </item>
   </plurals>
   <string name="description_search_video_call">ವೀಡಿಯೊ ಕರೆ</string>
-  <string name="description_search_call_and_share">ಹಂಚಿಕೊಳ್ಳಿ ಮತ್ತು ಕರೆ ಮಾಡಿ</string>
 </resources>

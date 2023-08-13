@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Talepostkasse (%s)</string>
   <string name="voicemail_settings_title">Talepost</string>
   <string name="voicemail_notifications_preference_title">Varsler</string>
   <string name="voicemail_change_greeting_preference_title">Taleposthilsen</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Endre PIN-koden</string>
   <string name="voicemail_change_pin_preference_summary_disable">Du må slå på visuell talepost for å endre PIN-koden</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Visuell talepost er ikke slått på ennå – prøv igjen senere</string>
-  <string name="vm_change_pin_old_pin">Gammel PIN-kode</string>
-  <string name="vm_change_pin_new_pin">Ny PIN-kode</string>
   <string name="vm_change_pin_progress_message">Vent litt.</string>
   <string name="vm_change_pin_error_too_short">Den nye PIN-koden er for kort.</string>
   <string name="vm_change_pin_error_too_long">Den nye PIN-koden er for lang.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN-kodene stemmer ikke overens</string>
   <string name="change_pin_succeeded">PIN-koden for talemeldinger ble oppdatert</string>
   <string name="change_pin_system_error">Kan ikke angi PIN-kode</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Transkripsjon av talepost</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Analyse av transkripsjoner av talepost</string>
   <string name="voicemail_activating_summary_info">Slår på talepost</string>
-  <string name="voicemail_transcription_preference_summary_info">Få transkripsjoner av talemeldingene dine fra Googles transkripsjonstjeneste. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Tillat at Google går gjennom talemeldingene dine for å forbedre nøyaktigheten for transkripsjoner. Talemeldingene dine blir lagret anonymt. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Slå av visuell talepost</string>
   <string name="confirm_disable_voicemail_dialog_message">Dette sletter eventuelle talemeldinger og Google-transkripsjoner som er lagret i denne appen. Det kan hende mobiloperatøren din har lagret egne kopier.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">SLÅ AV</string>

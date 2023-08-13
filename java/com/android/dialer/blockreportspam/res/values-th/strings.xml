@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">เลิกบล็อก</string>
   <string name="block_report_number_alert_title">บล็อก %1$s ไหม</string>
   <string name="block_report_number_alert_details">คุณจะไม่ได้รับสายจากหมายเลขนี้อีกต่อไป</string>
-  <string name="block_number_alert_details">%1$s ระบบจะรายงานสายนี้ว่าเป็นสแปม</string>
   <string name="unblock_number_alert_details">ระบบจะเลิกบล็อกหมายเลขนี้และรายงานว่าไม่ใช่สแปม การโทรเข้ามาหลังจากนี้จะไม่ถูกระบุว่าเป็นสแปม</string>
   <string name="unblock_report_number_alert_title">เลิกบล็อก %1$s ไหม</string>
   <string name="report_not_spam_alert_button">รายงาน</string>

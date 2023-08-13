@@ -508,8 +508,6 @@ public final class NewSearchFragment extends Fragment
     CallSpecificAppData callSpecificAppData =
         CallSpecificAppData.newBuilder()
             .setCallInitiationType(callInitiationType)
-            .setPositionOfSelectedSearchResult(position)
-            .setCharactersInSearchString(query == null ? 0 : query.length())
             .setAllowAssistedDialing(true)
             .build();
     PreCall.start(

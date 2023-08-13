@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">ឈប់រារាំង</string>
   <string name="block_report_number_alert_title">ទប់ស្កាត់ %1$s ?</string>
   <string name="block_report_number_alert_details">អ្នក​នឹង​លែង​ទទួល​បាន​ការ​ហៅ​ពី​លេខ​នេះ​ទៀត​ហើយ។</string>
-  <string name="block_number_alert_details">%1$s ការ​ហៅ​នេះ​នឹង​ត្រូវ​រាយការណ៍​ថា​ជា​សារ​ឥត​បាន​ការ។</string>
   <string name="unblock_number_alert_details">លេខ​នេះ​នឹង​ត្រូវ​​បាន​ឈប់​​ទប់ស្កាត់ និង​រាយការណ៍​​ថា​​មិន​មែន​ជា​សារ​ឥតបានការ​ទេ។ ការ​ហៅ​លើក​ក្រោយៗ​នឹង​មិន​ត្រូវ​បាន​​កំណត់​​ថា​ជា​សារ​​ឥត​បាន​ការ​ទេ។</string>
   <string name="unblock_report_number_alert_title">ឈប់​ទប់ស្កាត់ %1$s ?</string>
   <string name="report_not_spam_alert_button">រាយការណ៍</string>

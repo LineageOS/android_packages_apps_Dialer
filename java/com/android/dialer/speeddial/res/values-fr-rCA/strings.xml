@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">Choisir le type d\'appel</string>
   <string name="disambig_option_video_call">Appel vidéo</string>
   <string name="disambig_option_voice_call">Appeler</string>
-  <string name="add_favorite_activity_title">Ajoutez un favori</string>
   <string name="contact_menu_voice_call">Appel vocal</string>
   <string name="contact_menu_video_call">Appel vidéo</string>
   <string name="contact_menu_message">Message</string>

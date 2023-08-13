@@ -34,27 +34,7 @@
   <string name="voicemail_string">Дуут шуудан</string>
   <string name="just_now">Дөнгөж сая</string>
   <string name="new_call_log_carrier_video">Үүрэн холбооны компанийн видео</string>
-  <string name="new_call_log_duo_video">Duo видео</string>
   <string name="new_call_log_unknown">Тодорхойгүй</string>
   <string name="new_call_log_secondary_blocked">Хориглосон</string>
   <string name="new_call_log_secondary_spam">Спам</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^2-с ирсэн аваагүй ^1 дуудлага</item>
-    <item quantity="other">^1 дуудлага, хамгийн сүүлийнх нь ^2-с ирсэн аваагүй дуудлага</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^2-с ирсэн авсан ^1 дуудлага</item>
-    <item quantity="other">^1 дуудлага, хамгийн сүүлийнх нь ^2-с ирсэн авсан дуудлага</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^2 руу залгасан ^1 дуудлага</item>
-    <item quantity="other">^1 дуудлага, хамгийн сүүлийнх нь ^2 руу залгасан дуудлага</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^2-с ирсэн блоклосон ^1 дуудлага</item>
-    <item quantity="other">^1 дуудлага, хамгийн сүүлийнх нь ^2-с ирсэн блоклосон дуудлага</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1 дээр ^2-р</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

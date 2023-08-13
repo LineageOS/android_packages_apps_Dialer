@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Tik om by kontakte te voeg of strooiposnommer te blokkeer.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Dit is die eerste keer wat hierdie nommer jou bel. As hierdie oproep strooipos was, kan jy hierdie nommer blokkeer en dit aangee.</string>
   <string name="spam_notification_spam_call_collapsed_text">Tik om as nie strooipos nie aan te gee, of dit te blokkeer</string>
-  <string name="spam_notification_report_spam_action_text">Blokkeer en gee aan</string>
-  <string name="spam_notification_add_contact_action_text">Voeg kontak by</string>
   <string name="spam_notification_dialog_add_contact_action_text">Voeg by kontakte</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokkeer en gee strooipos aan</string>
   <string name="spam_notification_was_not_spam_action_text">Nee, nie strooipos nie</string>

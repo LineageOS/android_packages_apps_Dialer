@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Дакраніцеся, каб дадаць да кантактаў ці заблакіраваць спамерскі нумар.</string>
   <string name="spam_notification_non_spam_call_expanded_text">З гэтага нумара вас выклікалі ўпершыню. Калі гэта быў спамерскі выклік, вы можаце заблакіраваць гэты нумар і паведаміць аб гэтым.</string>
   <string name="spam_notification_spam_call_collapsed_text">Дакраніцеся, каб заявіць, што гэта не спам, ці заблакіраваць нумар</string>
-  <string name="spam_notification_report_spam_action_text">Заблак. і паведаміць</string>
-  <string name="spam_notification_add_contact_action_text">Дадаць кантакт</string>
   <string name="spam_notification_dialog_add_contact_action_text">Дадаць у кантакты</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Заблакіраваць і паведаміць пра спам</string>
   <string name="spam_notification_was_not_spam_action_text">Не спам</string>

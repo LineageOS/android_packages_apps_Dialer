@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefon</string>
-  <string name="launcherDialpadActivityLabel">Telefonska tastatura</string>
   <string name="callHistoryIconLabel">Istorija poziva</string>
   <string name="action_copy_number_text">Kopiraj broj</string>
   <string name="action_edit_number_before_call">Izmeni broj pre poziva</string>
@@ -37,8 +36,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Još opcija</string>
   <string name="action_menu_dialpad_button">tastatura</string>
   <string name="dialer_settings_label">Podešavanja</string>
-  <string name="simulator_submenu_label">Simulator</string>
-  <string name="new_ui_launcher_shortcut_label">Napravite prečicu za novi UI</string>
   <string name="description_entering_bulk_action_mode">Ulazite u režim grupnih radnji</string>
   <string name="description_leaving_bulk_action_mode">Izašli ste iz režima grupnih radnji</string>
   <string name="description_selecting_bulk_action_mode">Izabrano je %1$s</string>
@@ -49,7 +46,6 @@
   <string name="description_video_call">Video poziv.</string>
   <string name="description_start_voice_search">Pokretanje glasovne pretrage</string>
   <string name="voicemail">Govorna pošta</string>
-  <string name="description_cancel_multi_select">Otkažite režim grupnih radnji</string>
   <string name="voicemailMultiSelectDeleteConfirm">Izbriši</string>
   <string name="voicemailMultiSelectDeleteCancel">Otkaži</string>
   <string name="voicemailMultiSelectActionBarTitle">Izabranih: %1$s</string>
@@ -64,7 +60,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Glasovna pretraga nije dostupna</string>
   <string name="dialer_hint_find_contact">Pretraži kontakte</string>
-  <string name="block_number_search_hint">Dodajte broj ili pretražite kontakte</string>
   <string name="call_log_all_empty">Istorija poziva je prazna</string>
   <string name="call_log_all_empty_action">Pozovi</string>
   <string name="call_log_missed_empty">Nemate nijedan propušten poziv.</string>
@@ -72,23 +67,13 @@
   <string name="call_log_activity_title">Istorija poziva</string>
   <string name="call_log_all_title">Svi</string>
   <string name="call_log_missed_title">Propušteni</string>
-  <string name="tab_speed_dial">Brzo biranje</string>
-  <string name="tab_history">Istorija poziva</string>
   <string name="tab_all_contacts">Kontakti</string>
-  <string name="tab_voicemail">Govorna pošta</string>
-  <string name="search_shortcut_call_number">Pozovi %s</string>
   <string name="search_shortcut_create_new_contact">Napravi novi kontakt</string>
   <string name="search_shortcut_add_to_contact">Dodaj u kontakt</string>
   <string name="search_shortcut_send_sms_message">Pošalji SMS</string>
   <string name="search_shortcut_make_video_call">Uputi video poziv</string>
-  <string name="search_shortcut_block_number">Blokiraj broj</string>
-  <string name="speed_dial_empty">Nemate nijedan kontakt na brzom biranju</string>
-  <string name="speed_dial_empty_add_favorite_action">Dodaj omiljen kontakt</string>
-  <string name="remove_contact">Ukloni</string>
   <string name="select_all">Izaberi sve</string>
   <string name="call_log_action_video_call">Video poziv</string>
-  <string name="call_log_action_set_up_video">Podesi video pozive</string>
-  <string name="call_log_action_invite_video">Pozovi u video poziv</string>
   <string name="call_log_action_send_message">Pošalji poruku</string>
   <string name="call_log_action_details">Detalji poziva</string>
   <string name="call_log_action_share_voicemail">Pošalji u…</string>
@@ -127,23 +112,8 @@
   <string name="call_settings_label">Pozivi</string>
   <string name="manage_blocked_numbers_label">Blokirani brojevi</string>
   <string name="voicemail_settings_label">Govorna pošta</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Blokiranje poziva je privremeno isključeno</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Blokiranje poziva je onemogućeno zato što ste kontaktirali službe za pomoć u hitnim slučajevima sa ovog telefona u poslednjih 48 sati. Automatski će biti ponovo omogućeno kada istekne period od 48 sati.</string>
-  <string name="import_send_to_voicemail_numbers_label">Uvezi brojeve</string>
-  <string name="blocked_call_settings_import_description">Ranije ste označili neke pozivaoce koje automatski treba preusmeriti na govornu poštu preko drugih aplikacija.</string>
-  <string name="blocked_call_settings_view_numbers_button">Prikaži brojeve</string>
-  <string name="blocked_call_settings_import_button">Uvezi</string>
-  <string name="description_blocked_number_list_delete">Deblokiraj broj</string>
-  <string name="addBlockedNumber">Dodaj broj</string>
-  <string name="block_number_footer_message_vvm">Pozivi sa ovih brojeva će biti blokirani i poruke govorne pošte će se automatski brisati.</string>
-  <string name="block_number_footer_message_no_vvm">Pozivi sa ovih brojeva će biti blokirani, ali pozivaoci sa ovih brojeva će i dalje moći da vam ostavljaju poruke govorne pošte.</string>
-  <string name="block_list">Blokirani brojevi</string>
-  <string name="alreadyBlocked">%1$s je već blokiran.</string>
   <string name="phone_account_settings_label">Nalozi za pozivanje</string>
-  <string name="permission_no_speeddial">Da biste omogućili brzo biranje, uključite dozvolu za Kontakte.</string>
   <string name="permission_no_calllog">Da biste videli evidenciju poziva, uključite dozvolu za Telefon.</string>
-  <string name="permission_no_search">Da biste pretražili kontakte, uključite dozvole za Kontakte.</string>
-  <string name="permission_place_call">Da biste uputili poziv, uključite dozvolu za Telefon.</string>
   <string name="toast_cannot_write_system_settings">Aplikacija Telefon nema dozvolu za upisivanje u sistemska podešavanja.</string>
   <string name="blocked_number_call_log_label">Blokirano</string>
   <string name="call_log_action_block_report_number">Blokiraj/prijavi kao nepoželjan</string>
@@ -151,22 +121,4 @@
   <string name="call_log_action_remove_spam">Nije nepoželjan</string>
   <string name="call_log_action_unblock_number">Deblokiraj broj</string>
   <string name="spam_number_call_log_label">Nepoželjan</string>
-  <string name="call_composer_connection_failed">%1$s je oflajn i ne možete da ga/je kontaktirate</string>
-  <string name="about_phone_label">Osnovni podaci</string>
-  <string name="voicemail_transcription_branding_text">Transkript je napravio Google</string>
-  <string name="voicemail_transcription_in_progress">Transkribuje se…</string>
-  <string name="voicemail_transcription_failed">Transkript nije dostupan.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transkript nije dostupan. Nije podržan jezik.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transkript nije dostupan. Nije otkriven govor.</string>
-  <string name="voicemail_donation_promo_title">Želite li da nam pomognete da poboljšamo tačnost transkripcije?</string>
-  <string name="voicemail_donation_promo_content">Dozvolite Google-u da pregleda ovu i buduće govorne poruke sa transkriptima. Čuvaće se anonimno. Podešavanja uvek možete da promenite. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Da, omogući</string>
-  <string name="voicemail_donation_promo_opt_out">Ne, hvala</string>
-  <string name="voicemail_transcription_rating">Ocenite kvalitet transkripcije</string>
-  <string name="voicemail_transcription_rating_thanks">Hvala vam na oceni kvaliteta</string>
-  <string name="description_rating_good">Označite da je dobro</string>
-  <string name="description_rating_bad">Označite da je loše</string>
-  <string name="view_conversation">Prikaži</string>
-  <string name="ec_data_deleted">Poziv je izbrisan. Pregledajte i izbrišite priloge deljene tokom ovog poziva u Messages-u.</string>
-  <string name="multiple_ec_data_deleted">Pozivi su izbrisani. Pregledajte i izbrišite priloge deljene tokom poziva u Messages-u.</string>
 </resources>

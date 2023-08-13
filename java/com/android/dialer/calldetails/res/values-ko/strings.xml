@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">전화번호 복사</string>
   <string name="call_details_edit_number">통화하기 전에 번호 수정</string>
   <string name="call_details_report_call_id">잘못된 번호 신고하기</string>
-  <string name="sent_a_photo">사진 전송됨</string>
-  <string name="received_a_photo">사진 수신됨</string>
-  <string name="message_in_quotes">\'%1$s\'</string>
   <string name="report_caller_id_dialog_title">잘못된 번호 신고</string>
   <string name="report_caller_id_failed">번호를 신고할 수 없습니다.</string>
   <string name="report_caller_id_toast">번호가 신고되었습니다.</string>

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">නිතරම සම්බන්ධ වන අය හිස් කරන්නද?</string>
   <string name="clearFrequentsConfirmation">ඔබ සම්බන්ධතා සහ දුරකථන යෙදුම්වලින් නිතරම සම්බන්ධ වුණු අයගේ ලැයිස්තුව හිස් කර, මුල සිටම ඔබගේ ලිපින අභිරුචි ඉගෙනීමට ඊ-තැපැල් යෙදුම්වලට බල කරයි.</string>
   <string name="clearFrequentsProgress_title">නිතරම සම්බන්ධ වන අය හිස් කරමින්…</string>
-  <string name="status_available">සිටියි</string>
-  <string name="status_away">ළඟ නැත</string>
-  <string name="status_busy">කාර්යබහුල</string>
-  <string name="contactsList">සම්බන්ධතා</string>
-  <string name="contact_suggestions">ඉහළින්ම යෝජිත</string>
-  <string name="local_invisible_directory">වෙනත්</string>
   <string name="directory_search_label">නාමාවලිය</string>
   <string name="directory_search_label_work">කාර්යාල සම්බන්ධතා නාමාවලිය</string>
-  <string name="local_search_label">සියලුම සම්බන්ධතා</string>
-  <string name="local_suggestions_search_label">යෝජනා</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">මම</string>
   <string name="missing_name">(නමක් නොමැත)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">සම්බන්ධතාව පෙන්වන්න.</string>
-  <string name="list_filter_phones">දුරකථන අංක සහිත සම්බන්ධතා</string>
-  <string name="list_filter_phones_work">කාර්යාල පැතිකඩ සම්බන්ධතා</string>
   <string name="view_updates_from_group">යාවත්කාලීන වීම් පෙන්වන්න</string>
   <string name="account_phone">උපාංගය-පමණී, සමමුහුර්තකරණය නොකරන ලදී</string>
   <string name="nameLabelsGroup">නම‍</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ භාවිතයෙන් කතාබස් කරන්න</string>
   <string name="chat_jabber">Jabber භාවිතයෙන් කතාබස් කරන්න</string>
   <string name="chat">කතාබස්</string>
-  <string name="list_filter_all_accounts">සියලුම සම්බන්ධතා</string>
-  <string name="listAllContactsInAccount">%s හි සම්බන්ධතා</string>
-  <string name="listCustomView">අභිරුචි පෙනුමේ සම්බන්ධතා</string>
-  <string name="listSingleContact">එක් සම්බන්ධතාවය</string>
   <string name="display_options_sort_list_by">අනුපිළිවෙලට සකසා ඇත්තේ</string>
   <string name="display_options_sort_by_given_name">පළමු නම</string>
   <string name="display_options_sort_by_family_name">අවසාන නම</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">සෙවීම හිස් කරන්න</string>
   <string name="select_account_dialog_title">ගිණුම</string>
   <string name="set_default_account">ඇමතුම් සඳහා මෙම එක සැමවිටම භාවිතා කරන්න</string>
-  <string name="select_phone_account_for_calls">මෙම ඇමතුම සඳහා SIM තෝරන්න</string>
-  <string name="select_phone_account_for_calls_remember">මෙම තේරීම මතක තබා ගන්න</string>
   <string name="call_with_a_note">සටහනක් සමගින් අමතන්න</string>
   <string name="call_subject_hint">ඇමතුම සමග යැවීමට සටහනක් ටයිප් කරන්න ...</string>
   <string name="send_and_call_button">යවන්න සහ අමතන්න</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s ටැබය. නොකියවූ අයිතම %2$d. </item>
   </plurals>
   <string name="description_search_video_call">වීඩියෝ ඇමතුම</string>
-  <string name="description_search_call_and_share">බෙදා ගෙන අමතන්න</string>
 </resources>

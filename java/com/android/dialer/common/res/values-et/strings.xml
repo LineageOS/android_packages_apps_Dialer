@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">WiFi</string>
-  <string name="network_name_mobile">Mobiil</string>
   <string name="content_description_overflow">Rohkem valikuid</string>
   <string name="snackbar_undo">VÕTA TAG.</string>
   <string name="ok_got_it">OK, selge</string>

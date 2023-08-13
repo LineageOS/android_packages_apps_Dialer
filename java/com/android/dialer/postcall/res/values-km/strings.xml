@@ -4,8 +4,7 @@
   <string name="post_call_message_1">នេះជាការបន្ទាន់។ សូមហៅទូរស័ព្ទមកខ្ញុំវិញ។</string>
   <string name="post_call_message_2">សូមហៅទូរស័ព្ទមកខ្ញុំវិញនៅពេលអ្នកឆ្លៀតពេលបានខ្លះ។</string>
   <string name="post_call_message_3">មិនបន្ទាន់ទេ យើងអាចជជែកគ្នានៅពេលក្រោយ។</string>
-  <string name="post_call_add_message">បន្ថែមសារ</string>
-  <string name="post_call_send_message">ផ្ញើ​សារ</string>
+    <string name="post_call_send_message">ផ្ញើ​សារ</string>
   <string name="post_call_message_sent">បានផ្ញើសាររួចហើយ</string>
   <string name="view">មើល</string>
 </resources>

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Clear frequently contacted?</string>
   <string name="clearFrequentsConfirmation">You\'ll clear the frequently contacted list in the Contacts and Phone apps, and force email apps to learn your addressing preferences from scratch.</string>
   <string name="clearFrequentsProgress_title">Clearing frequently contacted…</string>
-  <string name="status_available">Available</string>
-  <string name="status_away">Away</string>
-  <string name="status_busy">Busy</string>
-  <string name="contactsList">Contacts</string>
-  <string name="contact_suggestions">Top suggested</string>
-  <string name="local_invisible_directory">Other</string>
   <string name="directory_search_label">Directory</string>
   <string name="directory_search_label_work">Work directory</string>
-  <string name="local_search_label">All contacts</string>
-  <string name="local_suggestions_search_label">Suggestions</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Me</string>
   <string name="missing_name">(No name)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">View contact</string>
-  <string name="list_filter_phones">All contacts with phone numbers</string>
-  <string name="list_filter_phones_work">Work profile contacts</string>
   <string name="view_updates_from_group">View updates</string>
   <string name="account_phone">Device only, unsynced</string>
   <string name="nameLabelsGroup">Name</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Chat using ICQ</string>
   <string name="chat_jabber">Chat using Jabber</string>
   <string name="chat">Chat</string>
-  <string name="list_filter_all_accounts">All contacts</string>
-  <string name="listAllContactsInAccount">Contacts in %s</string>
-  <string name="listCustomView">Contacts in customised view</string>
-  <string name="listSingleContact">Single contact</string>
   <string name="display_options_sort_list_by">Sort by</string>
   <string name="display_options_sort_by_given_name">First name</string>
   <string name="display_options_sort_by_family_name">Surname</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Clear search</string>
   <string name="select_account_dialog_title">Account</string>
   <string name="set_default_account">Always use this for calls</string>
-  <string name="select_phone_account_for_calls">Choose SIM for this call</string>
-  <string name="select_phone_account_for_calls_remember">Remember this choice</string>
   <string name="call_with_a_note">Call with a note</string>
   <string name="call_subject_hint">Type a note to send with call ...</string>
   <string name="send_and_call_button">SEND &amp; CALL</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s tab. %2$d unread items. </item>
   </plurals>
   <string name="description_search_video_call">Video call</string>
-  <string name="description_search_call_and_share">Share and call</string>
 </resources>

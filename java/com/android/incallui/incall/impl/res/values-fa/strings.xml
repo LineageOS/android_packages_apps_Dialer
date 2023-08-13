@@ -5,7 +5,6 @@
   <string name="incall_label_hold">درحال انتظار</string>
   <string name="incall_label_add_call">افزودن تماس</string>
   <string name="incall_label_mute">بی‌صدا کردن</string>
-  <string name="incall_label_end_call">پایان تماس</string>
   <string name="incall_label_dialpad">صفحه کلید</string>
   <string name="incall_talkback_speaker_on">، فعال است</string>
   <string name="incall_talkback_speaker_off">، غیرفعال است</string>
