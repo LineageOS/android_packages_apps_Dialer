@@ -929,9 +929,6 @@ public class VideoCallFragment extends Fragment
   }
 
   @Override
-  public void updateInCallButtonUiColors(@ColorInt int color) {}
-
-  @Override
   public Fragment getInCallButtonUiFragment() {
     return this;
   }
