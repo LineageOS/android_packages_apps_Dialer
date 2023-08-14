@@ -48,6 +48,7 @@
     <item name="android:layout_width">@dimen/incall_end_call_button_size</item>
     <item name="android:padding">8dp</item>
     <item name="android:src">@drawable/quantum_ic_call_end_vd_theme_24</item>
+    <item name="android:tint">@color/incall_end_call_icon_color</item>
     <item name="android:stateListAnimator">@animator/disabled_alpha</item>
   </style>
 
@@ -60,7 +61,7 @@
   </style>
 
   <style name="Answer.Button.Decline">
-    <item name="android:background">@drawable/answer_decline_background</item>
+    <item name="android:background">@drawable/incall_end_call_background</item>
   </style>
 
 </resources>
