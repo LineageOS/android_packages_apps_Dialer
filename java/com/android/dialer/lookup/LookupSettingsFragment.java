@@ -31,17 +31,13 @@ public class LookupSettingsFragment extends PreferenceFragment
     implements Preference.OnPreferenceChangeListener {
 
   private static final String KEY_ENABLE_FORWARD_LOOKUP = "enable_forward_lookup";
-  private static final String KEY_ENABLE_PEOPLE_LOOKUP = "enable_people_lookup";
   private static final String KEY_ENABLE_REVERSE_LOOKUP = "enable_reverse_lookup";
   private static final String KEY_FORWARD_LOOKUP_PROVIDER = "forward_lookup_provider";
-  private static final String KEY_PEOPLE_LOOKUP_PROVIDER = "people_lookup_provider";
   private static final String KEY_REVERSE_LOOKUP_PROVIDER = "reverse_lookup_provider";
 
   private SwitchPreference enableForwardLookup;
-  private SwitchPreference enablePeopleLookup;
   private SwitchPreference enableReverseLookup;
   private ListPreference forwardLookupProvider;
-  private ListPreference peopleLookupProvider;
   private ListPreference reverseLookupProvider;
 
   @Override
@@ -51,19 +47,15 @@ public class LookupSettingsFragment extends PreferenceFragment
     addPreferencesFromResource(R.xml.lookup_settings);
 
     enableForwardLookup = (SwitchPreference) findPreference(KEY_ENABLE_FORWARD_LOOKUP);
-    enablePeopleLookup = (SwitchPreference) findPreference(KEY_ENABLE_PEOPLE_LOOKUP);
     enableReverseLookup = (SwitchPreference) findPreference(KEY_ENABLE_REVERSE_LOOKUP);
 
     enableForwardLookup.setOnPreferenceChangeListener(this);
-    enablePeopleLookup.setOnPreferenceChangeListener(this);
     enableReverseLookup.setOnPreferenceChangeListener(this);
 
     forwardLookupProvider = (ListPreference) findPreference(KEY_FORWARD_LOOKUP_PROVIDER);
-    peopleLookupProvider = (ListPreference) findPreference(KEY_PEOPLE_LOOKUP_PROVIDER);
     reverseLookupProvider = (ListPreference) findPreference(KEY_REVERSE_LOOKUP_PROVIDER);
 
     forwardLookupProvider.setOnPreferenceChangeListener(this);
-    peopleLookupProvider.setOnPreferenceChangeListener(this);
     reverseLookupProvider.setOnPreferenceChangeListener(this);
   }
 
@@ -81,14 +73,10 @@ public class LookupSettingsFragment extends PreferenceFragment
 
     if (preference == enableForwardLookup) {
       LookupSettings.setForwardLookupEnabled(context, (Boolean) newValue);
-    } else if (preference == enablePeopleLookup) {
-      LookupSettings.setPeopleLookupEnabled(context, (Boolean) newValue);
     } else if (preference == enableReverseLookup) {
       LookupSettings.setReverseLookupEnabled(context, (Boolean) newValue);
     } else if (preference == forwardLookupProvider) {
       LookupSettings.setForwardLookupProvider(context, (String) newValue);
-    } else if (preference == peopleLookupProvider) {
-      LookupSettings.setPeopleLookupProvider(context, (String) newValue);
     } else if (preference == reverseLookupProvider) {
       LookupSettings.setReverseLookupProvider(context, (String) newValue);
     }
@@ -100,7 +88,6 @@ public class LookupSettingsFragment extends PreferenceFragment
     Context context = getContext();
 
     enableForwardLookup.setChecked(LookupSettings.isForwardLookupEnabled(context));
-    enablePeopleLookup.setChecked(LookupSettings.isPeopleLookupEnabled(context));
     enableReverseLookup.setChecked(LookupSettings.isReverseLookupEnabled(context));
   }
 
@@ -108,7 +95,6 @@ public class LookupSettingsFragment extends PreferenceFragment
     Context context = getContext();
 
     restoreLookupProvider(forwardLookupProvider, LookupSettings.getForwardLookupProvider(context));
-    restoreLookupProvider(peopleLookupProvider, LookupSettings.getPeopleLookupProvider(context));
     restoreLookupProvider(reverseLookupProvider, LookupSettings.getReverseLookupProvider(context));
   }
 
@@ -121,17 +107,37 @@ public class LookupSettingsFragment extends PreferenceFragment
     }
 
     if (provider == null) {
-      pref.setValueIndex(0);
-
-      if (pref == forwardLookupProvider) {
-        LookupSettings.setForwardLookupProvider(context, pref.getValue());
-      } else if (pref == peopleLookupProvider) {
-        LookupSettings.setPeopleLookupProvider(context, pref.getValue());
-      } else if (pref == reverseLookupProvider) {
-        LookupSettings.setReverseLookupProvider(context, pref.getValue());
-      }
+      setDefaultProvider(pref);
     } else {
-      pref.setValue(provider);
+      String[] providers = new String[0];
+      if (pref == forwardLookupProvider) {
+        providers = getContext().getResources().getStringArray(R.array.forward_lookup_providers);
+      } else if (pref == reverseLookupProvider) {
+        providers = getContext().getResources().getStringArray(R.array.reverse_lookup_providers);
+      }
+
+      boolean found = false;
+      for (String p : providers) {
+        if (p.equals(provider)) {
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        setDefaultProvider(pref);
+      } else {
+        pref.setValue(provider);
+      }
+    }
+  }
+
+  private void setDefaultProvider(ListPreference pref) {
+    Context context = getContext();
+    if (pref == forwardLookupProvider) {
+      LookupSettings.setForwardLookupProvider(context, LookupSettings.FLP_DEFAULT);
+    } else if (pref == reverseLookupProvider) {
+      LookupSettings.setReverseLookupProvider(context, LookupSettings.RLP_DEFAULT);
     }
   }
 }
