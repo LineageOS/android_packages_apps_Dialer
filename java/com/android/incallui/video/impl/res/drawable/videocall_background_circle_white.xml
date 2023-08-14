@@ -4,7 +4,7 @@
   <item>
     <shape
       android:shape="oval">
-      <solid android:color="@color/incall_button_white"/>
+      <solid android:color="@color/incall_button_background"/>
     </shape>
   </item>
 </ripple>
