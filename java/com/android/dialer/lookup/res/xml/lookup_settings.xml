@@ -34,22 +34,6 @@
         android:persistent="false" />
 
     <SwitchPreference
-        android:key="enable_people_lookup"
-        android:title="@string/enable_people_lookup_title"
-        android:summary="@string/enable_people_lookup_summary"
-        android:defaultValue="false"
-        android:persistent="false" />
-
-    <ListPreference
-        android:key="people_lookup_provider"
-        android:title="@string/people_lookup_provider_title"
-        android:entries="@array/people_lookup_provider_names"
-        android:entryValues="@array/people_lookup_providers"
-        android:summary="%s"
-        android:dependency="enable_people_lookup"
-        android:persistent="false" />
-
-    <SwitchPreference
         android:key="enable_reverse_lookup"
         android:title="@string/enable_reverse_lookup_title"
         android:summary="@string/enable_reverse_lookup_summary"
