@@ -23,16 +23,7 @@
         <item>OpenStreetMap</item>
     </string-array>
 
-    <string-array name="people_lookup_providers" translatable="false">
-        <item>Auskunft</item>
-    </string-array>
-
-    <string-array name="people_lookup_provider_names" translatable="false">
-        <item>Auskunft (AT)</item>
-    </string-array>
-
     <string-array name="reverse_lookup_providers" translatable="false">
-        <item>Auskunft</item>
         <item>DasTelefonbuch</item>
         <item>OpenCnam</item>
         <item>YellowPages</item>
@@ -41,7 +32,6 @@
     </string-array>
 
     <string-array name="reverse_lookup_provider_names" translatable="false">
-        <item>Auskunft (AT)</item>
         <item>Das Telefonbuch (DE)</item>
         <item>OpenCnam (US)</item>
         <item>YellowPages (US)</item>
