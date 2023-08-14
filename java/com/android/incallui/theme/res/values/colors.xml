@@ -62,4 +62,6 @@
   <color name="incall_background_gradient_spam_bottom">#B8E55135</color>
 
   <color name="incall_background_multiwindow_spam">#E9C22E2E</color>
+
+  <color name="incall_button_icon_color">@android:color/black</color>
 </resources>

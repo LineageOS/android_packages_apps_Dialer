@@ -870,7 +870,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         "InCallPresenter.setBoundAndWaitingForOutgoingCall",
         "setBoundAndWaitingForOutgoingCall: " + isBound);
     boundAndWaitingForOutgoingCall = isBound;
-    themeColorManager.setPendingPhoneAccountHandle(handle);
     if (isBound && inCallState == InCallState.NO_CALLS) {
       inCallState = InCallState.PENDING_OUTGOING;
     }
