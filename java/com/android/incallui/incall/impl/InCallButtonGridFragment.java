@@ -131,12 +131,6 @@ public class InCallButtonGridFragment extends Fragment {
     return numVisibleButtons;
   }
 
-  public void updateButtonColor(@ColorInt int color) {
-    for (CheckableLabeledButton button : buttons) {
-      button.setCheckedColor(color);
-    }
-  }
-
   /** Interface to let the listener know the status of the button grid. */
   public interface OnButtonGridCreatedListener {
     void onButtonGridCreated(InCallButtonGridFragment inCallButtonGridFragment);

@@ -17,11 +17,6 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.support.v4.graphics.ColorUtils;
-import android.telecom.PhoneAccount;
-import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
@@ -30,6 +25,8 @@ import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.dialer.R;
 import com.android.incallui.call.DialerCall;
+
+import static android.telecom.PhoneAccount.NO_HIGHLIGHT_COLOR;
 
 /**
  * Calculates the background color for the in call window. The background color is based on the SIM
@@ -44,32 +41,19 @@ public class ThemeColorManager {
   @ColorInt private int backgroundColorBottom;
   @ColorInt private int backgroundColorSolid;
 
-  /**
-   * If there is no actual call currently in the call list, this will be used as a fallback to
-   * determine the theme color for InCallUI.
-   */
-  @Nullable private PhoneAccountHandle pendingPhoneAccountHandle;
-
   public ThemeColorManager(MaterialColorMapUtils colorMap) {
     this.colorMap = colorMap;
   }
 
-  public void setPendingPhoneAccountHandle(@Nullable PhoneAccountHandle pendingPhoneAccountHandle) {
-    this.pendingPhoneAccountHandle = pendingPhoneAccountHandle;
-  }
-
   public void onForegroundCallChanged(Context context, @Nullable DialerCall newForegroundCall) {
     if (newForegroundCall == null) {
-      updateThemeColors(context, getHighlightColor(context, pendingPhoneAccountHandle), false);
+      updateThemeColors(context, false);
     } else {
-      updateThemeColors(
-          context,
-          getHighlightColor(context, newForegroundCall.getAccountHandle()),
-          newForegroundCall.isSpam());
+      updateThemeColors(context, newForegroundCall.isSpam());
     }
   }
 
-  private void updateThemeColors(Context context, @ColorInt int highlightColor, boolean isSpam) {
+  private void updateThemeColors(Context context, boolean isSpam) {
     MaterialPalette palette;
     if (isSpam) {
       palette =
@@ -79,7 +63,7 @@ public class ThemeColorManager {
       backgroundColorBottom = context.getColor(R.color.incall_background_gradient_spam_bottom);
       backgroundColorSolid = context.getColor(R.color.incall_background_multiwindow_spam);
     } else {
-      palette = colorMap.calculatePrimaryAndSecondaryColor(highlightColor);
+      palette = colorMap.calculatePrimaryAndSecondaryColor(NO_HIGHLIGHT_COLOR);
       backgroundColorTop = context.getColor(R.color.incall_background_gradient_top);
       backgroundColorMiddle = context.getColor(R.color.incall_background_gradient_middle);
       backgroundColorBottom = context.getColor(R.color.incall_background_gradient_bottom);
@@ -88,17 +72,6 @@ public class ThemeColorManager {
 
     primaryColor = palette.mPrimaryColor;
     secondaryColor = palette.mSecondaryColor;
-  }
-
-  @ColorInt
-  private int getHighlightColor(Context context, @Nullable PhoneAccountHandle handle) {
-    if (handle != null) {
-      PhoneAccount account = context.getSystemService(TelecomManager.class).getPhoneAccount(handle);
-      if (account != null) {
-        return account.getHighlightColor();
-      }
-    }
-    return PhoneAccount.NO_HIGHLIGHT_COLOR;
   }
 
   @ColorInt
