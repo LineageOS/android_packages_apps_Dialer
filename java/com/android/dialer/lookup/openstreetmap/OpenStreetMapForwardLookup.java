@@ -48,7 +48,7 @@ public class OpenStreetMapForwardLookup extends ForwardLookup {
   /** Query URL */
   private static final String LOOKUP_URL = "https://overpass-api.de/api/interpreter";
   private static final String LOOKUP_QUERY =
-      "[out:json];node[name~\"%s\"][phone](around:%d,%f,%f);out body;";
+      "[out:json];node[name~\"%s\",i][phone](around:%d,%f,%f);out body;";
 
   private static final String RESULT_ELEMENTS = "elements";
   private static final String RESULT_TAGS = "tags";
@@ -65,15 +65,7 @@ public class OpenStreetMapForwardLookup extends ForwardLookup {
 
   @Override
   public List<ContactInfo> lookup(Context context, String filter, Location lastLocation) {
-    // The OSM API doesn't support case-insentive searches, but does
-    // support regular expressions.
-    String regex = "";
-    for (int i = 0; i < filter.length(); i++) {
-      char c = filter.charAt(i);
-      regex += "[" + Character.toUpperCase(c) + Character.toLowerCase(c) + "]";
-    }
-
-    String request = String.format(Locale.ENGLISH, LOOKUP_QUERY, regex,
+    String request = String.format(Locale.ENGLISH, LOOKUP_QUERY, filter,
         RADIUS, lastLocation.getLatitude(), lastLocation.getLongitude());
 
     try {
