@@ -16,12 +16,10 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string-array name="forward_lookup_providers" translatable="false">
-        <item>Google</item>
         <item>OpenStreetMap</item>
     </string-array>
 
     <string-array name="forward_lookup_provider_names" translatable="false">
-        <item>Google</item>
         <item>OpenStreetMap</item>
     </string-array>
 
