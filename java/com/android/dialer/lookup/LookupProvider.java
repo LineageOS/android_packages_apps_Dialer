@@ -70,8 +70,6 @@ public class LookupProvider extends ContentProvider {
   public static final Uri AUTHORITY_URI = Uri.parse("content://" + AUTHORITY);
   public static final Uri NEARBY_LOOKUP_URI =
       Uri.withAppendedPath(AUTHORITY_URI, "nearby");
-  public static final Uri PEOPLE_LOOKUP_URI =
-      Uri.withAppendedPath(AUTHORITY_URI, "people");
   public static final Uri NEARBY_AND_PEOPLE_LOOKUP_URI =
       Uri.withAppendedPath(AUTHORITY_URI, "nearby_and_people");
   public static final Uri IMAGE_CACHE_URI =
@@ -309,13 +307,6 @@ public class LookupProvider extends ContentProvider {
       List<ContactInfo> nearby = fl.lookup(getContext(), filter, lastLocation);
       if (nearby != null) {
         results.addAll(nearby);
-      }
-    }
-    if (type == PEOPLE || type == NEARBY_AND_PEOPLE) {
-      PeopleLookup pl = PeopleLookup.getInstance(getContext());
-      List<ContactInfo> people = pl.lookup(getContext(), filter);
-      if (people != null) {
-        results.addAll(people);
       }
     }
 
