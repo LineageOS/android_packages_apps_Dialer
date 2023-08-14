@@ -817,9 +817,6 @@ public class SurfaceViewVideoCallFragment extends Fragment
   }
 
   @Override
-  public void updateInCallButtonUiColors(@ColorInt int color) {}
-
-  @Override
   public Fragment getInCallButtonUiFragment() {
     return this;
   }
