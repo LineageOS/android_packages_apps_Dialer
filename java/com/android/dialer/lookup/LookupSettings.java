@@ -23,9 +23,8 @@ public final class LookupSettings {
   private static final String TAG = LookupSettings.class.getSimpleName();
 
   /** Forward lookup providers */
-  public static final String FLP_GOOGLE = "Google";
   public static final String FLP_OPENSTREETMAP = "OpenStreetMap";
-  public static final String FLP_DEFAULT = FLP_GOOGLE;
+  public static final String FLP_DEFAULT = FLP_OPENSTREETMAP;
 
   /** People lookup providers */
   public static final String PLP_AUSKUNFT = "Auskunft";
