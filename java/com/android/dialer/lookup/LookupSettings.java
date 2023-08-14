@@ -23,9 +23,8 @@ public final class LookupSettings {
   private static final String TAG = LookupSettings.class.getSimpleName();
 
   /** Forward lookup providers */
-  public static final String FLP_GOOGLE = "Google";
   public static final String FLP_OPENSTREETMAP = "OpenStreetMap";
-  public static final String FLP_DEFAULT = FLP_GOOGLE;
+  public static final String FLP_DEFAULT = FLP_OPENSTREETMAP;
 
   /** People lookup providers */
   public static final String PLP_AUSKUNFT = "Auskunft";
@@ -46,7 +45,7 @@ public final class LookupSettings {
   private static final String ENABLE_FORWARD_LOOKUP = "enable_forward_lookup";
   private static final String ENABLE_PEOPLE_LOOKUP = "enable_people_lookup";
   private static final String ENABLE_REVERSE_LOOKUP = "enable_reverse_lookup";
-  private static final String FORWARD_LOOKUP_PROVIDER = "forward_lookup_provider";
+  private static final String FORWARD_LOOKUP_PROVIDER = "forward_lookup_provider2";
   private static final String PEOPLE_LOOKUP_PROVIDER = "people_lookup_provider";
   private static final String REVERSE_LOOKUP_PROVIDER = "reverse_lookup_provider";
   private static final String OPENCNAM_ACCOUNT_SID = "opencnam_account_sid";
