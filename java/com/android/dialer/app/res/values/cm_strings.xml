@@ -45,4 +45,7 @@
     <string name="call_log_stats_title">Statistics</string>
 
     <string name="action_menu_helplines">Helplines</string>
+
+    <string name="default_dialer_text">You must set Dialer as the default phone app to use it.</string>
+    <string name="default_dialer_action">Set as default</string>
 </resources>
