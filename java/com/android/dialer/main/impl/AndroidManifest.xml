@@ -111,5 +111,11 @@
 
     </activity>
 
+    <activity
+        android:name="com.android.dialer.main.impl.DefaultDialerActivity"
+        android:exported="false"
+        android:launchMode="singleTask"
+        android:theme="@style/MainActivityTheme" />
+
   </application>
 </manifest>
