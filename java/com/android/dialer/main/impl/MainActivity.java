@@ -25,6 +25,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
 import com.android.dialer.R;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.TransactionSafeActivity;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
@@ -63,6 +64,12 @@ public class MainActivity extends TransactionSafeActivity
   @Override
   protected void onResume() {
     super.onResume();
+
+    if (!TelecomUtil.isDefaultDialer(this)) {
+      startActivity(new Intent(this, DefaultDialerActivity.class));
+      return;
+    }
+
     activePeer.onActivityResume();
 
     LocalBroadcastManager.getInstance(this)
