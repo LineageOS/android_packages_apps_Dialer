@@ -16,6 +16,7 @@
 
 package com.android.dialer.telecom;
 
+import android.app.role.RoleManager;
 import android.Manifest;
 import android.Manifest.permission;
 import android.content.ComponentName;
@@ -364,19 +365,18 @@ public abstract class TelecomUtil {
     }
 
     public boolean isDefaultDialer(Context context) {
-      final boolean result =
-          TextUtils.equals(
-              context.getPackageName(), getTelecomManager(context).getDefaultDialerPackage());
-      if (result) {
-        warningLogged = false;
-      } else {
+      final RoleManager rm = (RoleManager) context.getSystemService(Context.ROLE_SERVICE);
+      if (rm == null || !rm.isRoleHeld(RoleManager.ROLE_DIALER)) {
         if (!warningLogged) {
           // Log only once to prevent spam.
           LogUtil.w(TAG, "Dialer is not currently set to be default dialer");
           warningLogged = true;
         }
+        return false;
       }
-      return result;
+
+      warningLogged = false;
+      return true;
     }
   }
 }
