@@ -19,34 +19,9 @@
     android:layout_marginTop="?dialogPreferredPadding"
     android:orientation="vertical">
   <TextView
-      android:id="@+id/deviceid_hex_label"
-      style="@style/DeviceIdBody"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/hex"/>
-  <TextView
       android:id="@+id/deviceid_hex"
       style="@style/DeviceIdBody"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textIsSelectable="true"/>
-  <TextView
-      android:id="@+id/deviceid_dec_label"
-      style="@style/DeviceIdBody"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/dec"
-      android:visibility="gone"/>
-  <TextView
-      android:id="@+id/deviceid_dec"
-      style="@style/DeviceIdBody"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textIsSelectable="true"/>
-  <ImageView
-      android:id="@+id/deviceid_barcode"
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/barcode_height"
-      android:layout_margin="24dp"
-      android:layout_gravity="center_horizontal"/>
 </LinearLayout>
