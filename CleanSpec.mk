@@ -39,3 +39,4 @@
 # ************************************************
 
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/Dialer)
+$(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/APPS/Dialer_intermediates)
