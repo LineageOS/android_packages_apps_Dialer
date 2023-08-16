@@ -56,15 +56,12 @@ LOCAL_AAPT_FLAGS += \
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-common \
 	android-support-dynamic-animation \
-	com.android.vcard \
 	dialer-common-m2-target-deps \
 	dialer-glide-target-deps \
 	error_prone_annotations \
 	jsr305 \
-	libbackup \
 	libphonenumber \
 	volley \
-	zxing-core-1.7 \
 	org.lineageos.lib.phone \
 	androidx.annotation_annotation \
 
