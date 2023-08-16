@@ -55,7 +55,6 @@ LOCAL_AAPT_FLAGS += \
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-common \
 	android-support-dynamic-animation \
-	com.android.vcard \
 	dialer-commons-io-target \
 	dialer-dagger2-target \
 	dialer-disklrucache-target \
@@ -70,10 +69,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-guava-target \
 	dialer-glide-target \
 	dialer-glide-annotation-target \
-	dialer-zxing-target \
 	error_prone_annotations \
 	jsr305 \
-	libbackup \
 	libphonenumber \
 	volley \
 	org.lineageos.lib.phone \
@@ -317,19 +314,6 @@ LOCAL_LICENSE_CONDITIONS := notice
 LOCAL_NOTICE_FILE := $(LOCAL_PATH)/LICENSE
 LOCAL_SDK_VERSION := current
 LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/org/apache/james/apache-mime4j-dom/0.7.2/apache-mime4j-dom-0.7.2.jar
-LOCAL_UNINSTALLABLE_MODULE := true
-
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-
-LOCAL_MODULE_CLASS := JAVA_LIBRARIES
-LOCAL_MODULE := dialer-zxing-target
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0
-LOCAL_LICENSE_CONDITIONS := notice
-LOCAL_NOTICE_FILE := $(LOCAL_PATH)/LICENSE
-LOCAL_SDK_VERSION := current
-LOCAL_SRC_FILES := ../../../external/zxing/core/core.jar
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)
