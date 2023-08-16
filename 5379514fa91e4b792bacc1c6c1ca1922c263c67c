@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f19538_91c7fe35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5911
+      },
+      "writtenOn": "2023-08-16T14:36:54Z",
+      "side": 1,
+      "message": "commit message is misleading... this should be \"effing FIX cleanspec\" because georg wasted hours on it :P",
+      "revId": "5379514fa91e4b792bacc1c6c1ca1922c263c67c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
