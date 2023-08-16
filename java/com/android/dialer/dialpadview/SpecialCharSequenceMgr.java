@@ -29,9 +29,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.Color;
 import android.net.Uri;
 import android.provider.Settings;
 import android.telecom.PhoneAccount;
@@ -43,10 +40,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,11 +61,6 @@ import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.oem.TranssionUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -330,22 +320,11 @@ public class SpecialCharSequenceMgr {
         for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
           String deviceId = telephonyManager.getDeviceId(slot);
           if (!TextUtils.isEmpty(deviceId)) {
-            addDeviceIdRow(
-                holder,
-                deviceId,
-                /* showDecimal */
-                context.getResources().getBoolean(R.bool.show_device_id_in_hex_and_decimal),
-                /* showBarcode */ false);
+            addDeviceIdRow(holder, deviceId);
           }
         }
       } else {
-        addDeviceIdRow(
-            holder,
-            telephonyManager.getDeviceId(),
-            /* showDecimal */
-            context.getResources().getBoolean(R.bool.show_device_id_in_hex_and_decimal),
-            /* showBarcode */
-            context.getResources().getBoolean(R.bool.show_device_id_as_barcode));
+        addDeviceIdRow(holder, telephonyManager.getDeviceId());
       }
 
       new AlertDialog.Builder(context)
@@ -361,8 +340,7 @@ public class SpecialCharSequenceMgr {
     return false;
   }
 
-  private static void addDeviceIdRow(
-      ViewGroup holder, String deviceId, boolean showDecimal, boolean showBarcode) {
+  private static void addDeviceIdRow(ViewGroup holder, String deviceId) {
     if (TextUtils.isEmpty(deviceId)) {
       return;
     }
@@ -372,43 +350,7 @@ public class SpecialCharSequenceMgr {
             LayoutInflater.from(holder.getContext()).inflate(R.layout.row_deviceid, holder, false);
     holder.addView(row);
 
-    // Remove the check digit, if exists. This digit is a checksum of the ID.
-    // See https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity
-    // and https://en.wikipedia.org/wiki/Mobile_equipment_identifier
-    String hex = deviceId.length() == 15 ? deviceId.substring(0, 14) : deviceId;
-
-    // If this is the valid length IMEI or MEID (14 digits), show it in all formats, otherwise fall
-    // back to just showing the raw hex
-    if (hex.length() == 14 && showDecimal) {
-      ((TextView) row.findViewById(R.id.deviceid_hex)).setText(hex);
-      ((TextView) row.findViewById(R.id.deviceid_dec)).setText(getDecimalFromHex(hex));
-      row.findViewById(R.id.deviceid_dec_label).setVisibility(View.VISIBLE);
-    } else {
-      row.findViewById(R.id.deviceid_hex_label).setVisibility(View.GONE);
-      ((TextView) row.findViewById(R.id.deviceid_hex)).setText(deviceId);
-    }
-
-    final ImageView barcode = row.findViewById(R.id.deviceid_barcode);
-    if (showBarcode) {
-      // Wait until the layout pass has completed so we the barcode is measured before drawing. We
-      // do this by adding a layout listener and setting the bitmap after getting the callback.
-      barcode
-          .getViewTreeObserver()
-          .addOnGlobalLayoutListener(
-              new OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                  barcode.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                  Bitmap barcodeBitmap =
-                      generateBarcode(hex, barcode.getWidth(), barcode.getHeight());
-                  if (barcodeBitmap != null) {
-                    barcode.setImageBitmap(barcodeBitmap);
-                  }
-                }
-              });
-    } else {
-      barcode.setVisibility(View.GONE);
-    }
+    ((TextView) row.findViewById(R.id.deviceid_hex)).setText(deviceId);
   }
 
   private static String getDecimalFromHex(String hex) {
@@ -445,32 +387,6 @@ public class SpecialCharSequenceMgr {
         .append(' ')
         .append(serialNum, 4, serialNum.length());
     return builder.toString();
-  }
-
-  /**
-   * This method generates a 2d barcode using the zxing library. Each pixel of the bitmap is either
-   * black or white painted vertically. We determine which color using the BitMatrix.get(x, y)
-   * method.
-   */
-  private static Bitmap generateBarcode(String hex, int width, int height) {
-    MultiFormatWriter writer = new MultiFormatWriter();
-    String data = Uri.encode(hex);
-
-    try {
-      BitMatrix bitMatrix = writer.encode(data, BarcodeFormat.CODE_128, width, 1);
-      Bitmap bitmap = Bitmap.createBitmap(bitMatrix.getWidth(), height, Config.RGB_565);
-
-      for (int i = 0; i < bitMatrix.getWidth(); i++) {
-        // Paint columns of width 1
-        int[] column = new int[height];
-        Arrays.fill(column, bitMatrix.get(i, 0) ? Color.BLACK : Color.WHITE);
-        bitmap.setPixels(column, 0, 1, i, 0, 1, height);
-      }
-      return bitmap;
-    } catch (WriterException e) {
-      LogUtil.e("SpecialCharSequenceMgr.generateBarcode", "error generating barcode", e);
-    }
-    return null;
   }
 
   private static boolean handleRegulatoryInfoDisplay(Context context, String input) {
