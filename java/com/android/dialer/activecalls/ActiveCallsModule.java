@@ -17,15 +17,12 @@
 package com.android.dialer.activecalls;
 
 import com.android.dialer.activecalls.impl.ActiveCallsImpl;
-import com.android.dialer.inject.DialerVariant;
-import com.android.dialer.inject.InstallIn;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Singleton;
 
 /** Module for {@link ActiveCallsComponent} */
 @Module
-@InstallIn(variants = DialerVariant.DIALER_TEST) // TODO(weijiaxu): put all variants.
 public abstract class ActiveCallsModule {
 
   @Singleton
