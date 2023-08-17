@@ -16,15 +16,12 @@
 
 package com.android.dialer.promotion.impl;
 
-import com.android.dialer.inject.DialerVariant;
-import com.android.dialer.inject.InstallIn;
 import com.android.dialer.promotion.Promotion;
 import com.google.common.collect.ImmutableList;
 import dagger.Module;
 import dagger.Provides;
 
 /** Module for Promotion. */
-@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class PromotionModule {
 

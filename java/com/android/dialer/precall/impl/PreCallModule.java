@@ -16,8 +16,6 @@
 
 package com.android.dialer.precall.impl;
 
-import com.android.dialer.inject.DialerVariant;
-import com.android.dialer.inject.InstallIn;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.precall.PreCallAction;
 import com.google.common.collect.ImmutableList;
@@ -27,7 +25,6 @@ import dagger.Provides;
 import javax.inject.Singleton;
 
 /** Dagger module for {@link PreCall}. */
-@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class PreCallModule {
 
