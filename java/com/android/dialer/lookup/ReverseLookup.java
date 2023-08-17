@@ -23,7 +23,6 @@ import android.util.Log;
 
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.lookup.dastelefonbuch.TelefonbuchReverseLookup;
-import com.android.dialer.lookup.opencnam.OpenCnamReverseLookup;
 import com.android.dialer.lookup.yellowpages.YellowPagesReverseLookup;
 import com.android.dialer.lookup.zabasearch.ZabaSearchReverseLookup;
 
@@ -40,9 +39,7 @@ public abstract class ReverseLookup {
     if (INSTANCE == null || !isInstance(provider)) {
       Log.d(TAG, "Chosen reverse lookup provider: " + provider);
 
-      if (provider.equals(LookupSettings.RLP_OPENCNAM)) {
-        INSTANCE = new OpenCnamReverseLookup(context);
-      } else if (provider.equals(LookupSettings.RLP_YELLOWPAGES)
+      if (provider.equals(LookupSettings.RLP_YELLOWPAGES)
           || provider.equals(LookupSettings.RLP_YELLOWPAGES_CA)) {
         INSTANCE = new YellowPagesReverseLookup(context, provider);
       } else if (provider.equals(LookupSettings.RLP_ZABASEARCH)) {
@@ -56,10 +53,7 @@ public abstract class ReverseLookup {
   }
 
   private static boolean isInstance(String provider) {
-    if (provider.equals(LookupSettings.RLP_OPENCNAM)
-        && INSTANCE instanceof OpenCnamReverseLookup) {
-      return true;
-    } else if ((provider.equals(LookupSettings.RLP_YELLOWPAGES)
+    if ((provider.equals(LookupSettings.RLP_YELLOWPAGES)
         || provider.equals(LookupSettings.RLP_YELLOWPAGES_CA))
         && INSTANCE instanceof YellowPagesReverseLookup) {
       return true;
