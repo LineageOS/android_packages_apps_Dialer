@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
 
 /**
  * Only used by rootcomponent generator to store metadata for locating annotated class with {@link
- * IncludeInDialerRoot}, {@link InstallIn}.
+ * IncludeInDialerRoot}.
  */
 @Target(ElementType.TYPE)
 public @interface RootComponentGeneratorMetadata {

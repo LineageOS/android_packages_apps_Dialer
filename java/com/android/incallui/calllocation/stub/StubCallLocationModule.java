@@ -22,15 +22,12 @@ import android.support.v4.app.Fragment;
 import androidx.annotation.NonNull;
 
 import com.android.dialer.common.Assert;
-import com.android.dialer.inject.DialerVariant;
-import com.android.dialer.inject.InstallIn;
 import com.android.incallui.calllocation.CallLocation;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Inject;
 
 /** This module provides an instance of call location. */
-@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class StubCallLocationModule {
 

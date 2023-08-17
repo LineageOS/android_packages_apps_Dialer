@@ -22,15 +22,12 @@ import com.android.dialer.commandline.impl.Echo;
 import com.android.dialer.commandline.impl.Help;
 import com.android.dialer.commandline.impl.Version;
 import com.android.dialer.function.Supplier;
-import com.android.dialer.inject.DialerVariant;
-import com.android.dialer.inject.InstallIn;
 import com.google.common.collect.ImmutableMap;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Inject;
 
 /** Provides {@link Command} */
-@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class CommandLineModule {
 
