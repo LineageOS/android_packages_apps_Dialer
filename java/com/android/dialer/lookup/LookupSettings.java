@@ -27,13 +27,12 @@ public final class LookupSettings {
   public static final String FLP_DEFAULT = FLP_OPENSTREETMAP;
 
   /** Reverse lookup providers */
-  public static final String RLP_OPENCNAM = "OpenCnam";
   public static final String RLP_YELLOWPAGES = "YellowPages";
   public static final String RLP_YELLOWPAGES_CA = "YellowPages_CA";
   public static final String RLP_ZABASEARCH = "ZabaSearch";
   public static final String RLP_CYNGN_CHINESE = "CyngnChinese";
   public static final String RLP_DASTELEFONBUCH = "DasTelefonbuch";
-  public static final String RLP_DEFAULT = RLP_OPENCNAM;
+  public static final String RLP_DEFAULT = RLP_YELLOWPAGES;
 
   /** Preferences */
   private static final String SHARED_PREFERENCES_NAME = "lookup_settings";
@@ -41,8 +40,6 @@ public final class LookupSettings {
   private static final String ENABLE_REVERSE_LOOKUP = "enable_reverse_lookup";
   private static final String FORWARD_LOOKUP_PROVIDER = "forward_lookup_provider2";
   private static final String REVERSE_LOOKUP_PROVIDER = "reverse_lookup_provider2";
-  private static final String OPENCNAM_ACCOUNT_SID = "opencnam_account_sid";
-  private static final String OPENCNAM_AUTH_TOKEN = "opencnam_auth_token";
 
   private LookupSettings() {
   }
@@ -81,17 +78,5 @@ public final class LookupSettings {
 
   public static void setReverseLookupProvider(Context context, String value) {
     getSharedPreferences(context).edit().putString(REVERSE_LOOKUP_PROVIDER, value).commit();
-  }
-
-  public static String getOpenCnamAccountSid(Context context) {
-    return getSharedPreferences(context).getString(OPENCNAM_ACCOUNT_SID, null);
-  }
-
-  public static void setOpenCnamAccountSid(Context context, String value) {
-    getSharedPreferences(context).edit().putString(OPENCNAM_ACCOUNT_SID, value).commit();
-  }
-
-  public static String getOpenCnamAuthToken(Context context) {
-    return getSharedPreferences(context).getString(OPENCNAM_AUTH_TOKEN, null);
   }
 }
