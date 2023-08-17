@@ -27,25 +27,27 @@ public class TelefonbuchApi {
   private static final String TAG = TelefonbuchApi.class.getSimpleName();
 
   private static final String REVERSE_LOOKUP_URL =
-      "https://www.dastelefonbuch.de/?s=a20000" +
-      "&cmd=search&sort_ok=0&sp=55&vert_ok=0&aktion=23";
+          "https://www.dastelefonbuch.de/R%C3%BCckw%C3%A4rts-Suche/";
 
-  private static String NAME_REGEX ="<a id=\"name0.*?>\\s*\n?(.*?)\n?\\s*</a>";
-  private static String NUMBER_REGEX = "<span\\s+class=\"ico fon.*>.*<span>(.*?)</span><br/>";
+  private static String RELEVANT_CONTENT_REGEX =
+          "<div class=\"vcard\">(.*)<div class=\"additional\">";
+  private static String NAME_REGEX ="<div class=\"name\" title=\"(.*?)\">";
+  private static String NUMBER_REGEX = "<!-- phoneTo: (.*?) -->";
   private static String ADDRESS_REGEX = "<address.*?>\n?(.*?)</address>";
+  private static String WEBSITE_REGEX = "<div.*class=\"url\">.*<a.*?href=\"(.*?)\"";
 
   private TelefonbuchApi() {
   }
 
   public static ContactInfo reverseLookup(Context context, String number) throws IOException {
     Uri uri = Uri.parse(REVERSE_LOOKUP_URL)
-        .buildUpon()
-        .appendQueryParameter("kw", number)
-        .build();
+            .buildUpon()
+            .appendPath(number)
+            .build();
     // Cut out everything we're not interested in (scripts etc.) to
     // speed up the subsequent matching.
     String output = LookupUtils.firstRegexResult(
-        LookupUtils.httpGet(uri.toString(), null), ": Treffer(.*)Ende Treffer", true);
+            LookupUtils.httpGet(uri.toString(), null), RELEVANT_CONTENT_REGEX, true);
 
     String name = parseValue(output, NAME_REGEX, true, false);
     if (name == null) {
@@ -54,12 +56,13 @@ public class TelefonbuchApi {
 
     String phoneNumber = parseValue(output, NUMBER_REGEX, false, true);
     String address = parseValue(output, ADDRESS_REGEX, true, true);
+    String website = parseValue(output, WEBSITE_REGEX, true, false);
 
     ContactInfo info = new ContactInfo();
     info.name = name;
     info.address = address;
     info.formattedNumber = phoneNumber != null ? phoneNumber : number;
-    info.website = uri.toString();
+    info.website = website != null ? website : uri.toString();
 
     return info;
   }
