@@ -24,14 +24,11 @@ import static javax.tools.Diagnostic.Kind.ERROR;
 import com.android.dialer.inject.DialerRootComponent;
 import com.android.dialer.inject.DialerVariant;
 import com.android.dialer.inject.IncludeInDialerRoot;
-import com.android.dialer.inject.InstallIn;
 import com.android.dialer.inject.RootComponentGeneratorMetadata;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
 import com.google.auto.common.MoreElements;
 import com.google.common.base.Optional;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.SetMultimap;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
@@ -86,15 +83,14 @@ final class RootComponentGeneratingStep implements ProcessingStep {
 
   @Override
   public Set<? extends Class<? extends Annotation>> annotations() {
-    return ImmutableSet.of(DialerRootComponent.class, InstallIn.class, IncludeInDialerRoot.class);
+    return ImmutableSet.of(DialerRootComponent.class, IncludeInDialerRoot.class);
   }
 
   @Override
   public Set<? extends Element> process(
       SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
     for (Element element : elementsByAnnotation.get(DialerRootComponent.class)) {
-      // defer root components to the next round in case where the current build target contains
-      // elements annotated with @InstallIn. Annotation processor cannot detect metadata files
+      // defer root components to the next round. Annotation processor cannot detect metadata files
       // generated in the same round and the metadata is accessible in the next round.
       if (shouldDeferRootComponent(elementsByAnnotation)) {
         return elementsByAnnotation.get(DialerRootComponent.class);
@@ -107,8 +103,7 @@ final class RootComponentGeneratingStep implements ProcessingStep {
 
   private boolean shouldDeferRootComponent(
       SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
-    return elementsByAnnotation.containsKey(InstallIn.class)
-        || elementsByAnnotation.containsKey(IncludeInDialerRoot.class);
+    return elementsByAnnotation.containsKey(IncludeInDialerRoot.class);
   }
 
   /**
@@ -119,7 +114,6 @@ final class RootComponentGeneratingStep implements ProcessingStep {
    */
   private void generateRootComponent(TypeElement rootElement) {
     DialerRootComponent dialerRootComponent = rootElement.getAnnotation(DialerRootComponent.class);
-    ListMultimap<DialerVariant, TypeElement> componentModuleMap = generateComponentModuleMap();
     List<TypeElement> componentList = generateComponentList();
     DialerVariant dialerVariant = dialerRootComponent.variant();
     TypeSpec.Builder rootComponentClassBuilder =
@@ -130,9 +124,6 @@ final class RootComponentGeneratingStep implements ProcessingStep {
       rootComponentClassBuilder.addSuperinterface(ClassName.get(componentWithSuperInterface));
     }
     AnnotationSpec.Builder componentAnnotation = AnnotationSpec.builder(Component.class);
-    for (TypeElement annotatedElement : componentModuleMap.get(dialerVariant)) {
-      componentAnnotation.addMember("modules", "$T.class", annotatedElement.asType());
-    }
     rootComponentClassBuilder.addAnnotation(componentAnnotation.build());
 
     AnnotationMirror dialerRootComponentMirror =
@@ -152,19 +143,6 @@ final class RootComponentGeneratingStep implements ProcessingStep {
     List<TypeElement> list = new ArrayList<>();
     extractInfoFromMetadata(IncludeInDialerRoot.class, list::add);
     return list;
-  }
-
-  private ListMultimap<DialerVariant, TypeElement> generateComponentModuleMap() {
-    ListMultimap<DialerVariant, TypeElement> map = ArrayListMultimap.create();
-    extractInfoFromMetadata(
-        InstallIn.class,
-        (annotatedElement) -> {
-          for (DialerVariant rootComponentName :
-              annotatedElement.getAnnotation(InstallIn.class).variants()) {
-            map.put(rootComponentName, annotatedElement);
-          }
-        });
-    return map;
   }
 
   private void extractInfoFromMetadata(
