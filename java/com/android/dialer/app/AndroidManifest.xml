@@ -139,11 +139,6 @@
       </intent-filter>
     </receiver>
 
-    <receiver
-        android:exported="false"
-        android:name="com.android.dialer.commandline.CommandLineReceiver">
-    </receiver>
-
     <provider
       android:authorities="com.android.dialer.files"
       android:exported="false"
