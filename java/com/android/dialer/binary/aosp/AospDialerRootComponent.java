@@ -19,7 +19,6 @@ package com.android.dialer.binary.aosp;
 import com.android.dialer.activecalls.ActiveCallsModule;
 import com.android.dialer.binary.basecomponent.BaseDialerRootComponent;
 import com.android.dialer.calllog.CallLogModule;
-import com.android.dialer.commandline.CommandLineModule;
 import com.android.dialer.common.concurrent.DialerExecutorModule;
 import com.android.dialer.contacts.ContactsModule;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerModule;
@@ -44,7 +43,6 @@ import javax.inject.Singleton;
     modules = {
       ActiveCallsModule.class,
       CallLogModule.class,
-      CommandLineModule.class,
       ContactsModule.class,
       ContextModule.class,
       DialerExecutorModule.class,
