@@ -17,14 +17,11 @@
 package com.android.dialer.glidephotomanager;
 
 import com.android.dialer.glidephotomanager.impl.GlidePhotoManagerImpl;
-import com.android.dialer.inject.DialerVariant;
-import com.android.dialer.inject.InstallIn;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Singleton;
 
 /** Module for {@link GlidePhotoManagerComponent} */
-@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class GlidePhotoManagerModule {
   @Binds
