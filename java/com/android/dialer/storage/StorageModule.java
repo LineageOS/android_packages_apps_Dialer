@@ -20,14 +20,11 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import com.android.dialer.inject.ApplicationContext;
-import com.android.dialer.inject.DialerVariant;
-import com.android.dialer.inject.InstallIn;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
 
 /** Module for the storage component. */
-@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public class StorageModule {
 

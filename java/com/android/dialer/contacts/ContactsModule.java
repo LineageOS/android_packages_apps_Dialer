@@ -24,15 +24,12 @@ import com.android.dialer.contacts.displaypreference.ContactDisplayPreferencesSt
 import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequester;
 import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequesterImpl;
 import com.android.dialer.inject.ApplicationContext;
-import com.android.dialer.inject.DialerVariant;
-import com.android.dialer.inject.InstallIn;
 import dagger.Binds;
 import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 
 /** Module for standard {@link ContactsComponent} */
-@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class ContactsModule {
   @Provides

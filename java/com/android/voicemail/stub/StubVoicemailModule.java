@@ -16,8 +16,6 @@
 
 package com.android.voicemail.stub;
 
-import com.android.dialer.inject.DialerVariant;
-import com.android.dialer.inject.InstallIn;
 import com.android.voicemail.VoicemailClient;
 import dagger.Binds;
 import dagger.Module;
@@ -26,7 +24,6 @@ import javax.inject.Singleton;
 /**
  * A no-op version of the voicemail module for build targets that don't support the new OTMP client.
  */
-@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class StubVoicemailModule {
 
