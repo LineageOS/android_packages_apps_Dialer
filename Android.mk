@@ -148,7 +148,6 @@ LOCAL_SRC_FILES := \
         $(BASE_DIR)/dialer/inject/DialerVariant.java \
         $(BASE_DIR)/dialer/inject/HasRootComponent.java \
         $(BASE_DIR)/dialer/inject/IncludeInDialerRoot.java \
-        $(BASE_DIR)/dialer/inject/InstallIn.java \
         $(BASE_DIR)/dialer/inject/RootComponentGeneratorMetadata.java
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
