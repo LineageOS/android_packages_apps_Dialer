@@ -20,7 +20,6 @@ import com.android.dialer.activecalls.ActiveCallsComponent;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.calllog.ui.CallLogUiComponent;
-import com.android.dialer.commandline.CommandLineComponent;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
@@ -48,7 +47,6 @@ public interface BaseDialerRootComponent
         CallLogComponent.HasComponent,
         CallLogDatabaseComponent.HasComponent,
         CallLogUiComponent.HasComponent,
-        CommandLineComponent.HasComponent,
         ContactsComponent.HasComponent,
         DialerExecutorComponent.HasComponent,
         GlidePhotoManagerComponent.HasComponent,
