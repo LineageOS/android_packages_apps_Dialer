@@ -36,7 +36,7 @@ public class InCallDndHandler implements InCallPresenter.InCallStateListener {
   private int userSelectedDndMode;
 
   public InCallDndHandler(Context context) {
-    prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    prefs = PreferenceManager.getDefaultSharedPreferences(context.createDeviceProtectedStorageContext());
     notificationManager = context.getSystemService(NotificationManager.class);
 
     // Save the user's Do Not Disturb mode so that it can be restored when the call ends

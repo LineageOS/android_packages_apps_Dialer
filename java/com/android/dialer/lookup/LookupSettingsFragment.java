@@ -47,6 +47,7 @@ public class LookupSettingsFragment extends PreferenceFragment
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getPreferenceManager().setStorageDeviceProtected();
 
     addPreferencesFromResource(R.xml.lookup_settings);
 
