@@ -40,6 +40,7 @@
       android:paddingStart="8dp"
       android:paddingEnd="8dp"
       android:text="@string/speed_dial_add_button_text"
-      android:textColor="?android:attr/colorPrimary"
+      android:textColor="?android:attr/colorAccent"
+      android:textAllCaps="false"
       style="@style/Widget.AppCompat.Button.Borderless"/>
 </RelativeLayout>

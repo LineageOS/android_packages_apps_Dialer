@@ -176,7 +176,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
 
   private void setColor(TextView item, boolean isSelected) {
     int color = isSelected
-            ? ThemeComponent.get(getContext()).theme().getColorPrimary()
+            ? ThemeComponent.get(getContext()).theme().getColorAccent()
             : getContext().getColor(R.color.nav_item);
     item.setTextColor(color);
     item.setCompoundDrawableTintList(ColorStateList.valueOf(color));

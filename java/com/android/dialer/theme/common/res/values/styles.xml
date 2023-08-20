@@ -37,4 +37,9 @@
     <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
     <item name="android:layout_margin">8dp</item>
   </style>
+
+  <style name="CallStatsCardStyle" parent="CallLogCardStyle">
+    <item name="android:layout_margin">0dp</item>
+    <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
+  </style>
 </resources>
