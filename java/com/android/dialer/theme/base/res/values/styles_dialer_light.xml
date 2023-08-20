@@ -33,8 +33,10 @@
     <!-- Setting description. -->
     <item name="android:textColorSecondary">@color/settings_text_color_secondary</item>
     <item name="android:windowBackground">?android:attr/colorBackground</item>
-    <item name="android:colorAccent">?android:attr/colorPrimary</item>
-    <item name="colorPrimary">@color/settings_primary</item>
+    <item name="android:colorAccent">@color/dialer_theme_color</item>
+    <item name="colorPrimary">@color/dialer_primary_color</item>
+    <item name="colorPrimaryDark">@color/dialer_primary_color</item>
+    <item name="android:statusBarColor">@color/dialer_primary_color</item>
   </style>
 
   <!-- TODO(a bug): This is only actively used in empty_content_view.xml. Move it there. -->

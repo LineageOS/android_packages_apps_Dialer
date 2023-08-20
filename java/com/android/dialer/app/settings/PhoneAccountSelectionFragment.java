@@ -33,7 +33,7 @@ import java.util.List;
  * Preference screen that lists SIM phone accounts to select from, and forwards the selected account
  * to {@link #PARAM_TARGET_FRAGMENT}. Can only be used in a {@link PreferenceActivity}
  */
-public class PhoneAccountSelectionFragment extends PreferenceFragment {
+public class PhoneAccountSelectionFragment extends DialerPreferenceFragment {
 
   /** The {@link PreferenceFragment} to launch after the account is selected. */
   public static final String PARAM_TARGET_FRAGMENT = "target_fragment";
