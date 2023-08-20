@@ -47,6 +47,7 @@ public class AospThemeImpl implements Theme {
   private int colorBackgroundFloating = -1;
   private int colorTextOnUnthemedDarkBackground = -1;
   private int colorIconOnUnthemedDarkBackground = -1;
+  private int colorCallNotificationBackground = -1;
 
   public AospThemeImpl(Context context) {
 
@@ -71,6 +72,7 @@ public class AospThemeImpl implements Theme {
                   R.attr.colorIconSecondary,
                   R.attr.colorTextOnUnthemedDarkBackground,
                   R.attr.colorIconOnUnthemedDarkBackground,
+                  R.attr.colorCallNotificationBackground
                 });
     colorPrimary = array.getColor(/* index= */ 0, /* defValue= */ -1);
     colorPrimaryDark = array.getColor(/* index= */ 1, /* defValue= */ -1);
@@ -85,6 +87,7 @@ public class AospThemeImpl implements Theme {
     colorIconSecondary = array.getColor(/* index= */ 10, /* defValue= */ -1);
     colorTextOnUnthemedDarkBackground = array.getColor(/* index= */ 11, /* defValue= */ -1);
     colorIconOnUnthemedDarkBackground = array.getColor(/* index= */ 12, /* defValue= */ -1);
+    colorCallNotificationBackground = array.getColor(/* index= */ 13, /* defValue= */ -1);
     array.recycle();
   }
 
@@ -173,5 +176,11 @@ public class AospThemeImpl implements Theme {
   public @ColorInt int getColorIconOnUnthemedDarkBackground() {
     Assert.checkArgument(colorIconOnUnthemedDarkBackground != -1);
     return colorIconOnUnthemedDarkBackground;
+  }
+
+  @Override
+  public @ColorInt int getColorCallNotificationBackground() {
+    Assert.checkArgument(colorCallNotificationBackground != -1);
+    return colorCallNotificationBackground;
   }
 }
