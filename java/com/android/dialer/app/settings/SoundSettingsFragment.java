@@ -85,6 +85,7 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getPreferenceManager().setStorageDeviceProtected();
 
     addPreferencesFromResource(R.xml.sound_settings);
 
