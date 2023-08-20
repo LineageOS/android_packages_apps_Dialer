@@ -58,8 +58,8 @@
     <item name="android:textColorHint">@color/google_grey_600</item>
 
     <!-- These will be automatically used to color most Appcompat/Material widgets. -->
-    <item name="android:colorPrimary">@color/dialer_theme_color</item>
-    <item name="colorPrimary">@color/dialer_theme_color</item>
+    <item name="android:colorPrimary">@color/dialer_primary_color</item>
+    <item name="colorPrimary">@color/dialer_primary_color</item>
     <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="android:colorAccent">@color/dialer_theme_color</item>

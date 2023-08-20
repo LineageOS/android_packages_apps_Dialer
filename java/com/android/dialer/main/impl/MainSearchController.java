@@ -72,7 +72,6 @@ import java.util.List;
 public class MainSearchController implements SearchBarListener {
 
   private static final String KEY_IS_FAB_HIDDEN = "is_fab_hidden";
-  private static final String KEY_TOOLBAR_SHADOW_VISIBILITY = "toolbar_shadow_visibility";
   private static final String KEY_IS_TOOLBAR_EXPANDED = "is_toolbar_expanded";
   private static final String KEY_IS_TOOLBAR_SLIDE_UP = "is_toolbar_slide_up";
 
@@ -83,7 +82,6 @@ public class MainSearchController implements SearchBarListener {
   private final BottomNavBar bottomNav;
   private final FloatingActionButton fab;
   private final MainToolbar toolbar;
-  private final View toolbarShadow;
 
   /** View located underneath the toolbar that needs to animate with it. */
   private final View fragmentContainer;
@@ -107,13 +105,11 @@ public class MainSearchController implements SearchBarListener {
       BottomNavBar bottomNav,
       FloatingActionButton fab,
       MainToolbar toolbar,
-      View toolbarShadow,
       View fragmentContainer) {
     this.activity = activity;
     this.bottomNav = bottomNav;
     this.fab = fab;
     this.toolbar = toolbar;
-    this.toolbarShadow = toolbarShadow;
     this.fragmentContainer = fragmentContainer;
 
     dialpadFragment =
@@ -152,7 +148,6 @@ public class MainSearchController implements SearchBarListener {
     fab.hide();
     toolbar.slideUp(animate, fragmentContainer);
     toolbar.expand(animate, Optional.absent(), /* requestFocus */ false);
-    toolbarShadow.setVisibility(View.VISIBLE);
 
     activity.setTitle(R.string.dialpad_activity_title);
 
@@ -324,7 +319,6 @@ public class MainSearchController implements SearchBarListener {
     }
     showBottomNav();
     toolbar.collapse(animate);
-    toolbarShadow.setVisibility(View.GONE);
     activity.getFragmentManager().beginTransaction().hide(searchFragment).commit();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
@@ -388,7 +382,6 @@ public class MainSearchController implements SearchBarListener {
     fab.hide();
     toolbar.expand(/* animate=*/ true, query, /* requestFocus */ true);
     toolbar.showKeyboard();
-    toolbarShadow.setVisibility(View.VISIBLE);
     hideBottomNav();
 
     FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
@@ -515,13 +508,11 @@ public class MainSearchController implements SearchBarListener {
 
   public void onSaveInstanceState(Bundle bundle) {
     bundle.putBoolean(KEY_IS_FAB_HIDDEN, !fab.isShown());
-    bundle.putInt(KEY_TOOLBAR_SHADOW_VISIBILITY, toolbarShadow.getVisibility());
     bundle.putBoolean(KEY_IS_TOOLBAR_EXPANDED, toolbar.isExpanded());
     bundle.putBoolean(KEY_IS_TOOLBAR_SLIDE_UP, toolbar.isSlideUp());
   }
 
   public void onRestoreInstanceState(Bundle savedInstanceState) {
-    toolbarShadow.setVisibility(savedInstanceState.getInt(KEY_TOOLBAR_SHADOW_VISIBILITY));
     if (savedInstanceState.getBoolean(KEY_IS_FAB_HIDDEN, false)) {
       fab.hide();
     }
