@@ -235,7 +235,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     builder.setSmallIcon(R.drawable.quantum_ic_call_vd_theme_24);
     builder.setContentTitle(info.getContentTitle());
     builder.setLargeIcon(info.getLargeIcon());
-    builder.setColor(ThemeComponent.get(context).theme().getColorPrimary());
+    builder.setColor(ThemeComponent.get(context).theme().getColorCallNotificationBackground());
     builder.addPerson(info.getPersonReference());
     builder.setChannelId(NotificationChannelId.DEFAULT);
 
@@ -269,7 +269,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
      */
     Notification.Builder publicBuilder = new Notification.Builder(context);
     publicBuilder.setSmallIcon(R.drawable.quantum_ic_call_vd_theme_24);
-    publicBuilder.setColor(ThemeComponent.get(context).theme().getColorPrimary());
+    publicBuilder.setColor(ThemeComponent.get(context).theme().getColorCallNotificationBackground());
     publicBuilder.setChannelId(NotificationChannelId.DEFAULT);
 
     builder.setPublicVersion(publicBuilder.build());

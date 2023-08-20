@@ -46,7 +46,7 @@
   <!-- Text style for tabs. -->
   <style name="DialtactsActionBarTabTextStyle"
     parent="android:style/Widget.Material.Light.ActionBar.TabText">
-    <item name="android:textColor">?colorTextOnUnthemedDarkBackground</item>
+    <item name="android:textColor">@color/tab_text</item>
     <item name="android:textSize">@dimen/tab_text_size</item>
     <item name="android:fontFamily">"sans-serif-medium"</item>
   </style>

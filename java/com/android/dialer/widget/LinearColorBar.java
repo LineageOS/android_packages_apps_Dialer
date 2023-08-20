@@ -45,14 +45,9 @@ public class LinearColorBar extends LinearLayout {
 
   final Rect mRect = new Rect();
   final Paint mPaint = new Paint();
+  final Path mClipPath = new Path();
 
-  int mLastInterestingLeft, mLastInterestingRight;
   int mLineWidth;
-
-  final Path mColorPath = new Path();
-  final Path mEdgePath = new Path();
-  final Paint mColorGradientPaint = new Paint();
-  final Paint mEdgeGradientPaint = new Paint();
 
   public LinearColorBar(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -87,13 +82,6 @@ public class LinearColorBar extends LinearLayout {
     a.recycle();
 
     mPaint.setStyle(Paint.Style.FILL);
-    mColorGradientPaint.setStyle(Paint.Style.FILL);
-    mColorGradientPaint.setAntiAlias(true);
-    mEdgeGradientPaint.setStyle(Paint.Style.STROKE);
-    mLineWidth = getResources().getDisplayMetrics().densityDpi >= DisplayMetrics.DENSITY_HIGH
-        ? 2 : 1;
-    mEdgeGradientPaint.setStrokeWidth(mLineWidth);
-    mEdgeGradientPaint.setAntiAlias(true);
   }
 
   public void setRatios(float blue, float green, float red, float orange) {
@@ -104,22 +92,16 @@ public class LinearColorBar extends LinearLayout {
     invalidate();
   }
 
-  private void updateIndicator() {
+  @Override
+  protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    super.onSizeChanged(w, h, oldw, oldh);
+
     int off = Math.max(0, getPaddingTop() - getPaddingBottom());
     mRect.top = off;
     mRect.bottom = getHeight();
 
-    mColorGradientPaint.setShader(new LinearGradient(
-        0, 0, 0, off - 2, mBackgroundColor & 0xffffff,
-        mBackgroundColor, Shader.TileMode.CLAMP));
-    mEdgeGradientPaint.setShader(new LinearGradient(
-        0, 0, 0, off / 2, 0x00a0a0a0, 0xffa0a0a0, Shader.TileMode.CLAMP));
-  }
-
-  @Override
-  protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-    super.onSizeChanged(w, h, oldw, oldh);
-    updateIndicator();
+    mClipPath.reset();
+    mClipPath.addRoundRect(0, 0, w, h, h / 2, h / 2, Path.Direction.CW);
   }
 
   @Override
@@ -135,38 +117,8 @@ public class LinearColorBar extends LinearLayout {
     int right3 = right2 + (int) (width * mThirdRatio);
     int right4 = right3 + (int) (width * mFourthRatio);
 
-    int indicatorLeft = right4;
-    int indicatorRight = width;
-
-    if (mLastInterestingLeft != indicatorLeft || mLastInterestingRight != indicatorRight) {
-      mColorPath.reset();
-      mEdgePath.reset();
-      if (indicatorLeft < indicatorRight) {
-        final int midTopY = mRect.top;
-        final int midBottomY = 0;
-        final int xoff = 2;
-        mColorPath.moveTo(indicatorLeft, mRect.top);
-        mColorPath.cubicTo(indicatorLeft, midBottomY, -xoff, midTopY, -xoff, 0);
-        mColorPath.lineTo(width + xoff - 1, 0);
-        mColorPath.cubicTo(width + xoff - 1, midTopY,
-            indicatorRight, midBottomY, indicatorRight, mRect.top);
-        mColorPath.close();
-        final float lineOffset = mLineWidth + .5f;
-        mEdgePath.moveTo(-xoff + lineOffset, 0);
-        mEdgePath.cubicTo(-xoff + lineOffset, midTopY,
-            indicatorLeft + lineOffset, midBottomY, indicatorLeft + lineOffset, mRect.top);
-        mEdgePath.moveTo(width + xoff - 1 - lineOffset, 0);
-        mEdgePath.cubicTo(width + xoff - 1 - lineOffset, midTopY,
-            indicatorRight - lineOffset, midBottomY, indicatorRight - lineOffset, mRect.top);
-      }
-      mLastInterestingLeft = indicatorLeft;
-      mLastInterestingRight = indicatorRight;
-    }
-
-    if (!mEdgePath.isEmpty()) {
-      canvas.drawPath(mEdgePath, mEdgeGradientPaint);
-      canvas.drawPath(mColorPath, mColorGradientPaint);
-    }
+    int saveCount = canvas.save();
+    canvas.clipPath(mClipPath);
 
     if (left < right) {
       mRect.left = left;
@@ -217,5 +169,7 @@ public class LinearColorBar extends LinearLayout {
       mPaint.setColor(mBackgroundColor);
       canvas.drawRect(mRect, mPaint);
     }
+
+    canvas.restoreToCount(saveCount);
   }
 }

@@ -26,7 +26,7 @@
   </item>
   <item>
     <shape>
-      <solid android:color="?android:attr/colorPrimary"/>
+      <solid android:color="?android:attr/colorAccent"/>
       <corners android:radius="28dp"/>
     </shape>
   </item>

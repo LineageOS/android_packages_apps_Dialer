@@ -94,7 +94,7 @@ public class ReportDialogFragment extends DialogFragment {
   }
 
   private static void onShow(Context context, AlertDialog dialog) {
-    int buttonTextColor = ThemeComponent.get(context).theme().getColorPrimary();
+    int buttonTextColor = ThemeComponent.get(context).theme().getColorAccent();
     dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(buttonTextColor);
     dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(buttonTextColor);
   }
