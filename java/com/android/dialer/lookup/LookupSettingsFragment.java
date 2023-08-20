@@ -20,14 +20,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.ListPreference;
-import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 
 import com.android.dialer.R;
+import com.android.dialer.app.settings.DialerPreferenceFragment;
 
 import java.util.Arrays;
 
-public class LookupSettingsFragment extends PreferenceFragment
+public class LookupSettingsFragment extends DialerPreferenceFragment
     implements Preference.OnPreferenceChangeListener {
 
   private static final String KEY_ENABLE_FORWARD_LOOKUP = "enable_forward_lookup";

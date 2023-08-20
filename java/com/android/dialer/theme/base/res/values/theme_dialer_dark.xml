@@ -41,11 +41,11 @@
     <item name="colorPrimary">@color/dialer_dark_theme_color</item>
     <item name="android:colorPrimaryDark">@color/dialer_dark_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_dark_theme_color_dark</item>
-    <item name="android:colorAccent">@color/dialer_dark_secondary_color</item>
-    <item name="colorAccent">@color/dialer_dark_secondary_color</item>
+    <item name="android:colorAccent">@color/dialer_dark_theme_color</item>
+    <item name="colorAccent">@color/dialer_dark_theme_color</item>
 
     <!-- Used to automatically style check/selected checkbox, switches and radio buttons -->
-    <item name="colorControlActivated">?android:attr/colorPrimary</item>
+    <item name="colorControlActivated">?android:attr/colorAccent</item>
 
     <!-- Dialer specific attributes. -->
     <item name="colorIcon">?android:attr/textColorSecondary</item>
@@ -53,5 +53,6 @@
     <item name="colorTextOnUnthemedDarkBackground">@*android:color/system_neutral1_0</item>
     <item name="colorIconOnUnthemedDarkBackground">@*android:color/system_neutral1_0</item>
     <item name="colorPrimary20pct">@color/dialer_dark_theme_color_20pct</item>
+    <item name="colorCallNotificationBackground">@*android:color/system_accent2_700</item>
   </style>
 </resources>

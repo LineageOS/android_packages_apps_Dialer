@@ -249,9 +249,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             activity, activity.getContentResolver(), bottomNav, toolbar, bottomNavTabListener);
     bottomNav.addOnTabSelectedListener(callLogFragmentListener);
 
-    searchController =
-        getNewMainSearchController(
-            bottomNav, fab, toolbar, activity.findViewById(R.id.toolbar_shadow), snackbarContainer);
+    searchController = getNewMainSearchController(bottomNav, fab, toolbar, snackbarContainer);
     toolbar.setSearchBarListener(searchController);
 
     onDialpadQueryChangedListener = getNewOnDialpadQueryChangedListener(searchController);
@@ -532,10 +530,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       BottomNavBar bottomNavBar,
       FloatingActionButton fab,
       MainToolbar mainToolbar,
-      View toolbarShadow,
       View fragmentContainer) {
     return new MainSearchController(
-        activity, bottomNavBar, fab, mainToolbar, toolbarShadow, fragmentContainer);
+        activity, bottomNavBar, fab, mainToolbar, fragmentContainer);
   }
 
   public MainOnDialpadQueryChangedListener getNewOnDialpadQueryChangedListener(
