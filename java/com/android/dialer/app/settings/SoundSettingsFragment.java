@@ -22,14 +22,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.RingtoneManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
@@ -40,7 +38,7 @@ import com.android.dialer.app.R;
 import com.android.dialer.callrecord.impl.CallRecorderService;
 import com.android.dialer.util.SettingsUtil;
 
-public class SoundSettingsFragment extends PreferenceFragment
+public class SoundSettingsFragment extends DialerPreferenceFragment
     implements Preference.OnPreferenceChangeListener {
 
   private static final int NO_DTMF_TONE = 0;
