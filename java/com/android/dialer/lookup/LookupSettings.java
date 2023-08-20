@@ -45,7 +45,8 @@ public final class LookupSettings {
   }
 
   private static SharedPreferences getSharedPreferences(Context context) {
-    return context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+    return context.createDeviceProtectedStorageContext()
+            .getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
   }
 
   public static boolean isForwardLookupEnabled(Context context) {
