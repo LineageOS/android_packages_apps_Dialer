@@ -715,6 +715,7 @@ public class DialpadFragment extends Fragment
     }
     floatingActionButtonController.changeIcon(
         getContext(), iconId, res.getString(R.string.description_dial_button));
+    floatingActionButtonController.changeIconColor(getContext(), R.color.dialer_call_icon_color);
 
     // if the mToneGenerator creation fails, just continue without it.  It is
     // a local audio signal, and is not as important as the dtmf tone itself.

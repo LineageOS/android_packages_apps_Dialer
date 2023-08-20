@@ -28,7 +28,7 @@
       android:layout_gravity="top"
       android:elevation="@dimen/tab_elevation"
       android:orientation="horizontal"
-      android:textAllCaps="true"/>
+      android:textAllCaps="false"/>
   <android.support.v4.view.ViewPager
       android:id="@+id/call_log_pager"
       android:layout_width="match_parent"

@@ -314,7 +314,7 @@ public class StatusBarNotifier
     Notification.Builder publicBuilder = new Notification.Builder(context);
     publicBuilder
         .setSmallIcon(iconResId)
-        .setColor(ThemeComponent.get(context).theme().getColorPrimary())
+        .setColor(ThemeComponent.get(context).theme().getColorCallNotificationBackground())
         // Hide work call state for the lock screen notification
         .setContentTitle(getContentString(call, ContactsUtils.USER_TYPE_CURRENT));
     setNotificationWhen(call, callState, publicBuilder);
@@ -363,7 +363,7 @@ public class StatusBarNotifier
     builder.setSmallIcon(iconResId);
     builder.setContentTitle(contentTitle);
     builder.setLargeIcon(largeIcon);
-    builder.setColor(InCallPresenter.getInstance().getThemeColorManager().getPrimaryColor());
+    builder.setColor(ThemeComponent.get(context).theme().getColorCallNotificationBackground());
 
     if (isVideoUpgradeRequest) {
       builder.setUsesChronometer(false);
