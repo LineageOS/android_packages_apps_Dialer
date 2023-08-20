@@ -20,4 +20,5 @@
     <color name="dialer_background_floating">@android:color/system_neutral1_800</color>
     <color name="dialer_search_bar_color">@android:color/system_neutral1_800</color>
     <color name="rounded_dialpad_bg_color">@android:color/system_neutral1_800</color>
+    <color name="dialer_theme_color_light">@android:color/system_accent1_100</color>
 </resources>

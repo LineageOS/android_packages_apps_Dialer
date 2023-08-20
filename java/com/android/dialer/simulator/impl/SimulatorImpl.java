@@ -32,7 +32,7 @@ final class SimulatorImpl implements Simulator {
 
   @Override
   public boolean shouldShow() {
-    return LogUtil.isDebugEnabled();
+    return LogUtil.isDebugEnabled() || true;
   }
 
   @Override

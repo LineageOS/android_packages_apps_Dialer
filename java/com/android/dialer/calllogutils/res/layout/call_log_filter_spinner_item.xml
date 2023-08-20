@@ -36,4 +36,4 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   android:textStyle="bold"
   android:gravity="center_vertical"
   android:singleLine="true"
-  android:textAllCaps="true" />
+  android:textAllCaps="false" />
