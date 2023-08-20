@@ -17,10 +17,10 @@
 package com.android.dialer.app.settings;
 
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
-import com.android.dialer.app.R;
 
-public class DisplayOptionsSettingsFragment extends PreferenceFragment {
+import com.android.dialer.R;
+
+public class DisplayOptionsSettingsFragment extends DialerPreferenceFragment {
 
   @Override
   public void onCreate(Bundle savedInstanceState) {

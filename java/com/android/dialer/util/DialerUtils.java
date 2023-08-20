@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.telecom.TelecomManager;
@@ -31,6 +32,11 @@ import android.text.TextDirectionHeuristics;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
+
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.Iterator;
@@ -195,6 +201,15 @@ public class DialerUtils {
         (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
     if (imm != null) {
       imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+  }
+
+  public static @ColorInt int resolveColor(Context context, @AttrRes int styledAttributeId) {
+    TypedArray a = context.obtainStyledAttributes(new int[] {styledAttributeId});
+    try {
+      return a.getColor(0, 0);
+    } finally {
+      a.recycle();
     }
   }
 }
