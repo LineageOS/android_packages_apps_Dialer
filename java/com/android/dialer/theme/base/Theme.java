@@ -75,4 +75,7 @@ public interface Theme {
 
   @ColorInt
   int getColorIconOnUnthemedDarkBackground();
+
+  @ColorInt
+  int getColorCallNotificationBackground();
 }

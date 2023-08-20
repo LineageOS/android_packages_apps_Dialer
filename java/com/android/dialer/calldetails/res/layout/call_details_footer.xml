@@ -41,6 +41,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:drawableStart="@drawable/quantum_ic_edit_vd_theme_24"
+      android:drawableTint="?colorIcon"
       android:tint="?colorIcon"
       android:text="@string/call_details_edit_number"/>
 
@@ -60,6 +61,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:drawableStart="@drawable/quantum_ic_delete_vd_theme_24"
+      android:drawableTint="?colorIcon"
       android:tint="?colorIcon"
       android:text="@string/delete"/>
 </LinearLayout>
