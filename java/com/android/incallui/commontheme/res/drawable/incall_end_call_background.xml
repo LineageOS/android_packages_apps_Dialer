@@ -4,7 +4,7 @@
   <item>
     <shape
       android:shape="oval">
-      <solid android:color="#FFDF0000"/>
+      <solid android:color="@color/dialer_end_call_button_color"/>
     </shape>
   </item>
 </ripple>

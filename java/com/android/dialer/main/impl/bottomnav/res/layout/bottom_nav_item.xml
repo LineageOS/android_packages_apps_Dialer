@@ -16,24 +16,41 @@
   -->
 <com.android.dialer.main.impl.bottomnav.BottomNavItem
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:minWidth="80dp"
     android:minHeight="56dp"
-    android:gravity="center"
-    android:background="?android:attr/selectableItemBackgroundBorderless">
+    android:gravity="center">
 
   <FrameLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content">
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp">
+
+    <View
+        android:id="@+id/active_indicator"
+        android:layout_width="64dp"
+        android:layout_height="32dp"
+        android:background="@drawable/pill"
+        android:gravity="center"
+        android:visibility="visible"/>
+
     <ImageView
         android:id="@+id/bottom_nav_item_image"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_gravity="center"
+        tools:src="@drawable/quantum_ic_star_vd_theme_24"/>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/notification_badge"
@@ -61,5 +78,6 @@
       android:layout_marginBottom="16dp"
       android:gravity="center_horizontal"
       android:textSize="12sp"
-      style="@style/Dialer.TextAppearance.Secondary"/>
+      style="@style/Dialer.TextAppearance.OVERLINE"
+      android:textColor="?android:attr/textColorPrimary"/>
 </com.android.dialer.main.impl.bottomnav.BottomNavItem>

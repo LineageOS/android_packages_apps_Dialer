@@ -28,14 +28,14 @@
         android:layout_height="wrap_content"
         android:gravity="top"
         android:textSize="@dimen/toolbar_title_text_size"
-        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textColor="?android:attr/textColorPrimary"
         style="@style/Dialer.TextAppearance.Header2"/>
 
     <com.android.dialer.widget.BidiTextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textColor="?android:attr/textColorPrimary"
         android:visibility="gone"
         style="@style/Dialer.TextAppearance.Secondary.Ellipsize"/>
   </LinearLayout>
