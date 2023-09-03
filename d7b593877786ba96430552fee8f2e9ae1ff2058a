@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9248de4_616e347a",
+        "filename": "java/com/android/dialer/app/settings/DialerSettingsActivity.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-09-03T18:18:50Z",
+      "side": 0,
+      "message": "do we want to hide it?",
+      "range": {
+        "startLine": 231,
+        "startChar": 17,
+        "endLine": 231,
+        "endChar": 26
+      },
+      "revId": "d7b593877786ba96430552fee8f2e9ae1ff2058a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
