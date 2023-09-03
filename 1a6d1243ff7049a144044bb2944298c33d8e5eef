@@ -16,6 +16,24 @@
       "message": "@Nick: do you know if this clobbers the old prefs?",
       "revId": "1a6d1243ff7049a144044bb2944298c33d8e5eef",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0349844_93e32922",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 24262
+      },
+      "writtenOn": "2023-09-03T19:14:44Z",
+      "side": 1,
+      "message": "it does, but i figured it wasn\u0027t worth the migration code",
+      "parentUuid": "49d2a1ef_a7ff02eb",
+      "revId": "1a6d1243ff7049a144044bb2944298c33d8e5eef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
