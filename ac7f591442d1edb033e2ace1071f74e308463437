@@ -16,6 +16,29 @@
       "message": "If the user manually picked google they\u0027ll have the provider set to \"Google\"\nThen any check after that will fail.\nYou can fix that by dropping the provider checks, or make a migration attempt if you see Google :)",
       "revId": "ac7f591442d1edb033e2ace1071f74e308463437",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9c1b8fd_9af5b0bf",
+        "filename": "java/com/android/dialer/lookup/LookupSettings.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-09-03T19:20:37Z",
+      "side": 1,
+      "message": "change to forward_lookup_provider2",
+      "range": {
+        "startLine": 48,
+        "startChar": 57,
+        "endLine": 48,
+        "endChar": 80
+      },
+      "revId": "ac7f591442d1edb033e2ace1071f74e308463437",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
