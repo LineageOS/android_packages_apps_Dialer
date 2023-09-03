@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00369986_f7fd96f2",
+        "filename": "java/com/android/dialer/main/impl/DefaultDialerActivity.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-09-03T19:01:41Z",
+      "side": 1,
+      "message": "license",
+      "revId": "fde117b778f2db57183f2e005774d9fa36acb2e0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32757fea_c5d011b9",
+        "filename": "java/com/android/dialer/main/impl/res/layout/default_dialer_view.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-09-03T19:01:41Z",
+      "side": 1,
+      "message": "license",
+      "revId": "fde117b778f2db57183f2e005774d9fa36acb2e0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
