@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11e2509b_d56f489a",
+        "filename": "assets/quantum/res/drawable/quantum_ic_delete_vd_theme_24.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-09-03T18:11:28Z",
+      "side": 1,
+      "message": "unix line endings, was gonna happen at some point anyway.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 9
+      },
+      "revId": "95efabc50ecd691e2ee054d9544d3f645c61114d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}

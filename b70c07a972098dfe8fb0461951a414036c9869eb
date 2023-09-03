@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64d7d3d_43f34153",
+        "filename": "java/com/android/dialer/theme/common/res/values/styles.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-09-03T18:11:28Z",
+      "side": 0,
+      "message": "same as above note",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 12
+      },
+      "revId": "b70c07a972098dfe8fb0461951a414036c9869eb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
