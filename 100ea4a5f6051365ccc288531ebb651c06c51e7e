@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f00be0e3_00adf365",
+        "filename": "java/com/android/dialer/app/settings/DialerPreferenceFragment.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-09-03T10:36:21Z",
+      "side": 1,
+      "message": "license",
+      "revId": "100ea4a5f6051365ccc288531ebb651c06c51e7e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
