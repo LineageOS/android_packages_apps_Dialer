@@ -22,6 +22,30 @@
       },
       "revId": "d7b593877786ba96430552fee8f2e9ae1ff2058a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "934cd87b_d7b3c940",
+        "filename": "java/com/android/dialer/app/settings/DialerSettingsActivity.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-09-03T18:25:41Z",
+      "side": 0,
+      "message": "hiding does the same job but what use does the code have then? so i removed it completely",
+      "parentUuid": "f9248de4_616e347a",
+      "range": {
+        "startLine": 231,
+        "startChar": 17,
+        "endLine": 231,
+        "endChar": 26
+      },
+      "revId": "d7b593877786ba96430552fee8f2e9ae1ff2058a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
