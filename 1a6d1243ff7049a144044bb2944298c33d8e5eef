@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d2a1ef_a7ff02eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-09-03T19:09:51Z",
+      "side": 1,
+      "message": "@Nick: do you know if this clobbers the old prefs?",
+      "revId": "1a6d1243ff7049a144044bb2944298c33d8e5eef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
