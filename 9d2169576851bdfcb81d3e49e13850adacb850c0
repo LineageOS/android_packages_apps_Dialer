@@ -33,6 +33,24 @@
       "message": "Translation of this line does not work\n\nOriginal being displayed:\nhttps://github.com/LineageOS/android_packages_apps_Dialer/blob/lineage-20.0/java/com/android/dialer/app/res/values/strings.xml#L158\nTranslation that is not displayed:\nhttps://github.com/LineageOS/android_packages_apps_Dialer/blob/lineage-20.0/java/com/android/dialer/app/res/values-ru/strings.xml#L41",
       "revId": "9d2169576851bdfcb81d3e49e13850adacb850c0",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e1ab423_fbcbaaa7",
+        "filename": "java/com/android/dialer/app/AndroidManifest.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-09-03T16:13:31Z",
+      "side": 1,
+      "message": "Wrong place of failure, fixed it on proper commit",
+      "parentUuid": "d0a44e4c_b20f7cdb",
+      "revId": "9d2169576851bdfcb81d3e49e13850adacb850c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
