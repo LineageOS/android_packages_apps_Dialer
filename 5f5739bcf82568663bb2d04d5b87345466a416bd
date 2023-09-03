@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f27d32_c2fa9bea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-09-03T19:00:15Z",
+      "side": 1,
+      "message": "I assume the same happens here in case Auskunft was set\nMaybe add the migration in the code that gets the pref?",
+      "revId": "5f5739bcf82568663bb2d04d5b87345466a416bd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
