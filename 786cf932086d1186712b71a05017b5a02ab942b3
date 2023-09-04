@@ -41,6 +41,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5da3bd77_45b3dcb4",
+        "filename": "java/com/android/incallui/util/BluetoothUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-09-04T18:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "479bdafb_da93916f",
+      "revId": "786cf932086d1186712b71a05017b5a02ab942b3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8fd0599_ad41ea3b",
@@ -54,6 +72,24 @@
       "writtenOn": "2023-09-03T18:46:20Z",
       "side": 1,
       "message": "before it always assumed the device to be non null, and since the method calling that is createBluetoothItem we can safely assume it\u0027ll be a valid object, remove this class and use getAlias() directly",
+      "revId": "786cf932086d1186712b71a05017b5a02ab942b3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54cdb834_772fc5b2",
+        "filename": "java/com/android/incallui/util/BluetoothUtil.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-09-04T18:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8fd0599_ad41ea3b",
       "revId": "786cf932086d1186712b71a05017b5a02ab942b3",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
