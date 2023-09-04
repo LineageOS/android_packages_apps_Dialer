@@ -24,6 +24,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c311a7_ddc43a46",
+        "filename": "java/com/android/incallui/speakerbuttonlogic/SpeakerButtonInfo.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-09-04T18:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51ad3e01_873a56c7",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 22
+      },
+      "revId": "786cf932086d1186712b71a05017b5a02ab942b3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "479bdafb_da93916f",
