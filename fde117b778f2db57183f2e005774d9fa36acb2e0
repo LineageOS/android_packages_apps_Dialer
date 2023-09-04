@@ -18,6 +18,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52847afe_a85bb943",
+        "filename": "java/com/android/dialer/main/impl/DefaultDialerActivity.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-09-04T19:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00369986_f7fd96f2",
+      "revId": "fde117b778f2db57183f2e005774d9fa36acb2e0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32757fea_c5d011b9",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-03T19:01:41Z",
       "side": 1,
       "message": "license",
+      "revId": "fde117b778f2db57183f2e005774d9fa36acb2e0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3f8fa20_1ed7398a",
+        "filename": "java/com/android/dialer/main/impl/res/layout/default_dialer_view.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-09-04T19:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32757fea_c5d011b9",
       "revId": "fde117b778f2db57183f2e005774d9fa36acb2e0",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
