@@ -39,6 +39,30 @@
       },
       "revId": "ac7f591442d1edb033e2ace1071f74e308463437",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ec5f0e5_392893c0",
+        "filename": "java/com/android/dialer/lookup/LookupSettings.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-09-04T18:31:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9c1b8fd_9af5b0bf",
+      "range": {
+        "startLine": 48,
+        "startChar": 57,
+        "endLine": 48,
+        "endChar": 80
+      },
+      "revId": "ac7f591442d1edb033e2ace1071f74e308463437",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
