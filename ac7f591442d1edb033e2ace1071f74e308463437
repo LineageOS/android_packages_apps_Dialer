@@ -18,6 +18,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a43dfdb9_28359eb0",
+        "filename": "java/com/android/dialer/lookup/ForwardLookup.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-09-04T19:13:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4afbc3e1_688ddd1e",
+      "revId": "ac7f591442d1edb033e2ace1071f74e308463437",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9c1b8fd_9af5b0bf",
