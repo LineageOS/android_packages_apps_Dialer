@@ -82,38 +82,6 @@
     android:protectionLevel="signature" />
   <uses-permission android:name="com.android.dialer.permission.DIALER_ORIGIN"/>
 
-  <!-- Permissions needed for badger count showing on launch icon. -->
-
-  <!--for Samsung-->
-  <uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
-  <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
-
-  <!--for htc-->
-  <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
-  <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
-
-  <!--for sony-->
-  <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
-  <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE"/>
-
-  <!--for apex-->
-  <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
-
-  <!--for solid-->
-  <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE"/>
-
-  <!--for huawei-->
-  <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
-  <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS"/>
-  <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS"/>
-
-  <!--for ZUK-->
-  <uses-permission android:name="android.permission.READ_APP_BADGE"/>
-
-  <!--for OPPO-->
-  <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS"/>
-  <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS"/>
-
   <uses-permission android:name="android.permission.RECORD_AUDIO" />
   <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
 
