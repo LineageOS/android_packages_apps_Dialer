@@ -50,7 +50,6 @@ include ${LOCAL_PATH}/packages.mk
 LOCAL_AAPT_FLAGS := $(addprefix --extra-packages , $(LOCAL_AAPT_FLAGS))
 LOCAL_AAPT_FLAGS += \
 	--auto-add-overlay \
-	--extra-packages me.leolin.shortcutbadger \
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-common \
@@ -63,7 +62,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-j2objc-annotations-target \
 	dialer-javax-annotation-api-target \
 	dialer-javax-inject-target \
-	dialer-libshortcutbadger-target \
 	dialer-mime4j-core-target \
 	dialer-mime4j-dom-target \
 	dialer-guava-target \
@@ -249,19 +247,6 @@ LOCAL_LICENSE_CONDITIONS := notice
 LOCAL_NOTICE_FILE := $(LOCAL_PATH)/LICENSE
 LOCAL_SDK_VERSION := current
 LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar
-LOCAL_UNINSTALLABLE_MODULE := true
-
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-
-LOCAL_MODULE_CLASS := JAVA_LIBRARIES
-LOCAL_MODULE := dialer-libshortcutbadger-target
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0
-LOCAL_LICENSE_CONDITIONS := notice
-LOCAL_NOTICE_FILE := $(LOCAL_PATH)/LICENSE
-LOCAL_SDK_VERSION := current
-LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/me/leolin/ShortcutBadger/1.1.13/ShortcutBadger-1.1.13.jar
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)
