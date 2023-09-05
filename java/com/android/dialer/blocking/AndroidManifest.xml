@@ -15,6 +15,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.android.dialer.blocking">
 
-  <application />
+  <application>
+    <!-- Provide this since upgrade path seems to be messy; Only a stub class exists there -->
+    <provider
+        android:authorities="com.android.dialer.blocking.filterednumberprovider"
+        android:exported="false"
+        android:multiprocess="false"
+        android:name="com.android.dialer.blocking.FilteredNumberProvider"/>
+  </application>
 
 </manifest>
