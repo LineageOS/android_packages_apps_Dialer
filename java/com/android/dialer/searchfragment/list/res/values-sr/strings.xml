@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Да бисте претражили контакте, укључите дозволе за Контакте.</string>
-  <string name="search_shortcut_create_new_contact">Направи нови контакт</string>
-  <string name="search_shortcut_add_to_contact">Додај у контакт</string>
-  <string name="search_shortcut_send_sms_message">Пошаљи SMS</string>
-  <string name="search_shortcut_make_video_call">Упути видео позив</string>
   <string name="search_shortcut_make_voice_call">Позови %1$s</string>
 </resources>

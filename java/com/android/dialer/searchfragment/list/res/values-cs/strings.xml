@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Chcete-li vyhledat kontakty, zapněte oprávnění Kontakty.</string>
-  <string name="search_shortcut_create_new_contact">Vytvořit nový kontakt</string>
-  <string name="search_shortcut_add_to_contact">Přidat ke kontaktu</string>
-  <string name="search_shortcut_send_sms_message">Odeslat SMS</string>
-  <string name="search_shortcut_make_video_call">Uskutečnit videohovor</string>
   <string name="search_shortcut_make_voice_call">Zavolat na číslo %1$s</string>
 </resources>

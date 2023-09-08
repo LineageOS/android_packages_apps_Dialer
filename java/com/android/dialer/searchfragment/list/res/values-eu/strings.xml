@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Kontaktuak bilatzeko, eman kontaktuak atzitzeko baimena.</string>
-  <string name="search_shortcut_create_new_contact">Sortu kontaktua</string>
-  <string name="search_shortcut_add_to_contact">Gehitu kontaktuetan</string>
-  <string name="search_shortcut_send_sms_message">Bidali SMS mezua</string>
-  <string name="search_shortcut_make_video_call">Egin bideo-deia</string>
   <string name="search_shortcut_make_voice_call">Deitu %1$s zenbakira</string>
 </resources>

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Për të kërkuar te kontaktet, aktivizo lejet e \"Kontakteve\"</string>
-  <string name="search_shortcut_create_new_contact">Krijo një kontakt të ri</string>
-  <string name="search_shortcut_add_to_contact">Shto te një kontakt</string>
-  <string name="search_shortcut_send_sms_message">Dërgo SMS</string>
-  <string name="search_shortcut_make_video_call">Bëj një telefonatë me video</string>
   <string name="search_shortcut_make_voice_call">Telefono %1$s</string>
 </resources>

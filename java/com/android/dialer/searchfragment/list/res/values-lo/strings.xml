@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">ເພື່ອຊອກຫາລາຍຊື່ຂອງທ່ານ, ໃຫ້ອະນຸຍາດສິດການໃຊ້ລາຍຊື່ຜູ້ຕິດຕໍ່ກ່ອນ.</string>
-  <string name="search_shortcut_create_new_contact">ສ້າງລາຍຊື່ຜູ້ຕິດຕໍ່ໃໝ່</string>
-  <string name="search_shortcut_add_to_contact">ເພີ່ມ​ໃສ່​ລາຍ​ຊື່</string>
-  <string name="search_shortcut_send_sms_message">ສົ່ງ SMS</string>
-  <string name="search_shortcut_make_video_call">​ໂທ​ອອກ​ດ້ວຍ​ວິ​ດີ​ໂອ</string>
   <string name="search_shortcut_make_voice_call">ໂທຫາ %1$s</string>
 </resources>

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Kveiktu á heimildunum fyrir tengiliði til að leita að tengiliðum.</string>
-  <string name="search_shortcut_create_new_contact">Búa til nýjan tengilið</string>
-  <string name="search_shortcut_add_to_contact">Bæta við tengilið</string>
-  <string name="search_shortcut_send_sms_message">Senda SMS-skilaboð</string>
-  <string name="search_shortcut_make_video_call">Hringja myndsímtal</string>
   <string name="search_shortcut_make_voice_call">Hringja í %1$s</string>
 </resources>
