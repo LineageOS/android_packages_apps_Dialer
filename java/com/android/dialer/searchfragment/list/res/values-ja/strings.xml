@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">連絡先を検索するには、連絡先の権限を ON にしてください。</string>
-  <string name="search_shortcut_create_new_contact">新しい連絡先を作成</string>
-  <string name="search_shortcut_add_to_contact">連絡先に追加</string>
-  <string name="search_shortcut_send_sms_message">SMSを送信</string>
-  <string name="search_shortcut_make_video_call">ビデオハングアウト</string>
   <string name="search_shortcut_make_voice_call">%1$s 宛に発信</string>
 </resources>

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">برای جستجوی مخاطبینتان، مجوزهای مخاطبین را روشن کنید.</string>
-  <string name="search_shortcut_create_new_contact">ایجاد مخاطب جدید</string>
-  <string name="search_shortcut_add_to_contact">افزودن به مخاطب</string>
-  <string name="search_shortcut_send_sms_message">ارسال پیامک</string>
-  <string name="search_shortcut_make_video_call">برقراری تماس ویدئویی</string>
   <string name="search_shortcut_make_voice_call">تماس با %1$s</string>
 </resources>

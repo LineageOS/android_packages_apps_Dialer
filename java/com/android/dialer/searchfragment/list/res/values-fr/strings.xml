@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Pour effectuer une recherche dans vos contacts, activez les autorisations de l\'application Contacts.</string>
-  <string name="search_shortcut_create_new_contact">Créer un contact</string>
-  <string name="search_shortcut_add_to_contact">Ajouter à un contact</string>
-  <string name="search_shortcut_send_sms_message">Envoyer un SMS</string>
-  <string name="search_shortcut_make_video_call">Passer un appel vidéo</string>
   <string name="search_shortcut_make_voice_call">Composer le %1$s</string>
 </resources>

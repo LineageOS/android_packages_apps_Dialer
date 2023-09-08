@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Slå tilladelser til Kontaktpersoner til for at søge i dine kontaktpersoner.</string>
-  <string name="search_shortcut_create_new_contact">Opret ny kontaktperson</string>
-  <string name="search_shortcut_add_to_contact">Føj til en kontaktperson</string>
-  <string name="search_shortcut_send_sms_message">Send sms</string>
-  <string name="search_shortcut_make_video_call">Foretag videoopkald</string>
   <string name="search_shortcut_make_voice_call">Ring til %1$s</string>
 </resources>

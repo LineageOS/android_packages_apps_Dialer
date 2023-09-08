@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">عليك تشغيل أذونات جهات الاتصال للبحث عنا</string>
-  <string name="search_shortcut_create_new_contact">إنشاء جهة اتصال جديدة</string>
-  <string name="search_shortcut_add_to_contact">إضافة إلى جهة اتصال</string>
-  <string name="search_shortcut_send_sms_message">‏إرسال رسالة قصيرة SMS</string>
-  <string name="search_shortcut_make_video_call">إجراء مكالمة فيديو</string>
   <string name="search_shortcut_make_voice_call">الاتصال بالرقم %1$s</string>
 </resources>
