@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">ನಿಮ್ಮ ಸಂಪರ್ಕಗಳನ್ನು ಹುಡುಕಲು, ಸಂಪರ್ಕಗಳ ಅನುಮತಿಗಳನ್ನು ಆನ್ ಮಾಡಿ.</string>
-  <string name="search_shortcut_create_new_contact">ಹೊಸ ಸಂಪರ್ಕ ರಚಿಸು</string>
-  <string name="search_shortcut_add_to_contact">ಸಂಪರ್ಕಕ್ಕೆ ಸೇರಿಸು</string>
-  <string name="search_shortcut_send_sms_message">SMS ಕಳುಹಿಸು</string>
-  <string name="search_shortcut_make_video_call">ವೀಡಿಯೊ ಕರೆ ಮಾಡಿ</string>
   <string name="search_shortcut_make_voice_call">%1$s ಗೆ ಕರೆಮಾಡಿ</string>
 </resources>

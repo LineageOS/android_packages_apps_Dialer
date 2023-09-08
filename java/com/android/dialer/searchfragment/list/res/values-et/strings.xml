@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Kontaktide otsimiseks lülitage sisse kontaktiload.</string>
-  <string name="search_shortcut_create_new_contact">Loo uus kontakt</string>
-  <string name="search_shortcut_add_to_contact">Lisa kontaktile</string>
-  <string name="search_shortcut_send_sms_message">Saada SMS</string>
-  <string name="search_shortcut_make_video_call">Videokõne tegemine</string>
   <string name="search_shortcut_make_voice_call">Helista numbrile %1$s</string>
 </resources>

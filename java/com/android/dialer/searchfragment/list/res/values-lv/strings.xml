@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Lai meklētu savas kontaktpersonas, ieslēdziet atļauju Kontaktpersonas.</string>
-  <string name="search_shortcut_create_new_contact">Izveidot jaunu kontaktpersonu</string>
-  <string name="search_shortcut_add_to_contact">Pievienot kontaktpersonai</string>
-  <string name="search_shortcut_send_sms_message">Sūtīt īsziņu</string>
-  <string name="search_shortcut_make_video_call">Veikt videozvanu</string>
   <string name="search_shortcut_make_voice_call">Zvanīt: %1$s</string>
 </resources>

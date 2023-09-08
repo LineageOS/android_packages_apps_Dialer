@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Kad galėtumėte ieškoti kontaktų, įjunkite Kontaktų leidimus.</string>
-  <string name="search_shortcut_create_new_contact">Kurti naują kontaktą</string>
-  <string name="search_shortcut_add_to_contact">Pridėti prie kontakto</string>
-  <string name="search_shortcut_send_sms_message">Siųsti SMS</string>
-  <string name="search_shortcut_make_video_call">Atlikti vaizdo skambutį</string>
   <string name="search_shortcut_make_voice_call">Skambinti numeriu %1$s</string>
 </resources>

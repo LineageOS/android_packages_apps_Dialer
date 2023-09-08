@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">עליך להפעיל את ההרשאה \'אנשי קשר\' כדי לחפש באנשי הקשר שלך.</string>
-  <string name="search_shortcut_create_new_contact">איש קשר חדש</string>
-  <string name="search_shortcut_add_to_contact">הוסף לאיש קשר</string>
-  <string name="search_shortcut_send_sms_message">‏שלח SMS</string>
-  <string name="search_shortcut_make_video_call">בצע שיחת וידאו</string>
   <string name="search_shortcut_make_voice_call">התקשרות אל %1$s</string>
 </resources>

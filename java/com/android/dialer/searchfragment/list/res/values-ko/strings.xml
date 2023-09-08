@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">연락처를 검색하려면 연락처 권한을 사용하도록 설정하세요.</string>
-  <string name="search_shortcut_create_new_contact">새 연락처 만들기</string>
-  <string name="search_shortcut_add_to_contact">연락처에 추가</string>
-  <string name="search_shortcut_send_sms_message">SMS 보내기</string>
-  <string name="search_shortcut_make_video_call">화상 통화하기</string>
   <string name="search_shortcut_make_voice_call">%1$s(으)로 전화 걸기</string>
 </resources>

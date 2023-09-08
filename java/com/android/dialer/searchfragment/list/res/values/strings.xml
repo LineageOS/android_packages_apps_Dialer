@@ -18,20 +18,6 @@
   <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]. See 2424710404207193826 for current translation. -->
   <string name="new_permission_no_search">To search your contacts, turn on the Contacts permissions.</string>
 
-  <!-- Shortcut item used to add a number directly to a new contact from search.
-       [CHAR LIMIT=25] -->
-  <string name="search_shortcut_create_new_contact">Create new contact</string>
-
-  <!-- Shortcut item used to add a number to an existing contact directly from search.
-       [CHAR LIMIT=25] -->
-  <string name="search_shortcut_add_to_contact">Add to a contact</string>
-
-  <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_send_sms_message">Send SMS</string>
-
-  <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_make_video_call">Make video call</string>
-
   <!-- Shortcut item used to make a voice call directly from search. [CHAR LIMIT=25] -->
   <string name="search_shortcut_make_voice_call">Call <xliff:g id="phone_number">%1$s</xliff:g></string>
 </resources>

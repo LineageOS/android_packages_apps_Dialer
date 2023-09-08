@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">మీ పరిచయాలను శోధించడానికి, పరిచయాల అనుమతులను ఆన్ చేయండి.</string>
-  <string name="search_shortcut_create_new_contact">కొత్త పరిచయాన్ని సృష్టించు</string>
-  <string name="search_shortcut_add_to_contact">పరిచయానికి జోడించు</string>
-  <string name="search_shortcut_send_sms_message">SMS పంపు</string>
-  <string name="search_shortcut_make_video_call">వీడియో కాల్ చేయండి</string>
   <string name="search_shortcut_make_voice_call">%1$sకి కాల్ చేయి</string>
 </resources>

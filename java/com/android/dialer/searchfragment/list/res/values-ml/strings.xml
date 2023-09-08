@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">നിങ്ങളുടെ കോൺടാക്റ്റുകൾ തിരയുന്നതിന് കോൺടാക്റ്റുകൾക്കുള്ള അനുമതികൾ ഓണാക്കുക.</string>
-  <string name="search_shortcut_create_new_contact">പുതിയകോൺടാക്റ്റ് സൃഷ്‌ടിക്കൂ</string>
-  <string name="search_shortcut_add_to_contact">ഒരുകോൺടാക്റ്റിൽ ചേർക്കൂ</string>
-  <string name="search_shortcut_send_sms_message">SMS അയയ്ക്കുക</string>
-  <string name="search_shortcut_make_video_call">വീഡിയോ കോൾ ചെയ്യുക</string>
   <string name="search_shortcut_make_voice_call">%1$s എന്ന നമ്പറിൽ വിളിക്കുക</string>
 </resources>
