@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Харилцагчаа хайхын тулд, Харилцагчийн зөвшөөрлийг идэвхжүүлнэ үү.</string>
-  <string name="search_shortcut_create_new_contact">Шинэ хаяг үүсгэх</string>
-  <string name="search_shortcut_add_to_contact">Харилцагчийн хаягт нэмэх</string>
-  <string name="search_shortcut_send_sms_message">Мессеж илгээх</string>
-  <string name="search_shortcut_make_video_call">Видео дуудлага хийх</string>
   <string name="search_shortcut_make_voice_call">%1$s руу залгах</string>
 </resources>

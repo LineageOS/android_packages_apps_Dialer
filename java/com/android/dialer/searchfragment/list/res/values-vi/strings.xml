@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">Để tìm kiếm liên hệ của bạn, hãy bật quyền đối với Danh bạ.</string>
-  <string name="search_shortcut_create_new_contact">Tạo liên hệ mới</string>
-  <string name="search_shortcut_add_to_contact">Thêm vào liên hệ</string>
-  <string name="search_shortcut_send_sms_message">Gửi SMS</string>
-  <string name="search_shortcut_make_video_call">Gọi điện video</string>
   <string name="search_shortcut_make_voice_call">Gọi %1$s</string>
 </resources>

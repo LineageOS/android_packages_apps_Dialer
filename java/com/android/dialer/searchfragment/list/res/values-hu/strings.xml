@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="new_permission_no_search">A névjegyek kereséséhez engedélyezze a névjegyhozzáférést.</string>
-  <string name="search_shortcut_create_new_contact">Új névjegy létrehozása</string>
-  <string name="search_shortcut_add_to_contact">Hozzáadás névjegyhez</string>
-  <string name="search_shortcut_send_sms_message">SMS küldése</string>
-  <string name="search_shortcut_make_video_call">Videohívás kezdeményezése</string>
   <string name="search_shortcut_make_voice_call">%1$s hívása</string>
 </resources>
