@@ -435,8 +435,5 @@ public class ContactGridManager {
             BidiFormatter.getInstance()
                 .unicodeWrap(primaryCallState.callbackNumber(), TextDirectionHeuristics.LTR)));
     deviceNumberTextView.setVisibility(View.VISIBLE);
-    if (primaryInfo.shouldShowLocation()) {
-      deviceNumberDivider.setVisibility(View.VISIBLE);
-    }
   }
 }

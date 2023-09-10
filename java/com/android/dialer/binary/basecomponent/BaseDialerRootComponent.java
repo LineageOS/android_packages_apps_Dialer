@@ -34,7 +34,6 @@ import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.theme.base.ThemeComponent;
-import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.voicemail.VoicemailComponent;
 
 /**
@@ -43,7 +42,6 @@ import com.android.voicemail.VoicemailComponent;
  */
 public interface BaseDialerRootComponent
     extends ActiveCallsComponent.HasComponent,
-        CallLocationComponent.HasComponent,
         CallLogComponent.HasComponent,
         CallLogDatabaseComponent.HasComponent,
         CallLogUiComponent.HasComponent,
