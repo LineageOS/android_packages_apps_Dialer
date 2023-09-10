@@ -32,7 +32,6 @@ import com.android.dialer.promotion.impl.PromotionModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.storage.StorageModule;
 import com.android.dialer.theme.base.impl.AospThemeModule;
-import com.android.incallui.calllocation.stub.StubCallLocationModule;
 import com.android.voicemail.impl.VoicemailModule;
 import dagger.Component;
 import javax.inject.Singleton;
@@ -54,7 +53,6 @@ import javax.inject.Singleton;
       PromotionModule.class,
       SimulatorModule.class,
       StorageModule.class,
-      StubCallLocationModule.class,
       StubSimSuggestionModule.class,
       AospThemeModule.class,
       VoicemailModule.class,
