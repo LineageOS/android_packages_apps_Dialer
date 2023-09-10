@@ -37,10 +37,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -275,19 +273,6 @@ public class InCallFragment extends Fragment
     LogUtil.i("InCallFragment.setPrimary", primaryInfo.toString());
     setAdapterMedia(primaryInfo.multimediaData(), primaryInfo.showInCallButtonGrid());
     contactGridManager.setPrimary(primaryInfo);
-
-    if (primaryInfo.shouldShowLocation()) {
-      // Hide the avatar to make room for location
-      contactGridManager.setAvatarHidden(true);
-
-      // Need to let the dialpad move up a little further when location info is being shown
-      View dialpadView = getView().findViewById(R.id.incall_dialpad_container);
-      ViewGroup.LayoutParams params = dialpadView.getLayoutParams();
-      if (params instanceof RelativeLayout.LayoutParams) {
-        ((RelativeLayout.LayoutParams) params).removeRule(RelativeLayout.BELOW);
-      }
-      dialpadView.setLayoutParams(params);
-    }
   }
 
   private void setAdapterMedia(MultimediaData multimediaData, boolean showInCallButtonGrid) {

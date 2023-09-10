@@ -535,11 +535,6 @@ public class AnswerFragment extends Fragment
         .setContactPhoto(
             primaryInfo.photoType() == ContactPhotoType.CONTACT ? primaryInfo.photo() : null);
     updateDataFragment();
-
-    if (primaryInfo.shouldShowLocation()) {
-      // Hide the avatar to make room for location
-      contactGridManager.setAvatarHidden(true);
-    }
   }
 
   private void updateDataFragment() {

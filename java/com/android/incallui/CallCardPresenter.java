@@ -21,12 +21,10 @@ import static com.android.contacts.common.compat.CallCompat.Details.PROPERTY_ENT
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
-import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Trace;
 import android.support.v4.app.Fragment;
@@ -42,7 +40,6 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.contacts.common.ContactsUtils;
@@ -66,8 +63,6 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallListener;
 import com.android.incallui.call.state.DialerCallState;
-import com.android.incallui.calllocation.CallLocation;
-import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.InCallScreen;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
@@ -119,8 +114,6 @@ public class CallCardPresenter
   private boolean isInCallScreenReady;
   private boolean shouldSendAccessibilityEvent;
 
-  @NonNull
-  private final CallLocation callLocation;
   private final Runnable sendAccessibilityEventRunnable =
       new Runnable() {
         @Override
@@ -139,7 +132,6 @@ public class CallCardPresenter
   public CallCardPresenter(Context context) {
     LogUtil.i("CallCardPresenter.constructor", null);
     this.context = Assert.isNotNull(context).getApplicationContext();
-    callLocation = CallLocationComponent.get(this.context).getCallLocation();
   }
 
   private static boolean hasCallSubject(DialerCall call) {
@@ -186,11 +178,6 @@ public class CallCardPresenter
     InCallPresenter.getInstance().addDetailsListener(this);
     InCallPresenter.getInstance().addInCallEventListener(this);
     isInCallScreenReady = true;
-
-    // Showing the location may have been skipped if the UI wasn't ready during previous layout.
-    if (shouldShowLocation()) {
-      inCallScreen.showLocationUi(getLocationFragment());
-    }
   }
 
   @Override
@@ -206,8 +193,6 @@ public class CallCardPresenter
     if (primary != null) {
       primary.removeListener(this);
     }
-
-    callLocation.close();
 
     primary = null;
     primaryContactInfo = null;
@@ -642,7 +627,6 @@ public class CallCardPresenter
               .setIsSpam(false)
               .setIsLocalContact(false)
               .setAnsweringDisconnectsOngoingCall(false)
-              .setShouldShowLocation(shouldShowLocation())
               .setShowInCallButtonGrid(true)
               .setNumberPresentation(primary.getNumberPresentation())
               .build());
@@ -692,7 +676,6 @@ public class CallCardPresenter
               .setIsSpam(primary.isSpam())
               .setIsLocalContact(primaryContactInfo.isLocalContact())
               .setAnsweringDisconnectsOngoingCall(primary.answeringDisconnectsForegroundVideoCall())
-              .setShouldShowLocation(shouldShowLocation())
               .setContactInfoLookupKey(primaryContactInfo.lookupKey)
               .setMultimediaData(multimediaData)
               .setShowInCallButtonGrid(true)
@@ -704,7 +687,7 @@ public class CallCardPresenter
     }
 
     if (isInCallScreenReady) {
-      inCallScreen.showLocationUi(getLocationFragment());
+      inCallScreen.showLocationUi(null);
     } else {
       LogUtil.i("CallCardPresenter.updatePrimaryDisplayInfo", "UI not ready, not showing location");
     }
@@ -719,88 +702,6 @@ public class CallCardPresenter
       return true;
     }
     return false;
-  }
-
-  private Fragment getLocationFragment() {
-    if (!shouldShowLocation()) {
-      return null;
-    }
-    LogUtil.i("CallCardPresenter.getLocationFragment", "returning location fragment");
-    return callLocation.getLocationFragment(context);
-  }
-
-  private boolean shouldShowLocation() {
-    if (!isPotentialEmergencyCall()) {
-      LogUtil.i("CallCardPresenter.getLocationFragment", "shouldn't show location");
-      return false;
-    }
-    if (!hasLocationPermission()) {
-      LogUtil.i("CallCardPresenter.getLocationFragment", "no location permission.");
-      return false;
-    }
-    if (isBatteryTooLowForEmergencyLocation()) {
-      LogUtil.i("CallCardPresenter.getLocationFragment", "low battery.");
-      return false;
-    }
-    if (inCallScreen.getInCallScreenFragment().getActivity().isInMultiWindowMode()) {
-      LogUtil.i("CallCardPresenter.getLocationFragment", "in multi-window mode");
-      return false;
-    }
-    if (primary.isVideoCall()) {
-      LogUtil.i("CallCardPresenter.getLocationFragment", "emergency video calls not supported");
-      return false;
-    }
-    if (!callLocation.canGetLocation(context)) {
-      LogUtil.i("CallCardPresenter.getLocationFragment", "can't get current location");
-      return false;
-    }
-    return true;
-  }
-
-  private boolean isPotentialEmergencyCall() {
-    if (isOutgoingEmergencyCall(primary)) {
-      LogUtil.i("CallCardPresenter.shouldShowLocation", "new emergency call");
-      return true;
-    } else if (isIncomingEmergencyCall(primary)) {
-      LogUtil.i("CallCardPresenter.shouldShowLocation", "potential emergency callback");
-      return true;
-    } else if (isIncomingEmergencyCall(secondary)) {
-      LogUtil.i("CallCardPresenter.shouldShowLocation", "has potential emergency callback");
-      return true;
-    }
-    return false;
-  }
-
-  private static boolean isOutgoingEmergencyCall(@Nullable DialerCall call) {
-    return call != null && !call.isIncoming() && call.isEmergencyCall();
-  }
-
-  private static boolean isIncomingEmergencyCall(@Nullable DialerCall call) {
-    return call != null && call.isIncoming() && call.isPotentialEmergencyCallback();
-  }
-
-  private boolean hasLocationPermission() {
-    return ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-        == PackageManager.PERMISSION_GRANTED;
-  }
-
-  private boolean isBatteryTooLowForEmergencyLocation() {
-    Intent batteryStatus =
-        context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-    int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-    if (status == BatteryManager.BATTERY_STATUS_CHARGING
-        || status == BatteryManager.BATTERY_STATUS_FULL) {
-      // Plugged in or full battery
-      return false;
-    }
-    int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-    int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-    float batteryPercent = (100f * level) / scale;
-    long threshold = CONFIG_MIN_BATTERY_PERCENT_FOR_EMERGENCY_LOCATION_DEFAULT;
-    LogUtil.i(
-        "CallCardPresenter.isBatteryTooLowForEmergencyLocation",
-        "percent charged: " + batteryPercent + ", min required charge: " + threshold);
-    return batteryPercent < threshold;
   }
 
   private void updateSecondaryDisplayInfo() {

@@ -64,7 +64,6 @@ public abstract class PrimaryInfo {
 
   public abstract boolean answeringDisconnectsOngoingCall();
 
-  public abstract boolean shouldShowLocation();
   // Used for consistent LetterTile coloring.
   @Nullable
   public abstract String contactInfoLookupKey();
@@ -112,8 +111,6 @@ public abstract class PrimaryInfo {
     public abstract Builder setAnsweringDisconnectsOngoingCall(
         boolean answeringDisconnectsOngoingCall);
 
-    public abstract Builder setShouldShowLocation(boolean shouldShowLocation);
-
     public abstract Builder setContactInfoLookupKey(String contactInfoLookupKey);
 
     public abstract Builder setMultimediaData(MultimediaData multimediaData);
@@ -135,7 +132,6 @@ public abstract class PrimaryInfo {
         .setIsSpam(false)
         .setIsLocalContact(false)
         .setAnsweringDisconnectsOngoingCall(false)
-        .setShouldShowLocation(false)
         .setShowInCallButtonGrid(true)
         .setNumberPresentation(-1)
         .build();
