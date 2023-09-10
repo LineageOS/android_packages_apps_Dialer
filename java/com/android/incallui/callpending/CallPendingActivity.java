@@ -178,7 +178,6 @@ public class CallPendingActivity extends FragmentActivity
         .setIsSpam(false)
         .setIsLocalContact(true)
         .setAnsweringDisconnectsOngoingCall(false)
-        .setShouldShowLocation(false)
         .setContactInfoLookupKey(getLookupKey())
         .setMultimediaData(null)
         .setShowInCallButtonGrid(false)
