@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Petear opnimme</string>
     <string name="onscreenCallRecordingText">Petear oan it opnimmen - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Opnimmen stopje</string>
-    <string name="recording_time_text">Opname dwaande</string>
     <string name="recording_warning_title">Petearopname ynskeakelje?</string>
     <string name="recording_warning_text">Let op: jo binne sels ferantwurdlik om de wetten, feroarderingen en rigels te folgjen dy\'t fan tapassing binne by it opnimmen fan petearen en it gebrûk of fersprieding fan soksoarte opnamen.</string>
 </resources>

@@ -16,16 +16,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places">Platser i närheten</string>
-    <string name="people">Personer</string>
     <string name="lookup_settings_label">Telefonnummersökning</string>
     <string name="enable_forward_lookup_title">Platssökning</string>
     <string name="enable_forward_lookup_summary">Visa platser i närheten vid sökning med knappsatsen</string>
-    <string name="enable_people_lookup_title">Personsökning</string>
-    <string name="enable_people_lookup_summary">Visa online-resultat för personer vid sökning med knappsatsen</string>
     <string name="enable_reverse_lookup_title">Omvänd sökning</string>
     <string name="enable_reverse_lookup_summary">Sök efter information om personen eller platsen för okända nummer vid inkommande samtal</string>
     <string name="forward_lookup_provider_title">Platssökningstjänst</string>
-    <string name="people_lookup_provider_title">Personsökningstjänst</string>
     <string name="reverse_lookup_provider_title">Leverantör för omvänd sökning</string>
     <string name="lookup_disclaimer">Sökningar kan innebära att förfrågningar skickas till webbplatser via ett säkert protokoll (HTTPS) för att samla in information. Förfrågningarna kan innehålla motpartens telefonnummer, söktermen, eller båda två.</string>
 </resources>

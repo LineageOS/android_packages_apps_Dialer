@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Optag opkald</string>
     <string name="onscreenCallRecordingText">Optager opkald - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Stop optagelse</string>
-    <string name="recording_time_text">Optager</string>
     <string name="recording_warning_title">Aktivér opkaldoptagelse?</string>
     <string name="recording_warning_text">Bemærk: Du er ansvarlig for overholdelse af alle love, reguleringer og regler, som gælder for brugen af opkaldsoptagelsesfunktionalitet, og brugen, eller distributionen af de optagelser.</string>
 </resources>

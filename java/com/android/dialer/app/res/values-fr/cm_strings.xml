@@ -32,4 +32,6 @@
     <string name="call_via_dialog_title">Appeler via\u2026</string>
     <string name="call_log_stats_title">Statistiques</string>
     <string name="action_menu_helplines">Services d’assistance téléphonique</string>
+    <string name="default_dialer_text">Vous devez définir Téléphone comme application par défaut pour pouvoir l\'utiliser</string>
+    <string name="default_dialer_action">Définir par défaut</string>
 </resources>

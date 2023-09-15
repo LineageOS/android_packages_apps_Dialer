@@ -16,16 +16,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places">Nálægir staðir</string>
-    <string name="people">Fólk</string>
     <string name="lookup_settings_label">Uppfletting á símanúmeri</string>
     <string name="enable_forward_lookup_title">Leita áfram</string>
     <string name="enable_forward_lookup_summary">Sýna staði í nágrenninu þegar leitað er á hringiskjá</string>
-    <string name="enable_people_lookup_title">Uppfletting á einstaklingum</string>
-    <string name="enable_people_lookup_summary">Sýna niðustöður af netinu um fólk þegar leitað er á hringiskjá</string>
     <string name="enable_reverse_lookup_title">Leita í hina áttina</string>
     <string name="enable_reverse_lookup_summary">Flettu upp upplýsingum um einstakling eða stað þegar hringt er úr óþekktum símanúmerum</string>
     <string name="forward_lookup_provider_title">Framvirk uppflettiþjónusta (forward lookup)</string>
-    <string name="people_lookup_provider_title">Uppflettiþjónusta fyrir fólk</string>
     <string name="reverse_lookup_provider_title">Afturvirk uppflettiþjónusta (reverse lookup)</string>
     <string name="lookup_disclaimer">Uppflettingar gætu sent beiðnir í gegnum öruggan samskiptamáta (HTTPS) á fjartengt vefsvæði til að safna upplýsingum. Beiðnir gætu innihaldið símanúmer hins aðilans eða umbeðinn leitarstreng</string>
 </resources>

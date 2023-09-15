@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Записати виклик</string>
     <string name="onscreenCallRecordingText">Запис виклику — <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Зупинити запис</string>
-    <string name="recording_time_text">Запис</string>
     <string name="recording_warning_title">Дозволити запис викликів?</string>
     <string name="recording_warning_text">Увага: ви несете відповідальність за дотримання всіх законів, правил та обмежень, що стосуються використання функції запису викликів і використання або розповсюдження цих записів.</string>
 </resources>

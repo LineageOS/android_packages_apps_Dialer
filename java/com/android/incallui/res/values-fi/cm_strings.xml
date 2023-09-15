@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Aloita nauhoitus</string>
     <string name="onscreenCallRecordingText">Nauhoitetaan puhelua - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Lopeta tallennus</string>
-    <string name="recording_time_text">Nauhoitetaan</string>
     <string name="recording_warning_title">Ota puheluiden nauhoitus käyttöön?</string>
     <string name="recording_warning_text">Huomautus: Olet vastuussa lakien, asetuksien ja sääntöjen noudattamisesta, jotka koskevat puheluiden nauhoittamista ja näiden nauhoitteiden käytöstä ja jakelusta.</string>
 </resources>

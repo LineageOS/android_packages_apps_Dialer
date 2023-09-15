@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">บันทึกการสนทนา</string>
     <string name="onscreenCallRecordingText">กำลังบันทึกการโทร - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">หยุดการบันทึก</string>
-    <string name="recording_time_text">กำลังบันทึก</string>
     <string name="recording_warning_title">เปิดใช้การบันทึกเสียงสนทนาหรือไม่</string>
     <string name="recording_warning_text">หมายเหตุ: คุณต้องรับผิดชอบต่อการปฏิบัติตามกฎหมายระเบียบข้อบังคับและกฎระเบียบที่เกี่ยวข้องกับการใช้ฟังก์ชันการบันทึกการโทรและการใช้หรือการแจกจ่ายข้อมูลการบันทึกเหล่านั้น</string>
 </resources>

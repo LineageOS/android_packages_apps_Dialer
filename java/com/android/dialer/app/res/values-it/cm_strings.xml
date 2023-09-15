@@ -32,4 +32,6 @@
     <string name="call_via_dialog_title">Chiama con\u2026</string>
     <string name="call_log_stats_title">Statistiche</string>
     <string name="action_menu_helplines">Telefono amico</string>
+    <string name="default_dialer_text">Devi impostare Telefono come app per telefono predefinita per poterla usare.</string>
+    <string name="default_dialer_action">Imposta come predefinita</string>
 </resources>

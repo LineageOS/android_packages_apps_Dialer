@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Spela in samtalet</string>
     <string name="onscreenCallRecordingText">Spelar in samtalet - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Stoppa inspelningen</string>
-    <string name="recording_time_text">Inspelning</string>
     <string name="recording_warning_title">Aktivera samtalsinspelning?</string>
     <string name="recording_warning_text">Observera: Du är ansvarig för att följa alla lagar och regler som gäller vid samtalsinspelning samt användning och distribution av inspelningarna.</string>
 </resources>

@@ -32,4 +32,6 @@
     <string name="call_via_dialog_title">Zəng et\u2026</string>
     <string name="call_log_stats_title">Statistikalar</string>
     <string name="action_menu_helplines">Yardım xətti</string>
+    <string name="default_dialer_text">İstifadə etmək üçün \"Nömrəyığan\"ı ilkin telefon tətbiqi kimi təyin etməlisiniz.</string>
+    <string name="default_dialer_action">İlkin olaraq təyin et</string>
 </resources>

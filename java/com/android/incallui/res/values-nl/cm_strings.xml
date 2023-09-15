@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Gesprek opnemen</string>
     <string name="onscreenCallRecordingText">Oproep aan het opnemen - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Opname stoppen</string>
-    <string name="recording_time_text">Opname bezig</string>
     <string name="recording_warning_title">Gespreksopname inschakelen?</string>
     <string name="recording_warning_text">Let op: u bent zelf verantwoordelijk om de wetten, verordeningen en regels na te leven die van toepassing zijn bij het opnemen van gesprekken en het gebruik of verspreiding van zulke opnamen.</string>
 </resources>

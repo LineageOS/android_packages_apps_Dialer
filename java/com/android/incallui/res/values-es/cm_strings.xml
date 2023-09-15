@@ -18,6 +18,5 @@
     <string name="onscreenCallRecordText">Grabar llamada</string>
     <string name="onscreenCallRecordingText">Grabación de llamada - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Detener grabación</string>
-    <string name="recording_time_text">Grabando</string>
     <string name="recording_warning_title">¿Activar la grabación de llamada?</string>
 </resources>

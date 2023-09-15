@@ -32,4 +32,6 @@
     <string name="call_via_dialog_title">დასარეკად გამოიყენოს\u2026</string>
     <string name="call_log_stats_title">სტატისტიკა</string>
     <string name="action_menu_helplines">ცხელი ხაზი</string>
+    <string name="default_dialer_text">ნომრის ასაკრეფის გამოსაყენებლად უნდა მიუთითოთ ნაგულისხმევ სატელეფონო პროგრამად.</string>
+    <string name="default_dialer_action">ნაგულისხმევად დაყენება</string>
 </resources>

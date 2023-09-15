@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">הקלט שיחה</string>
     <string name="onscreenCallRecordingText">מקליט שיחה – <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">הפסק להקליט</string>
-    <string name="recording_time_text">מקליט</string>
     <string name="recording_warning_title">להפעיל הקלטת שיחה?</string>
     <string name="recording_warning_text">לתשומת לבך: באחריותך לציית לכל חוקים, התקנות והכללים החלים על השימוש באפשרות הקלטת השיחות, על השימוש ו/או ההפצה של הקלטות אלה.</string>
 </resources>

@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Clàraich a’ ghairm</string>
     <string name="onscreenCallRecordingText">A’ clàradh na gairme – <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Cuir stad air a’ chlàradh</string>
-    <string name="recording_time_text">’Ga chlàradh</string>
     <string name="recording_warning_title">A bheil thu airson clàradh gairme a chur an comas?</string>
     <string name="recording_warning_text">An aire: ’S ann an urra dhut fhèin a th’ ann gun gèill thu ri lagh, riaghladh is riaghailt sam bith a bhios an sàs a thaobh cleachdadh gleus a’ chlàraidh agus cleachdadh no sgaoileadh nan clàraidhean a rinn thu leis.</string>
 </resources>

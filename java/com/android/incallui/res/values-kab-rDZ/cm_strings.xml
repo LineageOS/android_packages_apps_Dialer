@@ -19,6 +19,5 @@
     <string name="call_recording_file_location">Asiwel yettwasekles di <xliff:g id="filename">%s </xliff:g></string>
     <string name="onscreenCallRecordText">Sekles asiwel</string>
     <string name="onscreenStopCallRecordText">Seḥbes asekles</string>
-    <string name="recording_time_text">Asekles</string>
     <string name="recording_warning_title">Rmed asekles n isawalen?</string>
 </resources>

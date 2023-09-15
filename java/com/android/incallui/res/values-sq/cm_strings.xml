@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Inçizo telefonatën</string>
     <string name="onscreenCallRecordingText">Duke inçizuar telefonatën - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Ndalo inçizimin</string>
-    <string name="recording_time_text">Në inçizim</string>
     <string name="recording_warning_title">Aktivizo inçizimin e telefonatave?</string>
     <string name="recording_warning_text">Lajmërim: Ju jeni përgjegjës konfort çdo ligji apo rregull që ka lidhje me regjistrimin e telefonatave si dhe me përdorimin apo shpërndarjen e këtyre telefonatave.</string>
 </resources>

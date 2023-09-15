@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Recordio\'r galwad</string>
     <string name="onscreenCallRecordingText">Yn recordio\'r galwad - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Stopio recordio</string>
-    <string name="recording_time_text">Recordio</string>
     <string name="recording_warning_title">Galluogi recordio galwadau?</string>
     <string name="recording_warning_text">Nodyn: Ti sy\'n gyfrifol am gydymffurfio gydag unrhyw gyfreithiau, rheoliadau neu reolau sy\'n berthnasol wrth ddefnyddio\'r nodwedd recordio galwadau a hefyd am unrhyw ddefnydd neu rannu o\'r recordiadau.</string>
 </resources>

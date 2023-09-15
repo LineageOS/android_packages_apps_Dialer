@@ -32,4 +32,6 @@
     <string name="call_via_dialog_title">Truca a través\u2026</string>
     <string name="call_log_stats_title">Estadístiques</string>
     <string name="action_menu_helplines">Línies d\'ajuda</string>
+    <string name="default_dialer_text">Heu de configurar el Marcador com a aplicació de telèfon per defecte per utilitzar-la.</string>
+    <string name="default_dialer_action">Estableix com per defecte</string>
 </resources>

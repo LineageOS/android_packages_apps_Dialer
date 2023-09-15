@@ -16,16 +16,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places">Llugares cercanos</string>
-    <string name="people">Persones</string>
     <string name="lookup_settings_label">Busca de númberos de teléfonu</string>
     <string name="enable_forward_lookup_title">Busca direuta</string>
     <string name="enable_forward_lookup_summary">Amuesa los llugares cercanos al buscar nel marcador</string>
-    <string name="enable_people_lookup_title">Busca de persones</string>
-    <string name="enable_people_lookup_summary">Amuesa los resultaos en llinia de les persones al buscar nel marcador</string>
     <string name="enable_reverse_lookup_title">Busca inversa</string>
     <string name="enable_reverse_lookup_summary">Busca la información tocante a la persona o\'l llugar de les llamaes entrantes con númberos desconocíos</string>
     <string name="forward_lookup_provider_title">Fornidor de busques direutes</string>
-    <string name="people_lookup_provider_title">Fornidor de busca de persones</string>
     <string name="reverse_lookup_provider_title">Fornidor de busques inverses</string>
     <string name="lookup_disclaimer">Les busques puen unviar solicitúes per un protocolu seguru (https) a sitios web remotos p\'atropar información. La consulta pue incluyir el númberu de teléfonu del otru llamador o la consulta de busca</string>
 </resources>

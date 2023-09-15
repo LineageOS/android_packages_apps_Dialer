@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Nahrať hovor</string>
     <string name="onscreenCallRecordingText">Nahrávanie hovoru - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Zastaviť nahrávanie</string>
-    <string name="recording_time_text">Nahrávanie</string>
     <string name="recording_warning_title">Povoliť nahrávanie hovorov?</string>
     <string name="recording_warning_text">Upozornenie: Ste zodpovedný za dodržiavanie všetkých zákonov, predpisov a pravidiel, ktoré sa vzťahujú na nahrávanie hovorov a použitie alebo distribúciu týchto nahrávok.</string>
 </resources>

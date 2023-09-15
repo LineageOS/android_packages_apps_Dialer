@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Regjistre la clamade</string>
     <string name="onscreenCallRecordingText">Regjistrazion clamade - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Ferme di regjistrâ</string>
-    <string name="recording_time_text">Daûr a regjistrâ</string>
     <string name="recording_warning_title">Ativâ la regjistrazion de clamade?</string>
     <string name="recording_warning_text">Avîs: continuant tu ti declaris responsabil de conformitât cun eventuâls leçs, regolaments e normis che si aplichin ae utilizazion, condivision e distribuzion des regjistrazions des clamadis.</string>
 </resources>

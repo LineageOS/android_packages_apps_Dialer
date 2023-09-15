@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Taka upp símtal</string>
     <string name="onscreenCallRecordingText">Hljóðrita símtal - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Stöðva upptöku</string>
-    <string name="recording_time_text">Upptaka</string>
     <string name="recording_warning_title">Virkja hljóðritun símtala?</string>
     <string name="recording_warning_text">Áminning: Þú berð ábyrgð á því að farið sé eftir öllum lögum, reglugerðum og reglum sem gætu átt við um hljóðritun símtala og notkun eða dreifingu á slíkum upptökum.</string>
 </resources>

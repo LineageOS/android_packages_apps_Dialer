@@ -32,4 +32,6 @@
     <string name="call_via_dialog_title">Apel prin\u2026</string>
     <string name="call_log_stats_title">Statistici</string>
     <string name="action_menu_helplines">Linii ajutătoare</string>
+    <string name="default_dialer_text">Trebuie să setați Telefon ca aplicație implicită pentru apeluri pentru a o folosi.</string>
+    <string name="default_dialer_action">Setează ca implicit</string>
 </resources>

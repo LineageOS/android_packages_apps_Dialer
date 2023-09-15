@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Запись разговора</string>
     <string name="onscreenCallRecordingText">Запись разговора - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Остановить запись</string>
-    <string name="recording_time_text">Запись</string>
     <string name="recording_warning_title">Включить запись разговоров?</string>
     <string name="recording_warning_text">Уведомление: вы несете ответственность за соблюдение любых законов, постановлений и правил, которые применяются к функции записи разговоров, а также к использованию или распространению этих записей.</string>
 </resources>

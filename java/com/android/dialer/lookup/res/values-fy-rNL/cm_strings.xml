@@ -16,16 +16,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places">Plakken tichteby</string>
-    <string name="people">Minsken</string>
     <string name="lookup_settings_label">Telefoannûmer sykje</string>
     <string name="enable_forward_lookup_title">Foarút sykje</string>
     <string name="enable_forward_lookup_summary">Plakken tichteby wylst it sykjen yn de kiezer toane</string>
-    <string name="enable_people_lookup_title">Minsken sykje</string>
-    <string name="enable_people_lookup_summary">Lit online sykresultaten sjen foar minsken wylst it sykjen yn de kiezer</string>
     <string name="enable_reverse_lookup_title">Omkeard sykje</string>
     <string name="enable_reverse_lookup_summary">Ynformaasje oer de persoan of plak sykje by ynkommende oproppen fan ûnbekende nûmers</string>
     <string name="forward_lookup_provider_title">Tsjinst om foarút te sykjen</string>
-    <string name="people_lookup_provider_title">Oanbieder foar minsken sykje</string>
     <string name="reverse_lookup_provider_title">Oanbieder foar omkeard sykje</string>
     <string name="lookup_disclaimer">Sykopdrachten kinne gegevens ferstjoere nei eksterne websites fia in befeilige protokol (https) om ynformaasje te sammeljen. De gegevens kinne it telefoannûmer fan de oare partij of de sykopdracht befetsje</string>
 </resources>

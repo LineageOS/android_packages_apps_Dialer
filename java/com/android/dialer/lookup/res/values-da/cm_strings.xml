@@ -16,12 +16,9 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places">Steder tæt på</string>
-    <string name="people">Folk</string>
     <string name="lookup_settings_label">Slå telefonnummer op</string>
     <string name="enable_forward_lookup_title">Slå telefonnummer op, når du ringer</string>
     <string name="enable_forward_lookup_summary">Vis nærliggende steder, ved søgning i telefonen</string>
-    <string name="enable_people_lookup_title">Slå folk op</string>
-    <string name="enable_people_lookup_summary">Vis online-resultater for folk, ved søgning i telefonen</string>
     <string name="enable_reverse_lookup_title">Slå telefonnummer op, når du modtager opkald</string>
     <string name="enable_reverse_lookup_summary">Slå information op om personen, eller stedet, for ukendte numre, ved indgående opkald</string>
 </resources>

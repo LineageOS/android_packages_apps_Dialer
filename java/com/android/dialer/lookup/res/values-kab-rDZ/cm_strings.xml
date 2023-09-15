@@ -16,11 +16,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places">Imukan iqerban</string>
-    <string name="people">Imdanen</string>
     <string name="lookup_settings_label">Anadi n uṭṭun n tiliɣri</string>
     <string name="enable_forward_lookup_title">Anadi ɣer zdat</string>
     <string name="enable_forward_lookup_summary">Sken imukan iqerban ticki yettnadi g unasiw</string>
-    <string name="enable_people_lookup_title">Anadi n imdanen</string>
     <string name="enable_reverse_lookup_summary">Anadi n tlɣut ɣef umdan neɣ amkan iεnan uṭṭunen irussinen g sawalen i d-ikecmen</string>
-    <string name="people_lookup_provider_title">Amessis n unadi n imdanen</string>
 </resources>

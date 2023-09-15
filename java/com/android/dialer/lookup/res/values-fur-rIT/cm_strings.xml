@@ -16,16 +16,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places">Puescj tai contors</string>
-    <string name="people">Personis</string>
     <string name="lookup_settings_label">Ricercje numars telefonics</string>
     <string name="enable_forward_lookup_title">Ricercje direte</string>
     <string name="enable_forward_lookup_summary">Mostre lûcs tai contors te ricercje cul tastierin telefonic</string>
-    <string name="enable_people_lookup_title">Ricercje personis</string>
-    <string name="enable_people_lookup_summary">Mostre i risultâts in linie te ricercje cul tastierin telefonic</string>
     <string name="enable_reverse_lookup_title">Ricercje contrarie</string>
     <string name="enable_reverse_lookup_summary">Cîr informazions su la persone o il puest pai numars no cognossûts des clamadis in jentrade</string>
     <string name="forward_lookup_provider_title">Furnidôr servizi di ricercje direte</string>
-    <string name="people_lookup_provider_title">Furnidôr servizi di ricercje di personis</string>
     <string name="reverse_lookup_provider_title">Furnidôr servizi di ricercje contrarie</string>
     <string name="lookup_disclaimer">Al è pussibil che lis ricercjis a mandedin interogazions midiant un protocol sigûr (https) a sîts web esternis par tirâ dongje lis informazions necessariis. La interogazion e pues includi il numar di telefon dal interlocutôr o il test de ricercje</string>
 </resources>

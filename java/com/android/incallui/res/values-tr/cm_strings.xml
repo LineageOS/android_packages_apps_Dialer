@@ -20,7 +20,6 @@
     <string name="onscreenCallRecordText">Aramayı kaydet</string>
     <string name="onscreenCallRecordingText">Arama kaydı - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Kaydı durdur</string>
-    <string name="recording_time_text">Kaydediliyor</string>
     <string name="recording_warning_title">Arama kaydı etkinleştirilsin mi?</string>
     <string name="recording_warning_text">Dikkat: Arama kaydı işlevini kullanırken veya bu kayıtları dağıtırken ilgili yasa, düzenleme ve kurallara uyulmasından siz sorumlusunuz.</string>
 </resources>

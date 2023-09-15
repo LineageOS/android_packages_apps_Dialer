@@ -16,16 +16,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places">Yaxınlıqdakı məkanlar</string>
-    <string name="people">İnsanlar</string>
     <string name="lookup_settings_label">Telefon nömrəsi axtar</string>
     <string name="enable_forward_lookup_title">Yönləndirmə axtarışı</string>
     <string name="enable_forward_lookup_summary">Nömrə yığımında axtarış edərkən yaxın məkanları göstər</string>
-    <string name="enable_people_lookup_title">Şəxs axtarışı</string>
-    <string name="enable_people_lookup_summary">Nömrə yığımında axtarış edərkən şəxslər üçün xətdə nəticələrini göstər</string>
     <string name="enable_reverse_lookup_title">Geri axtarış</string>
     <string name="enable_reverse_lookup_summary">Gələn zənglərdə bilinməyən nömrələr üçün şəxs və ya yer haqqında məlumat axtar</string>
     <string name="forward_lookup_provider_title">Axtarış yönləndirmə provayderi</string>
-    <string name="people_lookup_provider_title">Şəxs axtarış provayderi</string>
     <string name="reverse_lookup_provider_title">Tərs axtarış provayderi</string>
     <string name="lookup_disclaimer">Axtarışlar, məlumat yığmaq üçün uzaq veb saytlara təhlükəsiz bir protokol (https) üzərindən sorğu göndərə bilər. Sorğu, digər tərəflərin telefon nömrəsini və ya axtarış sorğusunu ehtiva edə bilər.</string>
 </resources>
