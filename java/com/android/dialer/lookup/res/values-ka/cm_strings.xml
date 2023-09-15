@@ -21,7 +21,7 @@
     <string name="enable_forward_lookup_title">პირდაპირი ძიება</string>
     <string name="enable_forward_lookup_summary">ახლომდებარე ადგილების ჩვენება ნომრის ასაკრეფში ძიებისას</string>
     <string name="enable_people_lookup_title">ხალხის მონახვა</string>
-    <string name="enable_people_lookup_summary">შედეგების ჩვენება ინტერნეტიდან, ხალხის ძიებისას ნომრის ასაკრეფში</string>
+    <string name="enable_people_lookup_summary">შედეგების ჩვენება ინტერნეტიდან ხალხის ძიებისას ნომრის ასაკრეფში</string>
     <string name="enable_reverse_lookup_title">შებრუნებული ძიება</string>
     <string name="enable_reverse_lookup_summary">მონაცემების მოძიება პირის ან ადგილის შესახებ, უცნობი ნომრიდან შემომავალი ზარისას</string>
     <string name="forward_lookup_provider_title">პირდაპირი ძიების მომსახურების მომწოდებელი</string>
