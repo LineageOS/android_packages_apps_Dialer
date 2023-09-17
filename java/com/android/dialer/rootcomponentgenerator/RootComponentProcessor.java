@@ -29,7 +29,7 @@ public class RootComponentProcessor extends BasicAnnotationProcessor {
   @Override
   protected Iterable<? extends ProcessingStep> initSteps() {
     return ImmutableList.of(
-        new MetadataGeneratingStep(processingEnv), new RootComponentGeneratingStep(processingEnv));
+        new MetadataGeneratingStep(processingEnv));
   }
 
   @Override
