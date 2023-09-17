@@ -44,7 +44,9 @@ public class InCallVibrationHandler extends Handler implements
   private DialerCall activeCall;
 
   public InCallVibrationHandler(Context context) {
-    prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    prefs = context.createDeviceProtectedStorageContext()
+            .getSharedPreferences(PreferenceManager.getDefaultSharedPreferencesName(context),
+                    Context.MODE_PRIVATE);
     vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
   }
 
