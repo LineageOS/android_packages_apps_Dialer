@@ -1,0 +1,34 @@
+//
+// SPDX-FileCopyrightText: 2023 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+java_import {
+    name: "dialer-apache-mime4j-core",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    jars: ["apache-mime4j-core-0.8.9.jar"],
+    sdk_version: "current",
+}
+
+java_import {
+    name: "dialer-apache-mime4j-dom",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    jars: ["apache-mime4j-dom-0.8.9.jar"],
+    sdk_version: "current",
+}
+
+java_import {
+    name: "dialer-commons-io",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    jars: ["commons-io-2.13.0.jar"],
+    sdk_version: "current",
+}
