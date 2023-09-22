@@ -400,11 +400,6 @@ public class CallLogFragment extends Fragment
 
     this.hasReadCallLogPermission = hasReadCallLogPermission;
 
-    /*
-     * Always clear the filtered numbers cache since users could have blocked/unblocked numbers
-     * from the settings page
-     */
-    adapter.clearFilteredNumbersCache();
     refreshData();
     adapter.onResume();
 
