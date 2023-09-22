@@ -18,6 +18,7 @@ package com.android.dialer.app.calllog;
 
 import android.content.Context;
 import android.net.Uri;
+import android.provider.BlockedNumberContract;
 import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -29,7 +30,6 @@ import androidx.annotation.WorkerThread;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
-import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
@@ -37,6 +37,8 @@ import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.EmergencyCallUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +72,7 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
       return;
     }
 
-    if (FilteredNumbersUtil.hasRecentEmergencyCall(context)) {
+    if (EmergencyCallUtil.hasRecentEmergencyCall(context)) {
       LogUtil.i(
           "VisualVoicemailUpdateTask.updateNotification",
           "not filtering due to recent emergency call");
@@ -178,7 +180,8 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
     Assert.isWorkerThread();
     List<NewCall> result = new ArrayList<>();
     for (NewCall newCall : newCalls) {
-      if (queryHandler.getBlockedIdSynchronous(newCall.number, newCall.countryIso) != null) {
+      if (BlockedNumberContract.canCurrentUserBlockNumbers(context)
+        && BlockedNumberContract.isBlocked(context, newCall.number)) {
         LogUtil.i(
             "VisualVoicemailUpdateTask.filterBlockedNumbers",
             "found voicemail from blocked number, deleting");
