@@ -17,6 +17,7 @@
 package com.android.dialer.app.calllog;
 
 import android.content.Context;
+import android.provider.BlockedNumberContract;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -103,18 +104,15 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final String countryIso,
       final int callType,
       final ContactSource.Type contactSourceType,
-      final boolean isSpam,
-      final Integer blockId) {
+      final boolean isSpam) {
     DialogFragmentForUnblockingNumberAndReportingAsNotSpam.newInstance(
             displayNumber,
             isSpam,
             () -> {
               LogUtil.i("BlockReportSpamListener.onUnblock", "onClick");
-              filteredNumberAsyncQueryHandler.unblock(
-                  (rows, values) -> {
-                    adapter.notifyDataSetChanged();
-                  },
-                  blockId);
+              if (BlockedNumberContract.unblock(context, number) > 0) {
+                  adapter.notifyDataSetChanged();
+              }
             },
             null)
         .show(fragmentManager, BlockReportSpamDialogs.UNBLOCK_DIALOG_TAG);

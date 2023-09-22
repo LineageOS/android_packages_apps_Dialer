@@ -44,14 +44,12 @@ import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.CallConfiguration;
 import com.android.dialer.Mode;
 import com.android.dialer.R;
-import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
-import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
-import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.EmergencyCallUtil;
 import com.android.dialer.util.TouchPointManager;
 import com.android.incallui.InCallOrientationEventListener.ScreenOrientation;
 import com.android.incallui.answerproximitysensor.PseudoScreenState;
@@ -69,7 +67,7 @@ import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment
 import com.android.incallui.videosurface.bindings.VideoSurfaceBindings;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
 import com.android.incallui.videotech.utils.VideoUtils;
-import com.google.protobuf.InvalidProtocolBufferException;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -116,17 +114,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   private InCallDndHandler dndHandler;
   private ContactInfoCache contactInfoCache;
   private Context context;
-  private final OnCheckBlockedListener onCheckBlockedListener =
-      new OnCheckBlockedListener() {
-        @Override
-        public void onCheckComplete(final Integer id) {
-          if (id != null && id != FilteredNumberAsyncQueryHandler.INVALID_ID) {
-            // Silence the ringer now to prevent ringing and vibration before the call is
-            // terminated when Telecom attempts to add it.
-            TelecomUtil.silenceRinger(context);
-          }
-        }
-      };
   private CallList callList;
   private ExternalCallList externalCallList;
   private InCallActivity inCallActivity;
@@ -200,7 +187,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
           if (state == TelephonyManager.CALL_STATE_RINGING) {
-            if (FilteredNumbersUtil.hasRecentEmergencyCall(context)) {
+            if (EmergencyCallUtil.hasRecentEmergencyCall(context)) {
               return;
             }
             // Check if the number is blocked, to silence the ringer.
@@ -814,7 +801,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     }
 
     if (call.isEmergencyCall()) {
-      FilteredNumbersUtil.recordLastEmergencyCallTime(context);
+      EmergencyCallUtil.recordLastEmergencyCallTime(context);
     }
 
     if (!callList.hasLiveCall()
