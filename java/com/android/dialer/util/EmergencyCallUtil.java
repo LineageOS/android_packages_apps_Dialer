@@ -13,24 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.dialer.blocking;
+package com.android.dialer.util;
 
 import android.content.Context;
-import android.provider.BlockedNumberContract;
 import android.provider.Settings;
-import android.telephony.PhoneNumberUtils;
-import android.text.TextUtils;
-
-import androidx.annotation.Nullable;
 
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.storage.StorageComponent;
-import com.android.dialer.telecom.TelecomUtil;
+
 import java.util.concurrent.TimeUnit;
 
-/** Utility to help with tasks related to filtered numbers. */
-@Deprecated
-public class FilteredNumbersUtil {
+/** Utility to help with tasks related to emergency calls. */
+public class EmergencyCallUtil {
 
   // Pref key for storing the time of end of the last emergency call in milliseconds after epoch.\
   private static final String LAST_EMERGENCY_CALL_MS_PREF_KEY = "last_emergency_call_ms";
@@ -84,29 +78,6 @@ public class FilteredNumbersUtil {
         .apply();
   }
 
-  /**
-   * @param e164Number The e164 formatted version of the number, or {@code null} if such a format
-   *     doesn't exist.
-   * @param number The number to attempt blocking.
-   * @return {@code true} if the number can be blocked, {@code false} otherwise.
-   */
-  public static boolean canBlockNumber(Context context, String e164Number, String number) {
-    String blockableNumber = getBlockableNumber(e164Number, number);
-    return canAttemptBlockOperations(context) && !TextUtils.isEmpty(blockableNumber)
-        && !PhoneNumberUtils.isEmergencyNumber(blockableNumber);
-  }
-
-  /**
-   * @param e164Number The e164 formatted version of the number, or {@code null} if such a format
-   *     doesn't exist..
-   * @param number The number to attempt blocking.
-   * @return The version of the given number that can be blocked with the current blocking solution.
-   */
-  @Nullable
-  public static String getBlockableNumber(@Nullable String e164Number, String number) {
-    return TextUtils.isEmpty(e164Number) ? number : e164Number;
-  }
-
   private static long getRecentEmergencyCallThresholdMs(Context context) {
     if (LogUtil.isVerboseEnabled()) {
       long thresholdMs =
@@ -115,53 +86,6 @@ public class FilteredNumbersUtil {
       return thresholdMs > 0 ? thresholdMs : RECENT_EMERGENCY_CALL_THRESHOLD_MS;
     } else {
       return RECENT_EMERGENCY_CALL_THRESHOLD_MS;
-    }
-  }
-
-  /**
-   * Method used to determine if block operations are possible.
-   *
-   * @param context The {@link Context}.
-   * @return {@code true} if the app and user can block numbers, {@code false} otherwise.
-   */
-  public static boolean canAttemptBlockOperations(Context context) {
-    // Great Wall blocking, must be primary user and the default or system dialer
-    // TODO(maxwelb): check that we're the system Dialer
-    return TelecomUtil.isDefaultDialer(context)
-            && safeBlockedNumbersContractCanCurrentUserBlockNumbers(context);
-  }
-
-  /**
-   * Used to determine if the call blocking settings can be opened.
-   *
-   * @param context The {@link Context}.
-   * @return {@code true} if the current user can open the call blocking settings, {@code false}
-   *     otherwise.
-   */
-  public static boolean canCurrentUserOpenBlockSettings(Context context) {
-    // BlockedNumberContract blocking, verify through Contract API
-    return TelecomUtil.isDefaultDialer(context)
-            && safeBlockedNumbersContractCanCurrentUserBlockNumbers(context);
-  }
-
-  /**
-   * Calls {@link BlockedNumberContract#canCurrentUserBlockNumbers(Context)} in such a way that it
-   * never throws an exception. While on the CryptKeeper screen, the BlockedNumberContract isn't
-   * available, using this method ensures that the Dialer doesn't crash when on that screen.
-   *
-   * @param context The {@link Context}.
-   * @return the result of BlockedNumberContract#canCurrentUserBlockNumbers, or {@code false} if an
-   *     exception was thrown.
-   */
-  private static boolean safeBlockedNumbersContractCanCurrentUserBlockNumbers(Context context) {
-    try {
-      return BlockedNumberContract.canCurrentUserBlockNumbers(context);
-    } catch (Exception e) {
-      LogUtil.e(
-              "FilteredNumberCompat.safeBlockedNumbersContractCanCurrentUserBlockNumbers",
-              "Exception while querying BlockedNumberContract",
-              e);
-      return false;
     }
   }
 }

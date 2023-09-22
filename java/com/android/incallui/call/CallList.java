@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Trace;
+import android.provider.BlockedNumberContract;
 import android.telecom.Call;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
@@ -116,21 +117,11 @@ public class CallList implements DialerCallDelegate {
     Trace.endSection();
 
     Trace.beginSection("checkBlock");
-    FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler =
-        new FilteredNumberAsyncQueryHandler(context);
 
-    filteredNumberAsyncQueryHandler.isBlockedNumber(
-        new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
-          @Override
-          public void onCheckComplete(Integer id) {
-            if (id != null && id != FilteredNumberAsyncQueryHandler.INVALID_ID) {
-              call.setBlockedStatus(true);
-              // No need to update UI since it's only used for logging.
-            }
-          }
-        },
-        call.getNumber(),
-        call.getCountryIso());
+    if (BlockedNumberContract.canCurrentUserBlockNumbers(context) &&
+            BlockedNumberContract.isBlocked(context, call.getNumber())) {
+      call.setBlockedStatus(true);
+    }
     Trace.endSection();
 
     if (call.getState() == DialerCallState.INCOMING

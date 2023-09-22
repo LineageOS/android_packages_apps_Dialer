@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.preference.PreferenceManager;
+import android.provider.BlockedNumberContract;
 import android.provider.Settings;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -33,7 +34,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.android.dialer.app.R;
-import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.lookup.LookupSettingsFragment;
@@ -131,7 +131,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
       target.add(phoneAccountSettingsHeader);
     }
-    if (FilteredNumbersUtil.canCurrentUserOpenBlockSettings(this)) {
+    if (BlockedNumberContract.canCurrentUserBlockNumbers(this)) {
       Header blockedCallsHeader = new Header();
       blockedCallsHeader.titleRes = R.string.manage_blocked_numbers_label;
       blockedCallsHeader.intent = getApplicationContext().getSystemService(TelecomManager.class)
