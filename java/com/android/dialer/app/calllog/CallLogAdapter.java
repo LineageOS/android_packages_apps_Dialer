@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Trace;
+import android.provider.BlockedNumberContract;
 import android.provider.CallLog;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.app.AlertDialog;
@@ -79,9 +80,6 @@ import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
-import com.google.i18n.phonenumbers.NumberParseException;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
@@ -568,10 +566,6 @@ public class CallLogAdapter extends GroupingListAdapter
     }
   }
 
-  public void clearFilteredNumbersCache() {
-    filteredNumberAsyncQueryHandler.clearCache();
-  }
-
   public void onResume() {
     if (PermissionsUtil.hasPermission(activity, android.Manifest.permission.READ_CONTACTS)) {
       contactInfoCache.start();
@@ -747,17 +741,16 @@ public class CallLogAdapter extends GroupingListAdapter
     // Reset block and spam information since this view could be reused which may contain
     // outdated data.
     viewHolder.isSpam = false;
-    viewHolder.blockId = null;
+    viewHolder.isBlocked = false;
 
     viewHolder.setDetailedPhoneDetails(callDetailsEntries);
     final AsyncTask<Void, Void, Boolean> loadDataTask =
         new AsyncTask<Void, Void, Boolean>() {
           @Override
           protected Boolean doInBackground(Void... params) {
-            viewHolder.blockId =
-                filteredNumberAsyncQueryHandler.getBlockedIdSynchronous(
-                    viewHolder.number, viewHolder.countryIso);
-            details.isBlocked = viewHolder.blockId != null;
+            viewHolder.isBlocked = BlockedNumberContract.canCurrentUserBlockNumbers(activity) &&
+                    BlockedNumberContract.isBlocked(activity, viewHolder.number);
+            details.isBlocked = viewHolder.isBlocked;
             if (isCancelled()) {
               return false;
             }

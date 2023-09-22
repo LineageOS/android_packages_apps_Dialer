@@ -28,12 +28,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.dialer.R;
-import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorFactory;
-import com.android.dialer.location.GeoUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.call.CallList;
@@ -143,23 +141,5 @@ public class SpamCallListListener implements CallList.Listener {
   public void onInternationalCallOnWifi(@NonNull DialerCall call) {}
 
   @Override
-  public void onDisconnect(DialerCall call) {
-    if (!shouldShowAfterCallNotification(call)) {
-      return;
-    }
-    String e164Number =
-        PhoneNumberUtils.formatNumberToE164(
-            call.getNumber(), GeoUtil.getCurrentCountryIso(context));
-    if (!FilteredNumbersUtil.canBlockNumber(context, e164Number, call.getNumber())) {
-      return;
-    }
-    if (e164Number == null) {
-      return;
-    }
-  }
-
-  /** Determines if the after call notification should be shown for the specified call. */
-  private boolean shouldShowAfterCallNotification(DialerCall call) {
-    return false;
-  }
+  public void onDisconnect(DialerCall call) {}
 }
