@@ -16,6 +16,24 @@
       "message": "\u003e 0?\nIf no rows have changed I don\u0027t think the block list should be updated?",
       "revId": "ec1031bb19883015c713f24bb6e7a8df279073db",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "588c270a_d5d86e14",
+        "filename": "java/com/android/dialer/app/calllog/BlockReportSpamListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-09-26T17:03:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f2295cb_47b87835",
+      "revId": "ec1031bb19883015c713f24bb6e7a8df279073db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
