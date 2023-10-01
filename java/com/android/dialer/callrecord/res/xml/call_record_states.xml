@@ -1295,6 +1295,18 @@
     -->
     <country iso="us,vi,gu" allowed="false" />
 
+    <!-- Enable recording in Uruguay.
+
+         Uruguay follows a Civil Law system and law does not explicitly
+         prohibit call recording.
+
+         In a publication on the journal "Derecho Publico" (Public Right),
+         Umpiérrez (2020)[https://doi.org/10.31672/57.14] states that the
+         Supreme Court has not found call recording an illegal act as long
+         as it's performed by one of the involved parties.
+    -->
+    <country iso="uy" allowed="true" />
+
     <!-- Enable recording for Kosovo:
          Article 36 of the Constitution of Kosovo defines the Right to Privacy. Article 202 of the
          Criminal Code of Kosovo covers the infringing of privacy in corresepondence and computer
