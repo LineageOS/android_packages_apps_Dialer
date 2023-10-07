@@ -16,6 +16,7 @@
 
 package com.android.dialer.app.settings;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -266,7 +267,7 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
   private boolean shouldVibrateWhenRinging() {
     int vibrateWhenRingingSetting =
         Settings.System.getInt(
-            getActivity().getContentResolver(),
+            requireActivity().getContentResolver(),
             Settings.System.VIBRATE_WHEN_RINGING,
             NO_VIBRATION_FOR_CALLS);
     return hasVibrator() && (vibrateWhenRingingSetting == DO_VIBRATION_FOR_CALLS);
@@ -276,7 +277,7 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
   private boolean shouldPlayDtmfTone() {
     int dtmfToneSetting =
         Settings.System.getInt(
-            getActivity().getContentResolver(),
+            requireActivity().getContentResolver(),
             Settings.System.DTMF_TONE_WHEN_DIALING,
             PLAY_DTMF_TONE);
     return dtmfToneSetting == PLAY_DTMF_TONE;
@@ -284,13 +285,14 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
 
   /** Whether the device hardware has a vibrator. */
   private boolean hasVibrator() {
-    Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+    Vibrator vibrator = requireActivity().getSystemService(Vibrator.class);
     return vibrator != null && vibrator.hasVibrator();
   }
 
+  @SuppressLint("MissingPermission")
   private boolean shouldHideCarrierSettings() {
     CarrierConfigManager configManager =
-        (CarrierConfigManager) getActivity().getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        (CarrierConfigManager) requireActivity().getSystemService(Context.CARRIER_CONFIG_SERVICE);
     return configManager
         .getConfig()
         .getBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL);

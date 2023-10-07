@@ -31,6 +31,7 @@ import static com.android.incallui.NotificationBroadcastReceiver.ACTION_TURN_OFF
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_TURN_ON_SPEAKER;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
@@ -1021,6 +1022,7 @@ public class StatusBarNotifier
      * Responds to changes in the session modification state for the call by dismissing the status
      * bar notification as required.
      */
+    @SuppressLint("MissingPermission")
     @Override
     public void onDialerCallSessionModificationStateChange() {
       if (dialerCall.getVideoTech().getSessionModificationState()

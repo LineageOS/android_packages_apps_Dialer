@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.CallLog;
 import android.provider.VoicemailContract;
@@ -39,6 +40,7 @@ import android.view.WindowManager.LayoutParams;
 import android.webkit.MimeTypeMap;
 
 import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -66,6 +68,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
@@ -158,7 +161,7 @@ public class VoicemailPlaybackPresenter
     if (powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
       proximityWakeLock =
           powerManager.newWakeLock(
-              PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "VoicemailPlaybackPresenter");
+              PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "Voicemail:PlaybackPresenter");
     }
   }
 
@@ -413,10 +416,15 @@ public class VoicemailPlaybackPresenter
     Cursor cursor = contentResolver.query(voicemailUri, null, null, null, null);
     try {
       if (cursor != null && cursor.moveToNext()) {
-        int duration = cursor.getInt(cursor.getColumnIndex(VoicemailContract.Voicemails.DURATION));
+        int durationIndex = cursor.getColumnIndex(VoicemailContract.Voicemails.DURATION);
+        int hasContentIndex = cursor.getColumnIndex(VoicemailContract.Voicemails.HAS_CONTENT);
+        if (durationIndex < 0 || hasContentIndex < 0) {
+          return false;
+        }
+        int duration = cursor.getInt(durationIndex);
         // Convert database duration (seconds) into mDuration (milliseconds)
         this.duration.set(duration > 0 ? duration * 1000 : 0);
-        return cursor.getInt(cursor.getColumnIndex(VoicemailContract.Voicemails.HAS_CONTENT)) == 1;
+        return cursor.getInt(hasContentIndex) == 1;
       }
     } finally {
       MoreCloseables.closeQuietly(cursor);
@@ -456,37 +464,32 @@ public class VoicemailPlaybackPresenter
         break;
     }
 
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    Runnable runnable = () -> {
+      try (Cursor cursor = context.getContentResolver().query(
+              voicemailUri, new String[] {Voicemails.SOURCE_PACKAGE}, null, null, null)) {
+        String sourcePackage;
+        if (!hasContent(cursor)) {
+          LogUtil.e(
+                  "VoicemailPlaybackPresenter.requestContent",
+                  "mVoicemailUri does not return a SOURCE_PACKAGE");
+          sourcePackage = null;
+        } else {
+          sourcePackage = cursor.getString(0);
+        }
+        // Send voicemail fetch request.
+        Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, voicemailUri);
+        intent.setPackage(sourcePackage);
+        LogUtil.i(
+                "VoicemailPlaybackPresenter.requestContent",
+                "Sending ACTION_FETCH_VOICEMAIL to " + sourcePackage);
+        context.sendBroadcast(intent);
+      }
+    };
+
     asyncTaskExecutor.submit(
         Tasks.SEND_FETCH_REQUEST,
-        new AsyncTask<Void, Void, Void>() {
-
-          @Override
-          protected Void doInBackground(Void... voids) {
-            try (Cursor cursor =
-                context
-                    .getContentResolver()
-                    .query(
-                        voicemailUri, new String[] {Voicemails.SOURCE_PACKAGE}, null, null, null)) {
-              String sourcePackage;
-              if (!hasContent(cursor)) {
-                LogUtil.e(
-                    "VoicemailPlaybackPresenter.requestContent",
-                    "mVoicemailUri does not return a SOURCE_PACKAGE");
-                sourcePackage = null;
-              } else {
-                sourcePackage = cursor.getString(0);
-              }
-              // Send voicemail fetch request.
-              Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, voicemailUri);
-              intent.setPackage(sourcePackage);
-              LogUtil.i(
-                  "VoicemailPlaybackPresenter.requestContent",
-                  "Sending ACTION_FETCH_VOICEMAIL to " + sourcePackage);
-              context.sendBroadcast(intent);
-            }
-            return null;
-          }
-        });
+        runnable);
     return true;
   }
 
@@ -854,6 +857,9 @@ public class VoicemailPlaybackPresenter
     @Nullable
     @Override
     public Pair<Uri, String> doInBackground(Pair<Context, Uri> input) {
+      if (input == null) {
+        return null;
+      }
       Context context = input.first;
       Uri voicemailUri = input.second;
       ContentResolver contentResolver = context.getContentResolver();
@@ -862,17 +868,25 @@ public class VoicemailPlaybackPresenter
 
         if (hasContent(callLogInfo) && hasContent(contentInfo)) {
           String cachedName = callLogInfo.getString(CallLogQuery.CACHED_NAME);
-          String number = contentInfo.getString(contentInfo.getColumnIndex(Voicemails.NUMBER));
-          long date = contentInfo.getLong(contentInfo.getColumnIndex(Voicemails.DATE));
-          String mimeType = contentInfo.getString(contentInfo.getColumnIndex(Voicemails.MIME_TYPE));
-          String transcription =
-              contentInfo.getString(contentInfo.getColumnIndex(Voicemails.TRANSCRIPTION));
+          int numberIndex = contentInfo.getColumnIndex(Voicemails.NUMBER);
+          int dateIndex = contentInfo.getColumnIndex(Voicemails.DATE);
+          int mimeTypeIndex = contentInfo.getColumnIndex(Voicemails.MIME_TYPE);
+          int transcriptionIndex = contentInfo.getColumnIndex(Voicemails.TRANSCRIPTION);
+          if (numberIndex < 0 || dateIndex < 0 || mimeTypeIndex < 0 || transcriptionIndex < 0) {
+            return null;
+          }
+
+          String number = contentInfo.getString(numberIndex);
+          long date = contentInfo.getLong(dateIndex);
+          String mimeType = contentInfo.getString(mimeTypeIndex);
+          String transcription = contentInfo.getString(transcriptionIndex);
 
           // Copy voicemail content to a new file.
           // Please see reference in third_party/java_src/android_app/dialer/java/com/android/
           // dialer/app/res/xml/file_paths.xml for correct cache directory name.
           File parentDir = new File(context.getCacheDir(), "my_cache");
           if (!parentDir.exists()) {
+            //noinspection ResultOfMethodCallIgnored
             parentDir.mkdirs();
           }
           File temporaryVoicemailFile =

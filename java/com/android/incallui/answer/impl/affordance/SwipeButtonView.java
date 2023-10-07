@@ -34,13 +34,14 @@ import android.view.animation.Interpolator;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.android.dialer.R;
 import com.android.incallui.answer.impl.utils.FlingAnimationUtils;
 import com.android.incallui.answer.impl.utils.Interpolators;
 
 /** Button that allows swiping to trigger */
-public class SwipeButtonView extends ImageView {
+public class SwipeButtonView extends AppCompatImageView {
 
   private static final long CIRCLE_APPEAR_DURATION = 80;
   private static final long CIRCLE_DISAPPEAR_MAX_DURATION = 200;

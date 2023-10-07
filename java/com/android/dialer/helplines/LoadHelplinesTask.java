@@ -15,6 +15,7 @@
  */
 package com.android.dialer.helplines;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.telephony.SubscriptionInfo;
@@ -87,6 +88,7 @@ public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineIte
         return helplineList;
     }
 
+    @SuppressLint("MissingPermission")
     private List<SubscriptionInfo> getSubscriptionInfos() {
         List<SubscriptionInfo> subList = mSubManager.getActiveSubscriptionInfoList();
         if (subList == null) {

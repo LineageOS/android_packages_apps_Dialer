@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -66,10 +67,15 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
   public static final String EXTRA_NOTIFICATION_ID =
       "com.android.incallui.extra.EXTRA_NOTIFICATION_ID";
 
+  @SuppressLint("MissingPermission")
   @Override
   public void onReceive(Context context, Intent intent) {
     final String action = intent.getAction();
     LogUtil.i("NotificationBroadcastReceiver.onReceive", "Broadcast from Notification: " + action);
+
+    if (action == null) {
+      return;
+    }
 
     // TODO: Commands of this nature should exist in the CallList.
     if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {

@@ -29,7 +29,7 @@ import com.android.dialer.common.LogUtil;
 /** The normal PROXIMITY_SCREEN_OFF_WAKE_LOCK provided by the OS. */
 public class SystemProximityWakeLock implements AnswerProximityWakeLock, DisplayListener {
 
-  private static final String TAG = "SystemProximityWakeLock";
+  private static final String TAG = "SystemProximity:WakeLock";
 
   private final Context context;
   private final PowerManager.WakeLock wakeLock;

@@ -164,7 +164,7 @@
 
       <!-- Space holder for answer method. This is used to get better scaling to make room for
       incall_data_container on different screen size. -->
-      <Space
+      <android.widget.Space
           android:layout_width="match_parent"
           android:layout_height="220dp"/>
 

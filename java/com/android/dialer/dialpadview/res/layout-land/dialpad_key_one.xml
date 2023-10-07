@@ -52,6 +52,7 @@
     <!-- A placeholder to make the width the same as other dialpad keys. -->
     <View
         android:id="@+id/dialpad_key_horizontal_placeholder"
+
         android:layout_width="0dp"
         android:layout_height="match_parent"/>
   </LinearLayout>
