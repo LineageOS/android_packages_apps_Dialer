@@ -70,14 +70,8 @@
   <string name="search_shortcut_add_to_contact">Ajouter à un contact</string>
   <string name="search_shortcut_send_sms_message">Envoyer un SMS</string>
   <string name="search_shortcut_make_video_call">Passer un appel vidéo</string>
-  <string name="search_shortcut_block_number">Bloquer le numéro</string>
-  <string name="speed_dial_empty">Aucun contact pour la numérotation abrégée</string>
-  <string name="speed_dial_empty_add_favorite_action">Ajouter un favori</string>
-  <string name="remove_contact">Supprimer</string>
   <string name="select_all">Tout sélectionner</string>
   <string name="call_log_action_video_call">Appel vidéo</string>
-  <string name="call_log_action_set_up_video">Configurer l\'appel vidéo</string>
-  <string name="call_log_action_invite_video">Inviter à l\'appel vidéo</string>
   <string name="call_log_action_send_message">Envoyer un message</string>
   <string name="call_log_action_details">Informations sur l\'appel</string>
   <string name="call_log_action_share_voicemail">Envoyer à…</string>

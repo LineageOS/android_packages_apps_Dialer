@@ -20,6 +20,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Directory;
 
 import androidx.annotation.IntDef;
+import androidx.annotation.LongDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -80,6 +81,6 @@ public class ContactsUtils {
    */
   @Retention(RetentionPolicy.SOURCE)
   // TODO: Switch to @LongDef when @LongDef is available in the support library
-  @IntDef({(int) USER_TYPE_CURRENT, (int) USER_TYPE_WORK})
+  @LongDef({USER_TYPE_CURRENT, USER_TYPE_WORK})
   public @interface UserType {}
 }

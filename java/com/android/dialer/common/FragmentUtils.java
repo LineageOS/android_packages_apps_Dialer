@@ -73,9 +73,7 @@ public class FragmentUtils {
       T parent = (T) fragment.getActivity();
       return parent;
     } else if (fragment.getActivity() instanceof FragmentUtilListener) {
-      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
-      T parent = ((FragmentUtilListener) fragment.getActivity()).getImpl(callbackInterface);
-      return parent;
+      return ((FragmentUtilListener) fragment.getActivity()).getImpl(callbackInterface);
     } else if (fragment.getActivity() instanceof MainActivityPeer.PeerSupplier) {
       MainActivityPeer peer = ((MainActivityPeer.PeerSupplier) fragment.getActivity()).getPeer();
       if (peer instanceof FragmentUtilListener) {

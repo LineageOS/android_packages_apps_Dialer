@@ -49,7 +49,7 @@
         android:visibility="gone"
         tools:alpha="1"/>
     <!-- Space holder for animation. -->
-    <Space
+    <android.widget.Space
         android:id="@+id/incoming_bouncer_space_holder"
         android:layout_width="match_parent"
         android:layout_height="50dp"
