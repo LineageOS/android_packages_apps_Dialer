@@ -16,6 +16,7 @@
 
 package com.android.dialer.voicemail.listui.error;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.database.Cursor;
@@ -122,6 +123,7 @@ public class VoicemailStatus {
     isAirplaneMode = builder.isAirplaneMode;
   }
 
+  @SuppressLint("MissingPermission")
   private static int getNotificationChannelStateFormTelephony(
       Context context, PhoneAccountHandle phoneAccountHandle) {
     TelephonyManager telephonyManager =

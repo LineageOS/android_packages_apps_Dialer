@@ -17,6 +17,8 @@
 package com.android.dialer.common.concurrent;
 
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.MainThread;
 
@@ -50,9 +52,11 @@ public final class AsyncTaskExecutors {
   static class SimpleAsyncTaskExecutor implements AsyncTaskExecutor {
 
     private final Executor executor;
+    private final Handler handler;
 
     public SimpleAsyncTaskExecutor(Executor executor) {
       this.executor = executor;
+      this.handler = new Handler(Looper.getMainLooper());
     }
 
     @Override
@@ -60,6 +64,20 @@ public final class AsyncTaskExecutors {
     public <T> AsyncTask<T, ?, ?> submit(Object identifer, AsyncTask<T, ?, ?> task, T... params) {
       Assert.isMainThread();
       return task.executeOnExecutor(executor, params);
+    }
+
+    @Override
+    @MainThread
+    public void submit(Object identifer, Runnable runnable) {
+      Assert.isMainThread();
+      executor.execute(runnable);
+    }
+
+    @Override
+    public void submit(Object identifier, Runnable runnable, Runnable postExecuteRunnable) {
+      Assert.isMainThread();
+      executor.execute(runnable);
+      handler.post(postExecuteRunnable);
     }
   }
 }

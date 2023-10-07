@@ -88,7 +88,8 @@
         android:directBootAware="true"
         android:exported="true"
         android:name="com.android.incallui.InCallServiceImpl"
-        android:permission="android.permission.BIND_INCALL_SERVICE">
+        android:permission="android.permission.BIND_INCALL_SERVICE"
+        android:foregroundServiceType="phoneCall">
       <meta-data
           android:name="android.telecom.IN_CALL_SERVICE_UI"
           android:value="true"/>

@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -1659,6 +1660,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     }
   }
 
+  @SuppressLint("MissingPermission")
   @Override
   public void onAudioStateChanged(CallAudioState audioState) {
     if (statusBarNotifier != null) {

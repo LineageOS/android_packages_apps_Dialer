@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2021 The LineageOS Project
+ * Copyright (C) 2019-2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package com.android.dialer.helplines;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.telephony.SubscriptionInfo;
@@ -27,6 +28,7 @@ import org.lineageos.lib.phone.spn.Item;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineItem>> {
@@ -50,7 +52,7 @@ public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineIte
         List<HelplineItem> helplineList = new ArrayList<>();
         /* when the network's and the user's country iso differ from each other,
          * include the iso code in the name so one can be sure that the number is the correct one
-         * (think of accidential roaming close to the country border) */
+         * (think of accidental roaming close to the country border) */
         boolean addCountryCode = false;
 
         List<SubscriptionInfo> subList = getSubscriptionInfos();
@@ -82,11 +84,12 @@ public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineIte
             }
         }
 
-        Collections.sort(helplineList, (a, b) -> a.getName().compareTo(b.getName()));
+        Collections.sort(helplineList, Comparator.comparing(HelplineItem::getName));
 
         return helplineList;
     }
 
+    @SuppressLint("MissingPermission")
     private List<SubscriptionInfo> getSubscriptionInfos() {
         List<SubscriptionInfo> subList = mSubManager.getActiveSubscriptionInfoList();
         if (subList == null) {
