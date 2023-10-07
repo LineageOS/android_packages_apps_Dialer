@@ -528,7 +528,6 @@ public class VideoCallFragment extends Fragment
     View view = getView();
     if (view != null) {
       // Code is more expressive with all flags present, even though some may be combined
-      // noinspection PointlessBitwiseExpression
       view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     }
   }

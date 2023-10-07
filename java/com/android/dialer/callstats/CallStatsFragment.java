@@ -99,7 +99,7 @@ public class CallStatsFragment extends Fragment implements
     setHasOptionsMenu(true);
 
     ExpirableCacheHeadlessFragment cacheFragment =
-        ExpirableCacheHeadlessFragment.attach((AppCompatActivity) getActivity());
+        ExpirableCacheHeadlessFragment.attach(getChildFragmentManager());
     mAdapter = new CallStatsAdapter(getActivity(),
         ContactsComponent.get(getActivity()).contactDisplayPreferences(),
         cacheFragment.getRetainedCache());
@@ -151,30 +151,22 @@ public class CallStatsFragment extends Fragment implements
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     final int itemId = item.getItemId();
-    switch (itemId) {
-      case R.id.date_filter: {
-        final DoubleDatePickerDialog.Fragment fragment =
-            new DoubleDatePickerDialog.Fragment();
-        fragment.setArguments(
-            DoubleDatePickerDialog.Fragment.createArguments(mFilterFrom, mFilterTo));
-        fragment.show(getParentFragmentManager(), "filter");
-        break;
-      }
-      case R.id.reset_date_filter: {
-        mFilterFrom = -1;
-        mFilterTo = -1;
-        fetchCalls();
-        updateEmptyVisibilityAndMessage();
-        getActivity().invalidateOptionsMenu();
-        break;
-      }
-      case R.id.sort_by_duration:
-      case R.id.sort_by_count: {
-        mSortByDuration = itemId == R.id.sort_by_duration;
-        mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
-        getActivity().invalidateOptionsMenu();
-        break;
-      }
+    if (itemId == R.id.date_filter) {
+      final DoubleDatePickerDialog.Fragment fragment =
+              new DoubleDatePickerDialog.Fragment();
+      fragment.setArguments(
+              DoubleDatePickerDialog.Fragment.createArguments(mFilterFrom, mFilterTo));
+      fragment.show(getParentFragmentManager(), "filter");
+    } else if (itemId == R.id.reset_date_filter) {
+      mFilterFrom = -1;
+      mFilterTo = -1;
+      fetchCalls();
+      updateEmptyVisibilityAndMessage();
+      requireActivity().invalidateOptionsMenu();
+    } else if (itemId == R.id.sort_by_duration || itemId == R.id.sort_by_count) {
+      mSortByDuration = itemId == R.id.sort_by_duration;
+      mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
+      requireActivity().invalidateOptionsMenu();
     }
     return true;
   }

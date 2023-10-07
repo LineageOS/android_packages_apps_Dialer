@@ -93,6 +93,7 @@ public class CallUtil {
   /**
    * Returns a list of phone accounts that are able to call to numbers with the supplied scheme
    */
+  @SuppressLint("MissingPermission")
   public static List<PhoneAccount> getCallCapablePhoneAccounts(Context context, String scheme) {
     if (!PermissionsUtil.hasPermission(context, android.Manifest.permission.READ_PHONE_STATE)) {
       return null;

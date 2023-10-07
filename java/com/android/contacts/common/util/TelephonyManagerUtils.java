@@ -15,6 +15,7 @@
  */
 package com.android.contacts.common.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
@@ -27,6 +28,7 @@ public class TelephonyManagerUtils {
    * @param context Current application context
    * @return Voicemail tag, the alphabetic identifier associated with the voice mail number.
    */
+  @SuppressLint("MissingPermission")
   public static String getVoiceMailAlphaTag(Context context) {
     final TelephonyManager telephonyManager =
         (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);

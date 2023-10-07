@@ -42,7 +42,6 @@ public class InCallUIMaterialColorMapUtils extends MaterialColorMapUtils {
   /**
    * {@link Resources#getColor(int) used for compatibility
    */
-  @SuppressWarnings("deprecation")
   public static MaterialPalette getDefaultPrimaryAndSecondaryColors(Context context) {
     final int primaryColor = ThemeComponent.get(context).theme().getColorPrimary();
     final int secondaryColor = ThemeComponent.get(context).theme().getColorPrimaryDark();

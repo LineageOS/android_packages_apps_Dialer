@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +17,13 @@
 
 package com.android.dialer.smartdial;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+
+import androidx.loader.content.AsyncTaskLoader;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;

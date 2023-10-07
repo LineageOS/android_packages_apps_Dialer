@@ -152,13 +152,13 @@
       android:layout_height="1dp"
       android:background="@android:color/transparent"/>
 
-  <androidx.legacy.widget.Space
+  <android.widget.Space
       android:layout_width="match_parent"
       android:layout_height="@dimen/dialpad_space_above_keys"/>
 
   <include layout="@layout/dialpad"/>
 
-  <androidx.legacy.widget.Space
+  <android.widget.Space
       android:layout_width="match_parent"
       android:layout_height="@dimen/dialpad_space_below_keys"/>
 

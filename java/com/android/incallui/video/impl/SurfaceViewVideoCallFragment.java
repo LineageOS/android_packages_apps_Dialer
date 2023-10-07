@@ -475,8 +475,11 @@ public class SurfaceViewVideoCallFragment extends Fragment
 
   private Point getPreviewOffsetStartShown() {
     // No insets in multiwindow mode, and rootWindowInsets will get the display's insets.
-    if (getActivity().isInMultiWindowMode()) {
+    if (requireActivity().isInMultiWindowMode()) {
       return new Point();
+    }
+    if (getView() == null) {
+      return null;
     }
     if (isLandscape()) {
       int stableInsetEnd =
