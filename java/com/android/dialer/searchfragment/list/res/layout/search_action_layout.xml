@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2023 The LineageOS Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,27 +15,28 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="48dp">
 
-  <ImageView
-      android:id="@+id/search_action_image"
-      android:layout_width="48dp"
-      android:layout_height="48dp"
-      android:layout_marginStart="8dp"
-      android:layout_gravity="center_vertical|start"
-      android:padding="12dp"
-      android:tint="?colorIcon"/>
+    <ImageView
+        android:id="@+id/search_action_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|start"
+        android:layout_marginStart="8dp"
+        android:padding="12dp"
+        app:tint="?colorIcon" />
 
-  <TextView
-      android:id="@+id/search_action_text"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="72dp"
-      android:layout_marginEnd="16dp"
-      android:layout_gravity="center_vertical"
-      style="@style/Dialer.TextAppearance.Primary"/>
+    <TextView
+        android:id="@+id/search_action_text"
+        style="@style/Dialer.TextAppearance.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="16dp" />
 </FrameLayout>

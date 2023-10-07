@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2023 The LineageOS Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -37,7 +38,7 @@
      anchor video buttons. This is needed in greenscreen mode when the
      preview is fullscreen but we want the controls to be positioned as
      normal.  -->
-  <Space
+  <android.widget.Space
     android:id="@+id/videocall_video_preview_placeholder"
     android:layout_width="@dimen/videocall_preview_width"
     android:layout_height="@dimen/videocall_preview_long"

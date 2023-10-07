@@ -34,13 +34,14 @@ import android.view.animation.Interpolator;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.android.dialer.R;
 import com.android.incallui.answer.impl.utils.FlingAnimationUtils;
 import com.android.incallui.answer.impl.utils.Interpolators;
 
 /** Button that allows swiping to trigger */
-public class SwipeButtonView extends ImageView {
+public class SwipeButtonView extends AppCompatImageView {
 
   private static final long CIRCLE_APPEAR_DURATION = 80;
   private static final long CIRCLE_DISAPPEAR_MAX_DURATION = 200;
@@ -111,11 +112,7 @@ public class SwipeButtonView extends ImageView {
   }
 
   public SwipeButtonView(Context context, AttributeSet attrs, int defStyleAttr) {
-    this(context, attrs, defStyleAttr, 0);
-  }
-
-  public SwipeButtonView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-    super(context, attrs, defStyleAttr, defStyleRes);
+    super(context, attrs, defStyleAttr);
     circlePaint = new Paint();
     circlePaint.setAntiAlias(true);
     circleColor = 0xffffffff;

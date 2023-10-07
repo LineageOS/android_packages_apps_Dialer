@@ -20,6 +20,7 @@ import android.app.Notification;
 import android.bluetooth.BluetoothDevice;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
 import android.os.Looper;
 import android.telecom.InCallService;
 
@@ -176,7 +177,7 @@ public class TelecomAdapter implements InCallServiceListener {
   public void startForegroundNotification(int id, Notification notification) {
     Assert.isNotNull(
         inCallService, "No inCallService available for starting foreground notification");
-    inCallService.startForeground(id, notification);
+    inCallService.startForeground(id, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_PHONE_CALL);
   }
 
   /**

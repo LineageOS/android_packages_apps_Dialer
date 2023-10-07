@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<!--
+     Copyright (C) 2008 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,103 +17,103 @@
 -->
 
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:layout_width="match_parent"
-  android:layout_height="64dp"
-  android:paddingStart="16dp"
-  android:paddingEnd="8dp"
-  android:gravity="center_vertical"
-  android:orientation="horizontal">
-
-  <!-- Caller information -->
-  <LinearLayout
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingEnd="8dp">
 
-    <ImageView
-      android:id="@+id/callerPhoto"
-      android:layout_width="@dimen/contact_browser_list_item_photo_size"
-      android:layout_height="@dimen/contact_browser_list_item_photo_size"/>
-
+    <!-- Caller information -->
     <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:paddingBottom="2dp"
-      android:gravity="center_vertical"
-      android:orientation="vertical">
-
-      <!-- Name or number of this caller -->
-      <TextView
-        android:id="@+id/conferenceCallerName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginEnd="2dp"
-        android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/conference_call_manager_caller_name_text_color"
-        android:textSize="16sp"/>
-
-      <!-- Number of this caller if name is supplied above -->
-      <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <!-- Status (only support on hold now) -->
-        <TextView
-            android:id="@+id/conferenceCallerStatus"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/callerPhoto"
+            android:layout_width="@dimen/contact_browser_list_item_photo_size"
+            android:layout_height="@dimen/contact_browser_list_item_photo_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Dialer.TextAppearance.Secondary"
-            android:enabled="false"
-            android:visibility="gone"/>
+            android:layout_marginStart="16dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="2dp">
 
-        <!-- Number -->
-        <TextView
-          android:id="@+id/conferenceCallerNumber"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="8dp"
-          android:ellipsize="marquee"
-          android:singleLine="true"
-          android:textColor="@color/conference_call_manager_secondary_text_color"
-          android:textSize="14sp"/>
+            <!-- Name or number of this caller -->
+            <TextView
+                android:id="@+id/conferenceCallerName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="2dp"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/conference_call_manager_caller_name_text_color"
+                android:textSize="16sp" />
 
-      </LinearLayout>  <!-- End of caller number -->
+            <!-- Number of this caller if name is supplied above -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="horizontal">
 
-    </LinearLayout>  <!-- End of caller information -->
+                <!-- Status (only support on hold now) -->
+                <TextView
+                    android:id="@+id/conferenceCallerStatus"
+                    style="@style/Dialer.TextAppearance.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:visibility="gone" />
 
-  </LinearLayout>
+                <!-- Number -->
+                <TextView
+                    android:id="@+id/conferenceCallerNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:textColor="@color/conference_call_manager_secondary_text_color"
+                    android:textSize="14sp" />
 
-  <!-- "Separate" (i.e. "go private") button for this caller -->
-  <ImageView
-    android:id="@+id/conferenceCallerSeparate"
-    android:layout_width="@dimen/conference_call_manager_button_dimension"
-    android:layout_height="@dimen/conference_call_manager_button_dimension"
-    android:background="?android:attr/selectableItemBackgroundBorderless"
-    android:clickable="true"
-    android:contentDescription="@string/goPrivate"
-    android:scaleType="center"
-    android:src="@drawable/quantum_ic_call_split_vd_theme_24"
-    app:tint="?colorIcon" />
+            </LinearLayout>  <!-- End of caller number -->
 
-  <!-- "Disconnect" button which terminates the connection with this caller. -->
-  <ImageButton
-    android:id="@+id/conferenceCallerDisconnect"
-    android:layout_width="@dimen/conference_call_manager_button_dimension"
-    android:layout_height="@dimen/conference_call_manager_button_dimension"
-    android:layout_marginStart="8dp"
-    android:background="?android:attr/selectableItemBackgroundBorderless"
-    android:clickable="true"
-    android:contentDescription="@string/conference_caller_disconnect_content_description"
-    android:scaleType="center"
-    android:src="@drawable/quantum_ic_call_end_vd_theme_24"
-    android:tint="?colorIcon"/>
+        </LinearLayout>  <!-- End of caller information -->
+
+    </LinearLayout>
+
+    <!-- "Separate" (i.e. "go private") button for this caller -->
+    <ImageView
+        android:id="@+id/conferenceCallerSeparate"
+        android:layout_width="@dimen/conference_call_manager_button_dimension"
+        android:layout_height="@dimen/conference_call_manager_button_dimension"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="@string/goPrivate"
+        android:scaleType="center"
+        android:src="@drawable/quantum_ic_call_split_vd_theme_24"
+        app:tint="?colorIcon" />
+
+    <!-- "Disconnect" button which terminates the connection with this caller. -->
+    <ImageButton
+        android:id="@+id/conferenceCallerDisconnect"
+        android:layout_width="@dimen/conference_call_manager_button_dimension"
+        android:layout_height="@dimen/conference_call_manager_button_dimension"
+        android:layout_marginStart="8dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="@string/conference_caller_disconnect_content_description"
+        android:scaleType="center"
+        android:src="@drawable/quantum_ic_call_end_vd_theme_24"
+        app:tint="?colorIcon" />
 
 </LinearLayout>  <!-- End of single list element -->

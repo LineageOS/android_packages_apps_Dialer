@@ -137,7 +137,7 @@ public class SelfManagedAnswerVideoCallScreen extends StateCallback implements V
 
     try {
       manager.openCamera(cameraId, this, null);
-    } catch (CameraAccessException e) {
+    } catch (CameraAccessException | SecurityException e) {
       LogUtil.e("SelfManagedAnswerVideoCallScreen.openCamera", "failed to open camera", e);
     }
   }

@@ -50,4 +50,10 @@ public interface AsyncTaskExecutor {
    */
   @MainThread
   <T> AsyncTask<T, ?, ?> submit(Object identifier, AsyncTask<T, ?, ?> task, T... params);
+
+  @MainThread
+  void submit(Object identifier, Runnable runnable);
+
+  @MainThread
+  void submit(Object identifier, Runnable runnable, Runnable postExecuteRunnable);
 }

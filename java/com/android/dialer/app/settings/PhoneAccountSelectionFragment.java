@@ -16,6 +16,7 @@
 
 package com.android.dialer.app.settings;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.drawable.Icon;
@@ -36,7 +37,7 @@ import java.util.List;
  * Preference screen that lists SIM phone accounts to select from, and forwards the selected account
  * to {@link #PARAM_TARGET_FRAGMENT}. Can only be used in a {@link PreferenceActivity}
  */
-public class PhoneAccountSelectionFragment extends DialerPreferenceFragment {
+public class PhoneAccountSelectionFragment extends PreferenceFragmentCompat {
 
   /** The {@link PreferenceFragmentCompat} to launch after the account is selected. */
   public static final String PARAM_TARGET_FRAGMENT = "target_fragment";
@@ -104,13 +105,14 @@ public class PhoneAccountSelectionFragment extends DialerPreferenceFragment {
     }
   }
 
+  @SuppressLint("MissingPermission")
   @Override
   public void onResume() {
     super.onResume();
-    setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
+    setPreferenceScreen(getPreferenceManager().createPreferenceScreen(requireContext()));
     PreferenceScreen screen = getPreferenceScreen();
 
-    TelecomManager telecomManager = getContext().getSystemService(TelecomManager.class);
+    TelecomManager telecomManager = requireContext().getSystemService(TelecomManager.class);
 
     List<PhoneAccountHandle> accountHandles = telecomManager.getCallCapablePhoneAccounts();
 

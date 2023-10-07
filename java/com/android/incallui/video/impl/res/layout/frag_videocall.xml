@@ -14,6 +14,7 @@
      limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -45,11 +46,11 @@
     android:accessibilityTraversalBefore="@+id/videocall_speaker_button"
     android:drawablePadding="8dp"
     android:drawableTop="@drawable/quantum_ic_videocam_off_vd_theme_24"
-    android:drawableTint="?colorIcon"
     android:padding="64dp"
     android:text="@string/videocall_remote_video_off"
     android:textAppearance="@style/Dialer.Incall.TextAppearance"
     android:visibility="gone"
+    app:drawableTint="?colorIcon"
     tools:visibility="visible"/>
 
   <View
@@ -100,11 +101,11 @@
     android:layout_alignTop="@+id/videocall_video_preview"
     android:scaleType="center"
     android:src="@drawable/quantum_ic_videocam_off_vd_theme_24"
-    android:tint="?colorIcon"
     android:tintMode="src_in"
     android:visibility="gone"
     android:importantForAccessibility="no"
-    tools:visibility="visible"/>
+    tools:visibility="visible"
+    app:tint="?colorIcon" />
 
   <ImageView
     android:id="@+id/videocall_video_preview_mute_overlay"
@@ -116,9 +117,9 @@
     android:contentDescription="@string/incall_content_description_muted"
     android:scaleType="center"
     android:src="@drawable/quantum_ic_mic_off_vd_theme_24"
-    android:tint="@android:color/black"
     android:visibility="gone"
-    tools:visibility="visible"/>
+    tools:visibility="visible"
+    app:tint="@android:color/black" />
 
   <include
     layout="@layout/videocall_controls"

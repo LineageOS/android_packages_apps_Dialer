@@ -123,7 +123,12 @@ public class ShortcutUsageReporter {
           return null; // No contact for dialed number
         }
         // Arbitrarily use first result.
-        return cursor.getString(cursor.getColumnIndex(Contacts.LOOKUP_KEY));
+        int index = cursor.getColumnIndex(Contacts.LOOKUP_KEY);
+        if (index >= 0) {
+          return cursor.getString(index);
+        } else {
+          return null;
+        }
       }
     }
   }

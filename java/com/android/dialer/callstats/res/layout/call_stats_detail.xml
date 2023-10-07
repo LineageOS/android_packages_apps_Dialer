@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!--
+     Copyright (C) 2009 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,118 +15,119 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/call_stats_detail"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical"
-  android:layout_alignParentStart="true"
-  android:layout_alignParentTop="true"
-  android:background="?android:attr/colorBackground">
-
-  <com.android.dialer.widget.DialerToolbar
-    android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical">
 
-  <!-- Caller information "card" -->
-  <LinearLayout
-    android:id="@+id/caller_information"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/call_details_top_margin"
-    android:paddingStart="@dimen/contact_container_padding_top_start"
-    android:paddingEnd="@dimen/contact_container_padding_bottom_end"
-    android:paddingTop="@dimen/contact_container_padding_top_start"
-    android:paddingBottom="@dimen/contact_container_padding_bottom_end"
-    android:baselineAligned="false"
-    android:orientation="horizontal"
-    android:focusable="true">
+    <com.android.dialer.widget.DialerToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <QuickContactBadge
-      android:id="@+id/quick_contact_photo"
-      android:layout_width="@dimen/contact_photo_size"
-      android:layout_height="@dimen/contact_photo_size"
-      android:layout_gravity="center_vertical"
-      android:focusable="true" />
-
+    <!-- Caller information "card" -->
     <LinearLayout
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:layout_gravity="center_vertical"
-      android:orientation="vertical"
-      android:layout_marginStart="@dimen/photo_text_margin">
-
-      <TextView
-        android:id="@+id/caller_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/caller_information"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Dialer.TextAppearance.Primary" />
+        android:layout_marginTop="@dimen/call_details_top_margin"
+        android:baselineAligned="false"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/contact_container_padding_top_start"
+        android:paddingTop="@dimen/contact_container_padding_top_start"
+        android:paddingEnd="@dimen/contact_container_padding_bottom_end"
+        android:paddingBottom="@dimen/contact_container_padding_bottom_end">
 
-      <TextView
-        android:id="@+id/caller_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Dialer.TextAppearance.Secondary" />
+        <QuickContactBadge
+            android:id="@+id/quick_contact_photo"
+            android:layout_width="@dimen/contact_photo_size"
+            android:layout_height="@dimen/contact_photo_size"
+            android:layout_gravity="center_vertical"
+            android:focusable="true" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/photo_text_margin"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/caller_name"
+                style="@style/Dialer.TextAppearance.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/caller_number"
+                style="@style/Dialer.TextAppearance.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/call_back_button"
+            android:layout_width="@dimen/call_back_button_size"
+            android:layout_height="@dimen/call_back_button_size"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/call"
+            android:scaleType="center"
+            android:src="@drawable/quantum_ic_call_vd_theme_24"
+            android:visibility="gone"
+            app:tint="?android:attr/textColorSecondary" />
 
     </LinearLayout>
 
-    <ImageView
-      android:id="@+id/call_back_button"
-      android:layout_width="@dimen/call_back_button_size"
-      android:layout_height="@dimen/call_back_button_size"
-      android:background="?android:attr/selectableItemBackgroundBorderless"
-      android:src="@drawable/quantum_ic_call_vd_theme_24"
-      android:scaleType="center"
-      android:contentDescription="@string/call"
-      android:visibility="gone"
-      app:tint="?android:attr/textColorSecondary" />
-
-  </LinearLayout>
-
-  <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
-
-      <!-- The actual details -->
-      <include layout="@layout/call_stats_detail_info" />
-
-      <View
-        android:id="@+id/separator"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/out_average"
-        android:layout_marginTop="@dimen/ec_divider_top_bottom_margin"
-        android:layout_marginBottom="@dimen/ec_divider_top_bottom_margin"
-        android:background="#12000000" />
+        android:layout_height="match_parent">
 
-      <TextView
-        android:id="@+id/call_detail_action_copy"
-        style="@style/CallDetailsActionItemStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/quantum_ic_content_copy_vd_theme_24"
-        android:text="@string/call_details_copy_number"
-        android:drawableTint="?colorIcon"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-      <TextView
-        android:id="@+id/call_detail_action_edit_before_call"
-        style="@style/CallDetailsActionItemStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/quantum_ic_edit_vd_theme_24"
-        android:text="@string/call_details_edit_number"
-        android:drawableTint="?colorIcon"/>
+            <!-- The actual details -->
+            <include layout="@layout/call_stats_detail_info" />
 
-    </LinearLayout>
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/out_average"
+                android:layout_marginTop="@dimen/ec_divider_top_bottom_margin"
+                android:layout_marginBottom="@dimen/ec_divider_top_bottom_margin"
+                android:background="#12000000" />
 
-  </ScrollView>
+            <TextView
+                android:id="@+id/call_detail_action_copy"
+                style="@style/CallDetailsActionItemStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/call_details_copy_number"
+                app:drawableStartCompat="@drawable/quantum_ic_content_copy_vd_theme_24"
+                app:drawableTint="?colorIcon" />
+
+            <TextView
+                android:id="@+id/call_detail_action_edit_before_call"
+                style="@style/CallDetailsActionItemStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/call_details_edit_number"
+                app:drawableStartCompat="@drawable/quantum_ic_edit_vd_theme_24"
+                app:drawableTint="?colorIcon" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
