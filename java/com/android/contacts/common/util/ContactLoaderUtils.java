@@ -36,7 +36,6 @@ public final class ContactLoaderUtils {
    *
    * <p>Do not call from the UI thread.
    */
-  @SuppressWarnings("deprecation")
   public static Uri ensureIsContactUri(final ContentResolver resolver, final Uri uri)
       throws IllegalArgumentException {
     if (uri == null) {

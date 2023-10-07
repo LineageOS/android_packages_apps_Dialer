@@ -16,6 +16,7 @@
 
 package com.android.dialer.lookup;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -37,6 +38,8 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.Contacts;
 import android.provider.Settings;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.phonenumbercache.ContactInfo;
@@ -251,21 +254,22 @@ public class LookupProvider extends ContentProvider {
    *
    * @return The last location
    */
+  @SuppressLint("MissingPermission")
   private Location getLastLocation() {
-    LocationManager locationManager = getContext().getSystemService(LocationManager.class);
+    LocationManager locationManager = requireContext().getSystemService(LocationManager.class);
 
     try {
       locationManager.requestSingleUpdate(new Criteria(), new LocationListener() {
         @Override
-        public void onLocationChanged(Location location) {
+        public void onLocationChanged(@NonNull Location location) {
         }
 
         @Override
-        public void onProviderDisabled(String provider) {
+        public void onProviderDisabled(@NonNull String provider) {
         }
 
         @Override
-        public void onProviderEnabled(String provider) {
+        public void onProviderEnabled(@NonNull String provider) {
         }
 
         @Override

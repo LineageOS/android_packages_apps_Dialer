@@ -260,7 +260,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         new MainSpeedDialFragmentHost(
             toolbar,
             activity.findViewById(R.id.root_layout),
-            activity.findViewById(R.id.coordinator_layout),
+            (ViewGroup) snackbarContainer,
             activity.findViewById(R.id.fragment_container));
 
     lastTabController = new LastTabController(activity, bottomNav, showVoicemailTab);
