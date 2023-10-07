@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +18,8 @@ package com.android.dialer.app.calllog;
 
 import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_MISSED_WORK_CALL_TITLE;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
-import android.app.Notification.Builder;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -46,8 +47,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import com.android.contacts.common.ContactsUtils;
+import com.android.dialer.R;
 import com.android.dialer.app.MainComponent;
-import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
 import com.android.dialer.callintent.CallInitiationType;
@@ -365,7 +366,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   }
 
   private Notification.Builder createNotificationBuilder() {
-    return new Notification.Builder(context)
+    return new Notification.Builder(context, NotificationChannelId.MISSED_CALL)
         .setGroup(MissedCallConstants.GROUP_KEY)
         .setSmallIcon(android.R.drawable.stat_notify_missed_call)
         .setColor(ThemeComponent.get(context).theme().getColorPrimary())
@@ -376,16 +377,13 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   }
 
   private Notification.Builder createNotificationBuilder(@NonNull NewCall call) {
-    Builder builder =
-        createNotificationBuilder()
-            .setWhen(call.dateMs)
-            .setDeleteIntent(
-                CallLogNotificationsService.createCancelSingleMissedCallPendingIntent(
-                    context, call.callsUri))
-            .setContentIntent(createCallLogPendingIntent(call.callsUri))
-            .setChannelId(NotificationChannelId.MISSED_CALL);
-
-    return builder;
+    return createNotificationBuilder()
+        .setWhen(call.dateMs)
+        .setDeleteIntent(
+            CallLogNotificationsService.createCancelSingleMissedCallPendingIntent(
+                context, call.callsUri))
+        .setContentIntent(createCallLogPendingIntent(call.callsUri))
+        .setChannelId(NotificationChannelId.MISSED_CALL);
   }
 
   /** Trigger an intent to make a call from a missed call number. */
@@ -462,6 +460,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   }
 
   /** Closes open system dialogs and the notification shade. */
+  @SuppressLint("MissingPermission")
   private void closeSystemDialogs(Context context) {
     context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
   }

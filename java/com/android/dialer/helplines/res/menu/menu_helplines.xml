@@ -14,10 +14,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_helpline_help"
         android:icon="@drawable/ic_help"
-        android:showAsAction="always"
-        android:title="@string/helplines_help" />
+        android:title="@string/helplines_help"
+        app:showAsAction="always" />
 </menu>

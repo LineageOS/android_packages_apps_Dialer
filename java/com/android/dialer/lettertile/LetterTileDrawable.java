@@ -52,7 +52,8 @@ public class LetterTileDrawable extends Drawable {
    * #TYPE_BUSINESS}, and voicemail contacts should use {@link #TYPE_VOICEMAIL}.
    */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({TYPE_PERSON, TYPE_BUSINESS, TYPE_VOICEMAIL, TYPE_GENERIC_AVATAR, TYPE_SPAM})
+  @IntDef({TYPE_PERSON, TYPE_BUSINESS, TYPE_VOICEMAIL, TYPE_GENERIC_AVATAR, TYPE_SPAM,
+          TYPE_CONFERENCE})
   public @interface ContactType {}
 
   /** Contact type constants */

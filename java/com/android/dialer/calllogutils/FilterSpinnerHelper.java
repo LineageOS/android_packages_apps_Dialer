@@ -15,6 +15,7 @@
  */
 package com.android.dialer.calllogutils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.provider.CallLog;
 import android.telecom.PhoneAccountHandle;
@@ -82,6 +83,7 @@ public class FilterSpinnerHelper implements AdapterView.OnItemSelectedListener {
     return spinner;
   }
 
+  @SuppressLint("MissingPermission")
   private ArrayAdapter<AccountItem> createAccountAdapter(Context context) {
     ArrayList<AccountItem> items = new ArrayList<>();
     items.add(new AccountItem(null, context.getString(R.string.call_log_show_all_accounts)));

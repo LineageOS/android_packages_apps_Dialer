@@ -71,7 +71,7 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <Space
+    <android.widget.Space
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:layout_weight="1"/>
@@ -83,7 +83,7 @@
       android:src="@drawable/quantum_ic_volume_down_vd_theme_24"
       app:tint="?colorIcon"/>
 
-    <Space
+    <android.widget.Space
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:layout_weight="1"/>
@@ -94,7 +94,7 @@
       android:contentDescription="@string/voicemail_play_start_pause"
       android:src="@drawable/quantum_ic_play_arrow_vd_theme_24"/>
 
-    <Space
+    <android.widget.Space
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:layout_weight="1"/>
@@ -106,7 +106,7 @@
       android:src="@drawable/quantum_ic_delete_vd_theme_24"
       app:tint="?colorIcon"/>
 
-    <Space
+    <android.widget.Space
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:layout_weight="1"/>

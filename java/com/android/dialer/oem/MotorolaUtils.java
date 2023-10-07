@@ -29,7 +29,7 @@ public class MotorolaUtils {
 
   // This is used to check if a Motorola device supports HD voice call feature, which comes from
   // system feature setting.
-  private static final String HD_CALL_FEATRURE = "com.motorola.software.sprint.hd_call";
+  private static final String HD_CALL_FEATURE = "com.motorola.software.sprint.hd_call";
   // This is used to check if a Motorola device supports WiFi call feature, by checking if a certain
   // package is enabled.
   private static final String WIFI_CALL_PACKAGE_NAME = "com.motorola.sprintwfc";
@@ -112,7 +112,7 @@ public class MotorolaUtils {
   private static boolean isSupportingSprintHdCodec(Context context) {
     return isSpnMatched(context)
         && context.getResources().getBoolean(R.bool.motorola_sprint_hd_codec)
-        && context.getPackageManager().hasSystemFeature(HD_CALL_FEATRURE);
+        && context.getPackageManager().hasSystemFeature(HD_CALL_FEATURE);
   }
 
   private static boolean isSupportingSprintWifiCall(Context context) {

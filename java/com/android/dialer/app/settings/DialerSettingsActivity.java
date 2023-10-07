@@ -15,6 +15,7 @@
  */
 package com.android.dialer.app.settings;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -200,6 +201,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
    *     having a empty SIM slot still count as a PhoneAccountHandle that is "invalid", and
    *     voicemail settings should still be available for it.
    */
+  @SuppressLint("MissingPermission")
   @Nullable
   private PhoneAccountHandle getSoleSimAccount() {
     TelecomManager telecomManager = getSystemService(TelecomManager.class);

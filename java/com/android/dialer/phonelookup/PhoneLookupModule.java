@@ -31,7 +31,7 @@ import dagger.Provides;
 public abstract class PhoneLookupModule {
 
   @Provides
-  @SuppressWarnings({"unchecked", "rawtype"})
+  @SuppressWarnings("rawtypes")
   static ImmutableList<PhoneLookup> providePhoneLookupList(
       CequintPhoneLookup cequintPhoneLookup,
       CnapPhoneLookup cnapPhoneLookup,

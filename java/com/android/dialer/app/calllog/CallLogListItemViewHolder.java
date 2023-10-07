@@ -227,7 +227,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public CharSequence dayGroupHeaderText;
   public boolean isAttachedToWindow;
 
-  public AsyncTask<Void, Void, ?> asyncTask;
+  public CallLogAdapter.LoadDataTaskInterface asyncTask;
   private CallDetailsEntries callDetailsEntries;
 
   private CallLogListItemViewHolder(

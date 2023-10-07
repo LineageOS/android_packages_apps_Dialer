@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,6 +123,7 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
   @Override
   public void onRequestPermissionsResult(
       int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     if (permissions.length > 0 && permissions[0].equals(permission.SEND_SMS)) {
       PermissionsUtil.permissionRequested(this, permissions[0]);
     }

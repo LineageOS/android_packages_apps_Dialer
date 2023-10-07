@@ -116,7 +116,7 @@
 
   </androidx.cardview.widget.CardView>
 
-  <Space
+  <android.widget.Space
       android:layout_width="match_parent"
       android:layout_height="16dp"/>
 
@@ -221,7 +221,7 @@
 
   </androidx.cardview.widget.CardView>
 
-  <Space
+  <android.widget.Space
       android:layout_width="match_parent"
       android:layout_height="16dp"/>
 

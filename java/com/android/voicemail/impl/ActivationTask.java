@@ -16,6 +16,7 @@
 
 package com.android.voicemail.impl;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -272,6 +273,7 @@ public class ActivationTask extends BaseTask {
     context.sendBroadcast(intent);
   }
 
+  @SuppressLint("MissingPermission")
   private static boolean hasSignal(Context context, PhoneAccountHandle phoneAccountHandle) {
     TelephonyManager telephonyManager =
         context
