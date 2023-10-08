@@ -96,10 +96,6 @@ android_app {
         "--extra-packages com.android.voicemail.impl",
         "--extra-packages com.android.voicemail.impl.configui",
     ],
-    additional_manifests: [
-        "assets/quantum/AndroidManifest.xml",
-        "java/**/AndroidManifest.xml",
-    ],
     aidl: {
         local_include_dirs: ["java"],
     },
