@@ -25,4 +25,19 @@
   <color name="nav_item">@android:color/system_neutral1_600</color>
   <color name="dialer_pill_color">@android:color/system_accent2_200</color>
   <color name="dialer_fab_icon_color">#ffffffff</color>
+
+  <!-- Material next state on color-->
+  <color name="state_on_color">@android:color/system_accent3_100</color>
+
+  <!-- Material next thumb disable color-->
+  <color name="thumb_disabled_color">@android:color/black</color>
+
+  <!-- Material next thumb off color-->
+  <color name="thumb_off_color">@color/dialer_background_color</color>
+
+  <!-- Material next track on color-->
+  <color name="track_on_color">@color/dialer_theme_color</color>
+
+  <!-- Material next track off color-->
+  <color name="track_off_color">@android:color/system_neutral2_500</color>
 </resources>
