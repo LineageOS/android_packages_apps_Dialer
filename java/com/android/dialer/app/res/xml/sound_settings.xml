@@ -17,73 +17,80 @@
   ~ limitations under the License
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <com.android.dialer.app.settings.DefaultRingtonePreference
-    android:dialogTitle="@string/ringtone_title"
-    android:key="@string/ringtone_preference_key"
-    android:persistent="false"
-    android:ringtoneType="ringtone"
-    android:title="@string/ringtone_title"/>
-
-  <SwitchPreferenceCompat
-    android:defaultValue="false"
-    android:key="@string/vibrate_on_preference_key"
-    android:persistent="false"
-    android:title="@string/vibrate_on_ring_title"/>
-
-  <SwitchPreferenceCompat
-    android:defaultValue="true"
-    android:key="@string/play_dtmf_preference_key"
-    android:persistent="false"
-    android:title="@string/dtmf_tone_enable_title"/>
-
-  <ListPreference
-    android:entries="@array/dtmf_tone_length_entries"
-    android:entryValues="@array/dtmf_tone_length_entry_values"
-    android:key="@string/dtmf_tone_length_preference_key"
-    android:title="@string/dtmf_tone_length_title"/>
-
-  <PreferenceCategory
-    android:key="@string/incall_category_key"
-    android:title="@string/incall_category_title">
+    <com.android.dialer.app.settings.DefaultRingtonePreference
+        android:dialogTitle="@string/ringtone_title"
+        android:key="@string/ringtone_preference_key"
+        android:persistent="false"
+        android:ringtoneType="ringtone"
+        android:title="@string/ringtone_title"
+        android:summary="&#x20;"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:defaultValue="false"
-        android:key="incall_enable_dnd"
-        android:title="@string/incall_enable_dnd_title"/>
+        android:key="@string/vibrate_on_preference_key"
+        android:persistent="false"
+        android:title="@string/vibrate_on_ring_title" />
 
     <SwitchPreferenceCompat
-      android:key="@string/incall_vibrate_outgoing_key"
-      android:title="@string/incall_vibrate_outgoing_title" />
-
-    <SwitchPreferenceCompat
-      android:key="@string/incall_vibrate_call_waiting_key"
-      android:title="@string/incall_vibrate_call_waiting_title" />
-
-    <SwitchPreferenceCompat
-      android:key="@string/incall_vibrate_hangup_key"
-      android:title="@string/incall_vibrate_hangup_title" />
-
-    <SwitchPreferenceCompat
-      android:key="@string/incall_vibrate_45_key"
-      android:title="@string/incall_vibrate_45_title"
-      android:summary="@string/incall_vibrate_45_summary" />
-
-  </PreferenceCategory>
-
-  <PreferenceCategory
-    android:key="@string/call_recording_category_key"
-    android:title="@string/call_recording_category_title">
+        android:defaultValue="true"
+        android:key="@string/play_dtmf_preference_key"
+        android:persistent="false"
+        android:title="@string/dtmf_tone_enable_title" />
 
     <ListPreference
-      android:key="@string/call_recording_format_key"
-      android:title="@string/call_recording_format"
-      android:summary="%s"
-      android:entries="@array/call_recording_encoder_entries"
-      android:entryValues="@array/call_recording_encoder_values"
-      android:defaultValue="0" />
+        android:entries="@array/dtmf_tone_length_entries"
+        android:entryValues="@array/dtmf_tone_length_entry_values"
+        android:key="@string/dtmf_tone_length_preference_key"
+        android:title="@string/dtmf_tone_length_title"
+        app:iconSpaceReserved="false" />
 
-  </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/incall_category_key"
+        android:title="@string/incall_category_title"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="incall_enable_dnd"
+            android:title="@string/incall_enable_dnd_title" />
+
+        <SwitchPreferenceCompat
+            android:key="@string/incall_vibrate_outgoing_key"
+            android:title="@string/incall_vibrate_outgoing_title" />
+
+        <SwitchPreferenceCompat
+            android:key="@string/incall_vibrate_call_waiting_key"
+            android:title="@string/incall_vibrate_call_waiting_title" />
+
+        <SwitchPreferenceCompat
+            android:key="@string/incall_vibrate_hangup_key"
+            android:title="@string/incall_vibrate_hangup_title" />
+
+        <SwitchPreferenceCompat
+            android:key="@string/incall_vibrate_45_key"
+            android:summary="@string/incall_vibrate_45_summary"
+            android:title="@string/incall_vibrate_45_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/call_recording_category_key"
+        android:title="@string/call_recording_category_title"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/call_recording_encoder_entries"
+            android:entryValues="@array/call_recording_encoder_values"
+            android:key="@string/call_recording_format_key"
+            android:summary="%s"
+            android:title="@string/call_recording_format"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
