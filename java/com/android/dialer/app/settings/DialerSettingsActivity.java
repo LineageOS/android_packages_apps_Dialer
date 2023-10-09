@@ -125,6 +125,7 @@ public class DialerSettingsActivity extends AppCompatActivity implements
         Preference displayOptions = new Preference(getContext());
         displayOptions.setTitle(R.string.display_options_title);
         displayOptions.setFragment(DisplayOptionsSettingsFragment.class.getName());
+        displayOptions.setIconSpaceReserved(false);
         getPreferenceScreen().addPreference(displayOptions);
       }
 
@@ -132,6 +133,7 @@ public class DialerSettingsActivity extends AppCompatActivity implements
       soundSettings.setTitle(R.string.sounds_and_vibration_title);
       soundSettings.setFragment(SoundSettingsFragment.class.getName());
       soundSettings.setViewId(R.id.settings_header_sounds_and_vibration);
+      soundSettings.setIconSpaceReserved(false);
       getPreferenceScreen().addPreference(soundSettings);
 
       Preference quickResponseSettings = new Preference(getContext());
@@ -139,11 +141,13 @@ public class DialerSettingsActivity extends AppCompatActivity implements
               new Intent(TelecomManager.ACTION_SHOW_RESPOND_VIA_SMS_SETTINGS);
       quickResponseSettings.setTitle(R.string.respond_via_sms_setting_title);
       quickResponseSettings.setIntent(quickResponseSettingsIntent);
+      quickResponseSettings.setIconSpaceReserved(false);
       getPreferenceScreen().addPreference(quickResponseSettings);
 
       final Preference lookupSettings = new Preference(getContext());
       lookupSettings.setTitle(R.string.lookup_settings_label);
       lookupSettings.setFragment(LookupSettingsFragment.class.getName());
+      lookupSettings.setIconSpaceReserved(false);
       getPreferenceScreen().addPreference(lookupSettings);
 
       TelephonyManager telephonyManager = getContext().getSystemService(TelephonyManager.class);
@@ -160,6 +164,7 @@ public class DialerSettingsActivity extends AppCompatActivity implements
 
         callSettings.setTitle(R.string.call_settings_label);
         callSettings.setIntent(callSettingsIntent);
+        callSettings.setIconSpaceReserved(false);
         getPreferenceScreen().addPreference(callSettings);
       } else {
         Preference phoneAccountSettings = new Preference(getContext());
@@ -168,6 +173,7 @@ public class DialerSettingsActivity extends AppCompatActivity implements
 
         phoneAccountSettings.setTitle(R.string.phone_account_settings_label);
         phoneAccountSettings.setIntent(phoneAccountSettingsIntent);
+        phoneAccountSettings.setIconSpaceReserved(false);
         getPreferenceScreen().addPreference(phoneAccountSettings);
       }
       if (BlockedNumberContract.canCurrentUserBlockNumbers(getContext())) {
@@ -175,6 +181,7 @@ public class DialerSettingsActivity extends AppCompatActivity implements
         blockedCalls.setTitle(R.string.manage_blocked_numbers_label);
         blockedCalls.setIntent(getContext().getSystemService(TelecomManager.class)
                 .createManageBlockedNumbersIntent());
+        blockedCalls.setIconSpaceReserved(false);
         getPreferenceScreen().addPreference(blockedCalls);
       }
 
@@ -188,6 +195,7 @@ public class DialerSettingsActivity extends AppCompatActivity implements
                 new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);
         accessibilitySettings.setTitle(R.string.accessibility_settings_title);
         accessibilitySettings.setIntent(accessibilitySettingsIntent);
+        accessibilitySettings.setIconSpaceReserved(false);
         getPreferenceScreen().addPreference(accessibilitySettings);
       }
     }
@@ -247,6 +255,7 @@ public class DialerSettingsActivity extends AppCompatActivity implements
         bundle.putParcelable(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE, soleAccount);
       }
       voicemailSettings.getExtras().putAll(bundle);
+      voicemailSettings.setIconSpaceReserved(false);
       getPreferenceScreen().addPreference(voicemailSettings);
     }
 
