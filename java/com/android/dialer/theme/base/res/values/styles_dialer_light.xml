@@ -37,6 +37,9 @@
     <item name="colorPrimary">@color/dialer_primary_color</item>
     <item name="colorPrimaryDark">@color/dialer_primary_color</item>
     <item name="android:statusBarColor">@color/dialer_primary_color</item>
+    <item name="preferenceTheme">@style/Dialer.Settings.PreferenceTheme</item>
+    <item name="android:switchStyle">@style/Dialer.Switch</item>
+    <item name="android:dropDownSpinnerStyle">@style/Dialer.Settings.DropDownSpinnerStyle</item>
   </style>
 
   <!-- TODO(a bug): This is only actively used in empty_content_view.xml. Move it there. -->
@@ -51,5 +54,23 @@
     <item name="android:focusable">true</item>
     <item name="android:singleLine">true</item>
     <item name="android:textAllCaps">true</item>
+  </style>
+
+  <style name="Dialer.SwitchPreferenceCompat" parent="@style/Preference.SwitchPreferenceCompat.Material">
+    <item name="iconSpaceReserved">false</item>
+    <item name="android:widgetLayout">@layout/widget_switch_compat</item>
+  </style>
+
+  <style name="Dialer.Switch" parent="@android:style/Widget.Material.CompoundButton.Switch">
+    <item name="android:switchMinWidth">52dp</item>
+    <item name="android:minHeight">@dimen/touch_target_min_size</item>
+    <item name="android:track">@drawable/switch_track</item>
+    <item name="track">@drawable/switch_track</item>
+    <item name="android:thumb">@drawable/switch_thumb</item>
+    <item name="thumbTint">@color/dialer_background_color</item>
+  </style>
+
+  <style name="Dialer.Settings.DropDownSpinnerStyle" parent="@android:style/Widget.Material.Spinner">
+    <item name="android:popupBackground">@drawable/popup_background</item>
   </style>
 </resources>
