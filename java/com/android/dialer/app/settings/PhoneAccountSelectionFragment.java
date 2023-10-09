@@ -93,6 +93,8 @@ public class PhoneAccountSelectionFragment extends PreferenceFragmentCompat {
       Icon icon = phoneAccount.getIcon();
       if (icon != null) {
         setIcon(icon.loadDrawable(context));
+      } else {
+        setIconSpaceReserved(false);
       }
     }
 
