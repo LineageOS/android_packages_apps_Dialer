@@ -37,4 +37,6 @@
   <dimen name="call_log_list_item_primary_action_dimen">48dp</dimen>
 
   <dimen name="voicemail_playback_top_padding">12dp</dimen>
+
+  <dimen name="touch_target_min_size">48dp</dimen>
 </resources>

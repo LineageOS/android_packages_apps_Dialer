@@ -93,4 +93,10 @@
     <item name="background">?android:attr/colorPrimary</item>
   </style>
   <style name="DialerActionBarBaseTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+  <style name="Dialer.Settings.PreferenceTheme" parent="@style/PreferenceThemeOverlay">
+    <item name="switchPreferenceCompatStyle">@style/Dialer.SwitchPreferenceCompat</item>
+  </style>
+
+
 </resources>
