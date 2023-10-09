@@ -21,24 +21,29 @@
 
   <Preference
       android:key="@string/voicemail_notifications_key"
-      android:title="@string/voicemail_notifications_preference_title"/>
+      android:title="@string/voicemail_notifications_preference_title"
+      app:iconSpaceReserved="false" />
 
   <SwitchPreferenceCompat
       android:key="@string/voicemail_visual_voicemail_key"
-      android:title="@string/voicemail_visual_voicemail_switch_title"/>"
+      android:title="@string/voicemail_visual_voicemail_switch_title"
+      app:iconSpaceReserved="false" />"
 
   <SwitchPreferenceCompat
       android:dependency="@string/voicemail_visual_voicemail_key"
       android:key="@string/voicemail_visual_voicemail_archive_key"
-      android:title="@string/voicemail_visual_voicemail_auto_archive_switch_title"/>"
+      android:title="@string/voicemail_visual_voicemail_auto_archive_switch_title"
+      app:iconSpaceReserved="false" />"
 
   <Preference
       android:key="@string/voicemail_change_pin_key"
-      android:title="@string/voicemail_change_pin_preference_title"/>
+      android:title="@string/voicemail_change_pin_preference_title"
+      app:iconSpaceReserved="false" />
 
   <PreferenceScreen
       android:key="@string/voicemail_advanced_settings_key"
-      android:title="@string/voicemail_advanced_settings_title">
+      android:title="@string/voicemail_advanced_settings_title"
+      app:iconSpaceReserved="false" >
   </PreferenceScreen>
 
 </PreferenceScreen>
