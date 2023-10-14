@@ -480,15 +480,7 @@ public class CallButtonPresenter
 
     final boolean showAddCall =
         TelecomAdapter.getInstance().canAddCall() && UserManagerCompat.isUserUnlocked(context);
-    // There can only be two calls so don't show the ability to merge when one of them
-    // is a speak easy call.
-    final boolean showMerge =
-        InCallPresenter.getInstance()
-                .getCallList()
-                .getAllCalls()
-                .stream()
-                .noneMatch(c -> c != null)
-            && call.can(android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
+    final boolean showMerge = call.can(android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
     final boolean showUpgradeToVideo = !isVideo && (hasVideoCallCapabilities(call));
     final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
     final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
