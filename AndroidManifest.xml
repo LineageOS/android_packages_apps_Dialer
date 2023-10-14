@@ -139,11 +139,7 @@
             android:name="com.android.contacts.common.dialog.CallSubjectDialog"
             android:exported="true"
             android:theme="@style/Theme.CallSubjectDialogTheme"
-            android:windowSoftInputMode="stateVisible|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-        </activity>
+            android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <!-- Broadcast receiver that passively listens to location updates -->
         <receiver android:name="com.android.dialer.location.CountryDetector$LocationChangedReceiver" />
