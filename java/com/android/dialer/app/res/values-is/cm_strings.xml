@@ -31,4 +31,5 @@
     <string name="call_via">Hringja með</string>
     <string name="call_via_dialog_title">Hringja með\u2026</string>
     <string name="call_log_stats_title">Tölfræði</string>
+    <string name="default_dialer_text">Þú verður að setja Dialer hringiforritið sem sjálfgefið símaforrit til að geta notað það.</string>
 </resources>
