@@ -23,8 +23,8 @@
     <string name="incall_vibrate_hangup_title">ვიბრაცია ზარის გათიშვისას</string>
     <string name="incall_vibrate_45_title">ვიბრაცია ყოველ წუთში</string>
     <string name="incall_vibrate_45_summary">ვიბრაცია თითოეული წუთის გასვლის აღსანიშნავად 45-ე წამზე, გამავალი ზარისას</string>
-    <string name="incall_dnd_dialog_message">„არ შემაწუხოს“ მისათითებლად, ტელეფონის აპი საჭიროებს ნებართვას, მდგომარეობის სამართავად.\nგთხოვთ დაუშვათ.</string>
-    <string name="allow">დაშვება</string>
+    <string name="incall_dnd_dialog_message">„არ შემაწუხო“ რომ მიეთითოს, სატელეფონო აპი საჭიროებს ნებართვას მდგომარეობის სამართავად.\nგთხოვთ დართოთ ნება.</string>
+    <string name="allow">ნებართვა</string>
     <string name="deny">უარყოფა</string>
     <string name="call_recording_category_title">საუბრის ჩაწერა</string>
     <string name="call_recording_format">ხმოვანი ფაილის სახეობა</string>
