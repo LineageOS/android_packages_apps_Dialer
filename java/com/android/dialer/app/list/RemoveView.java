@@ -27,8 +27,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.content.res.ResourcesCompat;
-
 import com.android.dialer.R;
 
 public class RemoveView extends FrameLayout {
@@ -37,7 +35,6 @@ public class RemoveView extends FrameLayout {
   ImageView removeIcon;
   int unhighlightedColor;
   int highlightedColor;
-  Drawable removeDrawable;
 
   public RemoveView(Context context) {
     super(context);
@@ -59,8 +56,6 @@ public class RemoveView extends FrameLayout {
     final Resources r = getResources();
     unhighlightedColor = r.getColor(android.R.color.white, getContext().getTheme());
     highlightedColor = r.getColor(R.color.remove_highlighted_text_color, getContext().getTheme());
-    removeDrawable = ResourcesCompat.getDrawable(r, R.drawable.quantum_ic_clear_vd_theme_24,
-            getContext().getTheme());
   }
 
   @Override
