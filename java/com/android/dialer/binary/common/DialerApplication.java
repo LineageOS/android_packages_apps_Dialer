@@ -21,8 +21,6 @@ import android.os.Trace;
 
 import androidx.annotation.NonNull;
 
-import com.android.dialer.callrecord.CallRecordingAutoMigrator;
-import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.inject.HasRootComponent;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.persistentlog.PersistentLogger;
@@ -36,10 +34,6 @@ public abstract class DialerApplication extends Application implements HasRootCo
   public void onCreate() {
     Trace.beginSection("DialerApplication.onCreate");
     super.onCreate();
-    new CallRecordingAutoMigrator(
-            this.getApplicationContext(),
-            DialerExecutorComponent.get(this).dialerExecutorFactory())
-        .asyncAutoMigrate();
     PersistentLogger.initialize(this);
     NotificationChannelManager.initChannels(this);
     Trace.endSection();
