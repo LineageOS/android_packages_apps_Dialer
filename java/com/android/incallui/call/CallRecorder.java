@@ -58,8 +58,7 @@ public class CallRecorder implements CallList.Listener {
   public static final String TAG = "CallRecorder";
 
   public static final String[] REQUIRED_PERMISSIONS = new String[] {
-    android.Manifest.permission.RECORD_AUDIO,
-    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+    android.Manifest.permission.RECORD_AUDIO
   };
   private static final HashMap<String, Boolean> RECORD_ALLOWED_STATE_BY_COUNTRY = new HashMap<>();
 
