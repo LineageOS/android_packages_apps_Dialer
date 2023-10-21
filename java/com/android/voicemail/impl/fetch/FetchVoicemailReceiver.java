@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -193,38 +194,34 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
 
   private void fetchVoicemail(final Network network, final VoicemailStatus.Editor status) {
     Executor executor = Executors.newCachedThreadPool();
-    executor.execute(
-        new Runnable() {
-          @Override
-          public void run() {
-            if (networkCallback != null) {
-                networkCallback.waitForIpv4();
+    executor.execute(() -> {
+      if (networkCallback != null) {
+          networkCallback.waitForIpv4();
+      }
+      try {
+        while (retryCount > 0) {
+          VvmLog.i(TAG, "fetching voicemail, retry count=" + retryCount);
+          try (ImapHelper imapHelper =
+              new ImapHelper(context, phoneAccount, network, status)) {
+            boolean success =
+                imapHelper.fetchVoicemailPayload(
+                    new VoicemailFetchedCallback(context, uri, phoneAccount), uid);
+            if (!success && retryCount > 0) {
+              VvmLog.i(TAG, "fetch voicemail failed, retrying");
+              retryCount--;
+            } else {
+              return;
             }
-            try {
-              while (retryCount > 0) {
-                VvmLog.i(TAG, "fetching voicemail, retry count=" + retryCount);
-                try (ImapHelper imapHelper =
-                    new ImapHelper(context, phoneAccount, network, status)) {
-                  boolean success =
-                      imapHelper.fetchVoicemailPayload(
-                          new VoicemailFetchedCallback(context, uri, phoneAccount), uid);
-                  if (!success && retryCount > 0) {
-                    VvmLog.i(TAG, "fetch voicemail failed, retrying");
-                    retryCount--;
-                  } else {
-                    return;
-                  }
-                } catch (InitializingException e) {
-                  VvmLog.w(TAG, "Can't retrieve Imap credentials ", e);
-                  return;
-                }
-              }
-            } finally {
-              if (networkCallback != null) {
-                networkCallback.releaseNetwork();
-              }
-            }
+          } catch (InitializingException e) {
+            VvmLog.w(TAG, "Can't retrieve Imap credentials ", e);
+            return;
           }
-        });
+        }
+      } finally {
+        if (networkCallback != null) {
+          networkCallback.releaseNetwork();
+        }
+      }
+    });
   }
 }

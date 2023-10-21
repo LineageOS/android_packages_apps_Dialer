@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,20 +64,8 @@ public class PostCharDialogFragment extends DialogFragment {
 
     builder.setPositiveButton(
         R.string.pause_prompt_yes,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int whichButton) {
-            TelecomAdapter.getInstance().postDialContinue(callId, true);
-          }
-        });
-    builder.setNegativeButton(
-        R.string.pause_prompt_no,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int whichButton) {
-            dialog.cancel();
-          }
-        });
+            (dialog, whichButton) -> TelecomAdapter.getInstance().postDialContinue(callId, true));
+    builder.setNegativeButton(R.string.pause_prompt_no, (dialog, whichButton) -> dialog.cancel());
 
     final AlertDialog dialog = builder.create();
     return dialog;

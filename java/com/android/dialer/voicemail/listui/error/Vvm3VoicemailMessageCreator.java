@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -288,18 +289,15 @@ public class Vvm3VoicemailMessageCreator {
   private static Action createCallCustomerSupportAction(final Context context) {
     return new Action(
         context.getString(R.string.voicemail_action_call_customer_support),
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            Intent intent =
-                new Intent(
-                    Intent.ACTION_CALL,
-                    Uri.parse(
-                        "tel:"
-                            + context.getString(
-                                R.string.verizon_domestic_customer_support_number)));
-            context.startActivity(intent);
-          }
-        });
+            v -> {
+              Intent intent =
+                  new Intent(
+                      Intent.ACTION_CALL,
+                      Uri.parse(
+                          "tel:"
+                              + context.getString(
+                                  R.string.verizon_domestic_customer_support_number)));
+              context.startActivity(intent);
+            });
   }
 }
