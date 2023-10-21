@@ -25,6 +25,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.telecom.PhoneAccountHandle;
 import android.text.Editable;
@@ -321,7 +322,8 @@ public class VoicemailChangePinActivity extends AppCompatActivity
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    phoneAccountHandle = getIntent().getParcelableExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE);
+    phoneAccountHandle = getIntent().getParcelableExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE,
+            PhoneAccountHandle.class);
     pinChanger =
         VoicemailComponent.get(this)
             .getVoicemailClient()
@@ -561,6 +563,7 @@ public class VoicemailChangePinActivity extends AppCompatActivity
     private final WeakReference<VoicemailChangePinActivity> activityWeakReference;
 
     private ChangePinHandler(WeakReference<VoicemailChangePinActivity> activityWeakReference) {
+      super(Looper.getMainLooper());
       this.activityWeakReference = activityWeakReference;
     }
 

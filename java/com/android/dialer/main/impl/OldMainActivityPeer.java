@@ -27,6 +27,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.provider.VoicemailContract;
@@ -733,7 +734,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private boolean activityIsAlive;
 
     private final ContentObserver voicemailStatusObserver =
-        new ContentObserver(new Handler()) {
+        new ContentObserver(new Handler(Looper.getMainLooper())) {
           @Override
           public void onChange(boolean selfChange) {
             LogUtil.i(
