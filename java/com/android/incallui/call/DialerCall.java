@@ -543,9 +543,10 @@ public class DialerCall implements VideoTechListener {
     Trace.beginSection("DialerCall.updateFromTelecomCall");
     LogUtil.v("DialerCall.updateFromTelecomCall", telecomCall.toString());
 
-    videoTechManager.dispatchCallStateChanged(telecomCall.getState(), getAccountHandle());
+    videoTechManager.dispatchCallStateChanged(telecomCall.getDetails().getState(),
+            getAccountHandle());
 
-    final int translatedState = translateState(telecomCall.getState());
+    final int translatedState = translateState(telecomCall.getDetails().getState());
     if (state != DialerCallState.BLOCKED) {
       setState(translatedState);
       setDisconnectCause(telecomCall.getDetails().getDisconnectCause());
@@ -1097,7 +1098,8 @@ public class DialerCall implements VideoTechListener {
    * repeated calls to isEmergencyNumber.
    */
   private void updateEmergencyCallState() {
-    isEmergencyCall = TelecomCallUtil.isEmergencyCall(telecomCall);
+    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+    isEmergencyCall = TelecomCallUtil.isEmergencyCall(telephonyManager, telecomCall);
   }
 
   public LogState getLogState() {

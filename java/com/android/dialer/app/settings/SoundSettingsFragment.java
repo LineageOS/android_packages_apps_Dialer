@@ -56,7 +56,7 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
 
   private Preference ringtonePreference;
   private final Handler ringtoneLookupComplete =
-      new Handler() {
+      new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
           switch (msg.what) {

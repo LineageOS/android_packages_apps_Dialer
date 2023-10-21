@@ -97,7 +97,7 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
       finish();
     } else if (PermissionsUtil.hasPermission(this, permission.SEND_SMS)) {
       LogUtil.i("PostCallActivity.sendMessage", "Sending post call SMS.");
-      SmsManager smsManager = SmsManager.getDefault();
+      SmsManager smsManager = getSystemService(SmsManager.class);
       smsManager.sendMultipartTextMessage(
           number, null, smsManager.divideMessage(message), null, null);
       PostCall.onMessageSent(this, number);
