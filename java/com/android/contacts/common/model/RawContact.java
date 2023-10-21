@@ -78,7 +78,7 @@ public final class RawContact implements Parcelable {
    * @param parcel The parcel to de-serialize from.
    */
   private RawContact(Parcel parcel) {
-    mValues = parcel.readParcelable(ContentValues.class.getClassLoader());
+    mValues = parcel.readParcelable(ContentValues.class.getClassLoader(), ContentValues.class);
     mDataItems = new ArrayList<>();
     parcel.readTypedList(mDataItems, NamedDataItem.CREATOR);
   }
@@ -314,8 +314,9 @@ public final class RawContact implements Parcelable {
     }
 
     public NamedDataItem(Parcel parcel) {
-      this.mUri = parcel.readParcelable(Uri.class.getClassLoader());
-      this.mContentValues = parcel.readParcelable(ContentValues.class.getClassLoader());
+      this.mUri = parcel.readParcelable(Uri.class.getClassLoader(), Uri.class);
+      this.mContentValues = parcel.readParcelable(ContentValues.class.getClassLoader(),
+              ContentValues.class);
     }
 
     @Override

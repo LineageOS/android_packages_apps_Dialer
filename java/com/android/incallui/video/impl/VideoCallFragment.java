@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Insets;
 import android.graphics.Outline;
 import android.graphics.Point;
 import android.graphics.drawable.Animatable;
@@ -42,6 +43,7 @@ import android.view.View.OnSystemUiVisibilityChangeListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewOutlineProvider;
+import android.view.WindowInsets;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -523,14 +525,15 @@ public class VideoCallFragment extends Fragment
     if (getActivity().isInMultiWindowMode()) {
       return new Point();
     }
+    Insets insets = getView().getRootWindowInsets().getInsets(WindowInsets.Type.systemBars());
     if (isLandscape()) {
       int systemWindowInsetEnd =
           getView().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL
-              ? getView().getRootWindowInsets().getSystemWindowInsetLeft()
-              : -getView().getRootWindowInsets().getSystemWindowInsetRight();
+              ? insets.left
+              : -insets.right;
       return new Point(systemWindowInsetEnd, 0);
     } else {
-      return new Point(0, -getView().getRootWindowInsets().getSystemWindowInsetBottom());
+      return new Point(0, -insets.bottom);
     }
   }
 
@@ -1040,7 +1043,7 @@ public class VideoCallFragment extends Fragment
 
   private boolean isLandscape() {
     // Choose orientation based on display orientation, not window orientation
-    int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
+    int rotation = getActivity().getDisplay().getRotation();
     return rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270;
   }
 
