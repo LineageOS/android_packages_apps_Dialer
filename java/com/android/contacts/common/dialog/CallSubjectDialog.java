@@ -115,27 +115,19 @@ public class CallSubjectDialog extends AppCompatActivity {
   private SharedPreferences mPrefs;
   private List<String> mSubjectHistory;
   /** Handles displaying the list of past call subjects. */
-  private final View.OnClickListener mHistoryOnClickListener =
-      new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          hideSoftKeyboard(CallSubjectDialog.this, mCallSubjectView);
-          showCallHistory(mSubjectList.getVisibility() == View.GONE);
-        }
-      };
+  private final View.OnClickListener mHistoryOnClickListener = v -> {
+    hideSoftKeyboard(CallSubjectDialog.this, mCallSubjectView);
+    showCallHistory(mSubjectList.getVisibility() == View.GONE);
+  };
   /**
    * Handles auto-hiding the call history when user clicks in the call subject field to give it
    * focus.
    */
-  private final View.OnClickListener mCallSubjectClickListener =
-      new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          if (mSubjectList.getVisibility() == View.VISIBLE) {
-            showCallHistory(false);
-          }
-        }
-      };
+  private final View.OnClickListener mCallSubjectClickListener = v -> {
+    if (mSubjectList.getVisibility() == View.VISIBLE) {
+      showCallHistory(false);
+    }
+  };
 
   private long mPhotoID;
   private Uri mPhotoUri;
@@ -147,43 +139,31 @@ public class CallSubjectDialog extends AppCompatActivity {
   private int mContactType;
   private PhoneAccountHandle mPhoneAccountHandle;
   /** Handles starting a call with a call subject specified. */
-  private final View.OnClickListener mSendAndCallOnClickListener =
-      new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          String subject = mCallSubjectView.getText().toString();
-          PreCall.start(
-              CallSubjectDialog.this,
-              new CallIntentBuilder(mNumber, CallInitiationType.Type.CALL_SUBJECT_DIALOG)
-                  .setPhoneAccountHandle(mPhoneAccountHandle)
-                  .setCallSubject(subject));
+  private final View.OnClickListener mSendAndCallOnClickListener = v -> {
+    String subject = mCallSubjectView.getText().toString();
+    PreCall.start(
+            CallSubjectDialog.this,
+            new CallIntentBuilder(mNumber, CallInitiationType.Type.CALL_SUBJECT_DIALOG)
+                    .setPhoneAccountHandle(mPhoneAccountHandle)
+                    .setCallSubject(subject));
 
-          mSubjectHistory.add(subject);
-          saveSubjectHistory(mSubjectHistory);
-          finish();
-        }
-      };
+    mSubjectHistory.add(subject);
+    saveSubjectHistory(mSubjectHistory);
+    finish();
+  };
+
   /** Click listener which handles user clicks outside of the dialog. */
-  private View.OnClickListener mBackgroundListener =
-      new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          finish();
-        }
-      };
+  private final View.OnClickListener mBackgroundListener = v -> finish();
   /**
    * Item click listener which handles user clicks on the items in the list view. Dismisses the
    * activity, returning the subject to the caller and closing the activity with the {@link
    * Activity#RESULT_OK} result code.
    */
-  private AdapterView.OnItemClickListener mItemClickListener =
-      new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-          mCallSubjectView.setText(mSubjectHistory.get(position));
-          showCallHistory(false);
-        }
-      };
+  private final AdapterView.OnItemClickListener mItemClickListener =
+          (arg0, view, position, arg3) -> {
+    mCallSubjectView.setText(mSubjectHistory.get(position));
+    showCallHistory(false);
+  };
 
   /**
    * Show the call subject dialog given a phone number to dial (e.g. from the dialpad).

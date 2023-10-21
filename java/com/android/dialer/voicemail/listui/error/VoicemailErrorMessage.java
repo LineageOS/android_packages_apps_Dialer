@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +23,6 @@ import android.provider.Settings;
 import android.provider.VoicemailContract;
 import android.telecom.PhoneAccountHandle;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -130,13 +130,10 @@ public class VoicemailErrorMessage {
   public static Action createChangeAirplaneModeAction(final Context context) {
     return new Action(
         context.getString(R.string.voicemail_action_turn_off_airplane_mode),
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
-            context.startActivity(intent);
-          }
-        });
+            v -> {
+              Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
+              context.startActivity(intent);
+            });
   }
 
   @NonNull
@@ -144,14 +141,11 @@ public class VoicemailErrorMessage {
       final Context context, PhoneAccountHandle phoneAccountHandle) {
     return new Action(
         context.getString(R.string.voicemail_action_set_pin),
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            Intent intent = new Intent(context, VoicemailChangePinActivity.class);
-            intent.putExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
-            context.startActivity(intent);
-          }
-        });
+            v -> {
+              Intent intent = new Intent(context, VoicemailChangePinActivity.class);
+              intent.putExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
+              context.startActivity(intent);
+            });
   }
 
   @NonNull
@@ -159,43 +153,32 @@ public class VoicemailErrorMessage {
       final Context context) {
     return new Action(
         context.getString(R.string.voicemail_action_call_voicemail),
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            PreCall.start(
+            v -> PreCall.start(
                 context,
                 CallIntentBuilder.forVoicemail(
-                    CallInitiationType.Type.VOICEMAIL_ERROR_MESSAGE));
-          }
-        });
+                    CallInitiationType.Type.VOICEMAIL_ERROR_MESSAGE)));
   }
 
   @NonNull
   public static Action createSyncAction(final Context context, final VoicemailStatus status) {
     return new Action(
         context.getString(R.string.voicemail_action_sync),
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
-            intent.setPackage(status.sourcePackage);
-            context.sendBroadcast(intent);
-          }
-        });
+            v -> {
+              Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
+              intent.setPackage(status.sourcePackage);
+              context.sendBroadcast(intent);
+            });
   }
 
   @NonNull
   public static Action createRetryAction(final Context context, final VoicemailStatus status) {
     return new Action(
         context.getString(R.string.voicemail_action_retry),
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
-            intent.setPackage(status.sourcePackage);
-            context.sendBroadcast(intent);
-          }
-        });
+            v -> {
+              Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
+              intent.setPackage(status.sourcePackage);
+              context.sendBroadcast(intent);
+            });
   }
 
   @NonNull
@@ -207,20 +190,17 @@ public class VoicemailErrorMessage {
       PhoneAccountHandle phoneAccountHandle) {
     return new Action(
         context.getString(R.string.voicemail_action_turn_archive_on),
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            Assert.checkArgument(
-                VoicemailComponent.get(context)
-                    .getVoicemailClient()
-                    .isVoicemailArchiveAvailable(context));
-            voicemailClient.setVoicemailArchiveEnabled(context, phoneAccountHandle, true);
-            Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
-            intent.setPackage(status.sourcePackage);
-            context.sendBroadcast(intent);
-            statusReader.refresh();
-          }
-        });
+            v -> {
+              Assert.checkArgument(
+                  VoicemailComponent.get(context)
+                      .getVoicemailClient()
+                      .isVoicemailArchiveAvailable(context));
+              voicemailClient.setVoicemailArchiveEnabled(context, phoneAccountHandle, true);
+              Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
+              intent.setPackage(status.sourcePackage);
+              context.sendBroadcast(intent);
+              statusReader.refresh();
+            });
   }
 
   @NonNull
@@ -231,16 +211,13 @@ public class VoicemailErrorMessage {
       String preferenceKeyToUpdate) {
     return new Action(
         context.getString(R.string.voicemail_action_dimiss),
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            Assert.checkArgument(
-                VoicemailComponent.get(context)
-                    .getVoicemailClient()
-                    .isVoicemailArchiveAvailable(context));
-            sharedPreferenceForAccount.edit().putBoolean(preferenceKeyToUpdate, true).apply();
-            statusReader.refresh();
-          }
-        });
+            v -> {
+              Assert.checkArgument(
+                  VoicemailComponent.get(context)
+                      .getVoicemailClient()
+                      .isVoicemailArchiveAvailable(context));
+              sharedPreferenceForAccount.edit().putBoolean(preferenceKeyToUpdate, true).apply();
+              statusReader.refresh();
+            });
   }
 }

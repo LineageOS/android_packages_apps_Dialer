@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,34 +58,31 @@ public class DialerFutures {
     final AtomicInteger pending = new AtomicInteger(output.futures.size());
     for (final ListenableFuture<? extends T> future : output.futures) {
       future.addListener(
-          new Runnable() {
-            @Override
-            public void run() {
-              // Call get() and then set() instead of getAndSet() because a volatile read/write is
-              // cheaper than a CAS and atomicity is guaranteed by setFuture.
-              AggregateFuture<T> output = ref.get();
-              if (output != null) {
-                T value = null;
-                try {
-                  value = Futures.getDone(future);
-                } catch (ExecutionException e) {
-                  ref.set(null); // unpin
-                  output.setException(e);
-                  return;
-                }
-                if (!predicate.apply(value)) {
-                  if (pending.decrementAndGet() == 0) {
-                    // we are the last future (and every other future hasn't matched or failed).
-                    output.set(defaultValue);
-                    // no point in clearing the ref, every other listener has already run
+              () -> {
+                // Call get() and then set() instead of getAndSet() because a volatile read/write is
+                // cheaper than a CAS and atomicity is guaranteed by setFuture.
+                AggregateFuture<T> output1 = ref.get();
+                if (output1 != null) {
+                  T value = null;
+                  try {
+                    value = Futures.getDone(future);
+                  } catch (ExecutionException e) {
+                    ref.set(null); // unpin
+                    output1.setException(e);
+                    return;
                   }
-                } else {
-                  ref.set(null); // unpin
-                  output.set(value);
+                  if (!predicate.apply(value)) {
+                    if (pending.decrementAndGet() == 0) {
+                      // we are the last future (and every other future hasn't matched or failed).
+                      output1.set(defaultValue);
+                      // no point in clearing the ref, every other listener has already run
+                    }
+                  } else {
+                    ref.set(null); // unpin
+                    output1.set(value);
+                  }
                 }
-              }
-            }
-          },
+              },
           MoreExecutors.directExecutor());
     }
     return output;
