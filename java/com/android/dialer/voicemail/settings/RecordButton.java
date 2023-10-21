@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +26,15 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.AttributeSet;
-import android.widget.Button;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 
 import com.android.dialer.R;
 import com.android.dialer.voicemail.settings.RecordVoicemailGreetingActivity.ButtonState;
 
 /** Custom Button View for Dialer voicemail greeting recording */
-public class RecordButton extends Button {
+public class RecordButton extends AppCompatButton {
 
   private final float trackWidth = getResources().getDimensionPixelSize(R.dimen.track_width);
   private final int centerIconRadius =
