@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +22,14 @@ import android.widget.Toast;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;
-import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.PermissionsUtil;
 
 /** Aborts call and show a toast if phone permissions are missing. */
 public class PermissionCheckAction implements PreCallAction {
 
   @Override
   public boolean requiresUi(Context context, CallIntentBuilder builder) {
-    return !TelecomUtil.hasCallPhonePermission(context);
+    return !PermissionsUtil.hasPhonePermissions(context);
   }
 
   @Override

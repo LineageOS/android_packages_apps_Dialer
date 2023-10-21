@@ -1071,10 +1071,8 @@ public class DialpadFragment extends Fragment
         } else if (getActivity() != null) {
           // Voicemail is unavailable maybe because Airplane mode is turned on.
           // Check the current status and show the most appropriate error message.
-          final boolean isAirplaneModeOn =
-              Settings.System.getInt(
-                      getActivity().getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0)
-                  != 0;
+          final boolean isAirplaneModeOn = Settings.Global.getInt(
+                  getActivity().getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
           if (isAirplaneModeOn) {
             DialogFragment dialogFragment =
                 ErrorDialogFragment.newInstance(R.string.dialog_voicemail_airplane_mode_message);
@@ -1388,7 +1386,8 @@ public class DialpadFragment extends Fragment
   public boolean onMenuItemClick(MenuItem item) {
     if (item.getGroupId() == Menu.FIRST) {
       Intent intent = item.getIntent();
-      selectedAccount = intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE);
+      selectedAccount = intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE,
+              PhoneAccountHandle.class);
       return true;
     }
     int resId = item.getItemId();

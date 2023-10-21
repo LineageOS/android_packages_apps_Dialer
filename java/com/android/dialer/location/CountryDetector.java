@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -208,7 +209,7 @@ public class CountryDetector {
       }
 
       final Location location =
-          (Location) intent.getExtras().get(LocationManager.KEY_LOCATION_CHANGED);
+              intent.getParcelableExtra(LocationManager.KEY_LOCATION_CHANGED, Location.class);
 
       // TODO: rething how we access the gecoder here, right now we have to set the static instance
       // of CountryDetector to make this work for tests which is weird

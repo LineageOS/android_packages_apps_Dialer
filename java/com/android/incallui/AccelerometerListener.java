@@ -23,6 +23,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import com.android.dialer.common.LogUtil;
 
@@ -52,30 +53,29 @@ public class AccelerometerListener {
   // mOrientation.
   private int pendingOrientation;
   private OrientationListener listener;
-  Handler handler =
-      new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-          switch (msg.what) {
-            case ORIENTATION_CHANGED:
-              synchronized (this) {
-                orientation = pendingOrientation;
-                if (DEBUG) {
-                  LogUtil.d(
-                      TAG,
-                      "orientation: "
-                          + (orientation == ORIENTATION_HORIZONTAL
-                              ? "horizontal"
-                              : (orientation == ORIENTATION_VERTICAL ? "vertical" : "unknown")));
-                }
-                if (listener != null) {
-                  listener.orientationChanged(orientation);
-                }
-              }
-              break;
+  final Handler handler = new Handler(Looper.getMainLooper()) {
+    @Override
+    public void handleMessage(Message msg) {
+      switch (msg.what) {
+        case ORIENTATION_CHANGED:
+          synchronized (this) {
+            orientation = pendingOrientation;
+            if (DEBUG) {
+              LogUtil.d(
+                  TAG,
+                  "orientation: "
+                      + (orientation == ORIENTATION_HORIZONTAL
+                          ? "horizontal"
+                          : (orientation == ORIENTATION_VERTICAL ? "vertical" : "unknown")));
+            }
+            if (listener != null) {
+              listener.orientationChanged(orientation);
+            }
           }
-        }
-      };
+          break;
+      }
+    }
+  };
   final SensorEventListener sensorListener =
       new SensorEventListener() {
         @Override

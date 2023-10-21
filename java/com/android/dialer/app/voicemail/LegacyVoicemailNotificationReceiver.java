@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +55,8 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
     LogUtil.i(
         "LegacyVoicemailNotificationReceiver.onReceive", "received legacy voicemail notification");
     PhoneAccountHandle phoneAccountHandle =
-        Assert.isNotNull(intent.getParcelableExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE));
+        Assert.isNotNull(intent.getParcelableExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE,
+                PhoneAccountHandle.class));
     int count = intent.getIntExtra(TelephonyManager.EXTRA_NOTIFICATION_COUNT, -1);
 
     boolean isRefresh = intent.getBooleanExtra(TelephonyManagerCompat.EXTRA_IS_REFRESH, false);
@@ -97,9 +99,11 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
     String voicemailNumber = intent.getStringExtra(TelephonyManager.EXTRA_VOICEMAIL_NUMBER);
     PendingIntent callVoicemailIntent =
-        intent.getParcelableExtra(TelephonyManager.EXTRA_CALL_VOICEMAIL_INTENT);
+        intent.getParcelableExtra(TelephonyManager.EXTRA_CALL_VOICEMAIL_INTENT,
+                PendingIntent.class);
     PendingIntent voicemailSettingIntent =
-        intent.getParcelableExtra(TelephonyManager.EXTRA_LAUNCH_VOICEMAIL_SETTINGS_INTENT);
+        intent.getParcelableExtra(TelephonyManager.EXTRA_LAUNCH_VOICEMAIL_SETTINGS_INTENT,
+                PendingIntent.class);
 
     LogUtil.i("LegacyVoicemailNotificationReceiver.onReceive", "sending notification");
     LegacyVoicemailNotifier.showNotification(

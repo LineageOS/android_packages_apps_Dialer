@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,7 +97,7 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
       finish();
     } else if (PermissionsUtil.hasPermission(this, permission.SEND_SMS)) {
       LogUtil.i("PostCallActivity.sendMessage", "Sending post call SMS.");
-      SmsManager smsManager = SmsManager.getDefault();
+      SmsManager smsManager = getSystemService(SmsManager.class);
       smsManager.sendMultipartTextMessage(
           number, null, smsManager.divideMessage(message), null, null);
       PostCall.onMessageSent(this, number);

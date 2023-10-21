@@ -22,8 +22,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Insets;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.telecom.CallAudioState;
 import android.telephony.TelephonyManager;
 import android.transition.TransitionManager;
@@ -33,6 +35,7 @@ import android.view.View.OnAttachStateChangeListener;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowInsets;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -100,7 +103,7 @@ public class InCallFragment extends Fragment
 
   // Add animation to educate users. If a call has enriched calling attachments then we'll
   // initially show the attachment page. After a delay seconds we'll animate to the button grid.
-  private final Handler handler = new Handler();
+  private final Handler handler = new Handler(Looper.getMainLooper());
   private final Runnable pagerRunnable =
       new Runnable() {
         @Override
@@ -191,8 +194,9 @@ public class InCallFragment extends Fragment
           @Override
           public void onViewAttachedToWindow(View v) {
             View container = v.findViewById(R.id.incall_ui_container);
-            int topInset = v.getRootWindowInsets().getSystemWindowInsetTop();
-            int bottomInset = v.getRootWindowInsets().getSystemWindowInsetBottom();
+            Insets insets = v.getRootWindowInsets().getInsets(WindowInsets.Type.systemBars());
+            int topInset = insets.top;
+            int bottomInset = insets.bottom;
             if (topInset != container.getPaddingTop()) {
               TransitionManager.beginDelayedTransition(((ViewGroup) container.getParent()));
               container.setPadding(0, topInset, 0, bottomInset);

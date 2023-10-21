@@ -178,7 +178,7 @@ public class SpecialCharSequenceMgr {
     // accessed from the emergency dialer.
     KeyguardManager keyguardManager =
         (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-    if (keyguardManager.inKeyguardRestrictedInputMode()) {
+    if (keyguardManager.isKeyguardLocked()) {
       return false;
     }
 
@@ -319,14 +319,18 @@ public class SpecialCharSequenceMgr {
       ViewGroup holder = customView.findViewById(R.id.deviceids_holder);
 
       if (TelephonyManagerCompat.getPhoneCount(telephonyManager) > 1) {
-        for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
-          String deviceId = telephonyManager.getDeviceId(slot);
+        for (int slot = 0; slot < telephonyManager.getActiveModemCount(); slot++) {
+          String deviceId = telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM
+                  ? telephonyManager.getImei(slot)
+                  : telephonyManager.getMeid(slot);
           if (!TextUtils.isEmpty(deviceId)) {
             addDeviceIdRow(holder, deviceId);
           }
         }
       } else {
-        addDeviceIdRow(holder, telephonyManager.getDeviceId());
+        addDeviceIdRow(holder, telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM
+                ? telephonyManager.getImei()
+                : telephonyManager.getMeid());
       }
 
       new AlertDialog.Builder(context)

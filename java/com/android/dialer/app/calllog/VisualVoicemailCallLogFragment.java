@@ -209,7 +209,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
     if (getActivity() != null) {
       getActivity().setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
       // onNotVisible will be called in the lock screen when the call ends
-      if (!getActivity().getSystemService(KeyguardManager.class).inKeyguardRestrictedInputMode()) {
+      if (!getActivity().getSystemService(KeyguardManager.class).isKeyguardLocked()) {
         LogUtil.i("VisualVoicemailCallLogFragment.onNotVisible", "clearing all new voicemails");
         CallLogNotificationsService.markAllNewVoicemailsAsOld(getActivity());
       }

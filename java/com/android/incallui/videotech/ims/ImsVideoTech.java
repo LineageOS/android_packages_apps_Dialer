@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -238,7 +239,7 @@ public class ImsVideoTech implements VideoTech {
 
   @Override
   public void pause() {
-    if (call.getState() != Call.STATE_ACTIVE) {
+    if (call.getDetails().getState() != Call.STATE_ACTIVE) {
       LogUtil.i("ImsVideoTech.pause", "not pausing because call is not active");
       return;
     }
@@ -272,7 +273,7 @@ public class ImsVideoTech implements VideoTech {
 
   @Override
   public void unpause() {
-    if (call.getState() != Call.STATE_ACTIVE) {
+    if (call.getDetails().getState() != Call.STATE_ACTIVE) {
       LogUtil.i("ImsVideoTech.unpause", "not unpausing because call is not active");
       return;
     }
