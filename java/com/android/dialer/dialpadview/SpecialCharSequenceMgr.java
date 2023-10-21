@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2006 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -458,8 +459,8 @@ public class SpecialCharSequenceMgr {
     public int contactNum;
 
     // Used to identify the query request.
-    private int token;
-    private QueryHandler handler;
+    private final int token;
+    private final QueryHandler handler;
 
     // The text field we're going to update
     private EditText textField;

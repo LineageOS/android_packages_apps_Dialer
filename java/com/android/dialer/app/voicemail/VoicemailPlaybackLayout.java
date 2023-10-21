@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +59,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
   private static final String TAG = VoicemailPlaybackLayout.class.getSimpleName();
   private static final int VOICEMAIL_DELETE_DELAY_MS = 3000;
 
-  private Context context;
+  private final Context context;
   private CallLogListItemViewHolder viewHolder;
   private VoicemailPlaybackPresenter presenter;
   /** Click listener to toggle speakerphone. */
@@ -374,12 +375,12 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
     private final ScheduledExecutorService executorService;
     private final Object lock = new Object();
-    private int durationMs;
+    private final int durationMs;
 
     @GuardedBy("lock")
     private ScheduledFuture<?> scheduledFuture;
 
-    private Runnable updateClipPositionRunnable =
+    private final Runnable updateClipPositionRunnable =
         new Runnable() {
           @Override
           public void run() {

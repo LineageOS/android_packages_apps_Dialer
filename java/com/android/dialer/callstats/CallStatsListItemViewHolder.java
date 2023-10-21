@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,9 +59,8 @@ public final class CallStatsListItemViewHolder extends RecyclerView.ViewHolder
   public final TextView mPercentView;
   public final LinearColorBar mBarView;
 
-  private Context mContext;
-  private ContactInfoHelper mContactInfoHelper;
-  private final int mPhotoSize;
+  private final Context mContext;
+  private final ContactInfoHelper mContactInfoHelper;
 
   private CallStatsListItemViewHolder(View rootView,
       QuickContactBadge quickContactView,

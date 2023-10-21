@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -146,7 +147,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
   /** Flag indicating if the image loading is paused. */
   private boolean paused;
   /** The user agent string to use when loading URI based photos. */
-  private String userAgent;
+  private final String userAgent;
 
   public ContactPhotoManagerImpl(Context context) {
     this.context = context;
@@ -209,7 +210,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
     return ((bytes + 1023) / 1024) + "K";
   }
 
-  private static final int safeDiv(int dividend, int divisor) {
+  private static int safeDiv(int dividend, int divisor) {
     return (divisor == 0) ? 0 : (dividend / divisor);
   }
 

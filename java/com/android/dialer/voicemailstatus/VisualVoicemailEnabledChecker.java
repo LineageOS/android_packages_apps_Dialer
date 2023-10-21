@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,15 +45,15 @@ public class VisualVoicemailEnabledChecker implements CallLogQueryHandler.Listen
 
   public static final String PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER =
       "has_active_voicemail_provider";
-  private SharedPreferences prefs;
+  private final SharedPreferences prefs;
   private boolean hasActiveVoicemailProvider;
   private Context context;
-  private Callback callback;
+  private final Callback callback;
 
   public VisualVoicemailEnabledChecker(Context context, @Nullable Callback callback) {
     this.context = context;
     this.callback = callback;
-    prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
+    prefs = PreferenceManager.getDefaultSharedPreferences(context);
     hasActiveVoicemailProvider = prefs.getBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, false);
   }
 

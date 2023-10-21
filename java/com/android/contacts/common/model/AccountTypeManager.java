@@ -218,7 +218,7 @@ class AccountTypeManagerImpl extends AccountTypeManager
   private final AtomicBoolean mInvitablesTaskIsRunning = new AtomicBoolean(false);
 
   private final Handler mMainThreadHandler = new Handler(Looper.getMainLooper());
-  private Context mContext;
+  private final Context mContext;
   private final Runnable mCheckFilterValidityRunnable =
       new Runnable() {
         @Override
@@ -226,17 +226,17 @@ class AccountTypeManagerImpl extends AccountTypeManager
           ContactListFilterController.getInstance(mContext).checkFilterValidity(true);
         }
       };
-  private AccountManager mAccountManager;
-  private AccountType mFallbackAccountType;
+  private final AccountManager mAccountManager;
+  private final AccountType mFallbackAccountType;
   private List<AccountWithDataSet> mAccounts = new ArrayList<>();
   private List<AccountWithDataSet> mContactWritableAccounts = new ArrayList<>();
   private List<AccountWithDataSet> mGroupWritableAccounts = new ArrayList<>();
   private Map<AccountTypeWithDataSet, AccountType> mAccountTypesWithDataSets = new ArrayMap<>();
   private Map<AccountTypeWithDataSet, AccountType> mInvitableAccountTypes =
       EMPTY_UNMODIFIABLE_ACCOUNT_TYPE_MAP;
-  private HandlerThread mListenerThread;
-  private Handler mListenerHandler;
-  private BroadcastReceiver mBroadcastReceiver =
+  private final HandlerThread mListenerThread;
+  private final Handler mListenerHandler;
+  private final BroadcastReceiver mBroadcastReceiver =
       new BroadcastReceiver() {
 
         @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The LineageOS Project
+ * Copyright (C) 2018-2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,10 +31,10 @@ public class InCallDndHandler implements InCallPresenter.InCallStateListener {
 
   private static final String KEY_ENABLE_DND = "incall_enable_dnd";
 
-  private SharedPreferences prefs;
+  private final SharedPreferences prefs;
   private DialerCall activeCall;
-  private NotificationManager notificationManager;
-  private int userSelectedDndMode;
+  private final NotificationManager notificationManager;
+  private final int userSelectedDndMode;
 
   public InCallDndHandler(Context context) {
     prefs = PreferenceManager.getDefaultSharedPreferences(

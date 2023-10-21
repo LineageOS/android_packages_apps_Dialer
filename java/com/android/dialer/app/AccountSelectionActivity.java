@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The LineageOS Project
+ * Copyright (C) 2018-2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ public class AccountSelectionActivity extends AppCompatActivity {
   private String number;
   private CallInitiationType.Type initiationType;
 
-  private SelectPhoneAccountDialogFragment.SelectPhoneAccountListener listener =
+  private final SelectPhoneAccountDialogFragment.SelectPhoneAccountListener listener =
       new SelectPhoneAccountDialogFragment.SelectPhoneAccountListener() {
     @Override
     public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,

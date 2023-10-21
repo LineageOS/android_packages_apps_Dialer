@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +26,7 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
 
   private static final String KEY_FRAGMENT_HIDDEN = "key_fragment_hidden";
 
-  private T presenter;
+  private final T presenter;
 
   protected BaseFragment() {
     presenter = createPresenter();

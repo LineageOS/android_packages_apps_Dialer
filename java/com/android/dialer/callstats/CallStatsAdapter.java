@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
  * Copyright (C) 2013 Android Open Kang Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,10 +58,10 @@ class CallStatsAdapter extends RecyclerView.Adapter {
   private final ContactInfoCache mContactInfoCache;
   private final ContactDisplayPreferences mContactDisplayPreferences;
 
-  private ArrayList<CallStatsDetails> mAllItems;
-  private ArrayList<CallStatsDetails> mShownItems;
-  private CallStatsDetails mTotalItem;
-  private Map<CallStatsDetails, ContactInfo> mInfoLookup;
+  private final ArrayList<CallStatsDetails> mAllItems;
+  private final ArrayList<CallStatsDetails> mShownItems;
+  private final CallStatsDetails mTotalItem;
+  private final Map<CallStatsDetails, ContactInfo> mInfoLookup;
 
   private int mType = -1;
   private long mFilterFrom;

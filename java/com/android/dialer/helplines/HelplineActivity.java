@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2021 The LineageOS Project
+ * Copyright (C) 2019-2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -159,7 +159,7 @@ public class HelplineActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
     }
 
-    private LoadHelplinesTask.Callback mCallback = new LoadHelplinesTask.Callback () {
+    private final LoadHelplinesTask.Callback mCallback = new LoadHelplinesTask.Callback () {
         @Override
         public void onLoadListProgress(int progress) {
             mProgressBar.setProgress(progress);
@@ -177,7 +177,7 @@ public class HelplineActivity extends AppCompatActivity {
         }
     };
 
-    private HelplineAdapter.Listener mListener = new HelplineAdapter.Listener() {
+    private final HelplineAdapter.Listener mListener = new HelplineAdapter.Listener() {
         private AlertDialog mDialog;
 
         @Override

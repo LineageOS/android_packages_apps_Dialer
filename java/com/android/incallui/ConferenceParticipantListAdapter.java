@@ -89,7 +89,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
         }
       };
   /** The conference participants to show in the ListView. */
-  private List<ParticipantInfo> conferenceParticipants = new ArrayList<>();
+  private final List<ParticipantInfo> conferenceParticipants = new ArrayList<>();
   /** {@code True} if the conference parent supports separating calls from the conference. */
   private boolean parentCanSeparate;
 

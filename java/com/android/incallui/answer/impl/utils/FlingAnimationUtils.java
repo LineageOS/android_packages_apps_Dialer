@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,13 +36,13 @@ public class FlingAnimationUtils {
   /** Fancy math. http://en.wikipedia.org/wiki/B%C3%A9zier_curve */
   private static final float LINEAR_OUT_SLOW_IN_START_GRADIENT = 1.0f / LINEAR_OUT_SLOW_IN_X2;
 
-  private Interpolator linearOutSlowIn;
+  private final Interpolator linearOutSlowIn;
 
-  private float minVelocityPxPerSecond;
-  private float maxLengthSeconds;
-  private float highVelocityPxPerSecond;
+  private final float minVelocityPxPerSecond;
+  private final float maxLengthSeconds;
+  private final float highVelocityPxPerSecond;
 
-  private AnimatorProperties animatorProperties = new AnimatorProperties();
+  private final AnimatorProperties animatorProperties = new AnimatorProperties();
 
   public FlingAnimationUtils(Context ctx, float maxLengthSeconds) {
     this.maxLengthSeconds = maxLengthSeconds;
@@ -246,9 +247,9 @@ public class FlingAnimationUtils {
   /** An interpolator which interpolates two interpolators with an interpolator. */
   private static final class InterpolatorInterpolator implements Interpolator {
 
-    private Interpolator interpolator1;
-    private Interpolator interpolator2;
-    private Interpolator crossfader;
+    private final Interpolator interpolator1;
+    private final Interpolator interpolator2;
+    private final Interpolator crossfader;
 
     InterpolatorInterpolator(
         Interpolator interpolator1, Interpolator interpolator2, Interpolator crossfader) {
@@ -268,9 +269,9 @@ public class FlingAnimationUtils {
   /** An interpolator which interpolates with a fixed velocity. */
   private static final class VelocityInterpolator implements Interpolator {
 
-    private float durationSeconds;
-    private float velocity;
-    private float diff;
+    private final float durationSeconds;
+    private final float velocity;
+    private final float diff;
 
     private VelocityInterpolator(float durationSeconds, float velocity, float diff) {
       this.durationSeconds = durationSeconds;
