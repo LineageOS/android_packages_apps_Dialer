@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +21,21 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.ContactsContract;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.dialer.contacts.resources.R;
+import com.android.dialer.R;
 import com.android.dialer.util.PermissionsUtil;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /** Dialog that clears the frequently contacted list after confirming with the user. */
 public class ClearFrequentsDialog extends DialogFragment {
@@ -46,39 +50,27 @@ public class ClearFrequentsDialog extends DialogFragment {
   public Dialog onCreateDialog(Bundle savedInstanceState) {
     final Context context = getActivity().getApplicationContext();
     final ContentResolver resolver = getActivity().getContentResolver();
-    final OnClickListener okListener =
-        new OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            if (!PermissionsUtil.hasContactsReadPermissions(context)) {
-              return;
-            }
+    final OnClickListener okListener = (dialog, which) -> {
+        if (!PermissionsUtil.hasContactsReadPermissions(context)) {
+            return;
+        }
 
-            final ProgressDialog progressDialog =
-                ProgressDialog.show(
-                    getContext(),
-                    getString(R.string.clearFrequentsProgress_title),
-                    null,
-                    true,
-                    true);
+        final ProgressDialog progressDialog =
+          ProgressDialog.show(
+              getContext(),
+              getString(R.string.clearFrequentsProgress_title),
+              null,
+              true,
+              true);
 
-            final AsyncTask<Void, Void, Void> task =
-                new AsyncTask<Void, Void, Void>() {
-                  @Override
-                  protected Void doInBackground(Void... params) {
-                    resolver.delete(
-                        ContactsContract.DataUsageFeedback.DELETE_USAGE_URI, null, null);
-                    return null;
-                  }
+        final ExecutorService executorService = Executors.newSingleThreadExecutor();
+        final Handler handler = new Handler(Looper.getMainLooper());
 
-                  @Override
-                  protected void onPostExecute(Void result) {
-                    progressDialog.dismiss();
-                  }
-                };
-            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-          }
-        };
+        executorService.execute(() -> {
+          resolver.delete(ContactsContract.DataUsageFeedback.DELETE_USAGE_URI, null, null);
+          handler.post(progressDialog::dismiss);
+        });
+    };
     return new AlertDialog.Builder(getActivity())
         .setTitle(R.string.clearFrequentsConfirmation_title)
         .setMessage(R.string.clearFrequentsConfirmation)
