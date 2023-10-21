@@ -70,7 +70,7 @@ public class CequintPhoneLookup implements PhoneLookup<CequintInfo> {
                   TelecomCallUtil.getNumber(call), GeoUtil.getCurrentCountryIso(appContext));
             });
     String callerDisplayName = call.getDetails().getCallerDisplayName();
-    boolean isIncomingCall = (call.getState() == Call.STATE_RINGING);
+    boolean isIncomingCall = (call.getDetails().getState() == Call.STATE_RINGING);
 
     return Futures.transformAsync(
         dialerPhoneNumberFuture,

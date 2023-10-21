@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +30,7 @@ import com.android.dialer.common.LogUtil;
 /** The normal PROXIMITY_SCREEN_OFF_WAKE_LOCK provided by the OS. */
 public class SystemProximityWakeLock implements AnswerProximityWakeLock, DisplayListener {
 
-  private static final String TAG = "SystemProximityWakeLock";
+  private static final String TAG = "SystemProximity:WakeLock";
 
   private final Context context;
   private final PowerManager.WakeLock wakeLock;

@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
  * Copyright (C) 2013 Android Open Kang Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
@@ -80,7 +82,8 @@ public class CallStatsFragment extends Fragment implements
   private boolean mHasReadCallLogPermission = false;
 
   private boolean mRefreshDataRequired = true;
-  private final ContentObserver mObserver = new ContentObserver(new Handler()) {
+  private final ContentObserver mObserver = new ContentObserver(
+          new Handler(Looper.getMainLooper())) {
     @Override
     public void onChange(boolean selfChange) {
       mRefreshDataRequired = true;

@@ -23,14 +23,16 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Trace;
 import android.provider.BlockedNumberContract;
+import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.CallAudioState;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.PhoneAccountSuggestion;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
-import android.telephony.PhoneStateListener;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.util.ArraySet;
 import android.view.Window;
@@ -183,23 +185,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   private boolean screenTimeoutEnabled = true;
 
-  private PhoneStateListener phoneStateListener =
-      new PhoneStateListener() {
-        @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
-          if (state == TelephonyManager.CALL_STATE_RINGING) {
-            if (EmergencyCallUtil.hasRecentEmergencyCall(context)) {
-              return;
-            }
-            // Check if the number is blocked, to silence the ringer.
-            if (BlockedNumberContract.canCurrentUserBlockNumbers(context) &&
-                    BlockedNumberContract.isBlocked(context, incomingNumber)) {
-              TelecomUtil.silenceRinger(context);
-            }
-          }
-        }
-      };
-
   /** Whether or not InCallService is bound to Telecom. */
   private boolean serviceBound = false;
 
@@ -275,8 +260,9 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         extras = EMPTY_EXTRAS;
       }
 
-      final List<PhoneAccountHandle> phoneAccountHandles =
-          extras.getParcelableArrayList(android.telecom.Call.AVAILABLE_PHONE_ACCOUNTS);
+      final List<PhoneAccountSuggestion> phoneAccountHandles =
+          extras.getParcelableArrayList(android.telecom.Call.EXTRA_SUGGESTED_PHONE_ACCOUNTS,
+                  PhoneAccountSuggestion.class);
 
       if ((call.getAccountHandle() == null
           && (phoneAccountHandles == null || phoneAccountHandles.isEmpty()))) {
@@ -357,9 +343,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     this.callList.addListener(activeCallsListener);
 
     VideoPauseController.getInstance().setUp(this);
-    this.context
-        .getSystemService(TelephonyManager.class)
-        .listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
     AudioModeProvider.getInstance().addListener(this);
 
@@ -386,10 +369,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     callList.clearOnDisconnect();
 
     serviceConnected = false;
-
-    context
-        .getSystemService(TelephonyManager.class)
-        .listen(phoneStateListener, PhoneStateListener.LISTEN_NONE);
 
     attemptCleanup();
     VideoPauseController.getInstance().tearDown();
@@ -522,6 +501,24 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       externalCallList.onCallAdded(call);
     } else {
       callList.onCallAdded(context, call);
+    }
+
+    if (call.getDetails().getState() == Call.STATE_RINGING) {
+      if (EmergencyCallUtil.hasRecentEmergencyCall(context)) {
+        return;
+      }
+
+      TelephonyManager tm = context.getSystemService(TelephonyManager.class);
+      String countryIso = tm.getSimCountryIso().toUpperCase();
+      String incomingNumber = call.getDetails().getHandle().getSchemeSpecificPart();
+
+      incomingNumber = PhoneNumberUtils.formatNumberToE164(incomingNumber, countryIso);
+
+      // Check if the number is blocked, to silence the ringer.
+      if (BlockedNumberContract.canCurrentUserBlockNumbers(context) &&
+              BlockedNumberContract.isBlocked(context, incomingNumber)) {
+        TelecomUtil.silenceRinger(context);
+      }
     }
 
     // Since a call has been added we are no longer waiting for Telecom to send us a call.
@@ -1360,10 +1357,11 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       extras = new Bundle();
     }
 
-    final List<PhoneAccountHandle> phoneAccountHandles =
-        extras.getParcelableArrayList(android.telecom.Call.AVAILABLE_PHONE_ACCOUNTS);
+    final List<PhoneAccountSuggestion> phoneAccountSuggestions =
+        extras.getParcelableArrayList(Call.EXTRA_SUGGESTED_PHONE_ACCOUNTS,
+                PhoneAccountSuggestion.class);
 
-    if (phoneAccountHandles == null || phoneAccountHandles.isEmpty()) {
+    if (phoneAccountSuggestions == null || phoneAccountSuggestions.isEmpty()) {
       String scheme = call.getHandle().getScheme();
       final String errorMsg =
           PhoneAccount.SCHEME_TEL.equals(scheme)
@@ -1481,14 +1479,15 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       return;
     }
 
-    if (extras.containsKey(android.telecom.Call.AVAILABLE_PHONE_ACCOUNTS)) {
+    if (extras.containsKey(Call.EXTRA_SUGGESTED_PHONE_ACCOUNTS)) {
       // Account selection dialog will show up so don't show the animation.
       return;
     }
 
     final PhoneAccountHandle accountHandle =
-        intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE);
-    final Point touchPoint = extras.getParcelable(TouchPointManager.TOUCH_POINT);
+            intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE,
+                    PhoneAccountHandle.class);
+    final Point touchPoint = extras.getParcelable(TouchPointManager.TOUCH_POINT, Point.class);
 
     setBoundAndWaitingForOutgoingCall(true, accountHandle);
 

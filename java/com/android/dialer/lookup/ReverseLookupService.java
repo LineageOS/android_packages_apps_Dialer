@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Xiao-Long Chen <chillermillerlong@hotmail.com>
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +22,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
@@ -51,7 +53,7 @@ public class ReverseLookupService implements PhoneNumberService, Handler.Callbac
     backgroundThread.start();
 
     backgroundHandler = new Handler(backgroundThread.getLooper(), this);
-    handler = new Handler(this);
+    handler = new Handler(Looper.getMainLooper(), this);
   }
 
   @Override

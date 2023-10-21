@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,7 +81,8 @@ public class DialerUtils {
           Bundle extras;
           // Make sure to not accidentally clobber any existing extras
           if (intent.hasExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS)) {
-            extras = intent.getParcelableExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS);
+            extras = intent.getParcelableExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS,
+                    Bundle.class);
           } else {
             extras = new Bundle();
           }
@@ -127,11 +129,11 @@ public class DialerUtils {
   @SuppressLint("MissingPermission")
   private static boolean shouldWarnForOutgoingWps(Context context, String number) {
     if (number != null && number.startsWith(WPS_PREFIX)) {
+      TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
       TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
       boolean isOnVolte =
           telephonyManager.getVoiceNetworkType() == TelephonyManager.NETWORK_TYPE_LTE;
-      boolean hasCurrentActiveCall =
-          telephonyManager.getCallState() == TelephonyManager.CALL_STATE_OFFHOOK;
+      boolean hasCurrentActiveCall = telecomManager.isInCall();
       return isOnVolte && hasCurrentActiveCall;
     }
     return false;
