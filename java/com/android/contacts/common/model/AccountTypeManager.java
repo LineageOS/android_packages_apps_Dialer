@@ -696,8 +696,8 @@ class AccountTypeManagerImpl extends AccountTypeManager
         result.remove(accountTypeWithDataSet);
         continue;
       }
-      ResolveInfo resolveInfo =
-          packageManager.resolveActivity(invitableIntent, PackageManager.MATCH_DEFAULT_ONLY);
+      ResolveInfo resolveInfo = packageManager.resolveActivity(invitableIntent,
+              PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY));
       if (resolveInfo == null) {
         // If we can't find an activity to start for this intent, then there's no point in
         // showing this option to the user.

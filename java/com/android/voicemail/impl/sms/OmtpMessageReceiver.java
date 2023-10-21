@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,8 +50,9 @@ public class OmtpMessageReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     this.context = context;
-    VisualVoicemailSms sms = intent.getExtras().getParcelable(OmtpService.EXTRA_VOICEMAIL_SMS);
-    PhoneAccountHandle phone = sms.getPhoneAccountHandle();
+    VisualVoicemailSms sms = intent.getExtras().getParcelable(OmtpService.EXTRA_VOICEMAIL_SMS,
+            VisualVoicemailSms.class);
+    PhoneAccountHandle phone = sms != null ? sms.getPhoneAccountHandle() : null;
 
     if (phone == null) {
       // This should never happen

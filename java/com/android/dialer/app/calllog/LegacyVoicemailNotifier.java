@@ -174,7 +174,7 @@ public final class LegacyVoicemailNotifier {
   @NonNull
   private static String getNotificationTag(
       @NonNull Context context, @NonNull PhoneAccountHandle phoneAccountHandle) {
-    if (context.getSystemService(TelephonyManager.class).getPhoneCount() <= 1) {
+    if (context.getSystemService(TelephonyManager.class).getActiveModemCount() <= 1) {
       return NOTIFICATION_TAG;
     }
 

@@ -227,12 +227,12 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
 
   @Nullable
   public Uri getImageUri() {
-    return getArguments().getParcelable(ARG_IMAGE);
+    return getArguments().getParcelable(ARG_IMAGE, Uri.class);
   }
 
   @Nullable
   public Location getLocation() {
-    return getArguments().getParcelable(ARG_LOCATION);
+    return getArguments().getParcelable(ARG_LOCATION, Location.class);
   }
 
   /** Interface for notifying the fragment parent of changes. */

@@ -20,8 +20,11 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.os.VibratorManager;
 import android.telecom.DisconnectCause;
 
 import androidx.preference.PreferenceManager;
@@ -46,10 +49,11 @@ public class InCallVibrationHandler extends Handler implements
   private DialerCall activeCall;
 
   public InCallVibrationHandler(Context context) {
+    super(Looper.getMainLooper());
     String name = context.getPackageName() + "_preferences";
     prefs = context.createDeviceProtectedStorageContext()
             .getSharedPreferences(name, Context.MODE_PRIVATE);
-    vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+    vibrator = context.getSystemService(VibratorManager.class).getDefaultVibrator();
   }
 
   @Override
@@ -142,6 +146,7 @@ public class InCallVibrationHandler extends Handler implements
     long[] pattern = new long[] {
       0, v1, p1, v2
     };
-    vibrator.vibrate(pattern, -1);
+    VibrationEffect effect = VibrationEffect.createWaveform(pattern, -1);
+    vibrator.vibrate(effect);
   }
 }
