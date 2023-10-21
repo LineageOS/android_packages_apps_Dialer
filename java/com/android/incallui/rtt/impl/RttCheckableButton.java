@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +23,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.SoundEffectConstants;
-import android.widget.Button;
 import android.widget.Checkable;
 
+import androidx.appcompat.widget.AppCompatButton;
+
 /** Image button that maintains a checked state. */
-public class RttCheckableButton extends Button implements Checkable {
+public class RttCheckableButton extends AppCompatButton implements Checkable {
 
   private static final int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
 
@@ -51,12 +53,7 @@ public class RttCheckableButton extends Button implements Checkable {
   }
 
   public RttCheckableButton(Context context, AttributeSet attrs, int defStyleAttr) {
-    this(context, attrs, defStyleAttr, 0);
-  }
-
-  public RttCheckableButton(
-      Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-    super(context, attrs, defStyleAttr, defStyleRes);
+    super(context, attrs, defStyleAttr);
     init(context, attrs);
   }
 
