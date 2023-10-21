@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -232,7 +233,7 @@ public class OmtpConstants {
     return String.format("%s.%s.%s", manufacturer, model, version);
   }
 
-  private static final String truncate(String string, int length) {
+  private static String truncate(String string, int length) {
     return string.substring(0, Math.min(length, string.length()));
   }
 

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +43,8 @@ public class AccelerometerListener {
   private static final int VERTICAL_DEBOUNCE = 100;
   private static final int HORIZONTAL_DEBOUNCE = 500;
   private static final double VERTICAL_ANGLE = 50.0;
-  private SensorManager sensorManager;
-  private Sensor sensor;
+  private final SensorManager sensorManager;
+  private final Sensor sensor;
   // mOrientation is the orientation value most recently reported to the client.
   private int orientation;
   // mPendingOrientation is the latest orientation computed based on the sensor value.
@@ -75,7 +76,7 @@ public class AccelerometerListener {
           }
         }
       };
-  SensorEventListener sensorListener =
+  final SensorEventListener sensorListener =
       new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {

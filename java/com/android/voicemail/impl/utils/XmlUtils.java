@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +26,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 public class XmlUtils {
 
-  public static final ArrayMap<String, ?> readThisArrayMapXml(
+  public static ArrayMap<String, ?> readThisArrayMapXml(
       XmlPullParser parser, String endTag, String[] name, ReadMapCallback callback)
       throws XmlPullParserException, java.io.IOException {
     ArrayMap<String, Object> map = new ArrayMap<>();
@@ -57,7 +58,7 @@ public class XmlUtils {
    * @param name An array of one string, used to return the name attribute of the list's tag.
    * @return HashMap The newly generated list.
    */
-  public static final ArrayList readThisListXml(
+  public static ArrayList readThisListXml(
       XmlPullParser parser,
       String endTag,
       String[] name,
@@ -197,7 +198,7 @@ public class XmlUtils {
     throw new XmlPullParserException("Unexpected end of document in <" + tagName + ">");
   }
 
-  private static final Object readThisPrimitiveValueXml(XmlPullParser parser, String tagName)
+  private static Object readThisPrimitiveValueXml(XmlPullParser parser, String tagName)
       throws XmlPullParserException, java.io.IOException {
     try {
       if (tagName.equals("int")) {

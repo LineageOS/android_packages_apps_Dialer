@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +37,7 @@ public class PackedString {
 
   private static final char DELIMITER_TAG = '\2';
 
-  private String string;
+  private final String string;
   private ArrayMap<String, String> exploded;
   private static final ArrayMap<String, String> EMPTY_MAP = new ArrayMap<String, String>();
 
@@ -118,7 +119,7 @@ public class PackedString {
    * PackedString representations.
    */
   public static class Builder {
-    ArrayMap<String, String> map;
+    final ArrayMap<String, String> map;
 
     /** Create a builder that's empty (for filling) */
     public Builder() {
