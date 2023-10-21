@@ -102,7 +102,7 @@ public final class PeriodicJobService extends JobService {
     LogUtil.enterBlock("PeriodicJobService.onStopJob");
 
     if (refreshShortcutsTask != null) {
-      refreshShortcutsTask.cancel(false /* mayInterruptIfRunning */);
+      refreshShortcutsTask.cancel();
     }
     return false;
   }

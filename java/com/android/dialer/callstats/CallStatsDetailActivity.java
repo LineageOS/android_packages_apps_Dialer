@@ -20,8 +20,9 @@ package com.android.dialer.callstats;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.TextUtils;
@@ -49,6 +50,9 @@ import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.widget.LinearColorBar;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Activity to display detailed information about a callstat item
@@ -89,18 +93,21 @@ public class CallStatsDetailActivity extends AppCompatActivity implements
   private CallStatsDetails mTotalData;
   private String mNumber = null;
 
-  private class UpdateContactTask extends AsyncTask<String, Void, ContactInfo> {
-    @Override
-    protected ContactInfo doInBackground(String... strings) {
-      return mContactInfoHelper.lookupNumber(strings[0], strings[1]);
-    }
+  private class UpdateContactTask {
 
-    @Override
-    protected void onPostExecute(ContactInfo info) {
-      if (info != null) {
-        mData.updateFromInfo(info);
-        updateData();
-      }
+    private void execute(String number, String countryIso) {
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      Handler handler = new Handler(Looper.getMainLooper());
+
+      executor.execute(() -> {
+        final ContactInfo info = mContactInfoHelper.lookupNumber(number, countryIso);
+        handler.post(() -> {
+          if (info != null) {
+            mData.updateFromInfo(info);
+            updateData();
+          }
+        });
+      });
     }
   }
 
