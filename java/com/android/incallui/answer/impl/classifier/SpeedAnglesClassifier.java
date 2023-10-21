@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +34,7 @@ import java.util.Map;
  * a good stroke is most often increases, so most of these angels should be in this interval.
  */
 class SpeedAnglesClassifier extends StrokeClassifier {
-  private Map<Stroke, Data> strokeMap = new ArrayMap<>();
+  private final Map<Stroke, Data> strokeMap = new ArrayMap<>();
 
   public SpeedAnglesClassifier(ClassifierData classifierData) {
     this.classifierData = classifierData;
@@ -79,7 +80,7 @@ class SpeedAnglesClassifier extends StrokeClassifier {
     private static final float LENGTH_SCALE = 1.0f;
     private static final float ANGLE_DEVIATION = (float) Math.PI / 10.0f;
 
-    private List<Point> lastThreePoints = new ArrayList<>();
+    private final List<Point> lastThreePoints = new ArrayList<>();
     private Point previousPoint;
     private float previousAngle;
     private float sumSquares;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1754,8 +1755,8 @@ public class DialpadFragment extends Fragment
     static final int DIALPAD_CHOICE_RETURN_TO_CALL = 102;
     static final int DIALPAD_CHOICE_ADD_NEW_CALL = 103;
     private static final int NUM_ITEMS = 3;
-    private LayoutInflater inflater;
-    private ChoiceItem[] choiceItems = new ChoiceItem[NUM_ITEMS];
+    private final LayoutInflater inflater;
+    private final ChoiceItem[] choiceItems = new ChoiceItem[NUM_ITEMS];
 
     DialpadChooserAdapter(Context context) {
       // Cache the LayoutInflate to avoid asking for a new one each time.
@@ -1827,9 +1828,9 @@ public class DialpadFragment extends Fragment
     // Simple struct for a single "choice" item.
     static class ChoiceItem {
 
-      String text;
-      Bitmap icon;
-      int id;
+      final String text;
+      final Bitmap icon;
+      final int id;
 
       ChoiceItem(String s, Bitmap b, int i) {
         text = s;
