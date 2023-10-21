@@ -1136,8 +1136,8 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     private static final long RAMP_DOWN_END_MS = RAMP_DOWN_BEGIN_MS + RAMP_DOWN_DURATION_MS;
     private static final long RAMP_TOTAL_TIME_MS = RAMP_DOWN_END_MS;
     private final float ampMax;
-    private final float freqMax = 80;
-    private Interpolator sliderInterpolator = new FastOutSlowInInterpolator();
+    private static final float FREQ_MAX = 80;
+    private final Interpolator sliderInterpolator = new FastOutSlowInInterpolator();
 
     VibrateInterpolator(Context context) {
       ampMax = DpUtil.dpToPx(context, 1 /* dp */);
@@ -1167,7 +1167,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
       }
 
       float ampNormalized = ampMax * slider;
-      float freqNormalized = freqMax * slider;
+      float freqNormalized = FREQ_MAX * slider;
 
       return (float) (ampNormalized * Math.sin(time * freqNormalized));
     }

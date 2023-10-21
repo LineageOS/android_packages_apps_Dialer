@@ -32,17 +32,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilterSpinnerHelper implements AdapterView.OnItemSelectedListener {
-  private static String TAG = FilterSpinnerHelper.class.getSimpleName();
+  private static final String TAG = FilterSpinnerHelper.class.getSimpleName();
 
   public interface OnFilterChangedListener {
     void onFilterChanged(PhoneAccountHandle account, int callType);
   }
 
-  private OnFilterChangedListener mListener;
-  private Spinner mAccountSpinner;
-  private ArrayAdapter<AccountItem> mAccountAdapter;
-  private Spinner mTypeSpinner;
-  private ArrayAdapter<TypeItem> mTypeAdapter;
+  private final OnFilterChangedListener mListener;
+  private final Spinner mAccountSpinner;
+  private final ArrayAdapter<AccountItem> mAccountAdapter;
+  private final Spinner mTypeSpinner;
+  private final ArrayAdapter<TypeItem> mTypeAdapter;
 
   public FilterSpinnerHelper(View rootView, boolean includeVoicemailType,
       OnFilterChangedListener listener) {

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +58,7 @@ public class PhoneCallDetailsHelper {
   private final CachedNumberLookupService cachedNumberLookupService;
 
   /** List of items to be concatenated together for accessibility descriptions */
-  private ArrayList<CharSequence> descriptionItems = new ArrayList<>();
+  private final ArrayList<CharSequence> descriptionItems = new ArrayList<>();
 
   /**
    * Creates a new instance of the helper.

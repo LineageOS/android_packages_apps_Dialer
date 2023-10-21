@@ -307,10 +307,10 @@ public class CallStatsDetailActivity extends AppCompatActivity implements
   }
 
   private class DetailLine {
-    private int mValueTemplateResId;
-    private View mRootView;
-    private TextView mTextView;
-    private TextView mPercentView;
+    private final int mValueTemplateResId;
+    private final View mRootView;
+    private final TextView mTextView;
+    private final TextView mPercentView;
 
     public DetailLine(int rootViewId, int valueTemplateResId, int iconType) {
       mValueTemplateResId = valueTemplateResId;

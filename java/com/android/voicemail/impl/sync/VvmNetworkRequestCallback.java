@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,9 +51,9 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
   public static final String NETWORK_REQUEST_FAILED_TIMEOUT = "timeout";
   public static final String NETWORK_REQUEST_FAILED_LOST = "lost";
 
-  protected Context context;
-  protected PhoneAccountHandle phoneAccount;
-  protected NetworkRequest networkRequest;
+  protected final Context context;
+  protected final PhoneAccountHandle phoneAccount;
+  protected final NetworkRequest networkRequest;
   private ConnectivityManager connectivityManager;
   private final OmtpVvmCarrierConfigHelper carrierConfigHelper;
   private final VoicemailStatus.Editor status;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +34,7 @@ public class IndentingPrintWriter extends PrintWriter {
   private final int wrapLength;
 
   /** Mutable version of current indent */
-  private StringBuilder indentBuilder = new StringBuilder();
+  private final StringBuilder indentBuilder = new StringBuilder();
   /** Cache of current {@link #indentBuilder} value */
   private char[] currentIndent;
   /** Length of current line being built, excluding any indent */
@@ -45,7 +46,7 @@ public class IndentingPrintWriter extends PrintWriter {
    */
   private boolean emptyLine = true;
 
-  private char[] singleChar = new char[1];
+  private final char[] singleChar = new char[1];
 
   public IndentingPrintWriter(Writer writer, String singleIndent) {
     this(writer, singleIndent, -1);
