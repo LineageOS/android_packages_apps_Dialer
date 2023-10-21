@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Vibrator;
 import android.view.View;
 
@@ -92,7 +93,7 @@ public class PseudoEmergencyAnimator {
                   viewProvider.getFab().getBackground().clearColorFilter();
                 }
 
-                new Handler()
+                new Handler(Looper.getMainLooper())
                     .postDelayed(
                         () -> {
                           try {

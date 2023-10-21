@@ -209,7 +209,7 @@ public class CountryDetector {
       }
 
       final Location location =
-          (Location) intent.getExtras().get(LocationManager.KEY_LOCATION_CHANGED);
+              intent.getParcelableExtra(LocationManager.KEY_LOCATION_CHANGED, Location.class);
 
       // TODO: rething how we access the gecoder here, right now we have to set the static instance
       // of CountryDetector to make this work for tests which is weird

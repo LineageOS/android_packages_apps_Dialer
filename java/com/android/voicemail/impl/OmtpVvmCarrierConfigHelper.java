@@ -19,6 +19,7 @@ package com.android.voicemail.impl;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -483,7 +484,8 @@ public class OmtpVvmCarrierConfigHelper {
     }
     for (String packageName : carrierPackages) {
       try {
-        ApplicationInfo info = getContext().getPackageManager().getApplicationInfo(packageName, 0);
+        ApplicationInfo info = getContext().getPackageManager().getApplicationInfo(packageName,
+                PackageManager.ApplicationInfoFlags.of(0));
         if (!info.enabled) {
           continue;
         }

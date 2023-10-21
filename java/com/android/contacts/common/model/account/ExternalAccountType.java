@@ -30,9 +30,11 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Xml;
+
 import com.android.contacts.common.model.dataitem.DataKind;
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.contacts.resources.R;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -189,25 +191,23 @@ public class ExternalAccountType extends BaseAccountType {
   public static XmlResourceParser loadContactsXml(Context context, String resPackageName) {
     final PackageManager pm = context.getPackageManager();
     final Intent intent = new Intent(SYNC_META_DATA).setPackage(resPackageName);
-    final List<ResolveInfo> intentServices =
-        pm.queryIntentServices(intent, PackageManager.GET_SERVICES | PackageManager.GET_META_DATA);
+    final List<ResolveInfo> intentServices = pm.queryIntentServices(intent,
+            PackageManager.ResolveInfoFlags.of(PackageManager.GET_META_DATA));
 
-    if (intentServices != null) {
-      for (final ResolveInfo resolveInfo : intentServices) {
-        final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
-        if (serviceInfo == null) {
-          continue;
-        }
-        for (String metadataName : METADATA_CONTACTS_NAMES) {
-          final XmlResourceParser parser = serviceInfo.loadXmlMetaData(pm, metadataName);
-          if (parser != null) {
-            LogUtil.d(
-                TAG,
-                String.format(
-                    "Metadata loaded from: %s, %s, %s",
-                    serviceInfo.packageName, serviceInfo.name, metadataName));
-            return parser;
-          }
+    for (final ResolveInfo resolveInfo : intentServices) {
+      final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
+      if (serviceInfo == null) {
+        continue;
+      }
+      for (String metadataName : METADATA_CONTACTS_NAMES) {
+        final XmlResourceParser parser = serviceInfo.loadXmlMetaData(pm, metadataName);
+        if (parser != null) {
+          LogUtil.d(
+              TAG,
+              String.format(
+                  "Metadata loaded from: %s, %s, %s",
+                  serviceInfo.packageName, serviceInfo.name, metadataName));
+          return parser;
         }
       }
     }
