@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +31,6 @@ import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -63,6 +63,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -775,18 +777,20 @@ class AccountTypeManagerImpl extends AccountTypeManager
    * the list of all potential invitable account types. Once the work is completed, the list of
    * account types is stored in the {@link AccountTypeManager}'s {@link InvitableAccountTypeCache}.
    */
-  private class FindInvitablesTask
-      extends AsyncTask<Void, Void, Map<AccountTypeWithDataSet, AccountType>> {
+  private class FindInvitablesTask {
 
-    @Override
-    protected Map<AccountTypeWithDataSet, AccountType> doInBackground(Void... params) {
-      return findUsableInvitableAccountTypes(mContext);
-    }
+    private void execute() {
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      Handler handler = new Handler(Looper.getMainLooper());
 
-    @Override
-    protected void onPostExecute(Map<AccountTypeWithDataSet, AccountType> accountTypes) {
-      mInvitableAccountTypeCache.setCachedValue(accountTypes);
-      mInvitablesTaskIsRunning.set(false);
+      executor.execute(() -> {
+        final Map<AccountTypeWithDataSet, AccountType> accountTypes =
+                findUsableInvitableAccountTypes(mContext);
+        handler.post(() -> {
+          mInvitableAccountTypeCache.setCachedValue(accountTypes);
+          mInvitablesTaskIsRunning.set(false);
+        });
+      });
     }
   }
 }
