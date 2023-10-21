@@ -255,16 +255,12 @@ public class CallLogFragment extends Fragment
       }
       // Workaround for framework issue: the smooth-scroll doesn't
       // occur if setSelection() is called immediately before.
-      handler.post(
-          new Runnable() {
-            @Override
-            public void run() {
-              if (getActivity() == null || getActivity().isFinishing()) {
-                return;
-              }
-              recyclerView.smoothScrollToPosition(0);
-            }
-          });
+      handler.post(() -> {
+        if (getActivity() == null || getActivity().isFinishing()) {
+          return;
+        }
+        recyclerView.smoothScrollToPosition(0);
+      });
 
       scrollToTop = false;
     }

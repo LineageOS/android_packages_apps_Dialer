@@ -124,9 +124,7 @@ class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
         }
 
         void bind(HelplineItem item) {
-            mItemView.setOnClickListener(v -> {
-                mListener.onItemClicked(item);
-            });
+            mItemView.setOnClickListener(v -> mListener.onItemClicked(item));
 
             String name = item.getName();
             if (!TextUtils.isEmpty(name)) {
@@ -150,9 +148,7 @@ class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
             String number = item.getItem().getNumber();
             if (!TextUtils.isEmpty(number)) {
                 mCallIcon.setVisibility(View.VISIBLE);
-                mCallIcon.setOnClickListener(v -> {
-                    mListener.initiateCall(number);
-                });
+                mCallIcon.setOnClickListener(v -> mListener.initiateCall(number));
             }
         }
     }

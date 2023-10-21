@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +25,7 @@ import androidx.annotation.Nullable;
 
 import com.android.incallui.Log;
 import com.android.incallui.async.PausableExecutor;
+
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -76,13 +78,7 @@ public class InCallTonePlayer {
     }
     final ToneGeneratorInfo info = getToneGeneratorInfo(tone);
     numPlayingTones = new CountDownLatch(1);
-    executor.execute(
-        new Runnable() {
-          @Override
-          public void run() {
-            playOnBackgroundThread(info);
-          }
-        });
+    executor.execute(() -> playOnBackgroundThread(info));
   }
 
   private ToneGeneratorInfo getToneGeneratorInfo(int tone) {
