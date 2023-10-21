@@ -95,13 +95,7 @@ public class DialerUtils {
           AlertDialog.Builder builder = new AlertDialog.Builder(context);
           builder.setMessage(R.string.outgoing_wps_warning);
           builder.setPositiveButton(
-              R.string.dialog_continue,
-              new OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                  placeCallOrMakeToast(context, intent);
-                }
-              });
+              R.string.dialog_continue, (dialog, which) -> placeCallOrMakeToast(context, intent));
           builder.setNegativeButton(android.R.string.cancel, null);
           builder.create().show();
         } else {

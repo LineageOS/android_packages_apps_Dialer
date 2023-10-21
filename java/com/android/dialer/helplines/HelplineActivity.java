@@ -141,8 +141,7 @@ public class HelplineActivity extends AppCompatActivity {
                 .setTitle(R.string.helplines_help_title)
                 .setMessage(R.string.helplines_help_message)
                 .setPositiveButton(android.R.string.ok, null)
-                .setNeutralButton(R.string.helpline_button_more, (dialog, which) -> {
-                    showMoreInfo(); })
+                .setNeutralButton(R.string.helpline_button_more, (dialog, which) -> showMoreInfo())
                 .show();
     }
 
