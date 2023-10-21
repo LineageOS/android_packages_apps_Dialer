@@ -230,14 +230,10 @@ public class AnswerFragment extends Fragment
     answerAndReleaseButton
         .animate()
         .alpha(0)
-        .withEndAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                affordanceHolderLayout.reset(false);
-                secondaryButton.animate().alpha(1);
-              }
-            });
+        .withEndAction(() -> {
+          affordanceHolderLayout.reset(false);
+          secondaryButton.animate().alpha(1);
+        });
   }
 
   private final AccessibilityDelegate accessibilityDelegate =
@@ -410,13 +406,7 @@ public class AnswerFragment extends Fragment
             : SecondaryBehavior.REJECT_WITH_SMS;
     secondaryBehavior.applyToView(secondaryButton);
 
-    secondaryButton.setOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            performSecondaryButtonAction();
-          }
-        });
+    secondaryButton.setOnClickListener(v -> performSecondaryButtonAction());
     secondaryButton.setClickable(AccessibilityUtil.isAccessibilityEnabled(getContext()));
     secondaryButton.setFocusable(AccessibilityUtil.isAccessibilityEnabled(getContext()));
     secondaryButton.setAccessibilityDelegate(accessibilityDelegate);
@@ -441,13 +431,7 @@ public class AnswerFragment extends Fragment
       answerAndReleaseButton.setVisibility(View.INVISIBLE);
       answerScreenDelegate.onAnswerAndReleaseButtonDisabled();
     }
-    answerAndReleaseButton.setOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            performAnswerAndReleaseButtonAction();
-          }
-        });
+    answerAndReleaseButton.setOnClickListener(v -> performAnswerAndReleaseButtonAction());
   }
 
   /** Initialize chip buttons */
@@ -684,18 +668,14 @@ public class AnswerFragment extends Fragment
     importanceBadge = view.findViewById(R.id.incall_important_call_badge);
     importanceBadge
         .getViewTreeObserver()
-        .addOnGlobalLayoutListener(
-            new OnGlobalLayoutListener() {
-              @Override
-              public void onGlobalLayout() {
-                int leftRightPadding = importanceBadge.getHeight() / 2;
-                importanceBadge.setPadding(
-                    leftRightPadding,
-                    importanceBadge.getPaddingTop(),
-                    leftRightPadding,
-                    importanceBadge.getPaddingBottom());
-              }
-            });
+        .addOnGlobalLayoutListener(() -> {
+          int leftRightPadding = importanceBadge.getHeight() / 2;
+          importanceBadge.setPadding(
+              leftRightPadding,
+              importanceBadge.getPaddingTop(),
+              leftRightPadding,
+              importanceBadge.getPaddingBottom());
+        });
     updateImportanceBadgeVisibility();
 
     contactGridManager = new ContactGridManager(view, null, 0, false /* showAnonymousAvatar */);
@@ -988,14 +968,10 @@ public class AnswerFragment extends Fragment
     secondaryButton
         .animate()
         .alpha(0)
-        .withEndAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                affordanceHolderLayout.reset(false);
-                secondaryButton.animate().alpha(1);
-              }
-            });
+        .withEndAction(() -> {
+          affordanceHolderLayout.reset(false);
+          secondaryButton.animate().alpha(1);
+        });
 
     TelecomUtil.silenceRinger(getContext());
   }

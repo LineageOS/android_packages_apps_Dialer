@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,24 +130,20 @@ public class VideoCallPresenter
    * enter fullscreen mode if the dialpad is visible (doing so would make it impossible to exit the
    * dialpad).
    */
-  private Runnable autoFullscreenRunnable =
-      new Runnable() {
-        @Override
-        public void run() {
-          if (autoFullScreenPending
-              && !InCallPresenter.getInstance().isDialpadVisible()
-              && isVideoMode) {
+  private final Runnable autoFullscreenRunnable = () -> {
+    if (autoFullScreenPending
+            && !InCallPresenter.getInstance().isDialpadVisible()
+            && isVideoMode) {
 
-            LogUtil.v("VideoCallPresenter.mAutoFullScreenRunnable", "entering fullscreen mode");
-            InCallPresenter.getInstance().setFullScreen(true);
-            autoFullScreenPending = false;
-          } else {
-            LogUtil.v(
-                "VideoCallPresenter.mAutoFullScreenRunnable",
-                "skipping scheduled fullscreen mode.");
-          }
-        }
-      };
+      LogUtil.v("VideoCallPresenter.mAutoFullScreenRunnable", "entering fullscreen mode");
+      InCallPresenter.getInstance().setFullScreen(true);
+      autoFullScreenPending = false;
+    } else {
+      LogUtil.v(
+              "VideoCallPresenter.mAutoFullScreenRunnable",
+              "skipping scheduled fullscreen mode.");
+    }
+  };
 
   private boolean isVideoCallScreenUiReady;
 

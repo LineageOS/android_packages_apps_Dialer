@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +26,6 @@ import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -115,14 +115,11 @@ public class SmsBottomSheetFragment extends BottomSheetDialogFragment {
     textView.setLayoutParams(params);
 
     textView.setOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            FragmentUtils.getParentUnsafe(SmsBottomSheetFragment.this, SmsSheetHolder.class)
-                .smsSelected(text);
-            dismiss();
-          }
-        });
+            v -> {
+              FragmentUtils.getParentUnsafe(SmsBottomSheetFragment.this, SmsSheetHolder.class)
+                  .smsSelected(text);
+              dismiss();
+            });
     return textView;
   }
 
