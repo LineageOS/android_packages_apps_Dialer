@@ -175,13 +175,13 @@ public class CallRecordingDataStore {
   }
 
   static class CallRecordingsContract {
-    static interface CallRecording extends BaseColumns {
-      static final String TABLE_NAME = "call_recordings";
-      static final String COLUMN_NAME_PHONE_NUMBER = "phone_number";
-      static final String COLUMN_NAME_CALL_DATE = "call_date";
-      static final String COLUMN_NAME_RECORDING_FILENAME = "recording_filename";
-      static final String COLUMN_NAME_CREATION_DATE = "creation_date";
-      static final String COLUMN_NAME_MEDIA_ID = "media_id";
+    interface CallRecording extends BaseColumns {
+      String TABLE_NAME = "call_recordings";
+      String COLUMN_NAME_PHONE_NUMBER = "phone_number";
+      String COLUMN_NAME_CALL_DATE = "call_date";
+      String COLUMN_NAME_RECORDING_FILENAME = "recording_filename";
+      String COLUMN_NAME_CREATION_DATE = "creation_date";
+      String COLUMN_NAME_MEDIA_ID = "media_id";
     }
   }
 

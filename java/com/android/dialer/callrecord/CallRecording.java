@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,11 +28,11 @@ import android.webkit.MimeTypeMap;
 import java.io.File;
 
 public final class CallRecording implements Parcelable {
-  public String phoneNumber;
-  public long creationTime;
-  public String fileName;
-  public long startRecordingTime;
-  public long mediaId;
+  public final String phoneNumber;
+  public final long creationTime;
+  public final String fileName;
+  public final long startRecordingTime;
+  public final long mediaId;
 
   public static final Parcelable.Creator<CallRecording> CREATOR =
       new Parcelable.Creator<CallRecording>() {

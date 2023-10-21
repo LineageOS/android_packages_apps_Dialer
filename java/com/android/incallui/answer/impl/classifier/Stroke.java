@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +27,8 @@ class Stroke {
 
   private static final float NANOS_TO_SECONDS = 1e9f;
 
-  private ArrayList<Point> points = new ArrayList<>();
-  private long startTimeNano;
+  private final ArrayList<Point> points = new ArrayList<>();
+  private final long startTimeNano;
   private long endTimeNano;
   private float length;
   private final float dpi;

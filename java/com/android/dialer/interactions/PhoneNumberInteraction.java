@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,7 +118,7 @@ public class PhoneNumberInteraction implements Loader.OnLoadCompleteListener<Cur
   private final CallSpecificAppData callSpecificAppData;
   private long contactId = UNKNOWN_CONTACT_ID;
   private CursorLoader loader;
-  private boolean isVideoCall;
+  private final boolean isVideoCall;
 
   /** Error codes for interactions. */
   @Retention(RetentionPolicy.SOURCE)

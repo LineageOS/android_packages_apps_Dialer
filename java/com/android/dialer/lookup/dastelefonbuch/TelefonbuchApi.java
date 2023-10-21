@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Danny Baumann <dannybaumann@web.de>
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,12 +30,12 @@ public class TelefonbuchApi {
   private static final String REVERSE_LOOKUP_URL =
           "https://www.dastelefonbuch.de/R%C3%BCckw%C3%A4rts-Suche/";
 
-  private static String RELEVANT_CONTENT_REGEX =
+  private static final String RELEVANT_CONTENT_REGEX =
           "<div class=\"vcard\">(.*)<div class=\"additional\">";
-  private static String NAME_REGEX ="<div class=\"name\" title=\"(.*?)\">";
-  private static String NUMBER_REGEX = "<!-- phoneTo: (.*?) -->";
-  private static String ADDRESS_REGEX = "<address.*?>\n?(.*?)</address>";
-  private static String WEBSITE_REGEX = "<div.*class=\"url\">.*<a.*?href=\"(.*?)\"";
+  private static final String NAME_REGEX ="<div class=\"name\" title=\"(.*?)\">";
+  private static final String NUMBER_REGEX = "<!-- phoneTo: (.*?) -->";
+  private static final String ADDRESS_REGEX = "<address.*?>\n?(.*?)</address>";
+  private static final String WEBSITE_REGEX = "<div.*class=\"url\">.*<a.*?href=\"(.*?)\"";
 
   private TelefonbuchApi() {
   }

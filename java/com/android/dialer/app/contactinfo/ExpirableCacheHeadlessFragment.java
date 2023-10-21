@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +37,7 @@ public class ExpirableCacheHeadlessFragment extends Fragment {
   private static final String FRAGMENT_TAG = "ExpirableCacheHeadlessFragment";
   private static final int CONTACT_INFO_CACHE_SIZE = 100;
 
-  private ExpirableCache<NumberWithCountryIso, ContactInfo> retainedCache =
+  private final ExpirableCache<NumberWithCountryIso, ContactInfo> retainedCache =
       ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
 
   @NonNull

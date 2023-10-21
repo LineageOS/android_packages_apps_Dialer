@@ -49,7 +49,7 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
   private String rawNumber;
   private OnClickListener allowClickListener;
   private OnClickListener dismissClickListener;
-  private RowClickListener rowClickListener;
+  private final RowClickListener rowClickListener;
 
   public SearchAdapter(
       Context context, SearchCursorManager searchCursorManager, RowClickListener rowClickListener) {

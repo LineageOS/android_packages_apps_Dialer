@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -215,7 +216,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
   static class SelectAccountListAdapter
       extends ArrayAdapter<SelectPhoneAccountDialogOptions.Entry> {
 
-    private int mResId;
+    private final int mResId;
     private final SelectPhoneAccountDialogOptions options;
 
     SelectAccountListAdapter(
