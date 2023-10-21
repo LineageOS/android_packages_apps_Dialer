@@ -17,14 +17,15 @@
 
 package com.android.dialer.shortcuts;
 
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 
+import android.widget.Toast;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.LogUtil;
@@ -37,10 +38,19 @@ import com.android.dialer.util.TransactionSafeActivity;
  */
 public class CallContactActivity extends TransactionSafeActivity
     implements PhoneNumberInteraction.DisambigDialogDismissedListener,
-        PhoneNumberInteraction.InteractionErrorListener,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        PhoneNumberInteraction.InteractionErrorListener {
 
   private static final String CONTACT_URI_KEY = "uri_key";
+
+  private final ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(
+          new ActivityResultContracts.RequestMultiplePermissions(), grantResults -> {
+            if (grantResults.values().iterator().next()) {
+              makeCall();
+            } else {
+              Toast.makeText(this, R.string.dialer_shortcut_no_permissions, Toast.LENGTH_SHORT).show();
+              finish();
+            }
+          });
 
   private Uri contactUri;
 
@@ -73,7 +83,7 @@ public class CallContactActivity extends TransactionSafeActivity
             .setCallInitiationType(CallInitiationType.Type.LAUNCHER_SHORTCUT)
             .build();
     PhoneNumberInteraction.startInteractionForPhoneCall(
-        this, contactUri, false /* isVideoCall */, callSpecificAppData);
+        this, contactUri, false /* isVideoCall */, callSpecificAppData, permissionLauncher);
   }
 
   @Override
@@ -121,27 +131,5 @@ public class CallContactActivity extends TransactionSafeActivity
       return;
     }
     contactUri = savedInstanceState.getParcelable(CONTACT_URI_KEY, Uri.class);
-  }
-
-  @Override
-  public void onRequestPermissionsResult(
-      int requestCode, String[] permissions, int[] grantResults) {
-    switch (requestCode) {
-      case PhoneNumberInteraction.REQUEST_READ_CONTACTS:
-      case PhoneNumberInteraction.REQUEST_CALL_PHONE:
-        {
-          // If request is cancelled, the result arrays are empty.
-          if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            makeCall();
-          } else {
-            Toast.makeText(this, R.string.dialer_shortcut_no_permissions, Toast.LENGTH_SHORT)
-                .show();
-            finish();
-          }
-          break;
-        }
-      default:
-        throw new IllegalStateException("Unsupported request code: " + requestCode);
-    }
   }
 }
