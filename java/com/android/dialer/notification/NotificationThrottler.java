@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -112,14 +113,7 @@ class NotificationThrottler {
         notifications.add(notification);
       }
     }
-    Collections.sort(
-        notifications,
-        new Comparator<StatusBarNotification>() {
-          @Override
-          public int compare(StatusBarNotification left, StatusBarNotification right) {
-            return Long.compare(left.getPostTime(), right.getPostTime());
-          }
-        });
+    notifications.sort(Comparator.comparingLong(StatusBarNotification::getPostTime));
     return notifications;
   }
 

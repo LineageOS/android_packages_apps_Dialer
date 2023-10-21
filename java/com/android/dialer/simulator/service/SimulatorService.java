@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,34 +90,22 @@ public class SimulatorService extends Service {
 
         @Override
         public void populateDataBase() throws RemoteException {
-          doSecurityCheck(
-              () -> {
-                simulatorMainPortal.execute(new String[] {POPULATE_DATABASE});
-              });
+          doSecurityCheck(() -> simulatorMainPortal.execute(new String[] {POPULATE_DATABASE}));
         }
 
         @Override
         public void cleanDataBase() throws RemoteException {
-          doSecurityCheck(
-              () -> {
-                simulatorMainPortal.execute(new String[] {CLEAN_DATABASE});
-              });
+          doSecurityCheck(() -> simulatorMainPortal.execute(new String[] {CLEAN_DATABASE}));
         }
 
         @Override
         public void enableSimulatorMode() throws RemoteException {
-          doSecurityCheck(
-              () -> {
-                simulatorMainPortal.execute(new String[] {ENABLE_SIMULATOR_MODE});
-              });
+          doSecurityCheck(() -> simulatorMainPortal.execute(new String[] {ENABLE_SIMULATOR_MODE}));
         }
 
         @Override
         public void disableSimulatorMode() throws RemoteException {
-          doSecurityCheck(
-              () -> {
-                simulatorMainPortal.execute(new String[] {DISABLE_SIMULATOR_MODE});
-              });
+          doSecurityCheck(() -> simulatorMainPortal.execute(new String[] {DISABLE_SIMULATOR_MODE}));
         }
 
         @Override

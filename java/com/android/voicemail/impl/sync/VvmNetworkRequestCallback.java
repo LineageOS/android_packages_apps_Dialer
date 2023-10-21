@@ -164,15 +164,11 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
      */
     Handler handler = new Handler(Looper.getMainLooper());
     handler.postDelayed(
-        new Runnable() {
-          @Override
-          public void run() {
-            if (resultReceived == false) {
-              onFailed(NETWORK_REQUEST_FAILED_TIMEOUT);
-            }
-          }
-        },
-        NETWORK_REQUEST_TIMEOUT_MILLIS);
+            () -> {
+              if (!resultReceived) {
+                onFailed(NETWORK_REQUEST_FAILED_TIMEOUT);
+              }},
+            NETWORK_REQUEST_TIMEOUT_MILLIS);
   }
 
   public void releaseNetwork() {

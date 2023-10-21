@@ -79,7 +79,7 @@ final class SimulatorVideoCall
       handleNewConnection(connection);
       // Telecom will force the connection to switch to Dialing when we return it. Wait until after
       // we're returned it before changing call state.
-      ThreadUtil.postOnUiThread(() -> connection.setActive());
+      ThreadUtil.postOnUiThread(connection::setActive);
     }
   }
 
