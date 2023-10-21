@@ -72,7 +72,6 @@ import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
-import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.dialercontact.SimDetails;
@@ -898,8 +897,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return;
     }
     if (OldCallDetailsActivity.isLaunchIntent(intent)) {
-      ((Activity) context)
-          .startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_CALL_DETAILS);
+      ((Activity) context).startActivity(intent);
     } else {
       if (Intent.ACTION_CALL.equals(intent.getAction())
           && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)

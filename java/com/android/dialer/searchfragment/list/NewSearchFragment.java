@@ -19,7 +19,6 @@ package com.android.dialer.searchfragment.list;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
@@ -33,7 +32,8 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.loader.app.LoaderManager;
@@ -85,9 +85,6 @@ public final class NewSearchFragment extends Fragment
 
   private static final String KEY_LOCATION_PROMPT_DISMISSED = "search_location_prompt_dismissed";
 
-  private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
-  private static final int LOCATION_PERMISSION_REQUEST_CODE = 2;
-
   private static final int CONTACTS_LOADER_ID = 0;
   private static final int NEARBY_PLACES_LOADER_ID = 1;
 
@@ -132,6 +129,26 @@ public final class NewSearchFragment extends Fragment
   private final Runnable capabilitiesUpdatedRunnable = () -> adapter.notifyDataSetChanged();
 
   private Runnable updatePositionRunnable;
+
+  private final ActivityResultLauncher<String[]> contactPermissionLauncher =
+          registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
+                  grantResults -> {
+            if (grantResults.size() >= 1 && grantResults.values().iterator().next()) {
+              // Force a refresh of the data since we were missing the permission before this.
+              emptyContentView.setVisibility(View.GONE);
+              initLoaders();
+            }
+          });
+
+  private final ActivityResultLauncher<String[]> locationPermissionLauncher =
+          registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
+                  grantResults -> {
+            if (grantResults.size() >= 1 && grantResults.values().iterator().next()) {
+              // Force a refresh of the data since we were missing the permission before this.
+              loadNearbyPlacesCursor();
+              adapter.hideLocationPermissionRequest();
+            }
+          });
 
   public static NewSearchFragment newInstance() {
     return new NewSearchFragment();
@@ -330,24 +347,6 @@ public final class NewSearchFragment extends Fragment
   }
 
   @Override
-  public void onRequestPermissionsResult(
-          int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == READ_CONTACTS_PERMISSION_REQUEST_CODE) {
-      if (grantResults.length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
-        // Force a refresh of the data since we were missing the permission before this.
-        emptyContentView.setVisibility(View.GONE);
-        initLoaders();
-      }
-    } else if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-      if (grantResults.length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
-        // Force a refresh of the data since we were missing the permission before this.
-        loadNearbyPlacesCursor();
-        adapter.hideLocationPermissionRequest();
-      }
-    }
-  }
-
-  @Override
   public void onEmptyViewActionButtonClicked() {
     String[] deniedPermissions =
         PermissionsUtil.getPermissionsCurrentlyDenied(
@@ -357,7 +356,7 @@ public final class NewSearchFragment extends Fragment
           "NewSearchFragment.onEmptyViewActionButtonClicked",
           "Requesting permissions: " + Arrays.toString(deniedPermissions));
       FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).requestingPermission();
-      requestPermissions(deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+      contactPermissionLauncher.launch(deniedPermissions);
     }
   }
 
@@ -420,7 +419,7 @@ public final class NewSearchFragment extends Fragment
         PermissionsUtil.getPermissionsCurrentlyDenied(
             getContext(), PermissionsUtil.allLocationGroupPermissionsUsedInDialer);
     FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).requestingPermission();
-    requestPermissions(deniedPermissions, LOCATION_PERMISSION_REQUEST_CODE);
+    locationPermissionLauncher.launch(deniedPermissions);
   }
 
   public void dismissLocationPermission() {

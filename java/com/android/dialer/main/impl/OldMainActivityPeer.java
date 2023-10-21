@@ -60,7 +60,6 @@ import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.SupportUiListener;
-import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
@@ -466,23 +465,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     bundle.putString(KEY_SAVED_LANGUAGE_CODE, LocaleUtils.getLocale(activity).getISO3Language());
     bundle.putInt(KEY_CURRENT_TAB, bottomNav.getSelectedTab());
     searchController.onSaveInstanceState(bundle);
-  }
-
-  @Override
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    LogUtil.i(
-        "OldMainActivityPeer.onActivityResult",
-        "requestCode:%d, resultCode:%d",
-        requestCode,
-        resultCode);
-    if (requestCode == ActivityRequestCodes.DIALTACTS_VOICE_SEARCH) {
-      searchController.onVoiceResults(resultCode, data);
-    } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_DETAILS) {
-      // ignored
-
-    } else {
-      LogUtil.e("OldMainActivityPeer.onActivityResult", "Unknown request code: " + requestCode);
-    }
   }
 
   @Override

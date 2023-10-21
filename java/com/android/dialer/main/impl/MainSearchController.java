@@ -28,6 +28,8 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.AttrRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +42,6 @@ import com.android.dialer.app.calllog.CallLogActivity;
 import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
@@ -104,6 +105,8 @@ public class MainSearchController implements SearchBarListener {
   private DialpadFragment dialpadFragment;
   private NewSearchFragment searchFragment;
 
+  private final ActivityResultLauncher<Intent> mVoiceSearchLauncher;
+
   public MainSearchController(
       TransactionSafeActivity activity,
       BottomNavBar bottomNav,
@@ -120,6 +123,11 @@ public class MainSearchController implements SearchBarListener {
             .findFragmentByTag(DIALPAD_FRAGMENT_TAG);
     searchFragment = (NewSearchFragment) activity.getSupportFragmentManager()
             .findFragmentByTag(SEARCH_FRAGMENT_TAG);
+
+    mVoiceSearchLauncher = activity.registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+              onVoiceResults(result.getResultCode(), result.getData());
+            });
   }
 
   /** Should be called if we're showing the dialpad because of a new ACTION_DIAL intent. */
@@ -440,7 +448,7 @@ public class MainSearchController implements SearchBarListener {
   public void onVoiceButtonClicked(VoiceSearchResultCallback voiceSearchResultCallback) {
     try {
       Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-      activity.startActivityForResult(voiceIntent, ActivityRequestCodes.DIALTACTS_VOICE_SEARCH);
+      mVoiceSearchLauncher.launch(voiceIntent);
     } catch (ActivityNotFoundException e) {
       Toast.makeText(activity, R.string.voice_search_not_available, Toast.LENGTH_SHORT).show();
     }
