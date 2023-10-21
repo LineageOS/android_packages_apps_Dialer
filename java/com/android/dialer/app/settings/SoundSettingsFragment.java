@@ -20,7 +20,6 @@ package com.android.dialer.app.settings;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
@@ -67,13 +66,8 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
           }
         }
       };
-  private final Runnable ringtoneLookupRunnable =
-      new Runnable() {
-        @Override
-        public void run() {
-          updateRingtonePreferenceSummary();
-        }
-      };
+  private final Runnable ringtoneLookupRunnable = () -> updateRingtonePreferenceSummary();
+
   private SwitchPreferenceCompat vibrateWhenRinging;
   private SwitchPreferenceCompat playDtmfTone;
   private ListPreference dtmfToneLength;
@@ -201,20 +195,12 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
       if (newValue && !notificationManager.isNotificationPolicyAccessGranted()) {
         new AlertDialog.Builder(getContext())
             .setMessage(R.string.incall_dnd_dialog_message)
-            .setPositiveButton(R.string.allow, new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-                startActivity(intent);
-              }
+            .setPositiveButton(R.string.allow, (dialog, which) -> {
+              dialog.dismiss();
+              Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+              startActivity(intent);
             })
-            .setNegativeButton(R.string.deny, new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-              }
-            })
+            .setNegativeButton(R.string.deny, (dialog, which) -> dialog.dismiss())
             .show();
 
         // At this time, it is unknown whether the user granted the permission

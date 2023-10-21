@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Xiao-Long Chen <chillermillerlong@hotmail.com>
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -166,12 +167,9 @@ public class LookupProvider extends ContentProvider {
         final Location finalLastLocation = lastLocation;
         final int finalMaxResults = maxResults;
 
-        return execute(new Callable<Cursor>() {
-          @Override
-          public Cursor call() {
-            return handleFilter(match, projection, filter, finalMaxResults, finalLastLocation);
-          }
-        }, "FilterThread");
+        return execute(
+                () -> handleFilter(match, projection, filter, finalMaxResults, finalLastLocation),
+                "FilterThread");
     }
 
     return null;
