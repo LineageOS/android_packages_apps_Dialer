@@ -461,8 +461,8 @@ public class SpecialCharSequenceMgr {
     public int contactNum;
 
     // Used to identify the query request.
-    private int token;
-    private QueryHandler handler;
+    private final int token;
+    private final QueryHandler handler;
 
     // The text field we're going to update
     private EditText textField;

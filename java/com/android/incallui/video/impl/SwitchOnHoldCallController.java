@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,12 +32,15 @@ import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 public class SwitchOnHoldCallController implements OnClickListener {
 
   @NonNull
-  private InCallScreenDelegate inCallScreenDelegate;
-  @NonNull private VideoCallScreenDelegate videoCallScreenDelegate;
+  private final InCallScreenDelegate inCallScreenDelegate;
+  @NonNull
+  private final VideoCallScreenDelegate videoCallScreenDelegate;
 
-  @NonNull private View switchOnHoldButton;
+  @NonNull
+  private final View switchOnHoldButton;
 
-  @NonNull private View onHoldBanner;
+  @NonNull
+  private final View onHoldBanner;
 
   private boolean isVisible;
 
