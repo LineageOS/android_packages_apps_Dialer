@@ -205,34 +205,17 @@ public class CallLogAdapter extends GroupingListAdapter
                 .getResources()
                 .getQuantityString(
                     R.plurals.delete_voicemails_confirmation_dialog_title, selectedItems.size()))
-        .setPositiveButton(
-            R.string.voicemailMultiSelectDeleteConfirm,
-            new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(final DialogInterface dialog, final int button) {
-                LogUtil.i(
-                    "CallLogAdapter.showDeleteSelectedItemsDialog",
-                    "onClick, these items to delete " + voicemailsToDeleteOnConfirmation);
-                deleteSelectedItems(voicemailsToDeleteOnConfirmation);
-                actionMode.finish();
-                dialog.cancel();
-              }
-            })
-        .setOnCancelListener(
-            new OnCancelListener() {
-              @Override
-              public void onCancel(DialogInterface dialogInterface) {
-                dialogInterface.cancel();
-              }
-            })
-        .setNegativeButton(
-            R.string.voicemailMultiSelectDeleteCancel,
-            new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(final DialogInterface dialog, final int button) {
-                dialog.cancel();
-              }
-            })
+        .setPositiveButton(R.string.voicemailMultiSelectDeleteConfirm, (dialog, button) -> {
+          LogUtil.i(
+                  "CallLogAdapter.showDeleteSelectedItemsDialog",
+                  "onClick, these items to delete " + voicemailsToDeleteOnConfirmation);
+          deleteSelectedItems(voicemailsToDeleteOnConfirmation);
+          actionMode.finish();
+          dialog.cancel();
+        })
+        .setOnCancelListener(dialogInterface -> dialogInterface.cancel())
+        .setNegativeButton(R.string.voicemailMultiSelectDeleteCancel,
+                (dialog, button) -> dialog.cancel())
         .show();
   }
 

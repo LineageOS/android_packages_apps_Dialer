@@ -27,7 +27,6 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
@@ -117,7 +116,7 @@ public class SpamCallListListener implements CallList.Listener {
         new NumberInCallHistoryWorker(context, number, call.getCountryIso());
     dialerExecutorFactory
         .createNonUiTaskBuilder(historyTask)
-        .onSuccess((result) -> call.setCallHistoryStatus(result))
+        .onSuccess(call::setCallHistoryStatus)
         .build()
         .executeParallel(null);
   }
