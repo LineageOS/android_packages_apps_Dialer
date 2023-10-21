@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public abstract class Multipart implements Body {
   protected Part parent;
 
-  protected ArrayList<BodyPart> parts = new ArrayList<BodyPart>();
+  protected final ArrayList<BodyPart> parts = new ArrayList<>();
 
   protected String contentType;
 

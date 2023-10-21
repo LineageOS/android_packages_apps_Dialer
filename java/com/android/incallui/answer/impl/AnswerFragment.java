@@ -158,7 +158,7 @@ public class AnswerFragment extends Fragment
   private SecondaryBehavior answerAndReleaseBehavior;
   private ContactGridManager contactGridManager;
   private VideoCallScreen answerVideoCallScreen;
-  private Handler handler = new Handler(Looper.getMainLooper());
+  private final Handler handler = new Handler(Looper.getMainLooper());
 
   private enum SecondaryBehavior {
     REJECT_WITH_SMS(
@@ -195,7 +195,7 @@ public class AnswerFragment extends Fragment
     };
 
     @DrawableRes
-    public int icon;
+    public final int icon;
     @StringRes
     public final int contentDescription;
     @StringRes public final int accessibilityLabel;
@@ -336,7 +336,7 @@ public class AnswerFragment extends Fragment
         }
       };
 
-  private Runnable swipeHintRestoreTimer = this::restoreSwipeHintTexts;
+  private final Runnable swipeHintRestoreTimer = this::restoreSwipeHintTexts;
 
   private void performSecondaryButtonAction() {
     secondaryBehavior.performAction(this);

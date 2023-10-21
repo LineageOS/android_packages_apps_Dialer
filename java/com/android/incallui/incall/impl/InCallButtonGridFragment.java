@@ -41,7 +41,7 @@ public class InCallButtonGridFragment extends Fragment {
   private static final int BUTTON_COUNT = 6;
   private static final int BUTTONS_PER_ROW = 3;
 
-  private CheckableLabeledButton[] buttons = new CheckableLabeledButton[BUTTON_COUNT];
+  private final CheckableLabeledButton[] buttons = new CheckableLabeledButton[BUTTON_COUNT];
   private OnButtonGridCreatedListener buttonGridListener;
 
   public static Fragment newInstance() {

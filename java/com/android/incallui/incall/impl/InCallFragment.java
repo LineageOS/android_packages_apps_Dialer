@@ -81,7 +81,7 @@ public class InCallFragment extends Fragment
         AudioRouteSelectorPresenter,
         OnButtonGridCreatedListener {
 
-  private List<ButtonController> buttonControllers = new ArrayList<>();
+  private final List<ButtonController> buttonControllers = new ArrayList<>();
   private View endCallButton;
   private InCallPaginator paginator;
   private LockableViewPager pager;

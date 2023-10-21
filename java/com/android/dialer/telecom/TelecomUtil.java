@@ -58,7 +58,7 @@ public abstract class TelecomUtil {
   private static final String TAG = "TelecomUtil";
   private static boolean warningLogged = false;
 
-  private static TelecomUtilImpl instance = new TelecomUtilImpl();
+  private static final TelecomUtilImpl instance = new TelecomUtilImpl();
 
   /**
    * Cache for {@link #isVoicemailNumber(Context, PhoneAccountHandle, String)}. Both

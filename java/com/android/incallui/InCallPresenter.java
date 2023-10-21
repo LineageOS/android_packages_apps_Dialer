@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -212,7 +213,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   private boolean awaitingCallListUpdate = false;
 
-  private ExternalCallList.ExternalCallListener externalCallListener =
+  private final ExternalCallList.ExternalCallListener externalCallListener =
       new ExternalCallList.ExternalCallListener() {
 
         @Override

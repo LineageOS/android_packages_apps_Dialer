@@ -76,7 +76,7 @@ public class CallButtonPresenter
   private boolean isInCallButtonUiReady;
   private PhoneAccountHandle otherAccount;
 
-  private CallRecorder.RecordingProgressListener recordingProgressListener =
+  private final CallRecorder.RecordingProgressListener recordingProgressListener =
       new CallRecorder.RecordingProgressListener() {
     @Override
     public void onStartRecording() {
