@@ -26,9 +26,9 @@ import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.CallLog;
 import android.provider.VoicemailContract;
@@ -68,6 +68,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
@@ -392,19 +393,13 @@ public class VoicemailPlaybackPresenter
 
   /** Checks to see if we have content available for this voicemail. */
   protected void checkForContent(final OnContentCheckedListener callback) {
-    asyncTaskExecutor.submit(
-        Tasks.CHECK_FOR_CONTENT,
-        new AsyncTask<Void, Void, Boolean>() {
-          @Override
-          public Boolean doInBackground(Void... params) {
-            return queryHasContent(voicemailUri);
-          }
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    Handler handler = new Handler(Looper.getMainLooper());
 
-          @Override
-          public void onPostExecute(Boolean hasContent) {
-            callback.onContentChecked(hasContent);
-          }
-        });
+    executor.execute(() -> {
+      final boolean hasContent = queryHasContent(voicemailUri);
+      handler.post(() -> callback.onContentChecked(hasContent));
+    });
   }
 
   private boolean queryHasContent(Uri voicemailUri) {
@@ -459,37 +454,28 @@ public class VoicemailPlaybackPresenter
         break;
     }
 
-    asyncTaskExecutor.submit(
-        Tasks.SEND_FETCH_REQUEST,
-        new AsyncTask<Void, Void, Void>() {
-
-          @Override
-          protected Void doInBackground(Void... voids) {
-            try (Cursor cursor =
-                context
-                    .getContentResolver()
-                    .query(
-                        voicemailUri, new String[] {Voicemails.SOURCE_PACKAGE}, null, null, null)) {
-              String sourcePackage;
-              if (!hasContent(cursor)) {
-                LogUtil.e(
-                    "VoicemailPlaybackPresenter.requestContent",
-                    "mVoicemailUri does not return a SOURCE_PACKAGE");
-                sourcePackage = null;
-              } else {
-                sourcePackage = cursor.getString(0);
-              }
-              // Send voicemail fetch request.
-              Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, voicemailUri);
-              intent.setPackage(sourcePackage);
-              LogUtil.i(
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    executor.execute(() -> {
+      try (Cursor cursor = context.getContentResolver().query(
+              voicemailUri, new String[] {Voicemails.SOURCE_PACKAGE}, null, null, null)) {
+        String sourcePackage;
+        if (!hasContent(cursor)) {
+          LogUtil.e(
                   "VoicemailPlaybackPresenter.requestContent",
-                  "Sending ACTION_FETCH_VOICEMAIL to " + sourcePackage);
-              context.sendBroadcast(intent);
-            }
-            return null;
-          }
-        });
+                  "mVoicemailUri does not return a SOURCE_PACKAGE");
+          sourcePackage = null;
+        } else {
+          sourcePackage = cursor.getString(0);
+        }
+        // Send voicemail fetch request.
+        Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, voicemailUri);
+        intent.setPackage(sourcePackage);
+        LogUtil.i(
+                "VoicemailPlaybackPresenter.requestContent",
+                "Sending ACTION_FETCH_VOICEMAIL to " + sourcePackage);
+        context.sendBroadcast(intent);
+      }
+    });
     return true;
   }
 
@@ -975,14 +961,6 @@ public class VoicemailPlaybackPresenter
         null);
   }
 
-  /** The enumeration of {@link AsyncTask} objects we use in this class. */
-  public enum Tasks {
-    CHECK_FOR_CONTENT,
-    CHECK_CONTENT_AFTER_CHANGE,
-    SHARE_VOICEMAIL,
-    SEND_FETCH_REQUEST
-  }
-
   /** Contract describing the behaviour we need from the ui we are controlling. */
   public interface PlaybackView {
 
@@ -1066,24 +1044,19 @@ public class VoicemailPlaybackPresenter
 
     @Override
     public void onChange(boolean selfChange) {
-      asyncTaskExecutor.submit(
-          Tasks.CHECK_CONTENT_AFTER_CHANGE,
-          new AsyncTask<Void, Void, Boolean>() {
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      Handler handler = new Handler(Looper.getMainLooper());
 
-            @Override
-            public Boolean doInBackground(Void... params) {
-              return queryHasContent(voicemailUri);
-            }
-
-            @Override
-            public void onPostExecute(Boolean hasContent) {
-              if (hasContent && context != null && isWaitingForResult.getAndSet(false)) {
-                context.getContentResolver().unregisterContentObserver(FetchResultHandler.this);
-                showShareVoicemailButton(true);
-                prepareContent();
-              }
-            }
-          });
+      executor.execute(() -> {
+        final boolean hasContent = queryHasContent(voicemailUri);
+        handler.post(() -> {
+          if (hasContent && context != null && isWaitingForResult.getAndSet(false)) {
+            context.getContentResolver().unregisterContentObserver(FetchResultHandler.this);
+            showShareVoicemailButton(true);
+            prepareContent();
+          }
+        });
+      });
     }
   }
 }

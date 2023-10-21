@@ -30,7 +30,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.provider.BlockedNumberContract;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
@@ -229,7 +228,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public CharSequence dayGroupHeaderText;
   public boolean isAttachedToWindow;
 
-  public AsyncTask<Void, Void, ?> asyncTask;
+  public CallLogAdapter.LoadDataTaskInterface asyncTask;
   private CallDetailsEntries callDetailsEntries;
 
   private CallLogListItemViewHolder(
@@ -1095,7 +1094,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         ContactSource.Type contactSourceType);
   }
 
-  private static class DeleteCallTask extends AsyncTask<Void, Void, Void> {
+  private static class DeleteCallTask implements Runnable {
     // Using a weak reference to hold the Context so that there is no memory leak.
     private final WeakReference<Context> contextWeakReference;
 
@@ -1106,15 +1105,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       this.callIdsStr = concatCallIds(callIdsArray);
     }
 
-    @Override
     // Suppress the lint check here as the user will not be able to see call log entries if
     // permission.WRITE_CALL_LOG is not granted.
     @SuppressLint("MissingPermission")
     @RequiresPermission(value = permission.WRITE_CALL_LOG)
-    protected Void doInBackground(Void... params) {
+    @Override
+    public void run() {
       Context context = contextWeakReference.get();
       if (context == null) {
-        return null;
+        return;
       }
 
       if (callIdsStr != null) {
@@ -1128,12 +1127,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             .getContentResolver()
             .notifyChange(Calls.CONTENT_URI, null);
       }
-
-      return null;
     }
-
-    @Override
-    public void onPostExecute(Void result) {}
 
     private String concatCallIds(long[] callIds) {
       if (callIds == null || callIds.length == 0) {
