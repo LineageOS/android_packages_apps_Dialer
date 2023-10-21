@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +22,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 import android.view.Surface;
 
 import androidx.annotation.NonNull;
@@ -78,7 +80,7 @@ final class SimulatorRemoteVideo {
     @WorkerThread
     void schedule() {
       Assert.isWorkerThread();
-      new Handler().postDelayed(this, FRAME_DELAY_MILLIS);
+      new Handler(Looper.getMainLooper()).postDelayed(this, FRAME_DELAY_MILLIS);
     }
 
     @WorkerThread

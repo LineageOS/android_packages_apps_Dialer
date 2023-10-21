@@ -68,9 +68,11 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
     LogUtil.enterBlock("PreCallCoordinatorImpl.onCreate");
     if (savedInstanceState != null) {
       currentActionIndex = savedInstanceState.getInt(SAVED_STATE_CURRENT_ACTION);
-      builder = Assert.isNotNull(savedInstanceState.getParcelable(EXTRA_CALL_INTENT_BUILDER));
+      builder = Assert.isNotNull(savedInstanceState.getParcelable(EXTRA_CALL_INTENT_BUILDER,
+              CallIntentBuilder.class));
     } else {
-      builder = Assert.isNotNull(intent.getParcelableExtra(EXTRA_CALL_INTENT_BUILDER));
+      builder = Assert.isNotNull(intent.getParcelableExtra(EXTRA_CALL_INTENT_BUILDER,
+              CallIntentBuilder.class));
     }
     uiListener =
         DialerExecutorComponent.get(activity)
@@ -80,7 +82,7 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
 
   void onRestoreInstanceState(Bundle savedInstanceState) {
     currentActionIndex = savedInstanceState.getInt(SAVED_STATE_CURRENT_ACTION);
-    builder = savedInstanceState.getParcelable(EXTRA_CALL_INTENT_BUILDER);
+    builder = savedInstanceState.getParcelable(EXTRA_CALL_INTENT_BUILDER, CallIntentBuilder.class);
   }
 
   void onResume() {
