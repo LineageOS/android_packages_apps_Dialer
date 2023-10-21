@@ -743,7 +743,7 @@ public class ImapFolder {
     exists = true;
   }
 
-  public class Quota {
+  public static class Quota {
 
     public final int occupied;
     public final int total;

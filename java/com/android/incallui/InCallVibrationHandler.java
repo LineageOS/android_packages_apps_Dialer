@@ -41,8 +41,8 @@ public class InCallVibrationHandler extends Handler implements
   private static final String KEY_VIBRATE_45SECS = "incall_vibrate_45secs";
   private static final String KEY_VIBRATE_HANGUP = "incall_vibrate_hangup";
 
-  private SharedPreferences prefs;
-  private Vibrator vibrator;
+  private final SharedPreferences prefs;
+  private final Vibrator vibrator;
   private DialerCall activeCall;
 
   public InCallVibrationHandler(Context context) {

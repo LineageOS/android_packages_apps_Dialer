@@ -97,7 +97,7 @@ public class VoicemailChangePinActivity extends AppCompatActivity
   private Button cancelButton;
   private Button nextButton;
 
-  private Handler handler = new ChangePinHandler(new WeakReference<>(this));
+  private final Handler handler = new ChangePinHandler(new WeakReference<>(this));
 
   private enum State {
     /**

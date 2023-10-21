@@ -216,7 +216,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
   static class SelectAccountListAdapter
       extends ArrayAdapter<SelectPhoneAccountDialogOptions.Entry> {
 
-    private int mResId;
+    private final int mResId;
     private final SelectPhoneAccountDialogOptions options;
 
     SelectAccountListAdapter(

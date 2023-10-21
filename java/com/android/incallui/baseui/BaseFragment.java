@@ -26,7 +26,7 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
 
   private static final String KEY_FRAGMENT_HIDDEN = "key_fragment_hidden";
 
-  private T presenter;
+  private final T presenter;
 
   protected BaseFragment() {
     presenter = createPresenter();

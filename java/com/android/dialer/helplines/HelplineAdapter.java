@@ -36,9 +36,9 @@ import java.util.List;
 
 class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
 
-    private Resources mResources;
+    private final Resources mResources;
     private List<HelplineItem> mList = new ArrayList<>();
-    private Listener mListener;
+    private final Listener mListener;
 
     HelplineAdapter(Resources resources, Listener listener) {
         mResources = resources;
@@ -75,8 +75,8 @@ class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
     }
 
     private static class Callback extends DiffUtil.Callback {
-        List<HelplineItem> mOldList;
-        List<HelplineItem> mNewList;
+        final List<HelplineItem> mOldList;
+        final List<HelplineItem> mNewList;
 
         public Callback(List<HelplineItem> oldList,
                         List<HelplineItem> newList) {

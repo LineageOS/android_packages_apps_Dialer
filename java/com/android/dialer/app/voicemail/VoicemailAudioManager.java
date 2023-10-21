@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +33,9 @@ public final class VoicemailAudioManager
 
   public static final int PLAYBACK_STREAM = AudioManager.STREAM_VOICE_CALL;
 
-  private AudioManager audioManager;
-  private VoicemailPlaybackPresenter voicemailPlaybackPresenter;
-  private WiredHeadsetManager wiredHeadsetManager;
+  private final AudioManager audioManager;
+  private final VoicemailPlaybackPresenter voicemailPlaybackPresenter;
+  private final WiredHeadsetManager wiredHeadsetManager;
   private boolean wasSpeakerOn;
   private CallAudioState callAudioState;
   private boolean bluetoothScoEnabled;
