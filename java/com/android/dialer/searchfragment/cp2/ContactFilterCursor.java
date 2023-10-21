@@ -480,12 +480,12 @@ final class ContactFilterCursor implements Cursor {
 
   @Override
   public void deactivate() {
-    cursor.deactivate();
+
   }
 
   @Override
   public boolean requery() {
-    return cursor.requery();
+    return false;
   }
 
   @Override

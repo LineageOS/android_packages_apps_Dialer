@@ -38,6 +38,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
@@ -133,7 +134,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
   private final ConcurrentHashMap<ImageView, Request> pendingRequests =
       new ConcurrentHashMap<ImageView, Request>();
   /** Handler for messages sent to the UI thread. */
-  private final Handler mainThreadHandler = new Handler(this);
+  private final Handler mainThreadHandler = new Handler(Looper.getMainLooper(), this);
   /** For debug: How many times we had to reload cached photo for a stale entry */
   private final AtomicInteger staleCacheOverwrite = new AtomicInteger();
   /** For debug: How many times we had to reload cached photo for a fresh entry. Should be 0. */

@@ -120,7 +120,7 @@ public class CallContactActivity extends TransactionSafeActivity
     if (savedInstanceState == null) {
       return;
     }
-    contactUri = savedInstanceState.getParcelable(CONTACT_URI_KEY);
+    contactUri = savedInstanceState.getParcelable(CONTACT_URI_KEY, Uri.class);
   }
 
   @Override
