@@ -297,32 +297,22 @@ public class SpamNotificationActivity extends FragmentActivity {
           .setTitle(getString(R.string.spam_notification_title,
                   getFormattedNumber(number, applicationContext)))
           .setNeutralButton(getString(R.string.spam_notification_action_dismiss),
-              new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                  dismiss();
-                }
-              })
+                  (dialog, which) -> dismiss())
           .setPositiveButton(getString(R.string.spam_notification_block_spam_action_text),
-              new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                  dismissed = true;
-                  dismiss();
-                  spamNotificationActivity.maybeShowBlockReportSpamDialog(
-                      number, contactLookupResultType);
-                  spamNotificationActivity.maybeShowSpamBlockingPromoAndFinish();
-                }
-              })
+                  (dialog, which) -> {
+                    dismissed = true;
+                    dismiss();
+                    spamNotificationActivity.maybeShowBlockReportSpamDialog(
+                        number, contactLookupResultType);
+                    spamNotificationActivity.maybeShowSpamBlockingPromoAndFinish();
+                  })
           .setNegativeButton(getString(R.string.spam_notification_was_not_spam_action_text),
-              new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                  dismissed = true;
-                  dismiss();
-                  spamNotificationActivity.maybeShowNotSpamDialog(number, contactLookupResultType);
-                }
-              })
+                  (dialog, which) -> {
+                    dismissed = true;
+                    dismiss();
+                    spamNotificationActivity.maybeShowNotSpamDialog(number,
+                            contactLookupResultType);
+                  })
           .create();
     }
   }
@@ -379,34 +369,23 @@ public class SpamNotificationActivity extends FragmentActivity {
           .setMessage(getString(R.string.spam_notification_non_spam_call_expanded_text))
           .setNeutralButton(
               getString(R.string.spam_notification_action_dismiss),
-              new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                  dismiss();
-                }
-              })
+                  (dialog, which) -> dismiss())
           .setPositiveButton(
               getString(R.string.spam_notification_dialog_add_contact_action_text),
-              new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                  dismissed = true;
-                  dismiss();
-                  startActivity(createInsertContactsIntent(number));
-                }
-              })
+                  (dialog, which) -> {
+                    dismissed = true;
+                    dismiss();
+                    startActivity(createInsertContactsIntent(number));
+                  })
           .setNegativeButton(
                   getString(R.string.spam_notification_dialog_block_report_spam_action_text),
-              new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                  dismissed = true;
-                  dismiss();
-                  spamNotificationActivity.maybeShowBlockReportSpamDialog(
-                      number, contactLookupResultType);
-                  spamNotificationActivity.maybeShowSpamBlockingPromoAndFinish();
-                }
-              })
+                  (dialog, which) -> {
+                    dismissed = true;
+                    dismiss();
+                    spamNotificationActivity.maybeShowBlockReportSpamDialog(
+                        number, contactLookupResultType);
+                    spamNotificationActivity.maybeShowSpamBlockingPromoAndFinish();
+                  })
           .create();
     }
   }

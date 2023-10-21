@@ -340,16 +340,13 @@ public class SwipeButtonHelper {
     }
     ValueAnimator animator = ValueAnimator.ofFloat(targetView.getCircleRadius(), radius);
     animator.addUpdateListener(
-        new ValueAnimator.AnimatorUpdateListener() {
-          @Override
-          public void onAnimationUpdate(ValueAnimator animation) {
-            float newRadius = (float) animation.getAnimatedValue();
-            targetView.setCircleRadiusWithoutAnimation(newRadius);
-            float translation = getTranslationFromRadius(newRadius);
-            SwipeButtonHelper.this.translation = right ? -translation : translation;
-            updateIconsFromTranslation(targetView);
-          }
-        });
+            animation -> {
+              float newRadius = (float) animation.getAnimatedValue();
+              targetView.setCircleRadiusWithoutAnimation(newRadius);
+              float translation = getTranslationFromRadius(newRadius);
+              SwipeButtonHelper.this.translation = right ? -translation : translation;
+              updateIconsFromTranslation(targetView);
+            });
     return animator;
   }
 
@@ -388,13 +385,7 @@ public class SwipeButtonHelper {
 
     ValueAnimator animator = ValueAnimator.ofFloat(translation, target);
     flingAnimationUtils.apply(animator, translation, target, vel);
-    animator.addUpdateListener(
-        new ValueAnimator.AnimatorUpdateListener() {
-          @Override
-          public void onAnimationUpdate(ValueAnimator animation) {
-            translation = (float) animation.getAnimatedValue();
-          }
-        });
+    animator.addUpdateListener(animation -> translation = (float) animation.getAnimatedValue());
     animator.addListener(flingEndListener);
     if (!snapBack) {
       startFinishingCircleAnimation(vel * 0.375f, new AnimationEndRunnable(right), right);
