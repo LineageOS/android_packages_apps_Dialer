@@ -20,12 +20,13 @@ package com.android.dialer.postcall;
 import android.Manifest.permission;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.SmsManager;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +44,13 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
   public static final String KEY_PHONE_NUMBER = "phone_number";
   public static final String KEY_MESSAGE = "message";
   public static final String KEY_RCS_POST_CALL = "rcs_post_call";
-  private static final int REQUEST_CODE_SEND_SMS = 1;
+
+  private final ActivityResultLauncher<String> smsPermissionLauncher =
+          registerForActivityResult(new ActivityResultContracts.RequestPermission(),
+                  grantResult -> {
+            PermissionsUtil.permissionRequested(this, permission.SEND_SMS);
+            onMessageFragmentSendMessage(getIntent().getStringExtra(KEY_MESSAGE));
+          });
 
   private boolean useRcs;
 
@@ -105,7 +112,7 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
     } else if (PermissionsUtil.isFirstRequest(this, permission.SEND_SMS)
         || shouldShowRequestPermissionRationale(permission.SEND_SMS)) {
       LogUtil.i("PostCallActivity.sendMessage", "Requesting SMS_SEND permission.");
-      requestPermissions(new String[] {permission.SEND_SMS}, REQUEST_CODE_SEND_SMS);
+      smsPermissionLauncher.launch(permission.SEND_SMS);
     } else {
       LogUtil.i(
           "PostCallActivity.sendMessage", "Permission permanently denied, sending to settings.");
@@ -119,17 +126,4 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
 
   @Override
   public void onMessageFragmentAfterTextChange(String message) {}
-
-  @Override
-  public void onRequestPermissionsResult(
-      int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (permissions.length > 0 && permissions[0].equals(permission.SEND_SMS)) {
-      PermissionsUtil.permissionRequested(this, permissions[0]);
-    }
-    if (requestCode == REQUEST_CODE_SEND_SMS
-        && grantResults.length > 0
-        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-      onMessageFragmentSendMessage(getIntent().getStringExtra(KEY_MESSAGE));
-    }
-  }
 }
