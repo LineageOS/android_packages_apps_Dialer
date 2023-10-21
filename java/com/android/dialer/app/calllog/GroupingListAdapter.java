@@ -34,7 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 abstract class GroupingListAdapter extends RecyclerView.Adapter {
 
-  protected ContentObserver changeObserver =
+  protected final ContentObserver changeObserver =
       new ContentObserver(new Handler()) {
         @Override
         public boolean deliverSelfNotifications() {
@@ -46,7 +46,7 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
           onContentChanged();
         }
       };
-  protected DataSetObserver dataSetObserver =
+  protected final DataSetObserver dataSetObserver =
       new DataSetObserver() {
         @Override
         public void onChanged() {

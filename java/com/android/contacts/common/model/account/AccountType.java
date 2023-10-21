@@ -52,7 +52,7 @@ public abstract class AccountType {
 
   private static final String TAG = "AccountType";
   /** {@link Comparator} to sort by {@link DataKind#weight}. */
-  private static Comparator<DataKind> sWeightComparator =
+  private final static Comparator<DataKind> sWeightComparator =
           Comparator.comparingInt(object -> object.weight);
   /** The {@link RawContacts#ACCOUNT_TYPE} these constraints apply to. */
   public String accountType = null;
@@ -293,8 +293,8 @@ public abstract class AccountType {
    */
   public static class EditType {
 
-    public int rawValue;
-    public int labelRes;
+    public final int rawValue;
+    public final int labelRes;
     public boolean secondary;
     /**
      * The number of entries allowed for the type. -1 if not specified.
@@ -385,8 +385,8 @@ public abstract class AccountType {
    */
   public static final class EditField {
 
-    public String column;
-    public int titleRes;
+    public final String column;
+    public final int titleRes;
     public int inputType;
     public int minLines;
     public boolean optional;

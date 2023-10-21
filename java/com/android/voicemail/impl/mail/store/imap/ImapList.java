@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -190,7 +191,7 @@ public class ImapList extends ImapElement {
    * <p>We can't use toString(), because it's for debugging (meaning the format may change any
    * time), and it won't expand literals.
    */
-  private final StringBuilder flatten(StringBuilder sb) {
+  private StringBuilder flatten(StringBuilder sb) {
     sb.append('[');
     for (int i = 0; i < list.size(); i++) {
       if (i > 0) {

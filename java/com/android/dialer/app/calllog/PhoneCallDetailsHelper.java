@@ -58,7 +58,7 @@ public class PhoneCallDetailsHelper {
   private final CachedNumberLookupService cachedNumberLookupService;
 
   /** List of items to be concatenated together for accessibility descriptions */
-  private ArrayList<CharSequence> descriptionItems = new ArrayList<>();
+  private final ArrayList<CharSequence> descriptionItems = new ArrayList<>();
 
   /**
    * Creates a new instance of the helper.

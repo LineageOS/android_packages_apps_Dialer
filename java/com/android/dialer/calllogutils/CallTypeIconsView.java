@@ -45,7 +45,7 @@ public class CallTypeIconsView extends View {
 
   private static Resources resources;
   private static Resources largeResouces;
-  private List<Integer> callTypes = new ArrayList<>(3);
+  private final List<Integer> callTypes = new ArrayList<>(3);
   private boolean showVideo;
   private boolean showHd;
   private boolean showWifi;
