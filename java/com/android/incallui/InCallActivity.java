@@ -33,6 +33,7 @@ import android.os.Trace;
 import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.PhoneAccountSuggestion;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -342,10 +343,17 @@ public class InCallActivity extends TransactionSafeFragmentActivity
         PreferredSimComponent.get(this).preferredAccountWorker();
 
     Bundle extras = waitingForAccountCall.getIntentExtras();
-    List<PhoneAccountHandle> phoneAccountHandles =
+    List<PhoneAccountSuggestion> phoneAccountSuggestions =
         extras == null
             ? new ArrayList<>()
-            : extras.getParcelableArrayList(Call.AVAILABLE_PHONE_ACCOUNTS);
+            : extras.getParcelableArrayList(Call.EXTRA_SUGGESTED_PHONE_ACCOUNTS,
+                PhoneAccountSuggestion.class);
+    List<PhoneAccountHandle> phoneAccountHandles = new ArrayList<>();
+    if (phoneAccountSuggestions != null) {
+      for (PhoneAccountSuggestion suggestion : phoneAccountSuggestions) {
+        phoneAccountHandles.add(suggestion.getPhoneAccountHandle());
+      }
+    }
 
     ListenableFuture<PreferredAccountWorker.Result> preferredAccountFuture =
         preferredAccountWorker.selectAccount(
@@ -1028,7 +1036,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     List<AppTask> tasks = getSystemService(ActivityManager.class).getAppTasks();
     for (AppTask task : tasks) {
       try {
-        if (task.getTaskInfo().id == taskId) {
+        if (task.getTaskInfo().taskId == taskId) {
           task.setExcludeFromRecents(exclude);
         }
       } catch (RuntimeException e) {

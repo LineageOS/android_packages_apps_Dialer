@@ -69,9 +69,11 @@ public class LaunchPreCallActivity extends AppCompatActivity {
     Intent intent = getIntent();
     CallIntentBuilder builder = new CallIntentBuilder(intent.getData(), Type.EXTERNAL_INITIATION);
 
-    PhoneAccountHandle phoneAccountHandle = intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE);
+    PhoneAccountHandle phoneAccountHandle = intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE,
+            PhoneAccountHandle.class);
     if (phoneAccountHandle == null) {
-      phoneAccountHandle = intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE);
+      phoneAccountHandle = intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE,
+              PhoneAccountHandle.class);
     }
 
     builder
@@ -125,7 +127,8 @@ public class LaunchPreCallActivity extends AppCompatActivity {
 
     if (intentExtras.containsKey(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE)) {
       builder.setPhoneAccountHandle(
-          intentExtras.getParcelable(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE));
+          intentExtras.getParcelable(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE,
+                  PhoneAccountHandle.class));
     }
 
     if (intentExtras.containsKey(TelecomManager.EXTRA_CALL_SUBJECT)) {

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +19,7 @@ package com.android.incallui.call;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Trace;
 import android.provider.BlockedNumberContract;
@@ -75,21 +77,20 @@ public class CallList implements DialerCallDelegate {
 
   private UiListener uiListeners;
   /** Handles the timeout for destroying disconnected calls. */
-  private final Handler handler =
-      new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-          switch (msg.what) {
-            case EVENT_DISCONNECTED_TIMEOUT:
-              LogUtil.d("CallList.handleMessage", "EVENT_DISCONNECTED_TIMEOUT ", msg.obj);
-              finishDisconnectedCall((DialerCall) msg.obj);
-              break;
-            default:
-              LogUtil.e("CallList.handleMessage", "Message not expected: " + msg.what);
-              break;
-          }
-        }
-      };
+  private final Handler handler = new Handler(Looper.getMainLooper()) {
+    @Override
+    public void handleMessage(Message msg) {
+      switch (msg.what) {
+        case EVENT_DISCONNECTED_TIMEOUT:
+          LogUtil.d("CallList.handleMessage", "EVENT_DISCONNECTED_TIMEOUT ", msg.obj);
+          finishDisconnectedCall((DialerCall) msg.obj);
+          break;
+        default:
+          LogUtil.e("CallList.handleMessage", "Message not expected: " + msg.what);
+          break;
+      }
+    }
+  };
 
   /**
    * USED ONLY FOR TESTING Testing-only constructor. Instance should only be acquired through
