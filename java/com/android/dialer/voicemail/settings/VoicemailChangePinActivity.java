@@ -166,12 +166,7 @@ public class VoicemailChangePinActivity extends AppCompatActivity
               .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
           activity.showError(
               activity.getString(R.string.change_pin_system_error),
-              new OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                  activity.finish();
-                }
-              });
+                  dialog -> activity.finish());
         } else {
           LogUtil.e(TAG, "invalid default old PIN: " + activity.getChangePinResultMessage(result));
           // If the default old PIN is rejected by the server, the PIN is probably changed

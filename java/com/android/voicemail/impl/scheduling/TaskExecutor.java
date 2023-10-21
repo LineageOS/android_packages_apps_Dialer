@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -131,19 +132,14 @@ final class TaskExecutor {
 
   private Job job;
 
-  private final Runnable stopServiceWithDelay =
-      new Runnable() {
-        @MainThread
-        @Override
-        public void run() {
-          VvmLog.i(TAG, "Stopping service");
-          if (!isJobRunning() || isTerminating()) {
-            VvmLog.e(TAG, "Service already stopped");
-            return;
-          }
-          scheduleJobAndTerminate(0, true);
-        }
-      };
+  private final Runnable stopServiceWithDelay = () -> {
+    VvmLog.i(TAG, "Stopping service");
+    if (!isJobRunning() || isTerminating()) {
+      VvmLog.e(TAG, "Service already stopped");
+      return;
+    }
+    scheduleJobAndTerminate(0, true);
+  };
 
   /**
    * Reschedule the {@link TaskSchedulerJobService} and terminate the executor when the {@link Job}
@@ -179,7 +175,7 @@ final class TaskExecutor {
       VvmLog.w("JobFinishedPoller.run", "Job still running");
       mainThreadHandler.postDelayed(this, TERMINATE_POLLING_INTERVAL_MILLISECONDS);
     }
-  };
+  }
 
   /** Handles execution of the background task in teh worker thread. */
   final class WorkerThreadHandler extends Handler {
@@ -317,14 +313,7 @@ final class TaskExecutor {
   private void sleep(long timeMillis) {
     VvmLog.i(TAG, "sleep for " + timeMillis + " millis");
     if (timeMillis < SHORT_SLEEP_THRESHOLD_MILLISECONDS) {
-      mainThreadHandler.postDelayed(
-          new Runnable() {
-            @Override
-            public void run() {
-              maybeRunNextTask();
-            }
-          },
-          timeMillis);
+      mainThreadHandler.postDelayed(() -> maybeRunNextTask(), timeMillis);
       return;
     }
     scheduleJobAndTerminate(timeMillis, false);
