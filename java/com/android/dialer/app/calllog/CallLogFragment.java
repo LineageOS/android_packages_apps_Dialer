@@ -38,6 +38,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -91,8 +93,6 @@ public class CallLogFragment extends Fragment
   private static final int NO_LOG_LIMIT = -1;
   // No date-based filtering.
   private static final int NO_DATE_LIMIT = 0;
-
-  private static final int PHONE_PERMISSIONS_REQUEST_CODE = 1;
 
   private static final int EVENT_UPDATE_DISPLAY = 1;
 
@@ -153,6 +153,15 @@ public class CallLogFragment extends Fragment
       };
   protected CallLogModalAlertManager modalAlertManager;
   private ViewGroup modalAlertView;
+
+  private final ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(
+          new ActivityResultContracts.RequestMultiplePermissions(),
+          grantResults -> {
+            if (grantResults.size() >= 1 && grantResults.values().iterator().next()) {
+              // Force a refresh of the data since we were missing the permission before this.
+              refreshDataRequired = true;
+            }
+          });
 
   public CallLogFragment() {
     this(CallLogQueryHandler.CALL_TYPE_ALL, NO_LOG_LIMIT);
@@ -560,25 +569,13 @@ public class CallLogFragment extends Fragment
       LogUtil.i(
           "CallLogFragment.onEmptyViewActionButtonClicked",
           "Requesting permissions: " + Arrays.toString(deniedPermissions));
-      requestPermissions(deniedPermissions, PHONE_PERMISSIONS_REQUEST_CODE);
+      permissionLauncher.launch(deniedPermissions);
     } else if (!isCallLogActivity) {
       LogUtil.i("CallLogFragment.onEmptyViewActionButtonClicked", "showing dialpad");
       // Show dialpad if we are not in the call log activity.
       FragmentUtils.getParentUnsafe(this, HostInterface.class).showDialpad();
     }
   }
-  //TODO: BadDaemon: Reimplement this
-/*
-  @Override
-  public void onRequestPermissionsResult(
-      int requestCode, String[] permissions, int[] grantResults) {
-    if (requestCode == PHONE_PERMISSIONS_REQUEST_CODE) {
-      if (grantResults.length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
-        // Force a refresh of the data since we were missing the permission before this.
-        refreshDataRequired = true;
-      }
-    }
-  }*/
 
   /** Schedules an update to the relative call times (X mins ago). */
   private void rescheduleDisplayUpdate() {

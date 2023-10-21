@@ -22,7 +22,6 @@ import static android.Manifest.permission.READ_CALL_LOG;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +38,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,8 +60,6 @@ public class CallStatsFragment extends Fragment implements
     EmptyContentView.OnEmptyViewActionButtonClickedListener,
     DoubleDatePickerDialog.OnDateSetListener {
   private static final String TAG = "CallStatsFragment";
-
-  private static final int READ_CALL_LOG_PERMISSION_REQUEST_CODE = 1;
 
   private PhoneAccountHandle mAccountFilter = null;
   private int mCallTypeFilter = -1;
@@ -89,6 +88,16 @@ public class CallStatsFragment extends Fragment implements
       mRefreshDataRequired = true;
     }
   };
+
+  private final ActivityResultLauncher<String> permissionLauncher = registerForActivityResult(
+          new ActivityResultContracts.RequestPermission(),
+          granted -> {
+            if (granted) {
+              // Force a refresh of the data since we were missing the permission before this.
+              mRefreshDataRequired = true;
+              requireActivity().invalidateOptionsMenu();
+            }
+          });
 
   @Override
   public void onCreate(Bundle state) {
@@ -201,20 +210,7 @@ public class CallStatsFragment extends Fragment implements
   @Override
   public void onEmptyViewActionButtonClicked() {
     if (!PermissionsUtil.hasPermission(getActivity(), READ_CALL_LOG)) {
-      requestPermissions(new String[] { READ_CALL_LOG },
-          READ_CALL_LOG_PERMISSION_REQUEST_CODE);
-    }
-  }
-
-  @Override
-  public void onRequestPermissionsResult(int requestCode, String[] permissions,
-      int[] grantResults) {
-    if (requestCode == READ_CALL_LOG_PERMISSION_REQUEST_CODE) {
-      if (grantResults.length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
-        // Force a refresh of the data since we were missing the permission before this.
-        mRefreshDataRequired = true;
-        getActivity().invalidateOptionsMenu();
-      }
+      permissionLauncher.launch(READ_CALL_LOG);
     }
   }
 
