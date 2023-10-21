@@ -19,7 +19,6 @@ package com.android.incallui.video.impl;
 
 import android.Manifest.permission;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Insets;
@@ -53,6 +52,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -186,6 +187,19 @@ public class VideoCallFragment extends Fragment
         }
       };
 
+  private final ActivityResultLauncher<String> cameraPermissionLauncher = registerForActivityResult(
+          new ActivityResultContracts.RequestPermission(),
+          grantResult -> {
+            if (grantResult) {
+              LogUtil.i("VideoCallFragment.onRequestPermissionsResult",
+                      "Camera permission granted.");
+              videoCallScreenDelegate.onCameraPermissionGranted();
+            } else {
+              LogUtil.i("VideoCallFragment.onRequestPermissionsResult",
+                      "Camera permission denied.");
+            }
+          });
+
   public static VideoCallFragment newInstance(String callId) {
     Bundle bundle = new Bundle();
     bundle.putString(ARG_CALL_ID, Assert.isNotNull(callId));
@@ -206,20 +220,6 @@ public class VideoCallFragment extends Fragment
     if (savedInstanceState != null) {
       inCallButtonUiDelegate.onRestoreInstanceState(savedInstanceState);
     }
-  }
-
-  @Override
-  public void onRequestPermissionsResult(
-          int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
-      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        LogUtil.i("VideoCallFragment.onRequestPermissionsResult", "Camera permission granted.");
-        videoCallScreenDelegate.onCameraPermissionGranted();
-      } else {
-        LogUtil.i("VideoCallFragment.onRequestPermissionsResult", "Camera permission denied.");
-      }
-    }
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
 
   @Nullable
@@ -1275,7 +1275,7 @@ public class VideoCallFragment extends Fragment
     if (!VideoUtils.hasCameraPermissionAndShownPrivacyToast(getContext())) {
       videoCallScreenDelegate.onCameraPermissionDialogShown();
       if (!VideoUtils.hasCameraPermission(getContext())) {
-        requestPermissions(new String[] {permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
+        cameraPermissionLauncher.launch(permission.CAMERA);
       } else {
         PermissionsUtil.showCameraPermissionToast(getContext());
         videoCallScreenDelegate.onCameraPermissionGranted();

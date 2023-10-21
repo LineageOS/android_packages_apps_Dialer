@@ -42,8 +42,8 @@ import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.IntDef;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -84,10 +84,6 @@ import java.util.List;
 public class PhoneNumberInteraction implements Loader.OnLoadCompleteListener<Cursor> {
 
   static final String TAG = PhoneNumberInteraction.class.getSimpleName();
-  /** The identifier for a permissions request if one is generated. */
-  public static final int REQUEST_READ_CONTACTS = 1;
-
-  public static final int REQUEST_CALL_PHONE = 2;
 
   private static final String[] PHONE_NUMBER_PROJECTION =
       new String[] {
@@ -168,7 +164,6 @@ public class PhoneNumberInteraction implements Loader.OnLoadCompleteListener<Cur
 
     Assert.checkArgument(context instanceof InteractionErrorListener);
     Assert.checkArgument(context instanceof DisambigDialogDismissedListener);
-    Assert.checkArgument(context instanceof ActivityCompat.OnRequestPermissionsResultCallback);
   }
 
   private static void performAction(
@@ -202,13 +197,14 @@ public class PhoneNumberInteraction implements Loader.OnLoadCompleteListener<Cur
    * @param isVideoCall {@code true} if the call is a video call, {@code false} otherwise.
    */
   public static void startInteractionForPhoneCall(
-      TransactionSafeActivity activity,
-      Uri uri,
-      boolean isVideoCall,
-      CallSpecificAppData callSpecificAppData) {
+          TransactionSafeActivity activity,
+          Uri uri,
+          boolean isVideoCall,
+          CallSpecificAppData callSpecificAppData,
+          ActivityResultLauncher<String[]> permissionLauncher) {
     new PhoneNumberInteraction(
             activity, ContactDisplayUtils.INTERACTION_CALL, isVideoCall, callSpecificAppData)
-        .startInteraction(uri);
+        .startInteraction(uri, permissionLauncher);
   }
 
   private void performAction(String phoneNumber) {
@@ -221,14 +217,13 @@ public class PhoneNumberInteraction implements Loader.OnLoadCompleteListener<Cur
    *
    * @param uri Contact Uri
    */
-  private void startInteraction(Uri uri) {
+  private void startInteraction(Uri uri, ActivityResultLauncher<String[]> permissionLauncher) {
     // It's possible for a shortcut to have been created, and then permissions revoked. To avoid a
     // crash when the user tries to use such a shortcut, check for this condition and ask the user
     // for the permission.
     if (!PermissionsUtil.hasPhonePermissions(context)) {
       LogUtil.i("PhoneNumberInteraction.startInteraction", "Need phone permission: CALL_PHONE");
-      ActivityCompat.requestPermissions(
-          (Activity) context, new String[] {permission.CALL_PHONE}, REQUEST_CALL_PHONE);
+      permissionLauncher.launch(new String[] {permission.CALL_PHONE});
       return;
     }
 
@@ -239,8 +234,7 @@ public class PhoneNumberInteraction implements Loader.OnLoadCompleteListener<Cur
       LogUtil.i(
           "PhoneNumberInteraction.startInteraction",
           "Need contact permissions: " + Arrays.toString(deniedContactsPermissions));
-      ActivityCompat.requestPermissions(
-          (Activity) context, deniedContactsPermissions, REQUEST_READ_CONTACTS);
+      permissionLauncher.launch(deniedContactsPermissions);
       return;
     }
 

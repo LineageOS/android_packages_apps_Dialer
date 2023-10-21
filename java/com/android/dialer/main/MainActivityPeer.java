@@ -36,8 +36,6 @@ public interface MainActivityPeer {
 
   void onNewIntent(Intent intent);
 
-  void onActivityResult(int requestCode, int resultCode, Intent data);
-
   void onSaveInstanceState(Bundle bundle);
 
   boolean onBackPressed();
