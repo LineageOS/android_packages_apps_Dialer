@@ -106,51 +106,20 @@ public class DoubleDatePickerDialog extends AlertDialog
   };
 
   private static final QuickSelection[] QUICKSELECTIONS = new QuickSelection[] {
-    new QuickSelection() {
-      @Override
-      public void adjustStartDate(Calendar date) {
-          date.set(Calendar.DAY_OF_MONTH, 1);
-      }
-    },
-    new QuickSelection() {
-      @Override
-      public void adjustStartDate(Calendar date) {
-        final int currentMonth = date.get(Calendar.MONTH);
-        date.set(Calendar.MONTH, currentMonth - (currentMonth % 3));
-        date.set(Calendar.DAY_OF_MONTH, 1);
-      }
-    },
-    new QuickSelection() {
-      @Override
-      public void adjustStartDate(Calendar date) {
-        date.set(Calendar.MONTH, 0);
-        date.set(Calendar.DAY_OF_MONTH, 1);
-      }
-    },
-    new QuickSelection() {
-      @Override
-      public void adjustStartDate(Calendar date) {
-        date.add(Calendar.WEEK_OF_YEAR, -1);
-      }
-    },
-    new QuickSelection() {
-      @Override
-      public void adjustStartDate(Calendar date) {
-        date.add(Calendar.MONTH, -1);
-      }
-    },
-    new QuickSelection() {
-      @Override
-      public void adjustStartDate(Calendar date) {
-        date.add(Calendar.MONTH, -3);
-      }
-    },
-    new QuickSelection() {
-      @Override
-      public void adjustStartDate(Calendar date) {
-        date.add(Calendar.YEAR, -1);
-      }
-    },
+          date -> date.set(Calendar.DAY_OF_MONTH, 1),
+          date -> {
+            final int currentMonth = date.get(Calendar.MONTH);
+            date.set(Calendar.MONTH, currentMonth - (currentMonth % 3));
+            date.set(Calendar.DAY_OF_MONTH, 1);
+          },
+          date -> {
+            date.set(Calendar.MONTH, 0);
+            date.set(Calendar.DAY_OF_MONTH, 1);
+          },
+          date -> date.add(Calendar.WEEK_OF_YEAR, -1),
+          date -> date.add(Calendar.MONTH, -1),
+          date -> date.add(Calendar.MONTH, -3),
+          date -> date.add(Calendar.YEAR, -1),
   };
 
   private static final String YEAR = "year";
