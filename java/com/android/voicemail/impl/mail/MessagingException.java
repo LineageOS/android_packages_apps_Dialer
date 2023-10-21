@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,9 +71,9 @@ public class MessagingException extends Exception {
   /** The server indicates it experienced an internal error */
   public static final int SERVER_ERROR = 19;
 
-  protected int exceptionType;
+  protected final int exceptionType;
   // Exception type-specific data
-  protected Object exceptionData;
+  protected final Object exceptionData;
 
   public MessagingException(String message, Throwable throwable) {
     this(UNSPECIFIED_EXCEPTION, message, throwable);

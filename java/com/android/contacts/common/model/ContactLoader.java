@@ -84,10 +84,10 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
   private final Uri mRequestedUri;
   private final Set<Long> mNotifiedRawContactIds = Sets.newHashSet();
   private Uri mLookupUri;
-  private boolean mLoadGroupMetaData;
-  private boolean mLoadInvitableAccountTypes;
-  private boolean mPostViewNotification;
-  private boolean mComputeFormattedPhoneNumber;
+  private final boolean mLoadGroupMetaData;
+  private final boolean mLoadInvitableAccountTypes;
+  private final boolean mPostViewNotification;
+  private final boolean mComputeFormattedPhoneNumber;
   private Contact mContact;
   private ForceLoadContentObserver mObserver;
 

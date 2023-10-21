@@ -31,10 +31,10 @@ public class InCallDndHandler implements InCallPresenter.InCallStateListener {
 
   private static final String KEY_ENABLE_DND = "incall_enable_dnd";
 
-  private SharedPreferences prefs;
+  private final SharedPreferences prefs;
   private DialerCall activeCall;
-  private NotificationManager notificationManager;
-  private int userSelectedDndMode;
+  private final NotificationManager notificationManager;
+  private final int userSelectedDndMode;
 
   public InCallDndHandler(Context context) {
     prefs = PreferenceManager.getDefaultSharedPreferences(

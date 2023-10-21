@@ -35,7 +35,7 @@ import androidx.appcompat.widget.AppCompatTextView;
  */
 public class DialpadTextView extends AppCompatTextView {
 
-  private Rect textBounds = new Rect();
+  private final Rect textBounds = new Rect();
   private String textStr;
 
   public DialpadTextView(Context context, AttributeSet attrs) {

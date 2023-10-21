@@ -62,7 +62,7 @@ public class AccountSelectionActivity extends AppCompatActivity {
   private String number;
   private CallInitiationType.Type initiationType;
 
-  private SelectPhoneAccountDialogFragment.SelectPhoneAccountListener listener =
+  private final SelectPhoneAccountDialogFragment.SelectPhoneAccountListener listener =
       new SelectPhoneAccountDialogFragment.SelectPhoneAccountListener() {
     @Override
     public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
