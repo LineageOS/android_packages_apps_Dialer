@@ -336,8 +336,6 @@ public class StatusBarNotifier
         configureFullScreenIntent(builder, createLaunchPendingIntent(true /* isFullScreen */));
         // Set the notification category and bump the priority for incoming calls
         builder.setCategory(Notification.CATEGORY_CALL);
-        // This will be ignored on O+ and handled by the channel
-        builder.setPriority(Notification.PRIORITY_MAX);
         if (currentNotification != NOTIFICATION_INCOMING_CALL) {
           LogUtil.i(
               "StatusBarNotifier.buildAndSendNotification",
@@ -549,10 +547,14 @@ public class StatusBarNotifier
     // Query {@link Contacts#CONTENT_LOOKUP_URI} directly with work lookup key is not allowed.
     // So, do not pass {@link Contacts#CONTENT_LOOKUP_URI} to NotificationManager to avoid
     // NotificationManager using it.
+    String uri = null;
     if (contactInfo.lookupUri != null && contactInfo.userType != ContactsUtils.USER_TYPE_WORK) {
-      builder.addPerson(contactInfo.lookupUri.toString());
+      uri = contactInfo.lookupUri.toString();
     } else if (!TextUtils.isEmpty(call.getNumber())) {
-      builder.addPerson(Uri.fromParts(PhoneAccount.SCHEME_TEL, call.getNumber(), null).toString());
+      uri = Uri.fromParts(PhoneAccount.SCHEME_TEL, call.getNumber(), null).toString();
+    }
+    if (uri != null) {
+      builder.addPerson(new Person.Builder().setUri(uri).build());
     }
   }
 

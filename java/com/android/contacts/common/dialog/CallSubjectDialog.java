@@ -328,14 +328,15 @@ public class CallSubjectDialog extends AppCompatActivity {
       return;
     }
     mPhotoID = arguments.getLong(ARG_PHOTO_ID);
-    mPhotoUri = arguments.getParcelable(ARG_PHOTO_URI);
-    mContactUri = arguments.getParcelable(ARG_CONTACT_URI);
+    mPhotoUri = arguments.getParcelable(ARG_PHOTO_URI, Uri.class);
+    mContactUri = arguments.getParcelable(ARG_CONTACT_URI, Uri.class);
     mNameOrNumber = arguments.getString(ARG_NAME_OR_NUMBER);
     mNumber = arguments.getString(ARG_NUMBER);
     mDisplayNumber = arguments.getString(ARG_DISPLAY_NUMBER);
     mNumberLabel = arguments.getString(ARG_NUMBER_LABEL);
     mContactType = arguments.getInt(ARG_CONTACT_TYPE, LetterTileDrawable.TYPE_DEFAULT);
-    mPhoneAccountHandle = arguments.getParcelable(ARG_PHONE_ACCOUNT_HANDLE);
+    mPhoneAccountHandle = arguments.getParcelable(ARG_PHONE_ACCOUNT_HANDLE,
+            PhoneAccountHandle.class);
   }
 
   /**

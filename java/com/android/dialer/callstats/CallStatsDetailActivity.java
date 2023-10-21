@@ -167,8 +167,8 @@ public class CallStatsDetailActivity extends AppCompatActivity implements
         R.string.call_stats_outgoing, Calls.OUTGOING_TYPE);
 
     Intent launchIntent = getIntent();
-    mData = (CallStatsDetails) launchIntent.getParcelableExtra(EXTRA_DETAILS);
-    mTotalData = (CallStatsDetails) launchIntent.getParcelableExtra(EXTRA_TOTAL);
+    mData = launchIntent.getParcelableExtra(EXTRA_DETAILS, CallStatsDetails.class);
+    mTotalData = launchIntent.getParcelableExtra(EXTRA_TOTAL, CallStatsDetails.class);
     updateData();
 
     TextView dateFilterView = (TextView) findViewById(R.id.date_filter);

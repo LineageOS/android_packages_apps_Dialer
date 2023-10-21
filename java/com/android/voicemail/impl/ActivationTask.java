@@ -102,7 +102,7 @@ public class ActivationTask extends BaseTask {
   @Override
   public void onCreate(Context context, Bundle extras) {
     super.onCreate(context, extras);
-    messageData = extras.getParcelable(EXTRA_MESSAGE_DATA_BUNDLE);
+    messageData = extras.getParcelable(EXTRA_MESSAGE_DATA_BUNDLE, Bundle.class);
   }
 
   @Override
