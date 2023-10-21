@@ -23,7 +23,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ShortcutManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PhoneLookup;
 import android.text.TextUtils;
@@ -36,8 +37,9 @@ import androidx.core.content.ContextCompat;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.AsyncTaskExecutor;
-import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Reports outgoing calls as shortcut usage.
@@ -49,8 +51,6 @@ import com.android.dialer.common.concurrent.AsyncTaskExecutors;
  * isn't already using shortcuts.
  */
 public class ShortcutUsageReporter {
-
-  private static final AsyncTaskExecutor EXECUTOR = AsyncTaskExecutors.createThreadPoolExecutor();
 
   /**
    * Called when an outgoing call is added to the call list in order to report outgoing calls as
@@ -71,36 +71,36 @@ public class ShortcutUsageReporter {
       return;
     }
 
-    EXECUTOR.submit(Task.ID, new Task(context), phoneNumber);
+    new Task(context).execute(phoneNumber);
   }
 
-  private static final class Task extends AsyncTask<String, Void, Void> {
+  private static final class Task {
     private static final String ID = "ShortcutUsageReporter.Task";
 
     private final Context context;
+
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     public Task(Context context) {
       this.context = context;
     }
 
-    /** @param phoneNumbers array with exactly one non-empty phone number */
-    @Override
-    @WorkerThread
-    protected Void doInBackground(@NonNull String... phoneNumbers) {
-      Assert.isWorkerThread();
+    /** @param phoneNumber non-empty phone number */
+    public void execute(@NonNull String phoneNumber) {
+      executor.execute(() -> {
+        String lookupKey = queryForLookupKey(phoneNumber);
+        if (!TextUtils.isEmpty(lookupKey)) {
+          LogUtil.i("ShortcutUsageReporter.backgroundLogUsage", "%s", lookupKey);
+          ShortcutManager shortcutManager =
+                  (ShortcutManager) context.getSystemService(Context.SHORTCUT_SERVICE);
 
-      String lookupKey = queryForLookupKey(phoneNumbers[0]);
-      if (!TextUtils.isEmpty(lookupKey)) {
-        LogUtil.i("ShortcutUsageReporter.backgroundLogUsage", "%s", lookupKey);
-        ShortcutManager shortcutManager =
-            (ShortcutManager) context.getSystemService(Context.SHORTCUT_SERVICE);
-
-        // Note: There may not currently exist a shortcut with the provided key, but it is logged
-        // anyway, so that launcher applications at least have the information should the shortcut
-        // be created in the future.
-        shortcutManager.reportShortcutUsed(lookupKey);
-      }
-      return null;
+          // Note: There may not currently exist a shortcut with the provided key, but it is logged
+          // anyway, so that launcher applications at least have the information should the shortcut
+          // be created in the future.
+          shortcutManager.reportShortcutUsed(lookupKey);
+        }
+      });
     }
 
     @Nullable

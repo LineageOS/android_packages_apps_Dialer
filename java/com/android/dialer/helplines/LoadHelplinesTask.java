@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2019-2021 The LineageOS Project
- * Copyright (C) 2023 The LineageOS Project
+ * Copyright (C) 2019-2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +16,8 @@
 package com.android.dialer.helplines;
 
 import android.content.res.Resources;
-import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
@@ -27,10 +27,12 @@ import org.lineageos.lib.phone.SensitivePhoneNumbers;
 import org.lineageos.lib.phone.spn.Item;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineItem>> {
+public class LoadHelplinesTask {
 
     @NonNull
     private final Resources mResources;
@@ -39,53 +41,64 @@ public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineIte
     @NonNull
     private final Callback mCallback;
 
+    private final ExecutorService mExecutor;
+    private final Handler mHandler;
+
     LoadHelplinesTask(@NonNull Resources resources, @NonNull SubscriptionManager subManager,
                       @NonNull Callback callback) {
         mResources = resources;
         mSubManager = subManager;
         mCallback = callback;
+
+        mExecutor = Executors.newSingleThreadExecutor();
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
-    @Override
-    protected List<HelplineItem> doInBackground(Void... voids) {
-        List<HelplineItem> helplineList = new ArrayList<>();
-        /* when the network's and the user's country iso differ from each other,
-         * include the iso code in the name so one can be sure that the number is the correct one
-         * (think of accidential roaming close to the country border) */
-        boolean addCountryCode = false;
+    public void execute() {
+        mExecutor.execute(() -> {
+            final List<HelplineItem> helplineList = new ArrayList<>();
+            /* when the network's and the user's country iso differ from each other,
+             * include the iso code in the name so one can be sure that the number is the correct one
+             * (think of accidental roaming close to the country border) */
+            boolean addCountryCode = false;
 
-        List<SubscriptionInfo> subList = getSubscriptionInfos();
-        if (subList != null) {
-            String localeCountryIso =
-                    mResources.getConfiguration().locale.getCountry().toLowerCase();
-            List<String> alreadyProcessedMccs = new ArrayList<>();
-            for (SubscriptionInfo subInfo : subList) {
-                String subCountryIso = subInfo.getCountryIso();
-                if (!subCountryIso.equals(localeCountryIso)) {
-                    addCountryCode = true;
-                }
+            List<SubscriptionInfo> subList = getSubscriptionInfos();
+            if (subList != null) {
+                String localeCountryIso = mResources.getConfiguration().getLocales().get(0)
+                        .getCountry().toLowerCase();
+                List<String> alreadyProcessedMccs = new ArrayList<>();
+                for (SubscriptionInfo subInfo : subList) {
+                    String subCountryIso = subInfo.getCountryIso();
+                    if (!subCountryIso.equals(localeCountryIso)) {
+                        addCountryCode = true;
+                    }
 
-                String mcc = String.valueOf(subInfo.getMcc());
-                if (alreadyProcessedMccs.contains(mcc)) {
-                    continue;
-                }
-                alreadyProcessedMccs.add(mcc);
+                    String mcc = subInfo.getMccString();
+                    if (alreadyProcessedMccs.contains(mcc)) {
+                        continue;
+                    }
+                    alreadyProcessedMccs.add(mcc);
 
-                SensitivePhoneNumbers spn = SensitivePhoneNumbers.getInstance();
-                ArrayList<Item> pns = spn.getSensitivePnInfosForMcc(mcc);
-                int numPns = pns.size();
-                for (int i = 0; i < numPns; i++) {
-                    Item item = pns.get(i);
-                    helplineList.add(new HelplineItem(mResources, item,
-                            addCountryCode ? subCountryIso : ""));
-                    publishProgress(Math.round(i * 100 / numPns / subList.size()));
+                    SensitivePhoneNumbers spn = SensitivePhoneNumbers.getInstance();
+                    ArrayList<Item> pns = spn.getSensitivePnInfosForMcc(mcc);
+                    int numPns = pns.size();
+                    for (int i = 0; i < numPns; i++) {
+                        Item item = pns.get(i);
+                        helplineList.add(new HelplineItem(mResources, item,
+                                addCountryCode ? subCountryIso : ""));
+                        final int currentItem = i;
+                        mHandler.post(() -> {
+                            int progress = Math.round(currentItem * 100f / numPns / subList.size());
+                            mCallback.onLoadListProgress(progress);
+                        });
+                    }
                 }
             }
-        }
 
-        Collections.sort(helplineList, (a, b) -> a.getName().compareTo(b.getName()));
+            helplineList.sort(Comparator.comparing(HelplineItem::getName));
 
-        return helplineList;
+            mHandler.post(() -> mCallback.onLoadCompleted(helplineList));
+        });
     }
 
     private List<SubscriptionInfo> getSubscriptionInfos() {
@@ -99,18 +112,6 @@ public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineIte
             }
         }
         return subList;
-    }
-
-    @Override
-    protected void onProgressUpdate(Integer... values) {
-        if (values.length > 0) {
-            mCallback.onLoadListProgress(values[0]);
-        }
-    }
-
-    @Override
-    protected void onPostExecute(List<HelplineItem> list) {
-        mCallback.onLoadCompleted(list);
     }
 
     interface Callback {
