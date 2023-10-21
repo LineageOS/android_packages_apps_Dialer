@@ -19,7 +19,7 @@ package com.android.voicemail.impl.imap;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
-import android.net.NetworkInfo;
+import android.net.NetworkCapabilities;
 import android.telecom.PhoneAccountHandle;
 import android.util.Base64;
 
@@ -145,11 +145,11 @@ public class ImapHelper implements Closeable {
   public boolean isRoaming() {
     ConnectivityManager connectivityManager =
         (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-    NetworkInfo info = connectivityManager.getNetworkInfo(network);
-    if (info == null) {
+    NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(network);
+    if (capabilities == null) {
       return false;
     }
-    return info.isRoaming();
+    return !capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_ROAMING);
   }
 
   public OmtpVvmCarrierConfigHelper getConfig() {

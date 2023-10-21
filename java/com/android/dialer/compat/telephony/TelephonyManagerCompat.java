@@ -94,7 +94,7 @@ public class TelephonyManagerCompat {
     if (telephonyManager == null) {
       return 1;
     }
-    return telephonyManager.getPhoneCount();
+    return telephonyManager.getActiveModemCount();
   }
 
   /**

@@ -19,6 +19,7 @@ package com.android.incallui;
 
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.Person;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -219,7 +220,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
 
   /** Rebuild an existing or show a new notification given {@link NotificationInfo}. */
   private void postNotification(NotificationInfo info) {
-    Notification.Builder builder = new Notification.Builder(context);
+    Notification.Builder builder = new Notification.Builder(context, NotificationChannelId.DEFAULT);
     // Set notification as ongoing since calls are long-running versus a point-in-time notice.
     builder.setOngoing(true);
     // Make the notification prioritized over the other normal notifications.
@@ -237,8 +238,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     builder.setContentTitle(info.getContentTitle());
     builder.setLargeIcon(info.getLargeIcon());
     builder.setColor(ThemeComponent.get(context).theme().getColorCallNotificationBackground());
-    builder.addPerson(info.getPersonReference());
-    builder.setChannelId(NotificationChannelId.DEFAULT);
+    builder.addPerson(new Person.Builder().setUri(info.getPersonReference()).build());
 
     // Where the external call supports being transferred to the local device, add an action
     // to the notification to initiate the call pull process.
