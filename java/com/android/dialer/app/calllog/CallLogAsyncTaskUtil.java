@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +21,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.provider.CallLog;
 import android.provider.VoicemailContract.Voicemails;
 import android.text.TextUtils;
@@ -52,23 +52,18 @@ public class CallLogAsyncTaskUtil {
     }
 
     asyncTaskExecutor.submit(
-        Tasks.MARK_VOICEMAIL_READ,
-        new AsyncTask<Void, Void, Void>() {
-          @Override
-          public Void doInBackground(Void... params) {
-            ContentValues values = new ContentValues();
-            values.put(Voicemails.IS_READ, true);
-            // "External" changes to the database will be automatically marked as dirty, but this
-            // voicemail might be from dialer so it need to be marked manually.
-            values.put(Voicemails.DIRTY, 1);
-            if (context
-                    .getContentResolver()
-                    .update(voicemailUri, values, Voicemails.IS_READ + " = 0", null)
-                > 0) {
-              uploadVoicemailLocalChangesToServer(context);
-              CallLogNotificationsService.markAllNewVoicemailsAsOld(context);
-            }
-            return null;
+        Tasks.MARK_VOICEMAIL_READ, () -> {
+          ContentValues values = new ContentValues();
+          values.put(Voicemails.IS_READ, true);
+          // "External" changes to the database will be automatically marked as dirty, but this
+          // voicemail might be from dialer so it need to be marked manually.
+          values.put(Voicemails.DIRTY, 1);
+          if (context
+                  .getContentResolver()
+                  .update(voicemailUri, values, Voicemails.IS_READ + " = 0", null)
+              > 0) {
+            uploadVoicemailLocalChangesToServer(context);
+            CallLogNotificationsService.markAllNewVoicemailsAsOld(context);
           }
         });
   }
@@ -81,22 +76,13 @@ public class CallLogAsyncTaskUtil {
       initTaskExecutor();
     }
 
-    asyncTaskExecutor.submit(
-        Tasks.DELETE_VOICEMAIL,
-        new AsyncTask<Void, Void, Void>() {
-          @Override
-          public Void doInBackground(Void... params) {
-            deleteVoicemailSynchronous(context, voicemailUri);
-            return null;
-          }
-
-          @Override
-          public void onPostExecute(Void result) {
-            if (callLogAsyncTaskListener != null) {
-              callLogAsyncTaskListener.onDeleteVoicemail();
-            }
-          }
-        });
+    asyncTaskExecutor.submit(Tasks.DELETE_VOICEMAIL,
+            () -> deleteVoicemailSynchronous(context, voicemailUri),
+            () -> {
+      if (callLogAsyncTaskListener != null) {
+        callLogAsyncTaskListener.onDeleteVoicemail();
+      }
+    });
   }
 
   public static void deleteVoicemailSynchronous(Context context, Uri voicemailUri) {
@@ -117,35 +103,28 @@ public class CallLogAsyncTaskUtil {
       initTaskExecutor();
     }
 
-    asyncTaskExecutor.submit(
-        Tasks.MARK_CALL_READ,
-        new AsyncTask<Void, Void, Void>() {
-          @Override
-          public Void doInBackground(Void... params) {
+    asyncTaskExecutor.submit(Tasks.MARK_CALL_READ, () -> {
+      StringBuilder where = new StringBuilder();
+      where.append(CallLog.Calls.TYPE).append(" = ").append(CallLog.Calls.MISSED_TYPE);
+      where.append(" AND ");
 
-            StringBuilder where = new StringBuilder();
-            where.append(CallLog.Calls.TYPE).append(" = ").append(CallLog.Calls.MISSED_TYPE);
-            where.append(" AND ");
+      Long[] callIdLongs = new Long[callIds.length];
+      for (int i = 0; i < callIds.length; i++) {
+        callIdLongs[i] = callIds[i];
+      }
+      where
+          .append(CallLog.Calls._ID)
+          .append(" IN (" + TextUtils.join(",", callIdLongs) + ")");
 
-            Long[] callIdLongs = new Long[callIds.length];
-            for (int i = 0; i < callIds.length; i++) {
-              callIdLongs[i] = callIds[i];
-            }
-            where
-                .append(CallLog.Calls._ID)
-                .append(" IN (" + TextUtils.join(",", callIdLongs) + ")");
-
-            ContentValues values = new ContentValues(1);
-            values.put(CallLog.Calls.IS_READ, "1");
-            context
-                .getContentResolver()
-                .update(CallLog.Calls.CONTENT_URI, values, where.toString(), null);
-            return null;
-          }
-        });
+      ContentValues values = new ContentValues(1);
+      values.put(CallLog.Calls.IS_READ, "1");
+      context
+          .getContentResolver()
+          .update(CallLog.Calls.CONTENT_URI, values, where.toString(), null);
+    });
   }
 
-  /** The enumeration of {@link AsyncTask} objects used in this class. */
+  /** The enumeration of objects used in this class. */
   public enum Tasks {
     DELETE_VOICEMAIL,
     MARK_VOICEMAIL_READ,
