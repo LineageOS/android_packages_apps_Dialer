@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -271,7 +272,7 @@ public class ProximitySensor
    */
   public class ProximityDisplayListener implements DisplayListener {
 
-    private DisplayManager displayManager;
+    private final DisplayManager displayManager;
     private boolean isDisplayOn = true;
 
     ProximityDisplayListener(DisplayManager displayManager) {

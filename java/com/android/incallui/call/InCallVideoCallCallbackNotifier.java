@@ -28,7 +28,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class InCallVideoCallCallbackNotifier {
 
   /** Singleton instance of this class. */
-  private static InCallVideoCallCallbackNotifier instance = new InCallVideoCallCallbackNotifier();
+  private static final InCallVideoCallCallbackNotifier instance =
+          new InCallVideoCallCallbackNotifier();
 
   /**
    * ConcurrentHashMap constructor params: 8 is initial table size, 0.9f is load factor before

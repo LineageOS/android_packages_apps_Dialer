@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,13 +22,13 @@ package com.android.contacts.common;
  */
 public final class GroupMetaData {
 
-  private String mAccountName;
-  private String mAccountType;
-  private String mDataSet;
-  private long mGroupId;
-  private String mTitle;
-  private boolean mDefaultGroup;
-  private boolean mFavorites;
+  private final String mAccountName;
+  private final String mAccountType;
+  private final String mDataSet;
+  private final long mGroupId;
+  private final String mTitle;
+  private final boolean mDefaultGroup;
+  private final boolean mFavorites;
 
   public GroupMetaData(
       String accountName,

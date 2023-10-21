@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,14 +55,14 @@ public class DigestMd5Utils {
 
     private static final String CHARSET = "utf-8";
 
-    public String username;
-    public String password;
-    public String realm;
-    public String nonce;
-    public String nc;
-    public String cnonce;
-    public String digestUri;
-    public String qop;
+    public final String username;
+    public final String password;
+    public final String realm;
+    public final String nonce;
+    public final String nc;
+    public final String cnonce;
+    public final String digestUri;
+    public final String qop;
 
     public Data(ImapStore imapStore, MailTransport transport, Map<String, String> challenge) {
       username = imapStore.getUsername();
@@ -114,7 +115,7 @@ public class DigestMd5Utils {
 
     private static class ResponseBuilder {
 
-      private StringBuilder builder = new StringBuilder();
+      private final StringBuilder builder = new StringBuilder();
 
       public ResponseBuilder appendQuoted(String key, String value) {
         if (builder.length() != 0) {
@@ -223,7 +224,7 @@ public class DigestMd5Utils {
 
     private final String message;
     private int position = 0;
-    private Map<String, String> result = new ArrayMap<>();
+    private final Map<String, String> result = new ArrayMap<>();
 
     public DigestMessageParser(String message) {
       this.message = message;

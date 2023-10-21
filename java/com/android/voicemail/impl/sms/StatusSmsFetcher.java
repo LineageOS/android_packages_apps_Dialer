@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +61,7 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
 
   private static final int ACTION_REQUEST_SENT_REQUEST_CODE = 0;
 
-  private CompletableFuture<Bundle> future = new CompletableFuture<>();
+  private final CompletableFuture<Bundle> future = new CompletableFuture<>();
 
   private final Context context;
   private final PhoneAccountHandle phoneAccountHandle;
