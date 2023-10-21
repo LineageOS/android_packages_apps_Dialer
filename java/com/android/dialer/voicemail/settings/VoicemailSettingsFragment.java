@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -14,7 +15,6 @@
 package com.android.dialer.voicemail.settings;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -298,26 +298,16 @@ public class VoicemailSettingsFragment extends DialerPreferenceFragment
     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
     builder.setTitle(R.string.confirm_disable_voicemail_dialog_title);
     builder.setMessage(R.string.confirm_disable_voicemail_dialog_message);
-    builder.setPositiveButton(
-        R.string.confirm_disable_voicemail_accept_dialog_label,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            LogUtil.i(TAG, "showDisableConfirmationDialog, confirmed");
-            updateVoicemailEnabled(false);
-            dialog.dismiss();
-          }
-        });
-
-    builder.setNegativeButton(
-        android.R.string.cancel,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            LogUtil.i(TAG, "showDisableConfirmationDialog, cancelled");
-            dialog.dismiss();
-          }
-        });
+    builder.setPositiveButton(R.string.confirm_disable_voicemail_accept_dialog_label,
+            (dialog, which) -> {
+      LogUtil.i(TAG, "showDisableConfirmationDialog, confirmed");
+      updateVoicemailEnabled(false);
+      dialog.dismiss();
+    });
+    builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+      LogUtil.i(TAG, "showDisableConfirmationDialog, cancelled");
+      dialog.dismiss();
+    });
 
     builder.setCancelable(true);
     builder.show();

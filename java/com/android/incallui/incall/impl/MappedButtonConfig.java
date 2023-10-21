@@ -109,16 +109,13 @@ final class MappedButtonConfig {
    */
   @NonNull
   public Comparator<Integer> getSlotComparator() {
-    return new Comparator<Integer>() {
-      @Override
-      public int compare(Integer lhs, Integer rhs) {
-        MappingInfo lhsInfo = lookupMappingInfo(lhs);
-        MappingInfo rhsInfo = lookupMappingInfo(rhs);
-        if (lhsInfo.getSlot() != rhsInfo.getSlot()) {
-          throw new IllegalArgumentException("lhs and rhs don't go in the same slot");
-        }
-        return lhsInfo.getSlotOrder() - rhsInfo.getSlotOrder();
+    return (lhs, rhs) -> {
+      MappingInfo lhsInfo = lookupMappingInfo(lhs);
+      MappingInfo rhsInfo = lookupMappingInfo(rhs);
+      if (lhsInfo.getSlot() != rhsInfo.getSlot()) {
+        throw new IllegalArgumentException("lhs and rhs don't go in the same slot");
       }
+      return lhsInfo.getSlotOrder() - rhsInfo.getSlotOrder();
     };
   }
 
@@ -133,13 +130,10 @@ final class MappedButtonConfig {
    */
   @NonNull
   public Comparator<Integer> getConflictComparator() {
-    return new Comparator<Integer>() {
-      @Override
-      public int compare(Integer lhs, Integer rhs) {
-        MappingInfo lhsInfo = lookupMappingInfo(lhs);
-        MappingInfo rhsInfo = lookupMappingInfo(rhs);
-        return lhsInfo.getConflictOrder() - rhsInfo.getConflictOrder();
-      }
+    return (lhs, rhs) -> {
+      MappingInfo lhsInfo = lookupMappingInfo(lhs);
+      MappingInfo rhsInfo = lookupMappingInfo(rhs);
+      return lhsInfo.getConflictOrder() - rhsInfo.getConflictOrder();
     };
   }
 

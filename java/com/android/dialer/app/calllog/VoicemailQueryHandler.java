@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,10 +47,8 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
   @WorkerThread
   public static void markAllNewVoicemailsAsOld(final @NonNull Context context) {
     ThreadUtil.postOnUiThread(
-        () -> {
-          new VoicemailQueryHandler(context.getContentResolver())
-              .markNewVoicemailsAsOld(context, null);
-        });
+        () -> new VoicemailQueryHandler(context.getContentResolver())
+            .markNewVoicemailsAsOld(context, null));
   }
 
   @WorkerThread
@@ -60,10 +59,8 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
       return;
     }
     ThreadUtil.postOnUiThread(
-        () -> {
-          new VoicemailQueryHandler(context.getContentResolver())
-              .markNewVoicemailsAsOld(context, voicemailUri);
-        });
+        () -> new VoicemailQueryHandler(context.getContentResolver())
+            .markNewVoicemailsAsOld(context, voicemailUri));
   }
 
   /** Updates all new voicemails to mark them as old. */

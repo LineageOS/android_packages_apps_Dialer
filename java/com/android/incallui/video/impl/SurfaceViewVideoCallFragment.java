@@ -208,13 +208,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
     endCallButton.setOnClickListener(this);
     previewSurfaceView = (SurfaceView) view.findViewById(R.id.videocall_video_preview);
     previewSurfaceView.setZOrderMediaOverlay(true);
-    previewOffOverlay.setOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            checkCameraPermission();
-          }
-        });
+    previewOffOverlay.setOnClickListener(v -> checkCameraPermission());
     remoteSurfaceView = (SurfaceView) view.findViewById(R.id.videocall_video_remote);
     remoteSurfaceView.setOnClickListener(
         surfaceView -> {
@@ -368,13 +362,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
         .translationY(0)
         .setInterpolator(linearOutSlowInInterpolator)
         .alpha(1)
-        .withStartAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                switchOnHoldCallController.setOnScreen();
-              }
-            });
+        .withStartAction(() -> switchOnHoldCallController.setOnScreen());
 
     View contactGridView = contactGridManager.getContainerView();
     // Animate contact grid to the shown state.
@@ -384,13 +372,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
         .translationY(0)
         .setInterpolator(linearOutSlowInInterpolator)
         .alpha(1)
-        .withStartAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                contactGridManager.show();
-              }
-            });
+        .withStartAction(() -> contactGridManager.show());
 
     endCallButton
         .animate()
@@ -398,13 +380,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
         .translationY(0)
         .setInterpolator(linearOutSlowInInterpolator)
         .alpha(1)
-        .withStartAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                endCallButton.setVisibility(View.VISIBLE);
-              }
-            })
+        .withStartAction(() -> endCallButton.setVisibility(View.VISIBLE))
         .start();
 
     // Animate all the preview controls up to make room for the navigation bar.
@@ -563,13 +539,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
         .translationY(offset.y)
         .setInterpolator(fastOutLinearInInterpolator)
         .alpha(0)
-        .withEndAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                endCallButton.setVisibility(View.INVISIBLE);
-              }
-            })
+        .withEndAction(() -> endCallButton.setVisibility(View.INVISIBLE))
         .setInterpolator(new FastOutLinearInInterpolator())
         .start();
 
@@ -970,13 +940,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
           wasRemoteVideoOff
               ? R.string.videocall_remote_video_on
               : R.string.videocall_remotely_resumed);
-      remoteVideoOff.postDelayed(
-          new Runnable() {
-            @Override
-            public void run() {
-              remoteVideoOff.setVisibility(View.GONE);
-            }
-          },
+      remoteVideoOff.postDelayed(() -> remoteVideoOff.setVisibility(View.GONE),
           VIDEO_OFF_VIEW_FADE_OUT_DELAY_IN_MILLIS);
     } else {
       remoteVideoOff.setText(
@@ -1032,13 +996,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
     view.setVisibility(View.VISIBLE);
     view.animate()
         .alpha(endAlpha)
-        .withEndAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                view.setVisibility(visibility);
-              }
-            })
+        .withEndAction(() -> view.setVisibility(visibility))
         .start();
   }
 

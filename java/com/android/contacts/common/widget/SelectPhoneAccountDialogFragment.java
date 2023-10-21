@@ -102,31 +102,23 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     isSelected = false;
 
     final DialogInterface.OnClickListener selectionListener =
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            isSelected = true;
-            PhoneAccountHandle selectedAccountHandle =
-                SelectPhoneAccountDialogOptionsUtil.getPhoneAccountHandle(
-                    options.getEntriesList().get(which));
-            Bundle result = new Bundle();
-            result.putParcelable(
-                SelectPhoneAccountListener.EXTRA_SELECTED_ACCOUNT_HANDLE, selectedAccountHandle);
-            result.putBoolean(SelectPhoneAccountListener.EXTRA_SET_DEFAULT, isDefaultChecked);
-            result.putString(SelectPhoneAccountListener.EXTRA_CALL_ID, getCallId());
-            if (listener != null) {
-              listener.onReceiveResult(SelectPhoneAccountListener.RESULT_SELECTED, result);
-            }
-          }
-        };
+            (dialog, which) -> {
+              isSelected = true;
+              PhoneAccountHandle selectedAccountHandle =
+                  SelectPhoneAccountDialogOptionsUtil.getPhoneAccountHandle(
+                      options.getEntriesList().get(which));
+              Bundle result = new Bundle();
+              result.putParcelable(
+                  SelectPhoneAccountListener.EXTRA_SELECTED_ACCOUNT_HANDLE, selectedAccountHandle);
+              result.putBoolean(SelectPhoneAccountListener.EXTRA_SET_DEFAULT, isDefaultChecked);
+              result.putString(SelectPhoneAccountListener.EXTRA_CALL_ID, getCallId());
+              if (listener != null) {
+                listener.onReceiveResult(SelectPhoneAccountListener.RESULT_SELECTED, result);
+              }
+            };
 
     final CompoundButton.OnCheckedChangeListener checkListener =
-        new CompoundButton.OnCheckedChangeListener() {
-          @Override
-          public void onCheckedChanged(CompoundButton check, boolean isChecked) {
-            isDefaultChecked = isChecked;
-          }
-        };
+            (check, isChecked) -> isDefaultChecked = isChecked;
 
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     ListAdapter selectAccountListAdapter =

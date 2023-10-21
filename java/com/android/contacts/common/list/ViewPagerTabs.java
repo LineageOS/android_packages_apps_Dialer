@@ -184,13 +184,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
       tabView = textView;
     }
 
-    tabView.setOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            mPager.setCurrentItem(getRtlPosition(position));
-          }
-        });
+    tabView.setOnClickListener(v -> mPager.setCurrentItem(getRtlPosition(position)));
 
     tabView.setOnLongClickListener(new OnTabLongClickListener(position));
 

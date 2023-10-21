@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,28 +53,22 @@ import org.xmlpull.v1.XmlPullParserException;
 
 public abstract class BaseAccountType extends AccountType {
 
-  public static final StringInflater ORGANIZATION_BODY_INFLATER =
-      new StringInflater() {
-        @Override
-        public CharSequence inflateUsing(Context context, ContentValues values) {
-          final CharSequence companyValue =
-              values.containsKey(Organization.COMPANY)
-                  ? values.getAsString(Organization.COMPANY)
-                  : null;
-          final CharSequence titleValue =
-              values.containsKey(Organization.TITLE)
-                  ? values.getAsString(Organization.TITLE)
-                  : null;
+  public static final StringInflater ORGANIZATION_BODY_INFLATER = (context, values) -> {
+    final CharSequence companyValue = values.containsKey(Organization.COMPANY)
+            ? values.getAsString(Organization.COMPANY)
+            : null;
+    final CharSequence titleValue = values.containsKey(Organization.TITLE)
+            ? values.getAsString(Organization.TITLE)
+            : null;
 
-          if (companyValue != null && titleValue != null) {
-            return companyValue + ": " + titleValue;
-          } else if (companyValue == null) {
-            return titleValue;
-          } else {
-            return companyValue;
-          }
-        }
-      };
+    if (companyValue != null && titleValue != null) {
+      return companyValue + ": " + titleValue;
+    } else if (companyValue == null) {
+      return titleValue;
+    } else {
+      return companyValue;
+    }
+  };
   protected static final int FLAGS_PHONE = EditorInfo.TYPE_CLASS_PHONE;
   protected static final int FLAGS_EMAIL =
       EditorInfo.TYPE_CLASS_TEXT | EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS;

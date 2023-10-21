@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -165,12 +166,7 @@ public class VoicemailChangePinActivity extends AppCompatActivity
               .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
           activity.showError(
               activity.getString(R.string.change_pin_system_error),
-              new OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                  activity.finish();
-                }
-              });
+                  dialog -> activity.finish());
         } else {
           LogUtil.e(TAG, "invalid default old PIN: " + activity.getChangePinResultMessage(result));
           // If the default old PIN is rejected by the server, the PIN is probably changed

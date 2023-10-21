@@ -259,54 +259,24 @@ public class VideoCallFragment extends Fragment
     endCallButton.setOnClickListener(this);
     previewTextureView = (TextureView) view.findViewById(R.id.videocall_video_preview);
     previewTextureView.setClipToOutline(true);
-    previewOffOverlay.setOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            checkCameraPermission();
-          }
-        });
+    previewOffOverlay.setOnClickListener(v -> checkCameraPermission());
     remoteTextureView = (TextureView) view.findViewById(R.id.videocall_video_remote);
     greenScreenBackgroundView = view.findViewById(R.id.videocall_green_screen_background);
     fullscreenBackgroundView = view.findViewById(R.id.videocall_fullscreen_background);
 
     remoteTextureView.addOnLayoutChangeListener(
-        new OnLayoutChangeListener() {
-          @Override
-          public void onLayoutChange(
-              View v,
-              int left,
-              int top,
-              int right,
-              int bottom,
-              int oldLeft,
-              int oldTop,
-              int oldRight,
-              int oldBottom) {
-            LogUtil.i("VideoCallFragment.onLayoutChange", "remoteTextureView layout changed");
-            updateRemoteVideoScaling();
-            updateRemoteOffView();
-          }
-        });
+            (v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+              LogUtil.i("VideoCallFragment.onLayoutChange", "remoteTextureView layout changed");
+              updateRemoteVideoScaling();
+              updateRemoteOffView();
+            });
 
     previewTextureView.addOnLayoutChangeListener(
-        new OnLayoutChangeListener() {
-          @Override
-          public void onLayoutChange(
-              View v,
-              int left,
-              int top,
-              int right,
-              int bottom,
-              int oldLeft,
-              int oldTop,
-              int oldRight,
-              int oldBottom) {
-            LogUtil.i("VideoCallFragment.onLayoutChange", "previewTextureView layout changed");
-            updatePreviewVideoScaling();
-            updatePreviewOffView();
-          }
-        });
+            (v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+              LogUtil.i("VideoCallFragment.onLayoutChange", "previewTextureView layout changed");
+              updatePreviewVideoScaling();
+              updatePreviewOffView();
+            });
 
     controls.addOnLayoutChangeListener(
         new OnLayoutChangeListener() {
@@ -451,13 +421,7 @@ public class VideoCallFragment extends Fragment
         .translationY(0)
         .setInterpolator(linearOutSlowInInterpolator)
         .alpha(1)
-        .withStartAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                controls.setVisibility(View.VISIBLE);
-              }
-            })
+        .withStartAction(() -> controls.setVisibility(View.VISIBLE))
         .start();
 
     // Animate onHold to the shown state.
@@ -467,13 +431,7 @@ public class VideoCallFragment extends Fragment
         .translationY(0)
         .setInterpolator(linearOutSlowInInterpolator)
         .alpha(1)
-        .withStartAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                switchOnHoldCallController.setOnScreen();
-              }
-            });
+        .withStartAction(() -> switchOnHoldCallController.setOnScreen());
 
     View contactGridView = contactGridManager.getContainerView();
     // Animate contact grid to the shown state.
@@ -483,13 +441,7 @@ public class VideoCallFragment extends Fragment
         .translationY(0)
         .setInterpolator(linearOutSlowInInterpolator)
         .alpha(1)
-        .withStartAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                contactGridManager.show();
-              }
-            });
+        .withStartAction(() -> contactGridManager.show());
 
     endCallButton
         .animate()
@@ -497,13 +449,7 @@ public class VideoCallFragment extends Fragment
         .translationY(0)
         .setInterpolator(linearOutSlowInInterpolator)
         .alpha(1)
-        .withStartAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                endCallButton.setVisibility(View.VISIBLE);
-              }
-            })
+        .withStartAction(() -> endCallButton.setVisibility(View.VISIBLE))
         .start();
 
     // Animate all the preview controls up to make room for the navigation bar.
@@ -664,13 +610,7 @@ public class VideoCallFragment extends Fragment
         .translationY(offset.y)
         .setInterpolator(fastOutLinearInInterpolator)
         .alpha(0)
-        .withEndAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                endCallButton.setVisibility(View.INVISIBLE);
-              }
-            })
+        .withEndAction(() -> endCallButton.setVisibility(View.INVISIBLE))
         .setInterpolator(new FastOutLinearInInterpolator())
         .start();
 
@@ -1179,13 +1119,7 @@ public class VideoCallFragment extends Fragment
           wasRemoteVideoOff
               ? R.string.videocall_remote_video_on
               : R.string.videocall_remotely_resumed);
-      remoteVideoOff.postDelayed(
-          new Runnable() {
-            @Override
-            public void run() {
-              remoteVideoOff.setVisibility(View.GONE);
-            }
-          },
+      remoteVideoOff.postDelayed(() -> remoteVideoOff.setVisibility(View.GONE),
           VIDEO_OFF_VIEW_FADE_OUT_DELAY_IN_MILLIS);
     } else {
       remoteVideoOff.setText(
@@ -1303,13 +1237,7 @@ public class VideoCallFragment extends Fragment
     view.setVisibility(View.VISIBLE);
     view.animate()
         .alpha(endAlpha)
-        .withEndAction(
-            new Runnable() {
-              @Override
-              public void run() {
-                view.setVisibility(visibility);
-              }
-            })
+        .withEndAction(() -> view.setVisibility(visibility))
         .start();
   }
 

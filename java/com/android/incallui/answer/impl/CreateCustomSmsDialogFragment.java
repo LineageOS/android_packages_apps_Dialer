@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +20,6 @@ package com.android.incallui.answer.impl;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnShowListener;
 import android.os.Bundle;
 import android.text.Editable;
@@ -68,43 +68,21 @@ public class CreateCustomSmsDialogFragment extends AppCompatDialogFragment {
     builder
         .setCancelable(true)
         .setView(view)
-        .setPositiveButton(
-            R.string.call_incoming_custom_message_send,
-            new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialogInterface, int i) {
-                FragmentUtils.getParentUnsafe(
-                        CreateCustomSmsDialogFragment.this, CreateCustomSmsHolder.class)
+        .setPositiveButton(R.string.call_incoming_custom_message_send, (dialogInterface, i) -> {
+            FragmentUtils.getParentUnsafe(
+                    CreateCustomSmsDialogFragment.this, CreateCustomSmsHolder.class)
                     .customSmsCreated(editText.getText().toString().trim());
-                dismiss();
-              }
-            })
-        .setNegativeButton(
-            R.string.call_incoming_custom_message_cancel,
-            new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialogInterface, int i) {
-                dismiss();
-              }
-            })
-        .setOnCancelListener(
-            new OnCancelListener() {
-              @Override
-              public void onCancel(DialogInterface dialogInterface) {
-                dismiss();
-              }
-            })
+            dismiss();
+        })
+        .setNegativeButton(R.string.call_incoming_custom_message_cancel,
+                (dialogInterface, i) -> dismiss())
+        .setOnCancelListener(dialogInterface -> dismiss())
         .setTitle(R.string.call_incoming_respond_via_sms_custom_message);
     final AlertDialog customMessagePopup = builder.create();
     customMessagePopup.setOnShowListener(
-        new OnShowListener() {
-          @Override
-          public void onShow(DialogInterface dialogInterface) {
-            ((AlertDialog) dialogInterface)
-                .getButton(AlertDialog.BUTTON_POSITIVE)
-                .setEnabled(false);
-          }
-        });
+            dialogInterface -> ((AlertDialog) dialogInterface)
+                    .getButton(AlertDialog.BUTTON_POSITIVE)
+                    .setEnabled(false));
 
     editText.addTextChangedListener(
         new TextWatcher() {
