@@ -135,8 +135,7 @@ class CallStatsAdapter extends RecyclerView.Adapter {
     mTotalItem = new CallStatsDetails(null, 0, null, null, null, null, null, 0);
     mInfoLookup = new ConcurrentHashMap<>();
 
-    mContactInfoCache = new ContactInfoCache(cache,
-        mContactInfoHelper, () -> notifyDataSetChanged());
+    mContactInfoCache = new ContactInfoCache(cache, mContactInfoHelper, this::notifyDataSetChanged);
     if (!PermissionsUtil.hasContactsReadPermissions(context)) {
       mContactInfoCache.disableRequestProcessing();
     }

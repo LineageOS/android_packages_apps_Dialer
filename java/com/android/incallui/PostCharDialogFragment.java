@@ -64,20 +64,8 @@ public class PostCharDialogFragment extends DialogFragment {
 
     builder.setPositiveButton(
         R.string.pause_prompt_yes,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int whichButton) {
-            TelecomAdapter.getInstance().postDialContinue(callId, true);
-          }
-        });
-    builder.setNegativeButton(
-        R.string.pause_prompt_no,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int whichButton) {
-            dialog.cancel();
-          }
-        });
+            (dialog, whichButton) -> TelecomAdapter.getInstance().postDialContinue(callId, true));
+    builder.setNegativeButton(R.string.pause_prompt_no, (dialog, whichButton) -> dialog.cancel());
 
     final AlertDialog dialog = builder.create();
     return dialog;

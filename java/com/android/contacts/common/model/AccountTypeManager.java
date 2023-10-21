@@ -174,37 +174,33 @@ class AccountTypeManagerImpl extends AccountTypeManager
 
   private static final int MESSAGE_LOAD_DATA = 0;
   private static final int MESSAGE_PROCESS_BROADCAST_INTENT = 1;
-  private static final Comparator<AccountWithDataSet> ACCOUNT_COMPARATOR =
-      new Comparator<AccountWithDataSet>() {
-        @Override
-        public int compare(AccountWithDataSet a, AccountWithDataSet b) {
-          if (Objects.equals(a.name, b.name)
-              && Objects.equals(a.type, b.type)
-              && Objects.equals(a.dataSet, b.dataSet)) {
-            return 0;
-          } else if (b.name == null || b.type == null) {
-            return -1;
-          } else if (a.name == null || a.type == null) {
-            return 1;
-          } else {
-            int diff = a.name.compareTo(b.name);
-            if (diff != 0) {
-              return diff;
-            }
-            diff = a.type.compareTo(b.type);
-            if (diff != 0) {
-              return diff;
-            }
+  private static final Comparator<AccountWithDataSet> ACCOUNT_COMPARATOR = (a, b) -> {
+    if (Objects.equals(a.name, b.name)
+        && Objects.equals(a.type, b.type)
+        && Objects.equals(a.dataSet, b.dataSet)) {
+      return 0;
+    } else if (b.name == null || b.type == null) {
+      return -1;
+    } else if (a.name == null || a.type == null) {
+      return 1;
+    } else {
+      int diff = a.name.compareTo(b.name);
+      if (diff != 0) {
+        return diff;
+      }
+      diff = a.type.compareTo(b.type);
+      if (diff != 0) {
+        return diff;
+      }
 
-            // Accounts without data sets get sorted before those that have them.
-            if (a.dataSet != null) {
-              return b.dataSet == null ? 1 : a.dataSet.compareTo(b.dataSet);
-            } else {
-              return -1;
-            }
-          }
-        }
-      };
+      // Accounts without data sets get sorted before those that have them.
+      if (a.dataSet != null) {
+        return b.dataSet == null ? 1 : a.dataSet.compareTo(b.dataSet);
+      } else {
+        return -1;
+      }
+    }
+  };
   private final InvitableAccountTypeCache mInvitableAccountTypeCache;
   /**
    * The boolean value is equal to true if the {@link InvitableAccountTypeCache} has been
