@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +30,4 @@ public final class ActivityRequestCodes {
 
   /** Request code for {@link com.android.dialer.calldetails.OldCallDetailsActivity} intent. */
   public static final int DIALTACTS_CALL_DETAILS = 4;
-
-  /**
-   * Request code for {@link com.android.dialer.speeddial.SpeedDialFragment} contact picker intent.
-   */
-  public static final int SPEED_DIAL_ADD_FAVORITE = 5;
 }
