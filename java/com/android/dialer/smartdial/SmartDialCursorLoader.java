@@ -16,11 +16,13 @@
 
 package com.android.dialer.smartdial;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+
+import androidx.loader.content.AsyncTaskLoader;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
