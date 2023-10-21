@@ -118,7 +118,7 @@ public class PhoneNumberInteraction implements Loader.OnLoadCompleteListener<Cur
   private final CallSpecificAppData callSpecificAppData;
   private long contactId = UNKNOWN_CONTACT_ID;
   private CursorLoader loader;
-  private boolean isVideoCall;
+  private final boolean isVideoCall;
 
   /** Error codes for interactions. */
   @Retention(RetentionPolicy.SOURCE)

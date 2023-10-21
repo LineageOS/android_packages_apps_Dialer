@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -143,7 +144,7 @@ class FlingUpDownTouchHandler implements OnTouchListener {
   @NonNull private final OnProgressChangedListener listener;
 
   private VelocityTracker velocityTracker;
-  private FlingAnimationUtils flingAnimationUtils;
+  private final FlingAnimationUtils flingAnimationUtils;
 
   private boolean touchEnabled = true;
   private boolean flingEnabled = true;
@@ -156,14 +157,14 @@ class FlingUpDownTouchHandler implements OnTouchListener {
   private int trackingPointer;
   private Animator progressAnimator;
 
-  private float touchSlop;
+  private final float touchSlop;
   private float initialTouchY;
   private float acceptThresholdY;
   private float rejectThresholdY;
   private float zeroY;
 
   private boolean touchAboveFalsingThreshold;
-  private float falsingThresholdPx;
+  private final float falsingThresholdPx;
   private boolean touchUsesFalsing;
 
   private final float acceptThresholdPx;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,7 +101,7 @@ public class ExpirableCache<K, V> {
    */
   private final AtomicInteger generation;
   /** The underlying cache used to stored the cached values. */
-  private LruCache<K, CachedValue<V>> cache;
+  private final LruCache<K, CachedValue<V>> cache;
 
   private ExpirableCache(LruCache<K, CachedValue<V>> cache) {
     this.cache = cache;

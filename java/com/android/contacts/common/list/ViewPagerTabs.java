@@ -74,7 +74,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
   ViewPager mPager;
   int mPrevSelected = -1;
   int mSidePadding;
-  private ViewPagerTabStrip mTabStrip;
+  private final ViewPagerTabStrip mTabStrip;
   private int[] mTabIcons;
   // For displaying the unread count next to the tab icon.
   private int[] mUnreadCounts;

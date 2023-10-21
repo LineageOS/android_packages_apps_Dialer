@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +50,7 @@ public class CallRecorderService extends Service {
   private MediaRecorder mMediaRecorder = null;
   private CallRecording mCurrentRecording = null;
 
-  private SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyMMdd_HHmmssSSS");
+  private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyMMdd_HHmmssSSS");
 
   private final ICallRecorderService.Stub mBinder = new ICallRecorderService.Stub() {
     @Override

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +24,7 @@ import java.io.UnsupportedEncodingException;
 
 /** Subclass of {@link ImapString} used for non literals. */
 public class ImapSimpleString extends ImapString {
-  private final String TAG = "ImapSimpleString";
+  private static final String TAG = "ImapSimpleString";
   private String string;
 
   /* package */ ImapSimpleString(String string) {

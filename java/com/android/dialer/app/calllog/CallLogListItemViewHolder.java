@@ -151,8 +151,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public View detailsButtonView;
   public View callWithNoteButtonView;
   public View sendVoicemailButtonView;
-  public ImageView workIconView;
-  public ImageView checkBoxView;
+  public final ImageView workIconView;
+  public final ImageView checkBoxView;
   /**
    * The row Id for the first call associated with the call log entry. Used as a key for the map
    * used to track which call log entries have the action button section expanded.
@@ -218,7 +218,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   /** Whether the current log entry is a spam number or not. */
   public boolean isSpam;
 
-  private View.OnClickListener expandCollapseListener;
+  private final View.OnClickListener expandCollapseListener;
   private final OnActionModeStateChangedListener onActionModeStateChangedListener;
   private final View.OnLongClickListener longPressListener;
   private boolean voicemailPrimaryActionButtonClicked;

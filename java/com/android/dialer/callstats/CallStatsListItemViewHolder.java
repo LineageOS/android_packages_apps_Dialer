@@ -59,9 +59,8 @@ public final class CallStatsListItemViewHolder extends RecyclerView.ViewHolder
   public final TextView mPercentView;
   public final LinearColorBar mBarView;
 
-  private Context mContext;
-  private ContactInfoHelper mContactInfoHelper;
-  private final int mPhotoSize;
+  private final Context mContext;
+  private final ContactInfoHelper mContactInfoHelper;
 
   private CallStatsListItemViewHolder(View rootView,
       QuickContactBadge quickContactView,
