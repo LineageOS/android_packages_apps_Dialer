@@ -343,6 +343,6 @@ public class CallPendingActivity extends FragmentActivity
   }
 
   private Uri getPhotoUri() {
-    return getIntent().getParcelableExtra(EXTRA_PHOTO_URI);
+    return getIntent().getParcelableExtra(EXTRA_PHOTO_URI, Uri.class);
   }
 }

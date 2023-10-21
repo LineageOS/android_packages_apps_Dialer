@@ -22,7 +22,7 @@ import android.content.Context;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
-import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
@@ -67,16 +67,15 @@ public class CallingAccountSelector implements PreCallAction {
     if (builder.getPhoneAccountHandle() != null) {
       return false;
     }
-    if (PhoneNumberUtils.isEmergencyNumber(builder.getUri().getSchemeSpecificPart())) {
+
+    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+    if (telephonyManager.isEmergencyNumber(builder.getUri().getSchemeSpecificPart())) {
       return false;
     }
 
     TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
     List<PhoneAccountHandle> accounts = telecomManager.getCallCapablePhoneAccounts();
-    if (accounts.size() <= 1) {
-      return false;
-    }
-    return true;
+    return accounts.size() > 1;
   }
 
   @Override

@@ -27,6 +27,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Trace;
 import android.telecom.Call.Details;
 import android.telecom.StatusHints;
@@ -102,7 +103,7 @@ public class CallCardPresenter
   private static final long CONFIG_MIN_BATTERY_PERCENT_FOR_EMERGENCY_LOCATION_DEFAULT = 10;
 
   private final Context context;
-  private final Handler handler = new Handler();
+  private final Handler handler = new Handler(Looper.getMainLooper());
 
   private DialerCall primary;
   private String primaryNumber;
@@ -782,8 +783,9 @@ public class CallCardPresenter
       // Return the label for the gateway app on outgoing calls.
       final PackageManager pm = context.getPackageManager();
       try {
-        ApplicationInfo info =
-            pm.getApplicationInfo(primary.getGatewayInfo().getGatewayProviderPackageName(), 0);
+        ApplicationInfo info = pm.getApplicationInfo(
+                primary.getGatewayInfo().getGatewayProviderPackageName(),
+                PackageManager.ApplicationInfoFlags.of(0));
         return pm.getApplicationLabel(info).toString();
       } catch (PackageManager.NameNotFoundException e) {
         LogUtil.e("CallCardPresenter.getConnectionLabel", "gateway Application Not Found.", e);

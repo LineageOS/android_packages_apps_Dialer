@@ -123,7 +123,7 @@ public class CallRecorderService extends Service {
 
     if (DBG) Log.d(TAG, "Starting recording");
 
-    mMediaRecorder = new MediaRecorder();
+    mMediaRecorder = new MediaRecorder(getApplicationContext());
     try {
       int audioSource = getAudioSource();
       int formatChoice = getAudioFormatChoice();

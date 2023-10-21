@@ -88,7 +88,8 @@ public class AccountSelectionActivity extends AppCompatActivity {
     initiationType = CallInitiationType.Type.values()[getIntent().getIntExtra("type", 0)];
 
     if (getSupportFragmentManager().findFragmentByTag("dialog") == null) {
-      List<PhoneAccountHandle> handles = getIntent().getParcelableArrayListExtra("accountHandles");
+      List<PhoneAccountHandle> handles = getIntent().getParcelableArrayListExtra("accountHandles",
+              PhoneAccountHandle.class);
       SelectPhoneAccountDialogOptions options = SelectPhoneAccountDialogOptionsUtil
           .builderWithAccounts(handles)
           .setTitle(R.string.call_via_dialog_title)

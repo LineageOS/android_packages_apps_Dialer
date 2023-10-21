@@ -98,7 +98,7 @@ public class CallLogFragment extends Fragment
   private static final int EVENT_UPDATE_DISPLAY = 1;
 
   private static final long MILLIS_IN_MINUTE = 60 * 1000;
-  private final Handler handler = new Handler();
+  private final Handler handler = new Handler(Looper.getMainLooper());
   // See issue 6363009
   private final ContentObserver callLogObserver = new CustomContentObserver();
   private final ContentObserver contactsObserver = new CustomContentObserver();
