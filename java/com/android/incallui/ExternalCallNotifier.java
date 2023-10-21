@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,7 +76,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
 
   private final Context context;
   private final ContactInfoCache contactInfoCache;
-  private Map<Call, NotificationInfo> notifications = new ArrayMap<>();
+  private final Map<Call, NotificationInfo> notifications = new ArrayMap<>();
   private int nextUniqueNotificationId;
 
   /** Initializes a new instance of the external call notifier. */

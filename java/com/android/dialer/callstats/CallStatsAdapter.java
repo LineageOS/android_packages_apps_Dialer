@@ -58,10 +58,10 @@ class CallStatsAdapter extends RecyclerView.Adapter {
   private final ContactInfoCache mContactInfoCache;
   private final ContactDisplayPreferences mContactDisplayPreferences;
 
-  private ArrayList<CallStatsDetails> mAllItems;
-  private ArrayList<CallStatsDetails> mShownItems;
-  private CallStatsDetails mTotalItem;
-  private Map<CallStatsDetails, ContactInfo> mInfoLookup;
+  private final ArrayList<CallStatsDetails> mAllItems;
+  private final ArrayList<CallStatsDetails> mShownItems;
+  private final CallStatsDetails mTotalItem;
+  private final Map<CallStatsDetails, ContactInfo> mInfoLookup;
 
   private int mType = -1;
   private long mFilterFrom;

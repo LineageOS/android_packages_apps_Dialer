@@ -159,7 +159,7 @@ public class HelplineActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
     }
 
-    private LoadHelplinesTask.Callback mCallback = new LoadHelplinesTask.Callback () {
+    private final LoadHelplinesTask.Callback mCallback = new LoadHelplinesTask.Callback () {
         @Override
         public void onLoadListProgress(int progress) {
             mProgressBar.setProgress(progress);
@@ -177,7 +177,7 @@ public class HelplineActivity extends AppCompatActivity {
         }
     };
 
-    private HelplineAdapter.Listener mListener = new HelplineAdapter.Listener() {
+    private final HelplineAdapter.Listener mListener = new HelplineAdapter.Listener() {
         private AlertDialog mDialog;
 
         @Override
