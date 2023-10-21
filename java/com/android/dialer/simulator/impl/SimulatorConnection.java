@@ -50,7 +50,8 @@ public final class SimulatorConnection extends Connection {
         CAPABILITY_MUTE
             | CAPABILITY_SUPPORT_HOLD
             | CAPABILITY_HOLD
-            | CAPABILITY_CAN_UPGRADE_TO_VIDEO
+            | CAPABILITY_SUPPORTS_VT_LOCAL_BIDIRECTIONAL
+            | CAPABILITY_SUPPORTS_VT_REMOTE_BIDIRECTIONAL
             | CAPABILITY_DISCONNECT_FROM_CONFERENCE);
 
     if (request.getExtras() != null) {

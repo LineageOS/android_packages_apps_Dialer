@@ -523,7 +523,7 @@ public class PhoneNumberInteraction implements Loader.OnLoadCompleteListener<Cur
       final Activity activity = getActivity();
       Assert.checkState(activity instanceof DisambigDialogDismissedListener);
 
-      phoneList = getArguments().getParcelableArrayList(ARG_PHONE_LIST);
+      phoneList = getArguments().getParcelableArrayList(ARG_PHONE_LIST, PhoneItem.class);
       interactionType = getArguments().getInt(ARG_INTERACTION_TYPE);
       isVideoCall = getArguments().getBoolean(ARG_IS_VIDEO_CALL);
       callSpecificAppData = CallIntentParser.getCallSpecificAppData(getArguments());

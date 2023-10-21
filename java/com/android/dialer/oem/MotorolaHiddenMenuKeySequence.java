@@ -21,6 +21,7 @@ package com.android.dialer.oem;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
@@ -157,7 +158,8 @@ public class MotorolaHiddenMenuKeySequence {
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
       intent.putExtra(EXTRA_HIDDEN_MENU_CODE, input);
 
-      ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(intent, 0);
+      ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(intent,
+              PackageManager.ResolveInfoFlags.of(0));
 
       if (resolveInfo != null
           && resolveInfo.activityInfo != null

@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Handler;
+import android.os.Looper;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 import android.telecom.VideoProfile.CameraCapabilities;
@@ -88,7 +89,7 @@ public class VideoCallPresenter
 
   private static boolean isVideoMode = false;
 
-  private final Handler handler = new Handler();
+  private final Handler handler = new Handler(Looper.getMainLooper());
   private VideoCallScreen videoCallScreen;
 
   /** The current context. */
@@ -1115,7 +1116,7 @@ public class VideoCallPresenter
     Activity activity = videoCallScreen.getVideoCallScreenFragment().getActivity();
     if (activity != null) {
       Point screenSize = new Point();
-      activity.getWindowManager().getDefaultDisplay().getSize(screenSize);
+      activity.getDisplay().getSize(screenSize);
       getRemoteVideoSurfaceTexture().setSurfaceDimensions(screenSize);
     }
   }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -334,10 +335,9 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
     Assert.isWorkerThread();
 
     Intent quickContactIntent = getQuickContactIntent();
-    ResolveInfo resolveInfo =
-        context
-            .getPackageManager()
-            .resolveActivity(quickContactIntent, PackageManager.GET_META_DATA);
+    ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(
+            quickContactIntent,
+            PackageManager.ResolveInfoFlags.of(PackageManager.GET_META_DATA));
     if (resolveInfo == null
         || resolveInfo.activityInfo == null
         || resolveInfo.activityInfo.applicationInfo == null

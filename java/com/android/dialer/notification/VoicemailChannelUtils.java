@@ -225,7 +225,7 @@ import java.util.Set;
     if (!PermissionsUtil.hasReadPhoneStatePermissions(context)) {
       return true;
     }
-    return context.getSystemService(TelephonyManager.class).getPhoneCount() <= 1;
+    return context.getSystemService(TelephonyManager.class).getActiveModemCount() <= 1;
   }
 
   private VoicemailChannelUtils() {}

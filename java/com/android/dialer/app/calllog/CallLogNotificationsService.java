@@ -159,7 +159,9 @@ public class CallLogNotificationsService extends IntentService {
         break;
       case ACTION_LEGACY_VOICEMAIL_DISMISSED:
         LegacyVoicemailNotificationReceiver.setDismissed(
-            this, intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE), true);
+                this,
+                intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE, PhoneAccountHandle.class),
+                true);
         break;
       case ACTION_CANCEL_ALL_MISSED_CALLS:
         cancelAllMissedCalls(this);
