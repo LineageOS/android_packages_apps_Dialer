@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +19,14 @@ package com.android.dialer.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.android.dialer.i18n.DialerBidiFormatter;
 
-/** A {@link TextView} that applies bidirectional formatting to its text. */
-public final class BidiTextView extends TextView {
+/** An {@link AppCompatTextView} that applies bidirectional formatting to its text. */
+public final class BidiTextView extends AppCompatTextView {
 
   public BidiTextView(Context context) {
     super(context);
