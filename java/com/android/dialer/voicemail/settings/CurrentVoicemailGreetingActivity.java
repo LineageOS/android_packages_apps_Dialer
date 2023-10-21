@@ -19,16 +19,16 @@ package com.android.dialer.voicemail.settings;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import androidx.core.app.ActivityCompat;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.R;
@@ -41,9 +41,14 @@ import java.util.Locale;
 public class CurrentVoicemailGreetingActivity extends AppCompatActivity {
   public static final String VOICEMAIL_GREETING_FILEPATH_KEY = "canonVoicemailGreetingFilePathKey";
 
-  private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
-
-  private boolean permissionToRecordAccepted = false;
+  private final ActivityResultLauncher<String> audioPermissionLauncher = registerForActivityResult(
+          new ActivityResultContracts.RequestPermission(), granted -> {
+            if (!granted) {
+              LogUtil.w(
+                      "CurrentVoicemailGreetingActivity.onRequestPermissionsResult",
+                      "permissionToRecordAccepted = false.");
+            }
+          });
 
   private ImageButton changeGreetingButton;
   private ImageButton playButton;
@@ -94,8 +99,7 @@ public class CurrentVoicemailGreetingActivity extends AppCompatActivity {
 
   @Override
   public void onStart() {
-    ActivityCompat.requestPermissions(
-        this, new String[] {Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO_PERMISSION);
+    audioPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
 
     if (isGreetingRecorded()) {
       mediaPlayer = new MediaPlayer();
@@ -118,22 +122,6 @@ public class CurrentVoicemailGreetingActivity extends AppCompatActivity {
       }
     }
     super.onPause();
-  }
-
-  @Override
-  public void onRequestPermissionsResult(
-          int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-    if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
-      permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-    }
-    if (!permissionToRecordAccepted) {
-      LogUtil.w(
-          "CurrentVoicemailGreetingActivity.onRequestPermissionsResult",
-          "permissionToRecordAccepted = false.");
-      // TODO(sabowitz): Implement error dialog logic in a child CL.
-    }
   }
 
   private boolean isGreetingRecorded() {

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +22,6 @@ import static android.Manifest.permission.READ_CONTACTS;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +32,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -69,8 +71,6 @@ public class ContactsFragment extends Fragment
     int ADD_CONTACT = 1;
   }
 
-  public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
-
   private static final String EXTRA_HEADER = "extra_header";
   private static final String EXTRA_HAS_PHONE_NUMBERS = "extra_has_phone_numbers";
 
@@ -85,6 +85,16 @@ public class ContactsFragment extends Fragment
           loadContacts();
         }
       };
+
+  private final ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(
+          new ActivityResultContracts.RequestMultiplePermissions(),
+          grantResults -> {
+            if (grantResults.size() >= 1  && grantResults.values().iterator().next()) {
+              String key = grantResults.keySet().iterator().next();
+              // Force a refresh of the data since we were missing the permission before this.
+              PermissionsUtil.notifyPermissionGranted(getContext(), key);
+            }
+          });
 
   private FastScroller fastScroller;
   private TextView anchoredHeader;
@@ -302,7 +312,7 @@ public class ContactsFragment extends Fragment
         LogUtil.i(
             "ContactsFragment.onEmptyViewActionButtonClicked",
             "Requesting permissions: " + Arrays.toString(deniedPermissions));
-        requestPermissions(deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+        permissionLauncher.launch(deniedPermissions);
       }
 
     } else if (emptyContentView.getActionLabel()
@@ -312,17 +322,6 @@ public class ContactsFragment extends Fragment
           getContext(), IntentUtil.getNewContactIntent(), R.string.add_contact_not_available);
     } else {
       throw Assert.createIllegalStateFailException("Invalid empty content view action label.");
-    }
-  }
-
-  @Override
-  public void onRequestPermissionsResult(
-      int requestCode, String[] permissions, int[] grantResults) {
-    if (requestCode == READ_CONTACTS_PERMISSION_REQUEST_CODE) {
-      if (grantResults.length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
-        // Force a refresh of the data since we were missing the permission before this.
-        PermissionsUtil.notifyPermissionGranted(getContext(), permissions[0]);
-      }
     }
   }
 

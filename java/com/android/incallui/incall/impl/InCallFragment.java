@@ -40,6 +40,8 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -99,7 +101,14 @@ public class InCallFragment extends Fragment
   private int phoneType;
   private boolean stateRestored;
 
-  private static final int REQUEST_CODE_CALL_RECORD_PERMISSION = 1000;
+  private final ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(
+          new ActivityResultContracts.RequestMultiplePermissions(),
+          grantResults -> {
+            boolean allGranted = grantResults.values().stream().allMatch(x -> x);
+            if (allGranted) {
+              inCallButtonUiDelegate.callRecordClicked(true);
+            }
+          });
 
   // Add animation to educate users. If a call has enriched calling attachments then we'll
   // initially show the attachment page. After a delay seconds we'll animate to the button grid.
@@ -468,23 +477,7 @@ public class InCallFragment extends Fragment
 
   @Override
   public void requestCallRecordingPermissions(String[] permissions) {
-    requestPermissions(permissions, REQUEST_CODE_CALL_RECORD_PERMISSION);
-  }
-
-  @Override
-  public void onRequestPermissionsResult(int requestCode,
-      @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == REQUEST_CODE_CALL_RECORD_PERMISSION) {
-      boolean allGranted = grantResults.length > 0;
-      for (int i = 0; i < grantResults.length; i++) {
-        allGranted &= grantResults[i] == PackageManager.PERMISSION_GRANTED;
-      }
-      if (allGranted) {
-        inCallButtonUiDelegate.callRecordClicked(true);
-      }
-    } else {
-      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
+    permissionLauncher.launch(permissions);
   }
 
   @Override
