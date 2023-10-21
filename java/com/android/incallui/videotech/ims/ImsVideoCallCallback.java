@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +19,7 @@ package com.android.incallui.videotech.ims;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 import android.telecom.Call;
 import android.telecom.Connection;
 import android.telecom.Connection.VideoProvider;
@@ -31,7 +33,7 @@ import com.android.incallui.videotech.utils.SessionModificationState;
 /** Receives IMS video call state updates. */
 public class ImsVideoCallCallback extends VideoCall.Callback {
   private static final int CLEAR_FAILED_REQUEST_TIMEOUT_MILLIS = 4000;
-  private final Handler handler = new Handler();
+  private final Handler handler = new Handler(Looper.getMainLooper());
   private final Call call;
   private final ImsVideoTech videoTech;
   private final VideoTechListener listener;

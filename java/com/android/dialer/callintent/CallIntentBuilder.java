@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,7 +76,7 @@ public class CallIntentBuilder implements Parcelable {
 
   public CallIntentBuilder(@NonNull Parcel parcel) {
     ClassLoader classLoader = CallIntentBuilder.class.getClassLoader();
-    uri = parcel.readParcelable(classLoader);
+    uri = parcel.readParcelable(classLoader, Uri.class);
     CallSpecificAppData data;
     try {
       data = CallSpecificAppData.parseFrom(parcel.createByteArray());
@@ -83,7 +84,7 @@ public class CallIntentBuilder implements Parcelable {
       data = createCallSpecificAppData(Type.UNKNOWN_INITIATION);
     }
     callSpecificAppData = data;
-    phoneAccountHandle = parcel.readParcelable(classLoader);
+    phoneAccountHandle = parcel.readParcelable(classLoader, PhoneAccountHandle.class);
     isVideoCall = parcel.readInt() != 0;
     callSubject = parcel.readString();
     allowAssistedDial = parcel.readInt() != 0;

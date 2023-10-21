@@ -18,25 +18,18 @@
 package com.android.dialer.lookup;
 
 import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+import android.os.CancellationSignal;
 import android.os.ParcelFileDescriptor;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.Contacts;
-import android.provider.Settings;
 import android.util.Log;
 
 import com.android.dialer.searchfragment.common.Projections;
@@ -55,6 +48,7 @@ import java.net.URLDecoder;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.TimeUnit;
@@ -233,15 +227,8 @@ public class LookupProvider extends ContentProvider {
    * @return Whether location services are enabled
    */
   private boolean isLocationEnabled() {
-    try {
-      int mode = Settings.Secure.getInt(getContext().getContentResolver(),
-          Settings.Secure.LOCATION_MODE);
-
-      return mode != Settings.Secure.LOCATION_MODE_OFF;
-    } catch (Settings.SettingNotFoundException e) {
-      Log.e(TAG, "Failed to get location mode", e);
-      return false;
-    }
+      LocationManager locationManager = requireContext().getSystemService(LocationManager.class);
+      return locationManager.isLocationEnabled();
   }
 
   /**
@@ -250,26 +237,11 @@ public class LookupProvider extends ContentProvider {
    * @return The last location
    */
   private Location getLastLocation() {
-    LocationManager locationManager = getContext().getSystemService(LocationManager.class);
+    LocationManager locationManager = requireContext().getSystemService(LocationManager.class);
 
     try {
-      locationManager.requestSingleUpdate(new Criteria(), new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-        }
-      }, Looper.getMainLooper());
+      locationManager.getCurrentLocation(LocationManager.FUSED_PROVIDER, new CancellationSignal(),
+              Executors.newSingleThreadExecutor(), location -> {});
 
       return locationManager.getLastKnownLocation(LocationManager.FUSED_PROVIDER);
     } catch (IllegalArgumentException e) {

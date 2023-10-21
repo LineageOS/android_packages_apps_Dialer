@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,7 +95,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
   public View onCreateView(
       LayoutInflater layoutInflater, @Nullable ViewGroup viewGroup, @Nullable Bundle bundle) {
     View view = layoutInflater.inflate(R.layout.audioroute_selector, viewGroup, false);
-    CallAudioState audioState = getArguments().getParcelable(ARG_AUDIO_STATE);
+    CallAudioState audioState = getArguments().getParcelable(ARG_AUDIO_STATE, CallAudioState.class);
 
     // Create items for all connected Bluetooth devices
     Collection<BluetoothDevice> bluetoothDeviceSet = audioState.getSupportedBluetoothDevices();

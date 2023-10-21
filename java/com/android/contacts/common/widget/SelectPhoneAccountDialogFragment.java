@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.ResultReceiver;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -184,14 +185,14 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     static final String EXTRA_CALL_ID = "extra_call_id";
 
     protected SelectPhoneAccountListener() {
-      super(new Handler());
+      super(new Handler(Looper.getMainLooper()));
     }
 
     @Override
     protected void onReceiveResult(int resultCode, Bundle resultData) {
       if (resultCode == RESULT_SELECTED) {
         onPhoneAccountSelected(
-            resultData.getParcelable(EXTRA_SELECTED_ACCOUNT_HANDLE),
+            resultData.getParcelable(EXTRA_SELECTED_ACCOUNT_HANDLE, PhoneAccountHandle.class),
             resultData.getBoolean(EXTRA_SET_DEFAULT),
             resultData.getString(EXTRA_CALL_ID));
       } else if (resultCode == RESULT_DISMISSED) {
