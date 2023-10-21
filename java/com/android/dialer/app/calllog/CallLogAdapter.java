@@ -24,8 +24,9 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Trace;
 import android.provider.BlockedNumberContract;
 import android.provider.CallLog;
@@ -85,6 +86,8 @@ import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /** Adapter class to fill in data for the Call Log. */
 public class CallLogAdapter extends GroupingListAdapter
@@ -121,7 +124,6 @@ public class CallLogAdapter extends GroupingListAdapter
   /** Helper to group call log entries. */
   private final CallLogGroupBuilder callLogGroupBuilder;
 
-  private final AsyncTaskExecutor asyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
   private ContactInfoCache contactInfoCache;
   // Tracks the position of the currently expanded list item.
   private int currentlyExpandedPosition = RecyclerView.NO_POSITION;
@@ -665,7 +667,7 @@ public class CallLogAdapter extends GroupingListAdapter
       updateCheckMarkedStatusOfEntry(views);
 
       if (views.asyncTask != null) {
-        views.asyncTask.cancel(true);
+        views.asyncTask.cancel();
       }
     }
   }
@@ -746,38 +748,68 @@ public class CallLogAdapter extends GroupingListAdapter
     viewHolder.isBlocked = false;
 
     viewHolder.setDetailedPhoneDetails(callDetailsEntries);
-    final AsyncTask<Void, Void, Boolean> loadDataTask =
-        new AsyncTask<Void, Void, Boolean>() {
-          @Override
-          protected Boolean doInBackground(Void... params) {
-            viewHolder.isBlocked = BlockedNumberContract.canCurrentUserBlockNumbers(activity) &&
-                    BlockedNumberContract.isBlocked(activity, viewHolder.number);
-            details.isBlocked = viewHolder.isBlocked;
-            if (isCancelled()) {
-              return false;
-            }
-            return !isCancelled() && loadData(viewHolder, rowId, details);
-          }
-
-          @Override
-          protected void onPostExecute(Boolean success) {
-            viewHolder.isLoaded = true;
-            if (success) {
-              viewHolder.callbackAction = getCallbackAction(viewHolder.rowId);
-              int currentDayGroup = getDayGroup(viewHolder.rowId);
-              if (currentDayGroup != details.previousGroup) {
-                viewHolder.dayGroupHeaderVisibility = View.VISIBLE;
-                viewHolder.dayGroupHeaderText = getGroupDescription(currentDayGroup);
-              } else {
-                viewHolder.dayGroupHeaderVisibility = View.GONE;
-              }
-              render(viewHolder, details, rowId);
-            }
-          }
-        };
+    final LoadDataTask loadDataTask = new LoadDataTask(viewHolder, details, rowId);
 
     viewHolder.asyncTask = loadDataTask;
-    asyncTaskExecutor.submit(LOAD_DATA_TASK_IDENTIFIER, loadDataTask);
+    loadDataTask.execute();
+  }
+
+  public interface LoadDataTaskInterface {
+     void execute();
+     void cancel();
+  }
+
+  private class LoadDataTask implements LoadDataTaskInterface {
+
+    private boolean mIsCancelled = false;
+    private final CallLogListItemViewHolder mViewHolder;
+    private final PhoneCallDetails mDetails;
+    private final long mRowId;
+
+    private final ExecutorService mExecutor;
+    private final Handler mHandler;
+
+    public LoadDataTask(CallLogListItemViewHolder viewHolder, PhoneCallDetails details,
+                        long rowId) {
+      mExecutor = Executors.newSingleThreadExecutor();
+      mHandler = new Handler(Looper.getMainLooper());
+      mViewHolder = viewHolder;
+      mDetails = details;
+      mRowId = rowId;
+    }
+
+    public void execute() {
+      mExecutor.execute(() -> {
+        final boolean success;
+        mViewHolder.isBlocked = BlockedNumberContract.canCurrentUserBlockNumbers(activity) &&
+                BlockedNumberContract.isBlocked(activity, mViewHolder.number);
+        mDetails.isBlocked = mViewHolder.isBlocked;
+        if (mIsCancelled) {
+          success = false;
+        } else {
+          success = !mIsCancelled && loadData(mViewHolder, mRowId, mDetails);
+        }
+
+        mHandler.post(() -> {
+          mViewHolder.isLoaded = true;
+          if (success) {
+            mViewHolder.callbackAction = getCallbackAction(mViewHolder.rowId);
+            int currentDayGroup = getDayGroup(mViewHolder.rowId);
+            if (currentDayGroup != mDetails.previousGroup) {
+              mViewHolder.dayGroupHeaderVisibility = View.VISIBLE;
+              mViewHolder.dayGroupHeaderText = getGroupDescription(currentDayGroup);
+            } else {
+              mViewHolder.dayGroupHeaderVisibility = View.GONE;
+            }
+            render(mViewHolder, mDetails, mRowId);
+          }
+        });
+      });
+    }
+
+    public void cancel() {
+      mIsCancelled = true;
+    }
   }
 
   /**
