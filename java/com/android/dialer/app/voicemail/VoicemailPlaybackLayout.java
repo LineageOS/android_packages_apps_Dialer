@@ -92,16 +92,12 @@ public class VoicemailPlaybackLayout extends LinearLayout
           presenter.onVoicemailDeleted(viewHolder);
 
           final Uri deleteUri = voicemailUri;
-          final Runnable deleteCallback =
-              new Runnable() {
-                @Override
-                public void run() {
-                  if (Objects.equals(deleteUri, voicemailUri)) {
-                    CallLogAsyncTaskUtil.deleteVoicemail(
-                        context, deleteUri, VoicemailPlaybackLayout.this);
-                  }
-                }
-              };
+          final Runnable deleteCallback = () -> {
+            if (Objects.equals(deleteUri, voicemailUri)) {
+              CallLogAsyncTaskUtil.deleteVoicemail(
+                      context, deleteUri, VoicemailPlaybackLayout.this);
+            }
+          };
 
           final Handler handler = new Handler();
           // Add a little buffer time in case the user clicked "undo" at the end of the delay
@@ -113,15 +109,10 @@ public class VoicemailPlaybackLayout extends LinearLayout
                   R.string.snackbar_voicemail_deleted,
                   Snackbar.LENGTH_LONG)
               .setDuration(VOICEMAIL_DELETE_DELAY_MS)
-              .setAction(
-                  R.string.snackbar_undo,
-                  new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                      presenter.onVoicemailDeleteUndo(adapterPosition);
-                      handler.removeCallbacks(deleteCallback);
-                    }
-                  })
+              .setAction(R.string.snackbar_undo, view1 -> {
+                presenter.onVoicemailDeleteUndo(adapterPosition);
+                handler.removeCallbacks(deleteCallback);
+              })
               .setActionTextColor(
                   context.getResources().getColor(R.color.dialer_snackbar_action_text_color))
               .show();

@@ -336,15 +336,11 @@ public class SwipeButtonView extends ImageView {
     circleAnimator = animator;
     circleStartValue = this.circleRadius;
     circleWillBeHidden = circleRadius == 0.0f;
-    animator.addUpdateListener(
-        new ValueAnimator.AnimatorUpdateListener() {
-          @Override
-          public void onAnimationUpdate(ValueAnimator animation) {
-            SwipeButtonView.this.circleRadius = (float) animation.getAnimatedValue();
-            updateIconColor();
-            invalidate();
-          }
-        });
+    animator.addUpdateListener(animation -> {
+      SwipeButtonView.this.circleRadius = (float) animation.getAnimatedValue();
+      updateIconColor();
+      invalidate();
+    });
     animator.addListener(circleEndListener);
     return animator;
   }
@@ -377,14 +373,10 @@ public class SwipeButtonView extends ImageView {
     } else {
       ValueAnimator animator = ValueAnimator.ofFloat(tmageScale, imageScale);
       scaleAnimator = animator;
-      animator.addUpdateListener(
-          new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-              tmageScale = (float) animation.getAnimatedValue();
-              invalidate();
-            }
-          });
+      animator.addUpdateListener(animation -> {
+        tmageScale = (float) animation.getAnimatedValue();
+        invalidate();
+      });
       animator.addListener(scaleEndListener);
       if (interpolator == null) {
         interpolator =
@@ -446,17 +438,13 @@ public class SwipeButtonView extends ImageView {
       int currentAlpha = getImageAlpha();
       ValueAnimator animator = ValueAnimator.ofInt(currentAlpha, endAlpha);
       alphaAnimator = animator;
-      animator.addUpdateListener(
-          new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-              int alpha = (int) animation.getAnimatedValue();
-              if (background != null) {
-                background.mutate().setAlpha(alpha);
-              }
-              setImageAlpha(alpha);
-            }
-          });
+      animator.addUpdateListener(animation -> {
+        int alpha1 = (int) animation.getAnimatedValue();
+        if (background != null) {
+          background.mutate().setAlpha(alpha1);
+        }
+        setImageAlpha(alpha1);
+      });
       animator.addListener(alphaEndListener);
       if (interpolator == null) {
         interpolator =
