@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Poznate številko %1$s?</string>
   <string name="spam_notification_title">Ali vas je s številke %1$s poklical neželeni klicatelj?</string>
-  <string name="spam_notification_block_report_toast_text">Številka %1$s je blokirana, klic pa je bil prijavljen kot neželen.</string>
-  <string name="spam_notification_not_spam_toast_text">Klic s številke %1$s ni več prijavljen kot neželen.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Dotaknite se, da dodate med stike ali blokirate neželeno številko.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Klic s te številke ste prejeli prvič. Če je bil ta klic neželen, lahko blokirate številko in jo prijavite.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Dotaknite se, da klic prijavite kot »ni neželeni klic« ali ga blokirate</string>
   <string name="spam_notification_dialog_add_contact_action_text">Dodaj med stike</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokiraj in prijavi neželeni klic</string>
   <string name="spam_notification_was_not_spam_action_text">Ne, ni neželeni klic</string>

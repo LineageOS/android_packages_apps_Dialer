@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">‏PIN تبدیل کرنے سے قاصر</string>
   <string name="change_pin_title">‏صوتی میل کا PIN تبدیل کریں</string>
   <string name="change_pin_continue_label">جاری رکھیں</string>
-  <string name="change_pin_cancel_label">منسوخ کریں</string>
-  <string name="change_pin_ok_label">ٹھیک ہے</string>
   <string name="change_pin_enter_old_pin_header">‏اپنے پرانے PIN کی تصدیق کریں</string>
   <string name="change_pin_enter_old_pin_hint">‏جاری رکھنے کیلئے اپنے صوتی میل کا PIN درج کریں۔</string>
   <string name="change_pin_enter_new_pin_header">‏ایک نیا PIN سیٹ کریں</string>

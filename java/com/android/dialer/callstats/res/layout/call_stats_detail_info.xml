@@ -256,7 +256,6 @@
         android:id="@+id/out_average"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/in_average"
         android:layout_marginBottom="@dimen/call_log_icon_margin"
         layout="@layout/call_stats_detail_line" />
 

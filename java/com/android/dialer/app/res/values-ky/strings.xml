@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Ойнотуунун жайгашкан жерин издөө</string>
   <string name="action_menu_call_history_description">Чалуулар таржымалы</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Көбүрөөк мүмкүнчүлүктөр</string>
-  <string name="action_menu_dialpad_button">номер тергич</string>
   <string name="dialer_settings_label">Жөндөөлөр</string>
   <string name="description_entering_bulk_action_mode">Жапырт аракет режимине кирдиңиз</string>
   <string name="description_leaving_bulk_action_mode">Жапырт аракет режиминен чыктыңыз</string>

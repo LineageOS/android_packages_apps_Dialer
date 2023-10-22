@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s tanıdık bir numara mı?</string>
   <string name="spam_notification_title">%1$s spam olan bir arayan mıydı?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s engellendi ve çağrı spam olarak bildirildi.</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s numaralı telefondan gelen çağrının spam olmadığı bildirildi.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Kişilere eklemek veya spam numarasını engellemek için dokunun.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Bu numaradan ilk kez arandınız. Bu çağrı spam amaçlı olarak yapıldıysa numarayı engelleyip bildirebilirsiniz.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Spam değil bildirimi göndermek için dokunun veya numarayı engelleyin</string>
   <string name="spam_notification_dialog_add_contact_action_text">Kişilere ekle</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Engelle ve spam olarak bildir</string>
   <string name="spam_notification_was_not_spam_action_text">Hayır, spam değil</string>

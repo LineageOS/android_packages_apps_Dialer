@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Kodi PIN nuk mund të ndryshohet.</string>
   <string name="change_pin_title">Ndrysho kodin PIN të postës zanore</string>
   <string name="change_pin_continue_label">Vazhdo</string>
-  <string name="change_pin_cancel_label">Anulo</string>
-  <string name="change_pin_ok_label">Në rregull</string>
   <string name="change_pin_enter_old_pin_header">Konfirmo kodin PIN të vjetër</string>
   <string name="change_pin_enter_old_pin_hint">Shkruaj kodin PIN të postës zanore për të vazhduar.</string>
   <string name="change_pin_enter_new_pin_header">Cakto një kod të ri PIN.</string>

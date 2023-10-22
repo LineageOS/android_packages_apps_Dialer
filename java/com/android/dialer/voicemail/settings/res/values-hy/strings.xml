@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Չհաջողվեց փոխել PIN կոդը</string>
   <string name="change_pin_title">Փոխեք ձայնային փոստի PIN կոդը</string>
   <string name="change_pin_continue_label">Շարունակել</string>
-  <string name="change_pin_cancel_label">Չեղարկել</string>
-  <string name="change_pin_ok_label">Եղավ</string>
   <string name="change_pin_enter_old_pin_header">Հաստատեք հին PIN կոդը</string>
   <string name="change_pin_enter_old_pin_hint">Շարունակելու համար մուտքագրեք ձայնային փոստի PIN կոդը:</string>
   <string name="change_pin_enter_new_pin_header">Ընտրեք նոր PIN կոդ</string>

@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s - தெரிந்த எண்ணா?</string>
   <string name="spam_notification_title">%1$s, ஸ்பேம் அழைப்பாளரா?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s தடுக்கப்பட்டு, அழைப்பு ஸ்பேம் எனப் புகாரளிக்கப்பட்டது.</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s இன் அழைப்பு ஸ்பேம் இல்லை எனத் தெரிவிக்கப்பட்டது.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">தொடர்புகளில் சேர்க்க அல்லது ஸ்பேம் எண்ணைத் தடுக்க, தட்டவும்.</string>
   <string name="spam_notification_non_spam_call_expanded_text">இந்த எண்ணிலிருந்து உங்களுக்கு அழைப்பு வந்தது இதுவே முதல் முறை. இந்த அழைப்பு ஸ்பேமாக இருந்தால், எண்ணைத் தடுத்துப் புகாரளிக்கலாம்.</string>
-  <string name="spam_notification_spam_call_collapsed_text">\"ஸ்பேம் இல்லை\" எனத் தெரிவிக்க அல்லது தடுக்க, தட்டவும்</string>
   <string name="spam_notification_dialog_add_contact_action_text">தொடர்புகளில் சேர்</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">தடுத்து, ஸ்பேமெனப் புகாரளி</string>
   <string name="spam_notification_was_not_spam_action_text">இல்லை, ஸ்பேம் இல்லை</string>

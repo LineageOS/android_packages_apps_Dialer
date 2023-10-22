@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Je, unaitambua %1$s?</string>
   <string name="spam_notification_title">Je, %1$s alipiga simu taka?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s imezuiwa na simu ikaripotiwa kuwa taka.</string>
-  <string name="spam_notification_not_spam_toast_text">Simu kutoka %1$s imeripotiwa kuwa si taka.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Gusa ili uongeze kwenye anwani au uzuie nambari taka.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Hii ndiyo mara ya kwanza nambari hii imekupigia. Ikiwa ilikuwa simu taka, unaweza kuzuia nambari hii na uiripoti.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Gusa ili uripoti kuwa si taka au uizuie</string>
   <string name="spam_notification_dialog_add_contact_action_text">Ongeza kwenye anwani</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Zuia na uripoti taka</string>
   <string name="spam_notification_was_not_spam_action_text">Hapana, si taka</string>

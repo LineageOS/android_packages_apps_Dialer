@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN kodni o‘zgartirib bo‘lmadi.</string>
   <string name="change_pin_title">Ovozli pochta PIN kodini o‘zgartirish</string>
   <string name="change_pin_continue_label">Davom etish</string>
-  <string name="change_pin_cancel_label">Bekor qilish</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">Eski PIN kodni tasdiqlang</string>
   <string name="change_pin_enter_old_pin_hint">Davom etish uchun ovozli pochta PIN kodini kiriting.</string>
   <string name="change_pin_enter_new_pin_header">Yangi PIN kod o‘rnatish</string>

@@ -33,7 +33,6 @@
   <string name="description_playback_seek">ప్లేబ్యాక్ స్థానాన్ని కావాల్సిన చోటుకి జరపండి</string>
   <string name="action_menu_call_history_description">కాల్ చరిత్ర</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">మరిన్ని ఎంపికలు</string>
-  <string name="action_menu_dialpad_button">కీ ప్యాడ్</string>
   <string name="dialer_settings_label">సెట్టింగ్‌లు</string>
   <string name="description_entering_bulk_action_mode">బల్క్ చర్య మోడ్‌లోకి ప్రవేశిస్తున్నారు</string>
   <string name="description_leaving_bulk_action_mode">బల్క్ చర్య మోడ్ నుండి నిష్క్రమించారు</string>

@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s 是陌生号码吗？</string>
   <string name="spam_notification_title">%1$s 是骚扰电话号码吗？</string>
-  <string name="spam_notification_block_report_toast_text">已屏蔽 %1$s，并将来电举报为骚扰电话。</string>
-  <string name="spam_notification_not_spam_toast_text">已取消将 %1$s 的来电举报为骚扰电话。</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">点按即可添加到通讯录或屏蔽骚扰电话号码。</string>
   <string name="spam_notification_non_spam_call_expanded_text">这是此号码的第一次来电。如果是骚扰电话，您可以屏蔽此号码并举报。</string>
-  <string name="spam_notification_spam_call_collapsed_text">点按即可列为非骚扰电话号码，或将其屏蔽</string>
   <string name="spam_notification_dialog_add_contact_action_text">添加到通讯录</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">屏蔽并举报骚扰电话号码</string>
   <string name="spam_notification_was_not_spam_action_text">不，这不是骚扰电话</string>

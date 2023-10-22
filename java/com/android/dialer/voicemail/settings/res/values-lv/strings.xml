@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Neizdevās nomainīt PIN.</string>
   <string name="change_pin_title">Balss pasta PIN mainīšana</string>
   <string name="change_pin_continue_label">Turpināt</string>
-  <string name="change_pin_cancel_label">Atcelt</string>
-  <string name="change_pin_ok_label">Labi</string>
   <string name="change_pin_enter_old_pin_header">Iepriekšējā PIN apstiprināšana</string>
   <string name="change_pin_enter_old_pin_hint">Lai turpinātu, ievadiet savu balss pasta PIN.</string>
   <string name="change_pin_enter_new_pin_header">Jauna PIN iestatīšana</string>

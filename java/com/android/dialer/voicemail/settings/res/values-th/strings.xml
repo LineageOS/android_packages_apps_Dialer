@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">เปลี่ยน PIN ไม่ได้</string>
   <string name="change_pin_title">เปลี่ยน PIN ข้อความเสียง</string>
   <string name="change_pin_continue_label">ต่อไป</string>
-  <string name="change_pin_cancel_label">ยกเลิก</string>
-  <string name="change_pin_ok_label">ตกลง</string>
   <string name="change_pin_enter_old_pin_header">ยืนยัน PIN เก่า</string>
   <string name="change_pin_enter_old_pin_hint">ป้อน PIN ข้อความเสียงเพื่อดำเนินการต่อ</string>
   <string name="change_pin_enter_new_pin_header">ตั้งค่า PIN ใหม่</string>

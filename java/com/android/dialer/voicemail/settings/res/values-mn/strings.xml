@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN-г өөрчлөх боломжгүй</string>
   <string name="change_pin_title">Дуут шуудангийн PIN-г өөрчлөх</string>
   <string name="change_pin_continue_label">Үргэлжлүүлэх</string>
-  <string name="change_pin_cancel_label">Цуцлах</string>
-  <string name="change_pin_ok_label">Ок</string>
   <string name="change_pin_enter_old_pin_header">Хуучин PIN-ээ баталгаажуулна уу</string>
   <string name="change_pin_enter_old_pin_hint">Үргэлжлүүлэхийн тулд дуут шуудангийн PIN оруулна уу.</string>
   <string name="change_pin_enter_new_pin_header">Шинэ PIN тохируулах</string>

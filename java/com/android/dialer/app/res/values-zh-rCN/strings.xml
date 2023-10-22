@@ -33,7 +33,6 @@
   <string name="description_playback_seek">拖动到播放位置</string>
   <string name="action_menu_call_history_description">通话记录</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">更多选项</string>
-  <string name="action_menu_dialpad_button">拨号键盘</string>
   <string name="dialer_settings_label">设置</string>
   <string name="description_entering_bulk_action_mode">正在进入批量操作模式</string>
   <string name="description_leaving_bulk_action_mode">已退出批量操作模式</string>

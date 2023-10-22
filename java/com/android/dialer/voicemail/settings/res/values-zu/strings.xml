@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Ayikwazi ukushintsha i-PIN</string>
   <string name="change_pin_title">Shintsha IPHINI yevoyisimeyili</string>
   <string name="change_pin_continue_label">Qhubeka</string>
-  <string name="change_pin_cancel_label">Khansela</string>
-  <string name="change_pin_ok_label">Kulungile</string>
   <string name="change_pin_enter_old_pin_header">Qinisekisa i-PIN yakho endala</string>
   <string name="change_pin_enter_old_pin_hint">Faka i-PIN yakho yevoyisimeyili ukuze uqhubeke.</string>
   <string name="change_pin_enter_new_pin_header">Setha i-PIN entsha</string>

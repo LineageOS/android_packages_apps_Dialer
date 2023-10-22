@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Nepavyko pakeisti PIN kodo</string>
   <string name="change_pin_title">Balso pašto PIN kodo keitimas</string>
   <string name="change_pin_continue_label">Tęsti</string>
-  <string name="change_pin_cancel_label">Atšaukti</string>
-  <string name="change_pin_ok_label">Gerai</string>
   <string name="change_pin_enter_old_pin_header">Seno PIN kodo patvirtinimas</string>
   <string name="change_pin_enter_old_pin_hint">Įveskite balso pašto PIN kodą, kad galėtumėte tęsti.</string>
   <string name="change_pin_enter_new_pin_header">Naujo PIN kodo nustatymas</string>
