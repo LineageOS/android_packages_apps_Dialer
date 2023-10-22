@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM картны харилцагч</string>
   <string name="menu_callNumber">%s руу залгах</string>
   <string name="dialpad_hint_emergency_calling_not_available">WiFi-р яаралтай дуудлага хийх боломжгүй</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Энэ дугаар руу залгах боломжгүй</string>
 </resources>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2018 The Android Open Source Project
+<!--
+     Copyright (C) 2018 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,6 +17,7 @@
 -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/search_box_expanded"
     android:layout_width="match_parent"
     android:layout_height="@dimen/collapsed_search_bar_height"
@@ -29,7 +32,7 @@
       android:background="?attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/action_menu_back_from_search"
       android:src="@drawable/quantum_ic_arrow_back_vd_theme_24"
-      android:tint="?colorIcon"/>
+      app:tint="?colorIcon" />
 
   <EditText
       android:id="@+id/search_view"
@@ -60,6 +63,6 @@
       android:background="?attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/description_clear_search"
       android:src="@drawable/quantum_ic_close_vd_theme_24"
-      android:tint="?colorIcon"
-      android:visibility="gone"/>
+      android:visibility="gone"
+      app:tint="?colorIcon" />
 </RelativeLayout>

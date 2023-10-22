@@ -19,5 +19,4 @@
   <string name="simContacts_title">Névjegyek a SIM-kártyán</string>
   <string name="menu_callNumber">Hívás: %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Nem lehet segélyhívást kezdeményezni Wi-Fi-n keresztül</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Nem lehet felhívni ezt a számot</string>
 </resources>

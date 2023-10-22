@@ -33,7 +33,6 @@
   <string name="description_playback_seek">የመልሶ ማጫወት ቦታ ይፈልጉ</string>
   <string name="action_menu_call_history_description">የጥሪ ታሪክ</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">ተጨማሪ አማራጮች</string>
-  <string name="action_menu_dialpad_button">ቁልፍ ሰሌዳ</string>
   <string name="dialer_settings_label">ቅንብሮች</string>
   <string name="description_entering_bulk_action_mode">ወደ የጅምላ እርምጃ ሁነታ በመግባት ላይ</string>
   <string name="description_leaving_bulk_action_mode">ከጅምላ እርምጃ ሁነታ ለቀው ወጥተዋል</string>

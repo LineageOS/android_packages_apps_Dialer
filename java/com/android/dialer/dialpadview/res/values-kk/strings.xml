@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM контактілері</string>
   <string name="menu_callNumber">%s нөміріне қоңырау шалу</string>
   <string name="dialpad_hint_emergency_calling_not_available">Жедел қызметке Wi-Fi арқылы қоңырау шалынбайды</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Бұл нөмірге қоңырау шалу мүмкін емес</string>
 </resources>

@@ -22,6 +22,6 @@
   <!-- Background color for spam. This color must match one of background_colors_dark in call UI. -->
   <color name="incall_call_spam_background_color">@color/blocked_contact_background</color>
 
-  <color name="incall_button_background_color">@*android:color/system_neutral1_50</color>
+  <color name="incall_button_background_color">@android:color/system_neutral1_50</color>
   <color name="incall_end_call_icon_color">@android:color/white</color>
 </resources>

@@ -19,5 +19,4 @@
   <string name="simContacts_title">सिम कार्ड संपर्क</string>
   <string name="menu_callNumber">%s वर कॉल करा</string>
   <string name="dialpad_hint_emergency_calling_not_available">वाय-फाय वरून आणीबाणी कॉल करू शकत नाही</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">या नंबरवर कॉल करू शकत नाही</string>
 </resources>

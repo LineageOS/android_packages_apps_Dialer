@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Oynatma konumunu ayarla</string>
   <string name="action_menu_call_history_description">Çağrı geçmişi</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Diğer seçenekler</string>
-  <string name="action_menu_dialpad_button">tuş takımı</string>
   <string name="dialer_settings_label">Ayarlar</string>
   <string name="description_entering_bulk_action_mode">Toplu işlem moduna giriliyor</string>
   <string name="description_leaving_bulk_action_mode">Toplu işlem modundan çıkıldı</string>
