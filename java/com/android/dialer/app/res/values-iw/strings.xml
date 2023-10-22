@@ -35,7 +35,6 @@
   <string name="description_playback_seek">חפש מיקום בהפעלה</string>
   <string name="action_menu_call_history_description">היסטוריית שיחות</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">אפשרויות נוספות</string>
-  <string name="action_menu_dialpad_button">לוח חיוג</string>
   <string name="dialer_settings_label">הגדרות</string>
   <string name="description_entering_bulk_action_mode">עברת למצב של ביצוע פעולות בכמות גדולה</string>
   <string name="description_leaving_bulk_action_mode">עזבת את המצב של ביצוע פעולות בכמות גדולה</string>

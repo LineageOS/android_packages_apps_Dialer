@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Saps de qui és el número %1$s?</string>
   <string name="spam_notification_title">%1$s era una trucada brossa?</string>
-  <string name="spam_notification_block_report_toast_text">El %1$s s\'ha bloquejat i la trucada s\'ha marcat com a brossa.</string>
-  <string name="spam_notification_not_spam_toast_text">S\'ha indicat que la trucada del %1$s no és brossa.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Toca per afegir el número als contactes o bé per marcar-lo com a brossa i bloquejar-lo.</string>
   <string name="spam_notification_non_spam_call_expanded_text">És la primera vegada que aquest número t\'ha trucat. Si era una trucada brossa, pots bloquejar-lo i informar-ne.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Toca per indicar que no és una trucada brossa o per bloquejar el número</string>
   <string name="spam_notification_dialog_add_contact_action_text">Afegeix als contactes</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Bloqueja i marca com a brossa</string>
   <string name="spam_notification_was_not_spam_action_text">No, no és una trucada brossa</string>

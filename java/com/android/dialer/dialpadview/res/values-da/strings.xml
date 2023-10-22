@@ -19,5 +19,4 @@
   <string name="simContacts_title">Kontaktpersoner på SIM-kortet</string>
   <string name="menu_callNumber">Ring til %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Det er ikke muligt at foretage nødopkald via Wi‑Fi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Det er ikke muligt at ringe til dette nummer</string>
 </resources>

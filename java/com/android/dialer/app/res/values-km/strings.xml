@@ -33,7 +33,6 @@
   <string name="description_playback_seek">រកមើល​ទីតាំង​ចាក់​ឡើងវិញ</string>
   <string name="action_menu_call_history_description">ប្រវត្តិហៅ</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">ជម្រើស​បន្ថែម</string>
-  <string name="action_menu_dialpad_button">បន្ទះ​​ចុច​លេខ</string>
   <string name="dialer_settings_label">ការកំណត់</string>
   <string name="description_entering_bulk_action_mode">ចូល​មុខងារ​សកម្មភាព​ច្រើន</string>
   <string name="description_leaving_bulk_action_mode">បាន​ចាកចេញ​ពី​មុខងារ​សកម្មភាព​ច្រើន</string>

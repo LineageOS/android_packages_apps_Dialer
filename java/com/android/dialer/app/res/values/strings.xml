@@ -146,10 +146,6 @@
        [CHAR LIMIT=NONE] -->
   <string msgid="2295659037509008453" name="action_menu_overflow_description">More options</string>
 
-  <!-- Content description for the button that displays the dialpad
-       [CHAR LIMIT=NONE] -->
-  <string name="action_menu_dialpad_button">key pad</string>
-
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
   <string name="dialer_settings_label">Settings</string>
 

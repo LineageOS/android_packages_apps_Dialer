@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2011 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,7 +14,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
   <item
     android:id="@+id/call_with"
     android:title="@string/call_via">
@@ -21,14 +23,14 @@
   </item>
   <item
     android:id="@+id/menu_2s_pause"
-    android:showAsAction="withText"
-    android:title="@string/add_2sec_pause"/>
+    android:title="@string/add_2sec_pause"
+    app:showAsAction="withText" />
   <item
     android:id="@+id/menu_add_wait"
-    android:showAsAction="withText"
-    android:title="@string/add_wait"/>
+    android:title="@string/add_wait"
+    app:showAsAction="withText" />
   <item
     android:id="@+id/menu_call_with_note"
-    android:showAsAction="withText"
-    android:title="@string/call_with_a_note"/>
+    android:title="@string/call_with_a_note"
+    app:showAsAction="withText" />
 </menu>

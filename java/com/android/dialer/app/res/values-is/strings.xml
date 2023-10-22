@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Breyta spilunarstöðu</string>
   <string name="action_menu_call_history_description">Símtalaferill</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Fleiri valkostir</string>
-  <string name="action_menu_dialpad_button">talnaborð</string>
   <string name="dialer_settings_label">Stillingar</string>
   <string name="description_entering_bulk_action_mode">Opnar fjöldaaðgerðastillingu</string>
   <string name="description_leaving_bulk_action_mode">Fjöldaaðgerðastillingu lokað</string>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2006 The Android Open Source Project
+<!--
+     Copyright (C) 2006 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -27,7 +29,7 @@
       android:layout_height="0dp"
       android:layout_weight="1"
       android:orientation="horizontal">
-    <androidx.legacy.widget.Space style="@style/DialpadSpaceStyle"/>
+    <Space style="@style/DialpadSpaceStyle"/>
     <include layout="@layout/dialpad_key_one"/>
     <include
         android:id="@+id/two"
@@ -37,7 +39,7 @@
         android:id="@+id/three"
         style="@style/DialpadKeyButtonStyle"
         layout="@layout/dialpad_key"/>
-    <androidx.legacy.widget.Space style="@style/DialpadSpaceStyle"/>
+    <Space style="@style/DialpadSpaceStyle"/>
   </LinearLayout>
 
   <LinearLayout
@@ -45,7 +47,7 @@
       android:layout_height="0dp"
       android:layout_weight="1"
       android:orientation="horizontal">
-    <androidx.legacy.widget.Space style="@style/DialpadSpaceStyle"/>
+    <Space style="@style/DialpadSpaceStyle"/>
     <include
         android:id="@+id/four"
         style="@style/DialpadKeyButtonStyle"
@@ -58,7 +60,7 @@
         android:id="@+id/six"
         style="@style/DialpadKeyButtonStyle"
         layout="@layout/dialpad_key"/>
-    <androidx.legacy.widget.Space style="@style/DialpadSpaceStyle"/>
+    <Space style="@style/DialpadSpaceStyle"/>
   </LinearLayout>
 
   <LinearLayout
@@ -66,7 +68,7 @@
       android:layout_height="0dp"
       android:layout_weight="1"
       android:orientation="horizontal">
-    <androidx.legacy.widget.Space style="@style/DialpadSpaceStyle"/>
+    <Space style="@style/DialpadSpaceStyle"/>
     <include
         android:id="@+id/seven"
         style="@style/DialpadKeyButtonStyle"
@@ -79,7 +81,7 @@
         android:id="@+id/nine"
         style="@style/DialpadKeyButtonStyle"
         layout="@layout/dialpad_key"/>
-    <androidx.legacy.widget.Space style="@style/DialpadSpaceStyle"/>
+    <Space style="@style/DialpadSpaceStyle"/>
   </LinearLayout>
 
   <LinearLayout
@@ -87,15 +89,15 @@
       android:layout_height="0dp"
       android:layout_weight="1"
       android:orientation="horizontal">
-    <androidx.legacy.widget.Space style="@style/DialpadSpaceStyle"/>
+    <Space style="@style/DialpadSpaceStyle"/>
     <include layout="@layout/dialpad_key_star"/>
     <include
         android:id="@+id/zero"
         layout="@layout/dialpad_key"/>
     <include layout="@layout/dialpad_key_pound"/>
-    <androidx.legacy.widget.Space style="@style/DialpadSpaceStyle"/>
+    <Space style="@style/DialpadSpaceStyle"/>
   </LinearLayout>
-  <androidx.legacy.widget.Space
+  <Space
       android:id="@+id/end_call_space"
       android:layout_width="match_parent"
       android:layout_height="?attr/dialpad_end_key_spacing"/>

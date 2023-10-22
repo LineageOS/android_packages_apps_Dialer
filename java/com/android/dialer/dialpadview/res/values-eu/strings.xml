@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM txarteleko kontaktuak</string>
   <string name="menu_callNumber">Deitu %s zenbakira</string>
   <string name="dialpad_hint_emergency_calling_not_available">Ezin duzu egin larrialdi-deirik Wi-Fi bidez</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Ezin da deitu zenbaki honetara</string>
 </resources>

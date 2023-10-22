@@ -33,7 +33,6 @@
   <string name="description_playback_seek">재생 위치 찾기</string>
   <string name="action_menu_call_history_description">통화 기록</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">옵션 더보기</string>
-  <string name="action_menu_dialpad_button">키패드</string>
   <string name="dialer_settings_label">설정</string>
   <string name="description_entering_bulk_action_mode">일괄 작업 모드 시작 중</string>
   <string name="description_leaving_bulk_action_mode">일괄 작업 모드 종료됨</string>

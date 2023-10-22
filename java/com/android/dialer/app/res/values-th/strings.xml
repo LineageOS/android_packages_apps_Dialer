@@ -33,7 +33,6 @@
   <string name="description_playback_seek">ค้นหาตำแหน่งการเล่น</string>
   <string name="action_menu_call_history_description">ประวัติการโทร</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">ตัวเลือกเพิ่มเติม</string>
-  <string name="action_menu_dialpad_button">ปุ่มกด</string>
   <string name="dialer_settings_label">การตั้งค่า</string>
   <string name="description_entering_bulk_action_mode">กำลังเข้าสู่โหมดการดำเนินการแบบกลุ่ม</string>
   <string name="description_leaving_bulk_action_mode">ออกจากโหมดการทำงานแบบกลุ่มแล้ว</string>

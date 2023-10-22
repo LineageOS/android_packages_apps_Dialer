@@ -19,5 +19,4 @@
   <string name="simContacts_title">รายชื่อติดต่อในซิมการ์ด</string>
   <string name="menu_callNumber">โทร %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">โทรหาหมายเลขฉุกเฉินผ่าน Wi‑Fi ไม่ได้</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">ไม่สามารถโทรไปยังหมายเลขนี้</string>
 </resources>
