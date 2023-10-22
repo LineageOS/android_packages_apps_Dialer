@@ -19,5 +19,4 @@
   <string name="simContacts_title">Tengiliðir á SIM-korti</string>
   <string name="menu_callNumber">Hringja í %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Ekki er hægt að hringja neyðarsímtöl með Wi-Fi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Ekki er hægt að hringja í þetta númer</string>
 </resources>

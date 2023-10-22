@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2015 The Android Open Source Project
+<!--
+     Copyright (C) 2015 The Android Open Source Project
      Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +17,7 @@
 -->
 <com.android.dialer.dialpadview.DialpadView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dialpad_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -77,30 +79,31 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/dialpad_overflow_margin"
-        android:paddingLeft="@dimen/dialpad_digits_menu_left_padding"
-        android:paddingRight="@dimen/dialpad_digits_menu_right_padding"
+        android:paddingStart="@dimen/dialpad_digits_menu_left_padding"
+        android:paddingEnd="@dimen/dialpad_digits_menu_right_padding"
         android:background="@drawable/btn_dialpad_key"
         android:contentDescription="@string/description_dialpad_back"
         android:gravity="center"
         android:src="@drawable/quantum_ic_close_vd_theme_24"
-        android:tint="@color/dialer_theme_color_light"
         android:tintMode="src_in"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:tint="@color/dialer_theme_color_light" />
 
     <ImageButton
         android:id="@+id/dialpad_overflow"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/dialpad_overflow_margin"
-        android:paddingLeft="@dimen/dialpad_digits_menu_left_padding"
-        android:paddingRight="@dimen/dialpad_digits_menu_right_padding"
+        android:paddingStart="@dimen/dialpad_digits_menu_left_padding"
+        android:paddingEnd="@dimen/dialpad_digits_menu_right_padding"
         android:background="@drawable/btn_dialpad_key"
         android:contentDescription="@string/description_dialpad_overflow"
         android:gravity="center"
         android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-        android:tint="@color/dialer_theme_color_light"
         android:tintMode="src_in"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:tint="@color/dialer_theme_color_light" />
+
       <FrameLayout android:layout_width="0dp"
           android:layout_height="match_parent"
           android:layout_weight="1">
@@ -144,8 +147,8 @@
         android:contentDescription="@string/description_delete_button"
         android:src="@drawable/quantum_ic_backspace_vd_theme_24"
         android:state_enabled="false"
-        android:tint="@color/dialer_theme_color_light"
-        android:tintMode="src_in"/>
+        android:tintMode="src_in"
+        app:tint="@color/dialer_theme_color_light" />
   </LinearLayout>
 
   <View
@@ -153,13 +156,13 @@
       android:layout_height="1dp"
       android:background="@android:color/transparent"/>
 
-  <androidx.legacy.widget.Space
+  <Space
       android:layout_width="match_parent"
       android:layout_height="@dimen/dialpad_space_above_keys"/>
 
   <include layout="@layout/dialpad"/>
 
-  <androidx.legacy.widget.Space
+  <Space
       android:layout_width="match_parent"
       android:layout_height="@dimen/dialpad_space_below_keys"/>
 

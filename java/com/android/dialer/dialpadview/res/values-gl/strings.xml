@@ -19,5 +19,4 @@
   <string name="simContacts_title">Contactos da tarxeta SIM</string>
   <string name="menu_callNumber">Chamar ao %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Non se poden realizar chamadas de urxencia por wifi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Non é posible chamar a este número</string>
 </resources>

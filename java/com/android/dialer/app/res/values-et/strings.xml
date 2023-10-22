@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Taasesituse positsiooni otsimine</string>
   <string name="action_menu_call_history_description">Kõneajalugu</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Rohkem valikuid</string>
-  <string name="action_menu_dialpad_button">klaviatuur</string>
   <string name="dialer_settings_label">Seaded</string>
   <string name="description_entering_bulk_action_mode">Sisenemine hulgitoimingute režiimi</string>
   <string name="description_leaving_bulk_action_mode">Lahkumine hulgitoimingute režiimist</string>

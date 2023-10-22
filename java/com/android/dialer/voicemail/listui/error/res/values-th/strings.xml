@@ -88,7 +88,7 @@
   <string name="dialer_terms_and_conditions_message">%s</string>
   <string name="dialer_terms_and_conditions_1.0">ดูและฟังข้อความได้โดยไม่ต้องโทรไปฟังข้อความเสียงเอง บริการถอดเสียงฟรีของ Google ถอดเสียงข้อความให้คุณแล้ว โดยเลือกปิดฟีเจอร์นี้ในการตั้งค่าได้ทุกเมื่อ %s</string>
   <string name="dialer_terms_and_conditions_existing_user">บริการถอดเสียงฟรีของ Google ถอดเสียงข้อความให้คุณแล้ว โดยเลือกปิดฟีเจอร์นี้ในการตั้งค่าได้ทุกเมื่อ %s</string>
-  <string name="dialer_terms_and_conditions_for_verizon_1.0">ดูและฟังข้อความโดยไม่ต้องโทรไปฟังข้อความเสียงเอง %s</string>
+  <string name="dialer_terms_and_conditions_for_verizon_1.0">ดูและฟังข้อความโดยไม่ต้องโทรไปฟังข้อความเสียงเอง</string>
   <string name="dialer_terms_and_conditions_learn_more">ดูข้อมูลเพิ่มเติม</string>
   <string name="dialer_terms_and_conditions_existing_user_ack">รับทราบ</string>
   <string name="dialer_terms_and_conditions_existing_user_decline">ไม่เป็นไร</string>

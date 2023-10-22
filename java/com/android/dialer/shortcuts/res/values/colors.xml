@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2016 The Android Open Source Project
+  ~ Copyright (C) 2023 The LineageOS Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,6 +16,5 @@
   ~ limitations under the License
   -->
 <resources>
-  <color name="shortcut_add_contact_foreground_color">#2A56C6</color>
   <color name="shortcut_add_contact_background_color">#f5f5f5</color>
 </resources>

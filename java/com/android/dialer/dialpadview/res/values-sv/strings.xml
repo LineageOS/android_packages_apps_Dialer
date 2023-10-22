@@ -19,5 +19,4 @@
   <string name="simContacts_title">Kontakter från SIM-kort</string>
   <string name="menu_callNumber">Ring %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Det går inte att ringa nödsamtal över Wi‑Fi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Det går inte att ringa det här numret</string>
 </resources>

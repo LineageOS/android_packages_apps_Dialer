@@ -30,7 +30,7 @@
     <FrameLayout
         android:layout_width="@dimen/dialpad_key_number_width"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/dialpad_key_margin_right">
+        android:layout_marginEnd="@dimen/dialpad_key_margin_right">
       <com.android.dialer.dialpadview.DialpadTextView
           android:id="@id/dialpad_key_number"
           style="@style/DialpadKeyPoundStyle"/>
