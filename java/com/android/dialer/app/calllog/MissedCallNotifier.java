@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -430,7 +431,8 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
 
     // TODO (a bug): scroll to call
     contentIntent.setData(callUri);
-    return PendingIntent.getActivity(context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    return PendingIntent.getActivity(context, 0, contentIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
   }
 
   private PendingIntent createCallBackPendingIntent(String number, @NonNull Uri callUri) {
@@ -440,7 +442,8 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     intent.setData(callUri);
     // Use FLAG_UPDATE_CURRENT to make sure any previous pending intent is updated with the new
     // extra.
-    return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    return PendingIntent.getService(context, 0, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
   }
 
   private PendingIntent createSendSmsFromNotificationPendingIntent(
@@ -451,7 +454,8 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     intent.setData(callUri);
     // Use FLAG_UPDATE_CURRENT to make sure any previous pending intent is updated with the new
     // extra.
-    return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    return PendingIntent.getActivity(context, 0, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
   }
 
   /** Configures a notification to emit the blinky notification light. */
