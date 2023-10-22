@@ -33,7 +33,6 @@
   <string name="description_playback_seek">အသံပြန်ဖွင့်ရေး နေရာကို ရှာရန်</string>
   <string name="action_menu_call_history_description">ခေါ်ဆိုမှုမှတ်တမ်း</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">ပိုမိုရွေးချယ်စရာများ</string>
-  <string name="action_menu_dialpad_button">ခလုတ်ခုံ</string>
   <string name="dialer_settings_label">ဆက်တင်များ</string>
   <string name="description_entering_bulk_action_mode">တပြိုင်နက်တည်း စုပြုံလုပ်ဆောင်ချက်မုဒ်ကို ထည့်သွင်းခြင်း</string>
   <string name="description_leaving_bulk_action_mode">တပြိုင်နက်တည်း စုပြုံလုပ်ဆောင်ချက်မုဒ်မှ ထွက်လိုက်သည်</string>

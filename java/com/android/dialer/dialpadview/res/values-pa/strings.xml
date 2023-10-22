@@ -19,5 +19,4 @@
   <string name="simContacts_title">ਸਿਮ ਕਾਰਡ ਸੰਪਰਕ</string>
   <string name="menu_callNumber">%s ਨੂੰ ਕਾਲ ਕਰੋ</string>
   <string name="dialpad_hint_emergency_calling_not_available">ਵਾਈ-ਫਾਈ ਰਾਹੀਂ ਸੰਕਟਕਾਲੀਨ ਕਾਲਾਂ ਨਹੀਂ ਕਰ ਸਕਦੇ</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">ਇਸ ਨੰਬਰ \'ਤੇ ਕਾਲ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ</string>
 </resources>

@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s известен ли ви е?</string>
   <string name="spam_notification_title">Обаждането от %1$s спам ли беше?</string>
-  <string name="spam_notification_block_report_toast_text">Блокирахте %1$s и за обаждането бе подаден сигнал, че е спам.</string>
-  <string name="spam_notification_not_spam_toast_text">За обаждането от %1$s бе подаден сигнал, че не е спам.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Докоснете, за да добавите към контактите или да блокирате номера със спам.</string>
   <string name="spam_notification_non_spam_call_expanded_text">За първи път ви се обаждат от този номер. Ако обаждането е било спам, можете да блокирате номера и да подадете сигнал за него.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Докоснете за подаване на сигнал, че не е спам, или за блокиране</string>
   <string name="spam_notification_dialog_add_contact_action_text">Добавяне към контактите</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Блокиране и подаване на сигнал за спам</string>
   <string name="spam_notification_was_not_spam_action_text">Не, не е спам</string>

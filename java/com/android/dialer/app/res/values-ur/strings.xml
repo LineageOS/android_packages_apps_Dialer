@@ -33,7 +33,6 @@
   <string name="description_playback_seek">پلے بیک پوزیشن طلب کریں</string>
   <string name="action_menu_call_history_description">کال کی سرگزشت</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">مزید اختیارات</string>
-  <string name="action_menu_dialpad_button">کی پیڈ</string>
   <string name="dialer_settings_label">ترتیبات</string>
   <string name="description_entering_bulk_action_mode">بلک کاروائی موڈ میں داخل ہو رہا ہے</string>
   <string name="description_leaving_bulk_action_mode">بلک کاروائی موڈ چھوڑ دیا</string>

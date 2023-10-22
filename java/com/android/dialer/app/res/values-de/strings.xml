@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Wiedergabeposition suchen</string>
   <string name="action_menu_call_history_description">Anrufliste</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Mehr Optionen</string>
-  <string name="action_menu_dialpad_button">Wähltasten</string>
   <string name="dialer_settings_label">Einstellungen</string>
   <string name="description_entering_bulk_action_mode">Es wird in den Modus für Bulk-Aktionen gewechselt</string>
   <string name="description_leaving_bulk_action_mode">Der Modus für Bulk-Aktionen wurde verlassen</string>

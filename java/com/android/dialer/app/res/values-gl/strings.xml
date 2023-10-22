@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Buscar posición de reprodución</string>
   <string name="action_menu_call_history_description">Historial de chamadas</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Máis opcións</string>
-  <string name="action_menu_dialpad_button">Teclado</string>
   <string name="dialer_settings_label">Configuración</string>
   <string name="description_entering_bulk_action_mode">Entrando no modo de acción en bloque</string>
   <string name="description_leaving_bulk_action_mode">Saíu do modo de acción en bloque</string>

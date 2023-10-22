@@ -21,7 +21,7 @@
 
     <service
         android:name=".SimulatorService"
-        android:exported="true">
+        android:exported="false">
     </service>
 
   </application>

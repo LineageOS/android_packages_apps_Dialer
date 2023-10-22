@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s таныс па?</string>
   <string name="spam_notification_title">%1$s қоңырауы спам болды ма?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s бөгеліп, \"спам\" деп белгіленді.</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s қоңырауы \"спам емес\" деп белгіленді.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Контактілерге қосу немесе спам нөмірді бөгеу үшін түртіңіз.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Бұл нөмір сізге алғаш рет қоңырау шалып тұр. Егер қоңырау спам болса, нөмірді бөгеп, \"спам\" деп белгілеуге болады.</string>
-  <string name="spam_notification_spam_call_collapsed_text">\"Спам емес\" деп белгілеу не бөгеу үшін түртіңіз</string>
   <string name="spam_notification_dialog_add_contact_action_text">Контактілерге қосу</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Бөгеу және спам туралы хабарлау</string>
   <string name="spam_notification_was_not_spam_action_text">Жоқ, спам емес</string>

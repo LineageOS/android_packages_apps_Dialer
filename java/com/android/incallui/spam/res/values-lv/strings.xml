@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Vai saglabāt numuru %1$s?</string>
   <string name="spam_notification_title">Vai zvanītājs %1$s bija nevēlams?</string>
-  <string name="spam_notification_block_report_toast_text">Numurs %1$s ir bloķēts, un zvans tika atzīmēts kā nevēlams.</string>
-  <string name="spam_notification_not_spam_toast_text">Zvans no numura %1$s netika atzīmēts kā nevēlams.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Pieskarieties, lai numuru pievienotu kontaktpersonām vai bloķētu nevēlamu numuru.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Šis jums ir pirmais zvans no šī numura. Ja šis zvans bija nevēlams, varat bloķēt šo numuru un ziņot par to.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Pieskarieties, lai ziņotu, ka zvans nebija nevēlams, vai bloķētu numuru.</string>
   <string name="spam_notification_dialog_add_contact_action_text">Pievienot kontaktpersonām</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Bloķēt numuru un ziņot par to</string>
   <string name="spam_notification_was_not_spam_action_text">Nē, tas nebija nevēlams zvans</string>

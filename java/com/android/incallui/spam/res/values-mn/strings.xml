@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s-г мэдэх үү?</string>
   <string name="spam_notification_title">%1$s спам дуудлага хийгч байсан уу?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s-г хориглож, дуудлагыг спам гэж мэдээлсэн.</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s-с ирсэн дуудлагыг спам гэж мэдээлсэн.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Харилцагчдад нэмэх буюу спам дугаарыг хориглох бол товшино уу.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Энэ дугаараас танд анх удаа дуудлага ирсэн. Хэрэв энэ дуудлага спам бол та энэ дугаарыг хориглож, спамаар мэдээлэх боломжтой.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Спам биш гэж мэдээлэх эсвэл хориглох бол товшино уу</string>
   <string name="spam_notification_dialog_add_contact_action_text">Харилцагчдад нэмэх</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Хориглож, спам гэж мэдээлэх</string>
   <string name="spam_notification_was_not_spam_action_text">Үгүй, спам биш</string>

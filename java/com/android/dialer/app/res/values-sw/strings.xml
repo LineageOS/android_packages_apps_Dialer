@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Tafuta sehemu ya kucheza ujumbe wa sauti</string>
   <string name="action_menu_call_history_description">Rekodi ya simu zilizopigwa</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Chaguo zaidi</string>
-  <string name="action_menu_dialpad_button">vitufe vya simu</string>
   <string name="dialer_settings_label">Mipangilio</string>
   <string name="description_entering_bulk_action_mode">Unaingia katika hali ya kutekeleza vitendo vingi</string>
   <string name="description_leaving_bulk_action_mode">Umeondoka katika hali ya kutekeleza vitendo vingi</string>

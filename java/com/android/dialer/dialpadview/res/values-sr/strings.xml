@@ -19,5 +19,4 @@
   <string name="simContacts_title">Контакти на SIM картици</string>
   <string name="menu_callNumber">Позови %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Не можете да упућујете хитне позиве преко Wi‑Fi-ја</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Није могуће позвати овај број</string>
 </resources>
