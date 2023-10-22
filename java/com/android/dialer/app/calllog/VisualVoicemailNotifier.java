@@ -225,7 +225,8 @@ final class VisualVoicemailNotifier {
     if (voicemail != null) {
       intent.setData(voicemail.voicemailUri);
     }
-    return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    return PendingIntent.getActivity(context, 0, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
   }
 
   /**
