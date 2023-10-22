@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">يتعذّر تغيير رقم التعريف الشخصي</string>
   <string name="change_pin_title">تغيير رقم التعريف الشخصي للبريد الصوتي</string>
   <string name="change_pin_continue_label">متابعة</string>
-  <string name="change_pin_cancel_label">إلغاء</string>
-  <string name="change_pin_ok_label">موافق</string>
   <string name="change_pin_enter_old_pin_header">تأكيد رقم التعريف الشخصي القديم</string>
   <string name="change_pin_enter_old_pin_hint">أدخل رقم التعريف الشخصي لبريدك الصوتي للمتابعة.</string>
   <string name="change_pin_enter_new_pin_header">تعيين رقم تعريف شخصي جديد</string>

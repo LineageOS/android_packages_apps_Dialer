@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">รู้จัก %1$s ไหม</string>
   <string name="spam_notification_title">หมายเลข %1$s เป็นสแปมใช่ไหม</string>
-  <string name="spam_notification_block_report_toast_text">บล็อก %1$s และรายงานสายนี้ว่าเป็นสแปมแล้ว</string>
-  <string name="spam_notification_not_spam_toast_text">รายงานสายจาก %1$s ว่าไม่ใช่สแปมแล้ว</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">แตะเพื่อเพิ่มลงในรายชื่อติดต่อหรือบล็อกหมายเลขสแปม</string>
   <string name="spam_notification_non_spam_call_expanded_text">หมายเลขนี้โทรหาคุณเป็นครั้งแรก หากเป็นสแปม คุณสามารถบล็อกและรายงานหมายเลขนี้ได้</string>
-  <string name="spam_notification_spam_call_collapsed_text">แตะเพื่อรายงานว่าไม่ใช่สแปมหรือบล็อก</string>
   <string name="spam_notification_dialog_add_contact_action_text">เพิ่มในรายชื่อติดต่อ</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">บล็อกและรายงานสแปม</string>
   <string name="spam_notification_was_not_spam_action_text">ไม่ใช่สแปม</string>

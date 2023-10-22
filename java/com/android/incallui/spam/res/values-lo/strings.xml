@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">ຮູ້ຈັກ %1$s ບໍ?</string>
   <string name="spam_notification_title">%1$s ເປັນການໂທສະແປມບໍ?</string>
-  <string name="spam_notification_block_report_toast_text">ບລັອກ %1$s ແລະ ລາຍງານການໂທວ່າເປັນສະແປມແລ້ວ.</string>
-  <string name="spam_notification_not_spam_toast_text">ໝາຍການໂທຈາກ %1$s ວ່າບໍ່ແມ່ນສະແປມແລ້ວ.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">ແຕະເພື່ອເພີ່ມໃສ່ລາຍຊື່ຜູ້ຕິດຕໍ່ ຫຼື ບລັອກເບີໂທສະແປມ.</string>
   <string name="spam_notification_non_spam_call_expanded_text">ນີ້ເປັນເທື່ອທຳອິດທີ່ເບີນີ້ໂທຫາທ່ານ. ຫາກນີ້ເປັນການໂທສະແປມ, ທ່ານສາມາດບລັອກເບີນີ້ ແລະ ລາຍງານມັນໄດ້.</string>
-  <string name="spam_notification_spam_call_collapsed_text">ແຕະເພື່ອລາຍງານວ່າບໍ່ແມ່ນສະແປມ ຫຼື ບລັອກມັນ</string>
   <string name="spam_notification_dialog_add_contact_action_text">ເພີ່ມໃສ່ລາຍຊື່ຜູ່ຕິດຕໍ່</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">ບລັອກ ແລະ ລາຍງານສະແປມ</string>
   <string name="spam_notification_was_not_spam_action_text">ບໍ່, ບໍ່ແມ່ນສະແປມ</string>

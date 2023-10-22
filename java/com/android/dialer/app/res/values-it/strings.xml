@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Cerca posizione di riproduzione</string>
   <string name="action_menu_call_history_description">Cronologia chiamate</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Altre opzioni</string>
-  <string name="action_menu_dialpad_button">tastierino</string>
   <string name="dialer_settings_label">Impostazioni</string>
   <string name="description_entering_bulk_action_mode">Attivazione della modalità di azione collettiva</string>
   <string name="description_leaving_bulk_action_mode">Disttivazione della modalità di azione collettiva</string>

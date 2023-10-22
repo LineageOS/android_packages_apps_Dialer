@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN परिवर्तन गर्न सकिएन</string>
   <string name="change_pin_title">भ्वाइस मेलको PIN परिवर्तन गर्नुहोस्</string>
   <string name="change_pin_continue_label">जारी राख्नुहोस्</string>
-  <string name="change_pin_cancel_label">रद्द गर्नुहोस्</string>
-  <string name="change_pin_ok_label">ठिक छ</string>
   <string name="change_pin_enter_old_pin_header">आफ्नो पुरानो PIN को पुष्टि गर्नुहोस्</string>
   <string name="change_pin_enter_old_pin_hint">जारी राख्नका लागि आफ्नो भ्वाइस मेलको PIN प्रविष्ट गर्नुहोस्।</string>
   <string name="change_pin_enter_new_pin_header">कुनै नयाँ PIN सेट गर्नुहोस्</string>

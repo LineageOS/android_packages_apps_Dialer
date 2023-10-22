@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s nömrəsini tanıyırsınız?</string>
   <string name="spam_notification_title">%1$s spam zəngi idi?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s blok edilib və zəng spam olaraq bildirilib.</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s nömrəsindən gələn zəng spam olaraq bildirilib.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Klikləyərək kontaktlara əlavə edin və ya spam nömrə kimi blok edin.</string>
   <string name="spam_notification_non_spam_call_expanded_text">İlk dəfədir ki, bu nömrədən Sizə zəng gəlir. Bu zəng spamdırsa, nömrəni blok edə və ya şikayət edə bilərsiniz.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Spam deyil seçiminə klikləyin və ya blok edin</string>
   <string name="spam_notification_dialog_add_contact_action_text">Kontaktlara əlavə edin</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blok edin və ya spamı bildirin</string>
   <string name="spam_notification_was_not_spam_action_text">Xeyr, spam deyil</string>

@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Kan ikke bytte PIN-kode</string>
   <string name="change_pin_title">Endre PIN-kode for talemeldinger</string>
   <string name="change_pin_continue_label">Fortsett</string>
-  <string name="change_pin_cancel_label">Avbryt</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">Bekreft den gamle PIN-koden din</string>
   <string name="change_pin_enter_old_pin_hint">Skriv inn PIN-koden for talemeldinger for å fortsette.</string>
   <string name="change_pin_enter_new_pin_header">Angi en ny PIN-kode</string>

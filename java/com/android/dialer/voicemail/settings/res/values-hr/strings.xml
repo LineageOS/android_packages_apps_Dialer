@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN se ne može promijeniti</string>
   <string name="change_pin_title">Promjena PIN-a govorne pošte</string>
   <string name="change_pin_continue_label">Nastavi</string>
-  <string name="change_pin_cancel_label">Odustani</string>
-  <string name="change_pin_ok_label">U redu</string>
   <string name="change_pin_enter_old_pin_header">Potvrda starog PIN-a</string>
   <string name="change_pin_enter_old_pin_hint">Da biste nastavili, unesite PIN za govornu poštu.</string>
   <string name="change_pin_enter_new_pin_header">Postavljanje novog PIN-a</string>

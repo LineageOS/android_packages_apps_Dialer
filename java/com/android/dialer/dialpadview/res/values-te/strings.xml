@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM కార్డ్ పరిచయాలు</string>
   <string name="menu_callNumber">%sకు కాల్ చేయండి</string>
   <string name="dialpad_hint_emergency_calling_not_available">Wi-Fiతో అత్యవసర కాల్‌లు చేయలేరు</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">ఈ నంబర్‌కు కాల్ చేయలేరు</string>
 </resources>

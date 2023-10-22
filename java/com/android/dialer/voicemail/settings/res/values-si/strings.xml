@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN අංකය මාරු කිරීමට නොහැකිය</string>
   <string name="change_pin_title">හඬ තැපැල් PIN අංකය වෙනස් කරන්න</string>
   <string name="change_pin_continue_label">ඉදිරියට යන්න</string>
-  <string name="change_pin_cancel_label">අවලංගු කරන්න</string>
-  <string name="change_pin_ok_label">හරි</string>
   <string name="change_pin_enter_old_pin_header">ඔබේ පැරණි PIN අංකය තහවුරු කරන්න</string>
   <string name="change_pin_enter_old_pin_hint">දිගටම කරගෙන යාමට ඔබ හඬ තැපැල් PIN අංකය ඇතුළු කරන්න.</string>
   <string name="change_pin_enter_new_pin_header">නව PIN අංකයක් සකසන්න</string>

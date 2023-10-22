@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$sን ያውቁታል?</string>
   <string name="spam_notification_title">%1$s አይፈለጌ ደዋይ ነበር?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s ታግደዋል ጥሪውም እንደ አይፈለጌ መልዕክት ሪፖርት ተደርጓል።</string>
-  <string name="spam_notification_not_spam_toast_text">ከ%1$s የመጣው ጥሪ አይፈለጌ እንዳልሆነ ሪፖርት ተደርጓል።</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">እውቂያዎችን ለማከል ወይም አይፈለጌ ቁጥር ለማገድ መታ ያድርጉ።</string>
   <string name="spam_notification_non_spam_call_expanded_text">ይህ ቁጥር ሲደውልልዎ ይህ የመጀመሪያ ጊዜ ነው። ይህ ጥሪ አይፈለጌ ነበር፣ ይህን ቁጥር ማገድ እና ሪፖርት ማድረግ ይችላሉ።</string>
-  <string name="spam_notification_spam_call_collapsed_text">አይፈለጌ እንዳልሆነ ሪፖርት ለማድረግ ወይም ለማገድ መታ ያድርጉ</string>
   <string name="spam_notification_dialog_add_contact_action_text">ወደ እውቂያዎች ያክሉ</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">አግድ እና አይፈለጌ ሪፖርት አድርግ</string>
   <string name="spam_notification_was_not_spam_action_text">አይ፣ አይፈለጌ አይደለም</string>

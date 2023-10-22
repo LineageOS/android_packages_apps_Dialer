@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">పిన్‌ని మార్చడం సాధ్యపడలేదు</string>
   <string name="change_pin_title">వాయిస్ మెయిల్ పిన్‌ని మార్చండి</string>
   <string name="change_pin_continue_label">కొనసాగించు</string>
-  <string name="change_pin_cancel_label">రద్దు చేయి</string>
-  <string name="change_pin_ok_label">సరే</string>
   <string name="change_pin_enter_old_pin_header">మీ పాత పిన్‌ని నిర్ధారించండి</string>
   <string name="change_pin_enter_old_pin_hint">కొనసాగించడానికి మీ వాయిస్ మెయిల్ పిన్‌ని నమోదు చేయండి.</string>
   <string name="change_pin_enter_new_pin_header">కొత్త పిన్‌ని సెట్ చేయండి</string>

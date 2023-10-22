@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Kender du %1$s?</string>
   <string name="spam_notification_title">Var %1$s et spamopkald?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s blev blokeret, og opkaldet blev rapporteret som spam.</string>
-  <string name="spam_notification_not_spam_toast_text">Opkaldet fra %1$s blev ikke rapporteret som spam.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Tryk for at føje til kontaktpersoner eller for at blokere spamnummeret.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Dette er første gang, at dette nummer har ringet til dig. Hvis det var et spamopkald, kan du blokere nummeret og rapportere det.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Tryk for at fjerne spammarkeringen, eller bloker nummeret</string>
   <string name="spam_notification_dialog_add_contact_action_text">Føj til kontaktpersoner</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Bloker og rapportér spam</string>
   <string name="spam_notification_was_not_spam_action_text">Nej, ikke spam</string>

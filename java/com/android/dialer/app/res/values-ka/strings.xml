@@ -33,7 +33,6 @@
   <string name="description_playback_seek">დაკვრის პოზიციის მოძებნა</string>
   <string name="action_menu_call_history_description">ზარების ისტორია</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">სხვა პარამეტრები</string>
-  <string name="action_menu_dialpad_button">კლავიატურა</string>
   <string name="dialer_settings_label">პარამეტრები</string>
   <string name="description_entering_bulk_action_mode">მიმდინარეობს ერთიანი ქმედების რეჟიმში შესვლა</string>
   <string name="description_leaving_bulk_action_mode">ერთიანი ქმედების რეჟიმიდან გამოხვედით</string>

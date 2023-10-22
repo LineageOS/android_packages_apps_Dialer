@@ -21,16 +21,8 @@
   <string name="non_spam_notification_title">Know <xliff:g id="number">%1$s</xliff:g>?</string>
   <!-- Title for the notification to the user after a call from an spammer ends. [CHAR LIMIT=100] -->
   <string name="spam_notification_title">Was <xliff:g id="number">%1$s</xliff:g> a spam caller?</string>
-  <!-- Text for the toast shown after the user presses block/report spam. [CHAR LIMIT=100] -->
-  <string name="spam_notification_block_report_toast_text"><xliff:g id="number">%1$s</xliff:g> blocked and call was reported as spam.</string>
-  <!-- Text for the toast shown after the user presses not spam. [CHAR LIMIT=100] -->
-  <string name="spam_notification_not_spam_toast_text">Call from <xliff:g id="number">%1$s</xliff:g> reported as not spam.</string>
-  <!-- Text displayed in the collapsed notification to the user after a non-spam call ends. [CHAR LIMIT=100] -->
-  <string name="spam_notification_non_spam_call_collapsed_text">Tap to add to contacts or block spam number.</string>
   <!-- Text displayed in the expanded notification to the user after a non-spam call ends. [CHAR LIMIT=NONE] -->
   <string name="spam_notification_non_spam_call_expanded_text">This is the first time this number called you. If this call was spam, you can block this number and report it.</string>
-  <!-- Text displayed in the collapsed notification to the user after a spam call ends. [CHAR LIMIT=100] -->
-  <string name="spam_notification_spam_call_collapsed_text">Tap to report as not spam or block it</string>
   <!-- Text for the adding to contacts action in the after call dialog. [CHAR LIMIT=40] -->
   <string name="spam_notification_dialog_add_contact_action_text">Add to contacts</string>
   <!-- Text for the blocking and reporting spam action in the after call dialog. [CHAR LIMIT=40] -->

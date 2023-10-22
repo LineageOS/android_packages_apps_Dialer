@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Ekki var hægt að breyta PIN-númerinu</string>
   <string name="change_pin_title">Breyta PIN-númeri talhólfs</string>
   <string name="change_pin_continue_label">Áfram</string>
-  <string name="change_pin_cancel_label">Hætta við</string>
-  <string name="change_pin_ok_label">Í lagi</string>
   <string name="change_pin_enter_old_pin_header">Staðfestu gamla PIN-númerið</string>
   <string name="change_pin_enter_old_pin_hint">Sláðu inn PIN-númerið fyrir talhólf til að halda áfram.</string>
   <string name="change_pin_enter_new_pin_header">Veldu nýtt PIN-númer</string>
