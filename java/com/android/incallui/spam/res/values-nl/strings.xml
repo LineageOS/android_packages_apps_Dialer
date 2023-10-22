@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Ken je %1$s?</string>
   <string name="spam_notification_title">Was %1$s een spambeller?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s is geblokkeerd en de oproep wordt gemeld als spam.</string>
-  <string name="spam_notification_not_spam_toast_text">De oproep van %1$s wordt niet gemeld als spam.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Tik om contacten toe te voegen of om dit spamnummer te blokkeren.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Dit is de eerste keer dat je bent gebeld door dit nummer. Als deze oproep spam is, kun je dit nummer blokkeren en melden.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Tik om dit gesprek te melden als GEEN SPAM of om het te blokkeren</string>
   <string name="spam_notification_dialog_add_contact_action_text">Toevoegen aan contacten</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokkeren en spam melden</string>
   <string name="spam_notification_was_not_spam_action_text">Nee, geen spam</string>

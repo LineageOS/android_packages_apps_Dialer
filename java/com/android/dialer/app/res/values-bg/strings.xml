@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Търсене на позиция за възпроизвеждане</string>
   <string name="action_menu_call_history_description">История на обажданията</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Още опции</string>
-  <string name="action_menu_dialpad_button">цифрова клавиатура</string>
   <string name="dialer_settings_label">Настройки</string>
   <string name="description_entering_bulk_action_mode">Влизате в режима на групови действия</string>
   <string name="description_leaving_bulk_action_mode">Излязохте от режима на групови действия</string>

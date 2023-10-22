@@ -19,5 +19,4 @@
   <string name="simContacts_title">Mga contact sa SIM card</string>
   <string name="menu_callNumber">Tawagan ang %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Di makakagawa ng mga emergency na tawag sa Wi‑Fi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Hindi matawagan ang numerong ito</string>
 </resources>

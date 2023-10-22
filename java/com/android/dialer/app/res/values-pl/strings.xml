@@ -35,7 +35,6 @@
   <string name="description_playback_seek">Szukaj pozycji odtwarzania</string>
   <string name="action_menu_call_history_description">Historia połączeń</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Więcej opcji</string>
-  <string name="action_menu_dialpad_button">klawiatura</string>
   <string name="dialer_settings_label">Ustawienia</string>
   <string name="description_entering_bulk_action_mode">Włączono tryb działań zbiorczych</string>
   <string name="description_leaving_bulk_action_mode">Wyłączono tryb działań zbiorczych</string>

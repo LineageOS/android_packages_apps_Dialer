@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM քարտի կոնտակտներ</string>
   <string name="menu_callNumber">Զանգել %s համարին</string>
   <string name="dialpad_hint_emergency_calling_not_available">Շտապ կանչերը հասանելի չեն Wi‑Fi-ի միջոցով</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Հնարավոր չէ զանգել այս համարին</string>
 </resources>

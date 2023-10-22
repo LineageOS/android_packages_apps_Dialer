@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Kas teate numbrit %1$s?</string>
   <string name="spam_notification_title">Kas kõne numbrilt %1$s oli rämpskõnetegijalt?</string>
-  <string name="spam_notification_block_report_toast_text">Number %1$s blokeeriti ja kõne liigitati rämpspostiks.</string>
-  <string name="spam_notification_not_spam_toast_text">Kõnet numbrilt %1$s ei liigitatud rämpspostiks.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Puudutage kontaktide lisamiseks või rämpsposti saatva numbri blokeerimiseks.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Teile helistati sellelt numbrilt esimest korda. Kui see kõne oli rämpspost, blokeerige see number ja teavitage meid sellest.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Puudutage, kui see pole rämpskõne, või blokeerige see</string>
   <string name="spam_notification_dialog_add_contact_action_text">Lisa kontaktidesse</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokeeri ja teavita rämpspostist</string>
   <string name="spam_notification_was_not_spam_action_text">Ei, see pole rämpskõne</string>

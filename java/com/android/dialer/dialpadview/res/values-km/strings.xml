@@ -19,5 +19,4 @@
   <string name="simContacts_title">ទំនាក់ទំនង​នៅ​ក្នុង​ស៊ីម​កាត</string>
   <string name="menu_callNumber">ហៅ​ទៅ​កាន់ %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">មិន​អាចធ្វើការ​ហៅ​បន្ទាន់​តាម WiFi បានទេ</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">មិនអាចហៅ​ទៅ​កាន់​លេខនេះបានទេ</string>
 </resources>

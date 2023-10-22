@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Lejátszási pozíció módosítása</string>
   <string name="action_menu_call_history_description">Híváslista</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">További beállítások</string>
-  <string name="action_menu_dialpad_button">billentyűzet</string>
   <string name="dialer_settings_label">Beállítások</string>
   <string name="description_entering_bulk_action_mode">Belépés tömeges műveleti módba</string>
   <string name="description_leaving_bulk_action_mode">Kilépett a tömeges műveleti módból</string>

@@ -33,7 +33,6 @@
   <string name="description_playback_seek">பிளேபேக் நிலையைத் தேடு</string>
   <string name="action_menu_call_history_description">அழைப்பு வரலாறு</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">மேலும் விருப்பங்கள்</string>
-  <string name="action_menu_dialpad_button">விசைத்தளம்</string>
   <string name="dialer_settings_label">அமைப்பு</string>
   <string name="description_entering_bulk_action_mode">மொத்தச் செயல் பயன்முறையில் நுழைகிறீர்கள்</string>
   <string name="description_leaving_bulk_action_mode">மொத்தச் செயல் பயன்முறையிலிருந்து வெளியேறிவிட்டீர்கள்</string>

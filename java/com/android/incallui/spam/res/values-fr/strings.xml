@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Vous connaissez le propriétaire du %1$s ?</string>
   <string name="spam_notification_title">L\'appel reçu du %1$s était-il indésirable ?</string>
-  <string name="spam_notification_block_report_toast_text">Le numéro %1$s a été bloqué et l\'appel a été signalé comme indésirable.</string>
-  <string name="spam_notification_not_spam_toast_text">Les appels provenant du %1$s sont signalés comme fiables.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Appuyez pour ajouter le numéro à vos contacts ou le bloquer s\'il s\'agit d\'un numéro indésirable.</string>
   <string name="spam_notification_non_spam_call_expanded_text">C\'est la première fois que vous recevez un appel de ce numéro. S\'il s\'agit d\'un appel indésirable, vous pouvez bloquer le numéro et signaler ce dernier.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Appuyez pour signaler ce numéro comme fiable ou pour le bloquer</string>
   <string name="spam_notification_dialog_add_contact_action_text">Ajouter aux contacts</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Bloquer et signaler comme indésirable</string>
   <string name="spam_notification_was_not_spam_action_text">Non, le numéro est fiable</string>

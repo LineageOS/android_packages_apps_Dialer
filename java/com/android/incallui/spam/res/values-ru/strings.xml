@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Вы знаете, кому принадлежит номер %1$s?</string>
   <string name="spam_notification_title">Вызов с номера %1$s: это был спам?</string>
-  <string name="spam_notification_block_report_toast_text">Номер %1$s заблокирован. Вы сообщили, что вызов использовался для распространения спама.</string>
-  <string name="spam_notification_not_spam_toast_text">Вы сообщили, что вызов с номера %1$s не использовался для распространения спама</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Нажмите, чтобы добавить номер в контакты или заблокировать его за распространение спама.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Это был первый вызов с указанного номера. Если он использовался для распространения спама, вы можете сообщить об этом и заблокировать этот номер.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Нажмите, чтобы сообщить, что это не спам, или заблокировать номер</string>
   <string name="spam_notification_dialog_add_contact_action_text">Добавить в контакты</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Заблокировать и сообщить о спаме</string>
   <string name="spam_notification_was_not_spam_action_text">Это не спам</string>

@@ -33,7 +33,6 @@
   <string name="description_playback_seek">પ્લેબેક સ્થિતિ શોધો</string>
   <string name="action_menu_call_history_description">કૉલ ઇતિહાસ</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">વધુ વિકલ્પો</string>
-  <string name="action_menu_dialpad_button">કી પેડ</string>
   <string name="dialer_settings_label">સેટિંગ્સ</string>
   <string name="description_entering_bulk_action_mode">બલ્ક ક્રિયા મોડમાં દાખલ થઈ રહ્યાં છે</string>
   <string name="description_leaving_bulk_action_mode">બલ્ક ક્રિયા મોડ છોડી દીધો</string>

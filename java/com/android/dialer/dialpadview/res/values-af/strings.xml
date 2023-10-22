@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM-kaartkontakte</string>
   <string name="menu_callNumber">Bel %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Kan nie noodoproepe oor Wi-Fi maak nie</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Kan nie hierdie nommer bel nie</string>
 </resources>

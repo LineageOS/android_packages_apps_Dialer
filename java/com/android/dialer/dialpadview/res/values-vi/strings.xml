@@ -19,5 +19,4 @@
   <string name="simContacts_title">Danh bạ trên thẻ SIM</string>
   <string name="menu_callNumber">Gọi %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Không thể thực hiện cuộc gọi khẩn cấp qua Wi‑Fi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Không thể gọi số này</string>
 </resources>

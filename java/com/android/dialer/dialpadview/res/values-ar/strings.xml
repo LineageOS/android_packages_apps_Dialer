@@ -19,5 +19,4 @@
   <string name="simContacts_title">‏شريحة SIM وجهات الاتصال</string>
   <string name="menu_callNumber">الاتصال بالرقم %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">‏يتعذّر إجراء مكالمات طوارئ عبر WiFi.</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">لا يمكن الاتصال بهذا الرقم</string>
 </resources>

@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s 是你熟悉的電話號碼嗎？</string>
   <string name="spam_notification_title">%1$s 是騷擾/廣告來電者嗎？</string>
-  <string name="spam_notification_block_report_toast_text">已封鎖 %1$s 並將本次來電回報為騷擾/廣告電話。</string>
-  <string name="spam_notification_not_spam_toast_text">已將 %1$s 的來電回報為非騷擾/廣告電話。</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">輕觸這裡即可加到通訊錄或封鎖騷擾/廣告電話號碼。</string>
   <string name="spam_notification_non_spam_call_expanded_text">這組號碼是首次致電給你。如果本次來電為騷擾/廣告電話，你可以封鎖並檢舉這組號碼。</string>
-  <string name="spam_notification_spam_call_collapsed_text">輕觸即可回報為非騷擾/廣告電話或封鎖這組號碼</string>
   <string name="spam_notification_dialog_add_contact_action_text">新增為聯絡人</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">封鎖並回報為騷擾/廣告電話</string>
   <string name="spam_notification_was_not_spam_action_text">否，這不是騷擾/廣告電話</string>

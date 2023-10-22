@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">ਕੀ %1$s ਨੂੰ ਜਾਣਦੇ ਹੋ?</string>
   <string name="spam_notification_title">ਕੀ %1$s ਸਪੈਮ ਕਾਲਰ ਸੀ?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s ਨੂੰ ਬਲੌਕ ਕੀਤਾ ਅਤੇ ਕਾਲ ਸਪੈਮ ਵਜੋਂ ਰਿਪੋਰਟ ਕੀਤੀ ਗਈ।</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s ਤੋਂ ਕਾਲ ਸਪੈਮ ਨਹੀਂ ਵਜੋਂ ਰਿਪੋਰਟ ਕੀਤੀ ਗਈ।</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">ਸੰਪਰਕਾਂ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰਨ ਜਾਂ ਸਪੈਮ ਨੰਬਰ ਨੂੰ ਬਲੌਕ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ।</string>
   <string name="spam_notification_non_spam_call_expanded_text">ਇਸ ਨੰਬਰ ਤੋਂ ਤੁਹਾਨੂੰ ਪਹਿਲੀ ਵਾਰ ਤੁਹਾਨੂੰ ਕਾਲ ਆਈ ਹੈ, ਜੇਕਰ ਇਹ ਕਾਲ ਸਪੈਮ ਸੀ, ਤਾਂ ਤੁਸੀਂ ਇਹ ਨੰਬਰ ਬਲੌਕ ਕਰ ਸਕਦੇ ਹੋ ਅਤੇ ਇਸਦੀ ਰਿਪੋਰਟ ਕਰ ਸਕਦੇ ਹੋ।</string>
-  <string name="spam_notification_spam_call_collapsed_text">ਸਪੈਮ ਨਹੀਂ ਵਜੋਂ ਰਿਪੋਰਟ ਕਰਨ ਜਾਂ ਇਸ ਨੂੰ ਬਲਾਕ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ</string>
   <string name="spam_notification_dialog_add_contact_action_text">ਸੰਪਰਕਾਂ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">ਸਪੈਮ ਨੂੰ ਬਲੌਕ ਕਰੋ ਅਤੇ ਇਸਦੀ ਰਿਪੋਰਟ ਕਰੋ</string>
   <string name="spam_notification_was_not_spam_action_text">ਨਹੀਂ, ਸਪੈਮ ਕਾਲ ਨਹੀਂ</string>
