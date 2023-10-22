@@ -107,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/ad_text_margin_start"
         android:layout_marginEnd="@dimen/ad_end_margin"
-        android:layout_toRightOf="@id/assisted_dialing_globe"/>
+        android:layout_toEndOf="@id/assisted_dialing_globe"/>
 
   </RelativeLayout>
 

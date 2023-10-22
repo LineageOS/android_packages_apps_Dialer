@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s համարը ծանո՞թ է</string>
   <string name="spam_notification_title">%1$s համարից ստացված զանգը սպա՞մ էր</string>
-  <string name="spam_notification_block_report_toast_text">%1$s համարն արգելափակվեց, և զանգը նշվեց որպես սպամ:</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s համարից ստացված զանգը նշվեց որպես ոչ սպամ:</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Հպեք՝ կոնտակտներում ավելացնելու համար, կամ արգելափակեք լցոնային համարը:</string>
   <string name="spam_notification_non_spam_call_expanded_text">Այս համարից առաջին անգամ եք զանգ ստանում: Եթե այս զանգը սպամ էր, դուք կարող եք արգելափակել այս համարը և նշել այն որպես սպամ:</string>
-  <string name="spam_notification_spam_call_collapsed_text">Հպեք «սպամ չէ» կոճակին՝ համարը որպես ոչ սպամ նշելու համար, կամ արգելափակեք այն</string>
   <string name="spam_notification_dialog_add_contact_action_text">Ավելացնել կոնտակտներում</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Արգելափակել և նշել որպես սպամ</string>
   <string name="spam_notification_was_not_spam_action_text">Ոչ, սպամ չէ</string>

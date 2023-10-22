@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Funa indawo yokudlala</string>
   <string name="action_menu_call_history_description">Umlando wekholi</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Izinketho eziningi</string>
-  <string name="action_menu_dialpad_button">ikhiphedi</string>
   <string name="dialer_settings_label">Izilungiselelo</string>
   <string name="description_entering_bulk_action_mode">Kungenwa kumodi yesenzo senqwaba</string>
   <string name="description_leaving_bulk_action_mode">Ishiye imodi yesenzo senqwaba</string>

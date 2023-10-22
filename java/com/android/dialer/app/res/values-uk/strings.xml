@@ -35,7 +35,6 @@
   <string name="description_playback_seek">Шукати місце відтворення</string>
   <string name="action_menu_call_history_description">Історія викликів</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Інші варіанти</string>
-  <string name="action_menu_dialpad_button">клавіатура</string>
   <string name="dialer_settings_label">Налаштування</string>
   <string name="description_entering_bulk_action_mode">Перехід у режим масових дій</string>
   <string name="description_leaving_bulk_action_mode">Ви вийшли з режиму масових дій</string>

@@ -19,5 +19,4 @@
   <string name="simContacts_title">Kontakty na SIM karte</string>
   <string name="menu_callNumber">Volať na číslo %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Cez Wi-Fi sa tiesňové volania nedajú uskutočňovať</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Na toto číslo sa nedá zavolať</string>
 </resources>

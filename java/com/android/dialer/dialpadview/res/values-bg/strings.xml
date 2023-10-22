@@ -19,5 +19,4 @@
   <string name="simContacts_title">Контакти от SIM картата</string>
   <string name="menu_callNumber">Обаждане на %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Не може да се извършват спешни обаждания през Wi-Fi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Не можете да се обадите на този номер</string>
 </resources>

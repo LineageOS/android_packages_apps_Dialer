@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Connaissez-vous le numéro %1$s?</string>
   <string name="spam_notification_title">L\'appel provenant du numéro %1$s était-il importun?</string>
-  <string name="spam_notification_block_report_toast_text">Le numéro %1$s a été bloqué, et l\'appel a été signalé comme pourriel.</string>
-  <string name="spam_notification_not_spam_toast_text">L\'appel provenant du numéro %1$s a été signalé comme n\'étant pas un pourriel.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Touchez pour ajouter aux contacts, ou bloquez le numéro source de pourriel.</string>
   <string name="spam_notification_non_spam_call_expanded_text">C\'est la première fois que ce numéro vous appelle. Si cet appel était un pourriel, vous pouvez le signaler et bloquer le numéro.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Touchez pour signaler que l\'appel n\'est pas importun, ou bloquez le numéro</string>
   <string name="spam_notification_dialog_add_contact_action_text">Ajouter aux contacts</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Bloquer le numéro et signaler le pourriel</string>
   <string name="spam_notification_was_not_spam_action_text">Non, ce n\'est pas un appel importun</string>

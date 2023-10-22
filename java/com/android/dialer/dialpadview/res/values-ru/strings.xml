@@ -19,5 +19,4 @@
   <string name="simContacts_title">Контакты на SIM</string>
   <string name="menu_callNumber">Позвонить: %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Экстренные вызовы по Wi‑Fi недоступны.</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">На этот номер нельзя позвонить</string>
 </resources>

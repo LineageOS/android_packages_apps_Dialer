@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Ezagutzen duzu %1$s?</string>
   <string name="spam_notification_title">Spam-deia izan al da %1$s zenbakitik jasotakoa?</string>
-  <string name="spam_notification_block_report_toast_text">Blokeatu da %1$s, eta spama dela salatu da.</string>
-  <string name="spam_notification_not_spam_toast_text">Ez-spam gisa markatu da %1$s.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Sakatu kontaktuetan gehitzeko edo blokeatu spam-zenbakia.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Zenbaki honek deitu dizun lehenengo aldia izan da. Spama bada, blokeatu eta salatu egin dezakezu.</string>
-  <string name="spam_notification_spam_call_collapsed_text">\"Ez da spama\" gisa markatzeko edo zenbakia blokeatzeko, sakatu hau</string>
   <string name="spam_notification_dialog_add_contact_action_text">Gehitu kontaktuetan</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokeatu eta salatu spama dela</string>
   <string name="spam_notification_was_not_spam_action_text">Ez, ez da spama</string>

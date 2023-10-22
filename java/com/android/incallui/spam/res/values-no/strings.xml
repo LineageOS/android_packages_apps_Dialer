@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Kjenner du %1$s?</string>
   <string name="spam_notification_title">Var %1$s en useriøs oppringer?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s ble blokkert, og anropet ble rapportert som useriøst.</string>
-  <string name="spam_notification_not_spam_toast_text">Anropet fra %1$s ble rapportert som ikke useriøst.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Trykk for å legge til kontakter eller blokkere det useriøse nummeret.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Dette er den første gangen du blir oppringt fra dette nummeret. Hvis dette anropet var useriøst, kan du blokkere nummeret og rapportere det.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Trykk for å rapportere nummeret som ikke useriøst eller blokkere det.</string>
   <string name="spam_notification_dialog_add_contact_action_text">Legg til i kontakter</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokkér og rapportér som useriøst</string>
   <string name="spam_notification_was_not_spam_action_text">Nei, ikke useriøst</string>

@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s번은 알고 있는 전화번호인가요?</string>
   <string name="spam_notification_title">%1$s번이 스팸 발신자였나요?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s번을 차단하고 스팸으로 신고했습니다.</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s번으로 걸려온 전화는 스팸이 아닌 것으로 신고했습니다.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">탭하여 연락처에 추가하거나 스팸 전화번호를 차단합니다.</string>
   <string name="spam_notification_non_spam_call_expanded_text">이 번호에서 처음으로 걸려온 전화입니다. 이 전화가 스팸이라면 이 전화번호를 차단하고 신고할 수 있습니다.</string>
-  <string name="spam_notification_spam_call_collapsed_text">탭하여 스팸이 아닌 것으로 보고하거나 차단하세요.</string>
   <string name="spam_notification_dialog_add_contact_action_text">연락처에 추가</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">스팸 차단 및 신고</string>
   <string name="spam_notification_was_not_spam_action_text">아니요, 스팸이 아닙니다.</string>

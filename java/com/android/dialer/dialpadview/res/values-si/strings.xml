@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM කාඩ්පත් සම්බන්ධතා</string>
   <string name="menu_callNumber">%s අමතන්න</string>
   <string name="dialpad_hint_emergency_calling_not_available">Wi-Fi හරහා හදිසි අවස්ථා ඇමතුම් කිරීමට නොහැකිය</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">මෙම අංකයට ඇමතිය නොහැකිය</string>
 </resources>

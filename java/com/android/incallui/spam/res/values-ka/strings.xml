@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s ნაცნობია?</string>
   <string name="spam_notification_title">%1$s სპამერი აბონენტი იყო?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s დაიბლოკა და ზარი სპამად მოინიშნა.</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s-დან ზარზე გაიგზავნა სპამის გაუქმების შეტყობინება.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">შეეხეთ კონტაქტებში დასამატებლად ან სპამის ნომრის დასაბლოკად.</string>
   <string name="spam_notification_non_spam_call_expanded_text">ამ ნომრიდან პირველად დაგირეკეს. თუ ეს ზარი სპამი იყო, შეგიძლიათ დაბლოკოთ ეს ნომერი და შეგვატყობინოთ.</string>
-  <string name="spam_notification_spam_call_collapsed_text">შეეხეთ, რათა გვაცნობოთ, რომ „სპამი არ არის“, ან დაბლოკოთ</string>
   <string name="spam_notification_dialog_add_contact_action_text">კონტაქტებში დამატება</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">დაბლოკვა და სპამის შესახებ შეტყობინება</string>
   <string name="spam_notification_was_not_spam_action_text">არა, სპამი არ არის</string>

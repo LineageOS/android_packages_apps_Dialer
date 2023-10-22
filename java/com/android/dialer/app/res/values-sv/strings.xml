@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Sök uppspelningsläge</string>
   <string name="action_menu_call_history_description">Samtalshistorik</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Fler alternativ</string>
-  <string name="action_menu_dialpad_button">knappsats</string>
   <string name="dialer_settings_label">Inställningar</string>
   <string name="description_entering_bulk_action_mode">Öppnar läget för massåtgärd</string>
   <string name="description_leaving_bulk_action_mode">Stängde läget för massåtgärd</string>

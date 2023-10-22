@@ -19,5 +19,4 @@
   <string name="simContacts_title">Kontakty z karty SIM</string>
   <string name="menu_callNumber">Zadzwoń: %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Nie można nawiązywać połączeń alarmowych przez Wi‑Fi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Nie można zadzwonić pod ten numer</string>
 </resources>

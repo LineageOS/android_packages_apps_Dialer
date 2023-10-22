@@ -19,5 +19,4 @@
   <string name="simContacts_title">ဆင်းမ်ကဒ်အဆက်အသွယ်များ</string>
   <string name="menu_callNumber">%s ကို ဖုန်းခေါ်ရန်</string>
   <string name="dialpad_hint_emergency_calling_not_available">Wi‑Fi ဖြင့် အရေးပေါ်ခေါ်ဆိုမှုများ ပြုလုပ်၍မရပါ</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">ဤနံပါတ်ကို မခေါ်ဆိုနိုင်ပါ</string>
 </resources>

@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Soek terugspeelposisie</string>
   <string name="action_menu_call_history_description">Oproepgeskiedenis</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Meer opsies</string>
-  <string name="action_menu_dialpad_button">sleutelblok</string>
   <string name="dialer_settings_label">Instellings</string>
   <string name="description_entering_bulk_action_mode">Gaan tans grootmaathandelingmodus in</string>
   <string name="description_leaving_bulk_action_mode">Het grootmaathandelingmodus verlaat</string>

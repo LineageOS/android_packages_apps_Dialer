@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM कार्डका सम्पर्क ठेगानाहरू</string>
   <string name="menu_callNumber">%s मा कल गर्नुहोस्</string>
   <string name="dialpad_hint_emergency_calling_not_available">WiFi मार्फत आपतकालीन कल गर्न सकिँदैन</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">यस नम्बरमा कल गर्न सकिँदैन</string>
 </resources>

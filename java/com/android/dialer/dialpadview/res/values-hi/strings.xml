@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM कार्ड के संपर्क</string>
   <string name="menu_callNumber">%s पर कॉल करें</string>
   <string name="dialpad_hint_emergency_calling_not_available">वाई-फ़ाई के ज़रिए आपातकालीन कॉल नहीं किए जा सकते</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">इस नंबर पर कॉल नहीं किया जा सकता</string>
 </resources>
