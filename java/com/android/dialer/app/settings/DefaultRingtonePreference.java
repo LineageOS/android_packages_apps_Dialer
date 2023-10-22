@@ -21,32 +21,44 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.preference.RingtonePreference;
 import android.provider.Settings;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.dialer.R;
 
 /** RingtonePreference which doesn't show default ringtone setting. */
-public class DefaultRingtonePreference extends RingtonePreference {
+public class DefaultRingtonePreference extends Preference {
+
+  private final Intent mRingtonePickerIntent;
 
   public DefaultRingtonePreference(Context context, AttributeSet attrs) {
     super(context, attrs);
+
+    mRingtonePickerIntent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+    mRingtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, getRingtoneType());
+    mRingtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
+    mRingtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, true);
+    mRingtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
+            Settings.System.DEFAULT_NOTIFICATION_URI);
+    mRingtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getTitle());
   }
 
-  @Override
-  protected void onPrepareRingtonePickerIntent(Intent ringtonePickerIntent) {
-    super.onPrepareRingtonePickerIntent(ringtonePickerIntent);
-
-    /*
-     * Since this preference is for choosing the default ringtone, it
-     * doesn't make sense to show a 'Default' item.
-     */
-    ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
+  public Intent getRingtonePickerIntent() {
+    mRingtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI,
+            onRestoreRingtone());
+    return mRingtonePickerIntent;
   }
 
-  @Override
   protected void onSaveRingtone(Uri ringtoneUri) {
     if (!Settings.System.canWrite(getContext())) {
       Toast.makeText(
@@ -59,8 +71,11 @@ public class DefaultRingtonePreference extends RingtonePreference {
     RingtoneManager.setActualDefaultRingtoneUri(getContext(), getRingtoneType(), ringtoneUri);
   }
 
-  @Override
   protected Uri onRestoreRingtone() {
     return RingtoneManager.getActualDefaultRingtoneUri(getContext(), getRingtoneType());
+  }
+
+  private int getRingtoneType() {
+    return RingtoneManager.TYPE_RINGTONE;
   }
 }
