@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Pinkoden kunne ikke ændres</string>
   <string name="change_pin_title">Skift pinkode til din telefonsvarer</string>
   <string name="change_pin_continue_label">Fortsæt</string>
-  <string name="change_pin_cancel_label">Annuller</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">Bekræft din gamle pinkode</string>
   <string name="change_pin_enter_old_pin_hint">Angiv din pinkode til din telefonsvarer for at fortsætte.</string>
   <string name="change_pin_enter_new_pin_header">Angiv en ny pinkode</string>

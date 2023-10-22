@@ -35,7 +35,6 @@
   <string name="description_playback_seek">Hľadať pozíciu prehrávania</string>
   <string name="action_menu_call_history_description">História hovorov</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Ďalšie možnosti</string>
-  <string name="action_menu_dialpad_button">klávesnica</string>
   <string name="dialer_settings_label">Nastavenia</string>
   <string name="description_entering_bulk_action_mode">Vstupuje sa do režimu hromadných akcií</string>
   <string name="description_leaving_bulk_action_mode">Odišli ste z režimu hromadných akcií</string>

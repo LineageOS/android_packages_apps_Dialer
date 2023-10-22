@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Немагчыма змяніць PIN-код</string>
   <string name="change_pin_title">Змяніце PIN-код галасавой пошты</string>
   <string name="change_pin_continue_label">Працягнуць</string>
-  <string name="change_pin_cancel_label">Скасаваць</string>
-  <string name="change_pin_ok_label">ОК</string>
   <string name="change_pin_enter_old_pin_header">Пацвердзіце стары PIN-код</string>
   <string name="change_pin_enter_old_pin_hint">Каб працягнуць, увядзіце PIN-код галасавой пошты.</string>
   <string name="change_pin_enter_new_pin_header">Задайце новы PIN-код</string>

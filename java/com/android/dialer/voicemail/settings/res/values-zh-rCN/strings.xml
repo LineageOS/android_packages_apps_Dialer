@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">无法更改 PIN 码</string>
   <string name="change_pin_title">更改语音信箱 PIN 码</string>
   <string name="change_pin_continue_label">继续</string>
-  <string name="change_pin_cancel_label">取消</string>
-  <string name="change_pin_ok_label">确定</string>
   <string name="change_pin_enter_old_pin_header">确认旧 PIN 码</string>
   <string name="change_pin_enter_old_pin_hint">输入语音信箱 PIN 码以继续操作。</string>
   <string name="change_pin_enter_new_pin_header">设置新 PIN 码</string>

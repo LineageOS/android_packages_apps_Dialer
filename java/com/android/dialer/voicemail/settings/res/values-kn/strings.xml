@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">ಪಿನ್ ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ</string>
   <string name="change_pin_title">ಧ್ವನಿಮೇಲ್ ಪಿನ್‌ ಬದಲಾಯಿಸಿ</string>
   <string name="change_pin_continue_label">ಮುಂದುವರಿಸಿ</string>
-  <string name="change_pin_cancel_label">ರದ್ದು</string>
-  <string name="change_pin_ok_label">ಸರಿ</string>
   <string name="change_pin_enter_old_pin_header">ನಿಮ್ಮ ಹಳೆಯ ಪಿನ್‌ ಅನ್ನು ದೃಢೀಕರಿಸಿ</string>
   <string name="change_pin_enter_old_pin_hint">ಮುಂದುವರಿಸಲು ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್ ಪಿನ್ ಅನ್ನು ನಮೂದಿಸಿ.</string>
   <string name="change_pin_enter_new_pin_header">ಹೊಸ ಪಿನ್ ಹೊಂದಿಸಿ</string>

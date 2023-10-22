@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Ni mogoče spremeniti kode PIN</string>
   <string name="change_pin_title">Sprememba kode PIN za sporočila v odzivniku</string>
   <string name="change_pin_continue_label">Naprej</string>
-  <string name="change_pin_cancel_label">Prekliči</string>
-  <string name="change_pin_ok_label">V redu</string>
   <string name="change_pin_enter_old_pin_header">Potrditev stare kode PIN</string>
   <string name="change_pin_enter_old_pin_hint">Če želite nadaljevati, vnesite kodo PIN za sporočila v odzivniku.</string>
   <string name="change_pin_enter_new_pin_header">Nastavitev nove kode PIN</string>

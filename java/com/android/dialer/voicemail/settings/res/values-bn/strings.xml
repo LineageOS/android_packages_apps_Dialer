@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">পিন পরিবর্তন করা যায়নি</string>
   <string name="change_pin_title">ভয়েসমেলের পিন পরিবর্তন করুন</string>
   <string name="change_pin_continue_label">চালিয়ে যান</string>
-  <string name="change_pin_cancel_label">বাতিল করুন</string>
-  <string name="change_pin_ok_label">ঠিক আছে</string>
   <string name="change_pin_enter_old_pin_header">আপনার পুরনো পিনটি নিশ্চিত করুন</string>
   <string name="change_pin_enter_old_pin_hint">চালিয়ে যেতে আপনার ভয়েসমেলের পিন লিখুন৷</string>
   <string name="change_pin_enter_new_pin_header">একটি নতুন পিন সেট করুন</string>

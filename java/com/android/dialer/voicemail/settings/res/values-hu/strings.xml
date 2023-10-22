@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Nem sikerült módosítani a PIN-kódot</string>
   <string name="change_pin_title">A hangposta PIN-kódjának módosítása</string>
   <string name="change_pin_continue_label">Tovább</string>
-  <string name="change_pin_cancel_label">Mégse</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">A régi PIN-kód megerősítése</string>
   <string name="change_pin_enter_old_pin_hint">A folytatáshoz írja be a hangpostához használt PIN-kódját.</string>
   <string name="change_pin_enter_new_pin_header">Új PIN-kód beállítása</string>

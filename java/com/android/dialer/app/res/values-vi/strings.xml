@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Tìm kiếm vị trí phát lại</string>
   <string name="action_menu_call_history_description">Nhật ký cuộc gọi</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Tùy chọn khác</string>
-  <string name="action_menu_dialpad_button">bàn phím</string>
   <string name="dialer_settings_label">Cài đặt</string>
   <string name="description_entering_bulk_action_mode">Truy cập chế độ tác vụ hàng loạt</string>
   <string name="description_leaving_bulk_action_mode">Đã rời khỏi chế độ tác vụ hàng loạt</string>

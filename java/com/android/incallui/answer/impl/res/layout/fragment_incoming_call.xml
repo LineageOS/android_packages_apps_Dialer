@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2016 The Android Open Source Project
+  ~ Copyright (C) 2023 The LineageOS Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -68,11 +69,11 @@
         android:padding="64dp"
         android:accessibilityTraversalBefore="@+id/videocall_speaker_button"
         android:drawablePadding="8dp"
-        android:drawableTop="@drawable/quantum_ic_videocam_off_vd_theme_24"
         android:gravity="center"
         android:text="@string/call_incoming_video_is_off"
         android:textAppearance="@style/Dialer.Incall.TextAppearance"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:drawableTopCompat="@drawable/quantum_ic_videocam_off_vd_theme_24" />
 
     <LinearLayout
         android:id="@+id/incall_contact_grid"
@@ -152,6 +153,7 @@
           android:layout_weight="1"
           android:clipChildren="false"
           android:clipToPadding="false">
+
         <LinearLayout
             android:id="@+id/incall_data_container_chip_container"
             android:layout_width="wrap_content"

@@ -18,8 +18,8 @@
 <!-- Specific brand names for mcc262-mnc02. See b/64487733 -->
 <resources>
   <!-- "Brand name" for WiFi calls. Will be overridden for specific mcc-mnc combinations [CHAR LIMIT=40] -->
-  <string name="notification_call_wifi_brand" translatable="false">Wi\u2011Fi call</string>
+  <string name="notification_call_wifi_brand">Wi\u2011Fi call</string>
 
   <!-- "Brand name" for WiFi work calls. Will be overridden for specific mcc-mnc combinations [CHAR LIMIT=40] -->
-  <string name="notification_call_wifi_work_brand" translatable="false">Wi\u2011Fi work call</string>
+  <string name="notification_call_wifi_work_brand">Wi\u2011Fi work call</string>
 </resources>

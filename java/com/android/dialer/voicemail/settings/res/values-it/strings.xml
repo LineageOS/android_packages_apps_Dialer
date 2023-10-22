@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Impossibile cambiare il PIN</string>
   <string name="change_pin_title">Cambia PIN segreteria</string>
   <string name="change_pin_continue_label">Continua</string>
-  <string name="change_pin_cancel_label">Annulla</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">Conferma il PIN attuale</string>
   <string name="change_pin_enter_old_pin_hint">Inserisci il PIN della segreteria per continuare.</string>
   <string name="change_pin_enter_new_pin_header">Imposta un nuovo PIN</string>

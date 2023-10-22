@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">無法變更語音信箱密碼</string>
   <string name="change_pin_title">變更語音信箱密碼</string>
   <string name="change_pin_continue_label">繼續</string>
-  <string name="change_pin_cancel_label">取消</string>
-  <string name="change_pin_ok_label">確定</string>
   <string name="change_pin_enter_old_pin_header">確認舊的語音信箱密碼</string>
   <string name="change_pin_enter_old_pin_hint">請輸入你的語音信箱密碼，然後才能繼續接下來的步驟。</string>
   <string name="change_pin_enter_new_pin_header">設定新的語音信箱密碼</string>

@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Impossible de modifier le NIP</string>
   <string name="change_pin_title">Modifier le NIP de la messagerie vocale</string>
   <string name="change_pin_continue_label">Continuer</string>
-  <string name="change_pin_cancel_label">Annuler</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">Confirmer votre ancien NIP</string>
   <string name="change_pin_enter_old_pin_hint">Entrez votre NIP de messagerie vocale pour continuer.</string>
   <string name="change_pin_enter_new_pin_header">Choisir un nouveau NIP</string>

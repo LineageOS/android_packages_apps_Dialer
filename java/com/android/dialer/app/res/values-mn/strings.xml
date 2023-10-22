@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Тоглуулах байрлалыг хайх</string>
   <string name="action_menu_call_history_description">Дуудлагын түүх</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Нэмэлт сонголтууд</string>
-  <string name="action_menu_dialpad_button">Товчлуур</string>
   <string name="dialer_settings_label">Тохиргоо</string>
   <string name="description_entering_bulk_action_mode">Багц үйлдлийн горимд орж байна</string>
   <string name="description_leaving_bulk_action_mode">Багц үйлдлийн горимоос гарсан</string>

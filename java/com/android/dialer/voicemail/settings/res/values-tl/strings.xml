@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Hindi nabago ang PIN</string>
   <string name="change_pin_title">Baguhin ang PIN sa Voicemail</string>
   <string name="change_pin_continue_label">Magpatuloy</string>
-  <string name="change_pin_cancel_label">Kanselahin</string>
-  <string name="change_pin_ok_label">Ok</string>
   <string name="change_pin_enter_old_pin_header">Kumpirmahin ang luma mong PIN</string>
   <string name="change_pin_enter_old_pin_hint">Ilagay ang iyong PIN sa voicemail upang magpatuloy.</string>
   <string name="change_pin_enter_new_pin_header">Magtakda ng bagong PIN</string>

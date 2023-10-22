@@ -34,7 +34,6 @@
   <string name="description_playback_seek">Тражење позиције у репродукцији</string>
   <string name="action_menu_call_history_description">Историја позива</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Још опција</string>
-  <string name="action_menu_dialpad_button">тастатура</string>
   <string name="dialer_settings_label">Подешавања</string>
   <string name="description_entering_bulk_action_mode">Улазите у режим групних радњи</string>
   <string name="description_leaving_bulk_action_mode">Изашли сте из режима групних радњи</string>

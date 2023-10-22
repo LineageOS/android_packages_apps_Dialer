@@ -20,7 +20,7 @@
   <color name="dialer_end_call_button_color">#b52425</color>
   <color name="dialer_divider_line_color">#D8D8D8</color>
   <color name="dialer_link_color">#2A56C6</color>
-  <color name="dialer_snackbar_action_text_color">@*android:color/system_accent1_600</color>
+  <color name="dialer_snackbar_action_text_color">@android:color/system_accent1_600</color>
   <color name="dialer_call_icon_color">@android:color/white</color>
 
   <!-- Colors for the notification actions -->
@@ -33,5 +33,5 @@
   <!-- Legacy -->
   <color name="blue_grey_100">#CFD8DC</color>
 
-  <color name="cardBackgroundColor">@*android:color/system_neutral1_50</color>
+  <color name="cardBackgroundColor">@android:color/system_neutral1_50</color>
 </resources>

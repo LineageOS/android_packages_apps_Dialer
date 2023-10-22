@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN-კოდის შეცვლა შეუძლებელია</string>
   <string name="change_pin_title">ხმოვანი ფოსტის PIN-კოდის შეცვლა</string>
   <string name="change_pin_continue_label">გაგრძელება</string>
-  <string name="change_pin_cancel_label">გაუქმება</string>
-  <string name="change_pin_ok_label">კარგი</string>
   <string name="change_pin_enter_old_pin_header">დაადასტურეთ თქვენი ძველი PIN-კოდი</string>
   <string name="change_pin_enter_old_pin_hint">გასაგრძელებლად შეიყვანეთ თქვენი ხმოვანი ფოსტის PIN-კოდი.</string>
   <string name="change_pin_enter_new_pin_header">დააყენეთ ახალი PIN-კოდი</string>
