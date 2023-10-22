@@ -17,27 +17,29 @@
 
 package com.android.dialer.app.settings;
 
-import android.app.Fragment;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
+
+import com.android.dialer.R;
 
 import java.util.List;
 
 /**
  * Preference screen that lists SIM phone accounts to select from, and forwards the selected account
- * to {@link #PARAM_TARGET_FRAGMENT}. Can only be used in a {@link PreferenceActivity}
+ * to {@link #PARAM_TARGET_FRAGMENT}.
  */
-public class PhoneAccountSelectionFragment extends DialerPreferenceFragment {
+public class PhoneAccountSelectionFragment extends PreferenceFragmentCompat {
 
   /** The {@link PreferenceFragmentCompat} to launch after the account is selected. */
   public static final String PARAM_TARGET_FRAGMENT = "target_fragment";
@@ -45,7 +47,7 @@ public class PhoneAccountSelectionFragment extends DialerPreferenceFragment {
   /**
    * The arguments bundle to pass to the {@link #PARAM_TARGET_FRAGMENT}
    *
-   * @see Fragment#getArguments()
+   * @see PreferenceFragmentCompat#getArguments()
    */
   public static final String PARAM_ARGUMENTS = "arguments";
 
@@ -55,8 +57,7 @@ public class PhoneAccountSelectionFragment extends DialerPreferenceFragment {
   public static final String PARAM_PHONE_ACCOUNT_HANDLE_KEY = "phone_account_handle_key";
 
   /**
-   * The title of the {@link #PARAM_TARGET_FRAGMENT} once it is launched with {@link
-   * PreferenceActivity#startWithFragment(String, Bundle, Fragment, int)}, as a string resource ID.
+   * The title of the {@link #PARAM_TARGET_FRAGMENT} once it is launched, as a string resource ID.
    */
   public static final String PARAM_TARGET_TITLE_RES = "target_title_res";
 
@@ -98,10 +99,16 @@ public class PhoneAccountSelectionFragment extends DialerPreferenceFragment {
     @Override
     protected void onClick() {
       super.onClick();
-      // TODO BadDaemon: fix this
-      /*PreferenceActivity preferenceActivity = (PreferenceActivity) getActivity();
+      Fragment fragment = getChildFragmentManager()
+              .getFragmentFactory()
+              .instantiate(getActivity().getClassLoader(), targetFragment);
       arguments.putParcelable(phoneAccountHandleKey, phoneAccountHandle);
-      preferenceActivity.startWithFragment(targetFragment, arguments, null, 0, titleRes, 0);*/
+      fragment.setArguments(arguments);
+      getParentFragmentManager().beginTransaction()
+              .replace(R.id.content_frame, fragment)
+              .addToBackStack(null)
+              .commit();
+      setTitle(titleRes);
     }
   }
 
