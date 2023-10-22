@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Tahu nomor %1$s?</string>
   <string name="spam_notification_title">Apakah panggilan dari %1$s merupakan spam?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s diblokir dan panggilan dilaporkan sebagai spam.</string>
-  <string name="spam_notification_not_spam_toast_text">Panggilan dari %1$s dilaporkan sebagai bukan spam.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Tap untuk menambahkan ke kontak atau memblokir nomor spam.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Nomor ini baru pertama kali menghubungi Anda. Jika panggilan termasuk spam, Anda dapat memblokir nomor ini dan melaporkannya.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Tap untuk melaporkan sebagai bukan spam, atau blokir</string>
   <string name="spam_notification_dialog_add_contact_action_text">Tambahkan ke kontak</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokir &amp; laporkan sebagai spam</string>
   <string name="spam_notification_was_not_spam_action_text">Tidak, bukan spam</string>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2018 The Android Open Source Project
+<!--
+     Copyright (C) 2018 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +16,7 @@
      limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -89,8 +92,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignBottom="@+id/videocall_video_preview"
-    android:layout_alignLeft="@+id/videocall_video_preview"
-    android:layout_alignRight="@+id/videocall_video_preview"
+    android:layout_alignStart="@+id/videocall_video_preview"
+    android:layout_alignEnd="@+id/videocall_video_preview"
     android:layout_alignTop="@+id/videocall_video_preview"
     android:scaleType="center"
     android:src="@drawable/quantum_ic_videocam_off_vd_theme_24"
@@ -103,14 +106,14 @@
     android:layout_width="32dp"
     android:layout_height="32dp"
     android:layout_alignBottom="@+id/videocall_video_preview"
-    android:layout_alignRight="@+id/videocall_video_preview"
+    android:layout_alignEnd="@+id/videocall_video_preview"
     android:background="@drawable/videocall_background_circle_white"
     android:contentDescription="@string/incall_content_description_muted"
     android:scaleType="center"
     android:src="@drawable/quantum_ic_mic_off_vd_theme_24"
-    android:tint="@android:color/black"
     android:visibility="gone"
-    tools:visibility="visible"/>
+    tools:visibility="visible"
+    app:tint="@android:color/black" />
 
   <include
     layout="@layout/videocall_controls_land"

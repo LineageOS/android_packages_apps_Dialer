@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM カードの連絡先</string>
   <string name="menu_callNumber">%s に発信</string>
   <string name="dialpad_hint_emergency_calling_not_available">Wi‑Fi 経由で緊急通報を発信することはできません</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">この番号に発信できません</string>
 </resources>

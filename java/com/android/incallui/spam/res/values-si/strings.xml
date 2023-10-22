@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s දන්නවද?</string>
   <string name="spam_notification_title">%1$s අයාචිත අමතන්නෙක් වූයේද?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s අවහිර කර ඇමතුම අයාචිත ලෙස ලකුණු කර ඇත.</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s අංකයෙන් ඇමතුම අයාචිත නැති ලෙස වාර්තා කරන ලදී.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">සම්බන්ධතාවලට එක් කිරීමට හෝ අයාචිත අංක අවහිර කිරීමට තට්ටු කරන්න.</string>
   <string name="spam_notification_non_spam_call_expanded_text">මෙම අංකය ඔබට අමතන ලද පළමු අවස්ථාව මෙයයි. මෙම ඇමතුම අයාචිත නම්, ඔබට මෙම අංකය අවහිර කර ඒ පිළිබඳ පැමිණිලි කළ හැකිය.</string>
-  <string name="spam_notification_spam_call_collapsed_text">එය අයාචිත නැති ලෙස වාර්තා කිරීමට හෝ අවහිර කිරීමට තට්ටු කරන්න</string>
   <string name="spam_notification_dialog_add_contact_action_text">සම්බන්ධතාවලට එක් කරන්න</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">අයාචිත තැපැල් අවහිර කර වාර්තා කරන්න</string>
   <string name="spam_notification_was_not_spam_action_text">නැත, අයාචිත නොවේ</string>

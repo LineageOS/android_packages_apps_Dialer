@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Do you know %1$s?</string>
   <string name="spam_notification_title">Was %1$s a spam caller?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s blocked and call was reported as spam.</string>
-  <string name="spam_notification_not_spam_toast_text">Call from %1$s reported as not spam.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Tap to add to contacts or block spam number.</string>
   <string name="spam_notification_non_spam_call_expanded_text">This is the first time that this number has called you. If this call was spam, you can block this number and report it.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Tap to report as not spam or block it</string>
   <string name="spam_notification_dialog_add_contact_action_text">Add to contacts</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Block &amp; report spam</string>
   <string name="spam_notification_was_not_spam_action_text">No, not spam</string>

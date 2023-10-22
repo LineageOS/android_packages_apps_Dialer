@@ -19,5 +19,4 @@
   <string name="simContacts_title">Contacten op simkaart</string>
   <string name="menu_callNumber">%s bellen</string>
   <string name="dialpad_hint_emergency_calling_not_available">Er kunnen geen noodoproepen worden gemaakt via wifi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Kan dit nummer niet bellen</string>
 </resources>

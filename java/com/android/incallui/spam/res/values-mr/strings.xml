@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s माहीत आहे का?</string>
   <string name="spam_notification_title">%1$s स्‍पॅम कॉलर होता?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s ब्लॉक केला आणि कॉल स्पॅम असल्याचे कळवले.</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s वरील कॉल स्पॅम नसल्याचे कळवले.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">संपर्कांमध्ये जोडण्यासाठी किंवा स्पॅम नंबर ब्लॉक करण्यासाठी टॅप करा.</string>
   <string name="spam_notification_non_spam_call_expanded_text">तुम्हाला पहिल्यांदाच या नंबरवरून कॉल आला होता. हा कॉल स्पॅम असल्यास, तुम्ही हा नंबर ब्लॉक करू शकता आणि आणि तसे कळवू शकता.</string>
-  <string name="spam_notification_spam_call_collapsed_text">स्पॅम नसल्याचे कळवण्यासाठी किंवा तो ब्लॉक करण्यासाठी टॅप करा</string>
   <string name="spam_notification_dialog_add_contact_action_text">संपर्कांमध्ये जोडा</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">ब्लॉक करा आणि स्पॅमचा असल्याचे कळवा</string>
   <string name="spam_notification_was_not_spam_action_text">नाही, स्‍पॅम नाही</string>

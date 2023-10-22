@@ -19,5 +19,4 @@
   <string name="simContacts_title">የSIM ካርድ ዕውቂያዎች</string>
   <string name="menu_callNumber">ወደ %s ደውል</string>
   <string name="dialpad_hint_emergency_calling_not_available">በWi‑Fi በኩል የአደጋ ጊዜ ጥሪዎችን ማድረግ አይቻልም</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">ይህን ቁጥር መደወል አልተቻለም</string>
 </resources>

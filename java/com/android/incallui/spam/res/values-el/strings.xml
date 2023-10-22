@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Γνωρίζετε τον αριθμό %1$s;</string>
   <string name="spam_notification_title">Ήταν η κλήση από το %1$s ανεπιθύμητη;</string>
-  <string name="spam_notification_block_report_toast_text">Ο αριθμός %1$s αποκλείστηκε και η κλήση αναφέρθηκε ως ανεπιθύμητη.</string>
-  <string name="spam_notification_not_spam_toast_text">Η κλήση από τον αριθμό %1$s αναφέρθηκε ως μη ανεπιθύμητη.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Πατήστε για προσθήκη στις επαφές ή αποκλεισμό αριθμού ως ανεπιθύμητο.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Αυτή είναι η πρώτη φορά που σας καλεί αυτός ο αριθμός. Αν η κλήση αυτή ήταν ανεπιθύμητη, μπορείτε να αποκλείσετε αυτόν τον αριθμό και να τον αναφέρετε.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Πατήστε για αναφορά ως μη ανεπιθύμητης ή για αποκλεισμό της.</string>
   <string name="spam_notification_dialog_add_contact_action_text">Προσθήκη στις επαφές</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Αποκλεισμός και αναφορά ως ανεπιθύμητης</string>
   <string name="spam_notification_was_not_spam_action_text">Όχι, δεν ήταν ανεπιθύμητη</string>

@@ -33,7 +33,6 @@
   <string name="description_playback_seek">പ്ലേബാക്ക് സ്ഥാനം തിരയുക</string>
   <string name="action_menu_call_history_description">കോള്‍‌ ചരിത്രം</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">കൂടുതൽ‍ ഓപ്‌ഷനുകള്‍</string>
-  <string name="action_menu_dialpad_button">കീപാഡ്</string>
   <string name="dialer_settings_label">ക്രമീകരണം</string>
   <string name="description_entering_bulk_action_mode">ബൾക്ക് പ്രവർത്തന മോഡിലേക്ക് പ്രവേശിക്കുന്നു</string>
   <string name="description_leaving_bulk_action_mode">ബൾക്ക് പ്രവർത്തന മോഡ് വിട്ടു</string>
