@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Dapatkan kedudukan main balik</string>
   <string name="action_menu_call_history_description">Sejarah panggilan</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Lagi pilihan</string>
-  <string name="action_menu_dialpad_button">pad kekunci</string>
   <string name="dialer_settings_label">Tetapan</string>
   <string name="description_entering_bulk_action_mode">Memasuki mod tindakan pukal</string>
   <string name="description_leaving_bulk_action_mode">Meninggalkan mod tindakan pukal</string>

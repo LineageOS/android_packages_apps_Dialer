@@ -33,7 +33,6 @@
   <string name="description_playback_seek">جستجوی موقعیت بازپخش</string>
   <string name="action_menu_call_history_description">سابقه تماس</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">گزینه‌های بیشتر</string>
-  <string name="action_menu_dialpad_button">صفحه کلید</string>
   <string name="dialer_settings_label">تنظیمات</string>
   <string name="description_entering_bulk_action_mode">درحال ورود به حالت اقدام انبوه</string>
   <string name="description_leaving_bulk_action_mode">خروج از حالت اقدام انبوه</string>

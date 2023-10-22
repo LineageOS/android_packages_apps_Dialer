@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Afspeelpositie zoeken</string>
   <string name="action_menu_call_history_description">Oproepgeschiedenis</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Meer opties</string>
-  <string name="action_menu_dialpad_button">toetsenblok</string>
   <string name="dialer_settings_label">Instellingen</string>
   <string name="description_entering_bulk_action_mode">Modus voor bulkacties openen</string>
   <string name="description_leaving_bulk_action_mode">Modus voor bulkacties verlaten</string>

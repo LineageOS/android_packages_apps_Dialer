@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM kart kontaktları</string>
   <string name="menu_callNumber">%s nömrəsinə zəng edin</string>
   <string name="dialpad_hint_emergency_calling_not_available">Wi‑Fi vasitəsilə təcili zənglər etmək mümkün deyil</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Bu nömrəyə zəng etmək mümkün deyil</string>
 </resources>

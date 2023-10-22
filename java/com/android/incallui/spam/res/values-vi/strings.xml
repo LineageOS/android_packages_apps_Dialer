@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Bạn có biết %1$s không?</string>
   <string name="spam_notification_title">%1$s có phải là người gọi spam không?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s bị chặn và cuộc gọi đã bị báo cáo là spam.</string>
-  <string name="spam_notification_not_spam_toast_text">Cuộc gọi từ %1$s được báo cáo là không phải spam.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Nhấn để thêm vào danh bạ hoặc chặn số spam.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Đây là lần đầu tiên số này gọi cho bạn. Nếu cuộc gọi này là spam, bạn có thể chặn và báo cáo số này.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Nhấn để báo cáo không phải là spam hoặc chặn số</string>
   <string name="spam_notification_dialog_add_contact_action_text">Thêm vào danh bạ</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Chặn và báo cáo spam</string>
   <string name="spam_notification_was_not_spam_action_text">Không, không phải spam</string>

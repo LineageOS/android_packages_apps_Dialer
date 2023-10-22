@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Ойнату орнын іздеу</string>
   <string name="action_menu_call_history_description">Қоңыраулар тарихы</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Басқа опциялар</string>
-  <string name="action_menu_dialpad_button">пернетақта</string>
   <string name="dialer_settings_label">Параметрлер</string>
   <string name="description_entering_bulk_action_mode">Жаппай әрекет режиміне өту</string>
   <string name="description_leaving_bulk_action_mode">Жаппай әрекет режиімінен шығу</string>

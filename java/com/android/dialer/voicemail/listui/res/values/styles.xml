@@ -30,12 +30,4 @@
     <item name="android:lineSpacingExtra">8sp</item>
   </style>
 
-  <style name="TosButtonStyle" parent="Widget.AppCompat.Button.Borderless">
-    <item name="android:gravity">end|center_vertical</item>
-    <item name="android:layout_marginStart">8dp</item>
-    <item name="android:layout_marginEnd">8dp</item>
-    <item name="android:padding">8dp</item>
-    <item name="android:minHeight">48dp</item>
-  </style>
-
 </resources>

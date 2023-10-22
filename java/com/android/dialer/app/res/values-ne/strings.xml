@@ -33,7 +33,6 @@
   <string name="description_playback_seek">प्लेब्याक स्थिति खोज्नुहोस्</string>
   <string name="action_menu_call_history_description">कलको इतिहास</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">थप विकल्पहरू</string>
-  <string name="action_menu_dialpad_button">किप्याड</string>
   <string name="dialer_settings_label">सेटिङहरू</string>
   <string name="description_entering_bulk_action_mode">बल्क कारबाही सम्बन्धी मोडमा प्रवेश गर्दै</string>
   <string name="description_leaving_bulk_action_mode">बल्क कारबाही सम्बन्धी मोड छोडियो</string>

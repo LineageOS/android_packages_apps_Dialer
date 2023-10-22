@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM 卡联系人</string>
   <string name="menu_callNumber">拨打 %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">无法通过 WLAN 拨打紧急呼救电话</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">无法拨打此号码</string>
 </resources>
