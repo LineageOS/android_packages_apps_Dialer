@@ -22,12 +22,12 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.dialer.R;
-import com.android.dialer.app.settings.DialerPreferenceFragment;
 
-public class LookupSettingsFragment extends DialerPreferenceFragment
+public class LookupSettingsFragment extends PreferenceFragmentCompat
     implements Preference.OnPreferenceChangeListener {
 
   private static final String KEY_ENABLE_FORWARD_LOOKUP = "enable_forward_lookup";
