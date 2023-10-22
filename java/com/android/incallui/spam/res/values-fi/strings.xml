@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Onko %1$s sinulle tuttu?</string>
   <string name="spam_notification_title">Oliko %1$s häirikkösoittaja?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s estettiin ja puhelu ilmoitettiin häirikköpuheluksi.</string>
-  <string name="spam_notification_not_spam_toast_text">Numerosta %1$s saapunut puhelu ei ole häirikköpuhelu.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Lisää yhteystietoihin tai estä häirikkönumero napauttamalla.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Tästä numerosta soitettiin sinulle ensimmäisen kerran. Jos kyseessä oli häirikköpuhelu, voit estää numeron ja ilmoittaa siitä.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Valitse tilaksi Ei ole häirikkösoittaja tai estä numero napauttamalla</string>
   <string name="spam_notification_dialog_add_contact_action_text">Lisää yhteystietoihin</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Estä ja ilmoita häirikkösoittajaksi</string>
   <string name="spam_notification_was_not_spam_action_text">Ei ole häirikkösoittaja</string>

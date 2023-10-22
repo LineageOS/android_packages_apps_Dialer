@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s ကို သိပါသလား။</string>
   <string name="spam_notification_title">%1$s က စပမ်းခေါ်ဆိုမှု ဟုတ်ပါသလား။</string>
-  <string name="spam_notification_block_report_toast_text">%1$s ကို ပိတ်ဆို့လိုက်ပြီး ခေါ်ဆိုမှုကို စပမ်းအဖြစ် သတင်းပို့ပြီးပါပြီ။</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s ထံမှ ခေါ်ဆိုမှုကို စပမ်းမဟုတ်ကြောင်း သတင်းပို့ပြီးပါပြီ။</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">အဆက်အသွယ်များသို့ ထည့်ရန် (သို့) စပမ်းနံပါတ်ကို ပိတ်ဆို့ရန် နှိပ်ပါ</string>
   <string name="spam_notification_non_spam_call_expanded_text">ဤနံပါတ်သည် သင့်ထံသို့ ပထမဆုံးခေါ်ဖူးခြင်းဖြစ်သည်။ ဤခေါ်ဆိုမှုသည် စပမ်းဖြစ်ပါက ဤနံပါတ်ကို ပိတ်ဆို့၍ သတင်းပို့နိုင်ပါသည်။</string>
-  <string name="spam_notification_spam_call_collapsed_text">စပမ်းမဟုတ်ကြောင်း သတင်းပို့ရန် နှိပ်ပါ (သို့) ၎င်းကို ပိတ်ပါ</string>
   <string name="spam_notification_dialog_add_contact_action_text">အဆက်အသွယ်များထဲသို့ ထည့်ရန်</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">စပမ်းကို ပိတ်ဆို့ပြီး သတင်းပို့ပါ</string>
   <string name="spam_notification_was_not_spam_action_text">စပမ်း မဟုတ်ပါ</string>

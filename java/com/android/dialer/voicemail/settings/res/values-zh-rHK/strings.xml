@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">無法變更 PIN</string>
   <string name="change_pin_title">變更留言 PIN</string>
   <string name="change_pin_continue_label">繼續</string>
-  <string name="change_pin_cancel_label">取消</string>
-  <string name="change_pin_ok_label">確定</string>
   <string name="change_pin_enter_old_pin_header">確認舊的 PIN</string>
   <string name="change_pin_enter_old_pin_hint">請輸入留言 PIN 以繼續。</string>
   <string name="change_pin_enter_new_pin_header">設定新的 PIN</string>

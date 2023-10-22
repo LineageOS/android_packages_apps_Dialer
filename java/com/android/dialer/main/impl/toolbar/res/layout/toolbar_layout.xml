@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2018 The Android Open Source Project
+<!--
+     Copyright (C) 2018 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -48,7 +50,7 @@
             android:importantForAccessibility="no"
             android:scaleType="center"
             android:src="@drawable/quantum_ic_search_vd_theme_24"
-            android:tint="@color/searchbar_icon_color"/>
+            app:tint="@color/searchbar_icon_color" />
 
         <TextView
             android:id="@+id/search_box_start_search"
@@ -59,7 +61,7 @@
             android:layout_toEndOf="@+id/search_magnifying_glass"
             android:layout_toStartOf="@+id/voice_search_button"
             android:text="@string/dialer_hint_find_contact"
-            android:textSize="16dp"
+            android:textSize="16sp"
             style="@style/Dialer.TextAppearance.Secondary"/>
 
         <ImageView
@@ -71,7 +73,7 @@
             android:contentDescription="@string/description_start_voice_search"
             android:scaleType="center"
             android:src="@drawable/quantum_ic_mic_vd_theme_24"
-            android:tint="@color/searchbar_icon_color"/>
+            app:tint="@color/searchbar_icon_color" />
 
         <ImageButton
             android:id="@+id/main_options_menu_button"
@@ -82,7 +84,7 @@
             android:contentDescription="@string/action_menu_overflow_description"
             android:scaleType="center"
             android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-            android:tint="@color/searchbar_icon_color"/>
+            app:tint="@color/searchbar_icon_color" />
       </RelativeLayout>
 
       <include layout="@layout/expanded_search_bar"/>
@@ -119,7 +121,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/quantum_ic_close_vd_theme_24"
-            android:tint="?colorIconOnUnthemedDarkBackground"/>
+            app:tint="?colorIconOnUnthemedDarkBackground" />
 
         <TextView
             android:id="@+id/remove_view_text"

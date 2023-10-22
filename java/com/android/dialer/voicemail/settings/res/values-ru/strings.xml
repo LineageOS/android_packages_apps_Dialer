@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Не удалось сменить PIN-код</string>
   <string name="change_pin_title">Сменить PIN-код голосовой почты</string>
   <string name="change_pin_continue_label">Далее</string>
-  <string name="change_pin_cancel_label">Отмена</string>
-  <string name="change_pin_ok_label">ОК</string>
   <string name="change_pin_enter_old_pin_header">Подтвердите предыдущий PIN-код</string>
   <string name="change_pin_enter_old_pin_hint">Чтобы продолжить, введите PIN-код голосовой почты.</string>
   <string name="change_pin_enter_new_pin_header">Задайте новый PIN-код</string>

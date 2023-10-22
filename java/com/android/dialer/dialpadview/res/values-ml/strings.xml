@@ -19,5 +19,4 @@
   <string name="simContacts_title">സിം കാർഡ് കോൺടാക്റ്റുകൾ</string>
   <string name="menu_callNumber">വിളിക്കുക %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">വൈഫൈ വഴി എമർജൻസി കോളുകൾ ചെയ്യാനാകില്ല</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">ഈ നമ്പറിലേക്ക് കോൾ ചെയ്യാനാവില്ല</string>
 </resources>

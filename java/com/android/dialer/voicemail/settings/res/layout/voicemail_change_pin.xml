@@ -80,7 +80,7 @@
       android:layout_width="0dp"
       android:layout_weight="1"
       android:layout_height="wrap_content"
-      android:text="@string/change_pin_cancel_label"/>
+      android:text="@android:string/cancel"/>
 
     <!-- right : continue -->
     <Button

@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">មិន​អាច​ប្ដូរ​កូដ PIN បាន​ទេ</string>
   <string name="change_pin_title">ប្ដូរ​​កូដ PIN របស់​សារ​ជា​សំឡេង</string>
   <string name="change_pin_continue_label">បន្ត</string>
-  <string name="change_pin_cancel_label">បោះបង់</string>
-  <string name="change_pin_ok_label">យល់ព្រម</string>
   <string name="change_pin_enter_old_pin_header">បញ្ជាក់​កូដ PIN ចាស់​របស់​អ្នក</string>
   <string name="change_pin_enter_old_pin_hint">បញ្ចូល​កូដ PIN សម្រាប់​សារ​ជា​សំឡេង​របស់​អ្នក ​​ដើម្បី​បន្ត។</string>
   <string name="change_pin_enter_new_pin_header">កំណត់​កូដ PIN ថ្មី</string>

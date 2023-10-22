@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">ပင်နံပါတ်ကို ပြောင်း၍ မရပါ</string>
   <string name="change_pin_title">အသံမေးလ်ပင်နံပါတ်ကို ပြောင်းခြင်း</string>
   <string name="change_pin_continue_label">ဆက်လုပ်ရန်</string>
-  <string name="change_pin_cancel_label">မလုပ်တော့</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">သင့်ပင်နံပါတ်အဟောင်းကို အတည်ပြုခြင်း</string>
   <string name="change_pin_enter_old_pin_hint">ဆက်လုပ်ရန်အတွက် သင့်အသံမေးလ်ပင်နံပါတ်ကို ထည့်ပါ။</string>
   <string name="change_pin_enter_new_pin_header">ပင်နံပါတ်အသစ်ကို သတ်မှတ်ခြင်း</string>

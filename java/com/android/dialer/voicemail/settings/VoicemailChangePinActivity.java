@@ -239,7 +239,7 @@ public class VoicemailChangePinActivity extends AppCompatActivity
       public void onEnter(VoicemailChangePinActivity activity) {
         activity.headerText.setText(R.string.change_pin_confirm_pin_header);
         activity.hintText.setText(null);
-        activity.nextButton.setText(R.string.change_pin_ok_label);
+        activity.nextButton.setText(android.R.string.ok);
       }
 
       @Override

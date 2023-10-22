@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Oxutma pozisiyası axtarın</string>
   <string name="action_menu_call_history_description">Zəng tarixçəsi</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Daha çox seçim</string>
-  <string name="action_menu_dialpad_button">klaviatura</string>
   <string name="dialer_settings_label">Ayarlar</string>
   <string name="description_entering_bulk_action_mode">Toplu əməliyyat rejiminə daxil olunur</string>
   <string name="description_leaving_bulk_action_mode">Toplu əməliyyat rejimi tərk edilir</string>

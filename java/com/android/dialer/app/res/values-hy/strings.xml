@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Փնտրել նվագարկման դիրքը</string>
   <string name="action_menu_call_history_description">Զանգերի պատմություն</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Այլ ընտրանքներ</string>
-  <string name="action_menu_dialpad_button">ստեղնաշար</string>
   <string name="dialer_settings_label">Կարգավորումներ</string>
   <string name="description_entering_bulk_action_mode">Դուք մտել եք զանգվածային գործողության ռեժիմ</string>
   <string name="description_leaving_bulk_action_mode">Դուք դուրս եկաք զանգվածային գործողությունների ռեժիմից</string>

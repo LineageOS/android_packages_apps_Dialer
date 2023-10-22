@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Tidak dapat mengubah PIN</string>
   <string name="change_pin_title">Ubah PIN Pesan Suara</string>
   <string name="change_pin_continue_label">Lanjutkan</string>
-  <string name="change_pin_cancel_label">Batal</string>
-  <string name="change_pin_ok_label">Oke</string>
   <string name="change_pin_enter_old_pin_header">Konfirmasi PIN lama Anda</string>
   <string name="change_pin_enter_old_pin_hint">Masukkan PIN pesan suara Anda untuk melanjutkan.</string>
   <string name="change_pin_enter_new_pin_header">Setel PIN baru</string>

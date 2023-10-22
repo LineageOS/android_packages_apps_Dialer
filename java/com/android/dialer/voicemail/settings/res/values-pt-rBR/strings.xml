@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Não foi possível alterar o PIN.</string>
   <string name="change_pin_title">Alterar o PIN do correio de voz</string>
   <string name="change_pin_continue_label">Continuar</string>
-  <string name="change_pin_cancel_label">Cancelar</string>
-  <string name="change_pin_ok_label">Ok</string>
   <string name="change_pin_enter_old_pin_header">Confirmar seu PIN antigo</string>
   <string name="change_pin_enter_old_pin_hint">Digite o PIN do correio de voz para continuar.</string>
   <string name="change_pin_enter_new_pin_header">Definir um novo PIN</string>

@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM kartadagi kontaktlar</string>
   <string name="menu_callNumber">%s raqamiga qo‘ng‘iroq qilish</string>
   <string name="dialpad_hint_emergency_calling_not_available">Wi‑Fi orqali favqulodda xizmatlarga chaqiruv qilib bo‘lmaydi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Bu raqamga qo‘ng‘iroq qilib bo‘lmaydi</string>
 </resources>

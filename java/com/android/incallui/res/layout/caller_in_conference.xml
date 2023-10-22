@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<!--
+     Copyright (C) 2008 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -112,6 +114,6 @@
     android:contentDescription="@string/conference_caller_disconnect_content_description"
     android:scaleType="center"
     android:src="@drawable/quantum_ic_call_end_vd_theme_24"
-    android:tint="?colorIcon"/>
+    app:tint="?colorIcon" />
 
 </LinearLayout>  <!-- End of single list element -->

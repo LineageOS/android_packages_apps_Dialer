@@ -44,7 +44,7 @@
         android:id="@+id/select_all_view_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/select_all_text_left_padding"
+        android:paddingStart="@dimen/select_all_text_left_padding"
         android:gravity="center_vertical"
         android:text="@string/select_all"
         android:textAllCaps="true"

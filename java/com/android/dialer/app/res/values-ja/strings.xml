@@ -33,7 +33,6 @@
   <string name="description_playback_seek">再生位置を探す</string>
   <string name="action_menu_call_history_description">通話履歴</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">その他のオプション</string>
-  <string name="action_menu_dialpad_button">キーパッド</string>
   <string name="dialer_settings_label">設定</string>
   <string name="description_entering_bulk_action_mode">一括操作モードを開始します</string>
   <string name="description_leaving_bulk_action_mode">一括操作モードを終了しました</string>

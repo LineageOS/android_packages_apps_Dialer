@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2023 The LineageOS Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,6 +16,7 @@
   ~ limitations under the License
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -66,11 +68,11 @@
       android:layout_gravity="center"
       android:scaleType="center"
       android:src="@drawable/quantum_ic_videocam_off_vd_theme_24"
-      android:tint="?colorIcon"
       android:tintMode="src_in"
       android:visibility="gone"
       android:importantForAccessibility="no"
-      tools:visibility="visible"/>
+      tools:visibility="visible"
+      app:tint="?colorIcon" />
   </FrameLayout>
 
   <ImageView
@@ -85,9 +87,9 @@
     android:contentDescription="@string/incall_content_description_muted"
     android:scaleType="center"
     android:src="@drawable/quantum_ic_mic_off_vd_theme_24"
-    android:tint="@android:color/black"
     android:visibility="gone"
-    tools:visibility="visible"/>
+    tools:visibility="visible"
+    app:tint="@android:color/black" />
 
   <View
     android:id="@+id/videocall_green_screen_background"

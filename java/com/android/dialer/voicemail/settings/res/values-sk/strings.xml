@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN sa nedá zmeniť</string>
   <string name="change_pin_title">Zmena kódu PIN hlasovej schránky</string>
   <string name="change_pin_continue_label">Pokračovať</string>
-  <string name="change_pin_cancel_label">Zrušiť</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">Potvrďte starý PIN</string>
   <string name="change_pin_enter_old_pin_hint">Ak chcete pokračovať, zadajte PIN hlasovej schránky.</string>
   <string name="change_pin_enter_new_pin_header">Nastavte nový PIN</string>

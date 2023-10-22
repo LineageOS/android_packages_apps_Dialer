@@ -19,5 +19,4 @@
   <string name="simContacts_title">Agenda de pe cardul SIM</string>
   <string name="menu_callNumber">Apelați %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Nu puteți efectua apeluri de urgență prin Wi-Fi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Nu puteți apela acest număr</string>
 </resources>

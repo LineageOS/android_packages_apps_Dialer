@@ -27,8 +27,6 @@
   <dimen name="voicemail_promo_card_action_end_padding">4dp</dimen>
   <dimen name="voicemail_promo_card_action_between_padding">11dp</dimen>
   <dimen name="voicemail_promo_card_line_spacing">4dp</dimen>
-  <dimen name="voicemail_promo_card_title_text_size">16sp</dimen>
-  <dimen name="voicemail_promo_card_message_size">14sp</dimen>
 
   <dimen name="voicemail_tos_image_size">280dp</dimen>
 </resources>

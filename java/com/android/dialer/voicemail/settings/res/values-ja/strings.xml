@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN を変更できませんでした</string>
   <string name="change_pin_title">ボイスメール PIN の変更</string>
   <string name="change_pin_continue_label">続行</string>
-  <string name="change_pin_cancel_label">キャンセル</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">古い PIN の確認</string>
   <string name="change_pin_enter_old_pin_hint">続行するにはボイスメールの PIN を入力してください。</string>
   <string name="change_pin_enter_new_pin_header">新しい PIN の設定</string>

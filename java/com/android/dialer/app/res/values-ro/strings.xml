@@ -34,7 +34,6 @@
   <string name="description_playback_seek">Căutați poziția de redare</string>
   <string name="action_menu_call_history_description">Istoricul apelurilor</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Mai multe opțiuni</string>
-  <string name="action_menu_dialpad_button">tastatură</string>
   <string name="dialer_settings_label">Setări</string>
   <string name="description_entering_bulk_action_mode">Se intră în modul acțiune în bloc</string>
   <string name="description_leaving_bulk_action_mode">Ați ieșit din modul acțiune în bloc</string>

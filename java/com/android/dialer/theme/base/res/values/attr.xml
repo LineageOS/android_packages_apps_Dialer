@@ -25,7 +25,5 @@
   <attr name="colorTextOnUnthemedDarkBackground" format="color"/>
   <!-- Used to color icons on dark backgrounds. White in Light Theme. -->
   <attr name="colorIconOnUnthemedDarkBackground" format="color"/>
-  <!-- Used to theme ripple effects with the app's primary color. -->
-  <attr name="colorPrimary20pct" format="color|reference"/>
   <attr name="colorCallNotificationBackground" format="color|reference"/>
 </resources>

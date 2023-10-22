@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">לא ניתן היה לשנות את קוד הגישה</string>
   <string name="change_pin_title">שינוי של קוד הגישה לדואר הקולי</string>
   <string name="change_pin_continue_label">המשך</string>
-  <string name="change_pin_cancel_label">ביטול</string>
-  <string name="change_pin_ok_label">אישור</string>
   <string name="change_pin_enter_old_pin_header">אישור קוד הגישה הישן</string>
   <string name="change_pin_enter_old_pin_hint">כדי להמשיך צריך להזין את קוד הגישה לדואר הקולי.</string>
   <string name="change_pin_enter_new_pin_header">הגדרת קוד גישה חדש</string>

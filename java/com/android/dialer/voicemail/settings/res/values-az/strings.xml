@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN-i dəyişmək mümkün olmadı</string>
   <string name="change_pin_title">Səsli e-poçtun PIN kodunu dəyişin</string>
   <string name="change_pin_continue_label">Davam edin</string>
-  <string name="change_pin_cancel_label">Ləğv edin</string>
-  <string name="change_pin_ok_label">Ok</string>
   <string name="change_pin_enter_old_pin_header">Köhnə PIN-i təsdiq edin</string>
   <string name="change_pin_enter_old_pin_hint">Davam etmək üçün səsli e-poçtun PIN kodunu daxil edin.</string>
   <string name="change_pin_enter_new_pin_header">Yeni PIN ayarlayın</string>

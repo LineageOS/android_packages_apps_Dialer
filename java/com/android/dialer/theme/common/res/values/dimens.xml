@@ -27,8 +27,6 @@
   <!-- Height of the actionBar - this is 8dps bigger than the platform standard to give more
   room to the search box-->
   <dimen name="action_bar_height">56dp</dimen>
-  <dimen name="action_bar_height_large">64dp</dimen>
-  <dimen name="action_bar_elevation">3dp</dimen>
   <dimen name="tab_height">48dp</dimen>
 
   <dimen name="call_log_icon_margin">2dp</dimen>

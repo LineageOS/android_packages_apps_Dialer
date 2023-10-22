@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN kann nicht geändert werden</string>
   <string name="change_pin_title">Mailbox-PIN ändern</string>
   <string name="change_pin_continue_label">Weiter</string>
-  <string name="change_pin_cancel_label">Abbrechen</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">Alte PIN bestätigen</string>
   <string name="change_pin_enter_old_pin_hint">Gib zum Fortfahren deine Mailbox-PIN ein.</string>
   <string name="change_pin_enter_new_pin_header">Neue PIN festlegen</string>

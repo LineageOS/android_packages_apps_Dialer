@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Δεν είναι δυνατή η αλλαγή του PIN</string>
   <string name="change_pin_title">Αλλαγή PIN αυτόματου τηλεφωνητή</string>
   <string name="change_pin_continue_label">Συνέχεια</string>
-  <string name="change_pin_cancel_label">Ακύρωση</string>
-  <string name="change_pin_ok_label">ΟΚ</string>
   <string name="change_pin_enter_old_pin_header">Επιβεβαιώστε το παλιό σας PIN</string>
   <string name="change_pin_enter_old_pin_hint">Εισαγάγετε το PIN του αυτόματου τηλεφωνητή σας για να συνεχίσετε.</string>
   <string name="change_pin_enter_new_pin_header">Ορίστε ένα νέο PIN</string>
