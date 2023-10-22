@@ -17,13 +17,18 @@
 
 package com.android.dialer.app.settings;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -31,9 +36,12 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 
@@ -41,7 +49,7 @@ import com.android.dialer.R;
 import com.android.dialer.callrecord.impl.CallRecorderService;
 import com.android.dialer.util.SettingsUtil;
 
-public class SoundSettingsFragment extends DialerPreferenceFragment
+public class SoundSettingsFragment extends PreferenceFragmentCompat
     implements Preference.OnPreferenceChangeListener {
 
   private static final int NO_DTMF_TONE = 0;
@@ -54,7 +62,7 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
 
   private static final int MSG_UPDATE_RINGTONE_SUMMARY = 1;
 
-  private Preference ringtonePreference;
+  private DefaultRingtonePreference ringtonePreference;
   private final Handler ringtoneLookupComplete =
       new Handler(Looper.getMainLooper()) {
         @Override
@@ -67,6 +75,18 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
         }
       };
   private final Runnable ringtoneLookupRunnable = () -> updateRingtonePreferenceSummary();
+
+  private final ActivityResultLauncher<Intent> mRingtonePickerResult = registerForActivityResult(
+          new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK) {
+              Intent data = result.getData();
+              if (data == null || data.getExtras() == null) {
+                return;
+              }
+              Uri uri = (Uri) data.getExtras().get(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+              ringtonePreference.onSaveRingtone(uri);
+            }
+          });
 
   private SwitchPreferenceCompat vibrateWhenRinging;
   private SwitchPreferenceCompat playDtmfTone;
@@ -221,7 +241,9 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
           .show();
       return true;
     }
-    if (preference == playDtmfTone) {
+    if (preference == ringtonePreference) {
+      mRingtonePickerResult.launch(ringtonePreference.getRingtonePickerIntent());
+    } else if (preference == playDtmfTone) {
       Settings.System.putInt(
           getActivity().getContentResolver(),
           Settings.System.DTMF_TONE_WHEN_DIALING,
@@ -249,7 +271,7 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
   private boolean shouldVibrateWhenRinging() {
     int vibrateWhenRingingSetting =
         Settings.System.getInt(
-            getActivity().getContentResolver(),
+            requireActivity().getContentResolver(),
             Settings.System.VIBRATE_WHEN_RINGING,
             NO_VIBRATION_FOR_CALLS);
     return hasVibrator() && (vibrateWhenRingingSetting == DO_VIBRATION_FOR_CALLS);
@@ -259,7 +281,7 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
   private boolean shouldPlayDtmfTone() {
     int dtmfToneSetting =
         Settings.System.getInt(
-            getActivity().getContentResolver(),
+            requireActivity().getContentResolver(),
             Settings.System.DTMF_TONE_WHEN_DIALING,
             PLAY_DTMF_TONE);
     return dtmfToneSetting == PLAY_DTMF_TONE;
@@ -267,13 +289,14 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
 
   /** Whether the device hardware has a vibrator. */
   private boolean hasVibrator() {
-    Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+    Vibrator vibrator = requireActivity().getSystemService(Vibrator.class);
     return vibrator != null && vibrator.hasVibrator();
   }
 
+  @SuppressLint("MissingPermission")
   private boolean shouldHideCarrierSettings() {
     CarrierConfigManager configManager =
-        (CarrierConfigManager) getActivity().getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        (CarrierConfigManager) requireActivity().getSystemService(Context.CARRIER_CONFIG_SERVICE);
     return configManager
         .getConfig()
         .getBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL);
