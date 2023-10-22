@@ -19,5 +19,4 @@
   <string name="simContacts_title">Kontakte auf SIM-Karte</string>
   <string name="menu_callNumber">%s anrufen</string>
   <string name="dialpad_hint_emergency_calling_not_available">Notrufe über WLAN nicht möglich</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Diese Nummer kann nicht angerufen werden</string>
 </resources>

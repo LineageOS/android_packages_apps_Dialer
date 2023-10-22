@@ -89,8 +89,4 @@
   <!-- Warning hint shown in the dialpad input field when emergency call (911, etc.) cannot be made over wifi.
        [CHAR_LIMIT=60] -->
   <string name="dialpad_hint_emergency_calling_not_available">Can\'t make emergency calls over WiFi</string>
-
-  <!-- Dialog message which is shown when the user tries to make a phone call
-       to prohibited phone numbers [CHAR LIMIT=NONE] -->
-  <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Can\'t call this number</string>
 </resources>

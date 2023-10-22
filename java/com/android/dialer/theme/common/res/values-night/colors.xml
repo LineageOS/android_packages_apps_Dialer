@@ -19,6 +19,6 @@
   <color name="dialer_call_green">#3ee0a0</color>
   <color name="dialer_end_call_button_color">#ffb3ac</color>
   <color name="dialer_link_color">#b5c4ff</color>
-  <color name="dialer_snackbar_action_text_color">@*android:color/system_accent1_600</color>
+  <color name="dialer_snackbar_action_text_color">@android:color/system_accent1_600</color>
   <color name="dialer_call_icon_color">@android:color/black</color>
 </resources>

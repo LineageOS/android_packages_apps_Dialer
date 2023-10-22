@@ -19,5 +19,4 @@
   <string name="simContacts_title">‏SIM کارڈ کے رابطے</string>
   <string name="menu_callNumber">%s کو کال کریں</string>
   <string name="dialpad_hint_emergency_calling_not_available">‏Wi‑Fi کے ذریعے ایمرجنسی کالز نہیں کر سکتے</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">اس نمبر پر کال نہیں کر سکتے</string>
 </resources>

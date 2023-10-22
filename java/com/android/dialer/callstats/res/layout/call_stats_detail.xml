@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!--
+     Copyright (C) 2009 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -100,7 +102,6 @@
         android:id="@+id/separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/out_average"
         android:layout_marginTop="@dimen/ec_divider_top_bottom_margin"
         android:layout_marginBottom="@dimen/ec_divider_top_bottom_margin"
         android:background="#12000000" />
@@ -110,18 +111,18 @@
         style="@style/CallDetailsActionItemStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/quantum_ic_content_copy_vd_theme_24"
         android:text="@string/call_details_copy_number"
-        android:drawableTint="?colorIcon"/>
+        app:drawableStartCompat="@drawable/quantum_ic_content_copy_vd_theme_24"
+        app:drawableTint="?colorIcon" />
 
       <TextView
         android:id="@+id/call_detail_action_edit_before_call"
         style="@style/CallDetailsActionItemStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/quantum_ic_edit_vd_theme_24"
         android:text="@string/call_details_edit_number"
-        android:drawableTint="?colorIcon"/>
+        app:drawableStartCompat="@drawable/quantum_ic_edit_vd_theme_24"
+        app:drawableTint="?colorIcon" />
 
     </LinearLayout>
 

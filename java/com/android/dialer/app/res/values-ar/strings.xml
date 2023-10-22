@@ -37,7 +37,6 @@
   <string name="description_playback_seek">طلب موضع تشغيل</string>
   <string name="action_menu_call_history_description">سجل المكالمات</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">مزيد من الخيارات</string>
-  <string name="action_menu_dialpad_button">لوحة المفاتيح</string>
   <string name="dialer_settings_label">الإعدادات</string>
   <string name="description_entering_bulk_action_mode">يتم الدخول إلى وضع الإجراء المجمَّع</string>
   <string name="description_leaving_bulk_action_mode">تمت مغادرة وضع الإجراء المجمَّع</string>

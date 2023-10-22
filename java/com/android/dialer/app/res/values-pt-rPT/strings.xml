@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Procurar a posição da reprodução</string>
   <string name="action_menu_call_history_description">Histórico de chamadas</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Mais opções</string>
-  <string name="action_menu_dialpad_button">teclado</string>
   <string name="dialer_settings_label">Definições</string>
   <string name="description_entering_bulk_action_mode">A entrar no modo de ação em massa…</string>
   <string name="description_leaving_bulk_action_mode">Saiu do modo de ação em massa</string>

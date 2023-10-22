@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
  ~ Copyright (C) 2018 The Android Open Source Project
+ ~ Copyright (C) 2023 The LineageOS Project
  ~
  ~ Licensed under the Apache License, Version 2.0 (the "License");
  ~ you may not use this file except in compliance with the License.
@@ -21,6 +22,7 @@
          starts. -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/favorite_remove_view"
     android:layout_width="match_parent"
     android:layout_height="@dimen/expanded_search_bar_height"
@@ -38,7 +40,7 @@
       android:layout_marginTop="8dp"
       android:layout_marginBottom="8dp"
       android:src="@drawable/quantum_ic_close_vd_theme_24"
-      android:tint="?android:attr/textColorPrimary"/>
+      app:tint="?android:attr/textColorPrimary" />
 
   <TextView
       android:id="@+id/remove_view_text"

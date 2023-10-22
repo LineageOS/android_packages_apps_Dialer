@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s लाई चिन्नुहुन्छ?</string>
   <string name="spam_notification_title">%1$s स्प्याम कल गर्ने व्यक्ति थिए?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s माथि रोक लगाइयो र कललाई स्प्याम भनी रिपोर्ट गरियो।</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s बाट आएको कललाई स्प्याम होइन भनी रिपोर्ट गरियो।</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">सम्पर्कहरूमा थप्न वा स्प्याम नम्बरमाथि रोक लगाउन ट्याप गर्नुहोस्।</string>
   <string name="spam_notification_non_spam_call_expanded_text">यस नम्बरबाट तपाईंलाई कल आएको यो पहिलोपटक हो। यो कल स्प्याम हो भने तपाईं यो नम्बरमाथि रोक लगाउन र यसबारे रिपोर्ट गर्न सक्नुहुन्छ।</string>
-  <string name="spam_notification_spam_call_collapsed_text">स्प्याम होइन भनी रिपोर्ट गर्न ट्याप गर्नुहोस् वा यसमाथि रोक लगाउनुहोस्</string>
   <string name="spam_notification_dialog_add_contact_action_text">सम्पर्कहरूमा थप्नुहोस्‌</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">रोक लगाउनुहोस्‌ र स्प्याम भनी रिपोर्ट गर्नुहोस्‌</string>
   <string name="spam_notification_was_not_spam_action_text">स्प्याम होइन</string>

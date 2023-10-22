@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Го знаете %1$s?</string>
   <string name="spam_notification_title">Дали повикот од %1$s беше спам?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s е блокиран и повикот е пријавен како спам.</string>
-  <string name="spam_notification_not_spam_toast_text">Повикот од %1$s е пријавен дека не е спам.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Допрете за додавање контакти или блокирање спам број.</string>
   <string name="spam_notification_non_spam_call_expanded_text">За првпат добивте повик од бројов. Ако повикот е спам, бројот може да го блокирате и да го пријавите.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Допрете за да пријавите дека не е спам или за да го блокирате.</string>
   <string name="spam_notification_dialog_add_contact_action_text">Додај во контакти</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Блокирај и пријави спам</string>
   <string name="spam_notification_was_not_spam_action_text">Не, не е спам</string>

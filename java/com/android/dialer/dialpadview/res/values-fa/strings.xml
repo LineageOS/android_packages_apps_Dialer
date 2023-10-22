@@ -19,5 +19,4 @@
   <string name="simContacts_title">مخاطبین سیم‌کارت</string>
   <string name="menu_callNumber">تماس با %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">‏برقراری تماس اضطراری ازطریق Wi‑Fi امکان‌پذیر نیست</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">تماس با این شماره ممکن نیست</string>
 </resources>

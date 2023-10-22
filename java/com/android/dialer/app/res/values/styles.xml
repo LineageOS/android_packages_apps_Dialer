@@ -21,10 +21,6 @@
     <item name="android:navigationBarDividerColor">@null</item>
   </style>
 
-  <style name="DialpadTheme" parent="DialtactsTheme">
-    <item name="android:textColorPrimary">?android:attr/textColorPrimaryInverse</item>
-  </style>
-
   <style name="TransparentTheme" parent="DialtactsTheme">
     <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
     <item name="android:windowBackground">@android:color/transparent</item>
@@ -33,14 +29,6 @@
     <item name="android:windowIsTranslucent">true</item>
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowIsFloating">true</item>
-  </style>
-
-  <style name="DialtactsSearchBarThemeOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-
-  <!-- Text in the action bar at the top of the screen -->
-  <style name="DialtactsActionBarTitleText"
-    parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
-    <item name="android:textColor">?colorTextOnUnthemedDarkBackground</item>
   </style>
 
   <!-- Text style for tabs. -->

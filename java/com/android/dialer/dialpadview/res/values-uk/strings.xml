@@ -19,5 +19,4 @@
   <string name="simContacts_title">Контакти із SIM-карти</string>
   <string name="menu_callNumber">Зателефонувати на номер %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Не можна здійснювати екстрені виклики через Wi-Fi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Не можна телефонувати на цей номер</string>
 </resources>

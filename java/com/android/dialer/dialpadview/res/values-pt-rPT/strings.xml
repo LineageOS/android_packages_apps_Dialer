@@ -19,5 +19,4 @@
   <string name="simContacts_title">Contactos do cartão SIM</string>
   <string name="menu_callNumber">Telefonar para %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">Impossível efetuar chamadas de emergência através de Wi‑Fi</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Não é possível ligar para este número</string>
 </resources>

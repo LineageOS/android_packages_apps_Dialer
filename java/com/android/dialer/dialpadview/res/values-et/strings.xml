@@ -19,5 +19,4 @@
   <string name="simContacts_title">SIM-kaardi kontaktid</string>
   <string name="menu_callNumber">Helistamine numbrile %s</string>
   <string name="dialpad_hint_emergency_calling_not_available">WiFi kaudu ei saa hädaabikõnesid teha</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Sellele numbrile ei saa helistada</string>
 </resources>

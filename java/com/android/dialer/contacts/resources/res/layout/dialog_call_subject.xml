@@ -151,7 +151,6 @@
     android:id="@+id/subject_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/dialog_view"
     android:background="?android:attr/colorBackground"
     android:divider="@null"
     android:elevation="8dp"/>
