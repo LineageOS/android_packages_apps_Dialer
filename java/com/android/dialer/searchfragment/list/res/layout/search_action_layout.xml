@@ -28,7 +28,7 @@
       android:layout_marginStart="8dp"
       android:layout_gravity="center_vertical|start"
       android:padding="12dp"
-      android:tint="?colorIcon"/>
+      app:tint="?colorIcon" />
 
   <TextView
       android:id="@+id/search_action_text"

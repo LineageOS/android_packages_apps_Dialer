@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">பின்னை மாற்ற முடியவில்லை</string>
   <string name="change_pin_title">குரலஞ்சல் பின்னை மாற்றவும்</string>
   <string name="change_pin_continue_label">தொடர்க</string>
-  <string name="change_pin_cancel_label">ரத்துசெய்</string>
-  <string name="change_pin_ok_label">சரி</string>
   <string name="change_pin_enter_old_pin_header">பழைய பின்னை உறுதிப்படுத்தவும்</string>
   <string name="change_pin_enter_old_pin_hint">தொடர, குரலஞ்சல் பின்னை உள்ளிடவும்.</string>
   <string name="change_pin_enter_new_pin_header">புதிய பின்னை அமைக்கவும்</string>

@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN-koodin vaihtaminen epäonnistui.</string>
   <string name="change_pin_title">Vaihda vastaajan PIN-koodi</string>
   <string name="change_pin_continue_label">Jatka</string>
-  <string name="change_pin_cancel_label">Peruuta</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">Vahvista vanha PIN-koodi</string>
   <string name="change_pin_enter_old_pin_hint">Jatka antamalla vastaajasi PIN-koodi.</string>
   <string name="change_pin_enter_new_pin_header">Määritä uusi PIN-koodi</string>

@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">No se puede cambiar el PIN</string>
   <string name="change_pin_title">Cambiar el PIN del buzón de voz</string>
   <string name="change_pin_continue_label">Continuar</string>
-  <string name="change_pin_cancel_label">Cancelar</string>
-  <string name="change_pin_ok_label">Aceptar</string>
   <string name="change_pin_enter_old_pin_header">Confirmar el PIN anterior</string>
   <string name="change_pin_enter_old_pin_hint">Ingresa el PIN del buzón de voz para continuar.</string>
   <string name="change_pin_enter_new_pin_header">Establecer un PIN nuevo</string>

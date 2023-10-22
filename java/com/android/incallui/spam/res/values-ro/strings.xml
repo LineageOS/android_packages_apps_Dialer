@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Cunoașteți numărul %1$s?</string>
   <string name="spam_notification_title">%1$s a fost un apel spam?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s a fost blocat și apelul a fost raportat ca spam.</string>
-  <string name="spam_notification_not_spam_toast_text">Apelul primit de la %1$s a fost raportat ca nefiind spam.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Atingeți pentru a adăuga numărul în agendă sau pentru a-l raporta ca spam și a-l bloca.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Aceasta este prima dată când ați primit apel de la acest număr. Dacă apelul a fost spam, puteți să blocați numărul și să îl raportați.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Atingeți pentru a raporta ca nu este spam sau blocați-l.</string>
   <string name="spam_notification_dialog_add_contact_action_text">Adăugați în agendă</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blocați și raportați spam</string>
   <string name="spam_notification_was_not_spam_action_text">Nu, nu este spam</string>

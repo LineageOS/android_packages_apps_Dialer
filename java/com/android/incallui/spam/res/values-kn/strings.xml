@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s ತಿಳಿದಿದೆಯೇ?</string>
   <string name="spam_notification_title">%1$s ಇದು ಸ್ಪ್ಯಾಮ್ ಕರೆಯೇ?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s ಅನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ ಮತ್ತು ಕರೆಯನ್ನು ಸ್ಪ್ಯಾಮ್ ಎಂದು ವರದಿ ಮಾಡಲಾಗಿದೆ.</string>
-  <string name="spam_notification_not_spam_toast_text">%1$s ನಿಂದ ಕರೆಯನ್ನು ಸ್ಪ್ಯಾಮ್ ಅಲ್ಲ ಎಂದು ವರದಿಮಾಡಲಾಗಿದೆ.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">ಸಂಪರ್ಕಗಳಿಗೆ ಸೇರಿಸಲು ಅಥವಾ ಸ್ಪ್ಯಾಮ್ ಸಂಖ್ಯೆಯನ್ನು ನಿರ್ಬಂಧಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ.</string>
   <string name="spam_notification_non_spam_call_expanded_text">ಇದೇ ಮೊದಲ ಬಾರಿಗೆ ಈ ಸಂಖ್ಯೆಯಿಂದ ನಿಮಗೆ ಕರೆ ಮಾಡಲಾಗಿದೆ. ಈ ಕರೆಯು ಸ್ಪ್ಯಾಮ್ ಎನಿಸಿದರೆ, ನೀವು ಈ ಕರೆಯನ್ನು ನಿರ್ಬಂಧಿಸಬಹುದು ಮತ್ತು ವರದಿ ಮಾಡಿ.</string>
-  <string name="spam_notification_spam_call_collapsed_text">ಸ್ಪ್ಯಾಮ್ ಅಲ್ಲ ಎಂದು ವರದಿ ಮಾಡಲು ಟ್ಯಾಪ್ ಮಾಡಿ ಅಥವಾ ಇದನ್ನು ನಿರ್ಬಂಧಿಸಿ.</string>
   <string name="spam_notification_dialog_add_contact_action_text">ಸಂಪರ್ಕಗಳಿಗೆ ಸೇರಿಸಿ</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">ನಿರ್ಬಂಧಿಸಿ ಮತ್ತು ಸ್ಪ್ಯಾಮ್ ವರದಿ ಮಾಡಿ</string>
   <string name="spam_notification_was_not_spam_action_text">ಇಲ್ಲ, ಸ್ಪ್ಯಾಮ್‌ ಅಲ್ಲ</string>

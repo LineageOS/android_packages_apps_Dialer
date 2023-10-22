@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">ਪਿੰਨ ਨੂੰ ਬਦਲਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ</string>
   <string name="change_pin_title">ਵੌਇਸਮੇਲ ਪਿੰਨ ਬਦਲੋ</string>
   <string name="change_pin_continue_label">ਜਾਰੀ ਰੱਖੋ</string>
-  <string name="change_pin_cancel_label">ਰੱਦ ਕਰੋ</string>
-  <string name="change_pin_ok_label">ਠੀਕ ਹੈ</string>
   <string name="change_pin_enter_old_pin_header">ਆਪਣੇ ਪੁਰਾਣੇ ਪਿੰਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ</string>
   <string name="change_pin_enter_old_pin_hint">ਜਾਰੀ ਰੱਖਣ ਲਈ ਆਪਣਾ ਵੌਇਸਮੇਲ ਪਿੰਨ ਦਾਖਲ ਕਰੋ।</string>
   <string name="change_pin_enter_new_pin_header">ਇੱਕ ਨਵਾਂ ਪਿੰਨ ਸੈੱਟ ਕਰੋ</string>

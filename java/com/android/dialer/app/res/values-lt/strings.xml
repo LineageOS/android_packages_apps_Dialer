@@ -35,7 +35,6 @@
   <string name="description_playback_seek">Ieškoti atkūrimo pozicijos</string>
   <string name="action_menu_call_history_description">Skambučių istorija</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Daugiau parinkčių</string>
-  <string name="action_menu_dialpad_button">klaviatūra</string>
   <string name="dialer_settings_label">Nustatymai</string>
   <string name="description_entering_bulk_action_mode">Įjungiamas masinių veiksmų režimas</string>
   <string name="description_leaving_bulk_action_mode">Masinių veiksmų režimas išjungtas</string>

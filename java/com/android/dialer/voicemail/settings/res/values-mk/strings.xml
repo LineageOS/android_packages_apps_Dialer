@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">PIN-кодот не може да се промени</string>
   <string name="change_pin_title">Променете го PIN-кодот на говорната пошта</string>
   <string name="change_pin_continue_label">Продолжи</string>
-  <string name="change_pin_cancel_label">Откажи</string>
-  <string name="change_pin_ok_label">Во ред</string>
   <string name="change_pin_enter_old_pin_header">Потврдете го стариот PIN</string>
   <string name="change_pin_enter_old_pin_hint">Внесете го PIN-кодот на говорната пошта за да продолжите.</string>
   <string name="change_pin_enter_new_pin_header">Поставете нов PIN</string>

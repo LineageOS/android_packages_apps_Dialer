@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Kan nie PIN verander nie</string>
   <string name="change_pin_title">Verander stemboodskap-PIN</string>
   <string name="change_pin_continue_label">Gaan voort</string>
-  <string name="change_pin_cancel_label">Kanselleer</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">Bevestig jou ou PIN</string>
   <string name="change_pin_enter_old_pin_hint">Voer jou stemboodskap-PIN in om voort te gaan.</string>
   <string name="change_pin_enter_new_pin_header">Stel \'n nuwe PIN op</string>

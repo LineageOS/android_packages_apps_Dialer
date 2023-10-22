@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">ፒን መቀየር አልተቻለም</string>
   <string name="change_pin_title">የድምፅ መልዕክት ፒን ለውጥ</string>
   <string name="change_pin_continue_label">ቀጥል</string>
-  <string name="change_pin_cancel_label">ይቅር</string>
-  <string name="change_pin_ok_label">እሺ</string>
   <string name="change_pin_enter_old_pin_header">የቀድሞውን ፒንዎን ያረጋግጡ</string>
   <string name="change_pin_enter_old_pin_hint">ለመቀጠል የድምፅ መልዕክት ፒንዎን ያስገቡ።</string>
   <string name="change_pin_enter_new_pin_header">አዲስ ፒን ያዘጋጁ</string>

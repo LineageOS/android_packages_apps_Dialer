@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">ບໍ່ສາມາດປ່ຽນລະຫັດ PIN ໄດ້</string>
   <string name="change_pin_title">ປ່ຽນລະຫັດ PIN ຂໍ້ຄວາມສຽງ</string>
   <string name="change_pin_continue_label">ສືບຕໍ່</string>
-  <string name="change_pin_cancel_label">ຍົກເລີກ</string>
-  <string name="change_pin_ok_label">ຕົກລົງ</string>
   <string name="change_pin_enter_old_pin_header">ຢືນຢັນລະຫັດ PIN ເກົ່າຂອງທ່ານ</string>
   <string name="change_pin_enter_old_pin_hint">ໃສ່ລະຫັດ PIN ຂໍ້ຄວາມສຽງຂອງທ່ານເພື່ອດຳເນີນການຕໍ່.</string>
   <string name="change_pin_enter_new_pin_header">ຕັ້ງ​ເປັນ PIN ໃຫມ່</string>

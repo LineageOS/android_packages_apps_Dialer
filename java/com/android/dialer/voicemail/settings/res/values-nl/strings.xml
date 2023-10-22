@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Kan pincode niet wijzigen</string>
   <string name="change_pin_title">Voicemailpincode wijzigen</string>
   <string name="change_pin_continue_label">Doorgaan</string>
-  <string name="change_pin_cancel_label">Annuleren</string>
-  <string name="change_pin_ok_label">OK</string>
   <string name="change_pin_enter_old_pin_header">Je oude pincode bevestigen</string>
   <string name="change_pin_enter_old_pin_hint">Geef je voicemailpincode op om door te gaan.</string>
   <string name="change_pin_enter_new_pin_header">Een nieuwe pincode instellen</string>

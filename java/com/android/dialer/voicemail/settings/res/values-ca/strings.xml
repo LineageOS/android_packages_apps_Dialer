@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">No es pot canviar el PIN</string>
   <string name="change_pin_title">Canvia el PIN de la bústia de veu</string>
   <string name="change_pin_continue_label">Continua</string>
-  <string name="change_pin_cancel_label">Cancel·la</string>
-  <string name="change_pin_ok_label">D\'acord</string>
   <string name="change_pin_enter_old_pin_header">Confirma el teu PIN antic</string>
   <string name="change_pin_enter_old_pin_hint">Introdueix el PIN de la bústia de veu per continuar.</string>
   <string name="change_pin_enter_new_pin_header">Defineix un PIN nou</string>

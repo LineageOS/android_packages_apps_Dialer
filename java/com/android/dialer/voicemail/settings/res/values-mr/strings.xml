@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">पिन बदलू शकत नाही</string>
   <string name="change_pin_title">व्हॉइसमेल पिन बदला</string>
   <string name="change_pin_continue_label">सुरू ठेवा</string>
-  <string name="change_pin_cancel_label">रद्द करा</string>
-  <string name="change_pin_ok_label">ठीक आहे</string>
   <string name="change_pin_enter_old_pin_header">तुमच्या जुन्या पिनची खात्री पटवा</string>
   <string name="change_pin_enter_old_pin_hint">सुरू ठेवण्‍यासाठी तुमचा व्हॉइसमेल पिन टाका.</string>
   <string name="change_pin_enter_new_pin_header">नवीन पिन सेट करा</string>

@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">Không thể thay đổi mã PIN</string>
   <string name="change_pin_title">Thay đổi mã PIN thư thoại</string>
   <string name="change_pin_continue_label">Tiếp tục</string>
-  <string name="change_pin_cancel_label">Hủy</string>
-  <string name="change_pin_ok_label">Ok</string>
   <string name="change_pin_enter_old_pin_header">Xác nhận mã PIN cũ của bạn</string>
   <string name="change_pin_enter_old_pin_hint">Hãy nhập mã PIN thư thoại của bạn để tiếp tục.</string>
   <string name="change_pin_enter_new_pin_header">Đặt mã PIN mới</string>

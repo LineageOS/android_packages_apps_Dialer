@@ -35,7 +35,6 @@
   <string name="description_playback_seek">Шукаць становішча прайгравання</string>
   <string name="action_menu_call_history_description">Гісторыя выклікаў</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Дадатковыя параметры</string>
-  <string name="action_menu_dialpad_button">клавіятура</string>
   <string name="dialer_settings_label">Налады</string>
   <string name="description_entering_bulk_action_mode">Уваход у рэжым групавога дзеяння</string>
   <string name="description_leaving_bulk_action_mode">Выхад з рэжыму групавога дзеяння</string>

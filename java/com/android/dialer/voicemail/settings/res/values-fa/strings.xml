@@ -22,8 +22,6 @@
   <string name="vm_change_pin_error_system_error">پین تغییر نکرد</string>
   <string name="change_pin_title">تغییر پین پست صوتی</string>
   <string name="change_pin_continue_label">ادامه</string>
-  <string name="change_pin_cancel_label">لغو</string>
-  <string name="change_pin_ok_label">تأیید</string>
   <string name="change_pin_enter_old_pin_header">تأیید پین قدیمی</string>
   <string name="change_pin_enter_old_pin_hint">برای ادامه دادن، پین پست صوتی را وارد کنید.</string>
   <string name="change_pin_enter_new_pin_header">تنظیم پین جدید</string>
