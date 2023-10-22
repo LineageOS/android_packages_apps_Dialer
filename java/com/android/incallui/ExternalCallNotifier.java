@@ -259,7 +259,8 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
                       isVideoCall
                           ? R.string.notification_take_video_call
                           : R.string.notification_take_call),
-                  PendingIntent.getBroadcast(context, info.getNotificationId(), intent, 0))
+                  PendingIntent.getBroadcast(context, info.getNotificationId(), intent,
+                          PendingIntent.FLAG_IMMUTABLE))
               .build());
     }
 
