@@ -30,12 +30,11 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.dialer.R;
-import com.android.dialer.app.settings.DialerPreferenceFragment;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.notification.NotificationChannelManager;
@@ -51,7 +50,7 @@ import java.lang.annotation.RetentionPolicy;
  * Fragment for voicemail settings. Requires {@link VoicemailClient#PARAM_PHONE_ACCOUNT_HANDLE} set
  * in arguments.
  */
-public class VoicemailSettingsFragment extends DialerPreferenceFragment
+public class VoicemailSettingsFragment extends PreferenceFragmentCompat
     implements Preference.OnPreferenceChangeListener, ActivationStateListener {
 
   // Extras copied from com.android.phone.settings.VoicemailSettingsActivity,
@@ -80,6 +79,11 @@ public class VoicemailSettingsFragment extends DialerPreferenceFragment
     phoneAccountHandle =
         Assert.isNotNull(getArguments().getParcelable(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE));
     voicemailClient = VoicemailComponent.get(getContext()).getVoicemailClient();
+  }
+
+  @Override
+  public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+
   }
 
   @Override

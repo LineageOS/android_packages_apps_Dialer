@@ -20,10 +20,11 @@ package com.android.dialer.app.settings;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.dialer.R;
 
-public class DisplayOptionsSettingsFragment extends DialerPreferenceFragment {
+public class DisplayOptionsSettingsFragment extends PreferenceFragmentCompat {
 
   @Override
   public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
