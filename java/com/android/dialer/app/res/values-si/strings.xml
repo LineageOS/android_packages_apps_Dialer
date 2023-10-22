@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Playback ස්ථානය සොයාබලන්න</string>
   <string name="action_menu_call_history_description">ඇමතුම් ඉතිහාසය</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">තවත් විකල්ප</string>
-  <string name="action_menu_dialpad_button">යතුරු පුවරුව</string>
   <string name="dialer_settings_label">සැකසීම්</string>
   <string name="description_entering_bulk_action_mode">තොග ක්‍රියා ප්‍රකාරය ඇතුළු කරමින්</string>
   <string name="description_leaving_bulk_action_mode">තොග ක්‍රියා ප්‍රකාරය හැර යන ලදී</string>

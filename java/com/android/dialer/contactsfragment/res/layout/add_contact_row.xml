@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
  ~ Copyright (C) 2017 The Android Open Source Project
+ ~ Copyright (C) 2023 The LineageOS Project
  ~
  ~ Licensed under the Apache License, Version 2.0 (the "License");
  ~ you may not use this file except in compliance with the License.
@@ -35,8 +36,8 @@
       android:layout_width="@dimen/photo_size"
       android:layout_height="@dimen/photo_size"
       android:src="@drawable/quantum_ic_person_add_vd_theme_24"
-      android:tint="?colorIcon"
-      android:scaleType="center"/>
+      android:scaleType="center"
+      app:tint="?colorIcon" />
 
   <TextView
       android:id="@+id/contact_name"

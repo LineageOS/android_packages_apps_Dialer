@@ -35,7 +35,6 @@
   <string name="description_playback_seek">Iskanje položaja predvajanja</string>
   <string name="action_menu_call_history_description">Zgodovina klicev</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Več možnosti</string>
-  <string name="action_menu_dialpad_button">tipkovnica</string>
   <string name="dialer_settings_label">Nastavitve</string>
   <string name="description_entering_bulk_action_mode">Prehod v način množičnega dejanja</string>
   <string name="description_leaving_bulk_action_mode">Prehod iz načina množičnega dejanja</string>

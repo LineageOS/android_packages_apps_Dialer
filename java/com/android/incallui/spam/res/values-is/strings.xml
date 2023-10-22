@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Þekkirðu %1$s?</string>
   <string name="spam_notification_title">Var %1$s ruslnúmer?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s var sett á bannlista og símtalið tilkynnt.</string>
-  <string name="spam_notification_not_spam_toast_text">Símtal frá %1$s var ekki tilkynnt.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Ýttu til að bæta í tengiliði eða setja á bannlista.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Þetta er í fyrsta sinn sem hringt er í þig úr þessu númeri. Ef þetta símtal var úr ruslnúmeri geturðu sett það á bannlista og tilkynnt það.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Ýttu til að tilkynna að þetta sé ekki ruslnúmer eða til að setja það á bannlista</string>
   <string name="spam_notification_dialog_add_contact_action_text">Bæta við tengiliði</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Banna og tilkynna sem ruslnúmer</string>
   <string name="spam_notification_was_not_spam_action_text">Nei, ekki ruslnúmer</string>

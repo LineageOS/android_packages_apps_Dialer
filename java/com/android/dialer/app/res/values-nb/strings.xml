@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Søk etter avspillingsposisjon</string>
   <string name="action_menu_call_history_description">Anropslogg</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Flere alternativer</string>
-  <string name="action_menu_dialpad_button">Tastatur</string>
   <string name="dialer_settings_label">Innstillinger</string>
   <string name="description_entering_bulk_action_mode">Starter massehandlingsmodus</string>
   <string name="description_leaving_bulk_action_mode">Massehandlingsmodus er avsluttet</string>

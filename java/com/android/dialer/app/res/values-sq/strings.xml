@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Kërko pozicionin e luajtjes</string>
   <string name="action_menu_call_history_description">Historiku i telefonatave</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Opsione të tjera</string>
-  <string name="action_menu_dialpad_button">blloku i tasteve</string>
   <string name="dialer_settings_label">Cilësimet</string>
   <string name="description_entering_bulk_action_mode">Po hyn në modalitetin e veprimit në masë</string>
   <string name="description_leaving_bulk_action_mode">U largove nga modaliteti i veprimit në masë</string>

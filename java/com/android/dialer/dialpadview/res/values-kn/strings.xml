@@ -19,5 +19,4 @@
   <string name="simContacts_title">ಸಿಮ್‌ ಕಾರ್ಡ್‌ ಸಂಪರ್ಕಗಳು</string>
   <string name="menu_callNumber">%s ಕರೆ ಮಾಡಿ</string>
   <string name="dialpad_hint_emergency_calling_not_available">ವೈ-ಫೈ ಮೂಲಕ ತುರ್ತು ಕರೆಗಳನ್ನು ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ</string>
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">ಈ ಸಂಖ್ಯೆಗೆ ಕರೆ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ</string>
 </resources>

@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Ismeri a következő számot: %1$s?</string>
   <string name="spam_notification_title">Spamhívás érkezett erről a számról: %1$s?</string>
-  <string name="spam_notification_block_report_toast_text">Letiltotta a(z) %1$s számot, és bejelentette a hívást spamként.</string>
-  <string name="spam_notification_not_spam_toast_text">A(z) %1$s számról érkező hívást bejelentette nem spamként.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Koppintson a névjegyekhez való hozzáadáshoz vagy a spamszám letiltásához.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Ez az első alkalom, hogy erről a számról hívása érkezett. Ha a hívás spam, letilthatja és bejelentheti a számot.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Koppintson a nem spamként való bejelentéshez vagy a letiltáshoz</string>
   <string name="spam_notification_dialog_add_contact_action_text">Hozzáadás a névjegyekhez</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Letiltás és spam bejelentése</string>
   <string name="spam_notification_was_not_spam_action_text">Nem, nem spam volt</string>

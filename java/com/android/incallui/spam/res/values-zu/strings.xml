@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Uyayazi i-%1$s?</string>
   <string name="spam_notification_title">Ingabe i-%1$s umshayi wogaxekile?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s ivinjelwe futhi ikholi ibikwe njengogaxekile.</string>
-  <string name="spam_notification_not_spam_toast_text">Ikholi esuka ku-%1$s ibikwe njengokungeyena ugaxekile.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Thepha ukwengeza koxhumana nabo noma ukuvimbela inombolo engugaxekile.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Okokuqala le nombolo ikushayela. Uma le kholi kade ingugaxekile, ungakwazi ukuvimbela le nombolo futhi uyibike.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Thepha ukubika njengokungeyena ugaxekile noma vimbela</string>
   <string name="spam_notification_dialog_add_contact_action_text">Engeza koxhumana nabo</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Vimba futhi ubike ugaxekile</string>
   <string name="spam_notification_was_not_spam_action_text">Cha, akuyena ugaxekile</string>

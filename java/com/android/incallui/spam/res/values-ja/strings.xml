@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">発信者（%1$s）をご存知ですか？</string>
   <string name="spam_notification_title">%1$s は迷惑電話でしたか？</string>
-  <string name="spam_notification_block_report_toast_text">「%1$s」をブロックして、迷惑電話として報告しました。</string>
-  <string name="spam_notification_not_spam_toast_text">「%1$s」からの通話は迷惑電話ではないと報告しました。</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">タップして連絡先に追加するか、迷惑電話としてこの番号をブロックできます。</string>
   <string name="spam_notification_non_spam_call_expanded_text">この番号からの通話を着信したのはこれが初めてです。迷惑電話だった場合は、この番号をブロックして報告してください。</string>
-  <string name="spam_notification_spam_call_collapsed_text">タップして「迷惑電話ではない」と報告するか、この番号をブロックできます</string>
   <string name="spam_notification_dialog_add_contact_action_text">連絡先に追加</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">ブロックして迷惑電話として報告</string>
   <string name="spam_notification_was_not_spam_action_text">迷惑電話ではない</string>
