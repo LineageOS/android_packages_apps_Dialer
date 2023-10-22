@@ -33,7 +33,6 @@
   <string name="description_playback_seek">指定播放位置</string>
   <string name="action_menu_call_history_description">通話記錄</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">更多選項</string>
-  <string name="action_menu_dialpad_button">小鍵盤</string>
   <string name="dialer_settings_label">設定</string>
   <string name="description_entering_bulk_action_mode">正在進入大量操作模式</string>
   <string name="description_leaving_bulk_action_mode">已離開大量操作模式</string>

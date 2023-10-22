@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Hanapin ang posisyon ng playback</string>
   <string name="action_menu_call_history_description">History ng tawag</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Higit pang mga pagpipilian</string>
-  <string name="action_menu_dialpad_button">keypad</string>
   <string name="dialer_settings_label">Mga Setting</string>
   <string name="description_entering_bulk_action_mode">Pumapasok sa bulk action mode</string>
   <string name="description_leaving_bulk_action_mode">Umalis sa bulk action mode</string>

@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Mencari posisi pemutaran</string>
   <string name="action_menu_call_history_description">Histori panggilan</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Opsi lainnya</string>
-  <string name="action_menu_dialpad_button">keypad</string>
   <string name="dialer_settings_label">Setelan</string>
   <string name="description_entering_bulk_action_mode">Masuk ke mode tindakan massal</string>
   <string name="description_leaving_bulk_action_mode">Keluar dari mode tindakan massal</string>

@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">%1$s را می‌شناسید؟</string>
   <string name="spam_notification_title">%1$s تماس‌گیرنده هرزنامه بود؟</string>
-  <string name="spam_notification_block_report_toast_text">%1$s مسدود شد و تماس به‌عنوان هرزنامه گزارش شد.</string>
-  <string name="spam_notification_not_spam_toast_text">تماس از %1$s به‌عنوان غیرهرزنامه گزارش شد.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">برای افزودن مخاطبین یا مسدود کردن شماره هرزنامه، ضربه بزنید.</string>
   <string name="spam_notification_non_spam_call_expanded_text">اولین بار است که این شماره با شما تماس گرفته است. اگر این تماس هرزنامه است می‌توانید شماره را مسدود کنید و آن را گزارش کنید.</string>
-  <string name="spam_notification_spam_call_collapsed_text">برای گزارش به‌عنوان «غیرهرزنامه» ضربه بزنید یا آن را مسدود کنید</string>
   <string name="spam_notification_dialog_add_contact_action_text">افزودن به مخاطبین</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">مسدود کردن و گزارش هرزنامه</string>
   <string name="spam_notification_was_not_spam_action_text">نه، هرزنامه نیست</string>

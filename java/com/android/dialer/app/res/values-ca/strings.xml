@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Cerca la posició de la reproducció</string>
   <string name="action_menu_call_history_description">Historial de trucades</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Més opcions</string>
-  <string name="action_menu_dialpad_button">teclat</string>
   <string name="dialer_settings_label">Configuració</string>
   <string name="description_entering_bulk_action_mode">S\'està accedint al mode d\'acció massiva</string>
   <string name="description_leaving_bulk_action_mode">S\'ha sortit del mode d\'acció massiva</string>

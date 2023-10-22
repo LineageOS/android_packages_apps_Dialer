@@ -33,7 +33,6 @@
   <string name="description_playback_seek">Барајте позиција на репродукција</string>
   <string name="action_menu_call_history_description">Историја на повици</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Повеќе опции</string>
-  <string name="action_menu_dialpad_button">тастатура за бирање</string>
   <string name="dialer_settings_label">Поставки</string>
   <string name="description_entering_bulk_action_mode">Влегувате во режим на групно дејство</string>
   <string name="description_leaving_bulk_action_mode">Излеговте од режим на групно дејство</string>

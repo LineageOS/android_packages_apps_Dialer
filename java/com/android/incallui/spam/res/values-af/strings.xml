@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Ken jy %1$s?</string>
   <string name="spam_notification_title">Was %1$s \'n strooiposbeller?</string>
-  <string name="spam_notification_block_report_toast_text">%1$s is geblokkeer en oproep is as strooipos aangegee.</string>
-  <string name="spam_notification_not_spam_toast_text">Oproep vanaf %1$s is as nie strooipos nie aangegee.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Tik om by kontakte te voeg of strooiposnommer te blokkeer.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Dit is die eerste keer wat hierdie nommer jou bel. As hierdie oproep strooipos was, kan jy hierdie nommer blokkeer en dit aangee.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Tik om as nie strooipos nie aan te gee, of dit te blokkeer</string>
   <string name="spam_notification_dialog_add_contact_action_text">Voeg by kontakte</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokkeer en gee strooipos aan</string>
   <string name="spam_notification_was_not_spam_action_text">Nee, nie strooipos nie</string>

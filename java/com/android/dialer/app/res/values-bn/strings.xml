@@ -33,7 +33,6 @@
   <string name="description_playback_seek">প্লেব্যাক লোকেশন খুঁজুন</string>
   <string name="action_menu_call_history_description">কলের ইতিহাস</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">আরও বিকল্প</string>
-  <string name="action_menu_dialpad_button">কীপ্যাড</string>
   <string name="dialer_settings_label">সেটিংস</string>
   <string name="description_entering_bulk_action_mode">বাল্ক অ্যাকশন মোডে প্রবেশ করা হচ্ছে</string>
   <string name="description_leaving_bulk_action_mode">বাল্ক অ্যাকশন মোড ত্যাগ করুন</string>

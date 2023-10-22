@@ -2,11 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="non_spam_notification_title">Poznáte číslo %1$s?</string>
   <string name="spam_notification_title">Bol hovor z čísla %1$s spam?</string>
-  <string name="spam_notification_block_report_toast_text">Číslo %1$s bolo zablokované a hovor bol nahlásený ako spam.</string>
-  <string name="spam_notification_not_spam_toast_text">Hovor z čísla %1$s bol nahlásený, že nie je spam.</string>
-  <string name="spam_notification_non_spam_call_collapsed_text">Klepnutím pridáte číslo medzi kontakty alebo zablokujte ako spam.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Toto bol prvý hovor z tohto čísla. Ak bol tento hovor spam, môžete toto číslo zablokovať a nahlásiť ho.</string>
-  <string name="spam_notification_spam_call_collapsed_text">Klepnutím môžete nahlásiť, že číslo nie je spam, alebo ho môžete zablokovať</string>
   <string name="spam_notification_dialog_add_contact_action_text">Pridať medzi kontakty</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokovať a nahlásiť spam</string>
   <string name="spam_notification_was_not_spam_action_text">Nie, nebol to spam</string>

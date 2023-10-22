@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<!--
+     Copyright (C) 2014 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -17,6 +19,7 @@
 <!-- A layout representing key "1" in the dialpad -->
 <com.android.dialer.dialpadview.DialpadKeyButton
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/one"
     style="@style/DialpadKeyButtonStyle">
 
@@ -30,7 +33,7 @@
     <FrameLayout
         android:layout_width="@dimen/dialpad_key_number_width"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/dialpad_key_margin_right">
+        android:layout_marginEnd="@dimen/dialpad_key_margin_right">
       <com.android.dialer.dialpadview.DialpadTextView
           android:id="@+id/dialpad_key_number"
           style="@style/DialpadKeyNumberStyle"/>
@@ -46,7 +49,7 @@
           android:layout_height="@dimen/dialpad_voicemail_icon_size"
           android:scaleType="fitCenter"
           android:src="@drawable/quantum_ic_voicemail_vd_theme_24"
-          android:tint="?colorIcon"/>
+          app:tint="?colorIcon" />
     </LinearLayout>
 
     <!-- A placeholder to make the width the same as other dialpad keys. -->
