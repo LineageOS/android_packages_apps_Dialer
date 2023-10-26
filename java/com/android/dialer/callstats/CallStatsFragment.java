@@ -40,7 +40,6 @@ import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -109,7 +108,7 @@ public class CallStatsFragment extends Fragment implements
     setHasOptionsMenu(true);
 
     ExpirableCacheHeadlessFragment cacheFragment =
-        ExpirableCacheHeadlessFragment.attach((AppCompatActivity) getActivity());
+        ExpirableCacheHeadlessFragment.attach(getChildFragmentManager());
     mAdapter = new CallStatsAdapter(getActivity(),
         ContactsComponent.get(requireActivity()).contactDisplayPreferences(),
         cacheFragment.getRetainedCache());
