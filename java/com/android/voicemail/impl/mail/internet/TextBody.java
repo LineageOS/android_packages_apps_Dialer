@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 public class TextBody implements Body {
   final String body;
@@ -34,7 +35,7 @@ public class TextBody implements Body {
 
   @Override
   public void writeTo(OutputStream out) throws IOException, MessagingException {
-    byte[] bytes = body.getBytes("UTF-8");
+    byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
     out.write(Base64.encode(bytes, Base64.CRLF));
   }
 
@@ -50,11 +51,7 @@ public class TextBody implements Body {
   /** Returns an InputStream that reads this body's text in UTF-8 format. */
   @Override
   public InputStream getInputStream() throws MessagingException {
-    try {
-      byte[] b = body.getBytes("UTF-8");
-      return new ByteArrayInputStream(b);
-    } catch (UnsupportedEncodingException usee) {
-      return null;
-    }
+    byte[] b = body.getBytes(StandardCharsets.UTF_8);
+    return new ByteArrayInputStream(b);
   }
 }

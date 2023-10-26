@@ -97,22 +97,22 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
     try {
       String contactType = uri.getQueryParameter(CONTACT_TYPE_PARAM_KEY);
       if (!TextUtils.isEmpty(contactType)) {
-        request.contactType = Integer.valueOf(contactType);
+        request.contactType = Integer.parseInt(contactType);
       }
 
       String scale = uri.getQueryParameter(SCALE_PARAM_KEY);
       if (!TextUtils.isEmpty(scale)) {
-        request.scale = Float.valueOf(scale);
+        request.scale = Float.parseFloat(scale);
       }
 
       String offset = uri.getQueryParameter(OFFSET_PARAM_KEY);
       if (!TextUtils.isEmpty(offset)) {
-        request.offset = Float.valueOf(offset);
+        request.offset = Float.parseFloat(offset);
       }
 
       String isCircular = uri.getQueryParameter(IS_CIRCULAR_PARAM_KEY);
       if (!TextUtils.isEmpty(isCircular)) {
-        request.isCircular = Boolean.valueOf(isCircular);
+        request.isCircular = Boolean.parseBoolean(isCircular);
       }
     } catch (NumberFormatException e) {
       LogUtil.w(

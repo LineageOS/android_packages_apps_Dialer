@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +17,7 @@
 
 package com.android.dialer.databasepopulator;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
@@ -31,6 +33,7 @@ import com.android.dialer.common.Assert;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -86,6 +89,7 @@ public final class CallLogPopulator {
     populateCallLog(context, false);
   }
 
+  @SuppressLint("CheckResult")
   @WorkerThread
   public static void populateCallLog(
       @NonNull Context context, boolean isWithoutMissedCalls, boolean fastMode) {
@@ -116,7 +120,7 @@ public final class CallLogPopulator {
     try {
       context.getContentResolver().applyBatch(CallLog.AUTHORITY, operations);
     } catch (RemoteException | OperationApplicationException e) {
-      Assert.fail("error adding call entries: " + e);
+      Assert.createAssertionFailException("error adding call entries: " + e);
     }
   }
 
@@ -125,6 +129,7 @@ public final class CallLogPopulator {
     populateCallLog(context, true);
   }
 
+  @SuppressLint("CheckResult")
   @WorkerThread
   public static void deleteAllCallLog(@NonNull Context context) {
     Assert.isWorkerThread();
@@ -133,10 +138,10 @@ public final class CallLogPopulator {
           .getContentResolver()
           .applyBatch(
               CallLog.AUTHORITY,
-              new ArrayList<>(
-                  Arrays.asList(ContentProviderOperation.newDelete(Calls.CONTENT_URI).build())));
+              new ArrayList<>(Collections.singletonList(
+                      ContentProviderOperation.newDelete(Calls.CONTENT_URI).build())));
     } catch (RemoteException | OperationApplicationException e) {
-      Assert.fail("failed to delete call log: " + e);
+      Assert.createAssertionFailException("failed to delete call log: " + e);
     }
   }
 

@@ -37,9 +37,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.w3c.dom.Text;
 
-import java.sql.Struct;
 import java.util.ArrayList;
 
 public class ContactBuilder {

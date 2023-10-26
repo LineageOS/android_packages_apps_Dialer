@@ -27,10 +27,6 @@ public interface InCallButtonUiDelegate {
 
   void onInCallButtonUiUnready();
 
-  void onSaveInstanceState(Bundle outState);
-
-  void onRestoreInstanceState(Bundle savedInstanceState);
-
   void addCallClicked();
 
   void muteClicked(boolean checked, boolean clickedByUser);

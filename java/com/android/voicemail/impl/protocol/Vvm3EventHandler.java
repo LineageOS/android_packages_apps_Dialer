@@ -69,7 +69,8 @@ public class Vvm3EventHandler {
     VMG_COMMUNICATION_ERROR,
     SPG_URL_NOT_FOUND,
     VMG_UNKNOWN_ERROR,
-    PIN_NOT_SET
+    PIN_NOT_SET,
+    SUBSCRIBER_UNKNOWN
   })
   public @interface ErrorCode {}
 

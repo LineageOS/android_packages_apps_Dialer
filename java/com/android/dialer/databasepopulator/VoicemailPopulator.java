@@ -27,7 +27,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
 import com.android.dialer.common.Assert;
-import com.android.voicemail.impl.Voicemail;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.Arrays;

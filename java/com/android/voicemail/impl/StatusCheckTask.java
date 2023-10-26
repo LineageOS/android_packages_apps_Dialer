@@ -13,6 +13,7 @@
  */
 package com.android.voicemail.impl;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ public class StatusCheckTask extends BaseTask {
     context.sendBroadcast(intent);
   }
 
+  @SuppressLint("MissingPermission")
   @Override
   public void onExecuteInBackgroundThread() {
     TelephonyManager telephonyManager =

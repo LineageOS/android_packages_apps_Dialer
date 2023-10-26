@@ -142,7 +142,7 @@ public class SimulatorUtils {
         .getContentResolver()
         .bulkInsert(
             Voicemails.buildSourceUri(context.getPackageName()),
-            voicemails.toArray(new ContentValues[voicemails.size()]));
+            voicemails.toArray(new ContentValues[0]));
   }
 
   private static class PopulateVoicemailWorker

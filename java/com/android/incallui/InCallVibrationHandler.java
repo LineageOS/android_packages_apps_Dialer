@@ -27,12 +27,10 @@ import android.os.Vibrator;
 import android.os.VibratorManager;
 import android.telecom.DisconnectCause;
 
-import androidx.preference.PreferenceManager;
-
+import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.state.DialerCallState;
-import com.android.incallui.InCallPresenter.InCallState;
 
 public class InCallVibrationHandler extends Handler implements
     InCallPresenter.InCallStateListener {

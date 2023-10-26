@@ -292,7 +292,7 @@ public class CallButtonPresenter
 
   @Override
   public void showDialpadClicked(boolean checked) {
-    LogUtil.v("CallButtonPresenter", "show dialpad " + String.valueOf(checked));
+    LogUtil.v("CallButtonPresenter", "show dialpad " + checked);
     getActivity().showDialpadFragment(checked /* show */, true /* animate */);
   }
 
@@ -554,12 +554,6 @@ public class CallButtonPresenter
     // TODO(a bug): If there is an RCS video share session, return true here
     return !call.can(CallCompat.Details.CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO);
   }
-
-  @Override
-  public void onSaveInstanceState(Bundle outState) {}
-
-  @Override
-  public void onRestoreInstanceState(Bundle savedInstanceState) {}
 
   @Override
   public void onCameraPermissionGranted() {

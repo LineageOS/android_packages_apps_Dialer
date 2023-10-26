@@ -156,7 +156,7 @@ public interface Simulator {
 
     @Override
     public int hashCode() {
-      return Objects.hash(Integer.valueOf(type), data1, data2);
+      return Objects.hash(type, data1, data2);
     }
   }
 }

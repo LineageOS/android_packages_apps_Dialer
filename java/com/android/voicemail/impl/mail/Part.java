@@ -19,33 +19,33 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public interface Part extends Fetchable {
-  public void addHeader(String name, String value) throws MessagingException;
+  void addHeader(String name, String value) throws MessagingException;
 
-  public void removeHeader(String name) throws MessagingException;
+  void removeHeader(String name) throws MessagingException;
 
-  public void setHeader(String name, String value) throws MessagingException;
+  void setHeader(String name, String value) throws MessagingException;
 
-  public Body getBody() throws MessagingException;
+  Body getBody() throws MessagingException;
 
-  public String getContentType() throws MessagingException;
+  String getContentType() throws MessagingException;
 
-  public String getDisposition() throws MessagingException;
+  String getDisposition() throws MessagingException;
 
-  public String getContentId() throws MessagingException;
+  String getContentId() throws MessagingException;
 
-  public String[] getHeader(String name) throws MessagingException;
+  String[] getHeader(String name) throws MessagingException;
 
-  public void setExtendedHeader(String name, String value) throws MessagingException;
+  void setExtendedHeader(String name, String value) throws MessagingException;
 
-  public String getExtendedHeader(String name) throws MessagingException;
+  String getExtendedHeader(String name) throws MessagingException;
 
-  public int getSize() throws MessagingException;
+  int getSize() throws MessagingException;
 
-  public boolean isMimeType(String mimeType) throws MessagingException;
+  boolean isMimeType(String mimeType) throws MessagingException;
 
-  public String getMimeType() throws MessagingException;
+  String getMimeType() throws MessagingException;
 
-  public void setBody(Body body) throws MessagingException;
+  void setBody(Body body) throws MessagingException;
 
-  public void writeTo(OutputStream out) throws IOException, MessagingException;
+  void writeTo(OutputStream out) throws IOException, MessagingException;
 }
