@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -106,7 +107,7 @@ public class CallLogCache {
     if (phoneAccountColorCache.containsKey(accountHandle)) {
       return phoneAccountColorCache.get(accountHandle);
     } else {
-      Integer color = PhoneAccountUtils.getAccountColor(context, accountHandle);
+      int color = PhoneAccountUtils.getAccountColor(context, accountHandle);
       phoneAccountColorCache.put(accountHandle, color);
       return color;
     }
@@ -123,7 +124,7 @@ public class CallLogCache {
     if (phoneAccountCallWithNoteCache.containsKey(accountHandle)) {
       return phoneAccountCallWithNoteCache.get(accountHandle);
     } else {
-      Boolean supportsCallWithNote =
+      boolean supportsCallWithNote =
           PhoneAccountUtils.getAccountSupportsCallSubject(context, accountHandle);
       phoneAccountCallWithNoteCache.put(accountHandle, supportsCallWithNote);
       return supportsCallWithNote;

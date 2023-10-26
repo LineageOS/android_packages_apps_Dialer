@@ -18,7 +18,9 @@
 package com.android.dialer.app.voicemail;
 
 import android.content.Context;
+import android.media.AudioAttributes;
 import android.media.AudioDeviceInfo;
+import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.telecom.CallAudioState;
@@ -42,6 +44,8 @@ public final class VoicemailAudioManager
   private CallAudioState callAudioState;
   private boolean bluetoothScoEnabled;
 
+  private AudioFocusRequest audioFocusRequest;
+
   public VoicemailAudioManager(
       Context context, VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
     audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
@@ -55,10 +59,15 @@ public final class VoicemailAudioManager
   }
 
   public void requestAudioFocus() {
-    int result =
-        audioManager.requestAudioFocus(
-            this, PLAYBACK_STREAM, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+    audioFocusRequest = new AudioFocusRequest.Builder(
+            AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
+            .setAudioAttributes(
+                    new AudioAttributes.Builder().setLegacyStreamType(PLAYBACK_STREAM).build())
+            .setOnAudioFocusChangeListener(this)
+            .build();
+    int result = audioManager.requestAudioFocus(audioFocusRequest);
     if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+      audioFocusRequest = null;
       throw new RejectedExecutionException("Could not capture audio focus.");
     }
     updateBluetoothScoState(true);
@@ -66,7 +75,10 @@ public final class VoicemailAudioManager
 
   public void abandonAudioFocus() {
     updateBluetoothScoState(false);
-    audioManager.abandonAudioFocus(this);
+    if (audioFocusRequest != null) {
+      audioManager.abandonAudioFocusRequest(audioFocusRequest);
+      audioFocusRequest = null;
+    }
   }
 
   @Override

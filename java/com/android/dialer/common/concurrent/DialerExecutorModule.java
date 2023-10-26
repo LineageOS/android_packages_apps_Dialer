@@ -33,7 +33,7 @@ import dagger.Provides;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadFactory;
+
 import javax.inject.Singleton;
 
 /** Module which provides concurrency bindings. */

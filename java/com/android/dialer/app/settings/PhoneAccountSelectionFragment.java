@@ -112,13 +112,14 @@ public class PhoneAccountSelectionFragment extends PreferenceFragmentCompat {
     }
   }
 
+  @SuppressLint("MissingPermission")
   @Override
   public void onResume() {
     super.onResume();
-    setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
+    setPreferenceScreen(getPreferenceManager().createPreferenceScreen(requireContext()));
     PreferenceScreen screen = getPreferenceScreen();
 
-    TelecomManager telecomManager = getContext().getSystemService(TelecomManager.class);
+    TelecomManager telecomManager = requireContext().getSystemService(TelecomManager.class);
 
     List<PhoneAccountHandle> accountHandles = telecomManager.getCallCapablePhoneAccounts();
 

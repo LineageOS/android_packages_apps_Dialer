@@ -162,7 +162,7 @@ public class VoicemailPlaybackPresenter
     if (powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
       proximityWakeLock =
           powerManager.newWakeLock(
-              PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "VoicemailPlaybackPresenter");
+              PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "Voicemail:PlaybackPresenter");
     }
   }
 
@@ -226,7 +226,8 @@ public class VoicemailPlaybackPresenter
           DialerExecutorComponent.get(context)
               .dialerExecutorFactory()
               .createUiTaskBuilder(
-                  this.activity.getSupportFragmentManager(), "shareVoicemail", new ShareVoicemailWorker())
+                      this.activity.getSupportFragmentManager(), "shareVoicemail",
+                      new ShareVoicemailWorker())
               .onSuccess(
                   output -> {
                     if (output == null) {
@@ -862,6 +863,7 @@ public class VoicemailPlaybackPresenter
           // dialer/app/res/xml/file_paths.xml for correct cache directory name.
           File parentDir = new File(context.getCacheDir(), "my_cache");
           if (!parentDir.exists()) {
+            //noinspection ResultOfMethodCallIgnored
             parentDir.mkdirs();
           }
           File temporaryVoicemailFile =
@@ -874,7 +876,7 @@ public class VoicemailPlaybackPresenter
               ByteStreams.copy(inputStream, outputStream);
               return new Pair<>(
                   FileProvider.getUriForFile(
-                      context, Constants.get().getFileProviderAuthority(), temporaryVoicemailFile),
+                      context, Constants.FILE_PROVIDER_AUTHORITY, temporaryVoicemailFile),
                   transcription);
             }
           } catch (IOException e) {

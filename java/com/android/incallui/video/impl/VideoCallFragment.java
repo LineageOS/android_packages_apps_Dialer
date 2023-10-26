@@ -54,7 +54,6 @@ import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -217,9 +216,6 @@ public class VideoCallFragment extends Fragment
     inCallButtonUiDelegate =
         FragmentUtils.getParent(this, InCallButtonUiDelegateFactory.class)
             .newInCallButtonUiDelegate();
-    if (savedInstanceState != null) {
-      inCallButtonUiDelegate.onRestoreInstanceState(savedInstanceState);
-    }
   }
 
   @Nullable
@@ -256,14 +252,13 @@ public class VideoCallFragment extends Fragment
     onHoldContainer = view.findViewById(R.id.videocall_on_hold_banner);
     remoteVideoOff = (TextView) view.findViewById(R.id.videocall_remote_video_off);
     remoteVideoOff.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
-    remoteOffBlurredImageView =
-        (ImageView) view.findViewById(R.id.videocall_remote_off_blurred_image_view);
+    remoteOffBlurredImageView = view.findViewById(R.id.videocall_remote_off_blurred_image_view);
     endCallButton = view.findViewById(R.id.videocall_end_call);
     endCallButton.setOnClickListener(this);
-    previewTextureView = (TextureView) view.findViewById(R.id.videocall_video_preview);
+    previewTextureView = view.findViewById(R.id.videocall_video_preview);
     previewTextureView.setClipToOutline(true);
     previewOffOverlay.setOnClickListener(v -> checkCameraPermission());
-    remoteTextureView = (TextureView) view.findViewById(R.id.videocall_video_remote);
+    remoteTextureView = view.findViewById(R.id.videocall_video_remote);
     greenScreenBackgroundView = view.findViewById(R.id.videocall_green_screen_background);
     fullscreenBackgroundView = view.findViewById(R.id.videocall_fullscreen_background);
 
@@ -338,12 +333,6 @@ public class VideoCallFragment extends Fragment
         contactGridManager.getContainerView().setVisibility(View.INVISIBLE);
         endCallButton.setVisibility(View.INVISIBLE);
     }
-  }
-
-  @Override
-  public void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-    inCallButtonUiDelegate.onSaveInstanceState(outState);
   }
 
   @Override
@@ -477,7 +466,6 @@ public class VideoCallFragment extends Fragment
     View view = getView();
     if (view != null) {
       // Code is more expressive with all flags present, even though some may be combined
-      // noinspection PointlessBitwiseExpression
       view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     }
   }

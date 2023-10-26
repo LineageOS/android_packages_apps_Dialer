@@ -17,10 +17,6 @@
 package com.android.dialer.lookup.dastelefonbuch;
 
 import android.content.Context;
-import android.net.Uri;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
-import android.provider.ContactsContract.CommonDataKinds.Website;
 
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.lookup.ContactBuilder;

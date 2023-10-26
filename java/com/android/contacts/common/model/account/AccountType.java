@@ -35,7 +35,6 @@ import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.dialer.contacts.resources.R;
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -206,7 +205,7 @@ public abstract class AccountType {
    * the account.
    */
   public List<String> getExtensionPackageNames() {
-    return new ArrayList<String>();
+    return new ArrayList<>();
   }
 
   /**
@@ -236,13 +235,6 @@ public abstract class AccountType {
 
   /** Whether or not groups created under this account type have editable membership lists. */
   public abstract boolean isGroupMembershipEditable();
-
-  /** Return list of {@link DataKind} supported, sorted by {@link DataKind#weight}. */
-  public ArrayList<DataKind> getSortedDataKinds() {
-    // TODO: optimize by marking if already sorted
-    Collections.sort(mKinds, sWeightComparator);
-    return mKinds;
-  }
 
   /** Find the {@link DataKind} for a specific MIME-type, if it's handled by this data source. */
   public DataKind getKindForMimetype(String mimeType) {

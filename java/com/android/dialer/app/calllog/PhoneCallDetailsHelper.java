@@ -23,7 +23,7 @@ import android.graphics.Typeface;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telecom.PhoneAccount;
-import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -151,7 +151,8 @@ public class PhoneCallDetailsHelper {
       int color = callLogCache.getAccountColor(details.accountHandle);
       if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
         int defaultColor = R.color.dialer_secondary_text_color;
-        views.callAccountLabel.setTextColor(context.getResources().getColor(defaultColor));
+        views.callAccountLabel.setTextColor(context.getResources().getColor(defaultColor,
+                context.getTheme()));
       } else {
         views.callAccountLabel.setTextColor(color);
       }
@@ -180,7 +181,8 @@ public class PhoneCallDetailsHelper {
       return;
     }
 
-    if (PhoneNumberUtils.isEmergencyNumber(details.displayNumber)) {
+    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+    if (telephonyManager.isEmergencyNumber(details.displayNumber)) {
       views.nameView.setText(R.string.emergency_number);
       views.nameView.setTextDirection(View.TEXT_DIRECTION_INHERIT);
       return;

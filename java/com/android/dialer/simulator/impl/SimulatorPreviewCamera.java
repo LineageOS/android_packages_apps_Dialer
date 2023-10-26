@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +26,8 @@ import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
+import android.hardware.camera2.params.OutputConfiguration;
+import android.hardware.camera2.params.SessionConfiguration;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.telecom.VideoProfile.CameraCapabilities;
 import android.util.Size;
@@ -36,6 +39,8 @@ import androidx.annotation.Nullable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.concurrent.Executors;
 
 /**
  * Used by the video provider to draw the local camera. The in-call UI is responsible for setting
@@ -114,10 +119,11 @@ final class SimulatorPreviewCamera {
       }
 
       try {
-        camera.createCaptureSession(
-            Arrays.asList(Assert.isNotNull(surface)),
-            new CaptureSessionCallback(),
-            null /* handler */);
+        OutputConfiguration out = new OutputConfiguration(surface);
+        SessionConfiguration cfg = new SessionConfiguration(SessionConfiguration.SESSION_REGULAR,
+                Collections.singletonList(Assert.isNotNull(out)),
+                Executors.newSingleThreadExecutor(), new CaptureSessionCallback());
+        camera.createCaptureSession(cfg);
       } catch (CameraAccessException e) {
         throw Assert.createIllegalStateFailException("camera error: " + e);
       }

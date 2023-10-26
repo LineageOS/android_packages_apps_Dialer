@@ -19,8 +19,6 @@ package com.android.dialer.app.calllog;
 
 import android.app.Activity;
 import android.content.ContentUris;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
@@ -70,8 +68,6 @@ import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.AsyncTaskExecutor;
-import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ContactSource.Type;
@@ -630,7 +626,7 @@ public class CallLogAdapter extends GroupingListAdapter
    * @param position The position of the entry.
    */
   @Override
-  public void onBindViewHolder(ViewHolder viewHolder, int position) {
+  public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
     Trace.beginSection("onBindViewHolder: " + position);
     switch (getItemViewType(position)) {
       case VIEW_TYPE_ALERT:
@@ -713,10 +709,7 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   private boolean isHiddenRow(@Nullable String number, long rowId) {
-    if (hiddenRowIds.contains(rowId)) {
-      return true;
-    }
-    return false;
+    return hiddenRowIds.contains(rowId);
   }
 
   private void loadAndRender(

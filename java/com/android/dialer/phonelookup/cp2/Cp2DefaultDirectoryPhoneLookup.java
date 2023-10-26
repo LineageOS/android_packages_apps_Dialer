@@ -851,7 +851,7 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
             Phone.CONTENT_URI,
             projection,
             Phone.NORMALIZED_NUMBER + " IN (" + questionMarks(validE164Numbers.size()) + ")",
-            validE164Numbers.toArray(new String[validE164Numbers.size()]),
+            validE164Numbers.toArray(new String[0]),
             null);
   }
 

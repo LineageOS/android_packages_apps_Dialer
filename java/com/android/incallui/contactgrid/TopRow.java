@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -177,18 +178,10 @@ public class TopRow {
 
   private static CharSequence getLabelForIncomingVideo(
       Context context, @SessionModificationState int sessionModificationState, boolean isWifi) {
-    if (sessionModificationState == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
-      if (isWifi) {
-        return context.getString(R.string.contact_grid_incoming_wifi_video_call);
-      } else {
-        return context.getString(R.string.contact_grid_incoming_video_call);
-      }
+    if (isWifi) {
+      return context.getString(R.string.contact_grid_incoming_wifi_video_call);
     } else {
-      if (isWifi) {
-        return context.getString(R.string.contact_grid_incoming_wifi_video_call);
-      } else {
-        return context.getString(R.string.contact_grid_incoming_video_call);
-      }
+      return context.getString(R.string.contact_grid_incoming_video_call);
     }
   }
 
@@ -274,8 +267,7 @@ public class TopRow {
         return getLabelForIncomingVideo(context, state.sessionModificationState(), state.isWifi());
       case SessionModificationState.NO_REQUEST:
       default:
-        Assert.fail();
-        return null;
+        throw Assert.createIllegalStateFailException();
     }
   }
 

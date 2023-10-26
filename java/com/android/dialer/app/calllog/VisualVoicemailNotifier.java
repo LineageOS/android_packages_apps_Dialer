@@ -91,11 +91,11 @@ final class VisualVoicemailNotifier {
     if (shouldAlert) {
       groupSummary.setOnlyAlertOnce(false);
       // Group summary will alert when posted/updated
-      groupSummary.setGroupAlertBehavior(Notification.GROUP_ALERT_ALL);
+      groupSummary.setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL);
     } else {
       // Only children will alert. but since all children are set to "only alert summary" it is
       // effectively silenced.
-      groupSummary.setGroupAlertBehavior(Notification.GROUP_ALERT_CHILDREN);
+      groupSummary.setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN);
     }
     PhoneAccountHandle handle = getAccountForCall(context, newCalls.get(0));
     groupSummary.setChannelId(NotificationChannelManager.getVoicemailChannelId(context, handle));
@@ -171,7 +171,7 @@ final class VisualVoicemailNotifier {
     }
 
     builder.setChannelId(NotificationChannelManager.getVoicemailChannelId(context, handle));
-    builder.setGroupAlertBehavior(Notification.GROUP_ALERT_SUMMARY);
+    builder.setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY);
 
     ContactPhotoLoader loader = new ContactPhotoLoader(context, contactInfo);
     Bitmap photoIcon = loader.loadPhotoIcon();
