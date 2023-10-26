@@ -15,6 +15,7 @@
  */
 package com.android.dialer.helplines;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
@@ -101,6 +102,7 @@ public class LoadHelplinesTask {
         });
     }
 
+    @SuppressLint("MissingPermission")
     private List<SubscriptionInfo> getSubscriptionInfos() {
         List<SubscriptionInfo> subList = mSubManager.getActiveSubscriptionInfoList();
         if (subList == null) {

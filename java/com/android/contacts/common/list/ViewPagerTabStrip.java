@@ -24,6 +24,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import com.android.dialer.contacts.resources.R;
 import com.android.dialer.theme.base.ThemeComponent;
 

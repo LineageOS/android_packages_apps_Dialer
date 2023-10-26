@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +16,7 @@
  */
 package com.android.contacts.common.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
@@ -27,6 +29,7 @@ public class TelephonyManagerUtils {
    * @param context Current application context
    * @return Voicemail tag, the alphabetic identifier associated with the voice mail number.
    */
+  @SuppressLint("MissingPermission")
   public static String getVoiceMailAlphaTag(Context context) {
     final TelephonyManager telephonyManager =
         (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);

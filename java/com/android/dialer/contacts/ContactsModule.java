@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +19,14 @@ package com.android.dialer.contacts;
 
 import android.content.Context;
 import android.os.UserManager;
+
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferencesImpl;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferencesStub;
 import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequester;
 import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequesterImpl;
 import com.android.dialer.inject.ApplicationContext;
+
 import dagger.Binds;
 import dagger.Lazy;
 import dagger.Module;

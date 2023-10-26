@@ -45,15 +45,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import com.android.dialer.R;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.ContactPhotoManager;
-import com.android.dialer.contacts.resources.R;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.ViewUtil;
+
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,8 +88,6 @@ public class CallSubjectDialog extends AppCompatActivity {
   private TextView mNumberView;
   private EditText mCallSubjectView;
   private TextView mCharacterLimitView;
-  private View mHistoryButton;
-  private View mSendAndCallButton;
   private ListView mSubjectList;
 
   private int mLimit = CALL_SUBJECT_LIMIT;
@@ -275,22 +274,22 @@ public class CallSubjectDialog extends AppCompatActivity {
     mBackgroundView = findViewById(R.id.call_subject_dialog);
     mBackgroundView.setOnClickListener(mBackgroundListener);
     mDialogView = findViewById(R.id.dialog_view);
-    mContactPhoto = (QuickContactBadge) findViewById(R.id.contact_photo);
-    mNameView = (TextView) findViewById(R.id.name);
-    mNumberView = (TextView) findViewById(R.id.number);
-    mCallSubjectView = (EditText) findViewById(R.id.call_subject);
+    mContactPhoto = findViewById(R.id.contact_photo);
+    mNameView = findViewById(R.id.name);
+    mNumberView = findViewById(R.id.number);
+    mCallSubjectView = findViewById(R.id.call_subject);
     mCallSubjectView.addTextChangedListener(mTextWatcher);
     mCallSubjectView.setOnClickListener(mCallSubjectClickListener);
     InputFilter[] filters = new InputFilter[1];
     filters[0] = new InputFilter.LengthFilter(mLimit);
     mCallSubjectView.setFilters(filters);
-    mCharacterLimitView = (TextView) findViewById(R.id.character_limit);
-    mHistoryButton = findViewById(R.id.history_button);
-    mHistoryButton.setOnClickListener(mHistoryOnClickListener);
-    mHistoryButton.setVisibility(mSubjectHistory.isEmpty() ? View.GONE : View.VISIBLE);
-    mSendAndCallButton = findViewById(R.id.send_and_call_button);
-    mSendAndCallButton.setOnClickListener(mSendAndCallOnClickListener);
-    mSubjectList = (ListView) findViewById(R.id.subject_list);
+    mCharacterLimitView = findViewById(R.id.character_limit);
+    View historyButton = findViewById(R.id.history_button);
+    historyButton.setOnClickListener(mHistoryOnClickListener);
+    historyButton.setVisibility(mSubjectHistory.isEmpty() ? View.GONE : View.VISIBLE);
+    View sendAndCallButton = findViewById(R.id.send_and_call_button);
+    sendAndCallButton.setOnClickListener(mSendAndCallOnClickListener);
+    mSubjectList = findViewById(R.id.subject_list);
     mSubjectList.setOnItemClickListener(mItemClickListener);
     mSubjectList.setVisibility(View.GONE);
 
@@ -355,13 +354,14 @@ public class CallSubjectDialog extends AppCompatActivity {
       length = subjectText.length();
     }
 
-    mCharacterLimitView.setText(getString(R.string.call_subject_limit, length, mLimit));
+    mCharacterLimitView.setText(getString(R.string.call_subject_limit,
+            String.valueOf(length), String.valueOf(mLimit)));
     if (length >= mLimit) {
       mCharacterLimitView.setTextColor(
-          getResources().getColor(R.color.call_subject_limit_exceeded));
+          getResources().getColor(R.color.call_subject_limit_exceeded, getTheme()));
     } else {
       mCharacterLimitView.setTextColor(
-          getResources().getColor(R.color.dialer_secondary_text_color));
+          getResources().getColor(R.color.dialer_secondary_text_color, getTheme()));
     }
   }
 
@@ -413,9 +413,8 @@ public class CallSubjectDialog extends AppCompatActivity {
     final int dialogStartingBottom = mDialogView.getBottom();
     if (show) {
       // Showing the subject list; bind the list of history items to the list and show it.
-      ArrayAdapter<String> adapter =
-          new ArrayAdapter<String>(
-              CallSubjectDialog.this, R.layout.call_subject_history_list_item, mSubjectHistory);
+      ArrayAdapter<String> adapter = new ArrayAdapter<>(CallSubjectDialog.this,
+              R.layout.call_subject_history_list_item, mSubjectHistory);
       mSubjectList.setAdapter(adapter);
       mSubjectList.setVisibility(View.VISIBLE);
     } else {

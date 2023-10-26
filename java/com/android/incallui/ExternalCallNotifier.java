@@ -51,6 +51,7 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallDelegate;
 import com.android.incallui.call.ExternalCallList;
+
 import java.util.Map;
 
 /**
@@ -264,7 +265,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
               .build());
     }
 
-    /**
+    /*
      * This builder is used for the notification shown when the device is locked and the user has
      * set their notification settings to 'hide sensitive content' {@see
      * Notification.Builder#setPublicVersion}.

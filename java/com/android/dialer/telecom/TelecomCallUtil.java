@@ -20,6 +20,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.telecom.Call;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -39,10 +40,10 @@ import com.google.common.base.Optional;
 public class TelecomCallUtil {
 
   /** Returns Whether the call handle is an emergency number. */
-  public static boolean isEmergencyCall(@NonNull Call call) {
+  public static boolean isEmergencyCall(TelephonyManager telephonyManager, @NonNull Call call) {
     Assert.isNotNull(call);
     Uri handle = call.getDetails().getHandle();
-    return PhoneNumberUtils.isEmergencyNumber(handle == null ? "" : handle.getSchemeSpecificPart());
+    return telephonyManager.isEmergencyNumber(handle == null ? "" : handle.getSchemeSpecificPart());
   }
 
   /**

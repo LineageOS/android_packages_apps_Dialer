@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Xiao-Long Chen <chenxiaolong@cxl.epac.to>
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +37,10 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +78,7 @@ public class LookupCache {
 
     try {
       out = new FileOutputStream(file);
-      writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
+      writer = new JsonWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8));
       writer.setIndent("  ");
       List messages = new ArrayList();
 
@@ -135,7 +137,7 @@ public class LookupCache {
 
     try {
       in = new FileInputStream(file);
-      reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+      reader = new JsonReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 
       reader.beginObject();
       while (reader.hasNext()) {
@@ -249,7 +251,7 @@ public class LookupCache {
 
     try {
       out = new FileOutputStream(image);
-      bmp.compress(Bitmap.CompressFormat.WEBP, 100, out);
+      bmp.compress(Bitmap.CompressFormat.WEBP_LOSSLESS, 100, out);
       return Uri.fromFile(image);
     } catch (Exception e) {
       e.printStackTrace();

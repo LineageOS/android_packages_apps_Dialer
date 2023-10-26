@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Xiao-Long Chen <chillermillerlong@hotmail.com>
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,16 +31,14 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.util.Constants;
-import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.R;
+import com.android.dialer.phonenumbercache.ContactInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.w3c.dom.Text;
 
-import java.sql.Struct;
 import java.util.ArrayList;
 
 public class ContactBuilder {

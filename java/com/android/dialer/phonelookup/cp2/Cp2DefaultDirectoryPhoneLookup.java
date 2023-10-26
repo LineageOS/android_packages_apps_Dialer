@@ -55,6 +55,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.protobuf.InvalidProtocolBufferException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.function.Predicate;
+
 import javax.inject.Inject;
 
 /** PhoneLookup implementation for contacts in the default directory. */
@@ -852,7 +854,7 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
             Phone.CONTENT_URI,
             projection,
             Phone.NORMALIZED_NUMBER + " IN (" + questionMarks(validE164Numbers.size()) + ")",
-            validE164Numbers.toArray(new String[validE164Numbers.size()]),
+            validE164Numbers.toArray(new String[0]),
             null);
   }
 

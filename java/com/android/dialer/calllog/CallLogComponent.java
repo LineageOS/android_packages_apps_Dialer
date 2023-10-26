@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +17,10 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
+
 import com.android.dialer.calllog.notifier.RefreshAnnotatedCallLogNotifier;
 import com.android.dialer.inject.HasRootComponent;
+
 import dagger.Subcomponent;
 
 /** Dagger component for the call log package. */

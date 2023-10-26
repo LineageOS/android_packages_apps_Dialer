@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * This file is derived in part from code issued under the following license.
  *
@@ -23,7 +24,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+
 import com.android.dialer.common.LogUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

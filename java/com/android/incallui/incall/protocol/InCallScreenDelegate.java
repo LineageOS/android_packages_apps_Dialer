@@ -29,11 +29,7 @@ public interface InCallScreenDelegate {
 
   void onSecondaryInfoClicked();
 
-  void onCallStateButtonClicked();
-
   void onManageConferenceClicked();
-
-  void onShrinkAnimationComplete();
 
   void onInCallScreenResumed();
 

@@ -42,7 +42,9 @@ import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.preferredsim.PreferredAccountWorker;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
+
 import java.util.List;
+
 import javax.inject.Inject;
 
 /** PreCallAction to select which phone account to call with. Ignored if there's only one account */

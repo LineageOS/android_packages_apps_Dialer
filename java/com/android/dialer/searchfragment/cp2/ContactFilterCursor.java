@@ -131,7 +131,7 @@ final class ContactFilterCursor implements Cursor {
     }
 
     // Sort the contacts back into the exact same order they were inside of {@code cursor}
-    Collections.sort(coalescedContacts, (o1, o2) -> compare(contactIdsToPosition, o1, o2));
+    coalescedContacts.sort((o1, o2) -> compare(contactIdsToPosition, o1, o2));
     MatrixCursor newCursor = new MatrixCursor(Projections.CP2_PROJECTION, coalescedContacts.size());
     for (Cp2Contact contact : coalescedContacts) {
       newCursor.addRow(contact.toCursorRow());

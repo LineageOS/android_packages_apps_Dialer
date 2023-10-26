@@ -91,8 +91,8 @@ public class FloatingActionButtonController {
   public void changeIcon(Context context, @DrawableRes int iconId, String description) {
     if (this.fabIconId != iconId) {
       fab.setImageResource(iconId);
-      fab.setImageTintList(
-          ColorStateList.valueOf(context.getResources().getColor(android.R.color.white)));
+      fab.setImageTintList(ColorStateList.valueOf(context.getResources().getColor(
+              android.R.color.white, context.getTheme())));
       this.fabIconId = iconId;
     }
     if (!fab.getContentDescription().equals(description)) {
@@ -101,7 +101,8 @@ public class FloatingActionButtonController {
   }
 
   public void changeIconColor(Context context, @ColorRes int color) {
-    fab.setImageTintList(ColorStateList.valueOf(context.getResources().getColor(color)));
+    fab.setImageTintList(ColorStateList.valueOf(context.getResources().getColor(color,
+            context.getTheme())));
   }
 
   /**

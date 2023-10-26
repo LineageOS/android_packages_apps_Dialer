@@ -25,6 +25,7 @@ import android.content.pm.Signature;
 import androidx.annotation.Nullable;
 
 import com.android.dialer.common.LogUtil;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;

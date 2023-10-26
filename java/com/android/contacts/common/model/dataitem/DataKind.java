@@ -19,10 +19,12 @@ package com.android.contacts.common.model.dataitem;
 import android.content.ContentValues;
 import android.content.Context;
 import android.provider.ContactsContract.Data;
+
 import com.android.contacts.common.model.account.AccountType.EditField;
 import com.android.contacts.common.model.account.AccountType.EditType;
 import com.android.contacts.common.model.account.AccountType.StringInflater;
 import com.google.common.collect.Iterators;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 

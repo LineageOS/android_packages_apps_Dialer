@@ -170,7 +170,7 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
   private void setupBottomSheetBehavior() {
     BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(
             findViewById(com.google.android.material.R.id.design_bottom_sheet));
-    behavior.setBottomSheetCallback(
+    behavior.addBottomSheetCallback(
         new BottomSheetBehavior.BottomSheetCallback() {
           @Override
           public void onStateChanged(@NonNull View bottomSheet, int newState) {

@@ -17,6 +17,7 @@
 
 package com.android.dialer.widget;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -106,6 +107,7 @@ public class MessageFragment extends Fragment
     return view;
   }
 
+  @SuppressLint("CheckResult")
   @Override
   public void onClick(View view) {
     if (view == sendMessageContainer) {
@@ -116,7 +118,7 @@ public class MessageFragment extends Fragment
       customMessage.setText(((TextView) view).getText());
       customMessage.setSelection(customMessage.getText().length());
     } else {
-      Assert.fail("Unknown view clicked");
+      Assert.createUnsupportedOperationFailException("Unknown view clicked");
     }
   }
 
@@ -133,7 +135,6 @@ public class MessageFragment extends Fragment
     if (charLimit != NO_CHAR_LIMIT) {
       remainingChar.setText(Integer.toString(charLimit - s.length()));
     }
-    getListener().onMessageFragmentAfterTextChange(s.toString());
   }
 
   @Override
@@ -187,7 +188,5 @@ public class MessageFragment extends Fragment
   /** Interface for parent activity to implement to listen for important events. */
   public interface Listener {
     void onMessageFragmentSendMessage(String message);
-
-    void onMessageFragmentAfterTextChange(String message);
   }
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +20,9 @@ package com.android.incallui;
 import android.net.Uri;
 import android.telecom.PhoneAccount;
 import android.telephony.PhoneNumberUtils;
+
 import com.android.dialer.common.LogUtil;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

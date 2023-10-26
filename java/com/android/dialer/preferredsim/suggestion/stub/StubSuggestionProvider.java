@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +25,7 @@ import androidx.annotation.WorkerThread;
 
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.google.common.base.Optional;
+
 import javax.inject.Inject;
 
 /** {@link SuggestionProvider} that does nothing. */

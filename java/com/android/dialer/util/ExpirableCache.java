@@ -18,7 +18,9 @@
 package com.android.dialer.util;
 
 import android.util.LruCache;
+
 import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -120,7 +122,7 @@ public class ExpirableCache<K, V> {
    * @throws IllegalArgumentException if the cache is not empty
    */
   public static <K, V> ExpirableCache<K, V> create(LruCache<K, CachedValue<V>> cache) {
-    return new ExpirableCache<K, V>(cache);
+    return new ExpirableCache<>(cache);
   }
 
   /**
@@ -131,7 +133,7 @@ public class ExpirableCache<K, V> {
    * @return the newly created expirable cache
    */
   public static <K, V> ExpirableCache<K, V> create(int maxSize) {
-    return create(new LruCache<K, CachedValue<V>>(maxSize));
+    return create(new LruCache<>(maxSize));
   }
 
   /**
@@ -211,7 +213,7 @@ public class ExpirableCache<K, V> {
    * <p>Implementation of {@link LruCache#create(K)} can use this method to create a new entry.
    */
   public CachedValue<V> newCachedValue(V value) {
-    return new GenerationalCachedValue<V>(value, generation);
+    return new GenerationalCachedValue<>(value, generation);
   }
 
   /**

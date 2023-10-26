@@ -28,6 +28,7 @@ import androidx.core.os.UserManagerCompat;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;

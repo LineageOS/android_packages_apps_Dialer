@@ -41,7 +41,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.glidephotomanager.PhotoInfo;
-import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.widget.BidiTextView;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.PrimaryCallState;
@@ -96,7 +95,6 @@ public class ContactGridManager {
 
   private PrimaryInfo primaryInfo = PrimaryInfo.empty();
   private PrimaryCallState primaryCallState = PrimaryCallState.empty();
-  private final LetterTileDrawable letterTile;
   private boolean isInMultiWindowMode;
 
   public ContactGridManager(
@@ -121,7 +119,6 @@ public class ContactGridManager {
     topRowSpace = view.findViewById(R.id.contactgrid_top_row_space);
 
     contactGridLayout = (View) contactNameTextView.getParent();
-    letterTile = new LetterTileDrawable(context.getResources());
     isTimerStarted = false;
 
     deviceNumberTextView = view.findViewById(R.id.contactgrid_device_number_text);

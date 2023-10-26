@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +31,6 @@ import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
@@ -39,6 +39,7 @@ import com.android.dialer.dialpadview.DialpadKeyButton.OnPressedListener;
 import com.android.dialer.dialpadview.DialpadView;
 import com.android.incallui.DialpadPresenter.DialpadUi;
 import com.android.incallui.baseui.BaseFragment;
+
 import java.util.Map;
 
 /** Fragment for call control buttons */
@@ -48,7 +49,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   /** Hash Map to map a view id to a character */
   private static final Map<Integer, Character> displayMap = new ArrayMap<>();
 
-  /** Set up the static maps */
+  /* Set up the static maps */
   static {
     // Map the buttons to the display characters
     displayMap.put(R.id.one, '1');
@@ -137,9 +138,9 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
     Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.Dialer_ThemeBase);
     LayoutInflater layoutInflater = inflater.cloneInContext(contextThemeWrapper);
     final View parent = layoutInflater.inflate(R.layout.incall_dialpad_fragment, container, false);
-    dialpadView = (DialpadView) parent.findViewById(R.id.dialpad_view);
+    dialpadView = parent.findViewById(R.id.dialpad_view);
     dialpadView.setCanDigitsBeEdited(false);
-    dtmfDialerField = (EditText) parent.findViewById(R.id.digits);
+    dtmfDialerField = parent.findViewById(R.id.digits);
     if (dtmfDialerField != null) {
       LogUtil.i("DialpadFragment.onCreateView", "creating dtmfKeyListener");
       dtmfKeyListener = new DtmfKeyListener(getPresenter());
@@ -190,7 +191,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
 
   /** Starts the slide up animation for the Dialpad keys when the Dialpad is revealed. */
   public void animateShowDialpad() {
-    final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
+    final DialpadView dialpadView = getView().findViewById(R.id.dialpad_view);
     dialpadView.animateShow();
   }
 
@@ -233,7 +234,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   private void configureKeypadListeners() {
     DialpadKeyButton dialpadKey;
     for (int i = 0; i < buttonIds.length; i++) {
-      dialpadKey = (DialpadKeyButton) dialpadView.findViewById(buttonIds[i]);
+      dialpadKey = dialpadView.findViewById(buttonIds[i]);
       dialpadKey.setOnKeyListener(this);
       dialpadKey.setOnClickListener(this);
       dialpadKey.setOnPressedListener(this);

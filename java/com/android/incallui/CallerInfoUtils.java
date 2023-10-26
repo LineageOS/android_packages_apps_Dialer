@@ -32,9 +32,10 @@ import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.call.DialerCall;
-import java.util.Arrays;
 
 import org.lineageos.lib.phone.SensitivePhoneNumbers;
+
+import java.util.Arrays;
 
 /** Utility methods for contact and caller info related functionality */
 public class CallerInfoUtils {

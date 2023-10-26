@@ -23,6 +23,7 @@ import androidx.preference.PreferenceManager;
 
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.account.AccountWithDataSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,8 +70,7 @@ public abstract class ContactListFilterController {
 class ContactListFilterControllerImpl extends ContactListFilterController {
 
   private final Context mAppContext;
-  private final List<ContactListFilterListener> mListeners =
-      new ArrayList<ContactListFilterListener>();
+  private final List<ContactListFilterListener> mListeners = new ArrayList<>();
   private ContactListFilter mFilter;
 
   public ContactListFilterControllerImpl(Context context) {
