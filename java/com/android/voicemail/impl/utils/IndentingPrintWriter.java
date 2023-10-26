@@ -69,7 +69,7 @@ public class IndentingPrintWriter extends PrintWriter {
   }
 
   public void printPair(String key, Object value) {
-    print(key + "=" + String.valueOf(value) + " ");
+    print(key + "=" + value + " ");
   }
 
   public void printPair(String key, Object[] value) {

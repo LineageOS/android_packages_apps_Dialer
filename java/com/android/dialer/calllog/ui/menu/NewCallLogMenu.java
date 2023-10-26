@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +20,7 @@ package com.android.dialer.calllog.ui.menu;
 import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.view.View;
+
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;

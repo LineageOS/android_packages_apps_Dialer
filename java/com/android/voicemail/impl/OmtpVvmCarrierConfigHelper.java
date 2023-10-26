@@ -39,6 +39,7 @@ import com.android.voicemail.impl.protocol.VisualVoicemailProtocol;
 import com.android.voicemail.impl.protocol.VisualVoicemailProtocolFactory;
 import com.android.voicemail.impl.sms.StatusMessage;
 import com.android.voicemail.impl.sync.VvmAccountManager;
+
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
@@ -159,10 +160,7 @@ public class OmtpVvmCarrierConfigHelper {
    * known protocol.
    */
   public boolean isValid() {
-    if (protocol == null) {
-      return false;
-    }
-    return true;
+    return protocol != null;
   }
 
   @Nullable
@@ -490,8 +488,7 @@ public class OmtpVvmCarrierConfigHelper {
           continue;
         }
         return true;
-      } catch (NameNotFoundException e) {
-        continue;
+      } catch (NameNotFoundException ignored) {
       }
     }
     return false;

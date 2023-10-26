@@ -232,7 +232,7 @@ public class PermissionsUtil {
         permissionsCurrentlyDenied.add(permission);
       }
     }
-    return permissionsCurrentlyDenied.toArray(new String[permissionsCurrentlyDenied.size()]);
+    return permissionsCurrentlyDenied.toArray(new String[0]);
   }
 
   /**

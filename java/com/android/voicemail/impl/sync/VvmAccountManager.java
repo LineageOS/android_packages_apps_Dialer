@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +16,7 @@
  */
 package com.android.voicemail.impl.sync;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.UserManager;
 import android.telecom.PhoneAccountHandle;
@@ -33,6 +35,7 @@ import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
 import com.android.voicemail.impl.VoicemailStatus;
 import com.android.voicemail.impl.sms.StatusMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -93,6 +96,7 @@ public class VvmAccountManager {
     return preferences.getBoolean(IS_ACCOUNT_ACTIVATED, false);
   }
 
+  @SuppressLint("MissingPermission")
   @NonNull
   public static List<PhoneAccountHandle> getActiveAccounts(Context context) {
     List<PhoneAccountHandle> results = new ArrayList<>();

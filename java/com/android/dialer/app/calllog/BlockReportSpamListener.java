@@ -28,7 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForReportingNotSpam;
-import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForUnblockingNumberAndReportingAsNotSpam;
+import com.android.dialer.blockreportspam.BlockReportSpamDialogs.
+        DialogFragmentForUnblockingNumberAndReportingAsNotSpam;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.ContactSource;
 

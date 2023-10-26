@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +27,7 @@ import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.voicemailstatus.VoicemailStatusQuery;
 import com.android.voicemail.VoicemailComponent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +57,7 @@ public class VoicemailStatusWorker implements Worker<Context, List<VoicemailStat
                 Status.CONTENT_URI,
                 VoicemailStatusQuery.getProjection(),
                 where.toString(),
-                selectionArgs.toArray(new String[selectionArgs.size()]),
+                selectionArgs.toArray(new String[0]),
                 null)) {
       if (cursor == null) {
         return statuses;

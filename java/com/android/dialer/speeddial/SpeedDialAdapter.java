@@ -38,7 +38,8 @@ import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener
 import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
 import com.android.dialer.speeddial.SpeedDialFragment.HostInterface;
 import com.android.dialer.speeddial.SuggestionViewHolder.SuggestedContactsListener;
-import com.android.dialer.speeddial.draghelper.SpeedDialItemTouchHelperCallback.ItemTouchHelperAdapter;
+import com.android.dialer.speeddial.draghelper.SpeedDialItemTouchHelperCallback.
+        ItemTouchHelperAdapter;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.google.common.collect.ImmutableList;
 
@@ -70,7 +71,8 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
   private static final float IN_REMOVE_VIEW_ALPHA = 0.5f;
 
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({RowType.STARRED_HEADER, RowType.SUGGESTION_HEADER, RowType.STARRED, RowType.SUGGESTION})
+  @IntDef({RowType.REMOVE_VIEW, RowType.STARRED_HEADER, RowType.SUGGESTION_HEADER, RowType.STARRED,
+          RowType.SUGGESTION})
   @interface RowType {
     int REMOVE_VIEW = 0;
     int STARRED_HEADER = 1;

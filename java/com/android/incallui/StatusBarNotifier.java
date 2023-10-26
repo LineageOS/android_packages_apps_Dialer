@@ -22,11 +22,13 @@ import static com.android.contacts.common.compat.CallCompat.Details.PROPERTY_ENT
 import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_INCOMING_WORK_CALL_TITLE;
 import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_ONGOING_WORK_CALL_TITLE;
 import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_WIFI_WORK_CALL_LABEL;
-import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST;
+import static com.android.incallui.NotificationBroadcastReceiver.
+        ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VIDEO_INCOMING_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VOICE_INCOMING_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_DECLINE_INCOMING_CALL;
-import static com.android.incallui.NotificationBroadcastReceiver.ACTION_DECLINE_VIDEO_UPGRADE_REQUEST;
+import static com.android.incallui.NotificationBroadcastReceiver.
+        ACTION_DECLINE_VIDEO_UPGRADE_REQUEST;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_HANG_UP_ONGOING_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_TURN_OFF_SPEAKER;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_TURN_ON_SPEAKER;
@@ -82,7 +84,7 @@ import com.android.dialer.util.DrawableConverter;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
-import com.android.incallui.async.PausableExecutorImpl;
+import com.android.incallui.async.PausableExecutor;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
@@ -93,6 +95,7 @@ import com.android.incallui.ringtone.DialerRingtoneManager;
 import com.android.incallui.ringtone.InCallTonePlayer;
 import com.android.incallui.ringtone.ToneGeneratorFactory;
 import com.android.incallui.videotech.utils.SessionModificationState;
+
 import java.util.Objects;
 
 /** This class adds Notifications to the status bar for the in-call experience. */
@@ -135,7 +138,7 @@ public class StatusBarNotifier
     this.contactInfoCache = contactInfoCache;
     dialerRingtoneManager =
         new DialerRingtoneManager(
-            new InCallTonePlayer(new ToneGeneratorFactory(), new PausableExecutorImpl()),
+            new InCallTonePlayer(new ToneGeneratorFactory(), new PausableExecutor()),
             CallList.getInstance());
     currentNotification = NOTIFICATION_NONE;
     Trace.endSection();
@@ -592,7 +595,8 @@ public class StatusBarNotifier
     }
 
     if (call.isSpam()) {
-      Drawable drawable = resources.getDrawable(R.drawable.blocked_contact, context.getTheme());
+      Drawable drawable = ResourcesCompat.getDrawable(resources, R.drawable.blocked_contact,
+              context.getTheme());
       largeIcon = DrawableConverter.drawableToBitmap(drawable);
     }
     Trace.endSection();
@@ -1027,6 +1031,7 @@ public class StatusBarNotifier
      * Responds to changes in the session modification state for the call by dismissing the status
      * bar notification as required.
      */
+    @SuppressLint("MissingPermission")
     @Override
     public void onDialerCallSessionModificationStateChange() {
       if (dialerCall.getVideoTech().getSessionModificationState()

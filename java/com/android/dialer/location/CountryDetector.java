@@ -211,7 +211,7 @@ public class CountryDetector {
       final Location location =
               intent.getParcelableExtra(LocationManager.KEY_LOCATION_CHANGED, Location.class);
 
-      // TODO: rething how we access the gecoder here, right now we have to set the static instance
+      // TODO: rethink how we access the gecoder here, right now we have to set the static instance
       // of CountryDetector to make this work for tests which is weird
       // (see CountryDetectorTest.locationChangedBroadcast_GeocodesLocation)
       processLocationUpdate(context, CountryDetector.getInstance(context).geocoder, location);

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +19,7 @@ package com.android.dialer.phonenumbergeoutil.impl;
 
 import android.content.Context;
 import android.text.TextUtils;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.i18n.LocaleUtils;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtil;
@@ -25,7 +27,9 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
+
 import java.util.Locale;
+
 import javax.inject.Inject;
 
 /** Implementation of {@link PhoneNumberGeoUtil}. */

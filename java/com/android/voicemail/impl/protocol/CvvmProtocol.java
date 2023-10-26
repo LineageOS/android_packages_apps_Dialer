@@ -19,6 +19,7 @@ package com.android.voicemail.impl.protocol;
 
 import android.content.Context;
 import android.telecom.PhoneAccountHandle;
+
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.sms.OmtpCvvmMessageSender;
 import com.android.voicemail.impl.sms.OmtpMessageSender;
@@ -46,14 +47,13 @@ public class CvvmProtocol extends VisualVoicemailProtocol {
 
   @Override
   public String getCommand(String command) {
-    if (command == OmtpConstants.IMAP_CHANGE_TUI_PWD_FORMAT) {
-      return IMAP_CHANGE_TUI_PWD_FORMAT;
-    }
-    if (command == OmtpConstants.IMAP_CLOSE_NUT) {
-      return IMAP_CLOSE_NUT;
-    }
-    if (command == OmtpConstants.IMAP_CHANGE_VM_LANG_FORMAT) {
-      return IMAP_CHANGE_VM_LANG_FORMAT;
+    switch (command) {
+      case OmtpConstants.IMAP_CHANGE_TUI_PWD_FORMAT:
+        return IMAP_CHANGE_TUI_PWD_FORMAT;
+      case OmtpConstants.IMAP_CLOSE_NUT:
+        return IMAP_CLOSE_NUT;
+      case OmtpConstants.IMAP_CHANGE_VM_LANG_FORMAT:
+        return IMAP_CHANGE_VM_LANG_FORMAT;
     }
     return super.getCommand(command);
   }

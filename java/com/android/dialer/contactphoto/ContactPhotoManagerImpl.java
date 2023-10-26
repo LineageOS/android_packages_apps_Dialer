@@ -110,7 +110,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
 
   static {
     BITMAP_UNAVAILABLE = new BitmapHolder(new byte[0], 0);
-    BITMAP_UNAVAILABLE.bitmapRef = new SoftReference<Bitmap>(null);
+    BITMAP_UNAVAILABLE.bitmapRef = new SoftReference<>(null);
   }
 
   private final Context context;
@@ -131,8 +131,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
    * A map from ImageView to the corresponding photo ID or uri, encapsulated in a request. The
    * request may swapped out before the photo loading request is started.
    */
-  private final ConcurrentHashMap<ImageView, Request> pendingRequests =
-      new ConcurrentHashMap<ImageView, Request>();
+  private final ConcurrentHashMap<ImageView, Request> pendingRequests = new ConcurrentHashMap<>();
   /** Handler for messages sent to the UI thread. */
   private final Handler mainThreadHandler = new Handler(Looper.getMainLooper(), this);
   /** For debug: How many times we had to reload cached photo for a stale entry */
@@ -281,7 +280,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
 
       holder.decodedSampleSize = sampleSize;
       holder.bitmap = bitmap;
-      holder.bitmapRef = new SoftReference<Bitmap>(bitmap);
+      holder.bitmapRef = new SoftReference<>(bitmap);
       if (DEBUG) {
         LogUtil.d(
             "ContactPhotoManagerImpl.inflateBitmap",
@@ -339,7 +338,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
       LogUtil.d(
           "ContactPhotoManagerImpl.dumpStats",
           "L1 Stats: "
-              + bitmapHolderCache.toString()
+              + bitmapHolderCache
               + ", overwrite: fresh="
               + freshCacheOverwrite.get()
               + " stale="

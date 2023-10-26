@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +16,7 @@
  */
 package com.android.voicemail.impl.fetch;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -29,9 +31,11 @@ import com.android.dialer.common.Assert;
 import com.android.voicemail.impl.R;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.imap.VoicemailPayload;
+
+import org.apache.commons.io.IOUtils;
+
 import java.io.IOException;
 import java.io.OutputStream;
-import org.apache.commons.io.IOUtils;
 
 /**
  * Callback for when a voicemail payload is fetched. It copies the returned stream to the data file
@@ -58,6 +62,7 @@ public class VoicemailFetchedCallback {
    *
    * @param voicemailPayload The object containing the content data for the voicemail
    */
+  @SuppressLint("MissingPermission")
   public void setVoicemailContent(@Nullable VoicemailPayload voicemailPayload) {
     Assert.isWorkerThread();
     if (voicemailPayload == null) {

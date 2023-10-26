@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.ActivationTask;
 import com.android.voicemail.impl.Assert;
@@ -39,6 +40,7 @@ import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.sync.VvmNetworkRequest.NetworkWrapper;
 import com.android.voicemail.impl.sync.VvmNetworkRequest.RequestFailedException;
 import com.android.voicemail.impl.utils.VoicemailDatabaseUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -292,7 +294,7 @@ public class OmtpVvmSyncService {
 
   /** Builds a map from provider data to message for the given collection of voicemails. */
   private Map<String, Voicemail> buildMap(List<Voicemail> messages) {
-    Map<String, Voicemail> map = new ArrayMap<String, Voicemail>();
+    Map<String, Voicemail> map = new ArrayMap<>();
     for (Voicemail message : messages) {
       map.put(message.getSourceData(), message);
     }

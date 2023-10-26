@@ -19,14 +19,17 @@ package com.android.voicemail.impl.mail.store;
 
 import android.content.Context;
 import android.net.Network;
+
 import com.android.voicemail.impl.imap.ImapHelper;
 import com.android.voicemail.impl.mail.MailTransport;
 import com.android.voicemail.impl.mail.Message;
 import com.android.voicemail.impl.mail.MessagingException;
 import com.android.voicemail.impl.mail.internet.MimeMessage;
+
+import org.apache.james.mime4j.MimeException;
+
 import java.io.IOException;
 import java.io.InputStream;
-import org.apache.james.mime4j.MimeException;
 
 public class ImapStore {
   /**

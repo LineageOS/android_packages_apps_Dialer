@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +33,7 @@ import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
+
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.phonenumbercache.CallLogQuery;
@@ -39,6 +41,7 @@ import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.voicemailstatus.VoicemailStatusQuery;
 import com.android.voicemail.VoicemailComponent;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +121,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
           Status.CONTENT_URI,
           VoicemailStatusQuery.getProjection(),
           where.toString(),
-          selectionArgs.toArray(new String[selectionArgs.size()]),
+          selectionArgs.toArray(new String[0]),
           null);
     } else {
       LogUtil.i(
@@ -144,7 +147,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
           Voicemails.CONTENT_URI,
           new String[] {Voicemails._ID},
           where.toString(),
-          selectionArgs.toArray(new String[selectionArgs.size()]),
+          selectionArgs.toArray(new String[0]),
           null);
     }
   }
@@ -211,7 +214,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         uri,
         CallLogQuery.getProjection(),
         selection,
-        selectionArgs.toArray(new String[selectionArgs.size()]),
+        selectionArgs.toArray(new String[0]),
         Calls.DEFAULT_SORT_ORDER);
   }
 

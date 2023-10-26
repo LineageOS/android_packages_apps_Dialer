@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +21,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.telecom.Call;
 import android.text.TextUtils;
+
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -29,13 +31,15 @@ import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.CnapInfo;
-import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
+import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.
+        PhoneLookupHistory;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.protobuf.InvalidProtocolBufferException;
+
 import javax.inject.Inject;
 
 /** PhoneLookup implementation for CNAP info. */

@@ -17,9 +17,11 @@
 package com.android.dialer.activecalls;
 
 import com.android.dialer.activecalls.impl.ActiveCallsImpl;
+
+import javax.inject.Singleton;
+
 import dagger.Binds;
 import dagger.Module;
-import javax.inject.Singleton;
 
 /** Module for {@link ActiveCallsComponent} */
 @Module

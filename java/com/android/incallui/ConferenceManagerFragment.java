@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +29,7 @@ import com.android.incallui.ConferenceManagerPresenter.ConferenceManagerUi;
 import com.android.incallui.baseui.BaseFragment;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
+
 import java.util.List;
 
 /** Fragment that allows the user to manage a conference call. */
@@ -59,7 +61,7 @@ public class ConferenceManagerFragment
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     final View parent = inflater.inflate(R.layout.conference_manager_fragment, container, false);
 
-    conferenceParticipantList = (ListView) parent.findViewById(R.id.participantList);
+    conferenceParticipantList = parent.findViewById(R.id.participantList);
     contactPhotoManager = ContactPhotoManager.getInstance(getActivity().getApplicationContext());
 
     return parent;

@@ -22,6 +22,7 @@ import com.android.dialer.activecalls.ActiveCallInfo;
 import com.android.dialer.activecalls.ActiveCalls;
 import com.android.dialer.common.Assert;
 import com.google.common.collect.ImmutableList;
+
 import javax.inject.Inject;
 
 /** Implementation of {@link ActiveCalls} */

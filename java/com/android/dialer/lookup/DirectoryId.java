@@ -25,7 +25,7 @@ public class DirectoryId {
     if (lookupUri != null) {
       String dqp = lookupUri.getQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY);
       if (dqp != null) {
-        directory = Long.valueOf(dqp);
+        directory = Long.parseLong(dqp);
       }
     }
     return directory;

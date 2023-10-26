@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +49,8 @@ public class PreferredAccountRecorder {
 
   /**
    * Record the result from {@link
-   * com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener#onPhoneAccountSelected}
+   * com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener
+   * #onPhoneAccountSelected}
    */
   public void record(
       Context context, PhoneAccountHandle selectedAccountHandle, boolean setDefault) {
@@ -76,8 +78,8 @@ public class PreferredAccountRecorder {
     private final PhoneAccountHandle phoneAccountHandle;
     private final boolean remember;
 
-    public UserSelectionReporter(
-            @NonNull PhoneAccountHandle phoneAccountHandle, @Nullable String number, boolean remember) {
+    public UserSelectionReporter(@NonNull PhoneAccountHandle phoneAccountHandle,
+                                 @Nullable String number, boolean remember) {
       this.phoneAccountHandle = Assert.isNotNull(phoneAccountHandle);
       this.number = Assert.isNotNull(number);
       this.remember = remember;
@@ -127,7 +129,7 @@ public class PreferredAccountRecorder {
               PreferredSimFallbackContract.CONTENT_URI,
               values,
               PreferredSim.DATA_ID + " = ?",
-              new String[] {String.valueOf(input.dataId)});
+              new String[] {input.dataId});
       return null;
     }
   }

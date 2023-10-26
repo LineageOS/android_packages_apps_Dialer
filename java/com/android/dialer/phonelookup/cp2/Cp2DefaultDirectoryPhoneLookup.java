@@ -42,7 +42,8 @@ import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
-import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
+import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.
+        PhoneLookupHistory;
 import com.android.dialer.phonenumberproto.PartitionedNumbers;
 import com.android.dialer.storage.Unencrypted;
 import com.android.dialer.util.PermissionsUtil;
@@ -352,8 +353,8 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
           try (Cursor cursor =
               queryPhoneLookup(new String[] {ContactsContract.PhoneLookup.CONTACT_ID}, rawNumber)) {
             if (cursor == null) {
-              LogUtil.w(
-                  "Cp2DefaultDirectoryPhoneLookup.queryPhoneLookupTableForContactIdsBasedOnRawNumber",
+              LogUtil.w("Cp2DefaultDirectoryPhoneLookup." +
+                              "queryPhoneLookupTableForContactIdsBasedOnRawNumber",
                   "null cursor");
               return contactIds;
             }
@@ -854,7 +855,7 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
             Phone.CONTENT_URI,
             projection,
             Phone.NORMALIZED_NUMBER + " IN (" + questionMarks(validE164Numbers.size()) + ")",
-            validE164Numbers.toArray(new String[validE164Numbers.size()]),
+            validE164Numbers.toArray(new String[0]),
             null);
   }
 

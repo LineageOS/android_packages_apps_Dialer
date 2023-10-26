@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +18,13 @@
 package com.android.dialer.calllog.database.contract;
 
 import android.net.Uri;
-import android.os.Build;
 import android.provider.BaseColumns;
+
 import com.android.dialer.constants.Constants;
 
 /** Contract for the AnnotatedCallLog content provider. */
 public class AnnotatedCallLogContract {
-  public static final String AUTHORITY = Constants.get().getAnnotatedCallLogProviderAuthority();
+  public static final String AUTHORITY = Constants.ANNOTATED_CALL_LOG_PROVIDER_AUTHORITY;
 
   public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
