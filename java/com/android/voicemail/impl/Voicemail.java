@@ -163,7 +163,7 @@ public class Voicemail implements Parcelable {
       builderId = builderId == null ? -1 : builderId;
       builderTimestamp = builderTimestamp == null ? 0 : builderTimestamp;
       builderDuration = builderDuration == null ? 0 : builderDuration;
-      builderIsRead = builderIsRead == null ? false : builderIsRead;
+      builderIsRead = builderIsRead != null && builderIsRead;
       return new Voicemail(
           builderTimestamp,
           builderNumber,
@@ -326,8 +326,8 @@ public class Voicemail implements Parcelable {
     } else {
       uri = null;
     }
-    isRead = in.readInt() > 0 ? true : false;
-    hasContent = in.readInt() > 0 ? true : false;
+    isRead = in.readInt() > 0;
+    hasContent = in.readInt() > 0;
     transcription = (String) readCharSequence(in);
   }
 

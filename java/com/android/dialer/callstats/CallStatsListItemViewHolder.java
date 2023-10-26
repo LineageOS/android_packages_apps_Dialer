@@ -87,20 +87,18 @@ public final class CallStatsListItemViewHolder extends RecyclerView.ViewHolder
     quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
 
     mContext = rootView.getContext();
-    mPhotoSize = mContext.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);
     mContactInfoHelper = contactInfoHelper;
   }
 
-  public static CallStatsListItemViewHolder create(View view,
-      ContactInfoHelper contactInfoHelper) {
+  public static CallStatsListItemViewHolder create(View view, ContactInfoHelper contactInfoHelper) {
     return new CallStatsListItemViewHolder(view,
-        (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
+        view.findViewById(R.id.quick_contact_photo),
         view.findViewById(R.id.primary_action_view),
-        (TextView) view.findViewById(R.id.name),
-        (TextView) view.findViewById(R.id.number),
-        (TextView) view.findViewById(R.id.label),
-        (TextView) view.findViewById(R.id.percent),
-        (LinearColorBar) view.findViewById(R.id.percent_bar),
+        view.findViewById(R.id.name),
+        view.findViewById(R.id.number),
+        view.findViewById(R.id.label),
+        view.findViewById(R.id.percent),
+        view.findViewById(R.id.percent_bar),
         contactInfoHelper);
   }
 

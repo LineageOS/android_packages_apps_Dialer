@@ -25,7 +25,7 @@
             android:name=".HelplineActivity"
             android:autoRemoveFromRecents="true"
             android:label="@string/helplines_name"
-            android:theme="@android:style/Theme.DeviceDefault.Settings"
+            android:theme="@style/Dialer.ThemeBase.ActionBar"
             android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

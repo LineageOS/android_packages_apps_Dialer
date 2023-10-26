@@ -27,7 +27,6 @@ import com.android.dialer.spam.Spam;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
