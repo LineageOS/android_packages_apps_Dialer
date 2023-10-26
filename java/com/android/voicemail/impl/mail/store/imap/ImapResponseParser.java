@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +18,12 @@
 package com.android.voicemail.impl.mail.store.imap;
 
 import android.text.TextUtils;
+
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.mail.FixedLengthInputStream;
 import com.android.voicemail.impl.mail.MessagingException;
 import com.android.voicemail.impl.mail.PeekableInputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -47,7 +50,7 @@ public class ImapResponseParser {
    * We store all {@link ImapResponse} in it. {@link #destroyResponses()} must be called from time
    * to time to destroy them and clear it.
    */
-  private final ArrayList<ImapResponse> responsesToDestroy = new ArrayList<ImapResponse>();
+  private final ArrayList<ImapResponse> responsesToDestroy = new ArrayList<>();
 
   /**
    * Exception thrown when we receive BYE. It derives from IOException, so it'll be treated in the

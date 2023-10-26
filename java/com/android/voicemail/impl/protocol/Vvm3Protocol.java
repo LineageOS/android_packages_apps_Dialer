@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +45,7 @@ import com.android.voicemail.impl.sms.Vvm3MessageSender;
 import com.android.voicemail.impl.sync.VvmNetworkRequest;
 import com.android.voicemail.impl.sync.VvmNetworkRequest.NetworkWrapper;
 import com.android.voicemail.impl.sync.VvmNetworkRequest.RequestFailedException;
+
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Locale;

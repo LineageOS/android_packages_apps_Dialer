@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +18,6 @@
 package com.android.dialer.assisteddialing;
 
 import android.content.Context;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -28,6 +28,7 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber.CountryCodeSource;
+
 import java.util.Locale;
 import java.util.Optional;
 
@@ -193,9 +194,7 @@ final class Constraints {
   private boolean isNotEmergencyNumber(@NonNull String numberToCheck, @NonNull Context context) {
     // isEmergencyNumber may depend on network state, so also use isLocalEmergencyNumber when
     // roaming and out of service.
-    boolean result =
-        !PhoneNumberUtils.isEmergencyNumber(numberToCheck)
-            && !PhoneNumberHelper.isLocalEmergencyNumber(context, numberToCheck);
+    boolean result = !PhoneNumberHelper.isEmergencyNumber(context, numberToCheck);
     LogUtil.i("Constraints.isNotEmergencyNumber", String.valueOf(result));
     return result;
   }

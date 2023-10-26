@@ -195,12 +195,6 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
     return adapter;
   }
 
-  @Override
-  @CallSuper
-  public void onBackPressed() {
-    super.onBackPressed();
-  }
-
   @MainThread
   protected final void setCallDetailsEntries(CallDetailsEntries entries) {
     Assert.isMainThread();

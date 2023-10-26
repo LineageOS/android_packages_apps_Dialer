@@ -38,6 +38,7 @@ import com.android.voicemail.impl.OmtpService;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.protocol.VisualVoicemailProtocol;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.concurrent.CancellationException;
@@ -71,7 +72,8 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
     this.phoneAccountHandle = phoneAccountHandle;
     IntentFilter filter = new IntentFilter(ACTION_REQUEST_SENT_INTENT);
     filter.addAction(OmtpService.ACTION_SMS_RECEIVED);
-    context.registerReceiver(this, filter, PERMISSION_DIALER_ORIGIN, /* scheduler= */ null);
+    context.registerReceiver(this, filter, PERMISSION_DIALER_ORIGIN, /* scheduler= */ null,
+            Context.RECEIVER_NOT_EXPORTED);
   }
 
   @Override
@@ -116,9 +118,14 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
       return;
     }
 
-    VisualVoicemailSms sms = intent.getExtras().getParcelable(OmtpService.EXTRA_VOICEMAIL_SMS);
+    if (intent.getExtras() == null) {
+      return;
+    }
 
-    if (!phoneAccountHandle.equals(sms.getPhoneAccountHandle())) {
+    VisualVoicemailSms sms = intent.getExtras().getParcelable(OmtpService.EXTRA_VOICEMAIL_SMS,
+            VisualVoicemailSms.class);
+
+    if (sms == null || !phoneAccountHandle.equals(sms.getPhoneAccountHandle())) {
       return;
     }
     String eventType = sms.getPrefix();

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +27,7 @@ import androidx.annotation.NonNull;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -39,7 +41,7 @@ public class ExternalCallList {
 
   private final Set<Call> externalCalls = new ArraySet<>();
   private final Set<ExternalCallListener> externalCallListeners =
-      Collections.newSetFromMap(new ConcurrentHashMap<ExternalCallListener, Boolean>(8, 0.9f, 1));
+      Collections.newSetFromMap(new ConcurrentHashMap<>(8, 0.9f, 1));
   /** Handles {@link android.telecom.Call.Callback} callbacks. */
   private final Call.Callback telecomCallCallback =
       new Call.Callback() {

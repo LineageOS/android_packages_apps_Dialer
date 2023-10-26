@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +28,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.util.PermissionsUtil;
@@ -97,22 +99,22 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
     try {
       String contactType = uri.getQueryParameter(CONTACT_TYPE_PARAM_KEY);
       if (!TextUtils.isEmpty(contactType)) {
-        request.contactType = Integer.valueOf(contactType);
+        request.contactType = Integer.parseInt(contactType);
       }
 
       String scale = uri.getQueryParameter(SCALE_PARAM_KEY);
       if (!TextUtils.isEmpty(scale)) {
-        request.scale = Float.valueOf(scale);
+        request.scale = Float.parseFloat(scale);
       }
 
       String offset = uri.getQueryParameter(OFFSET_PARAM_KEY);
       if (!TextUtils.isEmpty(offset)) {
-        request.offset = Float.valueOf(offset);
+        request.offset = Float.parseFloat(offset);
       }
 
       String isCircular = uri.getQueryParameter(IS_CIRCULAR_PARAM_KEY);
       if (!TextUtils.isEmpty(isCircular)) {
-        request.isCircular = Boolean.valueOf(isCircular);
+        request.isCircular = Boolean.parseBoolean(isCircular);
       }
     } catch (NumberFormatException e) {
       LogUtil.w(

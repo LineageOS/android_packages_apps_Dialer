@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +17,9 @@
 package com.android.voicemail.impl.mail.store.imap;
 
 import com.android.voicemail.impl.mail.utils.LogUtils;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /** Utility methods for use with IMAP. */
 public class ImapUtility {
@@ -60,7 +63,7 @@ public class ImapUtility {
    * </pre>
    */
   public static String[] getImapSequenceValues(String set) {
-    ArrayList<String> list = new ArrayList<String>();
+    ArrayList<String> list = new ArrayList<>();
     if (set != null) {
       String[] setItems = set.split(",");
       for (String item : setItems) {
@@ -74,9 +77,7 @@ public class ImapUtility {
           }
         } else {
           // range
-          for (String rangeItem : getImapRangeValues(item)) {
-            list.add(rangeItem);
-          }
+          list.addAll(Arrays.asList(getImapRangeValues(item)));
         }
       }
     }
@@ -95,7 +96,7 @@ public class ImapUtility {
    * </pre>
    */
   public static String[] getImapRangeValues(String range) {
-    ArrayList<String> list = new ArrayList<String>();
+    ArrayList<String> list = new ArrayList<>();
     try {
       if (range != null) {
         int colonPos = range.indexOf(':');

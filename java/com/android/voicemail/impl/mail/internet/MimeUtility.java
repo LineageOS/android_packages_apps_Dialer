@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +20,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Base64DataException;
 import android.util.Base64InputStream;
+
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.mail.Body;
 import com.android.voicemail.impl.mail.BodyPart;
@@ -26,6 +28,14 @@ import com.android.voicemail.impl.mail.Message;
 import com.android.voicemail.impl.mail.MessagingException;
 import com.android.voicemail.impl.mail.Multipart;
 import com.android.voicemail.impl.mail.Part;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.james.mime4j.codec.DecodeMonitor;
+import org.apache.james.mime4j.codec.DecoderUtil;
+import org.apache.james.mime4j.codec.EncoderUtil;
+import org.apache.james.mime4j.codec.QuotedPrintableInputStream;
+import org.apache.james.mime4j.util.CharsetUtil;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,12 +43,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.commons.io.IOUtils;
-import org.apache.james.mime4j.codec.DecodeMonitor;
-import org.apache.james.mime4j.codec.DecoderUtil;
-import org.apache.james.mime4j.codec.EncoderUtil;
-import org.apache.james.mime4j.codec.QuotedPrintableInputStream;
-import org.apache.james.mime4j.util.CharsetUtil;
 
 public class MimeUtility {
   private static final String LOG_TAG = "Email";
@@ -253,18 +257,12 @@ public class MimeUtility {
         }
       }
 
-    } catch (OutOfMemoryError oom) {
+    } catch (OutOfMemoryError | Exception oom) {
       /*
        * If we are not able to process the body there's nothing we can do about it. Return
        * null and let the upper layers handle the missing content.
        */
-      VvmLog.e(LOG_TAG, "Unable to getTextFromPart " + oom.toString());
-    } catch (Exception e) {
-      /*
-       * If we are not able to process the body there's nothing we can do about it. Return
-       * null and let the upper layers handle the missing content.
-       */
-      VvmLog.e(LOG_TAG, "Unable to getTextFromPart " + e.toString());
+      VvmLog.e(LOG_TAG, "Unable to getTextFromPart " + oom);
     }
     return null;
   }

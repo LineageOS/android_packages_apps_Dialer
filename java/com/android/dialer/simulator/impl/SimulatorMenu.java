@@ -26,6 +26,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.android.dialer.common.Assert;
+
 import java.util.Map.Entry;
 
 /** Makes option menu for simulator. */

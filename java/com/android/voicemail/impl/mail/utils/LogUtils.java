@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -16,7 +17,9 @@ package com.android.voicemail.impl.mail.utils;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.voicemail.impl.VvmLog;
+
 import java.util.List;
 
 public class LogUtils {

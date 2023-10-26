@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +20,7 @@ package com.android.dialer.precall.impl;
 import android.content.Context;
 import android.os.Bundle;
 import android.telecom.PhoneAccount;
+
 import com.android.dialer.assisteddialing.AssistedDialingMediator;
 import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.TransformationInfo;
@@ -29,6 +31,7 @@ import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;
 import com.android.dialer.util.CallUtil;
+
 import java.util.Optional;
 
 /** Rewrites the call URI with country code. */

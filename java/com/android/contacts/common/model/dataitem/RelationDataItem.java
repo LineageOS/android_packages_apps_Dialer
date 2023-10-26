@@ -18,6 +18,7 @@ package com.android.contacts.common.model.dataitem;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
 import android.text.TextUtils;
 

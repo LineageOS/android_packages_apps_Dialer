@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Xiao-Long Chen <chillermillerlong@hotmail.com>
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,20 +27,16 @@ import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.DisplayNameSources;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.util.Constants;
-import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.R;
+import com.android.dialer.phonenumbercache.ContactInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-import org.w3c.dom.Text;
 
-import java.sql.Struct;
 import java.util.ArrayList;
 
 public class ContactBuilder {
@@ -69,10 +66,6 @@ public class ContactBuilder {
       return new ContactBuilder(DirectoryId.NEARBY, null, number);
   }
 
-  public static ContactBuilder forPeopleLookup(String number) {
-      return new ContactBuilder(DirectoryId.PEOPLE, null, number);
-  }
-
   public static ContactBuilder forReverseLookup(String normalizedNumber, String formattedNumber) {
       return new ContactBuilder(DirectoryId.NULL, normalizedNumber, formattedNumber);
   }
@@ -81,75 +74,6 @@ public class ContactBuilder {
     this.directoryId = directoryId;
     this.normalizedNumber = normalizedNumber;
     this.formattedNumber = formattedNumber;
-  }
-
-  public ContactBuilder(Uri encodedContactUri) throws JSONException {
-    String jsonData = encodedContactUri.getEncodedFragment();
-    String directoryIdStr = encodedContactUri.getQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY);
-    long directoryId = DirectoryId.DEFAULT;
-
-    if (!TextUtils.isEmpty(directoryIdStr)) {
-      try {
-        directoryId = Long.parseLong(directoryIdStr);
-      } catch (NumberFormatException e) {
-        Log.e(TAG, "Error parsing directory id of uri " + encodedContactUri, e);
-      }
-    }
-
-    this.directoryId = directoryId;
-    this.formattedNumber = null;
-    this.normalizedNumber = null;
-
-    try {
-      // name
-      JSONObject json = new JSONObject(jsonData);
-      JSONObject contact = json.optJSONObject(Contacts.CONTENT_ITEM_TYPE);
-      JSONObject nameObj = contact.optJSONObject(StructuredName.CONTENT_ITEM_TYPE);
-      name = new Name(nameObj);
-
-      if (contact != null) {
-        // numbers
-        if (contact.has(Phone.CONTENT_ITEM_TYPE)) {
-          String phoneData = contact.getString(Phone.CONTENT_ITEM_TYPE);
-          Object phoneObject = new JSONTokener(phoneData).nextValue();
-          JSONArray phoneNumbersJson;
-          if (phoneObject instanceof JSONObject) {
-            phoneNumbersJson = new JSONArray();
-            phoneNumbersJson.put(phoneObject);
-          } else {
-            phoneNumbersJson = contact.getJSONArray(Phone.CONTENT_ITEM_TYPE);
-          }
-          for (int i = 0; i < phoneNumbersJson.length(); ++i) {
-            JSONObject phoneObj = phoneNumbersJson.getJSONObject(i);
-            phoneNumbers.add(new PhoneNumber(phoneObj));
-          }
-        }
-
-        // address
-        if (contact.has(StructuredPostal.CONTENT_ITEM_TYPE)) {
-          JSONArray addressesJson = contact.getJSONArray(StructuredPostal.CONTENT_ITEM_TYPE);
-          for (int i = 0; i < addressesJson.length(); ++i) {
-            JSONObject addrObj = addressesJson.getJSONObject(i);
-            addresses.add(new Address(addrObj));
-          }
-        }
-
-        // websites
-        if (contact.has(Website.CONTENT_ITEM_TYPE)) {
-          JSONArray websitesJson = contact.getJSONArray(Website.CONTENT_ITEM_TYPE);
-          for (int i = 0; i < websitesJson.length(); ++i) {
-            JSONObject websiteObj = websitesJson.getJSONObject(i);
-            final WebsiteUrl websiteUrl = new WebsiteUrl(websiteObj);
-            if (!TextUtils.isEmpty(websiteUrl.url)) {
-              websites.add(new WebsiteUrl(websiteObj));
-            }
-          }
-        }
-      }
-    } catch(JSONException e) {
-      Log.e(TAG, "Error parsing encoded fragment of uri " + encodedContactUri, e);
-      throw e;
-    }
   }
 
   public ContactBuilder addAddress(Address address) {

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +24,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
+
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
 import com.android.dialer.app.AccountSelectionActivity;
@@ -33,6 +35,7 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.IntentUtil;
+
 import java.util.ArrayList;
 
 /**
