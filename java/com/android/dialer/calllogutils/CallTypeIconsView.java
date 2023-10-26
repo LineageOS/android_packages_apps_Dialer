@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,13 +22,22 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.provider.CallLog.Calls;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.res.ResourcesCompat;
+
+import com.android.dialer.R;
 import com.android.dialer.theme.base.Theme;
 import com.android.dialer.theme.base.ThemeComponent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +54,7 @@ public class CallTypeIconsView extends View {
   private final boolean useLargeIcons;
 
   private static Resources resources;
-  private static Resources largeResouces;
+  private static Resources largeResources;
   private final List<Integer> callTypes = new ArrayList<>(3);
   private boolean showVideo;
   private boolean showHd;
@@ -67,8 +77,8 @@ public class CallTypeIconsView extends View {
     if (resources == null) {
       resources = new Resources(context, false);
     }
-    if (largeResouces == null && useLargeIcons) {
-      largeResouces = new Resources(context, true);
+    if (largeResources == null && useLargeIcons) {
+      largeResources = new Resources(context, true);
     }
   }
 
@@ -152,19 +162,18 @@ public class CallTypeIconsView extends View {
   }
 
   private Drawable getCallTypeDrawable(int callType) {
-    Resources resources = useLargeIcons ? largeResouces : CallTypeIconsView.resources;
+    Resources resources = useLargeIcons ? largeResources : CallTypeIconsView.resources;
     switch (callType) {
       case Calls.INCOMING_TYPE:
       case Calls.ANSWERED_EXTERNALLY_TYPE:
         return resources.incoming;
       case Calls.OUTGOING_TYPE:
         return resources.outgoing;
-      case Calls.MISSED_TYPE:
-        return resources.missed;
       case Calls.VOICEMAIL_TYPE:
         return resources.voicemail;
       case Calls.BLOCKED_TYPE:
         return resources.blocked;
+      case Calls.MISSED_TYPE:
       default:
         // It is possible for users to end up with calls with unknown call types in their
         // call history, possibly due to 3rd party call log implementations (e.g. to
@@ -181,7 +190,7 @@ public class CallTypeIconsView extends View {
 
   @Override
   protected void onDraw(Canvas canvas) {
-    Resources resources = useLargeIcons ? largeResouces : CallTypeIconsView.resources;
+    Resources resources = useLargeIcons ? largeResources : CallTypeIconsView.resources;
     int left = 0;
     // If we are using large icons, we should only show one icon (video, hd or call type) with
     // priority give to HD or Video. So we skip the call type icon if we plan to show them.
@@ -230,7 +239,7 @@ public class CallTypeIconsView extends View {
     // Drawable representing an incoming answered call.
     public final Drawable incoming;
 
-    // Drawable respresenting an outgoing call.
+    // Drawable representing an outgoing call.
     public final Drawable outgoing;
 
     // Drawable representing an incoming missed call.
@@ -242,10 +251,10 @@ public class CallTypeIconsView extends View {
     // Drawable representing a blocked call.
     public final Drawable blocked;
 
-    // Drawable repesenting a video call.
+    // Drawable representing a video call.
     final Drawable videoCall;
 
-    // Drawable represeting a hd call.
+    // Drawable representing a hd call.
     final Drawable hdCall;
 
     // Drawable representing a WiFi call.
@@ -272,76 +281,59 @@ public class CallTypeIconsView extends View {
      */
     public Resources(Context context, boolean largeIcons) {
       final android.content.res.Resources r = context.getResources();
+      android.content.res.Resources.Theme contextTheme = context.getTheme();
 
-      int iconId = R.drawable.quantum_ic_call_received_vd_theme_24;
-      Drawable drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      incoming = drawable.mutate();
-      incoming.setColorFilter(r.getColor(R.color.answered_incoming_call),
-          PorterDuff.Mode.MULTIPLY);
+      incoming = getBitmap(context, R.drawable.quantum_ic_call_received_vd_theme_24,
+              r.getColor(R.color.answered_incoming_call, contextTheme), largeIcons);
 
       // Create a rotated instance of the call arrow for outgoing calls.
-      iconId = R.drawable.quantum_ic_call_made_vd_theme_24;
-      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      outgoing = drawable.mutate();
-      outgoing.setColorFilter(r.getColor(R.color.answered_outgoing_call),
-          PorterDuff.Mode.MULTIPLY);
+      outgoing = getBitmap(context, R.drawable.quantum_ic_call_made_vd_theme_24,
+              r.getColor(R.color.answered_outgoing_call, contextTheme), largeIcons);
 
       // Need to make a copy of the arrow drawable, otherwise the same instance colored
       // above will be recolored here.
-      iconId = R.drawable.quantum_ic_call_missed_vd_theme_24;
-      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      missed = drawable.mutate();
-      missed.setColorFilter(r.getColor(R.color.dialer_red), PorterDuff.Mode.MULTIPLY);
+      missed = getBitmap(context, R.drawable.quantum_ic_call_missed_vd_theme_24,
+              r.getColor(R.color.dialer_red, contextTheme), largeIcons);
 
       Theme theme = ThemeComponent.get(context).theme();
-      iconId = R.drawable.quantum_ic_voicemail_vd_theme_24;
-      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      voicemail = drawable.mutate();
-      voicemail.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
+      int iconColor = theme.getColorIcon();
 
-      iconId = R.drawable.quantum_ic_block_vd_theme_24;
-      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      blocked = drawable.mutate();
-      blocked.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
-
-      iconId = R.drawable.quantum_ic_videocam_vd_white_24;
-      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      videoCall = drawable.mutate();
-      videoCall.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
-
-      iconId = R.drawable.quantum_ic_hd_vd_theme_24;
-      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      hdCall = drawable.mutate();
-      hdCall.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
-
-      iconId = R.drawable.quantum_ic_signal_wifi_4_bar_vd_theme_24;
-      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      wifiCall = drawable.mutate();
-      wifiCall.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
-
-      iconId = R.drawable.quantum_ic_language_vd_theme_24;
-      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      assistedDialedCall = drawable.mutate();
-      assistedDialedCall.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
-
-      iconId = R.drawable.quantum_ic_rtt_vd_theme_24;
-      drawable = largeIcons ? r.getDrawable(iconId, null) : getScaledBitmap(context, iconId);
-      rttCall = drawable.mutate();
-      rttCall.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
+      voicemail = getBitmap(context, R.drawable.quantum_ic_voicemail_vd_theme_24, iconColor,
+              largeIcons);
+      blocked = getBitmap(context, R.drawable.quantum_ic_block_vd_theme_24, iconColor,
+              largeIcons);
+      videoCall = getBitmap(context, R.drawable.quantum_ic_videocam_vd_white_24, iconColor,
+              largeIcons);
+      hdCall = getBitmap(context, R.drawable.quantum_ic_hd_vd_theme_24, iconColor,
+              largeIcons);
+      wifiCall = getBitmap(context, R.drawable.quantum_ic_signal_wifi_4_bar_vd_theme_24,
+              iconColor, largeIcons);
+      assistedDialedCall = getBitmap(context, R.drawable.quantum_ic_language_vd_theme_24,
+              iconColor, largeIcons);
+      rttCall = getBitmap(context, R.drawable.quantum_ic_rtt_vd_theme_24, iconColor,
+              largeIcons);
 
       iconMargin = largeIcons ? 0 : r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
+    }
+
+    private Drawable getBitmap(Context context, @DrawableRes int iconId, @ColorInt int color,
+                               boolean largeIcons) {
+      final android.content.res.Resources r = context.getResources();
+      Drawable drawable = largeIcons
+              ? ResourcesCompat.getDrawable(r, iconId, context.getTheme())
+              : getScaledBitmap(context, iconId);
+      drawable.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+      return drawable;
     }
 
     // Gets the icon, scaled to the height of the call type icons. This helps display all the
     // icons to be the same height, while preserving their width aspect ratio.
     private Drawable getScaledBitmap(Context context, int resourceId) {
-      Drawable drawable = context.getDrawable(resourceId);
+      Drawable drawable = AppCompatResources.getDrawable(context, resourceId);
 
       int scaledHeight = context.getResources().getDimensionPixelSize(R.dimen.call_type_icon_size);
-      int scaledWidth =
-          (int)
-              ((float) drawable.getIntrinsicWidth()
-                  * ((float) scaledHeight / (float) drawable.getIntrinsicHeight()));
+      int scaledWidth = (int) ((float) drawable.getIntrinsicWidth()
+              * ((float) scaledHeight / (float) drawable.getIntrinsicHeight()));
 
       Bitmap icon = Bitmap.createBitmap(scaledWidth, scaledHeight, Bitmap.Config.ARGB_8888);
       Canvas canvas = new Canvas(icon);

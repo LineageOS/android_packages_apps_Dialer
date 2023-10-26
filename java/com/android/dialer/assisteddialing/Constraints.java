@@ -17,7 +17,6 @@
 package com.android.dialer.assisteddialing;
 
 import android.content.Context;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -193,9 +192,7 @@ final class Constraints {
   private boolean isNotEmergencyNumber(@NonNull String numberToCheck, @NonNull Context context) {
     // isEmergencyNumber may depend on network state, so also use isLocalEmergencyNumber when
     // roaming and out of service.
-    boolean result =
-        !PhoneNumberUtils.isEmergencyNumber(numberToCheck)
-            && !PhoneNumberHelper.isLocalEmergencyNumber(context, numberToCheck);
+    boolean result = !PhoneNumberHelper.isEmergencyNumber(context, numberToCheck);
     LogUtil.i("Constraints.isNotEmergencyNumber", String.valueOf(result));
     return result;
   }

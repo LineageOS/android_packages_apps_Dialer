@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 
@@ -64,15 +63,6 @@ public class SpamNotificationActivity extends FragmentActivity {
   private static final String CALL_INFO_KEY_CALL_ID = "call_id";
   private static final String CALL_INFO_KEY_START_TIME_MILLIS = "call_start_time_millis";
   private static final String CALL_INFO_CONTACT_LOOKUP_RESULT_TYPE = "contact_lookup_result_type";
-  private final DialogInterface.OnDismissListener dismissListener =
-      new DialogInterface.OnDismissListener() {
-        @Override
-        public void onDismiss(DialogInterface dialog) {
-          if (!isFinishing()) {
-            finish();
-          }
-        }
-      };
   private FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
 
   /**

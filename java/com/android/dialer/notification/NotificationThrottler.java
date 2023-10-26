@@ -28,7 +28,6 @@ import androidx.annotation.NonNull;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;

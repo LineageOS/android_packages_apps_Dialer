@@ -39,7 +39,7 @@ public class PackedString {
 
   private final String string;
   private ArrayMap<String, String> exploded;
-  private static final ArrayMap<String, String> EMPTY_MAP = new ArrayMap<String, String>();
+  private static final ArrayMap<String, String> EMPTY_MAP = new ArrayMap<>();
 
   /**
    * Create a packed string using an already-packed string (e.g. from database)
@@ -74,7 +74,7 @@ public class PackedString {
     if (exploded == null) {
       exploded = explode(string);
     }
-    return new ArrayMap<String, String>(exploded);
+    return new ArrayMap<>(exploded);
   }
 
   /** Read out all values into a map. */
@@ -82,7 +82,7 @@ public class PackedString {
     if (packed == null || packed.length() == 0) {
       return EMPTY_MAP;
     }
-    ArrayMap<String, String> map = new ArrayMap<String, String>();
+    ArrayMap<String, String> map = new ArrayMap<>();
 
     int length = packed.length();
     int elementStartIndex = 0;
@@ -123,7 +123,7 @@ public class PackedString {
 
     /** Create a builder that's empty (for filling) */
     public Builder() {
-      map = new ArrayMap<String, String>();
+      map = new ArrayMap<>();
     }
 
     /** Create a builder using the values of an existing PackedString (for editing). */

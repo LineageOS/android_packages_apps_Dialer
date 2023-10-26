@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,7 +112,6 @@ public final class Selection {
    *     enclosed in a parenthesis.
    */
   @NonNull
-  @SuppressWarnings("rawtypes")
   public static Selection fromString(@Nullable String selection, @Nullable String... args) {
     return new Builder(selection, args == null ? Collections.emptyList() : Arrays.asList(args))
         .build();
@@ -204,7 +204,7 @@ public final class Selection {
       }
       return new Selection(
           parenthesized(selection.toString()),
-          selectionArgs.toArray(new String[selectionArgs.size()]));
+          selectionArgs.toArray(new String[0]));
     }
 
     @NonNull
