@@ -111,7 +111,6 @@ public final class Selection {
    *     enclosed in a parenthesis.
    */
   @NonNull
-  @SuppressWarnings("rawtypes")
   public static Selection fromString(@Nullable String selection, @Nullable String... args) {
     return new Builder(selection, args == null ? Collections.emptyList() : Arrays.asList(args))
         .build();

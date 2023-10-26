@@ -47,7 +47,7 @@ public class ImapResponseParser {
    * We store all {@link ImapResponse} in it. {@link #destroyResponses()} must be called from time
    * to time to destroy them and clear it.
    */
-  private final ArrayList<ImapResponse> responsesToDestroy = new ArrayList<ImapResponse>();
+  private final ArrayList<ImapResponse> responsesToDestroy = new ArrayList<>();
 
   /**
    * Exception thrown when we receive BYE. It derives from IOException, so it'll be treated in the

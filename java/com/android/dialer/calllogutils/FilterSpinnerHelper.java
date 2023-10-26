@@ -15,12 +15,12 @@
  */
 package com.android.dialer.calllogutils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.provider.CallLog;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,7 +29,6 @@ import android.widget.Spinner;
 import com.android.dialer.R;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FilterSpinnerHelper implements AdapterView.OnItemSelectedListener {
   private static final String TAG = FilterSpinnerHelper.class.getSimpleName();
@@ -82,6 +81,7 @@ public class FilterSpinnerHelper implements AdapterView.OnItemSelectedListener {
     return spinner;
   }
 
+  @SuppressLint("MissingPermission")
   private ArrayAdapter<AccountItem> createAccountAdapter(Context context) {
     ArrayList<AccountItem> items = new ArrayList<>();
     items.add(new AccountItem(null, context.getString(R.string.call_log_show_all_accounts)));
