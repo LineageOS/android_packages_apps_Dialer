@@ -19,6 +19,7 @@ package com.android.incallui.answer.impl.classifier;
 
 import android.util.SparseArray;
 import android.view.MotionEvent;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 

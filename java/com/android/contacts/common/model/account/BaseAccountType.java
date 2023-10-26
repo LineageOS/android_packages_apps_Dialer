@@ -38,18 +38,21 @@ import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.view.inputmethod.EditorInfo;
+
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.util.CommonDateUtils;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contacts.resources.R;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 public abstract class BaseAccountType extends AccountType {
 

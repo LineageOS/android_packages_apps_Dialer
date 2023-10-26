@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Danny Baumann <dannybaumann@web.de>
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +18,10 @@
 package com.android.dialer.lookup.dastelefonbuch;
 
 import android.content.Context;
-import android.net.Uri;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
-import android.provider.ContactsContract.CommonDataKinds.Website;
 
-import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.ReverseLookup;
+import com.android.dialer.phonenumbercache.ContactInfo;
 
 import java.io.IOException;
 

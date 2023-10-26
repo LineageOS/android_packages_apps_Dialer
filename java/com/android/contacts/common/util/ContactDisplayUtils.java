@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contacts.resources.R;
+
 import java.util.Objects;
 
 /** Methods for handling various contact data labels. */

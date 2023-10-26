@@ -16,11 +16,8 @@
 
 package com.android.contacts.common.util;
 
-import android.content.res.Resources;
 import android.view.View;
 import android.widget.ListView;
-import com.android.dialer.contacts.resources.R;
-import com.android.dialer.util.ViewUtil;
 
 /** Utilities for configuring ListViews with a card background. */
 public class ContactListViewUtils {

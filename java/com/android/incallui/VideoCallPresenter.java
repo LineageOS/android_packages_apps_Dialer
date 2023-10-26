@@ -52,6 +52,7 @@ import com.android.incallui.videosurface.protocol.VideoSurfaceDelegate;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
 import com.android.incallui.videotech.utils.SessionModificationState;
 import com.android.incallui.videotech.utils.VideoUtils;
+
 import java.util.Objects;
 
 /**

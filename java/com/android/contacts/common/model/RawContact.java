@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +26,11 @@ import android.os.Parcelable;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
+
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountWithDataSet;
 import com.android.contacts.common.model.dataitem.DataItem;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -69,7 +72,7 @@ public final class RawContact implements Parcelable {
 
   public RawContact(ContentValues values) {
     mValues = values;
-    mDataItems = new ArrayList<NamedDataItem>();
+    mDataItems = new ArrayList<>();
   }
 
   /**

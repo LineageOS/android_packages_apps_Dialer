@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +29,16 @@ import com.android.voicemail.impl.mail.MessagingException;
 import com.android.voicemail.impl.mail.Multipart;
 import com.android.voicemail.impl.mail.Part;
 import com.android.voicemail.impl.mail.utils.LogUtils;
+
+import org.apache.james.mime4j.MimeException;
+import org.apache.james.mime4j.dom.field.DateTimeField;
+import org.apache.james.mime4j.field.DefaultFieldParser;
+import org.apache.james.mime4j.io.EOLConvertingInputStream;
+import org.apache.james.mime4j.parser.ContentHandler;
+import org.apache.james.mime4j.parser.MimeStreamParser;
+import org.apache.james.mime4j.stream.BodyDescriptor;
+import org.apache.james.mime4j.stream.Field;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,14 +49,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Stack;
 import java.util.regex.Pattern;
-import org.apache.james.mime4j.MimeException;
-import org.apache.james.mime4j.dom.field.DateTimeField;
-import org.apache.james.mime4j.field.DefaultFieldParser;
-import org.apache.james.mime4j.io.EOLConvertingInputStream;
-import org.apache.james.mime4j.parser.ContentHandler;
-import org.apache.james.mime4j.parser.MimeStreamParser;
-import org.apache.james.mime4j.stream.BodyDescriptor;
-import org.apache.james.mime4j.stream.Field;
 
 /**
  * An implementation of Message that stores all of its metadata in RFC 822 and RFC 2045 style
@@ -107,7 +110,7 @@ public class MimeMessage extends Message {
       sb.append(c);
     }
     sb.append(".");
-    sb.append(Long.toString(System.currentTimeMillis()));
+    sb.append(System.currentTimeMillis());
     sb.append("@email.android.com>");
     return sb.toString();
   }
@@ -453,7 +456,7 @@ public class MimeMessage extends Message {
   }
 
   class MimeMessageBuilder implements ContentHandler {
-    private final Stack<Object> stack = new Stack<Object>();
+    private final Stack<Object> stack = new Stack<>();
 
     public MimeMessageBuilder() {}
 

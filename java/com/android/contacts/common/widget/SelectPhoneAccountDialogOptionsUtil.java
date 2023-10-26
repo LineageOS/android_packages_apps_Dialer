@@ -19,11 +19,10 @@ package com.android.contacts.common.widget;
 
 import android.os.Parcel;
 import android.os.UserHandle;
-import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.telecom.TelecomUtil;
-
 import com.google.protobuf.ByteString;
 
 import java.util.Collection;

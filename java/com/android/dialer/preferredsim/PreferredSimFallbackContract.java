@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +21,7 @@ import android.content.ComponentName;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds;
 import android.telecom.PhoneAccountHandle;
+
 import com.android.dialer.constants.Constants;
 
 /**
@@ -37,7 +39,7 @@ public final class PreferredSimFallbackContract {
    * Check the meta-data "com.android.dialer.PREFERRED_SIM_FALLBACK_AUTHORITY" to get the authority
    * of the default dialer if it support it.
    */
-  public static final String AUTHORITY = Constants.get().getPreferredSimFallbackProviderAuthority();
+  public static final String AUTHORITY = Constants.PREFERRED_SIM_FALLBACK_PROVIDER_AUTHORITY;
 
   public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 

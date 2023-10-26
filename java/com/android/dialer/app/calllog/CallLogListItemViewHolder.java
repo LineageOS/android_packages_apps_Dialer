@@ -54,7 +54,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.cardview.widget.CardView;
@@ -88,8 +87,6 @@ import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.UriUtils;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 
 /**
@@ -130,7 +127,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   private final CachedNumberLookupService cachedNumberLookupService;
   private final VoicemailPlaybackPresenter voicemailPlaybackPresenter;
   private final OnClickListener blockReportListener;
-  @HostUi private final int hostUi;
   /** Whether the data fields are populated by the worker thread, ready to be shown. */
   public boolean isLoaded;
   /** The view containing call log item actions. Null until the ViewStub is inflated. */
@@ -269,20 +265,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     this.callLogEntryView = callLogEntryView;
     this.dayGroupHeader = dayGroupHeader;
     this.primaryActionButtonView = primaryActionButtonView;
-    this.workIconView = (ImageView) rootView.findViewById(R.id.work_profile_icon);
-    this.checkBoxView = (ImageView) rootView.findViewById(R.id.quick_contact_checkbox);
+    this.workIconView = rootView.findViewById(R.id.work_profile_icon);
+    this.checkBoxView = rootView.findViewById(R.id.quick_contact_checkbox);
 
     // Set text height to false on the TextViews so they don't have extra padding.
     phoneCallDetailsViews.nameView.setElegantTextHeight(false);
     phoneCallDetailsViews.callLocationAndDate.setElegantTextHeight(false);
-
-    if (this.context instanceof CallLogActivity) {
-      hostUi = HostUi.CALL_HISTORY;
-    } else if (this.voicemailPlaybackPresenter == null) {
-      hostUi = HostUi.CALL_LOG;
-    } else {
-      hostUi = HostUi.VOICEMAIL;
-    }
 
     quickContactView.setOverlay(null);
     quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
@@ -493,7 +481,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     videoCallButtonView.setVisibility(View.GONE);
 
     // For an emergency number, show "Call details" only.
-    if (PhoneNumberHelper.isLocalEmergencyNumber(context, number)) {
+    if (PhoneNumberHelper.isEmergencyNumber(context, number)) {
       createNewContactButtonView.setVisibility(View.GONE);
       addToExistingContactButtonView.setVisibility(View.GONE);
       sendMessageView.setVisibility(View.GONE);
@@ -899,11 +887,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     if (OldCallDetailsActivity.isLaunchIntent(intent)) {
       ((Activity) context).startActivity(intent);
     } else {
-      if (Intent.ACTION_CALL.equals(intent.getAction())
-          && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)
-              == VideoProfile.STATE_BIDIRECTIONAL) {
-      }
-
       DialerUtils.startActivityWithErrorToast(context, intent);
     }
   }
@@ -964,11 +947,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     blockView.setVisibility(View.GONE);
     unblockView.setVisibility(View.GONE);
     reportNotSpamView.setVisibility(View.GONE);
-    String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+
     if (!canPlaceCallToNumber
         || isVoicemailNumber
         || !BlockedNumberContract.canCurrentUserBlockNumbers(context)
-        || PhoneNumberUtils.isEmergencyNumber(e164Number)) {
+        || PhoneNumberHelper.isEmergencyNumber(context, number, countryIso)) {
       return;
     }
 
@@ -1021,13 +1004,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           .setOnMenuItemClickListener(this);
     }
 
-    String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
     boolean isVoicemailNumber = callLogCache.isVoicemailNumber(accountHandle, number);
     boolean canPlaceCallToNumber = PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation);
     if (canPlaceCallToNumber
         && !isVoicemailNumber
         && BlockedNumberContract.canCurrentUserBlockNumbers(context)
-            && !PhoneNumberUtils.isEmergencyNumber(e164Number)) {
+            && !PhoneNumberHelper.isEmergencyNumber(context, number, countryIso)) {
       if (isBlocked) {
         menu.add(
                 ContextMenu.NONE,
@@ -1049,15 +1031,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       menu.add(ContextMenu.NONE, R.id.context_menu_delete, ContextMenu.NONE, R.string.delete)
           .setOnMenuItemClickListener(this);
     }
-  }
-
-  /** Specifies where the view holder belongs. */
-  @IntDef({HostUi.CALL_LOG, HostUi.CALL_HISTORY, HostUi.VOICEMAIL})
-  @Retention(RetentionPolicy.SOURCE)
-  private @interface HostUi {
-    int CALL_LOG = 0;
-    int CALL_HISTORY = 1;
-    int VOICEMAIL = 2;
   }
 
   public interface OnClickListener {

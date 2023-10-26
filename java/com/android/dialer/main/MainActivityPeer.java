@@ -32,8 +32,6 @@ public interface MainActivityPeer {
 
   void onActivityStop();
 
-  void onActivityDestroyed();
-
   void onNewIntent(Intent intent);
 
   void onSaveInstanceState(Bundle bundle);

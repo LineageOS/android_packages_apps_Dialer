@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +31,6 @@ import android.provider.ContactsContract.Contacts;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.WorkerThread;
 
 import com.android.dialer.common.Assert;
@@ -57,11 +57,13 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 

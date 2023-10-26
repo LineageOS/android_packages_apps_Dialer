@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -87,8 +88,8 @@ public class DisambigDialog extends DialogFragment {
   public void onResume() {
     super.onResume();
     getDialog().getWindow().setBackgroundDrawable(
-            getActivity().getResources().getDrawable(R.drawable.dialog_background,
-                    getActivity().getTheme()));
+            ResourcesCompat.getDrawable(requireActivity().getResources(),
+                    R.drawable.dialog_background, requireActivity().getTheme()));
   }
 
   @Override
