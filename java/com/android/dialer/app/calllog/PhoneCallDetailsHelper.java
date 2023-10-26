@@ -201,24 +201,27 @@ public class PhoneCallDetailsHelper {
    * @return The call location and date string.
    */
   public CharSequence getCallLocationAndDate(PhoneCallDetails details) {
-    descriptionItems.clear();
+    synchronized (this) {
+      descriptionItems.clear();
 
-    if (details.callTypes[0] != Calls.VOICEMAIL_TYPE) {
-      // Get type of call (ie mobile, home, etc) if known, or the caller's location.
-      CharSequence callTypeOrLocation = getCallTypeOrLocation(details);
+      if (details.callTypes[0] != Calls.VOICEMAIL_TYPE) {
+        // Get type of call (ie mobile, home, etc) if known, or the caller's location.
+        CharSequence callTypeOrLocation = getCallTypeOrLocation(details);
 
-      // Only add the call type or location if its not empty.  It will be empty for unknown
-      // callers.
-      if (!TextUtils.isEmpty(callTypeOrLocation)) {
-        descriptionItems.add(callTypeOrLocation);
+        // Only add the call type or location if its not empty.  It will be empty for unknown
+        // callers.
+        if (!TextUtils.isEmpty(callTypeOrLocation)) {
+          descriptionItems.add(callTypeOrLocation);
+        }
       }
+
+      // The date of this call
+      descriptionItems.add(getCallDate(details));
+
+      // Create a comma separated list from the call type or location, and call date.
+
+      return DialerUtils.join(descriptionItems);
     }
-
-    // The date of this call
-    descriptionItems.add(getCallDate(details));
-
-    // Create a comma separated list from the call type or location, and call date.
-    return DialerUtils.join(descriptionItems);
   }
 
   /**
