@@ -44,7 +44,6 @@ import com.android.dialer.util.ExpirableCache;
 import com.android.dialer.util.PermissionsUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -130,8 +129,8 @@ class CallStatsAdapter extends RecyclerView.Adapter {
     final String currentCountryIso = GeoUtil.getCurrentCountryIso(mContext);
     mContactInfoHelper = new ContactInfoHelper(mContext, currentCountryIso);
 
-    mAllItems = new ArrayList<CallStatsDetails>();
-    mShownItems = new ArrayList<CallStatsDetails>();
+    mAllItems = new ArrayList<>();
+    mShownItems = new ArrayList<>();
     mTotalItem = new CallStatsDetails(null, 0, null, null, null, null, null, 0);
     mInfoLookup = new ConcurrentHashMap<>();
 
@@ -171,7 +170,7 @@ class CallStatsAdapter extends RecyclerView.Adapter {
       }
     }
 
-    Collections.sort(mShownItems, sortByDuration ? mDurationComparator : mCountComparator);
+    mShownItems.sort(sortByDuration ? mDurationComparator : mCountComparator);
     notifyDataSetChanged();
   }
 

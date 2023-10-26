@@ -44,6 +44,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -669,8 +670,8 @@ public class CallLogFragment extends Fragment
   @Override
   public void setSelectAllModeToFalse() {
     selectAllMode = false;
-    selectUnselectAllIcon.setImageDrawable(
-        getContext().getDrawable(R.drawable.ic_empty_check_mark_white_24dp));
+    selectUnselectAllIcon.setImageDrawable(AppCompatResources.getDrawable(requireContext(),
+                    R.drawable.ic_empty_check_mark_white_24dp));
   }
 
   @Override
@@ -688,12 +689,12 @@ public class CallLogFragment extends Fragment
 
   private void updateSelectAllIcon() {
     if (selectAllMode) {
-      selectUnselectAllIcon.setImageDrawable(
-          getContext().getDrawable(R.drawable.ic_check_mark_blue_24dp));
+      selectUnselectAllIcon.setImageDrawable(AppCompatResources.getDrawable(requireContext(),
+                      R.drawable.ic_check_mark_blue_24dp));
       getAdapter().onAllSelected();
     } else {
-      selectUnselectAllIcon.setImageDrawable(
-          getContext().getDrawable(R.drawable.ic_empty_check_mark_white_24dp));
+      selectUnselectAllIcon.setImageDrawable(AppCompatResources.getDrawable(requireContext(),
+              R.drawable.ic_empty_check_mark_white_24dp));
       getAdapter().onAllDeselected();
     }
   }

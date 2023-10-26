@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +17,26 @@
 
 package com.android.voicemail.impl.sync;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.VoicemailContract;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.ActivationTask;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
+
 import java.util.List;
 
 public class OmtpVvmSyncReceiver extends BroadcastReceiver {
 
   private static final String TAG = "OmtpVvmSyncReceiver";
 
+  @SuppressLint("MissingPermission")
   @Override
   public void onReceive(final Context context, Intent intent) {
     if (!VoicemailComponent.get(context).getVoicemailClient().isVoicemailModuleEnabled()) {

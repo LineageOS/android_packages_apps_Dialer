@@ -16,43 +16,18 @@
 
 package com.android.dialer.constants;
 
-import androidx.annotation.NonNull;
-
 /**
  * Utility to access constants
  */
 public class Constants {
-  private static Constants instance;
-  private static boolean didInitializeInstance;
+  public static final String FILE_PROVIDER_AUTHORITY = "com.android.dialer.files";
 
-  @NonNull
-  public static synchronized Constants get() {
-    if (!didInitializeInstance) {
-      didInitializeInstance = true;
-      instance = new Constants();
-    }
-    return instance;
-  }
+  public static final String ANNOTATED_CALL_LOG_PROVIDER_AUTHORITY =
+          "com.android.dialer.annotatedcalllog";
 
-  @NonNull
-  public String getFileProviderAuthority() {
-    return "com.android.dialer.files";
-  }
+  public static final String PHONE_LOOKUP_HISTORY_PROVIDER_AUTHORITY =
+          "com.android.dialer.phonelookuphistory";
 
-  @NonNull
-  public String getAnnotatedCallLogProviderAuthority() {
-    return "com.android.dialer.annotatedcalllog";
-  }
-
-  @NonNull
-  public String getPhoneLookupHistoryProviderAuthority() {
-    return "com.android.dialer.phonelookuphistory";
-  }
-
-  @NonNull
-  public String getPreferredSimFallbackProviderAuthority() {
-    return "com.android.dialer.preferredsimfallback";
-  }
-
-  protected Constants() {}
+  public static final String PREFERRED_SIM_FALLBACK_PROVIDER_AUTHORITY =
+          "com.android.dialer.preferredsimfallback";
 }

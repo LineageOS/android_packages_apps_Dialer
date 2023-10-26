@@ -260,7 +260,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         new MainSpeedDialFragmentHost(
             toolbar,
             activity.findViewById(R.id.root_layout),
-            activity.findViewById(R.id.coordinator_layout),
+            (ViewGroup) snackbarContainer,
             activity.findViewById(R.id.fragment_container));
 
     lastTabController = new LastTabController(activity, bottomNav, showVoicemailTab);
@@ -442,9 +442,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         activity.isChangingConfigurations(),
         activity.getSystemService(KeyguardManager.class).isKeyguardLocked());
   }
-
-  @Override
-  public void onActivityDestroyed() {}
 
   private void showPostCallPrompt() {
     if (TelecomUtil.isInManagedCall(activity)) {

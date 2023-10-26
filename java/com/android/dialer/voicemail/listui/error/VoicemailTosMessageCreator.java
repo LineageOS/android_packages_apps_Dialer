@@ -20,7 +20,6 @@ package com.android.dialer.voicemail.listui.error;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.telecom.PhoneAccountHandle;
@@ -32,8 +31,6 @@ import android.text.TextUtils;
 import android.text.style.AlignmentSpan;
 import android.text.style.TextAppearanceSpan;
 import android.text.style.URLSpan;
-import android.view.View;
-import android.view.View.OnClickListener;
 
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;

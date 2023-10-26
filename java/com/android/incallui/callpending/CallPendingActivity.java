@@ -115,7 +115,8 @@ public class CallPendingActivity extends FragmentActivity
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.pending_incall_screen);
-    registerReceiver(finishReceiver, new IntentFilter(ACTION_FINISH_BROADCAST));
+    registerReceiver(finishReceiver, new IntentFilter(ACTION_FINISH_BROADCAST),
+            RECEIVER_NOT_EXPORTED);
   }
 
   @Override
@@ -213,12 +214,6 @@ public class CallPendingActivity extends FragmentActivity
           public void onInCallButtonUiUnready() {}
 
           @Override
-          public void onSaveInstanceState(Bundle outState) {}
-
-          @Override
-          public void onRestoreInstanceState(Bundle savedInstanceState) {}
-
-          @Override
           public void addCallClicked() {}
 
           @Override
@@ -307,13 +302,7 @@ public class CallPendingActivity extends FragmentActivity
           public void onSecondaryInfoClicked() {}
 
           @Override
-          public void onCallStateButtonClicked() {}
-
-          @Override
           public void onManageConferenceClicked() {}
-
-          @Override
-          public void onShrinkAnimationComplete() {}
 
           @Override
           public void onInCallScreenResumed() {}

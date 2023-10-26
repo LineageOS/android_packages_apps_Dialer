@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +21,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.QuickContactBadge;
+
 import com.android.dialer.app.calllog.CallLogAdapter.OnActionModeStateChangedListener;
 
 /** Allows us to click the contact badge for non multi select mode. */

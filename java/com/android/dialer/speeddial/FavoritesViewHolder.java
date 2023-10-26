@@ -36,12 +36,12 @@ import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.draghelper.SpeedDialFavoritesViewHolderOnTouchListener;
-import com.android.dialer.speeddial.draghelper.SpeedDialFavoritesViewHolderOnTouchListener.OnTouchFinishCallback;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 
 /** ViewHolder for starred/favorite contacts in {@link SpeedDialFragment}. */
-public class FavoritesViewHolder extends RecyclerView.ViewHolder
-    implements OnClickListener, OnLongClickListener, OnTouchFinishCallback {
+public class FavoritesViewHolder extends RecyclerView.ViewHolder implements
+        OnClickListener, OnLongClickListener,
+        SpeedDialFavoritesViewHolderOnTouchListener.OnTouchFinishCallback {
 
   private final FavoriteContactsListener listener;
 

@@ -17,8 +17,10 @@
 package com.android.dialer.activecalls;
 
 import android.content.Context;
+
 import com.android.dialer.inject.HasRootComponent;
 import com.android.dialer.inject.IncludeInDialerRoot;
+
 import dagger.Subcomponent;
 
 /** Component for {@link ActiveCalls} */

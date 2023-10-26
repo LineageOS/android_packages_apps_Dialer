@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +31,7 @@ import com.android.dialer.historyitemactions.HistoryItemActionModuleInfo;
 import com.android.dialer.historyitemactions.HistoryItemActionModulesBuilder;
 import com.android.dialer.historyitemactions.IntentModule;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+
 import java.util.List;
 
 /**

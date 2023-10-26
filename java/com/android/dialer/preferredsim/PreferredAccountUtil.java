@@ -40,8 +40,10 @@ public class PreferredAccountUtil {
    * device.
    */
   @NonNull
-  public static Optional<PhoneAccountHandle> getValidPhoneAccount(
-          @NonNull Context context, @Nullable String componentNameString, @Nullable String idString) {
+  public static Optional<PhoneAccountHandle> getValidPhoneAccount(@NonNull Context context,
+                                                                  @Nullable String
+                                                                          componentNameString,
+                                                                  @Nullable String idString) {
     if (TextUtils.isEmpty(componentNameString) || TextUtils.isEmpty(idString)) {
       LogUtil.i("PreferredAccountUtil.getValidPhoneAccount", "empty componentName or id");
       return Optional.absent();

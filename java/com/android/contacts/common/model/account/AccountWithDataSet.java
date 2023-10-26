@@ -16,20 +16,11 @@
 
 package com.android.contacts.common.model.account;
 
-import android.accounts.Account;
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.provider.BaseColumns;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 /** Wrapper for an account that includes a data set (which may be null). */
 public class AccountWithDataSet implements Parcelable {

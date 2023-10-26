@@ -54,6 +54,9 @@ import com.android.voicemail.impl.mail.store.imap.ImapConstants;
 import com.android.voicemail.impl.mail.store.imap.ImapResponse;
 import com.android.voicemail.impl.mail.utils.LogUtils;
 import com.android.voicemail.impl.sync.OmtpVvmSyncService.TranscriptionFetchedCallback;
+
+import org.apache.commons.io.IOUtils;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -62,7 +65,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import org.apache.commons.io.IOUtils;
 
 /** A helper interface to abstract commands sent across IMAP interface for a given account. */
 public class ImapHelper implements Closeable {
@@ -133,7 +135,7 @@ public class ImapHelper implements Closeable {
     } catch (NumberFormatException e) {
       handleEvent(OmtpEvents.DATA_INVALID_PORT);
       LogUtils.w(TAG, "Could not parse port number");
-      throw new InitializingException("cannot initialize ImapHelper:" + e.toString());
+      throw new InitializingException("cannot initialize ImapHelper:" + e);
     }
   }
 
@@ -150,6 +152,7 @@ public class ImapHelper implements Closeable {
       return false;
     }
     return !capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_ROAMING);
+
   }
 
   public OmtpVvmCarrierConfigHelper getConfig() {
@@ -206,7 +209,7 @@ public class ImapHelper implements Closeable {
    * @return A list of voicemail objects containing data about voicemails stored on the server.
    */
   public List<Voicemail> fetchAllVoicemails() {
-    List<Voicemail> result = new ArrayList<Voicemail>();
+    List<Voicemail> result = new ArrayList<>();
     Message[] messages;
     try {
       folder = openImapFolder(ImapFolder.MODE_READ_WRITE);
@@ -327,7 +330,7 @@ public class ImapHelper implements Closeable {
       VoicemailPayload voicemailPayload = fetchVoicemailPayload(message);
       callback.setVoicemailContent(voicemailPayload);
       return true;
-    } catch (MessagingException e) {
+    } catch (MessagingException ignored) {
     } finally {
       closeImapFolder();
     }

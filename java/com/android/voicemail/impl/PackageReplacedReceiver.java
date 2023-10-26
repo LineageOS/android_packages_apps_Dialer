@@ -17,6 +17,7 @@
 
 package com.android.voicemail.impl;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +42,7 @@ import com.android.voicemail.VoicemailVersionConstants;
  */
 public class PackageReplacedReceiver extends BroadcastReceiver {
 
+  @SuppressLint({"MissingPermission", "UnsafeProtectedBroadcastReceiver"})
   @Override
   public void onReceive(Context context, Intent intent) {
     VvmLog.i("PackageReplacedReceiver.onReceive", "package replaced, starting activation");

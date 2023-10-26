@@ -35,6 +35,7 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.Contacts.Data;
 import android.provider.ContactsContract.Contacts.Entity;
+
 import com.android.contacts.common.Collapser;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.model.account.AccountType.EditType;

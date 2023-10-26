@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +24,7 @@ import androidx.annotation.Nullable;
 
 import com.android.dialer.smartdial.map.CompositeSmartDialMap;
 import com.android.dialer.smartdial.util.SmartDialPrefix.PhoneNumberTokens;
+
 import java.util.ArrayList;
 
 /**
@@ -262,7 +264,7 @@ public class SmartDialNameMatcher {
     // positions
     int seperatorCount = 0;
 
-    ArrayList<SmartDialMatchPosition> partial = new ArrayList<SmartDialMatchPosition>();
+    ArrayList<SmartDialMatchPosition> partial = new ArrayList<>();
     // Keep going until we reach the end of displayName
     while (nameStart < nameLength && queryStart < queryLength) {
       char ch = displayName.charAt(nameStart);

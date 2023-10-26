@@ -27,6 +27,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -158,7 +159,7 @@ public class SwipeButtonView extends AppCompatImageView {
     float alpha = circleRadius / minBackgroundRadius;
     alpha = Math.min(1.0f, alpha);
     int color = (int) colorInterpolator.evaluate(alpha, normalColor, inverseColor);
-    drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+    drawable.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
   }
 
   private void drawBackgroundCircle(Canvas canvas) {

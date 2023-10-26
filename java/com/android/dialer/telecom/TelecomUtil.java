@@ -17,8 +17,8 @@
 
 package com.android.dialer.telecom;
 
-import android.app.role.RoleManager;
 import android.Manifest.permission;
+import android.app.role.RoleManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
