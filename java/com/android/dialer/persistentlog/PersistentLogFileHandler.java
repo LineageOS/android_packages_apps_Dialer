@@ -41,6 +41,7 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -201,10 +202,7 @@ final class PersistentLogFileHandler {
     if (files == null) {
       files = new File[0];
     }
-    Arrays.sort(
-        files,
-        (File lhs, File rhs) ->
-            Long.compare(Long.valueOf(lhs.getName()), Long.valueOf(rhs.getName())));
+    Arrays.sort(files, Comparator.comparingLong((File lhs) -> Long.valueOf(lhs.getName())));
     return files;
   }
 

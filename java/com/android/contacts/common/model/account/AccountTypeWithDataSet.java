@@ -23,6 +23,7 @@ import android.provider.BaseColumns;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 /** Encapsulates an "account type" string and a "data set" string. */

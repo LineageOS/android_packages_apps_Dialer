@@ -57,6 +57,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,10 +72,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /** Loads a single Contact and all it constituent RawContacts. */
 public class ContactLoader extends AsyncTaskLoader<Contact> {
@@ -297,8 +297,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
       // status data.  Initially, result has empty entities and statuses.
       long currentRawContactId = -1;
       RawContact rawContact = null;
-      ImmutableList.Builder<RawContact> rawContactsBuilder =
-          new ImmutableList.Builder<RawContact>();
+      ImmutableList.Builder<RawContact> rawContactsBuilder = new ImmutableList.Builder<>();
       do {
         long rawContactId = cursor.getLong(ContactQuery.RAW_CONTACT_ID);
         if (rawContactId != currentRawContactId) {
@@ -393,8 +392,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
 
   /** Sets the "invitable" account types to {@link Contact#mInvitableAccountTypes}. */
   private void loadInvitableAccountTypes(Contact contactData) {
-    final ImmutableList.Builder<AccountType> resultListBuilder =
-        new ImmutableList.Builder<AccountType>();
+    final ImmutableList.Builder<AccountType> resultListBuilder = new ImmutableList.Builder<>();
     if (!contactData.isUserProfile()) {
       Map<AccountTypeWithDataSet, AccountType> invitables =
           AccountTypeManager.getInstance(getContext()).getUsableInvitableAccountTypes();
@@ -599,7 +597,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
    */
   private void loadGroupMetaData(Contact result) {
     StringBuilder selection = new StringBuilder();
-    ArrayList<String> selectionArgs = new ArrayList<String>();
+    ArrayList<String> selectionArgs = new ArrayList<>();
     final HashSet<AccountKey> accountsSeen = new HashSet<>();
     for (RawContact rawContact : result.getRawContacts()) {
       final String accountName = rawContact.getAccountName();
@@ -624,8 +622,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
         selection.append(")");
       }
     }
-    final ImmutableList.Builder<GroupMetaData> groupListBuilder =
-        new ImmutableList.Builder<GroupMetaData>();
+    final ImmutableList.Builder<GroupMetaData> groupListBuilder = new ImmutableList.Builder<>();
     final Cursor cursor =
         getContext()
             .getContentResolver()
@@ -933,7 +930,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
     static {
       List<String> projectionList = Lists.newArrayList(COLUMNS_INTERNAL);
       projectionList.add(Data.CARRIER_PRESENCE);
-      COLUMNS = projectionList.toArray(new String[projectionList.size()]);
+      COLUMNS = projectionList.toArray(new String[0]);
     }
   }
 

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +18,11 @@
 package com.android.dialer.glidephotomanager;
 
 import com.android.dialer.glidephotomanager.impl.GlidePhotoManagerImpl;
+
+import javax.inject.Singleton;
+
 import dagger.Binds;
 import dagger.Module;
-import javax.inject.Singleton;
 
 /** Module for {@link GlidePhotoManagerComponent} */
 @Module

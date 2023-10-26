@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +18,19 @@ package com.android.voicemail.impl.mail.internet;
 
 import android.util.Base64;
 import android.util.Base64OutputStream;
+
 import com.android.voicemail.impl.mail.Body;
 import com.android.voicemail.impl.mail.MessagingException;
 import com.android.voicemail.impl.mail.TempDirectory;
+
+import org.apache.commons.io.IOUtils;
+
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import org.apache.commons.io.IOUtils;
+import java.nio.file.Files;
 
 /**
  * A Body that is backed by a temp file. The Body exposes a getOutputStream method that allows the
@@ -51,13 +54,13 @@ public class BinaryTempFileBody implements Body {
   public OutputStream getOutputStream() throws IOException {
     file = File.createTempFile("body", null, TempDirectory.getTempDirectory());
     file.deleteOnExit();
-    return new FileOutputStream(file);
+    return Files.newOutputStream(file.toPath());
   }
 
   @Override
   public InputStream getInputStream() throws MessagingException {
     try {
-      return new BinaryTempFileBodyInputStream(new FileInputStream(file));
+      return new BinaryTempFileBodyInputStream(Files.newInputStream(file.toPath()));
     } catch (IOException ioe) {
       throw new MessagingException("Unable to open body", ioe);
     }

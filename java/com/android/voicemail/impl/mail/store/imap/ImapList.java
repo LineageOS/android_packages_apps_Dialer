@@ -36,7 +36,7 @@ public class ImapList extends ImapElement {
         }
       };
 
-  private ArrayList<ImapElement> list = new ArrayList<ImapElement>();
+  private ArrayList<ImapElement> list = new ArrayList<>();
 
   /* package */ void add(ImapElement e) {
     if (e == null) {
@@ -175,11 +175,6 @@ public class ImapList extends ImapElement {
   @Override
   public String toString() {
     return list.toString();
-  }
-
-  /** Return the text representations of the contents concatenated with ",". */
-  public final String flatten() {
-    return flatten(new StringBuilder()).toString();
   }
 
   /**

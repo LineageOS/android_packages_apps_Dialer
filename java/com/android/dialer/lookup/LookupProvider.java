@@ -17,6 +17,7 @@
 
 package com.android.dialer.lookup;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -32,10 +33,9 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.Contacts;
 import android.util.Log;
 
-import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.phonenumbercache.ContactInfo;
+import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.util.PermissionsUtil;
-import com.android.dialer.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,18 +43,18 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.TimeUnit;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 public class LookupProvider extends ContentProvider {
   private static final String TAG = LookupProvider.class.getSimpleName();
@@ -236,6 +236,7 @@ public class LookupProvider extends ContentProvider {
    *
    * @return The last location
    */
+  @SuppressLint("MissingPermission")
   private Location getLastLocation() {
     LocationManager locationManager = requireContext().getSystemService(LocationManager.class);
 
@@ -266,10 +267,7 @@ public class LookupProvider extends ContentProvider {
       return null;
     }
 
-    try {
-      filter = URLDecoder.decode(filter, "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-    }
+    filter = URLDecoder.decode(filter, StandardCharsets.UTF_8);
 
     ArrayList<ContactInfo> results = new ArrayList<>();
     if ((type == NEARBY || type == NEARBY_AND_PEOPLE) && lastLocation != null) {
@@ -385,8 +383,8 @@ public class LookupProvider extends ContentProvider {
    * @return Instance of the thread
    */
   private <T> T execute(Callable<T> callable, String name) {
-    FutureCallable<T> futureCallable = new FutureCallable<T>(callable);
-    FutureTask<T> future = new FutureTask<T>(futureCallable);
+    FutureCallable<T> futureCallable = new FutureCallable<>(callable);
+    FutureTask<T> future = new FutureTask<>(futureCallable);
     futureCallable.setFuture(future);
 
     synchronized (activeTasks) {

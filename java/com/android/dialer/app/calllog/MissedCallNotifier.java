@@ -18,8 +18,8 @@ package com.android.dialer.app.calllog;
 
 import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_MISSED_WORK_CALL_TITLE;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
-import android.app.Notification.Builder;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -46,8 +46,8 @@ import androidx.core.os.UserManagerCompat;
 import androidx.core.util.Pair;
 
 import com.android.contacts.common.ContactsUtils;
+import com.android.dialer.R;
 import com.android.dialer.app.MainComponent;
-import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
 import com.android.dialer.callintent.CallInitiationType;
@@ -366,7 +366,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   }
 
   private Notification.Builder createNotificationBuilder() {
-    return new Notification.Builder(context)
+    return new Notification.Builder(context, NotificationChannelId.MISSED_CALL)
         .setGroup(MissedCallConstants.GROUP_KEY)
         .setSmallIcon(android.R.drawable.stat_notify_missed_call)
         .setColor(ThemeComponent.get(context).theme().getColorPrimary())
@@ -377,7 +377,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   }
 
   private Notification.Builder createNotificationBuilder(@NonNull NewCall call) {
-    Builder builder =
+    Notification.Builder builder =
         createNotificationBuilder()
             .setWhen(call.dateMs)
             .setDeleteIntent(
@@ -466,6 +466,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   }
 
   /** Closes open system dialogs and the notification shade. */
+  @SuppressLint("MissingPermission")
   private void closeSystemDialogs(Context context) {
     context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
   }

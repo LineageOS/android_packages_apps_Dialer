@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -66,6 +67,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
   public static final String EXTRA_NOTIFICATION_ID =
       "com.android.incallui.extra.EXTRA_NOTIFICATION_ID";
 
+  @SuppressLint("MissingPermission")
   @Override
   public void onReceive(Context context, Intent intent) {
     final String action = intent.getAction();

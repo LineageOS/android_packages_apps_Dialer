@@ -16,6 +16,7 @@
 
 package com.android.voicemail.impl;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import android.content.Intent;
  */
 public class CarrierVvmPackageInstalledReceiver extends BroadcastReceiver {
 
+  @SuppressLint("UnsafeProtectedBroadcastReceiver")
   @Override
   public void onReceive(Context context, Intent intent) {
     String packageName = intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME);

@@ -19,7 +19,9 @@ package com.android.dialer.promotion;
 
 import com.android.dialer.promotion.Promotion.PromotionType;
 import com.google.common.collect.ImmutableList;
+
 import java.util.Optional;
+
 import javax.inject.Inject;
 
 /**

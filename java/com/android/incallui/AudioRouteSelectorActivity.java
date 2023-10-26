@@ -18,7 +18,6 @@
 package com.android.incallui;
 
 import android.os.Bundle;
-import android.telecom.CallAudioState;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2006 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +42,7 @@ import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedConta
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -163,7 +165,7 @@ public class CallerInfoAsyncQuery {
     cw.countryIso = info.countryIso;
 
     // check to see if these are recognized numbers, and use shortcuts if we can.
-    if (PhoneNumberHelper.isLocalEmergencyNumber(context, info.phoneNumber)) {
+    if (PhoneNumberHelper.isEmergencyNumber(context, info.phoneNumber)) {
       cw.event = EVENT_EMERGENCY_NUMBER;
     } else if (info.isVoiceMailNumber()) {
       cw.event = EVENT_VOICEMAIL_NUMBER;
@@ -439,7 +441,7 @@ public class CallerInfoAsyncQuery {
         Log.d(
             this,
             "notifying listener: "
-                + cw.listener.getClass().toString()
+                + cw.listener.getClass()
                 + " for token: "
                 + token
                 + callerInfo);
