@@ -107,7 +107,7 @@ public class MimeMessage extends Message {
       sb.append(c);
     }
     sb.append(".");
-    sb.append(Long.toString(System.currentTimeMillis()));
+    sb.append(System.currentTimeMillis());
     sb.append("@email.android.com>");
     return sb.toString();
   }
@@ -453,7 +453,7 @@ public class MimeMessage extends Message {
   }
 
   class MimeMessageBuilder implements ContentHandler {
-    private final Stack<Object> stack = new Stack<Object>();
+    private final Stack<Object> stack = new Stack<>();
 
     public MimeMessageBuilder() {}
 

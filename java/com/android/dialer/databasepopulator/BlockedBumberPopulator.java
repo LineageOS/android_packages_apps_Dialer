@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +51,7 @@ public class BlockedBumberPopulator {
     try {
       context.getContentResolver().applyBatch(BlockedNumberContract.AUTHORITY, operations);
     } catch (RemoteException | OperationApplicationException e) {
-      Assert.fail("error adding block number entries: " + e);
+      Assert.createAssertionFailException("error adding block number entries: " + e);
     }
   }
 

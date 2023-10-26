@@ -20,7 +20,6 @@ package com.android.incallui.answer.impl;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnShowListener;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -56,7 +55,7 @@ public class CreateCustomSmsDialogFragment extends AppCompatDialogFragment {
     super.onCreateDialog(savedInstanceState);
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     View view = View.inflate(builder.getContext(), R.layout.fragment_custom_sms_dialog, null);
-    editText = (EditText) view.findViewById(R.id.custom_sms_input);
+    editText = view.findViewById(R.id.custom_sms_input);
     if (savedInstanceState != null) {
       editText.setText(savedInstanceState.getCharSequence(ARG_ENTERED_TEXT));
     }

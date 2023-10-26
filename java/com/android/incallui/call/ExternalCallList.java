@@ -39,7 +39,7 @@ public class ExternalCallList {
 
   private final Set<Call> externalCalls = new ArraySet<>();
   private final Set<ExternalCallListener> externalCallListeners =
-      Collections.newSetFromMap(new ConcurrentHashMap<ExternalCallListener, Boolean>(8, 0.9f, 1));
+      Collections.newSetFromMap(new ConcurrentHashMap<>(8, 0.9f, 1));
   /** Handles {@link android.telecom.Call.Callback} callbacks. */
   private final Call.Callback telecomCallCallback =
       new Call.Callback() {

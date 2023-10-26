@@ -37,7 +37,7 @@ public final class PreferredSimFallbackContract {
    * Check the meta-data "com.android.dialer.PREFERRED_SIM_FALLBACK_AUTHORITY" to get the authority
    * of the default dialer if it support it.
    */
-  public static final String AUTHORITY = Constants.get().getPreferredSimFallbackProviderAuthority();
+  public static final String AUTHORITY = Constants.PREFERRED_SIM_FALLBACK_PROVIDER_AUTHORITY;
 
   public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 

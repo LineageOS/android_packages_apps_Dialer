@@ -47,11 +47,9 @@ public class VisualVoicemailEnabledChecker implements CallLogQueryHandler.Listen
       "has_active_voicemail_provider";
   private final SharedPreferences prefs;
   private boolean hasActiveVoicemailProvider;
-  private Context context;
   private final Callback callback;
 
   public VisualVoicemailEnabledChecker(Context context, @Nullable Callback callback) {
-    this.context = context;
     this.callback = callback;
     prefs = PreferenceManager.getDefaultSharedPreferences(context);
     hasActiveVoicemailProvider = prefs.getBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, false);

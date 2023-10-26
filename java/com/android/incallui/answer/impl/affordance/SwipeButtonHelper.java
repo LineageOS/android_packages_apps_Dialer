@@ -85,7 +85,7 @@ public class SwipeButtonHelper {
     public void run() {
       callback.onAnimationToSideEnded(rightPage);
     }
-  };
+  }
 
   public SwipeButtonHelper(Callback callback, Context context) {
     this.context = context;
@@ -596,8 +596,7 @@ public class SwipeButtonHelper {
       updateIcon(otherView, 0.0f, 0, true, false, true, false);
     } else {
       callback.onAnimationToSideStarted(!left, translation, 0);
-      translation =
-          left ? callback.getMaxTranslationDistance() : callback.getMaxTranslationDistance();
+      translation = callback.getMaxTranslationDistance();
       updateIcon(otherView, 0.0f, 0.0f, false, false, true, false);
       targetView.instantFinishAnimation();
       flingEndListener.onAnimationEnd(null);

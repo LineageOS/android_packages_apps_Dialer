@@ -16,6 +16,7 @@
  */
 package com.android.voicemail.impl.fetch;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -153,6 +154,7 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
    * format. There's a chance of M phone account collisions on multi-SIM devices, but visual
    * voicemail is not supported on M multi-SIM.
    */
+  @SuppressLint("MissingPermission")
   @Nullable
   private static PhoneAccountHandle getAccountFromMarshmallowAccount(
       Context context, PhoneAccountHandle oldAccount) {

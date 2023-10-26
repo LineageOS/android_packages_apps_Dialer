@@ -148,10 +148,10 @@ public class DoubleDatePickerDialog extends AlertDialog
     View view = inflater.inflate(R.layout.double_date_picker_dialog, null);
     setView(view);
 
-    mDatePickerFrom = (DatePicker) view.findViewById(R.id.date_picker_from);
-    mDatePickerTo = (DatePicker) view.findViewById(R.id.date_picker_to);
+    mDatePickerFrom = view.findViewById(R.id.date_picker_from);
+    mDatePickerTo = view.findViewById(R.id.date_picker_to);
 
-    ArrayList<CharSequence> quickSelEntries = new ArrayList<CharSequence>();
+    ArrayList<CharSequence> quickSelEntries = new ArrayList<>();
     for (int entryId : QUICKSELECTION_ENTRIES) {
       quickSelEntries.add(context.getString(entryId));
     }
@@ -166,7 +166,7 @@ public class DoubleDatePickerDialog extends AlertDialog
     };
     quickSelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-    mQuickSelSpinner = (Spinner) view.findViewById(R.id.date_quick_selection);
+    mQuickSelSpinner = view.findViewById(R.id.date_quick_selection);
     mQuickSelSpinner.setOnItemSelectedListener(this);
     mQuickSelSpinner.setAdapter(quickSelAdapter);
 
