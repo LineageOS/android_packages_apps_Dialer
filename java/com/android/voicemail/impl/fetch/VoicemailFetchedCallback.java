@@ -15,6 +15,7 @@
  */
 package com.android.voicemail.impl.fetch;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -58,6 +59,7 @@ public class VoicemailFetchedCallback {
    *
    * @param voicemailPayload The object containing the content data for the voicemail
    */
+  @SuppressLint("MissingPermission")
   public void setVoicemailContent(@Nullable VoicemailPayload voicemailPayload) {
     Assert.isWorkerThread();
     if (voicemailPayload == null) {

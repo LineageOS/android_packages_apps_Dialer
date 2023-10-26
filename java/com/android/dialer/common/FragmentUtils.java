@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Projectct
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,50 +56,10 @@ public class FragmentUtils {
     return null;
   }
 
-  /**
-   * Returns an instance of the {@code callbackInterface} that is defined in the parent of the
-   * {@code fragment}, or null if no such call back can be found.
-   */
-  @CheckResult(suggest = "#checkParent(Fragment, Class)}")
-  @Nullable
-  public static <T> T getParent(
-      @NonNull android.app.Fragment fragment, @NonNull Class<T> callbackInterface) {
-    android.app.Fragment parentFragment = fragment.getParentFragment();
-    if (callbackInterface.isInstance(parentFragment)) {
-      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
-      T parent = (T) parentFragment;
-      return parent;
-    } else if (callbackInterface.isInstance(fragment.getActivity())) {
-      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
-      T parent = (T) fragment.getActivity();
-      return parent;
-    } else if (fragment.getActivity() instanceof FragmentUtilListener) {
-      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
-      T parent = ((FragmentUtilListener) fragment.getActivity()).getImpl(callbackInterface);
-      return parent;
-    } else if (fragment.getActivity() instanceof MainActivityPeer.PeerSupplier) {
-      MainActivityPeer peer = ((MainActivityPeer.PeerSupplier) fragment.getActivity()).getPeer();
-      if (peer instanceof FragmentUtilListener) {
-        return ((FragmentUtilListener) peer).getImpl(callbackInterface);
-      }
-    }
-    return null;
-  }
-
   /** Returns the parent or throws. Should perform check elsewhere(e.g. onAttach, newInstance). */
   @NonNull
   public static <T> T getParentUnsafe(
       @NonNull Fragment fragment, @NonNull Class<T> callbackInterface) {
-    return Assert.isNotNull(getParent(fragment, callbackInterface));
-  }
-
-  /**
-   * Version of {@link #getParentUnsafe(Fragment, Class)} which supports {@link
-   * android.app.Fragment}.
-   */
-  @NonNull
-  public static <T> T getParentUnsafe(
-      @NonNull android.app.Fragment fragment, @NonNull Class<T> callbackInterface) {
     return Assert.isNotNull(getParent(fragment, callbackInterface));
   }
 

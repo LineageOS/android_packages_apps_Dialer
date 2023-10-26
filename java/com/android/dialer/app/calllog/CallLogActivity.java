@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,14 +86,14 @@ public class CallLogActivity extends TransactionSafeActivity implements
     tabTitles[1] = getString(R.string.call_log_missed_title);
     tabTitles[2] = getString(R.string.call_log_stats_title);
 
-    viewPager = (ViewPager) findViewById(R.id.call_log_pager);
+    viewPager = findViewById(R.id.call_log_pager);
 
     viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
     viewPager.setAdapter(viewPagerAdapter);
     viewPager.setOffscreenPageLimit(1);
     viewPager.setOnPageChangeListener(this);
 
-    viewPagerTabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
+    viewPagerTabs = findViewById(R.id.viewpager_header);
 
     viewPagerTabs.setViewPager(viewPager);
     viewPager.setCurrentItem(startingTab);
@@ -209,11 +210,6 @@ public class CallLogActivity extends TransactionSafeActivity implements
       default:
         throw Assert.createIllegalStateFailException("Invalid position: " + position);
     }
-  }
-
-  @Override
-  public void onBackPressed() {
-    super.onBackPressed();
   }
 
   /** Adapter for the view pager. */

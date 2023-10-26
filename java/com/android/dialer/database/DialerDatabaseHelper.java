@@ -444,7 +444,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
           continue;
         }
 
-        final Long contactId = updatedContactCursor.getLong(UpdatedContactQuery.UPDATED_CONTACT_ID);
+        final long contactId = updatedContactCursor.getLong(UpdatedContactQuery.UPDATED_CONTACT_ID);
 
         db.delete(Tables.SMARTDIAL_TABLE, SmartDialDbColumns.CONTACT_ID + "=" + contactId, null);
         db.delete(Tables.PREFIX_TABLE, PrefixColumns.CONTACT_ID + "=" + contactId, null);
@@ -655,7 +655,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         "DialerDatabaseHelper.updateSmartDialDatabase", "last updated at %s", lastUpdateMillis);
 
     /** Sets the time after querying the database as the current update time. */
-    final Long currentMillis = System.currentTimeMillis();
+    final long currentMillis = System.currentTimeMillis();
 
     /** Removes contacts that have been deleted. */
     removeDeletedContacts(db, lastUpdateMillis);

@@ -199,7 +199,7 @@ public class XmlUtils {
   }
 
   private static Object readThisPrimitiveValueXml(XmlPullParser parser, String tagName)
-      throws XmlPullParserException, java.io.IOException {
+      throws XmlPullParserException {
     try {
       if (tagName.equals("int")) {
         return Integer.parseInt(parser.getAttributeValue(null, "value"));

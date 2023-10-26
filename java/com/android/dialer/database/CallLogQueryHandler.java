@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,7 +119,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
           Status.CONTENT_URI,
           VoicemailStatusQuery.getProjection(),
           where.toString(),
-          selectionArgs.toArray(new String[selectionArgs.size()]),
+          selectionArgs.toArray(new String[0]),
           null);
     } else {
       LogUtil.i(
@@ -144,7 +145,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
           Voicemails.CONTENT_URI,
           new String[] {Voicemails._ID},
           where.toString(),
-          selectionArgs.toArray(new String[selectionArgs.size()]),
+          selectionArgs.toArray(new String[0]),
           null);
     }
   }
@@ -211,7 +212,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         uri,
         CallLogQuery.getProjection(),
         selection,
-        selectionArgs.toArray(new String[selectionArgs.size()]),
+        selectionArgs.toArray(new String[0]),
         Calls.DEFAULT_SORT_ORDER);
   }
 

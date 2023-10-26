@@ -116,9 +116,14 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
       return;
     }
 
-    VisualVoicemailSms sms = intent.getExtras().getParcelable(OmtpService.EXTRA_VOICEMAIL_SMS);
+    if (intent.getExtras() == null) {
+      return;
+    }
 
-    if (!phoneAccountHandle.equals(sms.getPhoneAccountHandle())) {
+    VisualVoicemailSms sms = intent.getExtras().getParcelable(OmtpService.EXTRA_VOICEMAIL_SMS,
+            VisualVoicemailSms.class);
+
+    if (sms == null || !phoneAccountHandle.equals(sms.getPhoneAccountHandle())) {
       return;
     }
     String eventType = sms.getPrefix();

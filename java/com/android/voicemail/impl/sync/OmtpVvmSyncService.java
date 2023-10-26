@@ -292,7 +292,7 @@ public class OmtpVvmSyncService {
 
   /** Builds a map from provider data to message for the given collection of voicemails. */
   private Map<String, Voicemail> buildMap(List<Voicemail> messages) {
-    Map<String, Voicemail> map = new ArrayMap<String, Voicemail>();
+    Map<String, Voicemail> map = new ArrayMap<>();
     for (Voicemail message : messages) {
       map.put(message.getSourceData(), message);
     }

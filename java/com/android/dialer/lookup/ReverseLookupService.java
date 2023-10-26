@@ -35,7 +35,6 @@ import com.android.incallui.bindings.PhoneNumberService;
 import java.io.IOException;
 
 public class ReverseLookupService implements PhoneNumberService, Handler.Callback {
-  private final HandlerThread backgroundThread;
   private final Handler backgroundHandler;
   private final Handler handler;
   private final Context context;
@@ -49,7 +48,7 @@ public class ReverseLookupService implements PhoneNumberService, Handler.Callbac
     telephonyManager = context.getSystemService(TelephonyManager.class);
 
     // TODO: stop after a while?
-    backgroundThread = new HandlerThread("ReverseLookup");
+    HandlerThread backgroundThread = new HandlerThread("ReverseLookup");
     backgroundThread.start();
 
     backgroundHandler = new Handler(backgroundThread.getLooper(), this);

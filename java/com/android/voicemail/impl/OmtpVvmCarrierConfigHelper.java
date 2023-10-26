@@ -159,10 +159,7 @@ public class OmtpVvmCarrierConfigHelper {
    * known protocol.
    */
   public boolean isValid() {
-    if (protocol == null) {
-      return false;
-    }
-    return true;
+    return protocol != null;
   }
 
   @Nullable
@@ -490,8 +487,7 @@ public class OmtpVvmCarrierConfigHelper {
           continue;
         }
         return true;
-      } catch (NameNotFoundException e) {
-        continue;
+      } catch (NameNotFoundException ignored) {
       }
     }
     return false;

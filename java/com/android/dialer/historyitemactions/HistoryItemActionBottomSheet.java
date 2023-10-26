@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -169,7 +170,7 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
   private void setupBottomSheetBehavior() {
     BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(
             findViewById(com.google.android.material.R.id.design_bottom_sheet));
-    behavior.setBottomSheetCallback(
+    behavior.addBottomSheetCallback(
         new BottomSheetBehavior.BottomSheetCallback() {
           @Override
           public void onStateChanged(@NonNull View bottomSheet, int newState) {

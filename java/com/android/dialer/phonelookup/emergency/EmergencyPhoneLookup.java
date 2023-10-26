@@ -57,7 +57,7 @@ public class EmergencyPhoneLookup implements PhoneLookup<EmergencyInfo> {
         () ->
             EmergencyInfo.newBuilder()
                 .setIsEmergencyNumber(
-                    PhoneNumberHelper.isLocalEmergencyNumber(
+                    PhoneNumberHelper.isEmergencyNumber(
                         appContext, dialerPhoneNumber.getNormalizedNumber()))
                 .build());
   }

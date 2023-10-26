@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +28,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+
 import org.apache.commons.io.IOUtils;
 
 /** Subclass of {@link ImapString} used for literals backed by a temp file. */
@@ -46,7 +49,7 @@ public class ImapTempFileLiteral extends ImapString {
     // so it'd simply cause a memory leak.
     // deleteOnExit() simply adds filenames to a static list and the list will never shrink.
     // mFile.deleteOnExit();
-    OutputStream out = new FileOutputStream(file);
+    OutputStream out = Files.newOutputStream(file.toPath());
     IOUtils.copy(stream, out);
     out.close();
   }

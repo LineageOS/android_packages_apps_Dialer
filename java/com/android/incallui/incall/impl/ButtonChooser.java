@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -83,7 +84,7 @@ final class ButtonChooser {
     for (int i = 0; i < configuredSlots.size() && placedButtons.size() < numUiButtons; ++i) {
       int slotNumber = configuredSlots.get(i);
       List<Integer> potentialButtons = config.getButtonsForSlot(slotNumber);
-      Collections.sort(potentialButtons, config.getSlotComparator());
+      potentialButtons.sort(config.getSlotComparator());
       for (int j = 0; j < potentialButtons.size(); ++j) {
         if (allowedButtons.contains(potentialButtons.get(j))) {
           placedButtons.add(potentialButtons.get(j));
@@ -100,7 +101,7 @@ final class ButtonChooser {
       @NonNull Set<Integer> disabledButtons,
       @NonNull List<Integer> placedButtons,
       @NonNull List<Integer> conflicts) {
-    Collections.sort(conflicts, config.getConflictComparator());
+    conflicts.sort(config.getConflictComparator());
     for (Integer conflict : conflicts) {
       if (placedButtons.size() >= numUiButtons) {
         return;

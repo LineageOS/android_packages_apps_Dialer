@@ -13,6 +13,7 @@
  */
 package com.android.voicemail.impl;
 
+import android.annotation.SuppressLint;
 import android.app.job.JobInfo;
 import android.app.job.JobParameters;
 import android.app.job.JobScheduler;
@@ -50,6 +51,7 @@ public class StatusCheckJobService extends JobService {
             .build());
   }
 
+  @SuppressLint("MissingPermission")
   @Override
   public boolean onStartJob(JobParameters params) {
     for (PhoneAccountHandle phoneAccountHandle :

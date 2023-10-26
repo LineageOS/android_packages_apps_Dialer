@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +35,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -164,7 +165,7 @@ public class SimulatorSimCallManager {
     return new PhoneAccount.Builder(getSimCallManagerHandle(context), "Simulator SIM call manager")
         .setCapabilities(PhoneAccount.CAPABILITY_CONNECTION_MANAGER | PhoneAccount.CAPABILITY_RTT)
         .setShortDescription("Simulator SIM call manager")
-        .setSupportedUriSchemes(Arrays.asList(PhoneAccount.SCHEME_TEL))
+        .setSupportedUriSchemes(Collections.singletonList(PhoneAccount.SCHEME_TEL))
         .build();
   }
 
@@ -176,7 +177,7 @@ public class SimulatorSimCallManager {
                 | PhoneAccount.CAPABILITY_SUPPORTS_VIDEO_CALLING
                 | PhoneAccount.CAPABILITY_VIDEO_CALLING)
         .setShortDescription("Simulator video provider")
-        .setSupportedUriSchemes(Arrays.asList(PhoneAccount.SCHEME_TEL))
+        .setSupportedUriSchemes(Collections.singletonList(PhoneAccount.SCHEME_TEL))
         .build();
   }
 

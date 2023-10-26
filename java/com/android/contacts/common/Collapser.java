@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +20,7 @@ package com.android.contacts.common;
 import android.content.Context;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class used for collapsing data items into groups of similar items. The data items that should be
@@ -74,12 +76,7 @@ public final class Collapser {
     }
 
     // Remove the null items
-    Iterator<T> itr = list.iterator();
-    while (itr.hasNext()) {
-      if (itr.next() == null) {
-        itr.remove();
-      }
-    }
+    list.removeIf(Objects::isNull);
   }
 
   /*

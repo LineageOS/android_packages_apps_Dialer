@@ -163,7 +163,7 @@ public class CallerInfoAsyncQuery {
     cw.countryIso = info.countryIso;
 
     // check to see if these are recognized numbers, and use shortcuts if we can.
-    if (PhoneNumberHelper.isLocalEmergencyNumber(context, info.phoneNumber)) {
+    if (PhoneNumberHelper.isEmergencyNumber(context, info.phoneNumber)) {
       cw.event = EVENT_EMERGENCY_NUMBER;
     } else if (info.isVoiceMailNumber()) {
       cw.event = EVENT_VOICEMAIL_NUMBER;
@@ -439,7 +439,7 @@ public class CallerInfoAsyncQuery {
         Log.d(
             this,
             "notifying listener: "
-                + cw.listener.getClass().toString()
+                + cw.listener.getClass()
                 + " for token: "
                 + token
                 + callerInfo);

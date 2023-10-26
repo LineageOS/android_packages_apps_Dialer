@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
- * Copyright (C) 2020 The LineageOS Project
+ * Copyright (C) 2020-2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,7 +89,8 @@ public class PostCall {
         Snackbar.make(rootView, message, durationMs)
             .setAction(actionText, onClickListener)
             .setActionTextColor(
-                activity.getResources().getColor(R.color.dialer_snackbar_action_text_color));
+                activity.getResources().getColor(R.color.dialer_snackbar_action_text_color,
+                        activity.getTheme()));
     activeSnackbar.show();
     StorageComponent.get(activity)
         .unencryptedSharedPrefs()
@@ -115,7 +116,8 @@ public class PostCall {
         Snackbar.make(rootView, message, Snackbar.LENGTH_LONG)
             .setAction(addMessage, onClickListener)
             .setActionTextColor(
-                activity.getResources().getColor(R.color.dialer_snackbar_action_text_color))
+                activity.getResources().getColor(R.color.dialer_snackbar_action_text_color,
+                        activity.getTheme()))
             .addCallback(
                 new BaseTransientBottomBar.BaseCallback<Snackbar>() {
                   @Override

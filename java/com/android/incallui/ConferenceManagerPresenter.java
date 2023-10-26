@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +58,7 @@ public class ConferenceManagerPresenter extends Presenter<ConferenceManagerUi>
         final DialerCall call = callList.getActiveOrBackgroundCall();
         if (call != null && call.isConferenceCall()) {
           Log.v(
-              this, "Number of existing calls is " + String.valueOf(call.getChildCallIds().size()));
+              this, "Number of existing calls is " + call.getChildCallIds().size());
           update(callList);
         } else {
           InCallPresenter.getInstance().showConferenceCallManager(false);
@@ -117,7 +118,7 @@ public class ConferenceManagerPresenter extends Presenter<ConferenceManagerUi>
       calls.add(callList.getCallById(callerId));
     }
 
-    Log.d(this, "Number of calls is " + String.valueOf(calls.size()));
+    Log.d(this, "Number of calls is " + calls.size());
 
     // Users can split out a call from the conference call if either the active call or the
     // holding call is empty. If both are filled, users can not split out another call.

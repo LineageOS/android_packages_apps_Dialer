@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -438,11 +439,6 @@ public final class NewSearchFragment extends Fragment
   public void onResume() {
     super.onResume();
     LoaderManager.getInstance(this).restartLoader(CONTACTS_LOADER_ID, null, this);
-  }
-
-  @Override
-  public void onPause() {
-    super.onPause();
   }
 
   /**

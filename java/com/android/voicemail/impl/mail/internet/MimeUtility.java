@@ -253,18 +253,12 @@ public class MimeUtility {
         }
       }
 
-    } catch (OutOfMemoryError oom) {
+    } catch (OutOfMemoryError | Exception oom) {
       /*
        * If we are not able to process the body there's nothing we can do about it. Return
        * null and let the upper layers handle the missing content.
        */
-      VvmLog.e(LOG_TAG, "Unable to getTextFromPart " + oom.toString());
-    } catch (Exception e) {
-      /*
-       * If we are not able to process the body there's nothing we can do about it. Return
-       * null and let the upper layers handle the missing content.
-       */
-      VvmLog.e(LOG_TAG, "Unable to getTextFromPart " + e.toString());
+      VvmLog.e(LOG_TAG, "Unable to getTextFromPart " + oom);
     }
     return null;
   }

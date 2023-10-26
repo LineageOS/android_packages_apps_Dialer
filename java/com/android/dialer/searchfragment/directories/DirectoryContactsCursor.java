@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,7 +97,7 @@ public final class DirectoryContactsCursor extends MergeCursor implements Search
       cursorList.add(createHeaderCursor(context, directory.getDisplayName(), directory.getId()));
       cursorList.add(cursor);
     }
-    return cursorList.toArray(new Cursor[cursorList.size()]);
+    return cursorList.toArray(new Cursor[0]);
   }
 
   private static MatrixCursor createHeaderCursor(Context context, String name, long id) {

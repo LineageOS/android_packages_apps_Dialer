@@ -79,7 +79,7 @@ public class ImapFolder {
 
   /** Callback for each message retrieval. */
   public interface MessageRetrievalListener {
-    public void messageRetrieved(Message message);
+    void messageRetrieved(Message message);
   }
 
   private void destroyResponses() {
@@ -152,7 +152,7 @@ public class ImapFolder {
 
   String[] getSearchUids(List<ImapResponse> responses) {
     // S: * SEARCH 2 3 6
-    final ArrayList<String> uids = new ArrayList<String>();
+    final ArrayList<String> uids = new ArrayList<>();
     for (ImapResponse response : responses) {
       if (!response.isDataResponse(0, ImapConstants.SEARCH)) {
         continue;
@@ -220,7 +220,7 @@ public class ImapFolder {
   }
 
   public Message[] getMessagesInternal(String[] uids) {
-    final ArrayList<Message> messages = new ArrayList<Message>(uids.length);
+    final ArrayList<Message> messages = new ArrayList<>(uids.length);
     for (int i = 0; i < uids.length; i++) {
       final String uid = uids[i];
       final ImapMessage message = new ImapMessage(uid, this);
@@ -245,7 +245,7 @@ public class ImapFolder {
       return;
     }
     checkOpen();
-    ArrayMap<String, Message> messageMap = new ArrayMap<String, Message>();
+    ArrayMap<String, Message> messageMap = new ArrayMap<>();
     for (Message m : messages) {
       messageMap.put(m.getUid(), m);
     }
@@ -261,7 +261,7 @@ public class ImapFolder {
      * Part      - UID FETCH (BODY.PEEK[ID]) where ID = mime part ID
      */
 
-    final LinkedHashSet<String> fetchFields = new LinkedHashSet<String>();
+    final LinkedHashSet<String> fetchFields = new LinkedHashSet<>();
 
     fetchFields.add(ImapConstants.UID);
     if (fp.contains(FetchProfile.Item.FLAGS)) {
@@ -300,7 +300,7 @@ public class ImapFolder {
               Locale.US,
               ImapConstants.UID_FETCH + " %s (%s)",
               ImapStore.joinMessageUids(messages),
-              Utility.combine(fetchFields.toArray(new String[fetchFields.size()]), ' ')),
+              Utility.combine(fetchFields.toArray(new String[0]), ' ')),
           false);
       ImapResponse response;
       do {
@@ -650,7 +650,7 @@ public class ImapFolder {
         } else if (part instanceof MimeBodyPart) {
           ((MimeBodyPart) part).setSize(size);
         } else {
-          throw new MessagingException("Unknown part type " + part.toString());
+          throw new MessagingException("Unknown part type " + part);
         }
       }
       part.setHeader(MimeHeader.HEADER_ANDROID_ATTACHMENT_STORE_DATA, id);

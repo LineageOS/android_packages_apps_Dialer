@@ -262,7 +262,7 @@ public class SmartDialNameMatcher {
     // positions
     int seperatorCount = 0;
 
-    ArrayList<SmartDialMatchPosition> partial = new ArrayList<SmartDialMatchPosition>();
+    ArrayList<SmartDialMatchPosition> partial = new ArrayList<>();
     // Keep going until we reach the end of displayName
     while (nameStart < nameLength && queryStart < queryLength) {
       char ch = displayName.charAt(nameStart);

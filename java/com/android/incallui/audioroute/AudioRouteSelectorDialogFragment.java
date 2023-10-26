@@ -35,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.widget.TextViewCompat;
 
 import com.android.dialer.R;
 import com.android.dialer.common.FragmentUtils;
@@ -109,15 +110,15 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     }
 
     initItem(
-        (TextView) view.findViewById(R.id.audioroute_speaker),
+        view.findViewById(R.id.audioroute_speaker),
         CallAudioState.ROUTE_SPEAKER,
         audioState);
     initItem(
-        (TextView) view.findViewById(R.id.audioroute_headset),
+        view.findViewById(R.id.audioroute_headset),
         CallAudioState.ROUTE_WIRED_HEADSET,
         audioState);
     initItem(
-        (TextView) view.findViewById(R.id.audioroute_earpiece),
+        view.findViewById(R.id.audioroute_earpiece),
         CallAudioState.ROUTE_EARPIECE,
         audioState);
 
@@ -178,10 +179,10 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
 
   private void setColor(TextView item, boolean isSelected) {
     int color = isSelected
-            ? ThemeComponent.get(getContext()).theme().getColorAccent()
-            : getContext().getColor(R.color.nav_item);
+            ? ThemeComponent.get(requireContext()).theme().getColorAccent()
+            : requireContext().getColor(R.color.nav_item);
     item.setTextColor(color);
-    item.setCompoundDrawableTintList(ColorStateList.valueOf(color));
-    item.setCompoundDrawableTintMode(Mode.SRC_ATOP);
+    TextViewCompat.setCompoundDrawableTintList(item, ColorStateList.valueOf(color));
+    TextViewCompat.setCompoundDrawableTintMode(item, Mode.SRC_ATOP);
   }
 }

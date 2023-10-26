@@ -130,9 +130,6 @@ public class RttChatFragment extends Fragment
     inCallButtonUiDelegate =
         FragmentUtils.getParent(this, InCallButtonUiDelegateFactory.class)
             .newInCallButtonUiDelegate();
-    if (savedInstanceState != null) {
-      inCallButtonUiDelegate.onRestoreInstanceState(savedInstanceState);
-    }
     inCallScreenDelegate =
         FragmentUtils.getParentUnsafe(this, InCallScreenDelegateFactory.class)
             .newInCallScreenDelegate();

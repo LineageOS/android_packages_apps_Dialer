@@ -40,6 +40,7 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.list.ContactListFilterController;
 import com.android.contacts.common.model.account.AccountType;
@@ -52,6 +53,7 @@ import com.android.contacts.common.model.account.GoogleAccountType;
 import com.android.contacts.common.model.account.SamsungAccountType;
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.util.Constants;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -162,8 +164,7 @@ class AccountTypeManagerImpl extends AccountTypeManager
     implements OnAccountsUpdateListener, SyncStatusObserver {
 
   private static final Map<AccountTypeWithDataSet, AccountType>
-      EMPTY_UNMODIFIABLE_ACCOUNT_TYPE_MAP =
-          Collections.unmodifiableMap(new HashMap<AccountTypeWithDataSet, AccountType>());
+      EMPTY_UNMODIFIABLE_ACCOUNT_TYPE_MAP = Collections.unmodifiableMap(new HashMap<>());
 
   /**
    * A sample contact URI used to test whether any activities will respond to an invitable intent
@@ -519,9 +520,9 @@ class AccountTypeManagerImpl extends AccountTypeManager
       }
     }
 
-    Collections.sort(allAccounts, ACCOUNT_COMPARATOR);
-    Collections.sort(contactWritableAccounts, ACCOUNT_COMPARATOR);
-    Collections.sort(groupWritableAccounts, ACCOUNT_COMPARATOR);
+    allAccounts.sort(ACCOUNT_COMPARATOR);
+    contactWritableAccounts.sort(ACCOUNT_COMPARATOR);
+    groupWritableAccounts.sort(ACCOUNT_COMPARATOR);
 
     synchronized (this) {
       mAccountTypesWithDataSets = accountTypesByTypeAndDataSet;

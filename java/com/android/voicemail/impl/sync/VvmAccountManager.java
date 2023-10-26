@@ -15,6 +15,7 @@
  */
 package com.android.voicemail.impl.sync;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.UserManager;
 import android.telecom.PhoneAccountHandle;
@@ -93,6 +94,7 @@ public class VvmAccountManager {
     return preferences.getBoolean(IS_ACCOUNT_ACTIVATED, false);
   }
 
+  @SuppressLint("MissingPermission")
   @NonNull
   public static List<PhoneAccountHandle> getActiveAccounts(Context context) {
     List<PhoneAccountHandle> results = new ArrayList<>();

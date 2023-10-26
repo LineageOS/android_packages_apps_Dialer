@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +42,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Shows the local preview for the incoming video call or video upgrade request. This class is used
@@ -137,7 +139,7 @@ public class SelfManagedAnswerVideoCallScreen extends StateCallback implements V
 
     try {
       manager.openCamera(cameraId, this, null);
-    } catch (CameraAccessException e) {
+    } catch (CameraAccessException | SecurityException e) {
       LogUtil.e("SelfManagedAnswerVideoCallScreen.openCamera", "failed to open camera", e);
     }
   }
@@ -223,7 +225,8 @@ public class SelfManagedAnswerVideoCallScreen extends StateCallback implements V
     try {
       captureRequestBuilder = camera.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
       captureRequestBuilder.addTarget(surface);
-      camera.createCaptureSession(Arrays.asList(surface), new CaptureSessionCallback(), null);
+      camera.createCaptureSession(Collections.singletonList(surface), new CaptureSessionCallback(),
+              null);
     } catch (CameraAccessException e) {
       LogUtil.e(
           "SelfManagedAnswerVideoCallScreen.createCameraPreview", "failed to create preview", e);

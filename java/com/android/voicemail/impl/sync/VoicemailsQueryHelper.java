@@ -96,7 +96,7 @@ public class VoicemailsQueryHelper {
       return null;
     }
     try {
-      List<Voicemail> voicemails = new ArrayList<Voicemail>();
+      List<Voicemail> voicemails = new ArrayList<>();
       while (cursor.moveToNext()) {
         final long id = cursor.getLong(_ID);
         final String sourceData = cursor.getString(SOURCE_DATA);
@@ -135,7 +135,7 @@ public class VoicemailsQueryHelper {
       sb.append(voicemails.get(i).getId());
     }
 
-    String selectionStatement = String.format(Voicemails._ID + " IN (%s)", sb.toString());
+    String selectionStatement = String.format(Voicemails._ID + " IN (%s)", sb);
     return contentResolver.delete(Voicemails.CONTENT_URI, selectionStatement, null);
   }
 
@@ -210,7 +210,7 @@ public class VoicemailsQueryHelper {
       String phoneAccountComponentName = phoneAccount.getComponentName().flattenToString();
       String phoneAccountId = phoneAccount.getId();
       String sourceData = voicemail.getSourceData();
-      if (phoneAccountComponentName == null || phoneAccountId == null || sourceData == null) {
+      if (phoneAccountId == null || sourceData == null) {
         return true;
       }
       try {
@@ -223,11 +223,7 @@ public class VoicemailsQueryHelper {
                 + "=?";
         String[] whereArgs = {phoneAccountComponentName, phoneAccountId, sourceData};
         cursor = contentResolver.query(sourceUri, PROJECTION, whereClause, whereArgs, null);
-        if (cursor.getCount() == 0) {
-          return true;
-        } else {
-          return false;
-        }
+        return cursor.getCount() == 0;
       } finally {
         if (cursor != null) {
           cursor.close();

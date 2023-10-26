@@ -21,12 +21,12 @@ import com.android.voicemail.impl.mail.Body;
 import com.android.voicemail.impl.mail.MessagingException;
 import com.android.voicemail.impl.mail.TempDirectory;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -51,13 +51,13 @@ public class BinaryTempFileBody implements Body {
   public OutputStream getOutputStream() throws IOException {
     file = File.createTempFile("body", null, TempDirectory.getTempDirectory());
     file.deleteOnExit();
-    return new FileOutputStream(file);
+    return Files.newOutputStream(file.toPath());
   }
 
   @Override
   public InputStream getInputStream() throws MessagingException {
     try {
-      return new BinaryTempFileBodyInputStream(new FileInputStream(file));
+      return new BinaryTempFileBodyInputStream(Files.newInputStream(file.toPath()));
     } catch (IOException ioe) {
       throw new MessagingException("Unable to open body", ioe);
     }
