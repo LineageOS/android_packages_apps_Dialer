@@ -18,18 +18,14 @@
 package com.android.dialer.voicemail.settings;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.R;
@@ -52,11 +48,6 @@ public class CurrentVoicemailGreetingActivity extends AppCompatActivity {
             }
           });
 
-  private ImageButton changeGreetingButton;
-  private ImageButton playButton;
-
-  private DialerToolbar currentVoicemailGreetingDialerToolbar;
-
   private int greetingDuration = -1;
 
   private MediaPlayer mediaPlayer;
@@ -72,29 +63,11 @@ public class CurrentVoicemailGreetingActivity extends AppCompatActivity {
     setContentView(R.layout.activity_current_voicemail_greeting);
 
     playbackDisplay = findViewById(R.id.current_voicemail_greeting_recording_display);
-    playbackProgressLabel = (TextView) findViewById(R.id.playback_progress_text_view);
-    currentVoicemailGreetingDialerToolbar = (DialerToolbar) findViewById(R.id.toolbar);
+    playbackProgressLabel = findViewById(R.id.playback_progress_text_view);
+    DialerToolbar currentVoicemailGreetingDialerToolbar = findViewById(R.id.toolbar);
 
     currentVoicemailGreetingDialerToolbar.setTitle(
         R.string.voicemail_change_greeting_preference_title);
-
-    changeGreetingButton = (ImageButton) findViewById(R.id.change_greeting_button);
-    changeGreetingButton.setOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            // TODO(sabowitz): Implement this in CL child beta01.
-          }
-        });
-
-    playButton = (ImageButton) findViewById(R.id.play_button);
-    playButton.setOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            // TODO(sabowitz): Finish implementing this in CL child beta02.
-          }
-        });
 
     displayCurrentVoicemailGreetingStatus();
   }

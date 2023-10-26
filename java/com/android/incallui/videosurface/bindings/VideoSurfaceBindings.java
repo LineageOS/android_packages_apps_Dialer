@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +18,7 @@
 package com.android.incallui.videosurface.bindings;
 
 import android.view.TextureView;
+
 import com.android.incallui.videosurface.impl.VideoScale;
 import com.android.incallui.videosurface.impl.VideoSurfaceTextureImpl;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;

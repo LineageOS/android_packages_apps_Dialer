@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +21,13 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.text.util.Rfc822Token;
 import android.text.util.Rfc822Tokenizer;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
+
 import org.apache.james.mime4j.codec.DecodeMonitor;
 import org.apache.james.mime4j.codec.DecoderUtil;
 import org.apache.james.mime4j.codec.EncoderUtil;
+
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * This class represent email address.
@@ -123,7 +126,7 @@ public class Address implements Parcelable {
       return EMPTY_ADDRESS_ARRAY;
     }
     Rfc822Token[] tokens = Rfc822Tokenizer.tokenize(addressList);
-    ArrayList<Address> addresses = new ArrayList<Address>();
+    ArrayList<Address> addresses = new ArrayList<>();
     for (int i = 0, length = tokens.length; i < length; ++i) {
       Rfc822Token token = tokens[i];
       String address = token.getAddress();
@@ -137,7 +140,7 @@ public class Address implements Parcelable {
         }
       }
     }
-    return addresses.toArray(new Address[addresses.size()]);
+    return addresses.toArray(new Address[0]);
   }
 
   /** Checks whether a string email address is valid. E.g. name@domain.com is valid. */

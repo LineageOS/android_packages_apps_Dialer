@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Xiao-Long Chen <chillermillerlong@hotmail.com>
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +21,8 @@ import android.content.Context;
 import android.location.Location;
 import android.util.Log;
 
-import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.lookup.openstreetmap.OpenStreetMapForwardLookup;
+import com.android.dialer.phonenumbercache.ContactInfo;
 
 import java.util.List;
 

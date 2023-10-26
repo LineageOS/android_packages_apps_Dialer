@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.PinnedPositions;
 import android.text.TextUtils;
+
 import com.android.dialer.util.PermissionsUtil;
 
 /**
@@ -93,8 +94,7 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
     }
     try {
       if (cursor.moveToFirst()) {
-        final long id = cursor.getLong(0);
-        return id;
+        return cursor.getLong(0);
       } else {
         return NO_CONTACT_FOUND;
       }

@@ -23,6 +23,7 @@ import android.os.Looper;
 import androidx.annotation.MainThread;
 
 import com.android.dialer.common.Assert;
+
 import java.util.concurrent.Executor;
 
 /**

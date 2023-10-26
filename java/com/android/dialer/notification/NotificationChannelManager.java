@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+
 import java.util.Set;
 
 /** Creates all notification channels for Dialer. */
@@ -116,7 +117,7 @@ public final class NotificationChannelManager {
         new NotificationChannel(
             NotificationChannelId.INCOMING_CALL,
             context.getText(R.string.notification_channel_incoming_call),
-            NotificationManager.IMPORTANCE_MAX);
+            NotificationManager.IMPORTANCE_HIGH);
     channel.setShowBadge(false);
     channel.enableLights(true);
     channel.enableVibration(false);

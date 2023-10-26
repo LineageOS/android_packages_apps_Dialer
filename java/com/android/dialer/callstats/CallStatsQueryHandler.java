@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
  * Copyright (C) 2013 Android Open Kang Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +23,8 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.database.sqlite.SQLiteDiskIOException;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteFullException;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -33,9 +34,9 @@ import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 
 import com.android.dialer.phonenumbercache.ContactInfo;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.UriUtils;
-
 import com.google.common.collect.Lists;
 
 import java.lang.ref.WeakReference;
@@ -82,11 +83,7 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
       try {
         // Perform same query while catching any exceptions
         super.handleMessage(msg);
-      } catch (SQLiteDiskIOException e) {
-        Log.w(TAG, "Exception on background worker thread", e);
-      } catch (SQLiteFullException e) {
-        Log.w(TAG, "Exception on background worker thread", e);
-      } catch (SQLiteDatabaseCorruptException e) {
+      } catch (SQLiteDiskIOException | SQLiteFullException | SQLiteDatabaseCorruptException e) {
         Log.w(TAG, "Exception on background worker thread", e);
       }
     }
@@ -101,7 +98,7 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
 
   public CallStatsQueryHandler(ContentResolver contentResolver, Listener listener) {
     super(contentResolver);
-    mListener = new WeakReference<Listener>(listener);
+    mListener = new WeakReference<>(listener);
   }
 
   public void fetchCalls(long from, long to, PhoneAccountHandle account) {
@@ -160,9 +157,9 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
   }
 
   private Map<ContactInfo, CallStatsDetails> processData(Cursor cursor) {
-    final Map<ContactInfo, CallStatsDetails> result = new HashMap<ContactInfo, CallStatsDetails>();
-    final ArrayList<ContactInfo> infos = new ArrayList<ContactInfo>();
-    final ArrayList<CallStatsDetails> calls = new ArrayList<CallStatsDetails>();
+    final Map<ContactInfo, CallStatsDetails> result = new HashMap<>();
+    final ArrayList<ContactInfo> infos = new ArrayList<>();
+    final ArrayList<CallStatsDetails> calls = new ArrayList<>();
     CallStatsDetails pending = null;
 
     cursor.moveToFirst();
@@ -205,8 +202,8 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
 
   private void mergeItemsByNumber(List<CallStatsDetails> calls, List<ContactInfo> infos) {
     // temporarily store items marked for removal
-    final ArrayList<CallStatsDetails> callsToRemove = new ArrayList<CallStatsDetails>();
-    final ArrayList<ContactInfo> infosToRemove = new ArrayList<ContactInfo>();
+    final ArrayList<CallStatsDetails> callsToRemove = new ArrayList<>();
+    final ArrayList<ContactInfo> infosToRemove = new ArrayList<>();
 
     for (int i = 0; i < calls.size(); i++) {
       final CallStatsDetails outerItem = calls.get(i);
@@ -254,41 +251,11 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
   }
 
   private static boolean phoneNumbersEqual(String number1, String number2) {
-    if (PhoneNumberUtils.isUriNumber(number1) || PhoneNumberUtils.isUriNumber(number2)) {
-      return sipAddressesEqual(number1, number2);
+    if (PhoneNumberHelper.isUriNumber(number1) || PhoneNumberHelper.isUriNumber(number2)) {
+      return PhoneNumberHelper.compareSipAddresses(number1, number2);
     } else {
       return PhoneNumberUtils.compare(number1, number2);
     }
-  }
-
-  private static boolean sipAddressesEqual(String number1, String number2) {
-    if (number1 == null || number2 == null) {
-      return number1 == number2;
-    }
-
-    int index1 = number1.indexOf('@');
-    final String userinfo1;
-    final String rest1;
-    if (index1 != -1) {
-      userinfo1 = number1.substring(0, index1);
-      rest1 = number1.substring(index1);
-    } else {
-      userinfo1 = number1;
-      rest1 = "";
-    }
-
-    int index2 = number2.indexOf('@');
-    final String userinfo2;
-    final String rest2;
-    if (index2 != -1) {
-      userinfo2 = number2.substring(0, index2);
-      rest2 = number2.substring(index2);
-    } else {
-      userinfo2 = number2;
-      rest2 = "";
-    }
-
-    return userinfo1.equals(userinfo2) && rest1.equalsIgnoreCase(rest2);
   }
 
   public interface Listener {

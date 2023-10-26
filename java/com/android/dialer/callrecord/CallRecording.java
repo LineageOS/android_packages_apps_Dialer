@@ -18,14 +18,11 @@
 package com.android.dialer.callrecord;
 
 import android.content.ContentValues;
-import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
-
-import java.io.File;
 
 public final class CallRecording implements Parcelable {
   public final String phoneNumber;

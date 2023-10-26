@@ -241,8 +241,8 @@ public class DialerSettingsActivity extends AppCompatActivity implements
         bundle.putInt(PhoneAccountSelectionFragment.PARAM_TARGET_TITLE_RES,
                 R.string.voicemail_settings_label);
       } else {
-        LogUtil.i(
-                "DialerSettingsActivity.addVoicemailSettings", "showing single-SIM voicemail settings");
+        LogUtil.i("DialerSettingsActivity.addVoicemailSettings",
+                "showing single-SIM voicemail settings");
         voicemailSettings.setFragment(VoicemailSettingsFragment.class.getName());
         bundle.putParcelable(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE, soleAccount);
       }
@@ -266,8 +266,8 @@ public class DialerSettingsActivity extends AppCompatActivity implements
           continue;
         }
         if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
-          LogUtil.i(
-                  "DialerSettingsActivity.getSoleSimAccount", phoneAccountHandle + " is a SIM account");
+          LogUtil.i("DialerSettingsActivity.getSoleSimAccount",
+                  phoneAccountHandle + " is a SIM account");
           if (result != null) {
             return null;
           }
@@ -279,8 +279,8 @@ public class DialerSettingsActivity extends AppCompatActivity implements
 
     /**
      * Returns {@code true} or {@code false} based on whether the display options setting should be
-     * shown. For languages such as Chinese, Japanese, or Korean, display options aren't useful since
-     * contacts are sorted and displayed family name first by default.
+     * shown. For languages such as Chinese, Japanese, or Korean, display options aren't useful
+     * since contacts are sorted and displayed family name first by default.
      *
      * @return {@code true} if the display options should be shown, {@code false} otherwise.
      */

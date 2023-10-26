@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +38,7 @@ import androidx.annotation.Nullable;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -52,7 +54,8 @@ public class LetterTileDrawable extends Drawable {
    * #TYPE_BUSINESS}, and voicemail contacts should use {@link #TYPE_VOICEMAIL}.
    */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({TYPE_PERSON, TYPE_BUSINESS, TYPE_VOICEMAIL, TYPE_GENERIC_AVATAR, TYPE_SPAM})
+  @IntDef({TYPE_PERSON, TYPE_BUSINESS, TYPE_VOICEMAIL, TYPE_GENERIC_AVATAR, TYPE_SPAM,
+          TYPE_CONFERENCE})
   public @interface ContactType {}
 
   /** Contact type constants */
@@ -118,9 +121,9 @@ public class LetterTileDrawable extends Drawable {
 
   public LetterTileDrawable(final Resources res) {
     colors = res.obtainTypedArray(R.array.letter_tile_colors);
-    spamColor = res.getColor(R.color.spam_contact_background);
-    defaultColor = res.getColor(R.color.letter_tile_default_color);
-    tileFontColor = res.getColor(R.color.letter_tile_font_color);
+    spamColor = res.getColor(R.color.spam_contact_background, null);
+    defaultColor = res.getColor(R.color.letter_tile_default_color, null);
+    tileFontColor = res.getColor(R.color.letter_tile_font_color, null);
     letterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
     defaultPersonAvatar = res.getDrawable(R.drawable.quantum_ic_person_vd_theme_24, null);
     defaultBusinessAvatar = res.getDrawable(R.drawable.quantum_ic_business_vd_theme_24, null);

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +23,7 @@ import android.net.Uri;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 
@@ -93,6 +95,7 @@ public class CallUtil {
   /**
    * Returns a list of phone accounts that are able to call to numbers with the supplied scheme
    */
+  @SuppressLint("MissingPermission")
   public static List<PhoneAccount> getCallCapablePhoneAccounts(Context context, String scheme) {
     if (!PermissionsUtil.hasPermission(context, android.Manifest.permission.READ_PHONE_STATE)) {
       return null;

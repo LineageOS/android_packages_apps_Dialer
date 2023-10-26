@@ -41,7 +41,8 @@ import com.android.incallui.call.DialerCall;
 public class VideoChargesAlertDialogFragment extends DialogFragment {
 
   /** Preference key for whether to show the alert dialog for video charges next time. */
-  private static final String KEY_DO_NOT_SHOW_VIDEO_CHARGES_ALERT = "key_do_not_show_video_charges_alert";
+  private static final String KEY_DO_NOT_SHOW_VIDEO_CHARGES_ALERT =
+          "key_do_not_show_video_charges_alert";
 
   /** Key in the arguments bundle for call id. */
   private static final String ARG_CALL_ID = "call_id";

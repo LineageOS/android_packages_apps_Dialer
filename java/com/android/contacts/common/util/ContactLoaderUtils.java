@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +20,10 @@ package com.android.contacts.common.util;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.net.Uri;
-import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.RawContacts;
+
+import com.android.contacts.common.model.ContactLoader;
 
 /** Utility methods for the {@link ContactLoader}. */
 public final class ContactLoaderUtils {
@@ -36,7 +38,6 @@ public final class ContactLoaderUtils {
    *
    * <p>Do not call from the UI thread.
    */
-  @SuppressWarnings("deprecation")
   public static Uri ensureIsContactUri(final ContentResolver resolver, final Uri uri)
       throws IllegalArgumentException {
     if (uri == null) {

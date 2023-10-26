@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +19,11 @@ package com.android.voicemail.impl.mail.store.imap;
 
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.mail.FixedLengthInputStream;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 /** Subclass of {@link ImapString} used for literals backed by an in-memory byte array. */
 public class ImapMemoryLiteral extends ImapString {
@@ -53,12 +55,7 @@ public class ImapMemoryLiteral extends ImapString {
 
   @Override
   public String getString() {
-    try {
-      return new String(data, "US-ASCII");
-    } catch (UnsupportedEncodingException e) {
-      VvmLog.e(TAG, "Unsupported encoding: ", e);
-    }
-    return null;
+    return new String(data, StandardCharsets.US_ASCII);
   }
 
   @Override

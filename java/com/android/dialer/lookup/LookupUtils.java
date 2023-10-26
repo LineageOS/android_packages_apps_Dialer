@@ -144,7 +144,7 @@ public class LookupUtils {
     Pattern pattern = Pattern.compile(regex, dotall ? Pattern.DOTALL : 0);
     Matcher matcher = pattern.matcher(input);
 
-    List<String> regexResults = new ArrayList<String>();
+    List<String> regexResults = new ArrayList<>();
     while (matcher.find()) {
       regexResults.add(matcher.group(1).trim());
     }

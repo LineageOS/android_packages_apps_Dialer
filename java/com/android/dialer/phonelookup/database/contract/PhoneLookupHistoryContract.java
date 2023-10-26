@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +18,12 @@
 package com.android.dialer.phonelookup.database.contract;
 
 import android.net.Uri;
+
 import com.android.dialer.constants.Constants;
 
 /** Contract for the PhoneLookupHistory content provider. */
 public class PhoneLookupHistoryContract {
-  public static final String AUTHORITY = Constants.get().getPhoneLookupHistoryProviderAuthority();
+  public static final String AUTHORITY = Constants.PHONE_LOOKUP_HISTORY_PROVIDER_AUTHORITY;
 
   public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 

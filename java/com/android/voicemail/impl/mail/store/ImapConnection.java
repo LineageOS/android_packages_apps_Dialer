@@ -18,6 +18,7 @@ package com.android.voicemail.impl.mail.store;
 
 import android.util.ArraySet;
 import android.util.Base64;
+
 import com.android.voicemail.impl.OmtpEvents;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.mail.AuthenticationFailedException;
@@ -31,12 +32,14 @@ import com.android.voicemail.impl.mail.store.imap.ImapResponse;
 import com.android.voicemail.impl.mail.store.imap.ImapResponseParser;
 import com.android.voicemail.impl.mail.store.imap.ImapUtility;
 import com.android.voicemail.impl.mail.utils.LogUtils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.net.ssl.SSLException;
 
 /** A cacheable class that stores the details for a single IMAP connection. */
@@ -180,7 +183,7 @@ public class ImapConnection {
   }
 
   /** Logs into the IMAP server */
-  private void doLogin() throws IOException, MessagingException, AuthenticationFailedException {
+  private void doLogin() throws IOException, MessagingException {
     try {
       if (capabilities.contains(ImapConstants.CAPABILITY_AUTH_DIGEST_MD5)) {
         doDigestMd5Auth();
@@ -301,7 +304,7 @@ public class ImapConnection {
       }
     }
 
-    LogUtils.d(TAG, "Capabilities: " + capabilities.toString());
+    LogUtils.d(TAG, "Capabilities: " + capabilities);
   }
 
   private boolean hasCapability(String capability) {
@@ -380,7 +383,7 @@ public class ImapConnection {
    * @throws MessagingException
    */
   List<ImapResponse> getCommandResponses() throws IOException, MessagingException {
-    final List<ImapResponse> responses = new ArrayList<ImapResponse>();
+    final List<ImapResponse> responses = new ArrayList<>();
     ImapResponse response;
     do {
       response = parser.readResponse(false);
