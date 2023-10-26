@@ -128,7 +128,7 @@ public class TaskSchedulerJobService extends JobService implements TaskExecutor.
         .apply();
 
     extras.putParcelableArray(
-        EXTRA_TASK_EXTRAS_ARRAY, pendingTasks.toArray(new Bundle[pendingTasks.size()]));
+        EXTRA_TASK_EXTRAS_ARRAY, pendingTasks.toArray(new Bundle[0]));
     JobInfo.Builder builder =
         new JobInfo.Builder(
                 ScheduledJobIds.VVM_TASK_SCHEDULER_JOB,

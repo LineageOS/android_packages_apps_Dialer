@@ -16,6 +16,7 @@
 
 package com.android.voicemail.impl.sync;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,7 @@ public class OmtpVvmSyncReceiver extends BroadcastReceiver {
 
   private static final String TAG = "OmtpVvmSyncReceiver";
 
+  @SuppressLint("MissingPermission")
   @Override
   public void onReceive(final Context context, Intent intent) {
     if (!VoicemailComponent.get(context).getVoicemailClient().isVoicemailModuleEnabled()) {

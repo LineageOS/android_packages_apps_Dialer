@@ -76,7 +76,7 @@ public abstract class Message implements Part, Body {
 
   private HashSet<String> getFlagSet() {
     if (flags == null) {
-      flags = new HashSet<String>();
+      flags = new HashSet<>();
     }
     return flags;
   }

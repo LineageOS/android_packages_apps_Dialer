@@ -74,11 +74,6 @@ public class InCallServiceImpl extends InCallService {
   }
 
   @Override
-  public void onCreate() {
-    super.onCreate();
-  }
-
-  @Override
   public IBinder onBind(Intent intent) {
     Trace.beginSection("InCallServiceImpl.onBind");
     final Context context = getApplicationContext();
