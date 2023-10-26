@@ -441,11 +441,6 @@ public final class NewSearchFragment extends Fragment
     LoaderManager.getInstance(this).restartLoader(CONTACTS_LOADER_ID, null, this);
   }
 
-  @Override
-  public void onPause() {
-    super.onPause();
-  }
-
   /**
    * Returns a list of search actions to be shown in the search results.
    *

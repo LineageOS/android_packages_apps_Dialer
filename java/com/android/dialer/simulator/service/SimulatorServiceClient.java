@@ -45,8 +45,6 @@ public abstract class SimulatorServiceClient {
     }
   }
 
-  private void onServiceDisconnected() {}
-
   static class SimulatorServiceConnection implements ServiceConnection {
 
     private SimulatorServiceClient client;
@@ -60,7 +58,6 @@ public abstract class SimulatorServiceClient {
 
     @Override
     public void onServiceDisconnected(ComponentName name) {
-      client.onServiceDisconnected();
     }
 
     void bindToClient(SimulatorServiceClient client) {

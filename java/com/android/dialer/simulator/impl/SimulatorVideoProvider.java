@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +39,7 @@ final class SimulatorVideoProvider extends Connection.VideoProvider {
   @NonNull
   private final Context context;
   @NonNull private final SimulatorConnection connection;
-  @Nullable private String previewCameraId;;
+  @Nullable private String previewCameraId;
   @Nullable
   private SimulatorPreviewCamera simulatorPreviewCamera;
   @Nullable private SimulatorRemoteVideo simulatorRemoteVideo;

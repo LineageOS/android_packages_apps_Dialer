@@ -19,6 +19,7 @@ package com.android.incallui.answer.impl.classifier;
 
 import android.util.ArrayMap;
 import android.view.MotionEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -35,6 +35,7 @@ import com.android.dialer.databasepopulator.ContactsPopulator;
 import com.android.dialer.databasepopulator.VoicemailPopulator;
 import com.android.dialer.persistentlog.PersistentLogger;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -142,7 +143,7 @@ public class SimulatorUtils {
         .getContentResolver()
         .bulkInsert(
             Voicemails.buildSourceUri(context.getPackageName()),
-            voicemails.toArray(new ContentValues[voicemails.size()]));
+            voicemails.toArray(new ContentValues[0]));
   }
 
   private static class PopulateVoicemailWorker

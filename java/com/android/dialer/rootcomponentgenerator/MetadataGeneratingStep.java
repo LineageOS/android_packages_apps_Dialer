@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +17,6 @@
 
 package com.android.dialer.rootcomponentgenerator;
 
-import static javax.tools.Diagnostic.Kind.ERROR;
-
 import com.android.dialer.inject.IncludeInDialerRoot;
 import com.android.dialer.inject.RootComponentGeneratorMetadata;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
@@ -26,9 +25,11 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.SetMultimap;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.TypeSpec;
+
 import java.lang.annotation.Annotation;
 import java.util.Collections;
 import java.util.Set;
+
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;

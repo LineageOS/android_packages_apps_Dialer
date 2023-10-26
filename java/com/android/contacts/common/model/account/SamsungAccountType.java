@@ -23,10 +23,12 @@ import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Relation;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
+
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.util.CommonDateUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contacts.resources.R;
+
 import java.util.ArrayList;
 import java.util.Locale;
 

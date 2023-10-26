@@ -17,10 +17,11 @@ import java.io.ByteArrayInputStream;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /** Simple utility methods used in email functions. */
 public class Utility {
-  public static final Charset ASCII = Charset.forName("US-ASCII");
+  public static final Charset ASCII = StandardCharsets.US_ASCII;
 
   public static final String[] EMPTY_STRINGS = new String[0];
 

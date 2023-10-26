@@ -16,20 +16,11 @@
 
 package com.android.incallui.async;
 
-import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
-/**
- * Executor that can be used to easily synchronize testing and production code. Production code
- * should call {@link #milestone()} at points in the code where the state of the system is worthy of
- * testing.
- */
-public interface PausableExecutor extends Executor {
-
-  /**
-   * Method called from asynchronous production code to inform this executor that it has reached a
-   * point that puts the system into a state worth testing. TestableExecutors intended for use in a
-   * testing environment should cause the calling thread to block. In the production environment
-   * this should be a no-op.
-   */
-  void milestone();
+/** {@link PausableExecutor} intended for use in production environments. */
+public class PausableExecutor {
+  public void execute(Runnable command) {
+    Executors.newSingleThreadExecutor().execute(command);
+  }
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Xiao-Long Chen <chillermillerlong@hotmail.com>
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +25,11 @@ import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.util.Log;
 
-import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.LookupSettings;
 import com.android.dialer.lookup.LookupUtils;
 import com.android.dialer.lookup.ReverseLookup;
+import com.android.dialer.phonenumbercache.ContactInfo;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +38,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.android.dialer.R;
 
@@ -71,10 +73,10 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
     CharSequence labelText;
     boolean enabled;
 
-    backgroundMore =
-        getResources().getDrawable(R.drawable.incall_button_background_more, context.getTheme());
-    background =
-        getResources().getDrawable(R.drawable.incall_button_background, context.getTheme());
+    backgroundMore = ResourcesCompat.getDrawable(getResources(),
+            R.drawable.incall_button_background_more, context.getTheme());
+    background = ResourcesCompat.getDrawable(getResources(),
+            R.drawable.incall_button_background, context.getTheme());
 
     TypedArray typedArray =
         context.obtainStyledAttributes(attrs, R.styleable.CheckableLabeledButton);

@@ -39,6 +39,8 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.StatusHints;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -47,6 +49,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.contacts.common.compat.CallCompat;
+import com.android.dialer.R;
 import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentParser;
@@ -63,7 +66,6 @@ import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptUtil;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.dialer.telecom.TelecomUtil;
-import com.android.dialer.theme.common.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.state.DialerCallState;
@@ -73,9 +75,9 @@ import com.android.incallui.videotech.VideoTech.VideoTechListener;
 import com.android.incallui.videotech.empty.EmptyVideoTech;
 import com.android.incallui.videotech.ims.ImsVideoTech;
 import com.android.incallui.videotech.utils.VideoUtils;
-import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.MoreExecutors;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -359,7 +361,7 @@ public class DialerCall implements VideoTechListener {
     this.context = context;
     this.dialerCallDelegate = dialerCallDelegate;
     this.telecomCall = telecomCall;
-    id = ID_PREFIX + Integer.toString(idCounter++);
+    id = ID_PREFIX + idCounter++;
 
     // Must be after assigning mTelecomCall
     videoTechManager = new VideoTechManager(this);
@@ -1366,6 +1368,7 @@ public class DialerCall implements VideoTechListener {
     return videoTech;
   }
 
+  @SuppressLint("MissingPermission")
   public String getCallbackNumber() {
     if (callbackNumber == null) {
       // Show the emergency callback number if either:
@@ -1375,8 +1378,13 @@ public class DialerCall implements VideoTechListener {
       boolean showCallbackNumber = hasProperty(Details.PROPERTY_EMERGENCY_CALLBACK_MODE);
 
       if (isEmergencyCall() || showCallbackNumber) {
-        callbackNumber =
-            context.getSystemService(TelecomManager.class).getLine1Number(getAccountHandle());
+        PhoneAccountHandle accountHandle = getAccountHandle();
+        if (accountHandle != null) {
+          int subId = context.getSystemService(TelephonyManager.class).getSubscriptionId(
+                  accountHandle);
+          SubscriptionManager subMgr = context.getSystemService(SubscriptionManager.class);
+          callbackNumber = subMgr.getPhoneNumber(subId);
+        }
       }
 
       if (callbackNumber == null) {

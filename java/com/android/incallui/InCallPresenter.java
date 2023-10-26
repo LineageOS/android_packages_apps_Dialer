@@ -17,6 +17,7 @@
 
 package com.android.incallui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -44,8 +45,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.contacts.common.compat.CallCompat;
-import com.android.dialer.CallConfiguration;
-import com.android.dialer.Mode;
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -96,20 +95,19 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
    * resizing, 1 means we only expect a single thread to access the map so make only a single shard
    */
   private final Set<InCallStateListener> listeners =
-      Collections.newSetFromMap(new ConcurrentHashMap<InCallStateListener, Boolean>(8, 0.9f, 1));
+      Collections.newSetFromMap(new ConcurrentHashMap<>(8, 0.9f, 1));
 
   private final List<IncomingCallListener> incomingCallListeners = new CopyOnWriteArrayList<>();
   private final Set<InCallDetailsListener> detailsListeners =
-      Collections.newSetFromMap(new ConcurrentHashMap<InCallDetailsListener, Boolean>(8, 0.9f, 1));
+      Collections.newSetFromMap(new ConcurrentHashMap<>(8, 0.9f, 1));
   private final Set<CanAddCallListener> canAddCallListeners =
-      Collections.newSetFromMap(new ConcurrentHashMap<CanAddCallListener, Boolean>(8, 0.9f, 1));
+      Collections.newSetFromMap(new ConcurrentHashMap<>(8, 0.9f, 1));
   private final Set<InCallUiListener> inCallUiListeners =
-      Collections.newSetFromMap(new ConcurrentHashMap<InCallUiListener, Boolean>(8, 0.9f, 1));
+      Collections.newSetFromMap(new ConcurrentHashMap<>(8, 0.9f, 1));
   private final Set<InCallOrientationListener> orientationListeners =
-      Collections.newSetFromMap(
-          new ConcurrentHashMap<InCallOrientationListener, Boolean>(8, 0.9f, 1));
+      Collections.newSetFromMap(new ConcurrentHashMap<>(8, 0.9f, 1));
   private final Set<InCallEventListener> inCallEventListeners =
-      Collections.newSetFromMap(new ConcurrentHashMap<InCallEventListener, Boolean>(8, 0.9f, 1));
+      Collections.newSetFromMap(new ConcurrentHashMap<>(8, 0.9f, 1));
 
   private StatusBarNotifier statusBarNotifier;
   private ExternalCallNotifier externalCallNotifier;
@@ -1659,6 +1657,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     }
   }
 
+  @SuppressLint("MissingPermission")
   @Override
   public void onAudioStateChanged(CallAudioState audioState) {
     if (statusBarNotifier != null) {

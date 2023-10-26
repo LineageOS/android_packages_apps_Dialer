@@ -103,7 +103,7 @@ public class CallRecordingDataStore {
    * @return list of recordings
    */
   public List<CallRecording> getRecordings(String phoneNumber, long callCreationDate) {
-    List<CallRecording> resultList = new ArrayList<CallRecording>();
+    List<CallRecording> resultList = new ArrayList<>();
 
     final String query = "SELECT " +
         CallRecordingsContract.CallRecording.COLUMN_NAME_RECORDING_FILENAME + "," +
@@ -115,7 +115,7 @@ public class CallRecordingDataStore {
         " AND " + CallRecordingsContract.CallRecording.COLUMN_NAME_MEDIA_ID + " != 0" +
         " ORDER BY " + CallRecordingsContract.CallRecording.COLUMN_NAME_CREATION_DATE;
 
-    String args[] = {
+    String[] args = {
       phoneNumber, String.valueOf(callCreationDate)
     };
 

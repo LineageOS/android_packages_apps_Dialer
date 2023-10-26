@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +24,6 @@ import android.os.Trace;
 import android.provider.CallLog;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -38,13 +38,12 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.i18n.LocaleUtils;
 import com.android.dialer.oem.MotorolaUtils;
-import com.android.dialer.oem.PhoneNumberUtilsAccessor;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.telecom.TelecomUtil;
-import com.google.common.base.Optional;
+
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class PhoneNumberHelper {
@@ -144,37 +143,13 @@ public class PhoneNumberHelper {
     return rawNumber1.equals(rawNumber2);
   }
 
-  /**
-   * An enhanced version of {@link PhoneNumberUtils#isLocalEmergencyNumber(Context, String)}.
-   *
-   * <p>This methods supports checking the number for all SIMs.
-   *
-   * @param context the context which the number should be checked against
-   * @param number the number to tbe checked
-   * @return true if the specified number is an emergency number for any SIM in the device.
-   */
-  @SuppressWarnings("Guava")
-  public static boolean isLocalEmergencyNumber(Context context, String number) {
-    List<PhoneAccountHandle> phoneAccountHandles =
-        TelecomUtil.getSubscriptionPhoneAccounts(context);
+  public static boolean isEmergencyNumber(Context context, String number) {
+    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+    return telephonyManager.isEmergencyNumber(number);
+  }
 
-    // If the number of phone accounts with a subscription is no greater than 1, only one SIM is
-    // installed in the device. We hand over the job to PhoneNumberUtils#isLocalEmergencyNumber.
-    if (phoneAccountHandles.size() <= 1) {
-      return PhoneNumberUtils.isLocalEmergencyNumber(context, number);
-    }
-
-    for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
-      Optional<SubscriptionInfo> subscriptionInfo =
-          TelecomUtil.getSubscriptionInfo(context, phoneAccountHandle);
-      if (subscriptionInfo.isPresent()
-          && PhoneNumberUtilsAccessor.isLocalEmergencyNumber(
-              context, subscriptionInfo.get().getSubscriptionId(), number)) {
-        return true;
-      }
-    }
-
-    return false;
+  public static boolean isEmergencyNumber(Context context, String number, String countryIso) {
+    return isEmergencyNumber(context, PhoneNumberUtils.formatNumberToE164(number, countryIso));
   }
 
   /**
@@ -195,32 +170,6 @@ public class PhoneNumberHelper {
    */
   public static boolean isSipNumber(CharSequence number) {
     return number != null && isUriNumber(number.toString());
-  }
-
-  public static boolean isUnknownNumberThatCanBeLookedUp(
-      Context context, PhoneAccountHandle accountHandle, CharSequence number, int presentation) {
-    if (presentation == CallLog.Calls.PRESENTATION_UNKNOWN) {
-      return false;
-    }
-    if (presentation == CallLog.Calls.PRESENTATION_RESTRICTED) {
-      return false;
-    }
-    if (presentation == CallLog.Calls.PRESENTATION_UNAVAILABLE) {
-      return false;
-    }
-    if (presentation == CallLog.Calls.PRESENTATION_PAYPHONE) {
-      return false;
-    }
-    if (TextUtils.isEmpty(number)) {
-      return false;
-    }
-    if (isVoicemailNumber(context, accountHandle, number)) {
-      return false;
-    }
-    if (isLegacyUnknownNumbers(number)) {
-      return false;
-    }
-    return true;
   }
 
   public static boolean isLegacyUnknownNumbers(CharSequence number) {
@@ -405,5 +354,35 @@ public class PhoneNumberHelper {
     } else {
       return context.getString(R.string.private_num_non_verizon);
     }
+  }
+
+  public static boolean compareSipAddresses(@Nullable String number1, @Nullable String number2) {
+    if (number1 == null || number2 == null) {
+      return Objects.equals(number1, number2);
+    }
+
+    int index1 = number1.indexOf('@');
+    final String userinfo1;
+    final String rest1;
+    if (index1 != -1) {
+      userinfo1 = number1.substring(0, index1);
+      rest1 = number1.substring(index1);
+    } else {
+      userinfo1 = number1;
+      rest1 = "";
+    }
+
+    int index2 = number2.indexOf('@');
+    final String userinfo2;
+    final String rest2;
+    if (index2 != -1) {
+      userinfo2 = number2.substring(0, index2);
+      rest2 = number2.substring(index2);
+    } else {
+      userinfo2 = number2;
+      rest2 = "";
+    }
+
+    return userinfo1.equals(userinfo2) && rest1.equalsIgnoreCase(rest2);
   }
 }

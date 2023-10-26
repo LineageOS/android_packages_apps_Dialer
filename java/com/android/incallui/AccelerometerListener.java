@@ -25,6 +25,7 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+
 import com.android.dialer.common.LogUtil;
 
 /**

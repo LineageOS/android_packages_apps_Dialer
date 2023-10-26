@@ -30,18 +30,15 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.provider.Settings;
 import android.util.Log;
 
+import com.android.dialer.R;
 import com.android.dialer.callrecord.CallRecording;
 import com.android.dialer.callrecord.ICallRecorderService;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.android.dialer.R;
 
 public class CallRecorderService extends Service {
   private static final String TAG = "CallRecorderService";

@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2014 The OmniROM Project
  * Copyright (C) 2014 Xiao-Long Chen <chillermillerlong@hotmail.com>
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,10 +26,10 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.util.Log;
 
-import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.ForwardLookup;
 import com.android.dialer.lookup.LookupUtils;
+import com.android.dialer.phonenumbercache.ContactInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;

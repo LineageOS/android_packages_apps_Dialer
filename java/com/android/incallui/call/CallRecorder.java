@@ -26,14 +26,13 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
-import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.dialer.R;
-import com.android.dialer.callrecord.CallRecordingDataStore;
 import com.android.dialer.callrecord.CallRecording;
+import com.android.dialer.callrecord.CallRecordingDataStore;
 import com.android.dialer.callrecord.ICallRecorderService;
 import com.android.dialer.callrecord.impl.CallRecorderService;
 import com.android.dialer.location.GeoUtil;

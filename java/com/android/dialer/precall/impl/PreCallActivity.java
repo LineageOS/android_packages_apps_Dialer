@@ -17,7 +17,6 @@
 
 package com.android.dialer.precall.impl;
 
-import android.app.Activity;
 import android.app.KeyguardManager;
 import android.os.Bundle;
 import android.view.WindowManager.LayoutParams;

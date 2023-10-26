@@ -152,7 +152,6 @@ public class InCallFragment extends Fragment
         FragmentUtils.getParent(this, InCallButtonUiDelegateFactory.class)
             .newInCallButtonUiDelegate();
     if (savedInstanceState != null) {
-      inCallButtonUiDelegate.onRestoreInstanceState(savedInstanceState);
       stateRestored = true;
     }
   }
@@ -267,19 +266,13 @@ public class InCallFragment extends Fragment
   }
 
   @Override
-  public void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-    inCallButtonUiDelegate.onSaveInstanceState(outState);
-  }
-
-  @Override
   public void onClick(View view) {
     if (view == endCallButton) {
       LogUtil.i("InCallFragment.onClick", "end call button clicked");
       inCallScreenDelegate.onEndCallClicked();
     } else {
       LogUtil.e("InCallFragment.onClick", "unknown view: " + view);
-      Assert.fail();
+      Assert.createAssertionFailException("");
     }
   }
 
@@ -536,7 +529,7 @@ public class InCallFragment extends Fragment
         return buttonController;
       }
     }
-    Assert.fail();
+    Assert.createAssertionFailException("");
     return null;
   }
 

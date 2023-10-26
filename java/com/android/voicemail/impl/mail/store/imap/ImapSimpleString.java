@@ -17,10 +17,9 @@
 
 package com.android.voicemail.impl.mail.store.imap;
 
-import com.android.voicemail.impl.VvmLog;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 /** Subclass of {@link ImapString} used for non literals. */
 public class ImapSimpleString extends ImapString {
@@ -44,12 +43,7 @@ public class ImapSimpleString extends ImapString {
 
   @Override
   public InputStream getAsStream() {
-    try {
-      return new ByteArrayInputStream(string.getBytes("US-ASCII"));
-    } catch (UnsupportedEncodingException e) {
-      VvmLog.e(TAG, "Unsupported encoding: ", e);
-    }
-    return null;
+    return new ByteArrayInputStream(string.getBytes(StandardCharsets.US_ASCII));
   }
 
   @Override

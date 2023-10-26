@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +18,6 @@
 package com.android.incallui.incall.protocol;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.telecom.CallAudioState;
 
 /** Callbacks from the module out to the container. */
@@ -26,10 +26,6 @@ public interface InCallButtonUiDelegate {
   void onInCallButtonUiReady(InCallButtonUi inCallButtonUi);
 
   void onInCallButtonUiUnready();
-
-  void onSaveInstanceState(Bundle outState);
-
-  void onRestoreInstanceState(Bundle savedInstanceState);
 
   void addCallClicked();
 

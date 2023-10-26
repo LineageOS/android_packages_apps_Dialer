@@ -123,7 +123,4 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
       startActivity(intent);
     }
   }
-
-  @Override
-  public void onMessageFragmentAfterTextChange(String message) {}
 }
