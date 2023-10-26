@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +17,7 @@
 
 package com.android.voicemail.impl.configui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,7 +33,6 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.dialer.R;
@@ -104,8 +105,9 @@ public class ConfigOverrideFragment extends PreferenceFragmentCompat
    * Loads the config for the currently carrier into the override values, from the dialer or the
    * carrier config app. This is a "reset" button to load the defaults.
    */
+  @SuppressLint("MissingPermission")
   private void loadCurrentConfig() {
-    Context context = getActivity();
+    Context context = requireActivity();
     PhoneAccountHandle phoneAccountHandle =
         context
             .getSystemService(TelecomManager.class)

@@ -16,6 +16,7 @@
 
 package com.android.voicemail.impl.sms;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -133,6 +134,7 @@ public class LegacyModeSmsHandler {
     context.sendBroadcast(intent);
   }
 
+  @SuppressLint("MissingPermission")
   @Nullable
   private static String getVoicemailNumber(Context context, PhoneAccountHandle phoneAccountHandle) {
     TelephonyManager telephonyManager =

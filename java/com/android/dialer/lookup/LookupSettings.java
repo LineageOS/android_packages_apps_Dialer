@@ -54,7 +54,7 @@ public final class LookupSettings {
   }
 
   public static void setForwardLookupEnabled(Context context, boolean value) {
-    getSharedPreferences(context).edit().putBoolean(ENABLE_FORWARD_LOOKUP, value).commit();
+    getSharedPreferences(context).edit().putBoolean(ENABLE_FORWARD_LOOKUP, value).apply();
   }
 
   public static boolean isReverseLookupEnabled(Context context) {
@@ -62,7 +62,7 @@ public final class LookupSettings {
   }
 
   public static void setReverseLookupEnabled(Context context, boolean value) {
-    getSharedPreferences(context).edit().putBoolean(ENABLE_REVERSE_LOOKUP, value).commit();
+    getSharedPreferences(context).edit().putBoolean(ENABLE_REVERSE_LOOKUP, value).apply();
   }
 
   public static String getForwardLookupProvider(Context context) {
@@ -70,7 +70,7 @@ public final class LookupSettings {
   }
 
   public static void setForwardLookupProvider(Context context, String value) {
-    getSharedPreferences(context).edit().putString(FORWARD_LOOKUP_PROVIDER, value).commit();
+    getSharedPreferences(context).edit().putString(FORWARD_LOOKUP_PROVIDER, value).apply();
   }
 
   public static String getReverseLookupProvider(Context context) {
@@ -78,6 +78,6 @@ public final class LookupSettings {
   }
 
   public static void setReverseLookupProvider(Context context, String value) {
-    getSharedPreferences(context).edit().putString(REVERSE_LOOKUP_PROVIDER, value).commit();
+    getSharedPreferences(context).edit().putString(REVERSE_LOOKUP_PROVIDER, value).apply();
   }
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,8 +91,8 @@ public class FloatingActionButtonController {
   public void changeIcon(Context context, @DrawableRes int iconId, String description) {
     if (this.fabIconId != iconId) {
       fab.setImageResource(iconId);
-      fab.setImageTintList(
-          ColorStateList.valueOf(context.getResources().getColor(android.R.color.white)));
+      fab.setImageTintList(ColorStateList.valueOf(context.getResources().getColor(
+              android.R.color.white, context.getTheme())));
       this.fabIconId = iconId;
     }
     if (!fab.getContentDescription().equals(description)) {
@@ -100,7 +101,8 @@ public class FloatingActionButtonController {
   }
 
   public void changeIconColor(Context context, @ColorRes int color) {
-    fab.setImageTintList(ColorStateList.valueOf(context.getResources().getColor(color)));
+    fab.setImageTintList(ColorStateList.valueOf(context.getResources().getColor(color,
+            context.getTheme())));
   }
 
   /**

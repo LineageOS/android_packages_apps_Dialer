@@ -116,7 +116,7 @@ public final class NotificationChannelManager {
         new NotificationChannel(
             NotificationChannelId.INCOMING_CALL,
             context.getText(R.string.notification_channel_incoming_call),
-            NotificationManager.IMPORTANCE_MAX);
+            NotificationManager.IMPORTANCE_HIGH);
     channel.setShowBadge(false);
     channel.enableLights(true);
     channel.enableVibration(false);

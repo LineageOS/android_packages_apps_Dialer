@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
  * Copyright (C) 2013 Android Open Kang Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +21,10 @@ package com.android.dialer.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
-import android.graphics.Shader;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.widget.LinearLayout;
 
 import com.android.dialer.R;
@@ -60,22 +58,16 @@ public class LinearColorBar extends LinearLayout {
     for (int i = 0; i < n; i++) {
       int attr = a.getIndex(i);
 
-      switch (attr) {
-        case R.styleable.LinearColorBar_backgroundColor:
-          mBackgroundColor = a.getColor(attr, 0);
-          break;
-        case R.styleable.LinearColorBar_redColor:
-          mRedColor = a.getColor(attr, 0);
-          break;
-        case R.styleable.LinearColorBar_greenColor:
-          mGreenColor = a.getColor(attr, 0);
-          break;
-        case R.styleable.LinearColorBar_blueColor:
-          mBlueColor = a.getColor(attr, 0);
-          break;
-        case R.styleable.LinearColorBar_orangeColor:
-          mOrangeColor = a.getColor(attr, 0);
-          break;
+      if (attr == R.styleable.LinearColorBar_backgroundColor) {
+        mBackgroundColor = a.getColor(attr, 0);
+      } else if (attr == R.styleable.LinearColorBar_redColor) {
+        mRedColor = a.getColor(attr, 0);
+      } else if (attr == R.styleable.LinearColorBar_greenColor) {
+        mGreenColor = a.getColor(attr, 0);
+      } else if (attr == R.styleable.LinearColorBar_blueColor) {
+        mBlueColor = a.getColor(attr, 0);
+      } else if (attr == R.styleable.LinearColorBar_orangeColor) {
+        mOrangeColor = a.getColor(attr, 0);
       }
     }
 
