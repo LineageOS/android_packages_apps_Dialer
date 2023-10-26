@@ -123,7 +123,7 @@ public class Address implements Parcelable {
       return EMPTY_ADDRESS_ARRAY;
     }
     Rfc822Token[] tokens = Rfc822Tokenizer.tokenize(addressList);
-    ArrayList<Address> addresses = new ArrayList<Address>();
+    ArrayList<Address> addresses = new ArrayList<>();
     for (int i = 0, length = tokens.length; i < length; ++i) {
       Rfc822Token token = tokens[i];
       String address = token.getAddress();
@@ -137,7 +137,7 @@ public class Address implements Parcelable {
         }
       }
     }
-    return addresses.toArray(new Address[addresses.size()]);
+    return addresses.toArray(new Address[0]);
   }
 
   /** Checks whether a string email address is valid. E.g. name@domain.com is valid. */

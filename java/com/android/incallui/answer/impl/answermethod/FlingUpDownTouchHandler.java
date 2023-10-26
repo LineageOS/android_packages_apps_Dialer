@@ -20,7 +20,6 @@ package com.android.incallui.answer.impl.answermethod;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.MotionEvent;
@@ -36,7 +35,6 @@ import androidx.annotation.Nullable;
 
 import com.android.dialer.R;
 import com.android.dialer.common.DpUtil;
-import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.MathUtil;
 import com.android.incallui.answer.impl.classifier.FalsingManager;
 import com.android.incallui.answer.impl.utils.FlingAnimationUtils;
@@ -165,7 +163,6 @@ class FlingUpDownTouchHandler implements OnTouchListener {
 
   private boolean touchAboveFalsingThreshold;
   private final float falsingThresholdPx;
-  private boolean touchUsesFalsing;
 
   private final float acceptThresholdPx;
   private final float rejectThresholdPx;
@@ -249,7 +246,6 @@ class FlingUpDownTouchHandler implements OnTouchListener {
         motionAborted = false;
         startMotion(pointerY, false, currentProgress);
         touchAboveFalsingThreshold = false;
-        touchUsesFalsing = listener.shouldUseFalsing(event);
         if (velocityTracker == null) {
           initVelocityTracker();
         }

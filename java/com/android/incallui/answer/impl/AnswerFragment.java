@@ -38,9 +38,7 @@ import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
@@ -636,11 +634,6 @@ public class AnswerFragment extends Fragment
   @Override
   public Fragment getInCallScreenFragment() {
     return this;
-  }
-
-  @Override
-  public void onDestroy() {
-    super.onDestroy();
   }
 
   @Override

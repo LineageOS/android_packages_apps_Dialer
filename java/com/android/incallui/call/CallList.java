@@ -32,7 +32,6 @@ import android.util.ArrayMap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.promotion.impl.RttPromotion;
@@ -70,10 +69,10 @@ public class CallList implements DialerCallDelegate {
    * resizing, 1 means we only expect a single thread to access the map so make only a single shard
    */
   private final Set<Listener> listeners =
-      Collections.newSetFromMap(new ConcurrentHashMap<Listener, Boolean>(8, 0.9f, 1));
+      Collections.newSetFromMap(new ConcurrentHashMap<>(8, 0.9f, 1));
 
   private final Set<DialerCall> pendingDisconnectCalls =
-      Collections.newSetFromMap(new ConcurrentHashMap<DialerCall, Boolean>(8, 0.9f, 1));
+      Collections.newSetFromMap(new ConcurrentHashMap<>(8, 0.9f, 1));
 
   private UiListener uiListeners;
   /** Handles the timeout for destroying disconnected calls. */
@@ -159,7 +158,6 @@ public class CallList implements DialerCallDelegate {
       // Don't log an already logged call. logCall() might be called multiple times
       // for the same call due to a bug.
       if (call.getLogState() != null && !call.getLogState().isLogged) {
-        getLegacyBindings(context).logCall(call);
         call.getLogState().isLogged = true;
       }
 
@@ -176,21 +174,6 @@ public class CallList implements DialerCallDelegate {
     }
   }
 
-  InCallUiLegacyBindings getLegacyBindings(Context context) {
-    Objects.requireNonNull(context);
-
-    Context application = context.getApplicationContext();
-    InCallUiLegacyBindings legacyInstance = null;
-    if (application instanceof InCallUiLegacyBindingsFactory) {
-      legacyInstance = ((InCallUiLegacyBindingsFactory) application).newInCallUiLegacyBindings();
-    }
-
-    if (legacyInstance == null) {
-      legacyInstance = new InCallUiLegacyBindingsStub();
-    }
-    return legacyInstance;
-  }
-
   /**
    * Handles the case where an internal call has become an exteral call. We need to
    *
@@ -205,7 +188,6 @@ public class CallList implements DialerCallDelegate {
       // Don't log an already logged call. logCall() might be called multiple times
       // for the same call due to a bug.
       if (call.getLogState() != null && !call.getLogState().isLogged) {
-        getLegacyBindings(context).logCall(call);
         call.getLogState().isLogged = true;
       }
 

@@ -39,6 +39,7 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class LookupCache {
 
     try {
       out = new FileOutputStream(file);
-      writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
+      writer = new JsonWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8));
       writer.setIndent("  ");
       List messages = new ArrayList();
 
@@ -135,7 +136,7 @@ public class LookupCache {
 
     try {
       in = new FileInputStream(file);
-      reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+      reader = new JsonReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 
       reader.beginObject();
       while (reader.hasNext()) {
@@ -249,7 +250,7 @@ public class LookupCache {
 
     try {
       out = new FileOutputStream(image);
-      bmp.compress(Bitmap.CompressFormat.WEBP, 100, out);
+      bmp.compress(Bitmap.CompressFormat.WEBP_LOSSLESS, 100, out);
       return Uri.fromFile(image);
     } catch (Exception e) {
       e.printStackTrace();

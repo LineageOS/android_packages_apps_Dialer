@@ -171,7 +171,7 @@ public class CallStatsDetailActivity extends AppCompatActivity implements
     mTotalData = launchIntent.getParcelableExtra(EXTRA_TOTAL, CallStatsDetails.class);
     updateData();
 
-    TextView dateFilterView = (TextView) findViewById(R.id.date_filter);
+    TextView dateFilterView = findViewById(R.id.date_filter);
     long filterFrom = launchIntent.getLongExtra(EXTRA_FROM, -1);
     if (filterFrom == -1) {
       dateFilterView.setVisibility(View.GONE);
@@ -184,11 +184,11 @@ public class CallStatsDetailActivity extends AppCompatActivity implements
   @Override
   public void onResume() {
     super.onResume();
-    new UpdateContactTask().execute(mData.number.toString(), mData.countryIso);
+    new UpdateContactTask().execute(mData.number, mData.countryIso);
   }
 
   private void updateData() {
-    mNumber = mData.number.toString();
+    mNumber = mData.number;
 
     // Cache the details about the phone number.
     boolean canPlaceCallsTo = PhoneNumberHelper.canPlaceCallsTo(mNumber, mData.numberPresentation);

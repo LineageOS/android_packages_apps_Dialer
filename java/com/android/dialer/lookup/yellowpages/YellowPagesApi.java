@@ -16,7 +16,6 @@
 
 package com.android.dialer.lookup.yellowpages;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.dialer.lookup.LookupUtils;

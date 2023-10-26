@@ -21,10 +21,6 @@ import android.provider.CallLog.Calls;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /** The query for the call log table. */
 public final class CallLogQuery {
 

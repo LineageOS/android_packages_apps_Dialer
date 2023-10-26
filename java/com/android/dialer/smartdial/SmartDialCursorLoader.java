@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -229,14 +230,14 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
       final List<String> projectionList =
           new ArrayList<>(Arrays.asList(PROJECTION_PRIMARY_INTERNAL));
       projectionList.add(Phone.CARRIER_PRESENCE); // 9
-      PROJECTION_PRIMARY = projectionList.toArray(new String[projectionList.size()]);
+      PROJECTION_PRIMARY = projectionList.toArray(new String[0]);
     }
 
     static {
       final List<String> projectionList =
           new ArrayList<>(Arrays.asList(PROJECTION_ALTERNATIVE_INTERNAL));
       projectionList.add(Phone.CARRIER_PRESENCE); // 9
-      PROJECTION_ALTERNATIVE = projectionList.toArray(new String[projectionList.size()]);
+      PROJECTION_ALTERNATIVE = projectionList.toArray(new String[0]);
     }
   }
 }

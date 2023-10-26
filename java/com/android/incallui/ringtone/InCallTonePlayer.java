@@ -107,15 +107,8 @@ public class InCallTonePlayer {
       Log.v(this, "Starting tone " + info);
       toneGenerator = toneGeneratorFactory.newInCallToneGenerator(info.stream, info.volume);
       toneGenerator.startTone(info.tone);
-      /*
-       * During tests, this will block until the tests call mExecutor.ackMilestone. This call
-       * allows for synchronization to the point where the tone has started playing.
-       */
-      executor.milestone();
       if (numPlayingTones != null) {
         numPlayingTones.await(info.toneLengthMillis, TimeUnit.MILLISECONDS);
-        // Allows for synchronization to the point where the tone has completed playing.
-        executor.milestone();
       }
     } catch (InterruptedException e) {
       Log.w(this, "Interrupted while playing in-call tone.");
@@ -126,8 +119,6 @@ public class InCallTonePlayer {
       if (numPlayingTones != null) {
         numPlayingTones.countDown();
       }
-      // Allows for synchronization to the point where this background thread has cleaned up.
-      executor.milestone();
     }
   }
 
