@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -48,6 +49,7 @@ import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+
 import java.util.List;
 import java.util.Set;
 
@@ -86,8 +88,8 @@ public class DisambigDialog extends DialogFragment {
   public void onResume() {
     super.onResume();
     getDialog().getWindow().setBackgroundDrawable(
-            getActivity().getResources().getDrawable(R.drawable.dialog_background,
-                    getActivity().getTheme()));
+            ResourcesCompat.getDrawable(requireActivity().getResources(),
+                    R.drawable.dialog_background, requireActivity().getTheme()));
   }
 
   @Override

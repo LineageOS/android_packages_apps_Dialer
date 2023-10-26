@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,11 +36,12 @@ import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /** A general contacts account type descriptor. */
 public class ExternalAccountType extends BaseAccountType {
@@ -153,7 +155,7 @@ public class ExternalAccountType extends BaseAccountType {
       }
     }
 
-    mExtensionPackageNames = new ArrayList<String>();
+    mExtensionPackageNames = new ArrayList<>();
     mInviteActionLabelResId =
         resolveExternalResId(
             context,
@@ -401,9 +403,7 @@ public class ExternalAccountType extends BaseAccountType {
           addKind(kind);
         }
       }
-    } catch (XmlPullParserException e) {
-      throw new DefinitionException("Problem reading XML", e);
-    } catch (IOException e) {
+    } catch (XmlPullParserException | IOException e) {
       throw new DefinitionException("Problem reading XML", e);
     }
   }

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +19,13 @@ package com.android.voicemail.impl.mail;
 import android.content.Context;
 import android.net.Network;
 import android.net.TrafficStats;
+
 import com.android.dialer.constants.TrafficStatsTags;
 import com.android.voicemail.impl.OmtpEvents;
 import com.android.voicemail.impl.imap.ImapHelper;
 import com.android.voicemail.impl.mail.store.ImapStore;
 import com.android.voicemail.impl.mail.utils.LogUtils;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -33,6 +36,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLException;
@@ -99,9 +103,9 @@ public class MailTransport {
    * SSL connection if indicated.
    */
   public void open() throws MessagingException {
-    LogUtils.d(TAG, "*** IMAP open " + host + ":" + String.valueOf(port));
+    LogUtils.d(TAG, "*** IMAP open " + host + ":" + port);
 
-    List<InetSocketAddress> socketAddresses = new ArrayList<InetSocketAddress>();
+    List<InetSocketAddress> socketAddresses = new ArrayList<>();
 
     if (network == null) {
       socketAddresses.add(new InetSocketAddress(host, port));

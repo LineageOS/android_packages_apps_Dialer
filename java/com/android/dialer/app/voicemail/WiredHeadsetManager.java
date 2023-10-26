@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+
 import com.android.dialer.common.LogUtil;
 
 /** Listens for and caches headset state. */

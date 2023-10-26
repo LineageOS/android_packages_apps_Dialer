@@ -18,11 +18,13 @@
 package com.android.voicemail.impl.utils;
 
 import android.util.ArrayMap;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 public class XmlUtils {
 
@@ -199,7 +201,7 @@ public class XmlUtils {
   }
 
   private static Object readThisPrimitiveValueXml(XmlPullParser parser, String tagName)
-      throws XmlPullParserException, java.io.IOException {
+      throws XmlPullParserException {
     try {
       if (tagName.equals("int")) {
         return Integer.parseInt(parser.getAttributeValue(null, "value"));

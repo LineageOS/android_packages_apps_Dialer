@@ -22,10 +22,10 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
+import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.state.DialerCallState;
-import com.android.incallui.InCallPresenter.InCallState;
 
 public class InCallDndHandler implements InCallPresenter.InCallStateListener {
 

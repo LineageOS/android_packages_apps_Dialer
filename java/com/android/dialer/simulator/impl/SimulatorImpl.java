@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.simulator.Simulator;
+
 import javax.inject.Inject;
 
 /** The entry point for the simulator feature. */

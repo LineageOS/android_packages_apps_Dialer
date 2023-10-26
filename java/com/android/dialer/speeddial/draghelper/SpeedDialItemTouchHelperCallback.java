@@ -17,7 +17,6 @@
 
 package com.android.dialer.speeddial.draghelper;
 
-import android.content.Context;
 import android.graphics.Canvas;
 
 import androidx.annotation.NonNull;
@@ -30,7 +29,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 public class SpeedDialItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
   private final ItemTouchHelperAdapter adapter;
-  private final Context context;
 
   // When dragged item is in removeView, onMove() and onChildDraw() are called in turn. This
   // behavior changes when dragged item entering/leaving removeView. The boolean field
@@ -38,8 +36,7 @@ public class SpeedDialItemTouchHelperCallback extends ItemTouchHelper.Callback {
   private boolean movedOverRemoveView;
   private boolean inRemoveView;
 
-  public SpeedDialItemTouchHelperCallback(Context context, ItemTouchHelperAdapter adapter) {
-    this.context = context;
+  public SpeedDialItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
     this.adapter = adapter;
   }
 
@@ -56,8 +53,8 @@ public class SpeedDialItemTouchHelperCallback extends ItemTouchHelper.Callback {
   }
 
   @Override
-  public boolean canDropOver(
-          @NonNull RecyclerView recyclerView, @NonNull ViewHolder current, @NonNull ViewHolder target) {
+  public boolean canDropOver(@NonNull RecyclerView recyclerView, @NonNull ViewHolder current,
+                             @NonNull ViewHolder target) {
     return adapter.canDropOver(target);
   }
 

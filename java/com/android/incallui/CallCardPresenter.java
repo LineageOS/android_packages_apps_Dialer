@@ -21,7 +21,6 @@ import static com.android.contacts.common.compat.CallCompat.Details.PROPERTY_ENT
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -73,6 +72,7 @@ import com.android.incallui.incall.protocol.PrimaryCallState.ButtonState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
 import com.android.incallui.videotech.utils.SessionModificationState;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -94,13 +94,6 @@ public class CallCardPresenter
    * to ensure that the correct information is announced.
    */
   private static final long ACCESSIBILITY_ANNOUNCEMENT_DELAY_MILLIS = 500;
-
-  /**
-   * Make it possible to not get location during an emergency call if the battery is too low, since
-   * doing so could trigger gps and thus potentially cause the phone to die in the middle of the
-   * call.
-   */
-  private static final long CONFIG_MIN_BATTERY_PERCENT_FOR_EMERGENCY_LOCATION_DEFAULT = 10;
 
   private final Context context;
   private final Handler handler = new Handler(Looper.getMainLooper());
@@ -504,26 +497,10 @@ public class CallCardPresenter
   }
 
   @Override
-  public void onCallStateButtonClicked() {
-    Intent broadcastIntent = Bindings.get(context).getCallStateButtonBroadcastIntent(context);
-    if (broadcastIntent != null) {
-      LogUtil.v(
-          "CallCardPresenter.onCallStateButtonClicked",
-          "sending call state button broadcast: " + broadcastIntent);
-      context.sendBroadcast(broadcastIntent, Manifest.permission.READ_PHONE_STATE);
-    }
-  }
-
-  @Override
   public void onManageConferenceClicked() {
     InCallActivity activity =
         (InCallActivity) (inCallScreen.getInCallScreenFragment().getActivity());
     activity.showConferenceFragment(true);
-  }
-
-  @Override
-  public void onShrinkAnimationComplete() {
-    InCallPresenter.getInstance().onShrinkAnimationComplete();
   }
 
   private void maybeStartSearch(DialerCall call, boolean isPrimary) {
@@ -948,7 +925,7 @@ public class CallCardPresenter
       return false;
     }
 
-    AccessibilityEvent event = AccessibilityEvent.obtain(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+    AccessibilityEvent event = new AccessibilityEvent(AccessibilityEvent.TYPE_ANNOUNCEMENT);
     inCallScreen.dispatchPopulateAccessibilityEvent(event);
     View view = inCallScreen.getInCallScreenFragment().getView();
     view.getParent().requestSendAccessibilityEvent(view, event);
@@ -1024,7 +1001,7 @@ public class CallCardPresenter
     private final boolean isPrimary;
 
     public ContactLookupCallback(CallCardPresenter callCardPresenter, boolean isPrimary) {
-      this.callCardPresenter = new WeakReference<CallCardPresenter>(callCardPresenter);
+      this.callCardPresenter = new WeakReference<>(callCardPresenter);
       this.isPrimary = isPrimary;
     }
 

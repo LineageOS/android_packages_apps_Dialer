@@ -60,6 +60,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -192,12 +193,6 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
   final CallDetailsAdapterCommon getAdapter() {
     return adapter;
-  }
-
-  @Override
-  @CallSuper
-  public void onBackPressed() {
-    super.onBackPressed();
   }
 
   @MainThread

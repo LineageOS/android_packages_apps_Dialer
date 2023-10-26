@@ -64,13 +64,13 @@ import com.android.incallui.bindings.PhoneNumberService;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Class responsible for querying Contact Information for DialerCall objects. Can perform

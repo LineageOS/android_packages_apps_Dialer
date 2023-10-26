@@ -20,7 +20,6 @@ package com.android.dialer.voicemail.settings;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,6 +55,7 @@ import com.android.voicemail.PinChanger.ChangePinResult;
 import com.android.voicemail.PinChanger.PinSpecification;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
+
 import java.lang.ref.WeakReference;
 
 /**

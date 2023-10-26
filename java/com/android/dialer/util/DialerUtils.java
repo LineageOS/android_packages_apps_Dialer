@@ -20,8 +20,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Point;
@@ -40,6 +38,7 @@ import androidx.annotation.ColorInt;
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
+
 import java.util.Iterator;
 
 /** General purpose utility methods for the Dialer. */

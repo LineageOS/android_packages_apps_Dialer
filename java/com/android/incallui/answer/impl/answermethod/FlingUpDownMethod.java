@@ -60,7 +60,8 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.MathUtil;
 import com.android.dialer.util.DrawableConverter;
 import com.android.dialer.util.ViewUtil;
-import com.android.incallui.answer.impl.answermethod.FlingUpDownTouchHandler.OnProgressChangedListener;
+import com.android.incallui.answer.impl.answermethod.FlingUpDownTouchHandler.
+        OnProgressChangedListener;
 import com.android.incallui.answer.impl.classifier.FalsingManager;
 import com.android.incallui.answer.impl.hint.AnswerHint;
 import com.android.incallui.answer.impl.hint.EmptyAnswerHint;

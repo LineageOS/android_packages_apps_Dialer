@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +24,7 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
+
 import java.util.Optional;
 
 /** Identifies a carrier. */

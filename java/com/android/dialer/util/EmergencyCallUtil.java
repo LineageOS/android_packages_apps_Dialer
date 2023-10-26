@@ -56,7 +56,7 @@ public class EmergencyCallUtil {
       return false;
     }
 
-    Long lastEmergencyCallTime = getLastEmergencyCallTimeMillis(context);
+    long lastEmergencyCallTime = getLastEmergencyCallTimeMillis(context);
     if (lastEmergencyCallTime == 0) {
       return false;
     }

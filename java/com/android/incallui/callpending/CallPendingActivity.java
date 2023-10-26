@@ -44,6 +44,7 @@ import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -212,12 +213,6 @@ public class CallPendingActivity extends FragmentActivity
           public void onInCallButtonUiUnready() {}
 
           @Override
-          public void onSaveInstanceState(Bundle outState) {}
-
-          @Override
-          public void onRestoreInstanceState(Bundle savedInstanceState) {}
-
-          @Override
           public void addCallClicked() {}
 
           @Override
@@ -306,13 +301,7 @@ public class CallPendingActivity extends FragmentActivity
           public void onSecondaryInfoClicked() {}
 
           @Override
-          public void onCallStateButtonClicked() {}
-
-          @Override
           public void onManageConferenceClicked() {}
-
-          @Override
-          public void onShrinkAnimationComplete() {}
 
           @Override
           public void onInCallScreenResumed() {}

@@ -17,8 +17,8 @@
 
 package com.android.dialer.telecom;
 
-import android.app.role.RoleManager;
 import android.Manifest.permission;
+import android.app.role.RoleManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +42,7 @@ import androidx.core.content.ContextCompat;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.common.base.Optional;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

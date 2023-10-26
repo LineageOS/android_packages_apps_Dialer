@@ -36,6 +36,7 @@ import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
 import com.android.dialer.lettertile.LetterTileDrawable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

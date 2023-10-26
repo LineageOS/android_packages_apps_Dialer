@@ -16,6 +16,7 @@
  */
 package com.android.voicemail.impl;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,7 +39,9 @@ import com.android.voicemail.VoicemailVersionConstants;
 import com.android.voicemail.impl.configui.VoicemailSecretCodeActivity;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.sync.VvmAccountManager;
+
 import java.util.List;
+
 import javax.inject.Inject;
 
 /**
@@ -154,6 +157,7 @@ public class VoicemailClientImpl implements VoicemailClient {
     return new PinChangerImpl(context, phoneAccountHandle);
   }
 
+  @SuppressLint("MissingPermission")
   @Override
   public void appendOmtpVoicemailSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs) {
@@ -185,6 +189,7 @@ public class VoicemailClientImpl implements VoicemailClient {
     }
   }
 
+  @SuppressLint("MissingPermission")
   @Override
   public void appendOmtpVoicemailStatusSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs) {

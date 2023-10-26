@@ -70,10 +70,8 @@ public class CallStatsFragment extends Fragment implements
 
   private RecyclerView mRecyclerView;
   private EmptyContentView mEmptyListView;
-  private LinearLayoutManager mLayoutManager;
   private CallStatsAdapter mAdapter;
   private CallStatsQueryHandler mCallStatsQueryHandler;
-  private FilterSpinnerHelper mFilterHelper;
 
   private TextView mSumHeaderView;
   private TextView mDateFilterView;
@@ -103,7 +101,7 @@ public class CallStatsFragment extends Fragment implements
   public void onCreate(Bundle state) {
     super.onCreate(state);
 
-    final ContentResolver cr = getActivity().getContentResolver();
+    final ContentResolver cr = requireActivity().getContentResolver();
     mCallStatsQueryHandler = new CallStatsQueryHandler(cr, this);
     cr.registerContentObserver(CallLog.CONTENT_URI, true, mObserver);
     cr.registerContentObserver(ContactsContract.Contacts.CONTENT_URI, true, mObserver);
@@ -113,7 +111,7 @@ public class CallStatsFragment extends Fragment implements
     ExpirableCacheHeadlessFragment cacheFragment =
         ExpirableCacheHeadlessFragment.attach((AppCompatActivity) getActivity());
     mAdapter = new CallStatsAdapter(getActivity(),
-        ContactsComponent.get(getActivity()).contactDisplayPreferences(),
+        ContactsComponent.get(requireActivity()).contactDisplayPreferences(),
         cacheFragment.getRetainedCache());
   }
 
@@ -121,16 +119,16 @@ public class CallStatsFragment extends Fragment implements
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
     View view = inflater.inflate(R.layout.call_stats_fragment, container, false);
 
-    mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+    mRecyclerView = view.findViewById(R.id.recycler_view);
     mRecyclerView.setHasFixedSize(true);
-    mLayoutManager = new LinearLayoutManager(getActivity());
-    mRecyclerView.setLayoutManager(mLayoutManager);
-    mEmptyListView = (EmptyContentView) view.findViewById(R.id.empty_list_view);
+    LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+    mRecyclerView.setLayoutManager(layoutManager);
+    mEmptyListView = view.findViewById(R.id.empty_list_view);
     mEmptyListView.setImage(R.drawable.empty_call_log);
     mEmptyListView.setActionClickedListener(this);
 
-    mSumHeaderView = (TextView) view.findViewById(R.id.sum_header);
-    mDateFilterView = (TextView) view.findViewById(R.id.date_filter);
+    mSumHeaderView = view.findViewById(R.id.sum_header);
+    mDateFilterView = view.findViewById(R.id.date_filter);
 
     return view;
   }
@@ -139,7 +137,6 @@ public class CallStatsFragment extends Fragment implements
   public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     mRecyclerView.setAdapter(mAdapter);
-    mFilterHelper = new FilterSpinnerHelper(view, false, this);
     updateEmptyVisibilityAndMessage();
   }
 
@@ -163,30 +160,22 @@ public class CallStatsFragment extends Fragment implements
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     final int itemId = item.getItemId();
-    switch (itemId) {
-      case R.id.date_filter: {
-        final DoubleDatePickerDialog.Fragment fragment =
-            new DoubleDatePickerDialog.Fragment();
-        fragment.setArguments(
-            DoubleDatePickerDialog.Fragment.createArguments(mFilterFrom, mFilterTo));
-        fragment.show(getParentFragmentManager(), "filter");
-        break;
-      }
-      case R.id.reset_date_filter: {
-        mFilterFrom = -1;
-        mFilterTo = -1;
-        fetchCalls();
-        updateEmptyVisibilityAndMessage();
-        getActivity().invalidateOptionsMenu();
-        break;
-      }
-      case R.id.sort_by_duration:
-      case R.id.sort_by_count: {
-        mSortByDuration = itemId == R.id.sort_by_duration;
-        mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
-        getActivity().invalidateOptionsMenu();
-        break;
-      }
+    if (itemId == R.id.date_filter) {
+      final DoubleDatePickerDialog.Fragment fragment =
+              new DoubleDatePickerDialog.Fragment();
+      fragment.setArguments(
+              DoubleDatePickerDialog.Fragment.createArguments(mFilterFrom, mFilterTo));
+      fragment.show(getParentFragmentManager(), "filter");
+    } else if (itemId == R.id.reset_date_filter) {
+      mFilterFrom = -1;
+      mFilterTo = -1;
+      fetchCalls();
+      updateEmptyVisibilityAndMessage();
+      requireActivity().invalidateOptionsMenu();
+    } else if (itemId == R.id.sort_by_duration || itemId == R.id.sort_by_count) {
+      mSortByDuration = itemId == R.id.sort_by_duration;
+      mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
+      requireActivity().invalidateOptionsMenu();
     }
     return true;
   }
@@ -218,7 +207,7 @@ public class CallStatsFragment extends Fragment implements
   public void onDateSet(long from, long to) {
     mFilterFrom = from;
     mFilterTo = to;
-    getActivity().invalidateOptionsMenu();
+    requireActivity().invalidateOptionsMenu();
     fetchCalls();
     updateEmptyVisibilityAndMessage();
   }

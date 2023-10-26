@@ -30,7 +30,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
-import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogOptions;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
@@ -42,7 +41,9 @@ import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.preferredsim.PreferredAccountWorker;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
+
 import java.util.List;
+
 import javax.inject.Inject;
 
 /** PreCallAction to select which phone account to call with. Ignored if there's only one account */
@@ -180,7 +181,8 @@ public class CallingAccountSelector implements PreCallAction {
                 pendingAction,
                 new PreferredAccountRecorder(number, suggestion, dataId)));
     selectPhoneAccountDialogFragment.show(
-        ((FragmentActivity) coordinator.getActivity()).getSupportFragmentManager(), TAG_CALLING_ACCOUNT_SELECTOR);
+        ((FragmentActivity) coordinator.getActivity()).getSupportFragmentManager(),
+            TAG_CALLING_ACCOUNT_SELECTOR);
   }
 
   @MainThread
@@ -192,7 +194,8 @@ public class CallingAccountSelector implements PreCallAction {
     }
   }
 
-  private class SelectedListener extends SelectPhoneAccountListener {
+  private class SelectedListener extends
+          SelectPhoneAccountDialogFragment.SelectPhoneAccountListener {
 
     private final PreCallCoordinator coordinator;
     private final PreCallCoordinator.PendingAction listener;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +16,12 @@
  */
 package com.android.dialer.calllogutils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.provider.CallLog;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,8 +29,8 @@ import android.widget.Spinner;
 
 import com.android.dialer.R;
 import com.android.dialer.util.PermissionsUtil;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class FilterSpinnerHelper implements AdapterView.OnItemSelectedListener {
   private static final String TAG = FilterSpinnerHelper.class.getSimpleName();
@@ -82,6 +83,7 @@ public class FilterSpinnerHelper implements AdapterView.OnItemSelectedListener {
     return spinner;
   }
 
+  @SuppressLint("MissingPermission")
   private ArrayAdapter<AccountItem> createAccountAdapter(Context context) {
     ArrayList<AccountItem> items = new ArrayList<>();
     items.add(new AccountItem(null, context.getString(R.string.call_log_show_all_accounts)));
@@ -95,7 +97,7 @@ public class FilterSpinnerHelper implements AdapterView.OnItemSelectedListener {
       }
     }
 
-    return new ArrayAdapter<AccountItem>(context, R.layout.call_log_filter_spinner_item, items);
+    return new ArrayAdapter<>(context, R.layout.call_log_filter_spinner_item, items);
   }
 
   private ArrayAdapter<TypeItem> createTypeAdapter(Context context, boolean includeVoicemail) {
@@ -114,10 +116,10 @@ public class FilterSpinnerHelper implements AdapterView.OnItemSelectedListener {
           context.getString(R.string.call_log_voicemail_header)));
     }
 
-    return new ArrayAdapter<TypeItem>(context, R.layout.call_log_filter_spinner_item, items);
+    return new ArrayAdapter<>(context, R.layout.call_log_filter_spinner_item, items);
   }
 
-  private final class AccountItem {
+  private static final class AccountItem {
     public final PhoneAccountHandle account;
     public final String label;
 
@@ -132,7 +134,7 @@ public class FilterSpinnerHelper implements AdapterView.OnItemSelectedListener {
     }
   }
 
-  private final class TypeItem {
+  private static final class TypeItem {
     public final int value;
     public final String label;
 

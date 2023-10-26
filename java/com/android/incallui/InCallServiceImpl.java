@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +24,7 @@ import android.os.Trace;
 import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
+
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.CallRecorder;
@@ -71,11 +73,6 @@ public class InCallServiceImpl extends InCallService {
     Trace.beginSection("InCallServiceImpl.onCanAddCallChanged");
     InCallPresenter.getInstance().onCanAddCallChanged(canAddCall);
     Trace.endSection();
-  }
-
-  @Override
-  public void onCreate() {
-    super.onCreate();
   }
 
   @Override
