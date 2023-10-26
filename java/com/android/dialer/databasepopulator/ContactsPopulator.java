@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +17,7 @@
 
 package com.android.dialer.databasepopulator;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProviderOperation;
 import android.content.Context;
 import android.content.OperationApplicationException;
@@ -128,6 +130,7 @@ public final class ContactsPopulator {
         .build(),
   };
 
+  @SuppressLint("CheckResult")
   @WorkerThread
   public static void populateContacts(@NonNull Context context, boolean fastMode) {
     Assert.isWorkerThread();
@@ -145,29 +148,11 @@ public final class ContactsPopulator {
     try {
       context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
     } catch (RemoteException | OperationApplicationException e) {
-      Assert.fail("error adding contacts: " + e);
+      Assert.createAssertionFailException("error adding contacts: " + e);
     }
   }
 
-  @WorkerThread
-  public static void populateSpeedDialTestContacts(@NonNull Context context) {
-    Assert.isWorkerThread();
-    ArrayList<ContentProviderOperation> operations = new ArrayList<>();
-    addContact(SIMPLE_CONTACTS[0], operations);
-    addContact(SIMPLE_CONTACTS[3], operations);
-    addContact(SIMPLE_CONTACTS[5], operations);
-    try {
-      context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
-    } catch (RemoteException | OperationApplicationException e) {
-      Assert.fail("error adding contacts: " + e);
-    }
-  }
-
-  @WorkerThread
-  public static void populateContacts(@NonNull Context context) {
-    populateContacts(context, false);
-  }
-
+  @SuppressLint("CheckResult")
   @WorkerThread
   public static void deleteAllContacts(@NonNull Context context) {
     Assert.isWorkerThread();
@@ -180,7 +165,7 @@ public final class ContactsPopulator {
                   Arrays.asList(
                       ContentProviderOperation.newDelete(RawContacts.CONTENT_URI).build())));
     } catch (RemoteException | OperationApplicationException e) {
-      Assert.fail("failed to delete contacts: " + e);
+      Assert.createAssertionFailException("failed to delete contacts: " + e);
     }
   }
 

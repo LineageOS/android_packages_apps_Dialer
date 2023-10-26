@@ -195,7 +195,7 @@ public class SpeedDialFragment extends Fragment {
     recyclerView.setAdapter(adapter);
 
     // Setup drag and drop touch helper
-    ItemTouchHelper.Callback callback = new SpeedDialItemTouchHelperCallback(getContext(), adapter);
+    ItemTouchHelper.Callback callback = new SpeedDialItemTouchHelperCallback(adapter);
     ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
     touchHelper.attachToRecyclerView(recyclerView);
     adapter.setItemTouchHelper(touchHelper);

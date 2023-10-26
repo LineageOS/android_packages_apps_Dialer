@@ -82,7 +82,7 @@ import com.android.dialer.util.DrawableConverter;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
-import com.android.incallui.async.PausableExecutorImpl;
+import com.android.incallui.async.PausableExecutor;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
@@ -135,7 +135,7 @@ public class StatusBarNotifier
     this.contactInfoCache = contactInfoCache;
     dialerRingtoneManager =
         new DialerRingtoneManager(
-            new InCallTonePlayer(new ToneGeneratorFactory(), new PausableExecutorImpl()),
+            new InCallTonePlayer(new ToneGeneratorFactory(), new PausableExecutor()),
             CallList.getInstance());
     currentNotification = NOTIFICATION_NONE;
     Trace.endSection();
@@ -592,7 +592,8 @@ public class StatusBarNotifier
     }
 
     if (call.isSpam()) {
-      Drawable drawable = resources.getDrawable(R.drawable.blocked_contact, context.getTheme());
+      Drawable drawable = ResourcesCompat.getDrawable(resources, R.drawable.blocked_contact,
+              context.getTheme());
       largeIcon = DrawableConverter.drawableToBitmap(drawable);
     }
     Trace.endSection();
@@ -1027,6 +1028,7 @@ public class StatusBarNotifier
      * Responds to changes in the session modification state for the call by dismissing the status
      * bar notification as required.
      */
+    @SuppressLint("MissingPermission")
     @Override
     public void onDialerCallSessionModificationStateChange() {
       if (dialerCall.getVideoTech().getSessionModificationState()

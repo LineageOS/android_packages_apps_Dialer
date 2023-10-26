@@ -21,7 +21,7 @@ import com.android.dialer.constants.Constants;
 
 /** Contract for the PhoneLookupHistory content provider. */
 public class PhoneLookupHistoryContract {
-  public static final String AUTHORITY = Constants.get().getPhoneLookupHistoryProviderAuthority();
+  public static final String AUTHORITY = Constants.PHONE_LOOKUP_HISTORY_PROVIDER_AUTHORITY;
 
   public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 

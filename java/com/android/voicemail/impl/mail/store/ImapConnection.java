@@ -180,7 +180,7 @@ public class ImapConnection {
   }
 
   /** Logs into the IMAP server */
-  private void doLogin() throws IOException, MessagingException, AuthenticationFailedException {
+  private void doLogin() throws IOException, MessagingException {
     try {
       if (capabilities.contains(ImapConstants.CAPABILITY_AUTH_DIGEST_MD5)) {
         doDigestMd5Auth();
@@ -301,7 +301,7 @@ public class ImapConnection {
       }
     }
 
-    LogUtils.d(TAG, "Capabilities: " + capabilities.toString());
+    LogUtils.d(TAG, "Capabilities: " + capabilities);
   }
 
   private boolean hasCapability(String capability) {
@@ -380,7 +380,7 @@ public class ImapConnection {
    * @throws MessagingException
    */
   List<ImapResponse> getCommandResponses() throws IOException, MessagingException {
-    final List<ImapResponse> responses = new ArrayList<ImapResponse>();
+    final List<ImapResponse> responses = new ArrayList<>();
     ImapResponse response;
     do {
       response = parser.readResponse(false);

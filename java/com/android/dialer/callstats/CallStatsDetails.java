@@ -247,8 +247,8 @@ public class CallStatsDetails implements Parcelable {
     name = in.readString();
     numberType = in.readInt();
     numberLabel = in.readString();
-    contactUri = in.readParcelable(null);
-    photoUri = in.readParcelable(null);
+    contactUri = in.readParcelable(null, Uri.class);
+    photoUri = in.readParcelable(null, Uri.class);
     photoId = in.readLong();
     inDuration = in.readLong();
     outDuration = in.readLong();
