@@ -33,9 +33,5 @@
         android:theme="@style/AfterCallNotificationTheme">
     </activity>
 
-    <service
-        android:exported="false"
-        android:name=".SpamNotificationService"/>
-
   </application>
 </manifest>

@@ -16,6 +16,7 @@
 
 package com.android.voicemail.impl;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -37,6 +38,7 @@ public final class VvmPackageInstallHandler {
    * Iterates through all phone account and disable VVM on a account if {@code packageName} is
    * listed as a carrier VVM package.
    */
+  @SuppressLint("MissingPermission")
   public static void handlePackageInstalled(Context context) {
     // This get called every time an app is installed and will be noisy. Don't log until the app
     // is identified as a carrier VVM app.

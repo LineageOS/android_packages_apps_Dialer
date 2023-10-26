@@ -31,7 +31,6 @@ import com.android.dialer.lookup.LookupCacheService;
 import com.android.dialer.lookup.LookupProvider;
 import com.android.dialer.lookup.LookupSettings;
 import com.android.dialer.lookup.ReverseLookupService;
-import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.PhoneNumberCacheBindings;
 import com.android.dialer.phonenumbercache.PhoneNumberCacheBindingsFactory;
 import com.android.incallui.bindings.InCallUiBindings;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +17,6 @@
 
 package com.android.dialer.contactsfragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
@@ -37,7 +37,6 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
   private final TextView header;
   private final BidiTextView name;
   private final QuickContactBadge photo;
-  private final Context context;
   private final OnContactSelectedListener onContactSelectedListener;
 
   private String headerText;
@@ -47,7 +46,6 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
   ContactViewHolder(View itemView, OnContactSelectedListener onContactSelectedListener) {
     super(itemView);
     this.onContactSelectedListener = Assert.isNotNull(onContactSelectedListener);
-    context = itemView.getContext();
     itemView.findViewById(R.id.click_target).setOnClickListener(this);
     header = itemView.findViewById(R.id.header);
     name = itemView.findViewById(R.id.contact_name);

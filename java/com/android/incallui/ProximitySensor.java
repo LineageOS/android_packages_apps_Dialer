@@ -168,16 +168,6 @@ public class ProximitySensor
     accelerometerListener.enable(isDisplayOn);
   }
 
-  /**
-   * TODO: There is no way to determine if a screen is off due to proximity or if it is legitimately
-   * off, but if ever we can do that in the future, it would be useful here. Until then, this
-   * function will simply return true of the screen is off. TODO: Investigate whether this can be
-   * replaced with the ProximityDisplayListener.
-   */
-  public boolean isScreenReallyOff() {
-    return !powerManager.isScreenOn();
-  }
-
   private void turnOnProximitySensor() {
     if (proximityWakeLock != null) {
       if (!proximityWakeLock.isHeld()) {

@@ -152,7 +152,8 @@
     <provider xmlns:tools="http://schemas.android.com/tools"
         android:name="androidx.startup.InitializationProvider"
         android:authorities="${applicationId}.androidx-startup"
-        tools:replace="android:authorities" />
+        android:exported="false"
+        tools:replace="android:authorities"/>
     <meta-data android:name="supports_per_number_preferred_account" android:value="true" />
   </application>
 </manifest>

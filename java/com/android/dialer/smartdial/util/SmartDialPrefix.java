@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,8 +64,6 @@ public class SmartDialPrefix {
   /** Set of supported country codes in front of the phone number. */
   private static Set<String> countryCodes = null;
 
-  private static boolean nanpInitialized = false;
-
   /** Initializes the Nanp settings, and finds out whether user is in a NANP region. */
   public static void initializeNanpSettings(Context context) {
     final TelephonyManager manager =
@@ -86,7 +85,6 @@ public class SmartDialPrefix {
     }
     /** Queries the NANP country list to find out whether user is in a NANP region. */
     userInNanpRegion = isCountryNanp(userSimCountryCode);
-    nanpInitialized = true;
   }
 
   /**
@@ -300,7 +298,7 @@ public class SmartDialPrefix {
   }
 
   private static Set<String> initCountryCodes() {
-    final HashSet<String> result = new HashSet<String>();
+    final HashSet<String> result = new HashSet<>();
     result.add("1");
     result.add("7");
     result.add("20");
@@ -538,7 +536,7 @@ public class SmartDialPrefix {
   }
 
   private static Set<String> initNanpCountries() {
-    final HashSet<String> result = new HashSet<String>();
+    final HashSet<String> result = new HashSet<>();
     result.add("US"); // United States
     result.add("CA"); // Canada
     result.add("AS"); // American Samoa

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +17,10 @@
 
 package com.android.dialer.compat.telephony;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.Nullable;
@@ -47,10 +49,6 @@ public class TelephonyManagerCompat {
       "android.telephony.event.EVENT_NOTIFY_INTERNATIONAL_CALL_ON_WFC";
   public static final String EVENT_CALL_FORWARDED = "android.telephony.event.EVENT_CALL_FORWARDED";
 
-  public static final String TELEPHONY_MANAGER_CLASS = "android.telephony.TelephonyManager";
-
-  private static final String SECRET_CODE_ACTION = "android.provider.Telephony.SECRET_CODE";
-
   // TODO(erfanian): a bug Replace with the platform/telecom constant when available.
   /**
    * Indicates that the call being placed originated from a known contact.
@@ -63,9 +61,6 @@ public class TelephonyManagerCompat {
   /** Additional information relating to the assisted dialing transformation. */
   public static final String ASSISTED_DIALING_EXTRAS =
       "android.telecom.extra.ASSISTED_DIALING_EXTRAS";
-
-  /** Indicates the Connection/Call used assisted dialing. */
-  public static final int PROPERTY_ASSISTED_DIALING_USED = 1 << 9;
 
   public static final String EXTRA_IS_REFRESH = "android.telephony.extra.IS_REFRESH";
 
@@ -100,11 +95,12 @@ public class TelephonyManagerCompat {
   /**
    * Whether the phone supports TTY mode.
    *
-   * @param telephonyManager The telephony manager instance to use for method calls.
+   * @param telecomManager The TelecomManager manager instance to use for method calls.
    * @return {@code true} if the device supports TTY mode, and {@code false} otherwise.
    */
-  public static boolean isTtyModeSupported(@Nullable TelephonyManager telephonyManager) {
-    return telephonyManager != null && telephonyManager.isTtyModeSupported();
+  @SuppressLint("MissingPermission")
+  public static boolean isTtyModeSupported(@Nullable TelecomManager telecomManager) {
+    return telecomManager != null && telecomManager.isTtySupported();
   }
 
   /**
@@ -120,34 +116,6 @@ public class TelephonyManagerCompat {
   }
 
   /**
-   * Returns the URI for the per-account voicemail ringtone set in Phone settings.
-   *
-   * @param telephonyManager The telephony manager instance to use for method calls.
-   * @param accountHandle The handle for the {@link android.telecom.PhoneAccount} for which to
-   *     retrieve the voicemail ringtone.
-   * @return The URI for the ringtone to play when receiving a voicemail from a specific
-   *     PhoneAccount.
-   */
-  @Nullable
-  public static Uri getVoicemailRingtoneUri(
-      TelephonyManager telephonyManager, PhoneAccountHandle accountHandle) {
-    return telephonyManager.getVoicemailRingtoneUri(accountHandle);
-  }
-
-  /**
-   * Returns whether vibration is set for voicemail notification in Phone settings.
-   *
-   * @param telephonyManager The telephony manager instance to use for method calls.
-   * @param accountHandle The handle for the {@link android.telecom.PhoneAccount} for which to
-   *     retrieve the voicemail vibration setting.
-   * @return {@code true} if the vibration is set for this PhoneAccount, {@code false} otherwise.
-   */
-  public static boolean isVoicemailVibrationEnabled(
-      TelephonyManager telephonyManager, PhoneAccountHandle accountHandle) {
-    return telephonyManager.isVoicemailVibrationEnabled(accountHandle);
-  }
-
-  /**
    * This method uses a new system API to enable or disable visual voicemail. TODO(twyen): restrict
    * to N MR1, not needed in future SDK.
    */
@@ -160,23 +128,6 @@ public class TelephonyManagerCompat {
     } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
       LogUtil.e("TelephonyManagerCompat.setVisualVoicemailEnabled", "failed", e);
     }
-  }
-
-  /**
-   * This method uses a new system API to check if visual voicemail is enabled TODO(twyen): restrict
-   * to N MR1, not needed in future SDK.
-   */
-  public static boolean isVisualVoicemailEnabled(
-      TelephonyManager telephonyManager, PhoneAccountHandle handle) {
-    try {
-      return (boolean)
-          TelephonyManager.class
-              .getMethod("isVisualVoicemailEnabled", PhoneAccountHandle.class)
-              .invoke(telephonyManager, handle);
-    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-      LogUtil.e("TelephonyManagerCompat.setVisualVoicemailEnabled", "failed", e);
-    }
-    return false;
   }
 
   /**
