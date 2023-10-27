@@ -16,7 +16,6 @@
 package com.android.voicemail.impl;
 
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.persistentlog.PersistentLogger;
 import com.android.voicemail.impl.utils.IndentingPrintWriter;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -32,10 +31,6 @@ public class VvmLog {
 
   private static final LocalLog localLog = new LocalLog(MAX_OMTP_VVM_LOGS);
 
-  public static void log(String tag, String log) {
-    PersistentLogger.logText(tag, log);
-  }
-
   public static void dump(FileDescriptor fd, PrintWriter printwriter, String[] args) {
     IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printwriter, "  ");
     indentingPrintWriter.increaseIndent();
@@ -44,62 +39,50 @@ public class VvmLog {
   }
 
   public static void e(String tag, String log) {
-    log(tag, log);
     LogUtil.e(tag, log);
   }
 
   public static void e(String tag, String log, Throwable e) {
-    log(tag, log + " " + e);
     LogUtil.e(tag, log, e);
   }
 
   public static void w(String tag, String log) {
-    log(tag, log);
     LogUtil.w(tag, log);
   }
 
   public static void w(String tag, String log, Throwable e) {
-    log(tag, log + " " + e);
     LogUtil.w(tag, log, e);
   }
 
   public static void i(String tag, String log) {
-    log(tag, log);
     LogUtil.i(tag, log);
   }
 
   public static void i(String tag, String log, Throwable e) {
-    log(tag, log + " " + e);
     LogUtil.i(tag, log, e);
   }
 
   public static void d(String tag, String log) {
-    log(tag, log);
     LogUtil.d(tag, log);
   }
 
   public static void d(String tag, String log, Throwable e) {
-    log(tag, log + " " + e);
     LogUtil.d(tag, log, e);
   }
 
   public static void v(String tag, String log) {
-    log(tag, log);
     LogUtil.v(tag, log);
   }
 
   public static void v(String tag, String log, Throwable e) {
-    log(tag, log + " " + e);
     LogUtil.v(tag, log, e);
   }
 
   public static void wtf(String tag, String log) {
-    log(tag, log);
     LogUtil.e(tag, log);
   }
 
   public static void wtf(String tag, String log, Throwable e) {
-    log(tag, log + " " + e);
     LogUtil.e(tag, log, e);
   }
 
