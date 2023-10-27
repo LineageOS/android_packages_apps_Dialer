@@ -33,7 +33,6 @@ import com.android.dialer.databasepopulator.BlockedBumberPopulator;
 import com.android.dialer.databasepopulator.CallLogPopulator;
 import com.android.dialer.databasepopulator.ContactsPopulator;
 import com.android.dialer.databasepopulator.VoicemailPopulator;
-import com.android.dialer.persistentlog.PersistentLogger;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,23 +105,6 @@ public class SimulatorUtils {
     context.sendBroadcast(intent);
   }
 
-  public static void sharePersistentLog(@NonNull Context context) {
-    DialerExecutorComponent.get(context)
-        .dialerExecutorFactory()
-        .createNonUiTaskBuilder(new ShareLogWorker())
-        .onSuccess(
-            (String log) -> {
-              Intent intent = new Intent(Intent.ACTION_SEND);
-              intent.setType("text/plain");
-              intent.putExtra(Intent.EXTRA_TEXT, log);
-              if (intent.resolveActivity(context.getPackageManager()) != null) {
-                context.startActivity(intent);
-              }
-            })
-        .build()
-        .executeSerial(null);
-  }
-
   public static void addVoicemailNotifications(@NonNull Context context, int notificationNum) {
     LogUtil.enterBlock("SimulatorNotifications.addVoicemailNotifications");
     List<ContentValues> voicemails = new ArrayList<>();
@@ -184,14 +166,6 @@ public class SimulatorUtils {
     public Void doInBackground(Context context) {
       context.getContentResolver().delete(PreferredSimFallbackContract.CONTENT_URI, null, null);
       return null;
-    }
-  }
-
-  private static class ShareLogWorker implements Worker<Void, String> {
-    @Nullable
-    @Override
-    public String doInBackground(Void unused) {
-      return PersistentLogger.dumpLogToString();
     }
   }
 
