@@ -104,7 +104,6 @@ public class SimulatorMainPortal {
                     .put("Clean database", () -> SimulatorUtils.cleanDatabase(context))
                     .put("clear preferred SIM", () -> SimulatorUtils.clearPreferredSim(context))
                     .put("Sync voicemail", () -> SimulatorUtils.syncVoicemail(context))
-                    .put("Share persistent log", () -> SimulatorUtils.sharePersistentLog(context))
                     .put(
                         "Enable simulator mode",
                         () -> {
