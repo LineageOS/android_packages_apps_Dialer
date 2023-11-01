@@ -32,4 +32,6 @@
     <string name="call_via_dialog_title">Clame cun\u2026</string>
     <string name="call_log_stats_title">Statistichis</string>
     <string name="action_menu_helplines">Liniis di jutori</string>
+    <string name="default_dialer_text">Tu âs di stabilî il Tastierin telefonic come aplicazion di telefon predefinie par doprâle.</string>
+    <string name="default_dialer_action">Met come predefinide</string>
 </resources>
