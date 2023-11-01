@@ -17,13 +17,13 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="incall_category_title">Trong cuộc gọi</string>
-    <string name="incall_enable_dnd_title">Bật Đừng Làm Phiền trong khi gọi</string>
+    <string name="incall_enable_dnd_title">Bật Không Làm Phiền trong khi gọi</string>
     <string name="incall_vibrate_outgoing_title">Rung khi trả lời</string>
     <string name="incall_vibrate_call_waiting_title">Rung khi chờ cuộc gọi</string>
     <string name="incall_vibrate_hangup_title">Rung khi gác máy</string>
     <string name="incall_vibrate_45_title">Rung mỗi phút</string>
     <string name="incall_vibrate_45_summary">Rung tại giây 45 mỗi phút trong khi gọi đi</string>
-    <string name="incall_dnd_dialog_message">Để bật Đừng Làm Phiền, ứng dụng Điện thoại cần được cấp quyền để kiểm soát trạng thái Đừng Làm Phiền.\nVui lòng cho phép nó.</string>
+    <string name="incall_dnd_dialog_message">Để bật Không Làm Phiền, ứng dụng Điện thoại cần được cấp quyền để kiểm soát trạng thái Không Làm Phiền.\nVui lòng chọn cho phép.</string>
     <string name="allow">Cho phép</string>
     <string name="deny">Từ chối</string>
     <string name="call_recording_category_title">Ghi âm cuộc gọi</string>
