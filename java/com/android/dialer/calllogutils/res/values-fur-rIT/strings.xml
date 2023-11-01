@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Copyright (C) 2017 The Android Open Source Project
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~      http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License
+ -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="type_incoming">Clamade in jentrade</string>
+  <string name="type_incoming_pulled">Clamade in jentrade trasferide suntun altri dispositîf</string>
+  <string name="type_outgoing">Clamade in jessude</string>
+  <string name="type_outgoing_pulled">Clamade in jessude trasferide suntun altri dispositîf</string>
+  <string name="type_missed">Clamade pierdude</string>
+  <string name="type_incoming_video">Videoclamade in jentrade</string>
+  <string name="type_incoming_video_pulled">Videoclamade in jentrade trasferide suntun altri dispositîf</string>
+  <string name="type_outgoing_video">Videoclamade in jessude</string>
+  <string name="type_outgoing_video_pulled">Videoclamade in jessude trasferide suntun altri dispositîf</string>
+  <string name="type_missed_video">Videoclamade pierdude</string>
+  <string name="type_voicemail">Messaç in segretarie</string>
+  <string name="type_rejected">Clamadis refudadis</string>
+  <string name="type_blocked">Clamadis blocadis</string>
+  <string name="call_details_minutes_abbreviation">m</string>
+  <string name="call_details_seconds_abbreviation">s</string>
+  <string name="a11y_call_duration_format">    <xliff:g id="minutes">%1$d</xliff:g> <xliff:g id="minutes_translation">%2$s</xliff:g> e <xliff:g id="seconds">%3$d</xliff:g> <xliff:g id="seconds_translation">%4$s</xliff:g>
+  </string>
+  <string name="a11y_call_duration_short_format">    <xliff:g id="seconds">%1$d</xliff:g> <xliff:g id="seconds_translation">%2$s</xliff:g>
+  </string>
+  <string name="call_duration_format_pattern">    <xliff:g id="minutes_special_character">%1$s</xliff:g>\'<xliff:g id="minutes_translation">%2$s</xliff:g>\' <xliff:g id="seconds_special_character">%3$s</xliff:g>\'<xliff:g id="seconds_translation">%4$s</xliff:g>\'
+  </string>
+  <string name="call_duration_short_format_pattern">    <xliff:g id="seconds_special_character">%1$s</xliff:g>\'<xliff:g id="seconds_translation">%2$s</xliff:g>\'
+  </string>
+  <plurals name="a11y_seconds">
+    <item quantity="one">secont</item>
+    <item quantity="other">seconts</item>
+  </plurals>
+  <plurals name="a11y_minutes">
+    <item quantity="one">minût</item>
+    <item quantity="other">minûts</item>
+  </plurals>
+  <string name="type_answered_elsewhere">Clamade rispuindude suntun altri dispositîf</string>
+  <string name="description_phone_account">su <xliff:g example="SIM 1" id="phoneAccount">^1</xliff:g></string>
+  <string name="description_via_number">vie <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g></string>
+  <string name="description_via_number_phone_account">su <xliff:g example="SIM 1" id="phoneAccount">%1$s</xliff:g>, vie <xliff:g example="(555) 555-5555" id="number">%2$s</xliff:g></string>
+  <string name="voicemail_string">Segretarie telefoniche</string>
+  <string name="just_now">Juste cumò</string>
+  <string name="new_call_log_carrier_video">Video di operadôr</string>
+  <string name="new_call_log_duo_video">Duo video</string>
+  <string name="new_call_log_unknown">No cognossût</string>
+  <string name="new_call_log_secondary_blocked">Blocât</string>
+  <string name="new_call_log_secondary_spam">Spam</string>
+  <plurals name="a11y_new_call_log_entry_missed_call">
+    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> clamade pierdude di <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> clamadis, la ultime e je une clamade pierdude di <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_answered_call">
+    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> clamade rispuindude di <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> clamadis, la ultime e je une clamade rispuindude di <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_outgoing_call">
+    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> clamade in jessude a <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> clamadis, la ultime e je une clamade in jessude a <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_blocked_call">
+    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> clamade blocade di <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> clamadis, la ultime e je une clamade blocade di <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+  </plurals>
+  <string name="a11y_new_call_log_entry_phone_account">    su <xliff:g example="SIM 1" id="phoneAccount">^1</xliff:g>,
+    vie <xliff:g example="(555) 555-5555" id="number">^2</xliff:g>
+  </string>
+  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">    <xliff:g example="A missed call from Jane Smith" id="primaryDescriptionForEntry">^1</xliff:g>, <xliff:g example="mobile, 30 minutes ago" id="secondaryDescriptionForEntry">^2</xliff:g>.
+  </string>
+  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">    <xliff:g example="A missed call from Jane Smith" id="primaryDescriptionForEntry">^1</xliff:g>, <xliff:g example="mobile, 30 minutes ago" id="secondaryDescriptionForEntry">^2</xliff:g>, <xliff:g example="on SIM 1, via (555) 555-5555">^3</xliff:g>.
+  </string>
+</resources>

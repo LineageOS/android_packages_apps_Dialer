@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_details">Detais de clamade</string>
+  <string name="delete">Elimine</string>
+  <string name="call_details_copy_number">Copie numar</string>
+  <string name="call_details_edit_number">Modifiche il numar prime di clamâ</string>
+  <string name="call_details_report_call_id">Segnale numar imprecîs</string>
+  <string name="sent_a_photo">Mandade une foto</string>
+  <string name="received_a_photo">Ricevude une foto</string>
+  <string name="message_in_quotes">“<xliff:g id="message">%1$s</xliff:g>”</string>
+  <string name="report_caller_id_dialog_title">Segnale numar sbaliât</string>
+  <string name="report_caller_id_failed">Nol è stât pussibil segnalâ il numar</string>
+  <string name="report_caller_id_toast">Numar segnalât</string>
+  <string name="assisted_dialing_country_code_entry">Composizion assistude: codiç di paîs doprât +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g></string>
+  <string name="assisted_dialing_country_code_entry_failure">E je stade doprade la composizion assistude</string>
+  <string name="rtt_transcript_not_available">Trascrizion disponibile dome pes clamadis cun messaçs</string>
+  <string name="rtt_transcript_link">Viôt trascrizion</string>
+</resources>

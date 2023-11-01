@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">    Blocâ <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>?
+  </string>
+  <string name="block_number_confirmation_message_new_filtering">    No tu ricevarâs plui clamadis e messaçs di test di chest numar.
+  </string>
+  <string name="block_number_ok">BLOCHE</string>
+  <string name="unblock_number_ok">SBLOCHE</string>
+  <string name="block_report_number_alert_title">Blocâ <xliff:g id="number">%1$s</xliff:g>?</string>
+  <string name="block_report_number_alert_details">No tu ricevarâs plui clamadis di chest numar.</string>
+  <string name="block_number_alert_details"><xliff:g id="text">%1$s</xliff:g> Cheste clamade e vignarà segnalade tant che spam.</string>
+  <string name="unblock_number_alert_details">Chest numar al vignarà sblocât e segnalât tant che no-spam. Lis clamadis futuris no vignaran identificadis come spam.</string>
+  <string name="unblock_report_number_alert_title">Sblocâ <xliff:g id="number">%1$s</xliff:g>?</string>
+  <string name="report_not_spam_alert_button">Segnale</string>
+  <string name="report_not_spam_alert_title">Segnalâ un fal?</string>
+  <string name="report_not_spam_alert_details">Lis clamadis futuris di <xliff:g id="number">%1$s</xliff:g> no vignaran plui identificadis come spam.</string>
+  <string name="checkbox_report_as_spam_action">Segnale clamade come spam</string>
+  <string name="block_number_failed_toast">Probleme tal blocâ chest numar</string>
+  <string name="unblock_number_failed_toast">Probleme tal sblocâ chest numar</string>
+</resources>

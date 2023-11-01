@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <string name="videocall_remote_video_off">Il lôr video al è disativât</string>
+  <string name="videocall_remote_video_on">Il lôr video al è ativât</string>
+  <string name="videocall_remotely_held">Clamade in spiete</string>
+  <string name="videocall_remotely_resumed">Clamade ripiade</string>
+  <string name="videocall_charges_alert_dialog_description">Lis videoclamadis fatis midiant rêt mobile a doprin sedi dâts che minûts di vôs. Al è pussibil che a vegnin aplicâts coscj.</string>
+  <string name="do_not_show_again">No sta mostrâ plui</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_incoming_swipe_to_answer">Scor in sù par rispuindi</string>
+  <string name="call_incoming_swipe_to_reject">Scor in jù par refudâ</string>
+  <string name="a11y_incoming_call_swipe_to_answer">Scor in sù cun doi dêts par rispuindi o jù par refudâ la clamade</string>
+  <string name="call_incoming_will_disconnect">Se tu rispuindis a cheste clamade tu butarâs jù la videoclamade</string>
+  <string name="a11y_call_incoming_decline_description">Refude</string>
+  <string name="call_incoming_decline">Refude</string>
+  <string name="a11y_call_incoming_answer_description">Rispuint</string>
+  <string name="call_incoming_answer">Rispuint</string>
+</resources>

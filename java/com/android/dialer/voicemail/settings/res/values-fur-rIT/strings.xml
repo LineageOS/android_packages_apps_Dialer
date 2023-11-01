@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2017 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="voicemail_settings_with_label">Segretarie (<xliff:g example="Mock Carrier" id="subscriptionlabel">%s</xliff:g>)</string>
+  <string name="voicemail_settings_title">Segretarie</string>
+  <string name="voicemail_notifications_preference_title">Notifichis</string>
+  <string name="voicemail_change_greeting_preference_title">Messaç di salût de segretarie</string>
+  <string name="current_voicemail_greeting_record_instruction">Regjistre un salût</string>
+  <string name="current_voicemail_greeting_recording_title">Il gno messaç di salût de segretarie</string>
+  <string name="change_greeting_text">Tocje par regjistrâ</string>
+  <string name="save_button_text">Salve</string>
+  <string name="redo_button_text">Torne prove</string>
+  <string name="voicemail_advanced_settings_title">Impostazions avanzadis</string>
+  <string name="voicemail_visual_voicemail_switch_title">Segretarie visive</string>
+  <string name="voicemail_visual_voicemail_auto_archive_switch_title">Backup e memorie extra</string>
+  <string name="voicemail_set_pin_preference_title">Stabilìs PIN</string>
+  <string name="voicemail_change_pin_preference_title">Cambie PIN</string>
+  <string name="voicemail_change_pin_preference_summary_disable">La segretarie visive e scugne jessi abilitade par cambiâ il PIN</string>
+  <string name="voicemail_change_pin_preference_summary_not_activated">La segretarie visive no je ancjemò ativade, torne prove plui tart</string>
+  <string name="vm_change_pin_old_pin">PIN vecjo</string>
+  <string name="vm_change_pin_new_pin">Gnûf PIN</string>
+  <string name="vm_change_pin_progress_message">Par plasê spiete.</string>
+  <string name="vm_change_pin_error_too_short">Il gnûf PIN al è masse curt.</string>
+  <string name="vm_change_pin_error_too_long">Il gnûf PIN al è masse lunc.</string>
+  <string name="vm_change_pin_error_too_weak">Il gnûf PIN al è masse sempliç. Une password fuarte no varès di vê secuencis continuis o cifris ripetudis.</string>
+  <string name="vm_change_pin_error_mismatch">Il PIN vecjo nol corispuint.</string>
+  <string name="vm_change_pin_error_invalid">Il gnûf PIN al conten caratars no valits.</string>
+  <string name="vm_change_pin_error_system_error">Impussibil cambiâ il PIN</string>
+  <string name="change_pin_title">Cambie PIN de segretarie</string>
+  <string name="change_pin_continue_label">Continue</string>
+  <string name="change_pin_cancel_label">Anule</string>
+  <string name="change_pin_ok_label">Va ben</string>
+  <string name="change_pin_enter_old_pin_header">Conferme il PIN vecjo</string>
+  <string name="change_pin_enter_old_pin_hint">Inserìs il PIN de segretarie par continuâ.</string>
+  <string name="change_pin_enter_new_pin_header">Stabilìs un gnûf PIN</string>
+  <string name="change_pin_enter_new_pin_hint">Il PIN al à di vê di <xliff:g example="4" id="min">%1$d</xliff:g> a <xliff:g example="7" id="max">%2$d</xliff:g> cifris.</string>
+  <string name="change_pin_confirm_pin_header">Conferme il to PIN</string>
+  <string name="change_pin_confirm_pins_dont_match">I PINs no corispuindin</string>
+  <string name="change_pin_succeeded">PIN segretarie inzornât</string>
+  <string name="change_pin_system_error">Impussibil configurâ il PIN</string>
+  <string name="voicemail_visual_voicemail_transcription_switch_title">    Trascrizion de segretarie
+  </string>
+  <string name="voicemail_visual_voicemail_donation_switch_title">    Analisi de trascrizion de segretarie
+  </string>
+  <string name="voicemail_activating_summary_info">Ativazion de segretarie</string>
+  <string name="voicemail_transcription_preference_summary_info">Oten lis trascrizions de tô segretarie doprant il servizi pes trascrizions di Google. <xliff:g example="Learn more">%1$s</xliff:g></string>
+  <string name="voicemail_donate_preference_summary_info">Lasse che Google al revisioni i tiei messaçs de segretarie par miorâ la precision de trascrizion. I tiei messaçs de segretarie a vegnin memorizâts in mût anonim. <xliff:g example="Learn more">%1$s</xliff:g></string>
+  <string name="confirm_disable_voicemail_dialog_title">Disative la segretarie visive</string>
+  <string name="confirm_disable_voicemail_dialog_message">Cheste operazion e eliminarà ducj i messaçs di segretarie e lis trascrizions di Google memorizadis in cheste aplicazion. Il to operadôr al podarès tignî lis sôs copiis.</string>
+  <string name="confirm_disable_voicemail_accept_dialog_label">DISATIVE</string>
+</resources>

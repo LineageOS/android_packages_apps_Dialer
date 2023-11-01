@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Inviâ chescj tons?\n</string>
+  <string name="pause_prompt_yes">Sì</string>
+  <string name="pause_prompt_no">No</string>
+  <string name="notification_dialing">Daûr a componi</string>
+  <string name="notification_ongoing_call">Clamade in cors</string>
+  <string name="notification_ongoing_video_call">Videoclamade in cors</string>
+  <string name="notification_ongoing_paused_video_call">Videoclamade in cors \u2011 video in pause</string>
+  <string name="notification_ongoing_work_call">Clamade di lavôr in cors</string>
+  <string name="notification_ongoing_call_wifi_template"><xliff:g id="brand_name">%1$s</xliff:g> in cors</string>
+  <string name="notification_incoming_call_wifi_template"><xliff:g id="brand_name">%1$s</xliff:g> in jentrade</string>
+  <string name="notification_call_wifi_brand">Clamade Wi\u2011Fi</string>
+  <string name="notification_call_wifi_work_brand">Clamade di lavôr Wi\u2011Fi</string>
+  <string name="notification_on_hold">In spiete</string>
+  <string name="notification_incoming_call">Clamade in jentrade</string>
+  <string name="notification_incoming_video_call">Videoclamade in jentrade</string>
+  <string name="notification_incoming_call_mutli_sim">Clamade in jentrade su <xliff:g id="sim_label" example="SIM 1">%1$s</xliff:g></string>
+  <string name="notification_incoming_call_with_photo">Clamade in jentrade cun foto</string>
+  <string name="notification_incoming_call_with_message">Clamade in jentrade cun messaç</string>
+  <string name="notification_incoming_call_with_location">Clamade in jentrade cun posizion</string>
+  <string name="notification_incoming_call_with_photo_message">Clamade in jentrade cun foto e messaç</string>
+  <string name="notification_incoming_call_with_photo_location">Clamade in jentrade cun foto e posizion</string>
+  <string name="notification_incoming_call_with_message_location">Clamade in jentrade cun messaç e posizion</string>
+  <string name="notification_incoming_call_with_photo_message_location">Clamade in jentrade cun foto, messaç e posizion</string>
+  <string name="notification_incoming_call_attachments">Clamade in jentrade cun zontis</string>
+  <string name="important_notification_incoming_call">Clamade impuartante in jentrade</string>
+  <string name="important_notification_incoming_call_with_photo">Clamade impuartante in jentrade cun foto</string>
+  <string name="important_notification_incoming_call_with_message">Clamade impuartante in jentrade cun messaç</string>
+  <string name="important_notification_incoming_call_with_location">Clamade impuartante in jentrade cun posizion</string>
+  <string name="important_notification_incoming_call_with_photo_message">Clamade impuartante in jentrade cun foto e messaç</string>
+  <string name="important_notification_incoming_call_with_photo_location">Clamade impuartante cun foto e posizion</string>
+  <string name="important_notification_incoming_call_with_message_location">Clamade impuartante cun messaç e posizion</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Clamade impuartante cun foto, messaç e posizion</string>
+  <string name="important_notification_incoming_call_attachments">Clamade impuartante in jentrade cun zontis</string>
+  <string name="notification_incoming_work_call">Clamade di lavôr in jentrade</string>
+  <string name="notification_incoming_spam_call">Suspiet di clamade di spam in jentrade</string>
+  <string name="notification_requesting_video_call">Richieste video in jentrade</string>
+  <string name="notification_action_answer">Rispuint</string>
+  <string name="notification_action_end_call"> Bute jù</string>
+  <string name="notification_action_answer_video">Video</string>
+  <string name="notification_action_accept">Acete</string>
+  <string name="notification_action_dismiss">Refude</string>
+  <string name="notification_action_speaker_on">Ative la casse amplifcade</string>
+  <string name="notification_action_speaker_off">Disative casse amplificade</string>
+  <string name="notification_external_call">Clamade in cors suntun altri dispositîf</string>
+  <string name="notification_external_video_call">Videoclamade in cors suntun altri dispositîf</string>
+  <string name="notification_take_call">Cjape la clamade</string>
+  <string name="notification_take_video_call">Cjape la videoclamade</string>
+  <string name="incall_error_supp_service_unknown">Servizi no supuartât.</string>
+  <string name="goPrivate">va in privât</string>
+  <string name="manageConferenceLabel" tools:ignore="UnusedResources">Gjestìs conference telefoniche</string>
+  <string name="child_number">midiant <xliff:g example="650-555-1212" id="child_number">%s</xliff:g></string>
+  <string name="callFailed_simError">Nissune SIM o erôr de SIM</string>
+  <string name="conference_caller_disconnect_content_description">Bute jù la clamade</string>
+  <string name="conference_call_name">Conference telefoniche</string>
+  <string name="generic_conference_call_name">In clamade</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Daûr a continuâ la clamade doprant i dâts mobii\u2026</string>
+  <string name="video_call_lte_to_wifi_failed_title">Nol è stât pussibil passâ ae rêt Wi\u2011Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message">La videoclamade e restarà su la rêt mobile. A podaressin
+    vignî aplicâts coscj standard pai dâts.
+  </string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">No sta mostrâ plui</string>
+  <string name="bubble_return_to_call">Torne ae clamade</string>
+  <string name="rtt_request_dialog_title">Unîsi ae clamade cun test in timp reâl?</string>
+  <string name="rtt_request_dialog_details"><xliff:g id="caller">%1$s</xliff:g> al desidere doprâ messaçs dentri de tô clamade vocâl.</string>
+  <string name="rtt_request_dialog_more_information">RTT (test in timp reâl) al jude i interlocutôrs sorts, che a fasin fadie a sintî, che a àn mancjancis tal fevelâ o che a àn bisugne di alc in plui rispiet ae sole vôs.</string>
+  <string name="rtt_button_decline_request">No graciis</string>
+  <string name="rtt_button_accept_request">Unissiti al RTT</string>
+</resources>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="applicationLabel" tools:ignore="UnusedResources">Telefon</string>
+  <string name="launcherDialpadActivityLabel">Tastiere dal telefon</string>
+  <string name="callHistoryIconLabel" tools:ignore="UnusedResources">Cronologjie clamadis</string>
+  <string name="action_copy_number_text">Copie numar</string>
+  <string name="copy_transcript_text">Copie trascrizion</string>
+  <string name="action_edit_number_before_call">Modifiche il numar prime di clamâ</string>
+  <string name="call_log_delete_all">Nete la cronologjie des clamadis</string>
+  <string name="call_log_trash_voicemail">Elimine messaç te segretarie</string>
+  <string name="snackbar_voicemail_deleted">Messaç de segretarie eliminât</string>
+  <string name="clearCallLogConfirmation_title">Netâ la cronologjie des clamadis?</string>
+  <string name="clearCallLogConfirmation">Chest al eliminarà dutis lis clamadis de tô cronologjie</string>
+  <string name="clearCallLogProgress_title">Netisie cronologjie clamadis\u2026</string>
+  <string name="notification_missedCallTitle">Clamade pierdude</string>
+  <string name="notification_missedWorkCallTitle">Clamade di vore pierdude</string>
+  <string name="notification_missedCallsTitle">Clamadis pierdudis</string>
+  <string name="notification_missedCallsMsg"><xliff:g id="num_missed_calls">%d</xliff:g> clamadis pierdudis</string>
+  <string name="notification_missedCall_call_back">Torne clame</string>
+  <string name="notification_missedCall_message">Mande messaç</string>
+  <string name="post_call_notification_message"><xliff:g id="name">%1$s</xliff:g>: <xliff:g id="message">%2$s</xliff:g></string>
+  <string name="notification_voicemail_text_format">Compon <xliff:g id="voicemail_number">%s</xliff:g></string>
+  <string name="notification_voicemail_no_vm_number">Numar de segretarie no cognossût</string>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one">Messaç in segretarie</item>
+    <item quantity="other">            <xliff:g id="count">%1$d</xliff:g>
+            Messaçs in segretarie
+        </item>
+  </plurals>
+  <string name="notification_voicemail_callers_list"><xliff:g id="newer_callers">%1$s</xliff:g>,
+        <xliff:g id="older_caller">%2$s</xliff:g>
+    </string>
+  <string name="notification_new_voicemail_ticker">Gnûf messaç in segretarie di
+        <xliff:g id="caller">%1$s</xliff:g>
+    </string>
+  <string name="voicemail_playback_error">Impussibil riprodusi il messaç vocâl</string>
+  <string name="voicemail_fetching_content">Daûr a cjariâ i messaçs de segretarie\u2026</string>
+  <string name="voicemail_fetching_timout">Impussibil cjariâ i messaçs de segretarie</string>
+  <string name="call_log_item_count_and_date">(<xliff:g id="count">%1$d</xliff:g>)
+        <xliff:g id="date">%2$s</xliff:g>
+    </string>
+  <string name="description_playback_speakerphone">Impie o distude l\'amplificadôr pe casse</string>
+  <string name="description_playback_seek">Cîr la posizion di riproduzion</string>
+  <string name="action_menu_call_history_description">Cronologjie clamadis</string>
+  <string msgid="2295659037509008453" name="action_menu_overflow_description">Altris opzions</string>
+  <string name="action_menu_dialpad_button">tastiere telefoniche</string>
+  <string name="dialer_settings_label">Impostazions</string>
+  <string name="simulator_submenu_label">Simuladôr</string>
+  <string name="new_ui_launcher_shortcut_label">Cree gnove scurte di IU</string>
+  <string name="description_entering_bulk_action_mode">Daûr a jentrâ in modalitât azion di masse</string>
+  <string name="description_leaving_bulk_action_mode">Lassade modalitât azion di masse</string>
+  <string name="description_selecting_bulk_action_mode">Selezionât <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_unselecting_bulk_action_mode">Gjavade selezion a <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_contact_details">Detais di contat par <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_spam_contact_details">Detais di contat par suspiete clamade di spam <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> clamadis.</string>
+  <string name="description_video_call">Videoclamade.</string>
+  <string name="description_start_voice_search">Scomence ricercje vocâl</string>
+  <string name="voicemail">Segretarie telefoniche</string>
+  <string name="description_cancel_multi_select">Anule modalitât azions in tasse</string>
+  <string name="voicemailMultiSelectDeleteConfirm">Elimine</string>
+  <string name="voicemailMultiSelectDeleteCancel">Anule</string>
+  <string name="voicemailMultiSelectActionBarTitle"><xliff:g id="number">%1$s</xliff:g> selezionâts</string>
+  <plurals name="delete_voicemails_confirmation_dialog_title">
+    <item quantity="one"><b>Eliminâ chest messaç in segretarie? </b></item>
+    <item quantity="other"><b>Eliminâ chescj messaçs in segretarie? </b></item>
+  </plurals>
+  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
+  <string name="voicemailCallLogDateTimeFormat"><xliff:g example="Jul 25, 2014" id="date">%1$s</xliff:g> aes <xliff:g example="2:49 PM" id="time">%2$s</xliff:g></string>
+  <string name="voicemailDurationFormat"><xliff:g example="10" id="minutes">%1$02d</xliff:g>:<xliff:g example="20" id="seconds">%2$02d</xliff:g></string>
+  <string name="voicemailCallLogDateTimeFormatWithDuration"><xliff:g example="Jul 25, 2014 at 2:49PM" id="dateAndTime">%1$s</xliff:g> \u2022 <xliff:g example="01:22" id="duration">%2$s</xliff:g></string>
+  <string name="voice_search_not_available">Ricercje vocâl no disponibile</string>
+  <string name="dialer_hint_find_contact">Cîr contats</string>
+  <string name="block_number_search_hint">Zonte numar o cîr contats</string>
+  <string name="call_log_all_empty">La tô cronologjie des clamadis e je vueide</string>
+  <string name="call_log_all_empty_action">Fâs une clamade</string>
+  <string name="call_log_missed_empty">No tu âs clamadis pierdudis.</string>
+  <string name="call_log_voicemail_empty">La tô segretarie telefoniche e je vueide.</string>
+  <string name="call_log_activity_title" tools:ignore="UnusedResources">Cronologjie des clamadis</string>
+  <string name="call_log_all_title">Dut</string>
+  <string name="call_log_missed_title">Pierdudis</string>
+  <string name="tab_speed_dial">Composizion rapide</string>
+  <string name="tab_history">Cronologjie clamadis</string>
+  <string name="tab_all_contacts">Contats</string>
+  <string name="tab_voicemail">Segretarie telefoniche</string>
+  <string name="search_shortcut_call_number">Clame
+        <xliff:g id="number">%s</xliff:g>
+    </string>
+  <string name="search_shortcut_create_new_contact">Cree gnûf contat</string>
+  <string name="search_shortcut_add_to_contact">Zonte a un contat</string>
+  <string name="search_shortcut_send_sms_message">Invie SMS</string>
+  <string name="search_shortcut_make_video_call">Fâs videoclamade</string>
+  <string name="search_shortcut_block_number">Bloche numar</string>
+  <string name="speed_dial_empty">Nol è ancjemò nissun te tô composizion rapide</string>
+  <string name="speed_dial_empty_add_favorite_action">Zonte un preferît</string>
+  <string name="remove_contact">Gjave</string>
+  <string name="select_all">Selezione dut</string>
+  <string name="call_log_action_video_call">Videoclamade</string>
+  <string name="call_log_action_set_up_video">Configure videoclamadis</string>
+  <string name="call_log_action_invite_video">Invide ae videoclamade</string>
+  <string name="call_log_action_send_message">Mande un messaç</string>
+  <string name="call_log_action_details">Detais de clamade</string>
+  <string name="call_log_action_share_voicemail">Invie a …</string>
+  <string name="call_log_action_call">        Clame <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
+    </string>
+  <string name="description_incoming_missed_call">Clamade pierdude di <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
+  <string name="description_incoming_answered_call">Clamade rispuindude di <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
+  <string name="description_unread_voicemail">Messaç in segretarie no let che al rive di  <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
+  <string name="description_read_voicemail">Messaç di segretarie di <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
+  <string name="description_outgoing_call">Clamade a <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
+  <string name="call_log_via_number">midiant <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g></string>
+  <string name="call_log_via_number_phone_account"><xliff:g example="SIM 1" id="phoneAccount">%1$s</xliff:g> midiant <xliff:g example="(555) 555-5555" id="number">%2$s</xliff:g></string>
+  <string name="description_call_action">        Clame <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
+    </string>
+  <string name="description_video_call_action">        Video-clame <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>.
+    </string>
+  <string name="description_voicemail_action">        Scolte messaç in segretarie di <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
+    </string>
+  <string name="description_create_new_contact_action">        Cree contat par <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
+    </string>
+  <string name="description_add_to_existing_contact_action">        Zonte <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g> a un contat esistent
+    </string>
+  <string name="description_details_action">        Detais des clamadis par <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
+    </string>
+  <string name="call_log_header_today">Vuê</string>
+  <string name="call_log_header_yesterday">Îr</string>
+  <string name="call_log_header_other">Plui vieris</string>
+  <string name="voicemail_speaker_on">Ative la casse amplifcade.</string>
+  <string name="voicemail_speaker_off">Disative casse amplificade.</string>
+  <string name="voicemail_play_start_pause">Invie o met in pause la riproduzion.</string>
+  <string name="display_options_title">Opzions di visualizazion</string>
+  <string name="sounds_and_vibration_title">Suns e vibrazion</string>
+  <string name="accessibility_settings_title">Acès facilitât</string>
+  <string name="ringtone_title">Sunarie dal telefon</string>
+  <string name="vibrate_on_ring_title">Ancje vibre pes clamadis</string>
+  <string name="dtmf_tone_enable_title">Tons de tastiere</string>
+  <string name="dtmf_tone_length_title">Lungjece dal ton de tastiere</string>
+  <string-array name="dtmf_tone_length_entries">
+    <item>Normâl</item>
+    <item>Lungje</item>
+  </string-array>
+  <string name="respond_via_sms_setting_title">Rispuestis rapidis</string>
+  <string name="call_settings_label">Clamadis</string>
+  <string name="manage_blocked_numbers_label">Numars blocâts</string>
+  <string name="voicemail_settings_label">Segretarie telefoniche</string>
+  <string name="blocked_numbers_disabled_emergency_header_label">        Bloc des clamadis disativât par cumò
+    </string>
+  <string name="blocked_numbers_disabled_emergency_desc">        Il bloc des clamadis al è stât disativât parcè che cun chest telefon tu âs contatât i servizis
+        di emergjence tes ultimis 48 oris. Une volte passadis lis 48 oris al tornarà a ativâsi
+        in automatic.
+    </string>
+  <string name="import_send_to_voicemail_numbers_label">Impuarte numars</string>
+  <string name="blocked_call_settings_import_description">        Timp indaûr, midiant altris aplicazions, tu âs segnât che cualchidun al à di sei mandât in automatic ae segretarie telefoniche.
+    </string>
+  <string name="blocked_call_settings_view_numbers_button">Viôt i numars</string>
+  <string name="blocked_call_settings_import_button">Impuarte</string>
+  <string name="description_blocked_number_list_delete">Sbloche il numar</string>
+  <string name="addBlockedNumber">Zonte numar</string>
+  <string name="block_number_footer_message_vvm">        Lis clamadi di chescj numars a vignaran blocadis e i messaçs te segretarie a vignaran eliminâts in automatic.
+    </string>
+  <string name="block_number_footer_message_no_vvm">         Lis clamadis di chescj numars a vignaran blocadis, ma a podaran di istès lassâ messaçs te segretarie telefoniche.
+    </string>
+  <string name="block_list">Numars blocâts</string>
+  <string name="alreadyBlocked"><xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>
+        al è za blocât.</string>
+  <string name="phone_account_settings_label">Accounts des clamadis</string>
+  <string name="permission_no_speeddial">Par ativâ la composizion rapide, ative il permès di Contats.</string>
+  <string name="permission_no_calllog">Par viodi il to regjistri des clamadis, ative il permès di Telefon.</string>
+  <string name="permission_no_search">Par cirî i tiei contats, ative il permès di Contats.</string>
+  <string name="permission_place_call">Par fâ une clamade, ative il permès di Telefon.</string>
+  <string name="toast_cannot_write_system_settings">La aplicazion Telefon no à i permès par scrivi lis impostazions di sisteme.</string>
+  <string name="blocked_number_call_log_label">Blocât</string>
+  <string name="call_log_action_block_report_number">Bloche/segnale spam</string>
+  <string name="call_log_action_block_number">Bloche numar</string>
+  <string name="call_log_action_remove_spam">Nol è spam</string>
+  <string name="call_log_action_unblock_number">Sbloche numar</string>
+  <string name="spam_number_call_log_label">Spam</string>
+  <string name="call_composer_connection_failed">Il contat <xliff:g id="name">%1$s</xliff:g> al è fûr rêt e nol è pussibil contatâlu</string>
+  <string name="about_phone_label">Informazions</string>
+  <string name="voicemail_transcription_branding_text">Trascrite di Google</string>
+  <string name="voicemail_transcription_in_progress">Daûr a trascrivi…</string>
+  <string name="voicemail_transcription_failed">Trascrizion no disponibile.</string>
+  <string name="voicemail_transcription_failed_language_not_supported">La trascrizion no je disponibile. La lenghe no je supuartade.</string>
+  <string name="voicemail_transcription_failed_no_speech">La trascrizion no je disponibile. Nissune fevelade rilevade.</string>
+  <string name="voicemail_donation_promo_title">Judâ a miorâ la precision di trascrizion?</string>
+  <string name="voicemail_donation_promo_content">    Lasse che Google al revisioni chest e i futûrs messaçs di segretarie cu lis trascrizions.
+    A vignaran memorizadis in mût anonim. Cambie lis Impostazions cuant che tu vûs. <xliff:g example="Learn more">%1$s</xliff:g>
+  </string>
+  <string name="voicemail_donation_promo_opt_in">Sì</string>
+  <string name="voicemail_donation_promo_opt_out">No graciis</string>
+  <string name="voicemail_transcription_rating">Valute cualitât de trascrizion</string>
+  <string name="voicemail_transcription_rating_thanks">Graciis pe tô opinion</string>
+  <string name="description_rating_good">Mi plâs</string>
+  <string name="description_rating_bad">No mi plâs</string>
+  <string name="view_conversation">Visualize</string>
+  <string name="ec_data_deleted">Clamade eliminade. Visualize e elimine lis zontis condividudis dulinvie cheste clamade in Messaçs.</string>
+  <string name="multiple_ec_data_deleted">Clamadis eliminadis. Visualize e elimine lis zontis condividudis dilunc lis clamadis in Messaçs.</string>
+</resources>

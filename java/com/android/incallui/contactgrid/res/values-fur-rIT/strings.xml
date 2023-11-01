@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_calling_via_template">Daûr a clamâ vie <xliff:g id="provider_name">%s</xliff:g></string>
+  <string name="incall_calling_on_same_carrier_template">Daûr a clamâ cul stes operadôr <xliff:g id="provider_name">%s</xliff:g></string>
+  <string name="incall_calling_on_recent_choice_template">Daûr a clamâ cu la sielte resinte <xliff:g id="provider_name">%s</xliff:g></string>
+  <string name="incall_connecting">Daûr a clamâ…</string>
+  <string name="incall_connecting_assited_dialed">Daûr a clamâ doprant +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> (<xliff:g example="1" id="ad_user_home_locale">%2$s</xliff:g>)\u2026</string>
+  <string name="incall_connecting_assited_dialed_component">Daûr a doprâ +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> (<xliff:g example="1" id="ad_user_home_locale">%2$s</xliff:g>)\u2026</string>
+  <string name="incall_transferring">Daûr a trasferî…</string>
+  <string name="incall_video_call_requesting">Videoclamade dal operadôr…</string>
+  <string name="incall_wifi_video_call_requesting">Videoclamade dal operadôr Wi-Fi…</string>
+  <string name="incall_video_call_upgrade_request">Daûr a passâ al operadôr video…</string>
+  <string name="incall_video_call_request_failed">Impussibil colegâsi</string>
+  <string name="incall_video_call_request_rejected">Clamade refudade</string>
+  <string name="incall_video_call_request_timed_out">Clamade scjadude</string>
+  <string name="incall_video_call_operation_failed">Impussibil operâ</string>
+  <string name="incall_hanging_up">Daûr a butâ jù</string>
+  <string name="incall_call_ended">Clamade terminade</string>
+  <string name="incall_remotely_held">In spiete</string>
+  <string name="contact_grid_incoming_video_call">Videoclamade dal operadôr di</string>
+  <string name="contact_grid_incoming_wifi_video_call">Videoclamade dal operadôr Wi-Fi di</string>
+  <string name="contact_grid_incoming_voice_call">Clamade di</string>
+  <string name="contact_grid_incoming_work_call">Clamade di lavôr di</string>
+  <string name="contact_grid_incoming_via_template">Clamade midiant <xliff:g id="provider_name">%s</xliff:g> di</string>
+  <string name="contact_grid_incoming_suspected_spam">Suspiete clamade di spam</string>
+  <string name="contact_grid_callback_number">Chest numar di telefon: <xliff:g id="light_number">%1$s</xliff:g></string>
+</resources>
