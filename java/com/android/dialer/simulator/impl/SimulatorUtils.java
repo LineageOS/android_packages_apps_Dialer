@@ -29,7 +29,6 @@ import androidx.annotation.Nullable;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.databasepopulator.BlockedBumberPopulator;
 import com.android.dialer.databasepopulator.CallLogPopulator;
 import com.android.dialer.databasepopulator.ContactsPopulator;
 import com.android.dialer.databasepopulator.VoicemailPopulator;
@@ -156,7 +155,6 @@ public class SimulatorUtils {
       ContactsPopulator.deleteAllContacts(context);
       CallLogPopulator.deleteAllCallLog(context);
       VoicemailPopulator.deleteAllVoicemail(context);
-      BlockedBumberPopulator.deleteBlockedNumbers(context);
       return null;
     }
   }
