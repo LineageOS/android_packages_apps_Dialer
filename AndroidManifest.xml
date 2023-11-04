@@ -485,7 +485,7 @@
 
         <service
             android:name="com.android.dialer.simulator.service.SimulatorService"
-            android:exported="true" />
+            android:exported="false" />
 
         <service
             android:name="com.android.dialer.simulator.impl.SimulatorConnectionService"
