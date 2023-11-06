@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fe1381c_9bee9522",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2023-11-06T10:04:15Z",
+      "side": 1,
+      "message": "The change is fine, but you as owner should also leave your CR, at least +v.",
+      "revId": "105d244af5f6b6292dc2e1bd8d5f39376d58f9ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
