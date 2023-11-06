@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b7afd67_1aabc75e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 33035
+      },
+      "writtenOn": "2023-11-06T00:35:10Z",
+      "side": 1,
+      "message": "Hi!\n\nI would appreciate if you can review my change or point me to someone that can do so.\n\nThank you in advance,\nJoaquin",
+      "revId": "6b2baa34583c9c4ddd920dcd7db5debdf50a5130",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
