@@ -106,6 +106,9 @@
     <!-- Required when the "Enable Do Not Disturb during call" setting is enabled -->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
+    <!-- Required to close the notification shade -->
+    <uses-permission android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS" />
+
     <application
         android:name="com.android.dialer.binary.aosp.AospDialerApplication"
         android:appCategory="social"
