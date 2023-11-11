@@ -141,6 +141,10 @@ public class PermissionsUtil {
     return hasPermission(context, permission.SEND_SMS);
   }
 
+  public static boolean hasBluetoothConnectPermissions(Context context) {
+    return hasPermission(context, permission.BLUETOOTH_CONNECT);
+  }
+
   public static boolean hasPermission(Context context, String permission) {
     return ContextCompat.checkSelfPermission(context, permission)
         == PackageManager.PERMISSION_GRANTED;

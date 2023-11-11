@@ -158,7 +158,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
   private TextView createBluetoothItem(BluetoothDevice bluetoothDevice, boolean selected) {
     TextView textView =
         (TextView) getLayoutInflater().inflate(R.layout.audioroute_item, null, false);
-    textView.setText(BluetoothUtil.getAliasName(bluetoothDevice));
+    textView.setText(BluetoothUtil.getAliasName(getContext(), bluetoothDevice));
     if (selected) {
       textView.setSelected(true);
     }

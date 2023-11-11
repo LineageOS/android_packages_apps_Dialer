@@ -392,7 +392,7 @@ interface ButtonController {
     }
 
     public void setAudioState(CallAudioState audioState) {
-      SpeakerButtonInfo info = new SpeakerButtonInfo(audioState);
+      SpeakerButtonInfo info = new SpeakerButtonInfo(delegate.getContext(), audioState);
 
       nonBluetoothMode = info.nonBluetoothMode;
       isChecked = info.isChecked;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +17,7 @@
 
 package com.android.incallui.speakerbuttonlogic;
 
+import android.content.Context;
 import android.telecom.CallAudioState;
 
 import androidx.annotation.DrawableRes;
@@ -50,7 +52,7 @@ public class SpeakerButtonInfo {
   public final boolean isChecked;
   public String deviceName;
 
-  public SpeakerButtonInfo(CallAudioState audioState) {
+  public SpeakerButtonInfo(Context context, CallAudioState audioState) {
     if ((audioState.getSupportedRouteMask() & CallAudioState.ROUTE_BLUETOOTH)
         == CallAudioState.ROUTE_BLUETOOTH) {
       nonBluetoothMode = false;
@@ -61,7 +63,7 @@ public class SpeakerButtonInfo {
         icon = R.drawable.volume_bluetooth;
         contentDescription = R.string.incall_content_description_bluetooth;
         label = R.string.audioroute_bluetooth;
-        deviceName = BluetoothUtil.getAliasName(audioState.getActiveBluetoothDevice());
+        deviceName = BluetoothUtil.getAliasName(context, audioState.getActiveBluetoothDevice());
       } else if ((audioState.getRoute() & CallAudioState.ROUTE_SPEAKER)
           == CallAudioState.ROUTE_SPEAKER) {
         icon = R.drawable.quantum_ic_volume_up_vd_theme_24;
