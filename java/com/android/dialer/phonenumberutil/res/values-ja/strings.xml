@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">制限されています</string>
   <string name="private_num_non_verizon">非通知設定</string>
 </resources>

@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">বিধিনিষেধযুক্ত</string>
   <string name="private_num_non_verizon">ব্যক্তিগত নম্বর</string>
 </resources>

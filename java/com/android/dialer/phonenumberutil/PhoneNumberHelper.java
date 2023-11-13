@@ -294,68 +294,6 @@ public class PhoneNumberHelper {
     return number.substring(0, delimiterIndex);
   }
 
-  private static boolean isVerizon(Context context) {
-    // Verizon MCC/MNC codes copied from com/android/voicemailomtp/res/xml/vvm_config.xml.
-    // TODO(sail): Need a better way to do per carrier and per OEM configurations.
-    switch (context.getSystemService(TelephonyManager.class).getSimOperator()) {
-      case "310004":
-      case "310010":
-      case "310012":
-      case "310013":
-      case "310590":
-      case "310890":
-      case "310910":
-      case "311110":
-      case "311270":
-      case "311271":
-      case "311272":
-      case "311273":
-      case "311274":
-      case "311275":
-      case "311276":
-      case "311277":
-      case "311278":
-      case "311279":
-      case "311280":
-      case "311281":
-      case "311282":
-      case "311283":
-      case "311284":
-      case "311285":
-      case "311286":
-      case "311287":
-      case "311288":
-      case "311289":
-      case "311390":
-      case "311480":
-      case "311481":
-      case "311482":
-      case "311483":
-      case "311484":
-      case "311485":
-      case "311486":
-      case "311487":
-      case "311488":
-      case "311489":
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  /**
-   * Gets the label to display for a phone call where the presentation is set as
-   * PRESENTATION_RESTRICTED. For Verizon we want this to be displayed as "Restricted". For all
-   * other carriers we want this to be be displayed as "Private number".
-   */
-  public static String getDisplayNameForRestrictedNumber(Context context) {
-    if (isVerizon(context)) {
-      return context.getString(R.string.private_num_verizon);
-    } else {
-      return context.getString(R.string.private_num_non_verizon);
-    }
-  }
-
   public static boolean compareSipAddresses(@Nullable String number1, @Nullable String number2) {
     if (number1 == null || number2 == null) {
       return Objects.equals(number1, number2);
