@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">受限</string>
   <string name="private_num_non_verizon">私密号码</string>
 </resources>

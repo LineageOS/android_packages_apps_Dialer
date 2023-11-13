@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">Zastrzeżone</string>
   <string name="private_num_non_verizon">Numer prywatny</string>
 </resources>
