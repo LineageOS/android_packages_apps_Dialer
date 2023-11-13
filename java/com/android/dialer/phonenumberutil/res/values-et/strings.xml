@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">Piiratud</string>
   <string name="private_num_non_verizon">Varjatud number</string>
 </resources>

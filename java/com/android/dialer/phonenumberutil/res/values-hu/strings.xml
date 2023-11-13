@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">Korlátozott</string>
   <string name="private_num_non_verizon">Magántelefonszám</string>
 </resources>
