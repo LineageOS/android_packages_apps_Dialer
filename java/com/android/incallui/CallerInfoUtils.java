@@ -206,7 +206,7 @@ public class CallerInfoUtils {
             && presentation == TelecomManager.PRESENTATION_ALLOWED)) {
       // For all special strings, change number & numberPrentation.
       if (isCnapSpecialCaseRestricted(number)) {
-        number = PhoneNumberHelper.getDisplayNameForRestrictedNumber(context).toString();
+        number = context.getString(R.string.private_num_non_verizon);
         ci.numberPresentation = TelecomManager.PRESENTATION_RESTRICTED;
       } else if (isCnapSpecialCaseUnknown(number)) {
         number = context.getString(R.string.unknown);

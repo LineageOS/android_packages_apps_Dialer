@@ -52,7 +52,7 @@ public class PhoneNumberDisplayUtil {
       return Optional.of(appContext.getResources().getString(R.string.unknown));
     }
     if (presentation == Calls.PRESENTATION_RESTRICTED) {
-      return Optional.of(PhoneNumberHelper.getDisplayNameForRestrictedNumber(appContext));
+      return Optional.of(appContext.getResources().getString(R.string.private_num_non_verizon));
     }
     if (presentation == Calls.PRESENTATION_PAYPHONE) {
       return Optional.of(appContext.getResources().getString(R.string.payphone));

@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">Begrenset</string>
   <string name="private_num_non_verizon">Skjult nummer</string>
 </resources>

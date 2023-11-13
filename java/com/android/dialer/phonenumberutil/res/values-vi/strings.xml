@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">Bị giới hạn</string>
   <string name="private_num_non_verizon">Số cá nhân</string>
 </resources>

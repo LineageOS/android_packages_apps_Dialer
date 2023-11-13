@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">제한됨</string>
   <string name="private_num_non_verizon">비공개 번호</string>
 </resources>
