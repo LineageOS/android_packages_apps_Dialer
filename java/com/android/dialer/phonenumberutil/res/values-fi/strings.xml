@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">Rajoitettu</string>
   <string name="private_num_non_verizon">Yksityinen numero</string>
 </resources>

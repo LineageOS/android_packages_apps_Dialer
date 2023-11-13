@@ -1,4 +1,3 @@
 <resources>
-  <string name="private_num_verizon">Обмежено</string>
   <string name="private_num_non_verizon">Приватний номер</string>
 </resources>

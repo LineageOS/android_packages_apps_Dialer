@@ -294,7 +294,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       return name;
     } else {
       if (presentation == TelecomManager.PRESENTATION_RESTRICTED) {
-        name = PhoneNumberHelper.getDisplayNameForRestrictedNumber(context);
+        name = context.getString(R.string.private_num_non_verizon);
       } else if (presentation == TelecomManager.PRESENTATION_PAYPHONE) {
         name = context.getString(R.string.payphone);
       }
