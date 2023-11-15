@@ -154,9 +154,9 @@ public class CallingAccountSelector implements PreCallAction {
               coordinator,
               pendingAction,
               result.getDialogOptionsBuilder().get().build(),
-              result.getDataId().orNull(),
+              result.getDataId().orElse(null),
               phoneNumber,
-              result.getSuggestion().orNull());
+              result.getSuggestion().orElse(null));
         },
         (throwable) -> {
           throw new RuntimeException(throwable);

@@ -34,7 +34,8 @@ import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.ViewUtil;
-import com.google.common.base.Optional;
+
+import java.util.Optional;
 
 /** Toolbar for {@link com.android.dialer.main.impl.MainActivity}. */
 public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemClickListener {

@@ -180,7 +180,7 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     speedDialUiItems.sort(
         (o1, o2) -> {
           if (o1.isStarred() && o2.isStarred()) {
-            return Integer.compare(o1.pinnedPosition().or(-1), o2.pinnedPosition().or(-1));
+            return Integer.compare(o1.pinnedPosition().orElse(-1), o2.pinnedPosition().orElse(-1));
           }
           return Boolean.compare(o2.isStarred(), o1.isStarred());
         });

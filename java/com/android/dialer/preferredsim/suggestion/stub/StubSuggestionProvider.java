@@ -24,7 +24,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
-import com.google.common.base.Optional;
+
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -37,7 +38,7 @@ public class StubSuggestionProvider implements SuggestionProvider {
   @WorkerThread
   @Override
   public Optional<Suggestion> getSuggestion(Context context, String number) {
-    return Optional.absent();
+    return Optional.empty();
   }
 
   @Override

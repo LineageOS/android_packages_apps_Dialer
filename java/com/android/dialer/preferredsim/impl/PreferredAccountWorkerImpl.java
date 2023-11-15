@@ -57,7 +57,6 @@ import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
 import com.android.dialer.util.PermissionsUtil;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -65,11 +64,12 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
 /** Implements {@link PreferredAccountWorker}. */
-@SuppressWarnings({"missingPermission", "Guava"})
+@SuppressWarnings("missingPermission")
 public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
 
   private final Context appContext;
@@ -116,7 +116,7 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
             .getSystemService(TelecomManager.class)
             .getDefaultOutgoingPhoneAccount(PhoneAccount.SCHEME_TEL);
     if (defaultPhoneAccount != null) {
-      return useDefaultSim(defaultPhoneAccount, candidates, dataId.orNull());
+      return useDefaultSim(defaultPhoneAccount, candidates, dataId.orElse(null));
     }
 
     Optional<Suggestion> suggestion =
@@ -124,18 +124,14 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
             .getSuggestionProvider()
             .getSuggestion(appContext, phoneNumber);
     if (suggestion.isPresent() && suggestion.get().shouldAutoSelect) {
-      return useSuggestedSim(suggestion.get(), candidates, dataId.orNull());
+      return useSuggestedSim(suggestion.get(), candidates, dataId.orElse(null));
     }
 
     Builder resultBuilder =
         Result.builder(
-            createDialogOptionsBuilder(candidates, dataId.orNull(), suggestion.orNull()));
-    if (suggestion.isPresent()) {
-      resultBuilder.setSuggestion(suggestion.get());
-    }
-    if (dataId.isPresent()) {
-      resultBuilder.setDataId(dataId.get());
-    }
+            createDialogOptionsBuilder(candidates, dataId.orElse(null), suggestion.orElse(null)));
+    suggestion.ifPresent(resultBuilder::setSuggestion);
+    dataId.ifPresent(resultBuilder::setDataId);
     return resultBuilder.build();
   }
 
@@ -221,15 +217,15 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
     Assert.isWorkerThread();
 
     if (!isPreferredSimEnabled(appContext)) {
-      return Optional.absent();
+      return Optional.empty();
     }
     if (!PermissionsUtil.hasContactsReadPermissions(appContext)) {
       LogUtil.i("PreferredAccountWorker.doInBackground", "missing READ_CONTACTS permission");
-      return Optional.absent();
+      return Optional.empty();
     }
 
     if (TextUtils.isEmpty(phoneNumber)) {
-      return Optional.absent();
+      return Optional.empty();
     }
     try (Cursor cursor =
         appContext
@@ -241,7 +237,7 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
                 null,
                 null)) {
       if (cursor == null) {
-        return Optional.absent();
+        return Optional.empty();
       }
       ImmutableSet<String> validAccountTypes = PreferredAccountUtil.getValidAccountTypes();
       String result = null;
@@ -257,11 +253,11 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
           // TODO(twyen): if there are multiple entries attempt to grab from the contact that
           // initiated the call.
           LogUtil.i("CallingAccountSelector.getDataId", "lookup result not unique, ignoring");
-          return Optional.absent();
+          return Optional.empty();
         }
         result = cursor.getString(0);
       }
-      return Optional.fromNullable(result);
+      return Optional.ofNullable(result);
     }
   }
 
@@ -270,7 +266,7 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
     Assert.isWorkerThread();
     Optional<Long> rawContactId = getRawContactId(contentResolver, dataId);
     if (!rawContactId.isPresent()) {
-      return Optional.absent();
+      return Optional.empty();
     }
     try (Cursor cursor =
         contentResolver.query(
@@ -280,9 +276,9 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
             null,
             null)) {
       if (cursor == null || !cursor.moveToFirst()) {
-        return Optional.absent();
+        return Optional.empty();
       }
-      return Optional.fromNullable(cursor.getString(0));
+      return Optional.ofNullable(cursor.getString(0));
     }
   }
 
@@ -297,7 +293,7 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
             null,
             null)) {
       if (cursor == null || !cursor.moveToFirst()) {
-        return Optional.absent();
+        return Optional.empty();
       }
       return Optional.of(cursor.getLong(0));
     }
@@ -322,10 +318,10 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
                 new String[] {dataId},
                 null)) {
       if (cursor == null) {
-        return Optional.absent();
+        return Optional.empty();
       }
       if (!cursor.moveToFirst()) {
-        return Optional.absent();
+        return Optional.empty();
       }
       return PreferredAccountUtil.getValidPhoneAccount(
           context, cursor.getString(0), cursor.getString(1));
@@ -375,7 +371,7 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
       return true;
     }
     for (ActiveCallInfo activeCall : activeCalls) {
-      if (Objects.equals(phoneAccountHandle, activeCall.phoneAccountHandle().orNull())) {
+      if (Objects.equals(phoneAccountHandle, activeCall.phoneAccountHandle().orElse(null))) {
         return true;
       }
     }
@@ -388,12 +384,12 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
 
     if (activeCalls.isEmpty()) {
       LogUtil.e("CallingAccountSelector.getActiveCallLabel", "active calls no longer exist");
-      return Optional.absent();
+      return Optional.empty();
     }
     ActiveCallInfo activeCall = activeCalls.get(0);
     if (!activeCall.phoneAccountHandle().isPresent()) {
       LogUtil.e("CallingAccountSelector.getActiveCallLabel", "active call has no phone account");
-      return Optional.absent();
+      return Optional.empty();
     }
     PhoneAccount phoneAccount =
         appContext
@@ -401,7 +397,7 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
             .getPhoneAccount(activeCall.phoneAccountHandle().get());
     if (phoneAccount == null) {
       LogUtil.e("CallingAccountSelector.getActiveCallLabel", "phone account not found");
-      return Optional.absent();
+      return Optional.empty();
     }
     return Optional.of(phoneAccount.getLabel().toString());
   }

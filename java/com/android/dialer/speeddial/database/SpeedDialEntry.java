@@ -23,10 +23,10 @@ import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
-import com.google.common.base.Optional;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Optional;
 
 /** POJO representation of database rows returned by {@link SpeedDialEntryDao}. */
 @AutoValue
@@ -61,7 +61,7 @@ public abstract class SpeedDialEntry {
   public abstract Builder toBuilder();
 
   public static Builder builder() {
-    return new AutoValue_SpeedDialEntry.Builder().setPinnedPosition(Optional.absent());
+    return new AutoValue_SpeedDialEntry.Builder().setPinnedPosition(Optional.empty());
   }
 
   /** Builder class for speed dial entry. */
