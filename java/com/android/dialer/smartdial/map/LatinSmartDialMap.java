@@ -20,10 +20,10 @@ package com.android.dialer.smartdial.map;
 import androidx.collection.SimpleArrayMap;
 
 import com.android.dialer.dialpadview.DialpadCharMappings;
-import com.google.common.base.Optional;
+
+import java.util.Optional;
 
 /** A {@link SmartDialMap} for the Latin alphabet, which is for T9 dialpad searching. */
-@SuppressWarnings("Guava")
 final class LatinSmartDialMap extends SmartDialMap {
 
   private static LatinSmartDialMap instance;
@@ -63,683 +63,372 @@ final class LatinSmartDialMap extends SmartDialMap {
 
     switch (ch) {
       case 'À':
-        return Optional.of('a');
       case 'Á':
-        return Optional.of('a');
       case 'Â':
-        return Optional.of('a');
       case 'Ã':
-        return Optional.of('a');
       case 'Ä':
-        return Optional.of('a');
       case 'Å':
-        return Optional.of('a');
-      case 'Ç':
-        return Optional.of('c');
-      case 'È':
-        return Optional.of('e');
-      case 'É':
-        return Optional.of('e');
-      case 'Ê':
-        return Optional.of('e');
-      case 'Ë':
-        return Optional.of('e');
-      case 'Ì':
-        return Optional.of('i');
-      case 'Í':
-        return Optional.of('i');
-      case 'Î':
-        return Optional.of('i');
-      case 'Ï':
-        return Optional.of('i');
-      case 'Ð':
-        return Optional.of('d');
-      case 'Ñ':
-        return Optional.of('n');
-      case 'Ò':
-        return Optional.of('o');
-      case 'Ó':
-        return Optional.of('o');
-      case 'Ô':
-        return Optional.of('o');
-      case 'Õ':
-        return Optional.of('o');
-      case 'Ö':
-        return Optional.of('o');
-      case '×':
-        return Optional.of('x');
-      case 'Ø':
-        return Optional.of('o');
-      case 'Ù':
-        return Optional.of('u');
-      case 'Ú':
-        return Optional.of('u');
-      case 'Û':
-        return Optional.of('u');
-      case 'Ü':
-        return Optional.of('u');
-      case 'Ý':
-        return Optional.of('u');
       case 'à':
-        return Optional.of('a');
       case 'á':
-        return Optional.of('a');
       case 'â':
-        return Optional.of('a');
       case 'ã':
-        return Optional.of('a');
       case 'ä':
-        return Optional.of('a');
       case 'å':
-        return Optional.of('a');
-      case 'ç':
-        return Optional.of('c');
-      case 'è':
-        return Optional.of('e');
-      case 'é':
-        return Optional.of('e');
-      case 'ê':
-        return Optional.of('e');
-      case 'ë':
-        return Optional.of('e');
-      case 'ì':
-        return Optional.of('i');
-      case 'í':
-        return Optional.of('i');
-      case 'î':
-        return Optional.of('i');
-      case 'ï':
-        return Optional.of('i');
-      case 'ð':
-        return Optional.of('d');
-      case 'ñ':
-        return Optional.of('n');
-      case 'ò':
-        return Optional.of('o');
-      case 'ó':
-        return Optional.of('o');
-      case 'ô':
-        return Optional.of('o');
-      case 'õ':
-        return Optional.of('o');
-      case 'ö':
-        return Optional.of('o');
-      case 'ø':
-        return Optional.of('o');
-      case 'ù':
-        return Optional.of('u');
-      case 'ú':
-        return Optional.of('u');
-      case 'û':
-        return Optional.of('u');
-      case 'ü':
-        return Optional.of('u');
-      case 'ý':
-        return Optional.of('y');
-      case 'ÿ':
-        return Optional.of('y');
       case 'Ā':
-        return Optional.of('a');
       case 'ā':
-        return Optional.of('a');
       case 'Ă':
-        return Optional.of('a');
       case 'ă':
-        return Optional.of('a');
       case 'Ą':
-        return Optional.of('a');
       case 'ą':
-        return Optional.of('a');
-      case 'Ć':
-        return Optional.of('c');
-      case 'ć':
-        return Optional.of('c');
-      case 'Ĉ':
-        return Optional.of('c');
-      case 'ĉ':
-        return Optional.of('c');
-      case 'Ċ':
-        return Optional.of('c');
-      case 'ċ':
-        return Optional.of('c');
-      case 'Č':
-        return Optional.of('c');
-      case 'č':
-        return Optional.of('c');
-      case 'Ď':
-        return Optional.of('d');
-      case 'ď':
-        return Optional.of('d');
-      case 'Đ':
-        return Optional.of('d');
-      case 'đ':
-        return Optional.of('d');
-      case 'Ē':
-        return Optional.of('e');
-      case 'ē':
-        return Optional.of('e');
-      case 'Ĕ':
-        return Optional.of('e');
-      case 'ĕ':
-        return Optional.of('e');
-      case 'Ė':
-        return Optional.of('e');
-      case 'ė':
-        return Optional.of('e');
-      case 'Ę':
-        return Optional.of('e');
-      case 'ę':
-        return Optional.of('e');
-      case 'Ě':
-        return Optional.of('e');
-      case 'ě':
-        return Optional.of('e');
-      case 'Ĝ':
-        return Optional.of('g');
-      case 'ĝ':
-        return Optional.of('g');
-      case 'Ğ':
-        return Optional.of('g');
-      case 'ğ':
-        return Optional.of('g');
-      case 'Ġ':
-        return Optional.of('g');
-      case 'ġ':
-        return Optional.of('g');
-      case 'Ģ':
-        return Optional.of('g');
-      case 'ģ':
-        return Optional.of('g');
-      case 'Ĥ':
-        return Optional.of('h');
-      case 'ĥ':
-        return Optional.of('h');
-      case 'Ħ':
-        return Optional.of('h');
-      case 'ħ':
-        return Optional.of('h');
-      case 'Ĩ':
-        return Optional.of('i');
-      case 'ĩ':
-        return Optional.of('i');
-      case 'Ī':
-        return Optional.of('i');
-      case 'ī':
-        return Optional.of('i');
-      case 'Ĭ':
-        return Optional.of('i');
-      case 'ĭ':
-        return Optional.of('i');
-      case 'Į':
-        return Optional.of('i');
-      case 'į':
-        return Optional.of('i');
-      case 'İ':
-        return Optional.of('i');
-      case 'ı':
-        return Optional.of('i');
-      case 'Ĵ':
-        return Optional.of('j');
-      case 'ĵ':
-        return Optional.of('j');
-      case 'Ķ':
-        return Optional.of('k');
-      case 'ķ':
-        return Optional.of('k');
-      case 'ĸ':
-        return Optional.of('k');
-      case 'Ĺ':
-        return Optional.of('l');
-      case 'ĺ':
-        return Optional.of('l');
-      case 'Ļ':
-        return Optional.of('l');
-      case 'ļ':
-        return Optional.of('l');
-      case 'Ľ':
-        return Optional.of('l');
-      case 'ľ':
-        return Optional.of('l');
-      case 'Ŀ':
-        return Optional.of('l');
-      case 'ŀ':
-        return Optional.of('l');
-      case 'Ł':
-        return Optional.of('l');
-      case 'ł':
-        return Optional.of('l');
-      case 'Ń':
-        return Optional.of('n');
-      case 'ń':
-        return Optional.of('n');
-      case 'Ņ':
-        return Optional.of('n');
-      case 'ņ':
-        return Optional.of('n');
-      case 'Ň':
-        return Optional.of('n');
-      case 'ň':
-        return Optional.of('n');
-      case 'Ō':
-        return Optional.of('o');
-      case 'ō':
-        return Optional.of('o');
-      case 'Ŏ':
-        return Optional.of('o');
-      case 'ŏ':
-        return Optional.of('o');
-      case 'Ő':
-        return Optional.of('o');
-      case 'ő':
-        return Optional.of('o');
-      case 'Ŕ':
-        return Optional.of('r');
-      case 'ŕ':
-        return Optional.of('r');
-      case 'Ŗ':
-        return Optional.of('r');
-      case 'ŗ':
-        return Optional.of('r');
-      case 'Ř':
-        return Optional.of('r');
-      case 'ř':
-        return Optional.of('r');
-      case 'Ś':
-        return Optional.of('s');
-      case 'ś':
-        return Optional.of('s');
-      case 'Ŝ':
-        return Optional.of('s');
-      case 'ŝ':
-        return Optional.of('s');
-      case 'Ş':
-        return Optional.of('s');
-      case 'ş':
-        return Optional.of('s');
-      case 'Š':
-        return Optional.of('s');
-      case 'š':
-        return Optional.of('s');
-      case 'Ţ':
-        return Optional.of('t');
-      case 'ţ':
-        return Optional.of('t');
-      case 'Ť':
-        return Optional.of('t');
-      case 'ť':
-        return Optional.of('t');
-      case 'Ŧ':
-        return Optional.of('t');
-      case 'ŧ':
-        return Optional.of('t');
-      case 'Ũ':
-        return Optional.of('u');
-      case 'ũ':
-        return Optional.of('u');
-      case 'Ū':
-        return Optional.of('u');
-      case 'ū':
-        return Optional.of('u');
-      case 'Ŭ':
-        return Optional.of('u');
-      case 'ŭ':
-        return Optional.of('u');
-      case 'Ů':
-        return Optional.of('u');
-      case 'ů':
-        return Optional.of('u');
-      case 'Ű':
-        return Optional.of('u');
-      case 'ű':
-        return Optional.of('u');
-      case 'Ų':
-        return Optional.of('u');
-      case 'ų':
-        return Optional.of('u');
-      case 'Ŵ':
-        return Optional.of('w');
-      case 'ŵ':
-        return Optional.of('w');
-      case 'Ŷ':
-        return Optional.of('y');
-      case 'ŷ':
-        return Optional.of('y');
-      case 'Ÿ':
-        return Optional.of('y');
-      case 'Ź':
-        return Optional.of('z');
-      case 'ź':
-        return Optional.of('z');
-      case 'Ż':
-        return Optional.of('z');
-      case 'ż':
-        return Optional.of('z');
-      case 'Ž':
-        return Optional.of('z');
-      case 'ž':
-        return Optional.of('z');
-      case 'ſ':
-        return Optional.of('s');
-      case 'ƀ':
-        return Optional.of('b');
-      case 'Ɓ':
-        return Optional.of('b');
-      case 'Ƃ':
-        return Optional.of('b');
-      case 'ƃ':
-        return Optional.of('b');
-      case 'Ɔ':
-        return Optional.of('o');
-      case 'Ƈ':
-        return Optional.of('c');
-      case 'ƈ':
-        return Optional.of('c');
-      case 'Ɖ':
-        return Optional.of('d');
-      case 'Ɗ':
-        return Optional.of('d');
-      case 'Ƌ':
-        return Optional.of('d');
-      case 'ƌ':
-        return Optional.of('d');
-      case 'ƍ':
-        return Optional.of('d');
-      case 'Ɛ':
-        return Optional.of('e');
-      case 'Ƒ':
-        return Optional.of('f');
-      case 'ƒ':
-        return Optional.of('f');
-      case 'Ɠ':
-        return Optional.of('g');
-      case 'Ɣ':
-        return Optional.of('g');
-      case 'Ɩ':
-        return Optional.of('i');
-      case 'Ɨ':
-        return Optional.of('i');
-      case 'Ƙ':
-        return Optional.of('k');
-      case 'ƙ':
-        return Optional.of('k');
-      case 'ƚ':
-        return Optional.of('l');
-      case 'ƛ':
-        return Optional.of('l');
-      case 'Ɯ':
-        return Optional.of('w');
-      case 'Ɲ':
-        return Optional.of('n');
-      case 'ƞ':
-        return Optional.of('n');
-      case 'Ɵ':
-        return Optional.of('o');
-      case 'Ơ':
-        return Optional.of('o');
-      case 'ơ':
-        return Optional.of('o');
-      case 'Ƥ':
-        return Optional.of('p');
-      case 'ƥ':
-        return Optional.of('p');
-      case 'ƫ':
-        return Optional.of('t');
-      case 'Ƭ':
-        return Optional.of('t');
-      case 'ƭ':
-        return Optional.of('t');
-      case 'Ʈ':
-        return Optional.of('t');
-      case 'Ư':
-        return Optional.of('u');
-      case 'ư':
-        return Optional.of('u');
-      case 'Ʊ':
-        return Optional.of('y');
-      case 'Ʋ':
-        return Optional.of('v');
-      case 'Ƴ':
-        return Optional.of('y');
-      case 'ƴ':
-        return Optional.of('y');
-      case 'Ƶ':
-        return Optional.of('z');
-      case 'ƶ':
-        return Optional.of('z');
-      case 'ƿ':
-        return Optional.of('w');
       case 'Ǎ':
-        return Optional.of('a');
       case 'ǎ':
-        return Optional.of('a');
-      case 'Ǐ':
-        return Optional.of('i');
-      case 'ǐ':
-        return Optional.of('i');
-      case 'Ǒ':
-        return Optional.of('o');
-      case 'ǒ':
-        return Optional.of('o');
-      case 'Ǔ':
-        return Optional.of('u');
-      case 'ǔ':
-        return Optional.of('u');
-      case 'Ǖ':
-        return Optional.of('u');
-      case 'ǖ':
-        return Optional.of('u');
-      case 'Ǘ':
-        return Optional.of('u');
-      case 'ǘ':
-        return Optional.of('u');
-      case 'Ǚ':
-        return Optional.of('u');
-      case 'ǚ':
-        return Optional.of('u');
-      case 'Ǜ':
-        return Optional.of('u');
-      case 'ǜ':
-        return Optional.of('u');
       case 'Ǟ':
-        return Optional.of('a');
       case 'ǟ':
-        return Optional.of('a');
       case 'Ǡ':
-        return Optional.of('a');
       case 'ǡ':
-        return Optional.of('a');
-      case 'Ǥ':
-        return Optional.of('g');
-      case 'ǥ':
-        return Optional.of('g');
-      case 'Ǧ':
-        return Optional.of('g');
-      case 'ǧ':
-        return Optional.of('g');
-      case 'Ǩ':
-        return Optional.of('k');
-      case 'ǩ':
-        return Optional.of('k');
-      case 'Ǫ':
-        return Optional.of('o');
-      case 'ǫ':
-        return Optional.of('o');
-      case 'Ǭ':
-        return Optional.of('o');
-      case 'ǭ':
-        return Optional.of('o');
-      case 'ǰ':
-        return Optional.of('j');
-      case 'ǲ':
-        return Optional.of('d');
-      case 'Ǵ':
-        return Optional.of('g');
-      case 'ǵ':
-        return Optional.of('g');
-      case 'Ƿ':
-        return Optional.of('w');
-      case 'Ǹ':
-        return Optional.of('n');
-      case 'ǹ':
-        return Optional.of('n');
       case 'Ǻ':
-        return Optional.of('a');
       case 'ǻ':
-        return Optional.of('a');
-      case 'Ǿ':
-        return Optional.of('o');
-      case 'ǿ':
-        return Optional.of('o');
       case 'Ȁ':
-        return Optional.of('a');
       case 'ȁ':
-        return Optional.of('a');
       case 'Ȃ':
-        return Optional.of('a');
       case 'ȃ':
-        return Optional.of('a');
-      case 'Ȅ':
-        return Optional.of('e');
-      case 'ȅ':
-        return Optional.of('e');
-      case 'Ȇ':
-        return Optional.of('e');
-      case 'ȇ':
-        return Optional.of('e');
-      case 'Ȉ':
-        return Optional.of('i');
-      case 'ȉ':
-        return Optional.of('i');
-      case 'Ȋ':
-        return Optional.of('i');
-      case 'ȋ':
-        return Optional.of('i');
-      case 'Ȍ':
-        return Optional.of('o');
-      case 'ȍ':
-        return Optional.of('o');
-      case 'Ȏ':
-        return Optional.of('o');
-      case 'ȏ':
-        return Optional.of('o');
-      case 'Ȑ':
-        return Optional.of('r');
-      case 'ȑ':
-        return Optional.of('r');
-      case 'Ȓ':
-        return Optional.of('r');
-      case 'ȓ':
-        return Optional.of('r');
-      case 'Ȕ':
-        return Optional.of('u');
-      case 'ȕ':
-        return Optional.of('u');
-      case 'Ȗ':
-        return Optional.of('u');
-      case 'ȗ':
-        return Optional.of('u');
-      case 'Ș':
-        return Optional.of('s');
-      case 'ș':
-        return Optional.of('s');
-      case 'Ț':
-        return Optional.of('t');
-      case 'ț':
-        return Optional.of('t');
-      case 'Ȝ':
-        return Optional.of('y');
-      case 'ȝ':
-        return Optional.of('y');
-      case 'Ȟ':
-        return Optional.of('h');
-      case 'ȟ':
-        return Optional.of('h');
-      case 'Ȥ':
-        return Optional.of('z');
-      case 'ȥ':
-        return Optional.of('z');
       case 'Ȧ':
-        return Optional.of('a');
       case 'ȧ':
-        return Optional.of('a');
-      case 'Ȩ':
-        return Optional.of('e');
-      case 'ȩ':
-        return Optional.of('e');
-      case 'Ȫ':
-        return Optional.of('o');
-      case 'ȫ':
-        return Optional.of('o');
-      case 'Ȭ':
-        return Optional.of('o');
-      case 'ȭ':
-        return Optional.of('o');
-      case 'Ȯ':
-        return Optional.of('o');
-      case 'ȯ':
-        return Optional.of('o');
-      case 'Ȱ':
-        return Optional.of('o');
-      case 'ȱ':
-        return Optional.of('o');
-      case 'Ȳ':
-        return Optional.of('y');
-      case 'ȳ':
-        return Optional.of('y');
       case 'A':
         return Optional.of('a');
+      case 'ƀ':
+      case 'Ɓ':
+      case 'Ƃ':
+      case 'ƃ':
       case 'B':
         return Optional.of('b');
+      case 'Ç':
+      case 'ç':
+      case 'Ć':
+      case 'ć':
+      case 'Ĉ':
+      case 'ĉ':
+      case 'Ċ':
+      case 'ċ':
+      case 'Č':
+      case 'č':
+      case 'Ƈ':
+      case 'ƈ':
       case 'C':
         return Optional.of('c');
+      case 'Ð':
+      case 'ð':
+      case 'Ď':
+      case 'ď':
+      case 'Đ':
+      case 'đ':
+      case 'Ɖ':
+      case 'Ɗ':
+      case 'Ƌ':
+      case 'ƌ':
+      case 'ƍ':
+      case 'ȡ':
       case 'D':
         return Optional.of('d');
+      case 'È':
+      case 'É':
+      case 'Ê':
+      case 'Ë':
+      case 'è':
+      case 'é':
+      case 'ê':
+      case 'ë':
+      case 'Ē':
+      case 'ē':
+      case 'Ĕ':
+      case 'ĕ':
+      case 'Ė':
+      case 'ė':
+      case 'Ę':
+      case 'ę':
+      case 'Ě':
+      case 'ě':
+      case 'Ɛ':
+      case 'Ȅ':
+      case 'ȅ':
+      case 'Ȇ':
+      case 'ȇ':
+      case 'Ȩ':
+      case 'ȩ':
       case 'E':
         return Optional.of('e');
+      case 'Ƒ':
+      case 'ƒ':
       case 'F':
         return Optional.of('f');
+      case 'Ĝ':
+      case 'ĝ':
+      case 'Ğ':
+      case 'ğ':
+      case 'Ġ':
+      case 'ġ':
+      case 'Ģ':
+      case 'ģ':
+      case 'Ɠ':
+      case 'Ɣ':
+      case 'Ǥ':
+      case 'ǥ':
+      case 'Ǧ':
+      case 'ǧ':
+      case 'Ǵ':
+      case 'ǵ':
       case 'G':
         return Optional.of('g');
+      case 'Ĥ':
+      case 'ĥ':
+      case 'Ħ':
+      case 'ħ':
+      case 'Ȟ':
+      case 'ȟ':
       case 'H':
         return Optional.of('h');
+      case 'Ì':
+      case 'Í':
+      case 'Î':
+      case 'Ï':
+      case 'ì':
+      case 'í':
+      case 'î':
+      case 'ï':
+      case 'Ĩ':
+      case 'ĩ':
+      case 'Ī':
+      case 'ī':
+      case 'Ĭ':
+      case 'ĭ':
+      case 'Į':
+      case 'į':
+      case 'İ':
+      case 'ı':
+      case 'Ɩ':
+      case 'Ɨ':
+      case 'Ǐ':
+      case 'ǐ':
+      case 'Ȉ':
+      case 'ȉ':
+      case 'Ȋ':
+      case 'ȋ':
       case 'I':
         return Optional.of('i');
+      case 'Ĵ':
+      case 'ĵ':
+      case 'ǰ':
       case 'J':
         return Optional.of('j');
+      case 'Ķ':
+      case 'ķ':
+      case 'ĸ':
+      case 'Ƙ':
+      case 'ƙ':
+      case 'Ǩ':
+      case 'ǩ':
       case 'K':
         return Optional.of('k');
+      case 'Ĺ':
+      case 'ĺ':
+      case 'Ļ':
+      case 'ļ':
+      case 'Ľ':
+      case 'ľ':
+      case 'Ŀ':
+      case 'ŀ':
+      case 'Ł':
+      case 'ł':
+      case 'ƚ':
+      case 'ƛ':
       case 'L':
         return Optional.of('l');
       case 'M':
         return Optional.of('m');
+      case 'Ñ':
+      case 'ñ':
+      case 'Ń':
+      case 'ń':
+      case 'Ņ':
+      case 'ņ':
+      case 'Ň':
+      case 'ň':
+      case 'Ɲ':
+      case 'ƞ':
+      case 'Ǹ':
+      case 'ǹ':
+      case 'Ƞ':
       case 'N':
         return Optional.of('n');
+      case 'Ò':
+      case 'Ó':
+      case 'Ô':
+      case 'Õ':
+      case 'Ö':
+      case 'Ø':
+      case 'ò':
+      case 'ó':
+      case 'ô':
+      case 'õ':
+      case 'ö':
+      case 'ø':
+      case 'Ō':
+      case 'ō':
+      case 'Ŏ':
+      case 'ŏ':
+      case 'Ő':
+      case 'ő':
+      case 'Ɔ':
+      case 'Ɵ':
+      case 'Ơ':
+      case 'ơ':
+      case 'Ǒ':
+      case 'ǒ':
+      case 'Ǫ':
+      case 'ǫ':
+      case 'Ǭ':
+      case 'ǭ':
+      case 'Ǿ':
+      case 'ǿ':
+      case 'Ȍ':
+      case 'ȍ':
+      case 'Ȏ':
+      case 'ȏ':
+      case 'Ȫ':
+      case 'ȫ':
+      case 'Ȭ':
+      case 'ȭ':
+      case 'Ȯ':
+      case 'ȯ':
+      case 'Ȱ':
+      case 'ȱ':
       case 'O':
         return Optional.of('o');
+      case 'Ƥ':
+      case 'ƥ':
       case 'P':
         return Optional.of('p');
       case 'Q':
         return Optional.of('q');
+      case 'Ŕ':
+      case 'ŕ':
+      case 'Ŗ':
+      case 'ŗ':
+      case 'Ř':
+      case 'ř':
+      case 'Ȑ':
+      case 'ȑ':
+      case 'Ȓ':
+      case 'ȓ':
       case 'R':
         return Optional.of('r');
+      case 'Ś':
+      case 'ś':
+      case 'Ŝ':
+      case 'ŝ':
+      case 'Ş':
+      case 'ş':
+      case 'Š':
+      case 'š':
+      case 'ſ':
+      case 'Ș':
+      case 'ș':
       case 'S':
         return Optional.of('s');
+      case 'Ţ':
+      case 'ţ':
+      case 'Ť':
+      case 'ť':
+      case 'Ŧ':
+      case 'ŧ':
+      case 'ƫ':
+      case 'Ƭ':
+      case 'ƭ':
+      case 'Ʈ':
+      case 'Ț':
+      case 'ț':
       case 'T':
         return Optional.of('t');
+      case 'Ù':
+      case 'Ú':
+      case 'Û':
+      case 'Ü':
+      case 'ù':
+      case 'ú':
+      case 'û':
+      case 'ü':
+      case 'Ũ':
+      case 'ũ':
+      case 'Ū':
+      case 'ū':
+      case 'Ŭ':
+      case 'ŭ':
+      case 'Ů':
+      case 'ů':
+      case 'Ű':
+      case 'ű':
+      case 'Ų':
+      case 'ų':
+      case 'Ư':
+      case 'ư':
+      case 'Ǔ':
+      case 'ǔ':
+      case 'Ǖ':
+      case 'ǖ':
+      case 'Ǘ':
+      case 'ǘ':
+      case 'Ǚ':
+      case 'ǚ':
+      case 'Ǜ':
+      case 'ǜ':
+      case 'Ȕ':
+      case 'ȕ':
+      case 'Ȗ':
+      case 'ȗ':
       case 'U':
         return Optional.of('u');
+      case 'Ʋ':
       case 'V':
         return Optional.of('v');
+      case 'Ŵ':
+      case 'ŵ':
+      case 'Ɯ':
+      case 'ƿ':
+      case 'Ƿ':
       case 'W':
         return Optional.of('w');
+      case '×':
       case 'X':
         return Optional.of('x');
+      case 'Ý':
+      case 'ý':
+      case 'ÿ':
+      case 'Ŷ':
+      case 'ŷ':
+      case 'Ÿ':
+      case 'Ʊ':
+      case 'Ƴ':
+      case 'ƴ':
+      case 'Ȝ':
+      case 'ȝ':
+      case 'Ȳ':
+      case 'ȳ':
       case 'Y':
         return Optional.of('y');
+      case 'Ź':
+      case 'ź':
+      case 'Ż':
+      case 'ż':
+      case 'Ž':
+      case 'ž':
+      case 'Ƶ':
+      case 'ƶ':
+      case 'Ȥ':
+      case 'ȥ':
       case 'Z':
         return Optional.of('z');
       default:
-        return Optional.absent();
+        return Optional.empty();
     }
   }
 

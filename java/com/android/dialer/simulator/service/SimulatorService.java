@@ -34,11 +34,11 @@ import android.os.RemoteException;
 import androidx.annotation.Nullable;
 
 import com.android.dialer.simulator.impl.SimulatorMainPortal;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 
 /**
  * A secured android service that gives clients simulator api access through binder if clients do
@@ -167,7 +167,7 @@ public class SimulatorService extends Service {
         return Optional.of(processInfo.processName);
       }
     }
-    return Optional.absent();
+    return Optional.empty();
   }
 
   private static boolean isCertificateValid(

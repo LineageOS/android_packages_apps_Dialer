@@ -20,7 +20,8 @@ package com.android.dialer.smartdial.map;
 import androidx.collection.SimpleArrayMap;
 
 import com.android.dialer.dialpadview.DialpadCharMappings;
-import com.google.common.base.Optional;
+
+import java.util.Optional;
 
 /** A {@link SmartDialMap} for the Ukrainian alphabet. */
 final class UkrainianSmartDialMap extends SmartDialMap {
@@ -40,7 +41,7 @@ final class UkrainianSmartDialMap extends SmartDialMap {
   @Override
   Optional<Character> normalizeCharacter(char ch) {
     ch = Character.toLowerCase(ch);
-    return isValidDialpadAlphabeticChar(ch) ? Optional.of(ch) : Optional.absent();
+    return isValidDialpadAlphabeticChar(ch) ? Optional.of(ch) : Optional.empty();
   }
 
   @Override
