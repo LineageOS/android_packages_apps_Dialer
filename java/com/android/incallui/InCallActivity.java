@@ -379,8 +379,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
           waitingForAccountCall.setPreferredAccountRecorder(
               new PreferredAccountRecorder(
                   waitingForAccountCall.getNumber(),
-                  result.getSuggestion().orNull(),
-                  result.getDataId().orNull()));
+                  result.getSuggestion().orElse(null),
+                  result.getDataId().orElse(null)));
           selectPhoneAccountDialogFragment =
               SelectPhoneAccountDialogFragment.newInstance(
                   result.getDialogOptionsBuilder().get().setCallId(callId).build(),

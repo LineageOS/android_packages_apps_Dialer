@@ -22,13 +22,13 @@ import android.telecom.PhoneAccountHandle;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogOptions;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
 import com.google.auto.value.AutoValue;
-import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.List;
+import java.util.Optional;
 
 /** Query a preferred SIM to make a call with. */
-@SuppressWarnings({"missingPermission", "Guava"})
+@SuppressWarnings("missingPermission")
 public interface PreferredAccountWorker {
 
   /** Result of the query. */

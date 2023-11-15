@@ -42,10 +42,10 @@ import com.android.dialer.telecom.TelecomUtil;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailClient.ActivationStateListener;
 import com.android.voicemail.VoicemailComponent;
-import com.google.common.base.Optional;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Optional;
 
 /**
  * Fragment for voicemail settings. Requires {@link VoicemailClient#PARAM_PHONE_ACCOUNT_HANDLE} set

@@ -52,7 +52,8 @@ import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.telecom.TelecomUtil;
-import com.google.common.base.Optional;
+
+import java.util.Optional;
 
 /**
  * Dialog that allows the user to select a phone accounts for a given action. Optionally provides
