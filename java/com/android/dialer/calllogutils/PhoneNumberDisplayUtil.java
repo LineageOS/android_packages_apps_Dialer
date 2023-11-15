@@ -25,7 +25,8 @@ import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
-import com.google.common.base.Optional;
+
+import java.util.Optional;
 
 /** Helper for formatting and managing the display of phone numbers. */
 public class PhoneNumberDisplayUtil {
@@ -57,7 +58,7 @@ public class PhoneNumberDisplayUtil {
     if (presentation == Calls.PRESENTATION_PAYPHONE) {
       return Optional.of(appContext.getResources().getString(R.string.payphone));
     }
-    return Optional.absent();
+    return Optional.empty();
   }
 
   /**

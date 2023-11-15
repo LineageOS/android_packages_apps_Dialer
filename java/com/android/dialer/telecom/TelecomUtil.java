@@ -41,19 +41,19 @@ import androidx.core.content.ContextCompat;
 
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;
-import com.google.common.base.Optional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.Optional;
 
 /**
  * Performs permission checks before calling into TelecomManager. Each method is self-explanatory -
  * perform the required check and return the fallback default if the permission is missing,
  * otherwise return the value from TelecomManager.
  */
-@SuppressWarnings({"MissingPermission", "Guava"})
+@SuppressWarnings("MissingPermission")
 public abstract class TelecomUtil {
 
   private static final String TAG = "TelecomUtil";
@@ -143,8 +143,8 @@ public abstract class TelecomUtil {
 
   public static List<PhoneAccountHandle> getCallCapablePhoneAccounts(Context context) {
     if (PermissionsUtil.hasReadPhoneStatePermissions(context)) {
-      return Optional.fromNullable(getTelecomManager(context).getCallCapablePhoneAccounts())
-          .or(new ArrayList<>());
+      return Optional.ofNullable(getTelecomManager(context).getCallCapablePhoneAccounts())
+          .orElse(new ArrayList<>());
     }
     return new ArrayList<>();
   }
@@ -196,22 +196,22 @@ public abstract class TelecomUtil {
   public static Optional<SubscriptionInfo> getSubscriptionInfo(
           @NonNull Context context, @NonNull PhoneAccountHandle phoneAccountHandle) {
     if (TextUtils.isEmpty(phoneAccountHandle.getId())) {
-      return Optional.absent();
+      return Optional.empty();
     }
     if (!PermissionsUtil.hasReadPhoneStatePermissions(context)) {
-      return Optional.absent();
+      return Optional.empty();
     }
     SubscriptionManager subscriptionManager = context.getSystemService(SubscriptionManager.class);
     List<SubscriptionInfo> subscriptionInfos = subscriptionManager.getActiveSubscriptionInfoList();
     if (subscriptionInfos == null) {
-      return Optional.absent();
+      return Optional.empty();
     }
     for (SubscriptionInfo info : subscriptionInfos) {
       if (phoneAccountHandle.getId().startsWith(info.getIccId())) {
         return Optional.of(info);
       }
     }
-    return Optional.absent();
+    return Optional.empty();
   }
 
   /**

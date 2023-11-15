@@ -26,8 +26,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.dialer.common.LogUtil;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
+
+import java.util.Optional;
 
 /**
  * Utilities for looking up and validating preferred {@link PhoneAccountHandle}. Contacts should
@@ -46,19 +47,19 @@ public class PreferredAccountUtil {
                                                                   @Nullable String idString) {
     if (TextUtils.isEmpty(componentNameString) || TextUtils.isEmpty(idString)) {
       LogUtil.i("PreferredAccountUtil.getValidPhoneAccount", "empty componentName or id");
-      return Optional.absent();
+      return Optional.empty();
     }
     ComponentName componentName = ComponentName.unflattenFromString(componentNameString);
     if (componentName == null) {
       LogUtil.e("PreferredAccountUtil.getValidPhoneAccount", "cannot parse component name");
-      return Optional.absent();
+      return Optional.empty();
     }
     PhoneAccountHandle phoneAccountHandle = new PhoneAccountHandle(componentName, idString);
 
     if (isPhoneAccountValid(context, phoneAccountHandle)) {
       return Optional.of(phoneAccountHandle);
     }
-    return Optional.absent();
+    return Optional.empty();
   }
 
   public static boolean isPhoneAccountValid(
