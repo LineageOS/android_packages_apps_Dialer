@@ -29,7 +29,8 @@ import androidx.annotation.WorkerThread;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.location.GeoUtil;
-import com.google.common.base.Optional;
+
+import java.util.Optional;
 
 /**
  * Class to provide a standard interface for obtaining information from the underlying
@@ -89,7 +90,7 @@ public class TelecomCallUtil {
     }
     String rawNumber = getNumber(call);
     if (TextUtils.isEmpty(rawNumber)) {
-      return Optional.absent();
+      return Optional.empty();
     }
     return Optional.of(PhoneNumberUtils.normalizeNumber(rawNumber));
   }
@@ -100,16 +101,16 @@ public class TelecomCallUtil {
    * GeoUtil#getCurrentCountryIso(Context)} is used.
    *
    * <p>If the number cannot be formatted (because for example it is invalid), returns {@link
-   * Optional#absent()}.
+   * Optional#empty()} ()}.
    */
   @WorkerThread
   public static Optional<String> getValidE164Number(Context appContext, Call call) {
     Assert.isWorkerThread();
     String rawNumber = getNumber(call);
     if (TextUtils.isEmpty(rawNumber)) {
-      return Optional.absent();
+      return Optional.empty();
     }
-    return Optional.fromNullable(
+    return Optional.ofNullable(
         PhoneNumberUtils.formatNumberToE164(rawNumber, GeoUtil.getCurrentCountryIso(appContext)));
   }
 }
