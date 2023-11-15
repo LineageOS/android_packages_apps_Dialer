@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,10 +27,10 @@ import androidx.annotation.WorkerThread;
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.google.common.base.Optional;
+
+import java.util.Optional;
 
 /** Provides hints to the user when selecting a SIM to make a call. */
-@SuppressWarnings("Guava")
 public interface SuggestionProvider {
 
   String EXTRA_SIM_SUGGESTION_REASON = "sim_suggestion_reason";
@@ -85,13 +86,13 @@ public interface SuggestionProvider {
   /**
    * Return the hint for {@code phoneAccountHandle}. Absent if no hint is available for the account.
    */
-  static Optional<String> getHint(
-      Context context, PhoneAccountHandle phoneAccountHandle, @Nullable Suggestion suggestion) {
+  static Optional<String> getHint(Context context, PhoneAccountHandle phoneAccountHandle,
+                                  @Nullable Suggestion suggestion) {
     if (suggestion == null) {
-      return Optional.absent();
+      return Optional.empty();
     }
     if (!phoneAccountHandle.equals(suggestion.phoneAccountHandle)) {
-      return Optional.absent();
+      return Optional.empty();
     }
     switch (suggestion.reason) {
       case INTRA_CARRIER:
@@ -101,7 +102,7 @@ public interface SuggestionProvider {
         return Optional.of(context.getString(R.string.pre_call_select_phone_account_hint_frequent));
       default:
         LogUtil.w("CallingAccountSelector.getHint", "unhandled reason " + suggestion.reason);
-        return Optional.absent();
+        return Optional.empty();
     }
   }
 }

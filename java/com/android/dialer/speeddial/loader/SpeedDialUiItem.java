@@ -34,12 +34,12 @@ import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.google.auto.value.AutoValue;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -97,7 +97,7 @@ public abstract class SpeedDialUiItem {
   public static Builder builder() {
     return new AutoValue_SpeedDialUiItem.Builder()
         .setChannels(ImmutableList.of())
-        .setPinnedPosition(Optional.absent());
+        .setPinnedPosition(Optional.empty());
   }
 
   /**

@@ -55,10 +55,10 @@ import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.common.base.Optional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Search controller for handling all the logic related to entering and exiting the search UI.
@@ -159,7 +159,7 @@ public class MainSearchController implements SearchBarListener {
 
     fab.hide();
     toolbar.slideUp(animate, fragmentContainer);
-    toolbar.expand(animate, Optional.absent(), /* requestFocus */ false);
+    toolbar.expand(animate, Optional.empty(), /* requestFocus */ false);
 
     activity.setTitle(R.string.dialpad_activity_title);
 
@@ -389,7 +389,7 @@ public class MainSearchController implements SearchBarListener {
   @Override
   public void onSearchBarClicked() {
     LogUtil.enterBlock("MainSearchController.onSearchBarClicked");
-    openSearch(Optional.absent());
+    openSearch(Optional.empty());
   }
 
   private void openSearch(Optional<String> query) {
@@ -411,8 +411,7 @@ public class MainSearchController implements SearchBarListener {
       transaction.show(searchFragment);
     }
 
-    searchFragment.setQuery(
-        query.isPresent() ? query.get() : "", CallInitiationType.Type.REGULAR_SEARCH);
+    searchFragment.setQuery(query.orElse(""), CallInitiationType.Type.REGULAR_SEARCH);
 
     if (activity.isSafeToCommitTransactions()) {
       transaction.commit();
@@ -540,7 +539,7 @@ public class MainSearchController implements SearchBarListener {
     if (savedInstanceState.getBoolean(KEY_IS_TOOLBAR_EXPANDED, false)) {
       // If the toolbar is slide up, that means the dialpad is showing. Thus we don't want to
       // request focus or we'll break physical/bluetooth keyboards typing.
-      toolbar.expand(/* animate */ false, Optional.absent(), /* requestFocus */ !isSlideUp);
+      toolbar.expand(/* animate */ false, Optional.empty(), /* requestFocus */ !isSlideUp);
     }
   }
 
