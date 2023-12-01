@@ -19,5 +19,5 @@
         <item quantity="one">ჩანაწერის მოსმენა</item>
         <item quantity="other">ჩანაწერების მოსმენა</item>
     </plurals>
-    <string name="call_playback_no_app_found_toast">პროგრამა ვერ მოიძებნა, შერჩეული ჩანაწერის გასაშვებად.</string>
+    <string name="call_playback_no_app_found_toast">პროგრამა ვერ მოიძებნა შერჩეული ჩანაწერის გასაშვებად.</string>
 </resources>

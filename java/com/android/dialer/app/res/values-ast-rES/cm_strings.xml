@@ -32,4 +32,5 @@
     <string name="call_via_dialog_title">Llamada per\u2026</string>
     <string name="call_log_stats_title">Estadístiques</string>
     <string name="action_menu_helplines">Llinies d\'ayuda</string>
+    <string name="default_dialer_action">Predeterminar</string>
 </resources>
