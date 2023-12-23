@@ -32,4 +32,6 @@
     <string name="call_via_dialog_title">\u2026 ile ara</string>
     <string name="call_log_stats_title">İstatistikler</string>
     <string name="action_menu_helplines">Yardım hatları</string>
+    <string name="default_dialer_text">Telefon Uygulamasını kullanmak için varsayılan olarak ayarlamanız gerekir</string>
+    <string name="default_dialer_action">Varsayılan olarak ayarla</string>
 </resources>
