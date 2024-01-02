@@ -73,7 +73,6 @@
     <item name="colorIconSecondary">@color/google_grey_400</item>
     <item name="colorTextOnUnthemedDarkBackground">@android:color/system_neutral1_0</item>
     <item name="colorIconOnUnthemedDarkBackground">@android:color/system_neutral1_0</item>
-    <item name="colorPrimary20pct">@color/dialer_theme_color_20pct</item>
     <item name="colorCallNotificationBackground">@android:color/system_accent2_200</item>
   </style>
 

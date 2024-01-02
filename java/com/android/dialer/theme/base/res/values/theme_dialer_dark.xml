@@ -52,7 +52,6 @@
     <item name="colorIconSecondary">?android:attr/textColorSecondary</item>
     <item name="colorTextOnUnthemedDarkBackground">@android:color/system_neutral1_0</item>
     <item name="colorIconOnUnthemedDarkBackground">@android:color/system_neutral1_0</item>
-    <item name="colorPrimary20pct">@color/dialer_dark_theme_color_20pct</item>
     <item name="colorCallNotificationBackground">@android:color/system_accent2_700</item>
   </style>
 </resources>
