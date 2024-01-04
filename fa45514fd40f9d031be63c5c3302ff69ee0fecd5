@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514e49c3_504c158e",
+        "filename": "java/com/android/voicemail/impl/OmtpVvmCarrierConfigHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-01-04T21:33:18Z",
+      "side": 1,
+      "message": "if (useDirectTlsConnection())",
+      "revId": "fa45514fd40f9d031be63c5c3302ff69ee0fecd5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee859bd8_f38ec44f",
+        "filename": "java/com/android/voicemail/impl/mail/store/ImapConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-01-04T21:33:18Z",
+      "side": 1,
+      "message": "just return early, leaving the rest of the code unchanged:\nif (!imapStore.getImapHelper().getConfig().useDirectTlsConnection()) {\n    return;\n}",
+      "revId": "fa45514fd40f9d031be63c5c3302ff69ee0fecd5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d39ca977_43a3c07a",
+        "filename": "java/com/android/voicemail/impl/protocol/VisualVoicemailProtocolFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-01-04T21:33:18Z",
+      "side": 1,
+      "message": "change this to \ncase VisualVoicemailTypeExtensions.VVM_TYPE_VVM3:\ncase VisualVoicemailTypeExtensions.VVM_TYPE_ADVVM:\n    return new Vvm3Protocol();",
+      "revId": "fa45514fd40f9d031be63c5c3302ff69ee0fecd5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f80a5f6_9dd2d730",
+        "filename": "java/com/android/voicemail/impl/sms/OmtpMessageReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-01-04T21:33:18Z",
+      "side": 1,
+      "message": "wrong indentation (Dialer uses 2 spaces per indent, so your lines should start at 4 spaces, not 2 tabs)",
+      "range": {
+        "startLine": 53,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 54
+      },
+      "revId": "fa45514fd40f9d031be63c5c3302ff69ee0fecd5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
