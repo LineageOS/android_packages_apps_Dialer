@@ -167,14 +167,16 @@ public class ImapConnection {
 
   /** Attempts to convert the connection into secure connection. */
   private void maybeDoStartTls() throws IOException, MessagingException {
-    // STARTTLS is required in the OMTP standard but not every implementation support it.
-    // Make sure the server does have this capability
-    if (hasCapability(ImapConstants.CAPABILITY_STARTTLS)) {
-      executeSimpleCommand(ImapConstants.STARTTLS);
-      transport.reopenTls();
-      createParser();
-      // The cached capabilities should be refreshed after TLS is established.
-      queryCapability();
+    if (!imapStore.getImapHelper().getConfig().useDirectTlsConnection()) {
+      // STARTTLS is required in the OMTP standard but not every implementation support it.
+      // Make sure the server does have this capability
+      if (hasCapability(ImapConstants.CAPABILITY_STARTTLS)) {
+        executeSimpleCommand(ImapConstants.STARTTLS);
+        transport.reopenTls();
+        createParser();
+        // The cached capabilities should be refreshed after TLS is established.
+        queryCapability();
+      }
     }
   }
 

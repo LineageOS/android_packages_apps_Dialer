@@ -40,6 +40,8 @@ public class VisualVoicemailProtocolFactory {
         return new CvvmProtocol();
       case VisualVoicemailTypeExtensions.VVM_TYPE_VVM3:
         return new Vvm3Protocol();
+      case VisualVoicemailTypeExtensions.VVM_TYPE_ADVVM:
+        return new Vvm3Protocol();
       default:
         VvmLog.e(TAG, "Unexpected visual voicemail type: " + type);
     }

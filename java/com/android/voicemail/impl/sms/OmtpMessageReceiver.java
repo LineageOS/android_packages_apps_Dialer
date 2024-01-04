@@ -50,6 +50,14 @@ public class OmtpMessageReceiver extends BroadcastReceiver {
   public void onReceive(Context context, Intent intent) {
     this.context = context;
     VisualVoicemailSms sms = intent.getExtras().getParcelable(OmtpService.EXTRA_VOICEMAIL_SMS);
+		VvmLog.i(TAG, "Received VVM sms, printing...");
+		for (String key: sms.getFields().keySet()) {
+			VvmLog.i (TAG, key + ":" + sms.getFields().get(key));
+		}
+		VvmLog.i(TAG, "Message body: " + sms.getMessageBody());
+		VvmLog.i(TAG, "Phone account handle: " + sms.getPhoneAccountHandle());
+		VvmLog.i(TAG, "Prefix: " + sms.getPrefix());
+		VvmLog.i(TAG, "Received VVM sms, done printing...");
     PhoneAccountHandle phone = sms.getPhoneAccountHandle();
 
     if (phone == null) {
