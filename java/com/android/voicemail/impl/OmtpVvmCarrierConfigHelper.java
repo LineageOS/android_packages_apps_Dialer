@@ -91,6 +91,7 @@ public class OmtpVvmCarrierConfigHelper {
 
   public static final String KEY_VVM_CLIENT_PREFIX_STRING = "vvm_client_prefix_string";
   private static final String KEY_IGNORE_TRANSCRIPTION_BOOL = "vvm_ignore_transcription";
+  private static final String KEY_USE_DIRECT_TLS_CONNECTION_BOOL = "vvm_use_direct_tls_connection";
 
   private final Context context;
   private final PersistableBundle carrierConfig;
@@ -254,6 +255,10 @@ public class OmtpVvmCarrierConfigHelper {
   /** @return Port to start a SSL IMAP connection directly. */
   public int getSslPort() {
     Assert.checkArgument(isValid());
+    if (useDirectTlsConnection()) {
+      VvmLog.i(TAG, "vvm_use_direct_tls_connection = true");
+      return 993;
+    }
     return (int) getValue(KEY_VVM_SSL_PORT_NUMBER_INT, 0);
   }
 
@@ -501,5 +506,13 @@ public class OmtpVvmCarrierConfigHelper {
   public boolean ignoreTranscription() {
     Assert.checkArgument(isValid());
     return (boolean) getValue(KEY_IGNORE_TRANSCRIPTION_BOOL, false);
+  }
+
+  /**
+   * Allow forcing direct TLS, default to false.
+   */
+  public boolean useDirectTlsConnection() {
+    Assert.checkArgument(isValid());
+    return (boolean) getValue(KEY_USE_DIRECT_TLS_CONNECTION_BOOL, false);
   }
 }

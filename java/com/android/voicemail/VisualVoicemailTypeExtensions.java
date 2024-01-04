@@ -26,4 +26,6 @@ public class VisualVoicemailTypeExtensions {
 
   // Protocol used by Verizon wireless
   public static final String VVM_TYPE_VVM3 = "vvm_type_vvm3";
+  // Protocol used by AT&T
+  public static final String VVM_TYPE_ADVVM = "vvm_type_advvm";
 }
