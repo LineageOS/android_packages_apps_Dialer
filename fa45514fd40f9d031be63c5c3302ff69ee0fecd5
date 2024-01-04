@@ -18,6 +18,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db261506_7ea5d60c",
+        "filename": "java/com/android/voicemail/impl/OmtpVvmCarrierConfigHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-01-04T21:46:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "514e49c3_504c158e",
+      "revId": "fa45514fd40f9d031be63c5c3302ff69ee0fecd5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee859bd8_f38ec44f",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-04T21:33:18Z",
       "side": 1,
       "message": "just return early, leaving the rest of the code unchanged:\nif (!imapStore.getImapHelper().getConfig().useDirectTlsConnection()) {\n    return;\n}",
+      "revId": "fa45514fd40f9d031be63c5c3302ff69ee0fecd5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50bad115_f47e19f4",
+        "filename": "java/com/android/voicemail/impl/mail/store/ImapConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-01-04T21:46:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee859bd8_f38ec44f",
       "revId": "fa45514fd40f9d031be63c5c3302ff69ee0fecd5",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
@@ -52,6 +88,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be893ed9_5423ba64",
+        "filename": "java/com/android/voicemail/impl/protocol/VisualVoicemailProtocolFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-01-04T21:46:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d39ca977_43a3c07a",
+      "revId": "fa45514fd40f9d031be63c5c3302ff69ee0fecd5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f80a5f6_9dd2d730",
@@ -65,6 +119,30 @@
       "writtenOn": "2024-01-04T21:33:18Z",
       "side": 1,
       "message": "wrong indentation (Dialer uses 2 spaces per indent, so your lines should start at 4 spaces, not 2 tabs)",
+      "range": {
+        "startLine": 53,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 54
+      },
+      "revId": "fa45514fd40f9d031be63c5c3302ff69ee0fecd5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2858c1a_781b283a",
+        "filename": "java/com/android/voicemail/impl/sms/OmtpMessageReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-01-04T21:46:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f80a5f6_9dd2d730",
       "range": {
         "startLine": 53,
         "startChar": 1,
