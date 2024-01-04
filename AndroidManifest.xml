@@ -63,6 +63,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.CONNECTIVITY_USE_RESTRICTED_NETWORKS" />
@@ -654,6 +655,16 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="com.android.vociemailomtp.sms.sms_received" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.android.voicemail.impl.sms.AdvvmSmsReceiver"
+            android:exported="true"
+            android:directBootAware="true">
+            <intent-filter>
+                <action android:name="android.intent.action.DATA_SMS_RECEIVED"/>
+                <data android:host="localhost" android:port="5499" android:scheme="sms"/>
             </intent-filter>
         </receiver>
 
