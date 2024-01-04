@@ -122,6 +122,10 @@ public class ImapHelper implements Closeable {
       int port = Integer.parseInt(prefs.getString(OmtpConstants.IMAP_PORT, null));
       int auth = ImapStore.FLAG_NONE;
 
+      if (serverName != null) {
+        serverName = serverName.replaceFirst("[12]:", "");
+      }
+
       int sslPort = this.config.getSslPort();
       if (sslPort != 0) {
         port = sslPort;

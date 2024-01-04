@@ -29,6 +29,16 @@
       </intent-filter>
     </receiver>
 
+    <receiver
+      android:name="com.android.voicemail.impl.sms.AdvvmSmsReceiver"
+      android:exported="true"
+      android:directBootAware="true">
+    <intent-filter>
+        <action android:name="android.intent.action.DATA_SMS_RECEIVED"/>
+        <data android:host="localhost" android:port="5499" android:scheme="sms"/>
+      </intent-filter>
+    </receiver>
+
     <receiver android:name="com.android.voicemail.impl.VoicemailClientReceiver"
       android:exported="false">
       <intent-filter>

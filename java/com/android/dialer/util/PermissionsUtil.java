@@ -25,6 +25,7 @@ import static android.Manifest.permission.READ_CALL_LOG;
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.READ_VOICEMAIL;
+import static android.Manifest.permission.RECEIVE_SMS;
 import static android.Manifest.permission.SEND_SMS;
 import static android.Manifest.permission.WRITE_CALL_LOG;
 import static android.Manifest.permission.WRITE_CONTACTS;
@@ -68,6 +69,7 @@ public class PermissionsUtil {
               WRITE_CALL_LOG,
               READ_PHONE_STATE,
               MODIFY_PHONE_STATE,
+              RECEIVE_SMS,
               SEND_SMS,
               CALL_PHONE,
               ADD_VOICEMAIL,
@@ -130,6 +132,10 @@ public class PermissionsUtil {
 
   public static boolean hasAddVoicemailPermissions(Context context) {
     return hasPermission(context, permission.ADD_VOICEMAIL);
+  }
+
+  public static boolean hasReceiveSmsPermissions(Context context) {
+    return hasPermission(context, permission.RECEIVE_SMS);
   }
 
   public static boolean hasSendSmsPermissions(Context context) {
