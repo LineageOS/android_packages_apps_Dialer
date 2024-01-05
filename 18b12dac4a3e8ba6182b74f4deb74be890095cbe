@@ -41,6 +41,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "133b1723_950ce719",
+        "filename": "java/com/android/voicemail/impl/imap/ImapHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-01-05T01:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28520b7b_94007ee7",
+      "range": {
+        "startLine": 126,
+        "startChar": 6,
+        "endLine": 126,
+        "endChar": 12
+      },
+      "revId": "18b12dac4a3e8ba6182b74f4deb74be890095cbe",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be229110_d05e790a",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-01-05T01:06:49Z",
       "side": 1,
       "message": "Is this really needed?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 56
+      },
+      "revId": "18b12dac4a3e8ba6182b74f4deb74be890095cbe",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96bf939b_34362faf",
+        "filename": "java/com/android/voicemail/impl/sms/OmtpMessageReceiver.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-01-05T01:48:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "be229110_d05e790a",
       "range": {
         "startLine": 53,
         "startChar": 0,
