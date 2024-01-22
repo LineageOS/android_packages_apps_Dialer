@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff3d759_b3d75bfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2024-01-22T06:32:46Z",
+      "side": 1,
+      "message": "phew - I tried here, spent a good amount of time looking for an issue - thought I had one with the MotorolaUtils HD_FEARTURE rename, but you caught the dangling ref elsewhere. So, signing off, but also publicly stating \"",
+      "revId": "889ee20dea6ce1985f973082c4a40fdd04d87ba1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
