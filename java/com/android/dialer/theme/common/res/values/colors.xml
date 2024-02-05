@@ -17,7 +17,7 @@
 <!-- The colors in this file aren't configured at the theme level. -->
 <resources>
   <color name="dialer_call_green">#006c49</color>
-  <color name="dialer_end_call_button_color">#b52425</color>
+  <color name="dialer_end_call_button_color">#dc362e</color>
   <color name="dialer_divider_line_color">#D8D8D8</color>
   <color name="dialer_link_color">#2A56C6</color>
   <color name="dialer_snackbar_action_text_color">@android:color/system_accent1_600</color>
