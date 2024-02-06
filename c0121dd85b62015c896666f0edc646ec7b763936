@@ -1,4 +1,39 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ef364e_deb692de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9760
+      },
+      "writtenOn": "2024-02-06T09:11:53Z",
+      "side": 1,
+      "message": "Please check it out...",
+      "revId": "c0121dd85b62015c896666f0edc646ec7b763936",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d1bcd6e_112351f2",
+        "filename": "java/com/android/incallui/InCallPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 9760
+      },
+      "writtenOn": "2024-02-06T09:11:53Z",
+      "side": 1,
+      "message": "If a call is received from a hidden number, then we get an error (null object reference) here.\nhttps://paste.crdroid.net/DoS7nV",
+      "revId": "c0121dd85b62015c896666f0edc646ec7b763936",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ],
   "submitRequirementResults": []
 }
