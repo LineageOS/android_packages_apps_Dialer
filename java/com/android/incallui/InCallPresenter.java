@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
 import android.provider.BlockedNumberContract;
@@ -495,27 +496,31 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   public void onCallAdded(final android.telecom.Call call) {
     Trace.beginSection("InCallPresenter.onCallAdded");
-    if (call.getDetails().hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
+    Call.Details callDetails = call.getDetails();
+    if (callDetails.hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
       externalCallList.onCallAdded(call);
     } else {
       callList.onCallAdded(context, call);
     }
 
-    if (call.getDetails().getState() == Call.STATE_RINGING) {
+    if (callDetails.getState() == Call.STATE_RINGING) {
       if (EmergencyCallUtil.hasRecentEmergencyCall(context)) {
         return;
       }
 
       TelephonyManager tm = context.getSystemService(TelephonyManager.class);
       String countryIso = tm.getSimCountryIso().toUpperCase();
-      String incomingNumber = call.getDetails().getHandle().getSchemeSpecificPart();
+      Uri handle = callDetails.getHandle();
+      if (handle != null) {
+        String incomingNumber = handle.getSchemeSpecificPart();
 
-      incomingNumber = PhoneNumberUtils.formatNumberToE164(incomingNumber, countryIso);
+        incomingNumber = PhoneNumberUtils.formatNumberToE164(incomingNumber, countryIso);
 
-      // Check if the number is blocked, to silence the ringer.
-      if (BlockedNumberContract.canCurrentUserBlockNumbers(context) &&
-              BlockedNumberContract.isBlocked(context, incomingNumber)) {
-        TelecomUtil.silenceRinger(context);
+        // Check if the number is blocked, to silence the ringer.
+        if (BlockedNumberContract.canCurrentUserBlockNumbers(context) &&
+                BlockedNumberContract.isBlocked(context, incomingNumber)) {
+          TelecomUtil.silenceRinger(context);
+        }
       }
     }
 
