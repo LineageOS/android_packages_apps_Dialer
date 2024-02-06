@@ -37,7 +37,7 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/incall_content_description_end_call"
         android:scaleType="fitXY"
-        android:src="@drawable/quantum_ic_call_end_vd_theme_24"
+        android:src="@drawable/quantum_ic_call_end_vd_theme_36"
         app:tint="@color/dialer_end_call_button_color" />
     <LinearLayout
         android:layout_width="0dp"
