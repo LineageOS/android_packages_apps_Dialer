@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca3ee665_ad138c2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2024-02-06T04:28:41Z",
+      "side": 1,
+      "message": "I agree with this one - standard user expects \"end\" and \"accept\" to be static, plus for low visibility users (blind friend of mine that helped us retailor wiki) - he said that (paraphrased) \"for core UI elements static color is helpful, as I don\u0027t have to be able to read it fully\"\n\npretty much everything else can be dynamic IMO",
+      "revId": "8eaeaa97d2d6291ecbf31259788d79f4367c3f69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
