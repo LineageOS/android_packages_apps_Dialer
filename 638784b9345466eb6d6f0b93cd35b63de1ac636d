@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7db797a_ce3223ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5911
+      },
+      "writtenOn": "2024-02-06T15:12:19Z",
+      "side": 1,
+      "message": "probably not the best way to do it, and we should keep the 24px for statusbar \u0026 friends?",
+      "revId": "638784b9345466eb6d6f0b93cd35b63de1ac636d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
