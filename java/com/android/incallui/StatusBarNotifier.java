@@ -816,7 +816,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_HANG_UP_ONGOING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_call_end_vd_theme_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_call_end_vd_theme_36),
                 context.getText(R.string.notification_action_end_call),
                 hangupPendingIntent)
             .build());
