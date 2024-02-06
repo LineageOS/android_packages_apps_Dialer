@@ -51,7 +51,7 @@
         android:layout_width="@dimen/two_button_button_size"
         android:layout_height="@dimen/two_button_button_size"
         android:contentDescription="@string/a11y_call_incoming_decline_description"
-        android:src="@drawable/quantum_ic_call_end_vd_theme_24"/>
+        android:src="@drawable/quantum_ic_call_end_vd_theme_36"/>
 
       <TextView
         android:id="@+id/two_button_decline_label"
