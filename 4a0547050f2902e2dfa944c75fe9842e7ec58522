@@ -24,6 +24,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd9a3bf1_7ae45d5c",
+        "filename": "java/com/android/voicemail/impl/OmtpVvmCarrierConfigHelper.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-02-07T22:22:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2577cbe5_de8e3f66",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 5
+      },
+      "revId": "4a0547050f2902e2dfa944c75fe9842e7ec58522",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a3a736e_af2cffa3",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-07T21:56:05Z",
       "side": 1,
       "message": "spaces plz, also isn\u0027t there some query string parser in Android SDK?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 34
+      },
+      "revId": "4a0547050f2902e2dfa944c75fe9842e7ec58522",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "911d42f7_d47dabaa",
+        "filename": "java/com/android/voicemail/impl/sms/AdvvmSmsReceiver.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-02-07T22:22:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a3a736e_af2cffa3",
       "range": {
         "startLine": 42,
         "startChar": 0,
