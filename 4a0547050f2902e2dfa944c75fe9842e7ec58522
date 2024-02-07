@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2577cbe5_de8e3f66",
+        "filename": "java/com/android/voicemail/impl/OmtpVvmCarrierConfigHelper.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2024-02-07T21:56:05Z",
+      "side": 1,
+      "message": "```\nif (useDirectTlsConnection()) {\n  VvmLog.i(TAG, \"vvm_use_direct_tls_connection \u003d true\");\n  return 993;\n}\nreturn (int) getValue(KEY_VVM_SSL_PORT_NUMBER_INT, 0);\n```",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 5
+      },
+      "revId": "4a0547050f2902e2dfa944c75fe9842e7ec58522",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a3a736e_af2cffa3",
+        "filename": "java/com/android/voicemail/impl/sms/AdvvmSmsReceiver.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2024-02-07T21:56:05Z",
+      "side": 1,
+      "message": "spaces plz, also isn\u0027t there some query string parser in Android SDK?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 34
+      },
+      "revId": "4a0547050f2902e2dfa944c75fe9842e7ec58522",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
