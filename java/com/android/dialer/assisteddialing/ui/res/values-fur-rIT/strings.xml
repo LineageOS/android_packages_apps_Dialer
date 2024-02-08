@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Composizion assistude</string>
+  <string name="assisted_dialing_setting_summary">Induvine e zonte un codiç di paîs cuant che tu clamis intant che tu sês in viaç tal forest</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Rilevât in automatic • <xliff:g example="United Kingdom (+44)" id="ad_country_code_info">%1$s</xliff:g></string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Rilevât in automatic</string>
+  <string name="assisted_dialing_setting_cc_category_title">Paîs di origjin</string>
+  <string name="assisted_dialing_setting_cc_title">Paîs di origjin predefinît</string>
+</resources>

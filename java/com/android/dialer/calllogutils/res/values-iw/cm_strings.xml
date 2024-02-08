@@ -18,5 +18,9 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_log_show_all_accounts">כל החשבונות</string>
     <string name="call_log_all_calls_header">כל השיחות</string>
+    <string name="call_log_incoming_header">שיחות נכנסות בלבד</string>
+    <string name="call_log_outgoing_header">שיחות יוצאות בלבד</string>
+    <string name="call_log_missed_header">שיחות שלא נענו בלבד</string>
+    <string name="call_log_voicemail_header">שיחות עם דואר קולי בלבד</string>
     <string name="call_log_blacklist_header">שיחות שנחסמו בלבד</string>
 </resources>

@@ -15,6 +15,19 @@
  ~ limitations under the License
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="a11y_voicemail_entry_call">Cuir fòn gun àireamh seo</string>
+  <string name="a11y_voicemail_entry_delete">Sguab às</string>
+  <string name="a11y_voicemail_entry_expand_menu">    Leudaich an clàr-taice dhan phost-ghutha seo
+  </string>
+  <string name="a11y_voicemail_entry_pause">Cuir ’na stad</string>
+  <string name="a11y_voicemail_entry_play">Cluich</string>
+  <string name="a11y_voicemail_entry_speaker">Glaodhaire</string>
+  <string name="voicemail_entry_unknown">Chan eil fhios</string>
+  <string name="voicemailDurationFormat"><xliff:g example="10" id="minutes">%1$02d</xliff:g>:<xliff:g example="20" id="seconds">%2$02d</xliff:g></string>
+  <string name="new_voicemail_header_today">An-diugh</string>
+  <string name="new_voicemail_header_yesterday">An-dè</string>
+  <string name="new_voicemail_header_older">Nas sine</string>
   <string name="voicemail_transcription_branding_text">Air a thar-sgrìobhadh le Google</string>
+  <string name="empty_voicemail_tab_text">Tha bogsa a-steach nam post-gutha agad falamh.</string>
   <string name="snackbar_voicemail_deleted">Chaidh am post-gutha a sguabadh às</string>
 </resources>

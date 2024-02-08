@@ -23,7 +23,7 @@
     <string name="incall_vibrate_hangup_title">Söndürüləndə titrət</string>
     <string name="incall_vibrate_45_title">Hər dəqiqə titrət</string>
     <string name="incall_vibrate_45_summary">Gedən zənglərin hər dəqiqəsinin 45-ci saniyəsində titrəyər</string>
-    <string name="incall_dnd_dialog_message">Narahat Etmə rejimini fəallaşdırmaq üçün, Telefon tətbiqi, Narahat Etmə vəziyyətinə nəzarət edə bilmə icazəsinə sahib olmalıdır.\nZəhmət olmasa buna icazə verin.</string>
+    <string name="incall_dnd_dialog_message">Narahat etməyin rejimini fəallaşdırmaq üçün, Telefon tətbiqi, Narahat etməyin statusuna nəzarət edə bilmə icazəsinə sahib olmalıdır.\nLütfən buna icazə verin.</string>
     <string name="allow">İcazə ver</string>
     <string name="deny">Rədd et</string>
     <string name="call_recording_category_title">Zəng səsyazması</string>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Copyright (C) 2017 The Android Open Source Project
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~      http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License
+ -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="a11y_voicemail_entry_call">Numar telefonic</string>
+  <string name="a11y_voicemail_entry_delete">Elimine</string>
+  <string name="a11y_voicemail_entry_expand_menu">    Slargje il menù par cheste vôs di segretarie
+  </string>
+  <string name="a11y_voicemail_entry_pause">Pause</string>
+  <string name="a11y_voicemail_entry_play">Riprodûs</string>
+  <string name="a11y_voicemail_entry_speaker">Casse</string>
+  <string name="voicemail_entry_unknown">No cognossude</string>
+  <string name="voicemailDurationFormat"><xliff:g example="10" id="minutes">%1$02d</xliff:g>:<xliff:g example="20" id="seconds">%2$02d</xliff:g></string>
+  <string name="new_voicemail_header_today">Vuê</string>
+  <string name="new_voicemail_header_yesterday">Îr</string>
+  <string name="new_voicemail_header_older">Plui vieris</string>
+  <string name="voicemail_transcription_branding_text">Trascrite di Google</string>
+  <string name="empty_voicemail_tab_text">La tô segretarie telefoniche e je vueide.</string>
+  <string name="snackbar_voicemail_deleted">Messaç de segretarie eliminât</string>
+</resources>

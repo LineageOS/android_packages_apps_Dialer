@@ -15,6 +15,9 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_custom">Cuir fòn gu 
+        <xliff:g id="custom">%s</xliff:g>
+    </string>
     <string name="call_home">Cuir fòn gun dachaigh</string>
     <string name="call_mobile">Cuir fòn gu àireamh mobile</string>
     <string name="call_work">Cuir fòn gun obair</string>
@@ -33,7 +36,13 @@
     <string name="call_tty_tdd">Cuir fòn gu TTY/TDD</string>
     <string name="call_work_mobile">Cuir fòn gu àireamh mobile na h-obrach</string>
     <string name="call_work_pager">Cuir fòn gu pèidsear na h-obrach</string>
+    <string name="call_assistant">Cuir fòn gu
+        <xliff:g id="assistant">%s</xliff:g>
+    </string>
     <string name="call_mms">Cuir fòn gu àireamh MMS</string>
+    <string name="sms_custom">Cuir teacsa gu
+        <xliff:g id="custom">%s</xliff:g>
+    </string>
     <string name="sms_home">Cuir teacsa dhachaigh</string>
     <string name="sms_mobile">Cuir teacsa gu àireamh mobile</string>
     <string name="sms_work">Cuir teacsa gun obair</string>
@@ -52,6 +61,9 @@
     <string name="sms_tty_tdd">Cuir teacsa gu TTY/TDD</string>
     <string name="sms_work_mobile">Cuir teacsa gu àireamh mobile na h-obrach</string>
     <string name="sms_work_pager">Cuir teacsa gu pèidsear na h-obrach</string>
+    <string name="sms_assistant">Cuir teacsa gu
+        <xliff:g id="assistant">%s</xliff:g>
+    </string>
     <string name="sms_mms">Cuir teacsa gu àireamh MMS</string>
     <string name="clearFrequentsConfirmation_title">Am falamhaich thu an conaltradh tric?</string>
     <string name="clearFrequentsConfirmation">Falamhaichidh tu liosta a’ chonaltraidh thric
@@ -100,6 +112,7 @@
     <string name="ghostData_company">Companaidh</string>
     <string name="ghostData_title">Tiotal</string>
     <string name="label_notes">Nòtaichean</string>
+    <string name="label_sip_address">SIP</string>
     <string name="websiteLabelsGroup">Làrach-lìn</string>
     <string name="groupsLabel">Buidhnean</string>
     <string name="email_home">Cuir post-d dhachaigh</string>
@@ -116,6 +129,7 @@
     <string name="map_home">Seall seòladh na dachaighe</string>
     <string name="map_work">Seall seòladh na h-obrach</string>
     <string name="map_other">Seall an seòladh</string>
+    <string name="map_custom">Seall seòladh <xliff:g id="custom">%s</xliff:g></string>
     <string name="chat_aim">Cabadaich le AIM</string>
     <string name="chat_msn">Cabadaich le Windows Live</string>
     <string name="chat_yahoo">Cabadaich le Yahoo</string>
@@ -126,6 +140,7 @@
     <string name="chat_jabber">Cabadaich le Jabber</string>
     <string name="chat">Cabadaich</string>
     <string name="list_filter_all_accounts">A h-uile neach-aithne</string>
+    <string name="listAllContactsInAccount">An luchd-aithne aig <xliff:g example="abc@gmail.com" id="name">%s</xliff:g></string>
     <string name="listCustomView">An luchd-aithne san t-sealladh ghnàthaichte</string>
     <string name="listSingleContact">Aon neach-aithne</string>
     <string name="display_options_sort_list_by">Seòrsaich a-rèir</string>
@@ -143,6 +158,20 @@
     <string name="select_phone_account_for_calls_remember">Cuimhnich an roghainn seo</string>
     <string name="call_with_a_note">Cuir fòn le nòta</string>
     <string name="call_subject_hint">Sgrìobh nòta a chuireas tu an cois na gairme…</string>
+    <string name="send_and_call_button">CUIR ⁊ CUIR FÒN</string>
+    <string name="call_subject_limit"><xliff:g example="4" id="count">%1$s</xliff:g> / <xliff:g example="64" id="limit">%2$s</xliff:g></string>
+    <string name="old_call_subject_type_and_number"><xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g></string>
+    <string name="tab_title">Taba <xliff:g id="title">%1$s</xliff:g>.</string>
+    <plurals name="tab_title_with_unread_items">
+        <item quantity="one">            Taba <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> nì gun leughadh.
+        </item>
+        <item quantity="two">            Taba <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> nì gun leughadh.
+        </item>
+        <item quantity="few">            Taba <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> nithean gun leughadh.
+        </item>
+        <item quantity="other">            Taba <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> nì gun leughadh.
+        </item>
+    </plurals>
     <string name="description_search_video_call">Gairm video</string>
     <string name="description_search_call_and_share">Co-roinn is cuir fòn</string>
 </resources>

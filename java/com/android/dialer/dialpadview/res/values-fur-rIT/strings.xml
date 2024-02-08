@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="description_dialpad_back">Navighe indaûr</string>
+  <string name="description_dialpad_overflow">Altris opzions</string>
+  <string name="description_delete_button">cancele indaûr (Backspace)</string>
+  <string name="description_image_button_plus">compon il plui</string>
+  <string name="description_voicemail_button">clame la segretarie telefoniche</string>
+  <string name="description_dial_button">compon</string>
+  <string name="dialog_voicemail_airplane_mode_message">Par clamâ la segretarie telefoniche, prime disative la modalitât avion.</string>
+  <string name="dialog_voicemail_not_ready_message">Par configurâ la segretarie telefoniche, va su Menù &gt; Impostazions.</string>
+  <string name="add_2sec_pause">Zonte pause di 2-sec</string>
+  <string name="add_wait">Zonte spiete</string>
+  <string name="dialer_useDtmfDialpad">Dopre tastiere tatile cun tons</string>
+  <string name="dialer_returnToInCallScreen">Torne ae clamade in cors</string>
+  <string name="dialer_addAnotherCall">Zonte clamade</string>
+  <string name="imei">IMEI</string>
+  <string name="meid">MEID</string>
+  <string name="simContacts_emptyLoading">Daûr a cjariâ de schede SIM\u2026</string>
+  <string name="simContacts_title">Contats de schede SIM</string>
+  <string name="menu_callNumber">Clame <xliff:g id="number">%s</xliff:g></string>
+  <string name="dialpad_hint_emergency_calling_not_available">Impussibil fâ clamadis di emergjence vie WiFi</string>
+  <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Impussibil clamâ chest numar</string>
+</resources>

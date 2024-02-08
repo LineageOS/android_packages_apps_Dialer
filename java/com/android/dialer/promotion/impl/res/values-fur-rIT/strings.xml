@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Messaçs di test in timp reâl dentri di une clamade</string>
+  <string name="rtt_promotion_details">RTT (test in timp reâl) al jude i interlocutôrs sorts, che a fasin fadie a sintî,
+    che a àn mancjancis tal fevelâ o che a àn bisugne di alc in plui rispiet ae sole vôs. Lis
+    trascrizions dai messaçs RTT a vegnin memorizadis sul to dispositîf te cronologjie des
+    clamadis. <xliff:g exmaple="Learn More">%1$s</xliff:g></string>
+  <string name="duo_disclosure_title">    Fâ videoclamadis cun Duo
+  </string>
+  <string name="duo_disclosure_details">    Lis videoclamadis Google Duo ti permeti di chatâ cun amîs e famee cjalantsi te muse. A podaressin vignî aplicâts coscj pai dâts. <xliff:g example="Learn More">%1$s</xliff:g>
+  </string>
+</resources>

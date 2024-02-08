@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Copyright (C) 2016 The Android Open Source Project
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~      http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License
+ -->
+<resources>
+  <string name="description_camera_switch_full_screen">Passe ae fotocjamare a plen schermi</string>
+  <string name="description_camera_switch_preview_screen">Passe ae anteprime de fotocjamare</string>
+  <string name="description_camera_switch_camera_facing">Passe ae fotocjamare anteriôr</string>
+  <string name="description_camera_switch_camera_rear">Passe ae fotocjamare posteriôr</string>
+  <string name="description_camera_take_picture">Fâs une foto</string>
+  <string name="description_camera_cancel_photo">Torne fâs la foto</string>
+</resources>

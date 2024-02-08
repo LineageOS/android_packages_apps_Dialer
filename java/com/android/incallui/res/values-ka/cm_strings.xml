@@ -16,5 +16,11 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_recording_failed_message">საუბრის ჩაწერის დაწყება ვერ მოხერხდა</string>
+    <string name="call_recording_file_location">საუბრის ჩანაწერი შენახულია – <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">საუბრის ჩაწერა</string>
+    <string name="onscreenCallRecordingText">საუბარი იწერება – <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">ჩაწერის შეწყვეტა</string>
+    <string name="recording_time_text">იწერება</string>
+    <string name="recording_warning_title">გსურთ საუბრის ჩაწერა?</string>
+    <string name="recording_warning_text">გაითვალისწინეთ: თავად იქნებით პასუხისმგებელი ყველა იმ კანონის, დადგენილებისა თუ წესის წინაშე, რომელიც ეხება საუბრის ჩაწერასა და ამ ჩანაწერების გამოყენებას ან გავრცელებას.</string>
 </resources>

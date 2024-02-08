@@ -26,6 +26,14 @@
     <string name="call_stats_filter_from">Start-dato</string>
     <string name="call_stats_filter_to">Slut-dato</string>
     <string name="call_stats_filter_picker_title">Filter-rækkevidde</string>
+    <string name="date_quick_selection">Hurtigt valg</string>
+    <string name="date_qs_currentmonth">Denne måned</string>
+    <string name="date_qs_currentquarter">Dette kvartal</string>
+    <string name="date_qs_currentyear">Dette år</string>
+    <string name="date_qs_lastweek">Sidste uge</string>
+    <string name="date_qs_lastmonth">Sidste måned</string>
+    <string name="date_qs_lastquarter">Sidste kvartal</string>
+    <string name="date_qs_lastyear">Sidste år</string>
     <string name="call_stats_date_filter">Justér tidsinterval</string>
     <string name="call_stats_reset_filter">Nulstil tidsinterval</string>
     <string name="call_stats_sort_by_duration">Sortér efter opkalds varighed</string>

@@ -21,5 +21,5 @@
         <item quantity="many">Воспроизвести записи</item>
         <item quantity="other">Воспроизвести записи</item>
     </plurals>
-    <string name="call_playback_no_app_found_toast">Не удалось найти приложение для воспроизведения выбранной записи.</string>
+    <string name="call_playback_no_app_found_toast">Не найдено приложение для воспроизведения выбранной записи.</string>
 </resources>

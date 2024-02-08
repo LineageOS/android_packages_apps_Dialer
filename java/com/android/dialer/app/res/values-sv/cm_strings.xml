@@ -16,9 +16,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_category_title">I samtal</string>
+    <string name="incall_enable_dnd_title">Aktivera Stör ej under samtal</string>
     <string name="incall_vibrate_outgoing_title">Vibrera vid svar</string>
     <string name="incall_vibrate_call_waiting_title">Vibrera vid samtal väntar</string>
+    <string name="incall_vibrate_hangup_title">Vibrera vid avslutat samtal</string>
     <string name="incall_vibrate_45_title">Vibrera varje minut</string>
+    <string name="incall_vibrate_45_summary">Vibrerar vid 45:e sekunden för varje minut under utgående samtal</string>
+    <string name="incall_dnd_dialog_message">För att aktivera Stör ej behöver telefonappen beviljas behörigheten till att kontrollera Stör ej-statusen.\nVänligen tillåt den.</string>
+    <string name="allow">Tillåt</string>
+    <string name="deny">Neka</string>
     <string name="call_recording_category_title">Samtalsinspelning</string>
     <string name="call_recording_format">Ljudformat</string>
+    <string name="call_via">Ring med</string>
+    <string name="call_via_dialog_title">Ring med\u2026</string>
+    <string name="call_log_stats_title">Statistik</string>
 </resources>

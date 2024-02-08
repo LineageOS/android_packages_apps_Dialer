@@ -22,6 +22,7 @@
     <string name="call_stats_missed">Cuộc gọi bị nhỡ: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_blocked">Cuộc gọi bị chặn: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Tổng cộng: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
     <string name="call_stats_header_total_callsonly">Tổng: <xliff:g id="call_count">%s</xliff:g></string>
     <string name="call_stats_filter_from">Ngày bắt đầu</string>
     <string name="call_stats_filter_to">Ngày kết thúc</string>

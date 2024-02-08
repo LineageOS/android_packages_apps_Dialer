@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_custom">Galw
+        <xliff:g id="custom">%s</xliff:g>
+    </string>
+    <string name="call_home">Galw cartref</string>
+    <string name="call_mobile">Galw symudol</string>
+    <string name="call_work">Galw gwaith</string>
+    <string name="call_fax_work">Galw ffacs gwaith</string>
+    <string name="call_fax_home">Galw ffacs cartref</string>
+    <string name="call_pager">Galw peiriant galw</string>
+    <string name="call_other">Galw</string>
+    <string name="call_callback">Galw rhif galw nôl</string>
+    <string name="call_car">Galw car</string>
+    <string name="call_company_main">Galw prif rif gwaith</string>
+    <string name="call_isdn">Galw ISDN</string>
+    <string name="call_main">Galw prif rif</string>
+    <string name="call_other_fax">Galw car</string>
+    <string name="call_radio">Galw radio</string>
+    <string name="call_telex">Galw telex</string>
+    <string name="call_tty_tdd">Galw TTY/TDD</string>
+    <string name="call_work_mobile">Galw symudol gwaith</string>
+    <string name="call_work_pager">Galw peiriant galw gwaith</string>
+    <string name="call_assistant">Galw
+        <xliff:g id="assistant">%s</xliff:g>
+    </string>
+    <string name="call_mms">Galw MMS</string>
+    <string name="sms_custom">Neges destun at
+        <xliff:g id="custom">%s</xliff:g>
+    </string>
+    <string name="sms_home">Neges destun at rif cartref</string>
+    <string name="sms_mobile">Neges destun at rif symudol</string>
+    <string name="sms_work">Neges destun at rif gwaith</string>
+    <string name="sms_fax_work">Neges destun at beiriant ffacs gwaith</string>
+    <string name="sms_fax_home">Neges destun at beiriant ffacs cartref</string>
+    <string name="sms_pager">Neges destun at beiriant galw</string>
+    <string name="sms_other">Neges destun</string>
+    <string name="sms_callback">Neges destun at rif galw nôl</string>
+    <string name="sms_car">Neges destun at car</string>
+    <string name="sms_company_main">Neges destun at brif rif gwaith</string>
+    <string name="sms_isdn">Neges destun at rif ISDN</string>
+    <string name="sms_main">Neges destun at brif rif</string>
+    <string name="sms_other_fax">Neges destun at beiriant ffacs</string>
+    <string name="sms_radio">Neges destun at rif ffôn radio</string>
+    <string name="sms_telex">Neges destun at rif telex</string>
+    <string name="sms_tty_tdd">Neges destun at rif TTY/TDD</string>
+    <string name="sms_work_mobile">Neges destun at rif symudol gwaith</string>
+    <string name="sms_work_pager">Neges destun at beiriant galw gwaith</string>
+    <string name="sms_assistant">Neges destun at
+        <xliff:g id="assistant">%s</xliff:g>
+    </string>
+    <string name="sms_mms">Neges destun at rif MMS</string>
+    <string name="clearFrequentsConfirmation_title">Clirio\'r cysylltiadau y cysylltir â nhw\'n aml?</string>
+    <string name="clearFrequentsConfirmation">Mi fydd hyn yn clirio\'r rhestr o gysylltiadau rwyt mewn cyswllt gyda nhw amlach o\'r rhestr yn yr apiau Cysylltiadau a Ffôn. Mi fydd hefyd yn gorfodi apiau e-bost i ail-ddysgu dy ddulliau cyfeirio atynt.    </string>
+    <string name="clearFrequentsProgress_title">Yn clirio\'r cysylltiadau y cysylltir â nhw\'n aml\u2026</string>
+    <string name="status_available">Ar gael</string>
+    <string name="status_away">I ffwrdd</string>
+    <string name="status_busy">Yn brysur</string>
+    <string name="contactsList">Cysylltiadau</string>
+    <string name="contact_suggestions">Awgrymiadau Gorau</string>
+    <string name="local_invisible_directory">Arall</string>
+    <string name="directory_search_label">Cyfeiriadur</string>
+    <string name="directory_search_label_work">Cyfeiriadur gwaith</string>
+    <string name="local_search_label">Pob cyswllt</string>
+    <string name="local_suggestions_search_label">Awgrymiadau</string>
+    <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Fi</string>
+    <string name="missing_name">(Dim enw)</string>
+    <string msgid="2795575601596468581" name="description_view_contact_detail">Gweld y cyswllt</string>
+    <string name="list_filter_phones">Pob cyswllt gyda rhif ffôn</string>
+    <string name="list_filter_phones_work">Cysylltiadau proffil gwaith</string>
+    <string name="view_updates_from_group">Gweld diweddariadau</string>
+    <string name="account_phone">Dyfais yn unig, heb gysoni</string>
+    <string name="nameLabelsGroup">Enw</string>
+    <string name="nicknameLabelsGroup">Llysenw</string>
+    <string name="full_name">Enw</string>
+    <string name="name_given">Enw cyntaf</string>
+    <string name="name_family">Cyfenw</string>
+    <string name="name_prefix">Rhagddodiaid enw</string>
+    <string name="name_middle">Enw canol</string>
+    <string name="name_suffix">Ôl-ddodiad enw</string>
+    <string name="name_phonetic">Enw\'n ffonetig</string>
+    <string name="name_phonetic_given">Enw cyntaf yn ffonetig</string>
+    <string name="name_phonetic_middle">Enw canol yn ffonetig</string>
+    <string name="name_phonetic_family">Cyfenw yn ffonetig</string>
+    <string name="phoneLabelsGroup">Ffôn</string>
+    <string name="emailLabelsGroup">Ebost</string>
+    <string name="postalLabelsGroup">Cyfeiriad</string>
+    <string name="imLabelsGroup">IM</string>
+    <string name="organizationLabelsGroup">Sefydliad</string>
+    <string name="relationLabelsGroup">Perthynas</string>
+    <string name="eventLabelsGroup">Dyddiad arbennig</string>
+    <string name="sms">Neges destun</string>
+    <string name="postal_address">Cyfeiriad</string>
+    <string name="ghostData_company">Cwmni</string>
+    <string name="ghostData_title">Teitl</string>
+    <string name="label_notes">Nodiadau</string>
+    <string name="label_sip_address">SIP</string>
+    <string name="websiteLabelsGroup">Gwefan</string>
+    <string name="groupsLabel">Grwpiau</string>
+    <string name="email_home">Ebostio cartref</string>
+    <string name="email_mobile">Ebostio symudol</string>
+    <string name="email_work">Ebostio gwaith</string>
+    <string name="email_other">Ebostio</string>
+    <string name="email_custom">Ebostio <xliff:g id="custom">%s</xliff:g></string>
+    <string name="email">Ebostio</string>
+    <string name="postal_street">Stryd/Ffordd/Heol</string>
+    <string name="postal_city">Tref/Dinas</string>
+    <string name="postal_region">Sir/Talaith</string>
+    <string name="postal_postcode">Cod post</string>
+    <string name="postal_country">Gwlad</string>
+    <string name="map_home">Gweld cyfeiriad cartref</string>
+    <string name="map_work">Gweld cyfeiriad gwaith</string>
+    <string name="map_other">Gweld cyfeiriad</string>
+    <string name="map_custom">Gweld cyfeiriad <xliff:g id="custom">%s</xliff:g></string>
+    <string name="chat_aim">Sgwrsio gydag AIM</string>
+    <string name="chat_msn">Sgwrsio gyda Windows Live</string>
+    <string name="chat_yahoo">Sgwrsio gyda Yahoo</string>
+    <string name="chat_skype">Sgwrsio gyda Skype</string>
+    <string name="chat_qq">Sgwrsio gyda QQ</string>
+    <string name="chat_gtalk">Sgwrsio gyda Google Talk</string>
+    <string name="chat_icq">Sgwrsio gydag ICQ</string>
+    <string name="chat_jabber">Sgwrsio gyda Jabber</string>
+    <string name="chat">Sgwrsio</string>
+    <string name="list_filter_all_accounts">Pob cyswllt</string>
+    <string name="listAllContactsInAccount">Cysylltiadau yn <xliff:g example="abc@gmail.com" id="name">%s</xliff:g></string>
+    <string name="listCustomView">Cysylltiadau mewn golwg addasedig</string>
+    <string name="listSingleContact">Cyswllt sengl</string>
+    <string name="display_options_sort_list_by">Trefnu yn ôl</string>
+    <string name="display_options_sort_by_given_name">Enw cyntaf</string>
+    <string name="display_options_sort_by_family_name">Cyfenw</string>
+    <string name="display_options_view_names_as">Fformat enw</string>
+    <string name="display_options_view_given_name_first">Enwau cyntaf yn gyntaf</string>
+    <string name="display_options_view_family_name_first">Cyfenw yn gyntaf</string>
+    <string name="menu_clear_frequents">Clirio rhestr galw\'n aml</string>
+    <string name="action_menu_back_from_search">stopio chwilio</string>
+    <string name="description_clear_search">Clirio\'r chwiliad</string>
+    <string name="select_account_dialog_title">Cyfrif</string>
+    <string name="set_default_account">Defnyddio hwn bob tro ar gyfer galwadau</string>
+    <string name="select_phone_account_for_calls">Dewisa SIM i\'r galwad hwn</string>
+    <string name="select_phone_account_for_calls_remember">Cofio\'r dewis hwn</string>
+    <string name="call_with_a_note">Galw gyda nodyn</string>
+    <string name="call_subject_hint">Rho nodyn i\'w anfon gyda\'r galwad...</string>
+    <string name="send_and_call_button">ANFON A GALW</string>
+    <string name="call_subject_limit"><xliff:g example="4" id="count">%1$s</xliff:g> / <xliff:g example="64" id="limit">%2$s</xliff:g></string>
+    <string name="old_call_subject_type_and_number"><xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g></string>
+    <string name="tab_title">tab <xliff:g id="title">%1$s</xliff:g>.</string>
+    <plurals name="tab_title_with_unread_items">
+        <item quantity="zero">            Tab <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> eitemau heb eu darllen
+        </item>
+        <item quantity="one">            Tab <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> eitem heb ei darllen.
+        </item>
+        <item quantity="two">            Tab <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> eitem heb eu darllen.
+        </item>
+        <item quantity="few">            Tab <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> eitem heb eu darllen.
+        </item>
+        <item quantity="many">            Tab <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> eitem heb eu darllen.
+        </item>
+        <item quantity="other">            Tab <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> eitem heb eu darllen.
+        </item>
+    </plurals>
+    <string name="description_search_video_call">Galwad fideo</string>
+    <string name="description_search_call_and_share">Rhannu a galw</string>
+</resources>

@@ -16,5 +16,33 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Detaljer för kontaktstatistik</string>
+    <string name="call_stats_incoming">Inkommande: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Utgående: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Missade: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Blockerade: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
     <string name="call_stats_header_total">Totalt: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Totalt: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Startdatum</string>
+    <string name="call_stats_filter_to">Slutdatum</string>
+    <string name="call_stats_filter_picker_title">Filterintervall</string>
+    <string name="date_quick_selection">Snabbval</string>
+    <string name="date_qs_currentmonth">Nuvarande månad</string>
+    <string name="date_qs_currentquarter">Nuvarande kvartal</string>
+    <string name="date_qs_currentyear">Nuvarande år</string>
+    <string name="date_qs_lastweek">Förra veckan</string>
+    <string name="date_qs_lastmonth">Förra månaden</string>
+    <string name="date_qs_lastquarter">Förra kvartalet</string>
+    <string name="date_qs_lastyear">Förra året</string>
+    <string name="call_stats_date_filter">Justera tidsintervall</string>
+    <string name="call_stats_reset_filter">Återställ tidsintervall</string>
+    <string name="call_stats_sort_by_duration">Sortera efter samtalstid</string>
+    <string name="call_stats_sort_by_count">Sortera efter antal samtal</string>
+    <string name="call_stats_title_for_number">Det här numret</string>
+    <string name="call_stats_title_of_total">Av totalt</string>
+    <string name="call_stats_title_durations">Samtalslängder</string>
+    <string name="call_stats_title_count">Antal samtal</string>
+    <string name="call_stats_title_average_duration">Genomsnittlig samtalslängd</string>
+    <string name="recent_calls_no_items_in_range">Samtalsloggen innehåller inte några samtal i det valda tidsintervallet.</string>
 </resources>

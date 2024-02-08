@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="migrate_blocked_numbers_dialog_title">Bloc gnûf e semplificât</string>
+  <string name="migrate_blocked_numbers_dialog_message">Par proteziti miôr, Telefon al à bisugne di cambiâ il mût di funzionâ dal bloc. I tiei numars blocâts cumò a fermaran sedi lis clamadis che i messaçs di test e a podaressin jessi condividûts cun altris aplicazions.</string>
+  <string name="migrate_blocked_numbers_dialog_allow_button">Permet</string>
+  <string name="old_block_number_confirmation_title">    Blocâ<xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>?
+  </string>
+  <string name="block_number_confirmation_message_vvm">    Lis clamadis di chest numar a vignaran blocadis e i messaçs in segretarie a vignaran eliminâts in automatic.
+  </string>
+  <string name="block_number_confirmation_message_no_vvm">    Lis clamadis di chest numar a vignaran blocadis, ma al rivarà istès a lassâti messaçs te segretarie.
+  </string>
+  <string name="block_number_confirmation_message_new_filtering">    No tu ricevarâs plui clamadis e messaçs di test di chest numar.
+  </string>
+  <string name="block_number_ok">BLOCHE</string>
+  <string name="unblock_number_confirmation_title">    Sblochâ<xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>?
+  </string>
+  <string name="unblock_number_ok">SBLOCHE</string>
+  <string name="invalidNumber">    <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>nol è valit.
+  </string>
+  <string name="snackbar_number_blocked">    <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> blocât
+  </string>
+  <string name="snackbar_number_unblocked">    <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>sblocât
+  </string>
+  <string name="send_to_voicemail_import_failed">Importazion falide</string>
+  <string name="call_blocking_disabled_notification_title">    Bloc des clamadis disativât par 48 oris
+  </string>
+  <string name="call_blocking_disabled_notification_text">    Disativât parcè che e je stade fate une clamade di emergjence.
+  </string>
+</resources>

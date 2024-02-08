@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="non_spam_notification_title">Cognossistu <xliff:g id="number">%1$s</xliff:g>?</string>
+  <string name="spam_notification_title">Jerial <xliff:g id="number">%1$s</xliff:g> spam?</string>
+  <string name="spam_notification_block_report_toast_text"><xliff:g id="number">%1$s</xliff:g> al è stât blocât e la clamade e je stade segnalade tant che spam.</string>
+  <string name="spam_notification_not_spam_toast_text">Clamade di <xliff:g id="number">%1$s</xliff:g> segnalade come no spam.</string>
+  <string name="spam_notification_non_spam_call_collapsed_text">Tocje par zontâ ai contats o blocâ il numar spam.</string>
+  <string name="spam_notification_non_spam_call_expanded_text">Cheste e je la prime volte che chest numar ti clame. Se cheste clamade e jere spam, tu puedis blocâ il numar e segnalâlu.</string>
+  <string name="spam_notification_spam_call_collapsed_text">Tocje par segnalâ come no spam o blocâlu</string>
+  <string name="spam_notification_report_spam_action_text">Bloche e segnale</string>
+  <string name="spam_notification_add_contact_action_text">Zonte contat</string>
+  <string name="spam_notification_dialog_add_contact_action_text">Zonte ai contats</string>
+  <string name="spam_notification_dialog_block_report_spam_action_text">Bloche e segnale spam</string>
+  <string name="spam_notification_was_not_spam_action_text">No, nol è spam</string>
+  <string name="spam_notification_block_spam_action_text">Sì, bloche il numar</string>
+  <string name="spam_notification_action_dismiss">Ignore</string>
+</resources>

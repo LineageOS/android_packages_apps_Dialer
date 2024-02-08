@@ -16,5 +16,33 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Nánari tölfræði tengiliðar</string>
+    <string name="call_stats_incoming">Innhringingar: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Úthringingar: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Ósvarað: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Útilokuð: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Alls: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Alls: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Upphafsdagsetning</string>
+    <string name="call_stats_filter_to">Lokadagsetning</string>
+    <string name="call_stats_filter_picker_title">Sía tímabil</string>
+    <string name="date_quick_selection">Flýtival</string>
+    <string name="date_qs_currentmonth">Núverandi mánuður</string>
+    <string name="date_qs_currentquarter">Núverandi ársfjórðungur</string>
+    <string name="date_qs_currentyear">Núverandi ár</string>
+    <string name="date_qs_lastweek">Í síðustu viku</string>
+    <string name="date_qs_lastmonth">Í síðasta mánuði</string>
+    <string name="date_qs_lastquarter">Síðasti ársfjórðungur</string>
+    <string name="date_qs_lastyear">Á síðasta ári</string>
+    <string name="call_stats_date_filter">Aðlaga tímabil</string>
+    <string name="call_stats_reset_filter">Endurstilla tímabil</string>
+    <string name="call_stats_sort_by_duration">Raða eftir lengd símtals</string>
+    <string name="call_stats_sort_by_count">Raða eftir fjölda símtala</string>
+    <string name="call_stats_title_for_number">Þetta númer</string>
+    <string name="call_stats_title_of_total">Af alls</string>
+    <string name="call_stats_title_durations">Tímalengdir símtala</string>
+    <string name="call_stats_title_count">Fjöldi símtala</string>
+    <string name="call_stats_title_average_duration">Meðallengd símtala</string>
     <string name="recent_calls_no_items_in_range">Símtalaskráin inniheldur engin símtöl á völdu tímabili.</string>
 </resources>

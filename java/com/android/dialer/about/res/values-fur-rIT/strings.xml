@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="build_version_label">Version di compilazion</string>
+  <string name="open_source_license_detail_label">Detais de licence pal software a codiç viert</string>
+  <string name="licenseActivityLabel">Licencis di codiç viert</string>
+  <string name="privacy_policy_label">Informative su la riservatece</string>
+  <string name="terms_of_service_label">Tiermins dal servizi</string>
+</resources>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_custom">Clame
+        <xliff:g id="custom">%s</xliff:g>
+    </string>
+    <string name="call_home">Clame a cjase</string>
+    <string name="call_mobile">Clame il celulâr</string>
+    <string name="call_work">Clame a vore</string>
+    <string name="call_fax_work">Clame il fax di vore</string>
+    <string name="call_fax_home">Clame il fax di cjase</string>
+    <string name="call_pager">Clame il ciridôr</string>
+    <string name="call_other">Clame</string>
+    <string name="call_callback">Clame il numar di clamade di rispueste</string>
+    <string name="call_car">Clame la machine</string>
+    <string name="call_company_main">Clame il telefon principâl de societât</string>
+    <string name="call_isdn">Clame il numar ISDN</string>
+    <string name="call_main">Clame il telefon principâl</string>
+    <string name="call_other_fax">Clame il fax</string>
+    <string name="call_radio">Clame la radio</string>
+    <string name="call_telex">Clame il telex</string>
+    <string name="call_tty_tdd">Clame TTY/TDD</string>
+    <string name="call_work_mobile">Clame il celulâr di vore</string>
+    <string name="call_work_pager">Clame il ciridôr di vore</string>
+    <string name="call_assistant">Clame
+        <xliff:g id="assistant">%s</xliff:g>
+    </string>
+    <string name="call_mms">Clame MMS</string>
+    <string name="sms_custom">Mande SMS a
+        <xliff:g id="custom">%s</xliff:g>
+    </string>
+    <string name="sms_home">Mande SMS a cjase</string>
+    <string name="sms_mobile">Mande SMS al celulâr</string>
+    <string name="sms_work">Mande SMS a vore</string>
+    <string name="sms_fax_work">Mande SMS al fax di vore</string>
+    <string name="sms_fax_home">Mande SMS al fax di cjase</string>
+    <string name="sms_pager">Mande SMS al ciridôr</string>
+    <string name="sms_other">Mande SMS</string>
+    <string name="sms_callback">Mande SMS al numar de clamade di rispueste</string>
+    <string name="sms_car">Mande SMS ae machine</string>
+    <string name="sms_company_main">Mande SMS al telefon principâl de societât</string>
+    <string name="sms_isdn">Mande SMS al numar ISDN</string>
+    <string name="sms_main">Mande SMS al telefon principâl</string>
+    <string name="sms_other_fax">Mande SMS al fax</string>
+    <string name="sms_radio">Mande SMS ae radio</string>
+    <string name="sms_telex">Mande SMS al telex</string>
+    <string name="sms_tty_tdd">Mande SMS a TTY/TDD</string>
+    <string name="sms_work_mobile">Mande SMS a celulâr di vore</string>
+    <string name="sms_work_pager">Mande SMS al ciridôr di vore</string>
+    <string name="sms_assistant">Mande SMS a
+        <xliff:g id="assistant">%s</xliff:g>
+    </string>
+    <string name="sms_mms">Mande SMS a MMS</string>
+    <string name="clearFrequentsConfirmation_title">Netâ i contatâts dispès?</string>
+    <string name="clearFrequentsConfirmation">Tu netarâs la liste dai contatâts dispès intes
+        aplicazions Contats e Telefon e tu sfuarçarâs lis aplicazions pes e-mail a imparâ di 0 lis direzions di
+        preference.
+    </string>
+    <string name="clearFrequentsProgress_title">Daûr a netâ i contatâts dispès\u2026</string>
+    <string name="status_available">Disponibil</string>
+    <string name="status_away">Assent</string>
+    <string name="status_busy">Impegnât</string>
+    <string name="contactsList">Contats</string>
+    <string name="contact_suggestions">Miôrs sugjerîts</string>
+    <string name="local_invisible_directory">Altri</string>
+    <string name="directory_search_label">Cartele</string>
+    <string name="directory_search_label_work">Cartele di lavôr</string>
+    <string name="local_search_label">Ducj i contats</string>
+    <string name="local_suggestions_search_label">Sugjeriments</string>
+    <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Jo</string>
+    <string name="missing_name">(Cence non)</string>
+    <string msgid="2795575601596468581" name="description_view_contact_detail">Visualize contat</string>
+    <string name="list_filter_phones">Ducj i contats cun numars di telefon</string>
+    <string name="list_filter_phones_work">Contats dal profîl di lavôr</string>
+    <string name="view_updates_from_group">Viôt inzornaments</string>
+    <string name="account_phone">Dome dal dispositîf, no sincronizât</string>
+    <string name="nameLabelsGroup">Non</string>
+    <string name="nicknameLabelsGroup">Sorenon</string>
+    <string name="full_name">Non</string>
+    <string name="name_given">Non</string>
+    <string name="name_family">Cognon</string>
+    <string name="name_prefix">Prefìs dal non</string>
+    <string name="name_middle">Secont non</string>
+    <string name="name_suffix">Sufìs dal non</string>
+    <string name="name_phonetic">Non fonetic</string>
+    <string name="name_phonetic_given">Non fonetic</string>
+    <string name="name_phonetic_middle">Secont non fonetic</string>
+    <string name="name_phonetic_family">Cognon fonetic</string>
+    <string name="phoneLabelsGroup">Telefon</string>
+    <string name="emailLabelsGroup">E-mail</string>
+    <string name="postalLabelsGroup">Recapit</string>
+    <string name="imLabelsGroup">Messaçs istantanis</string>
+    <string name="organizationLabelsGroup">Organizazion</string>
+    <string name="relationLabelsGroup">Relazion</string>
+    <string name="eventLabelsGroup">Date speciâl</string>
+    <string name="sms">Messaç di test</string>
+    <string name="postal_address">Recapit</string>
+    <string name="ghostData_company">Societât</string>
+    <string name="ghostData_title">Titul</string>
+    <string name="label_notes">Notis</string>
+    <string name="label_sip_address">SIP</string>
+    <string name="websiteLabelsGroup">Sît web</string>
+    <string name="groupsLabel">Grups</string>
+    <string name="email_home">Mande e-mail a cjase</string>
+    <string name="email_mobile">Mande e-mail al celulâr</string>
+    <string name="email_work">Mande e-mail a vore</string>
+    <string name="email_other">Mande e-mail</string>
+    <string name="email_custom">Mande e-mail a <xliff:g id="custom">%s</xliff:g></string>
+    <string name="email">Mande e-mail</string>
+    <string name="postal_street">Vie</string>
+    <string name="postal_city">Citât</string>
+    <string name="postal_region">Stât/regjon</string>
+    <string name="postal_postcode">Codiç postâl</string>
+    <string name="postal_country">Paîs</string>
+    <string name="map_home">Viôt recapit di cjase</string>
+    <string name="map_work">Viôt recapit di vore</string>
+    <string name="map_other">Viôt recapit</string>
+    <string name="map_custom">Viôt recapit di <xliff:g id="custom">%s</xliff:g></string>
+    <string name="chat_aim">Chate doprant AIM</string>
+    <string name="chat_msn">Chate doprant Windows Live</string>
+    <string name="chat_yahoo">Chate doprant Yahoo</string>
+    <string name="chat_skype">Chate doprant Skype</string>
+    <string name="chat_qq">Chate doprant QQ</string>
+    <string name="chat_gtalk">Chate doprant Google Talk</string>
+    <string name="chat_icq">Chate doprant ICQ</string>
+    <string name="chat_jabber">Chate doprant Jabber</string>
+    <string name="chat">Chate</string>
+    <string name="list_filter_all_accounts">Ducj i contats</string>
+    <string name="listAllContactsInAccount">Contats in <xliff:g example="abc@gmail.com" id="name">%s</xliff:g></string>
+    <string name="listCustomView">Contats te viodude personalizade</string>
+    <string name="listSingleContact">Contat singul</string>
+    <string name="display_options_sort_list_by">Ordene par</string>
+    <string name="display_options_sort_by_given_name">Non</string>
+    <string name="display_options_sort_by_family_name">Cognon</string>
+    <string name="display_options_view_names_as">Formât non</string>
+    <string name="display_options_view_given_name_first">Prime il non</string>
+    <string name="display_options_view_family_name_first">Prime il cognon</string>
+    <string name="menu_clear_frequents">Nete i frecuents</string>
+    <string name="action_menu_back_from_search">ferme di cirî</string>
+    <string name="description_clear_search">Nete la ricercje</string>
+    <string name="select_account_dialog_title">Account</string>
+    <string name="set_default_account">Dopre simpri cheste pes clamadis</string>
+    <string name="select_phone_account_for_calls">Sielç la SIM par cheste clamade</string>
+    <string name="select_phone_account_for_calls_remember">Visiti di cheste sielte</string>
+    <string name="call_with_a_note">Clamade cuntune note</string>
+    <string name="call_subject_hint">Scrîf une note di mandâ cu la clamade ...</string>
+    <string name="send_and_call_button">MANDE E CLAME</string>
+    <string name="call_subject_limit"><xliff:g example="4" id="count">%1$s</xliff:g> / <xliff:g example="64" id="limit">%2$s</xliff:g></string>
+    <string name="old_call_subject_type_and_number"><xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g></string>
+    <string name="tab_title">Schede <xliff:g id="title">%1$s</xliff:g>.</string>
+    <plurals name="tab_title_with_unread_items">
+        <item quantity="one">            Schede <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> element di lei.
+        </item>
+        <item quantity="other">            Schede <xliff:g id="title">%1$s</xliff:g>. <xliff:g id="count">%2$d</xliff:g> elements di lei.
+        </item>
+    </plurals>
+    <string name="description_search_video_call">Videoclamade</string>
+    <string name="description_search_call_and_share">Condivît e clame</string>
+</resources>
