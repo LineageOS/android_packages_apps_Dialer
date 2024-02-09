@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd40214_576b45d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-02-09T21:10:40Z",
+      "side": 1,
+      "message": "These are the minimal changes needed to access the VVM mailbox as well as to sync and receive new messages. There is definitely more to do as far as being able to change PIN, greeting update, etc. But this is a working MVP.",
+      "revId": "7d517da6589efeb7b51915b490ba21490f243ac2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
