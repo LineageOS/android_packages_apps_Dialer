@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">不正</string>
+    <string name="helpline_category_acohol">アルコール</string>
+    <string name="helpline_category_addiction">中毒</string>
+    <string name="helpline_category_adolescents">青少年</string>
+    <string name="helpline_category_adults">成人</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">誕生</string>
+    <string name="helpline_category_bullying">いじめ</string>
+    <string name="helpline_category_children">子供</string>
+    <string name="helpline_category_crime">犯罪</string>
+    <string name="helpline_category_crime_victims">犯罪難民</string>
+    <string name="helpline_category_corruption">腐敗</string>
+    <string name="helpline_category_discrimination">差別</string>
+    <string name="helpline_category_domestic_violence">家庭内暴力</string>
+    <string name="helpline_category_drugs">薬物</string>
+    <string name="helpline_category_emotional_support">精神支援</string>
+    <string name="helpline_category_family">家族</string>
+    <string name="helpline_category_gambling">ギャンブル</string>
+    <string name="helpline_category_gender">性別</string>
+    <string name="helpline_category_generic">ジェネリック</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">人権</string>
+    <string name="helpline_category_human_trafficking">人身売買</string>
+    <string name="helpline_category_immigration">移民</string>
+    <string name="helpline_category_legal_aid">法的支援</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">男性</string>
+    <string name="helpline_category_mental_health">メンタルヘルス</string>
+    <string name="helpline_category_missing_children">子供の行方不明</string>
+    <string name="helpline_category_mothers">母親</string>
+    <string name="helpline_category_muslim">イスラム</string>
+    <string name="helpline_category_parents">親</string>
+    <string name="helpline_category_pregnancy">妊娠</string>
+    <string name="helpline_category_psychological">心理的</string>
+    <string name="helpline_category_religion">宗教</string>
+    <string name="helpline_category_senior">高齢者</string>
+    <string name="helpline_category_sexual_abuse">性的虐待</string>
+    <string name="helpline_category_sexual_assault">性的暴行</string>
+    <string name="helpline_category_sexual_rights">性的権利</string>
+    <string name="helpline_category_sexuality">性的</string>
+    <string name="helpline_category_soldiers">兵士</string>
+    <string name="helpline_category_suicide">自殺予防</string>
+    <string name="helpline_category_trans">トランスジェンダー</string>
+    <string name="helpline_category_veterans">退役軍人</string>
+    <string name="helpline_category_violence">暴力</string>
+    <string name="helpline_category_war">戦争</string>
+    <string name="helpline_category_women">女性</string>
+    <string name="helpline_category_youth">青年</string>
+</resources>

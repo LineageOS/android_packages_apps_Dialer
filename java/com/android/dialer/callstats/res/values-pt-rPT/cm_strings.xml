@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Detalhes das estatísticas dos contactos</string>
+    <string name="call_stats_incoming">Recebidas: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Efetuadas: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Perdidas: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Bloqueadas: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Total: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Data inicial</string>
+    <string name="call_stats_filter_to">Data final</string>
+    <string name="call_stats_filter_picker_title">Filtrar intervalo</string>
+    <string name="date_quick_selection">Seleção rápida</string>
+    <string name="date_qs_currentmonth">Mês atual</string>
+    <string name="date_qs_currentquarter">Trimestre atual</string>
+    <string name="date_qs_currentyear">Ano atual</string>
+    <string name="date_qs_lastweek">Última semana</string>
+    <string name="date_qs_lastmonth">Último mês</string>
+    <string name="date_qs_lastquarter">Último trimestre</string>
+    <string name="date_qs_lastyear">Último ano</string>
+    <string name="call_stats_date_filter">Ajustar intervalo de tempo</string>
+    <string name="call_stats_reset_filter">Repor intervalo de tempo</string>
+    <string name="call_stats_sort_by_duration">Ordenar pela duração da chamada</string>
+    <string name="call_stats_sort_by_count">Ordenar pelo número de chamadas</string>
+    <string name="call_stats_title_for_number">Este número</string>
+    <string name="call_stats_title_of_total">Num total de</string>
+    <string name="call_stats_title_durations">Duração das chamadas</string>
+    <string name="call_stats_title_count">Contagem de chamadas</string>
+    <string name="call_stats_title_average_duration">Duração média das chamadas</string>
+    <string name="recent_calls_no_items_in_range">O seu registo de chamadas não contém qualquer chamada no período selecionado.</string>
+</resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Väärinkäyttö</string>
+    <string name="helpline_category_acohol">Alkoholi</string>
+    <string name="helpline_category_addiction">Riippuvuus</string>
+    <string name="helpline_category_adolescents">Nuoret</string>
+    <string name="helpline_category_adults">Aikuiset</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Synnytys</string>
+    <string name="helpline_category_bullying">Kiusaaminen</string>
+    <string name="helpline_category_children">Lapset</string>
+    <string name="helpline_category_crime">Rikos</string>
+    <string name="helpline_category_crime_victims">Rikosten uhrit</string>
+    <string name="helpline_category_corruption">Korruptio</string>
+    <string name="helpline_category_discrimination">Syrjintä</string>
+    <string name="helpline_category_domestic_violence">Perheväkivalta</string>
+    <string name="helpline_category_drugs">Huumeet</string>
+    <string name="helpline_category_emotional_support">Henkinen tuki</string>
+    <string name="helpline_category_family">Perhe</string>
+    <string name="helpline_category_gambling">Uhkapelaaminen</string>
+    <string name="helpline_category_gender">Sukupuoli</string>
+    <string name="helpline_category_generic">Yleinen</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Ihmisoikeudet</string>
+    <string name="helpline_category_human_trafficking">Ihmiskauppa</string>
+    <string name="helpline_category_immigration">Maahanmuutto</string>
+    <string name="helpline_category_legal_aid">Oikeusapu</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Miehet</string>
+    <string name="helpline_category_mental_health">Mielenterveys</string>
+    <string name="helpline_category_missing_children">Kadonneet lapset</string>
+    <string name="helpline_category_mothers">Äidit</string>
+    <string name="helpline_category_muslim">Muslimit</string>
+    <string name="helpline_category_parents">Vanhemmat</string>
+    <string name="helpline_category_pregnancy">Raskaus</string>
+    <string name="helpline_category_psychological">Psykologinen</string>
+    <string name="helpline_category_religion">Uskonto</string>
+    <string name="helpline_category_senior">Seniorit</string>
+    <string name="helpline_category_sexual_abuse">Seksuaalinen hyväksikäyttö</string>
+    <string name="helpline_category_sexual_assault">Seksuaalinen väkivalta</string>
+    <string name="helpline_category_sexual_rights">Seksuaaliset oikeudet</string>
+    <string name="helpline_category_sexuality">Seksuaalisuus</string>
+    <string name="helpline_category_soldiers">Sotilaat</string>
+    <string name="helpline_category_suicide">Itsemurhien ehkäisy</string>
+    <string name="helpline_category_trans">Transsukupuolisuus</string>
+    <string name="helpline_category_veterans">Veteraanit</string>
+    <string name="helpline_category_violence">Väkivalta</string>
+    <string name="helpline_category_war">Sota</string>
+    <string name="helpline_category_women">Naiset</string>
+    <string name="helpline_category_youth">Nuoret</string>
+</resources>

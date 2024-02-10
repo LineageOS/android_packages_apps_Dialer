@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Κατάχρηση</string>
+    <string name="helpline_category_acohol">Αλκοόλ</string>
+    <string name="helpline_category_addiction">Εθισμός</string>
+    <string name="helpline_category_adolescents">Έφηβοι</string>
+    <string name="helpline_category_adults">Ενήλικες</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Γέννηση</string>
+    <string name="helpline_category_bullying">Εκφοβισμός</string>
+    <string name="helpline_category_children">Παιδιά</string>
+    <string name="helpline_category_crime">Έγκλημα</string>
+    <string name="helpline_category_crime_victims">Θύματα εγκλήματος</string>
+    <string name="helpline_category_corruption">Διαφθορά</string>
+    <string name="helpline_category_discrimination">Διακρίσεις</string>
+    <string name="helpline_category_domestic_violence">Ενδοοικογενειακή βία</string>
+    <string name="helpline_category_drugs">Ναρκωτικά</string>
+    <string name="helpline_category_emotional_support">Συναισθηματική υποστήριξη</string>
+    <string name="helpline_category_family">Οικογένεια</string>
+    <string name="helpline_category_gambling">Τζόγος</string>
+    <string name="helpline_category_gender">Φύλο</string>
+    <string name="helpline_category_generic">Γενικά</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Ανθρώπινα δικαιώματα</string>
+    <string name="helpline_category_human_trafficking">Διακίνηση ανθρώπων</string>
+    <string name="helpline_category_immigration">Μετανάστευση</string>
+    <string name="helpline_category_legal_aid">Νομική βοήθεια</string>
+    <string name="helpline_category_lgbtq">ΛΟΑΤΚ+</string>
+    <string name="helpline_category_men">Άνδρες</string>
+    <string name="helpline_category_mental_health">Ψυχική υγεία</string>
+    <string name="helpline_category_missing_children">Αγνοούμενα παιδιά</string>
+    <string name="helpline_category_mothers">Μητέρες</string>
+    <string name="helpline_category_muslim">Μουσουλμάνοι</string>
+    <string name="helpline_category_parents">Γονείς</string>
+    <string name="helpline_category_pregnancy">Κύηση</string>
+    <string name="helpline_category_psychological">Ψυχολογικές</string>
+    <string name="helpline_category_religion">Θρησκεία</string>
+    <string name="helpline_category_senior">Ηλικιωμένοι</string>
+    <string name="helpline_category_sexual_abuse">Σεξουαλική παρενόχληση</string>
+    <string name="helpline_category_sexual_assault">Σεξουαλική επίθεση</string>
+    <string name="helpline_category_sexual_rights">Σεξουαλικά δικαιώματα</string>
+    <string name="helpline_category_sexuality">Σεξουαλικότητα</string>
+    <string name="helpline_category_soldiers">Στρατιώτες</string>
+    <string name="helpline_category_suicide">Αποφυγή αυτοκτονίας</string>
+    <string name="helpline_category_trans">Διεμφυλικά</string>
+    <string name="helpline_category_veterans">Βετεράνοι</string>
+    <string name="helpline_category_violence">Βία</string>
+    <string name="helpline_category_war">Πόλεμος</string>
+    <string name="helpline_category_women">Γυναίκες</string>
+    <string name="helpline_category_youth">Νεολαία</string>
+</resources>

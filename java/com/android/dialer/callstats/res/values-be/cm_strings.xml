@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Падрабязная статыстыка кантакту</string>
+    <string name="call_stats_incoming">Уваходных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Выходных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Прапушчаных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Заблакіраваных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Усяго: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Усяго: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Дата пачатку</string>
+    <string name="call_stats_filter_to">Дата завяршэння</string>
+    <string name="call_stats_filter_picker_title">Дыяпазон выбару</string>
+    <string name="date_quick_selection">Хуткі выбар</string>
+    <string name="date_qs_currentmonth">Бягучы месяц</string>
+    <string name="date_qs_currentquarter">Бягучы квартал</string>
+    <string name="date_qs_currentyear">Бягучы год</string>
+    <string name="date_qs_lastweek">Апошні тыдзень</string>
+    <string name="date_qs_lastmonth">Апошні месяц</string>
+    <string name="date_qs_lastquarter">Апошні квартал</string>
+    <string name="date_qs_lastyear">Апошні год</string>
+    <string name="call_stats_date_filter">Карэкціраваць дыяпазон часу</string>
+    <string name="call_stats_reset_filter">Скінуць дыяпазон часу</string>
+    <string name="call_stats_sort_by_count">Сартаваць па колькасці выклікаў</string>
+    <string name="call_stats_title_for_number">Гэты нумар</string>
+    <string name="call_stats_title_of_total">З усіх</string>
+    <string name="call_stats_title_durations">Працягласць выклікаў</string>
+    <string name="call_stats_title_count">Колькасць выклікаў</string>
+    <string name="call_stats_title_average_duration">Сярэдняя працягласць выклікаў</string>
+    <string name="recent_calls_no_items_in_range">Журнал выклікаў не змяшчае запісаў за азначаны перыяд.</string>
+</resources>

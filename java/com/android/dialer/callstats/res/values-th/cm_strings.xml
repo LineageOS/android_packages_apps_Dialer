@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">รายละเอียดสถิติการติดต่อ</string>
+    <string name="call_stats_incoming">สายเข้า: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">โทรออก: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">ไม่ได้รับ: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">บล็อค: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">ทั้งหมด: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">ทั้งหมด: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">วันที่เริ่มต้น</string>
+    <string name="call_stats_filter_to">วันที่สิ้นสุด</string>
+    <string name="call_stats_filter_picker_title">ขอบเขตตัวกรอง</string>
+    <string name="date_quick_selection">เลือกแบบรวดเร็ว</string>
+    <string name="date_qs_currentmonth">เดือนนี้</string>
+    <string name="date_qs_currentquarter">ไตรมาสปัจจุบัน</string>
+    <string name="date_qs_currentyear">ปีนี้</string>
+    <string name="date_qs_lastweek">สัปดาห์ที่แล้ว</string>
+    <string name="date_qs_lastmonth">เดือนที่แล้ว</string>
+    <string name="date_qs_lastquarter">ไตรมาสล่าสุด</string>
+    <string name="date_qs_lastyear">ปีที่แล้ว</string>
+    <string name="call_stats_date_filter">ปรับขอบเขตเวลา</string>
+    <string name="call_stats_reset_filter">รีเซ็ตขอบเขตเวลา</string>
+    <string name="call_stats_sort_by_duration">เรียงตามระยะเวลาการโทร</string>
+    <string name="call_stats_sort_by_count">เรียงตามจำนวนครั้งการโทร</string>
+    <string name="call_stats_title_for_number">หมายเลขนี้</string>
+    <string name="call_stats_title_of_total">จากทั้งหมด</string>
+    <string name="call_stats_title_durations">ระยะเวลาการโทร</string>
+    <string name="call_stats_title_count">จำนวนการโทร</string>
+    <string name="call_stats_title_average_duration">เวลาโทรเฉลี่ย</string>
+    <string name="recent_calls_no_items_in_range">ประวัติการโทรของคุณจะไม่นับการโทรในช่วงเวลาที่กำหนด</string>
+</resources>

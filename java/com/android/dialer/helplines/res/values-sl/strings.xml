@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">Tel. št. za pomoč</string>
+    <string name="helplines_loading">Nalaganje \u2026</string>
+    <string name="helplines_empty">Ni najdenih tel. št. za pomoč.\nVstavite kartico SIM in poskusite znova</string>
+    <string name="helplines_help">Pomoč</string>
+    <string name="helplines_help_title">Te so varne za klic</string>
+    <string name="helplines_help_message">Nobena od teh številk ne bo prikazana v vaši zgodovini klicev.\nKliknite na kateri koli predmet za več informacij</string>
+    <string name="helplines_help_more_message">Seznam tel. št. za pomoč je izpolnjen s podatki, ki so posodobljeni ročno s strani sodelavcev. Če opazite manjkajoče ali napačne podatke, nas prosimo kontaktirajte na <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
+    <string name="helpline_button_more">Več</string>
+    <string name="unknown_helpline_name">Neznana organizacija</string>
+    <string name="helpline_name">Ime</string>
+    <string name="helpline_org">Organizacija</string>
+    <string name="helpline_categories">Kategorije</string>
+    <string name="helpline_number">Številka</string>
+    <string name="helpline_website">Spletna stran</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_language_cree">Krijščina</string>
+    <string name="helpline_language_english">Angleščina</string>
+    <string name="helpline_language_french">Francoščina</string>
+    <string name="helpline_language_german">Nemščina</string>
+    <string name="helpline_language_inuktitut">Inuktitut</string>
+    <string name="helpline_language_ojibway">Ojibway</string>
+    <string name="helpline_language_turkish">Turščina</string>
+</resources>

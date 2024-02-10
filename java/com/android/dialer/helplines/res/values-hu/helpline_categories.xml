@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">jogsértés, nemi erőszak</string>
+    <string name="helpline_category_acohol">Alkohol</string>
+    <string name="helpline_category_addiction">Függőség</string>
+    <string name="helpline_category_adolescents">Serdülők</string>
+    <string name="helpline_category_adults">Felnőttek</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Szülés, születés</string>
+    <string name="helpline_category_bullying">Zaklatás</string>
+    <string name="helpline_category_children">Gyermekek</string>
+    <string name="helpline_category_crime">Bűnügy</string>
+    <string name="helpline_category_crime_victims">Bűncselekmények áldozatai</string>
+    <string name="helpline_category_corruption">Korrupció</string>
+    <string name="helpline_category_discrimination">Megkülönböztetés</string>
+    <string name="helpline_category_domestic_violence">Családon belüli erőszak</string>
+    <string name="helpline_category_drugs">Drogok</string>
+    <string name="helpline_category_emotional_support">Érzelmi támogatás</string>
+    <string name="helpline_category_family">Család</string>
+    <string name="helpline_category_gambling">Szerencsejáték</string>
+    <string name="helpline_category_gender">Nemiséggel kapcsolatos</string>
+    <string name="helpline_category_generic">Általános</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Emberi jogok</string>
+    <string name="helpline_category_human_trafficking">Embercsempészet</string>
+    <string name="helpline_category_immigration">Migránskérdés</string>
+    <string name="helpline_category_legal_aid">Jogsegély</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Férfiak</string>
+    <string name="helpline_category_mental_health">Mentális egészség</string>
+    <string name="helpline_category_missing_children">Elveszett gyermekek</string>
+    <string name="helpline_category_mothers">Anyák</string>
+    <string name="helpline_category_muslim">Muszlim</string>
+    <string name="helpline_category_parents">Szülők</string>
+    <string name="helpline_category_pregnancy">Terhesség, várandósság</string>
+    <string name="helpline_category_psychological">Pszichológiai</string>
+    <string name="helpline_category_religion">Vallási</string>
+    <string name="helpline_category_senior">Idősek</string>
+    <string name="helpline_category_sexual_abuse">Szexuális visszaélés</string>
+    <string name="helpline_category_sexual_assault">Szexuális erőszak</string>
+    <string name="helpline_category_sexual_rights">Szexuális jogok</string>
+    <string name="helpline_category_sexuality">Szexualitás</string>
+    <string name="helpline_category_soldiers">Katonák</string>
+    <string name="helpline_category_suicide">Öngyilkosság-megelőzés</string>
+    <string name="helpline_category_trans">Transzneműek</string>
+    <string name="helpline_category_veterans">Veteránok</string>
+    <string name="helpline_category_violence">Erőszak</string>
+    <string name="helpline_category_war">Háború</string>
+    <string name="helpline_category_women">Nők</string>
+    <string name="helpline_category_youth">Fiatalok</string>
+</resources>

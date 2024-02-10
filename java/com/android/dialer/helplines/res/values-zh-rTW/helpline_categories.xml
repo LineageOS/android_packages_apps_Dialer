@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">虐待 </string>
+    <string name="helpline_category_acohol">酗酒</string>
+    <string name="helpline_category_addiction">上癮</string>
+    <string name="helpline_category_adolescents">青少年</string>
+    <string name="helpline_category_adults">成人</string>
+    <string name="helpline_category_aids">愛滋病</string>
+    <string name="helpline_category_birth">生育</string>
+    <string name="helpline_category_bullying">霸凌行為</string>
+    <string name="helpline_category_children">兒童</string>
+    <string name="helpline_category_crime">犯罪</string>
+    <string name="helpline_category_crime_victims">犯罪受害者</string>
+    <string name="helpline_category_corruption">貪污</string>
+    <string name="helpline_category_discrimination">歧視</string>
+    <string name="helpline_category_domestic_violence">家暴</string>
+    <string name="helpline_category_drugs">藥物</string>
+    <string name="helpline_category_emotional_support">情緒扶持</string>
+    <string name="helpline_category_family">家庭</string>
+    <string name="helpline_category_gambling">賭博</string>
+    <string name="helpline_category_gender">性別</string>
+    <string name="helpline_category_generic">一般</string>
+    <string name="helpline_category_hiv">人類免疫缺乏病毒</string>
+    <string name="helpline_category_human_rights">人權</string>
+    <string name="helpline_category_human_trafficking">人口販賣</string>
+    <string name="helpline_category_immigration">移民入境</string>
+    <string name="helpline_category_legal_aid">法律援助</string>
+    <string name="helpline_category_lgbtq">多元性別</string>
+    <string name="helpline_category_men">男人</string>
+    <string name="helpline_category_mental_health">心理健康</string>
+    <string name="helpline_category_missing_children">失踪兒童</string>
+    <string name="helpline_category_mothers">母親</string>
+    <string name="helpline_category_muslim">穆斯林</string>
+    <string name="helpline_category_parents">家長</string>
+    <string name="helpline_category_pregnancy">懷孕</string>
+    <string name="helpline_category_psychological">心理</string>
+    <string name="helpline_category_religion">宗教</string>
+    <string name="helpline_category_senior">長者</string>
+    <string name="helpline_category_sexual_abuse">性虐待</string>
+    <string name="helpline_category_sexual_assault">性侵犯</string>
+    <string name="helpline_category_sexual_rights">性權利</string>
+    <string name="helpline_category_sexuality">性慾</string>
+    <string name="helpline_category_soldiers">士兵</string>
+    <string name="helpline_category_suicide">自殺預防</string>
+    <string name="helpline_category_trans">跨性別者</string>
+    <string name="helpline_category_veterans">退伍軍人</string>
+    <string name="helpline_category_violence">暴力</string>
+    <string name="helpline_category_war">戰爭</string>
+    <string name="helpline_category_women">女人</string>
+    <string name="helpline_category_youth">青年</string>
+</resources>

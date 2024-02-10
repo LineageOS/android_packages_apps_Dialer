@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Väärkohtlemine</string>
+    <string name="helpline_category_acohol">Alkohol</string>
+    <string name="helpline_category_addiction">Sõltuvus</string>
+    <string name="helpline_category_adolescents">Noorukid</string>
+    <string name="helpline_category_adults">Täiskasvanud</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Sünd</string>
+    <string name="helpline_category_children">Lapsed</string>
+    <string name="helpline_category_crime">Kuritegu</string>
+    <string name="helpline_category_corruption">Korruptsioon</string>
+    <string name="helpline_category_discrimination">Diskrimineerimine</string>
+    <string name="helpline_category_drugs">Narkootikumid</string>
+    <string name="helpline_category_family">Perekond</string>
+    <string name="helpline_category_gambling">Hasartmängud</string>
+    <string name="helpline_category_gender">Sugu</string>
+    <string name="helpline_category_generic">Üldine</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Inimõigused</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Mehed</string>
+    <string name="helpline_category_missing_children">Kadunud lapsed</string>
+    <string name="helpline_category_mothers">Emad</string>
+    <string name="helpline_category_muslim">Moslemid</string>
+    <string name="helpline_category_parents">Vanemad</string>
+    <string name="helpline_category_pregnancy">Rasedus</string>
+    <string name="helpline_category_psychological">Psühholoogiline</string>
+    <string name="helpline_category_religion">Religioon</string>
+    <string name="helpline_category_senior">Vanurid</string>
+    <string name="helpline_category_sexuality">Seksuaalsus</string>
+    <string name="helpline_category_soldiers">Sõdurid</string>
+    <string name="helpline_category_trans">Transsoolised</string>
+    <string name="helpline_category_veterans">Veteranid</string>
+    <string name="helpline_category_violence">Vägivald</string>
+    <string name="helpline_category_war">Sõda</string>
+    <string name="helpline_category_women">Naised</string>
+    <string name="helpline_category_youth">Noored</string>
+</resources>

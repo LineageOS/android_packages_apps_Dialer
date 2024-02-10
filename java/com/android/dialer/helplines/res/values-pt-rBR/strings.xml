@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">Linhas de ajuda</string>
+    <string name="helplines_loading">Carregando\u2026</string>
+    <string name="helplines_help">Ajuda</string>
+    <string name="helplines_help_title">Estes números são seguros para chamar</string>
+    <string name="helplines_help_message">Nenhum destes números aparecerá no seu histórico de chamadas.\nVocê pode clicar em qualquer um deles para obter mais informações</string>
+    <string name="helpline_button_more">Mais</string>
+    <string name="unknown_helpline_name">Organização desconhecida</string>
+    <string name="helpline_name">Nome</string>
+    <string name="helpline_org">Organização</string>
+    <string name="helpline_categories">Categorias</string>
+    <string name="helpline_number">Número</string>
+    <string name="helpline_website">Site</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Linha de Ajuda Narcóticos Anônimos">%1$s</xliff:g> (<xliff:g id="helpline_county" example="BR">%2$s</xliff:g>)</string>
+    <string name="helpline_language_cree">Cree</string>
+    <string name="helpline_language_english">Inglês</string>
+    <string name="helpline_language_french">Francês</string>
+    <string name="helpline_language_german">Alemão</string>
+    <string name="helpline_language_inuktitut">Inuctitute</string>
+    <string name="helpline_language_ojibway">Ojíbue</string>
+    <string name="helpline_language_turkish">Turco</string>
+</resources>
