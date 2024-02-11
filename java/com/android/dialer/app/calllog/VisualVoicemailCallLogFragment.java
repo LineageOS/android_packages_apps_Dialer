@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
- * Copyright (C) 2023 The LineageOS Project
+ * Copyright (C) 2023-2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.dialer.app.R;
+import com.android.dialer.R;
 import com.android.dialer.app.voicemail.VoicemailAudioManager;
 import com.android.dialer.app.voicemail.VoicemailErrorManager;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
@@ -66,7 +66,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   }
 
   @Override
-  public void onActivityCreated(Bundle savedInstanceState) {
+  public void onCreate(Bundle savedInstanceState) {
     voicemailPlaybackPresenter = VoicemailPlaybackPresenter.getInstance(
             (AppCompatActivity) getActivity(), savedInstanceState);
     if (PermissionsUtil.hasReadVoicemailPermissions(getContext())
@@ -77,10 +77,15 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
               VoicemailContract.Status.CONTENT_URI, true, voicemailStatusObserver);
     } else {
       LogUtil.w(
-          "VisualVoicemailCallLogFragment.onActivityCreated",
+          "VisualVoicemailCallLogFragment.onCreate",
           "read voicemail permission unavailable.");
     }
-    super.onActivityCreated(savedInstanceState);
+    super.onCreate(savedInstanceState);
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
 
     preSyncVoicemailStatusCheckExecutor =
         DialerExecutorComponent.get(getContext())
@@ -105,7 +110,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
               voicemailErrorManager.getContentObserver());
     } else {
       LogUtil.w(
-          "VisualVoicemailCallLogFragment.onActivityCreated",
+          "VisualVoicemailCallLogFragment.onViewCreated",
           "read voicemail permission unavailable.");
     }
   }
