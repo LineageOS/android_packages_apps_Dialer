@@ -117,14 +117,15 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
             }
           }
 
-          phoneAccount =
-              new PhoneAccountHandle(
-                  ComponentName.unflattenFromString(cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME)),
-                  cursor.getString(PHONE_ACCOUNT_ID));
-          TelephonyManager telephonyManager =
-              context
-                  .getSystemService(TelephonyManager.class)
-                  .createForPhoneAccountHandle(phoneAccount);
+          TelephonyManager telephonyManager = null;
+          ComponentName componentName = ComponentName.unflattenFromString(
+                  cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME));
+          if (componentName != null) {
+            phoneAccount =
+                    new PhoneAccountHandle(componentName, cursor.getString(PHONE_ACCOUNT_ID));
+            telephonyManager = context.getSystemService(TelephonyManager.class)
+                    .createForPhoneAccountHandle(phoneAccount);
+          }
           if (telephonyManager == null) {
             // can happen when trying to fetch voicemails from a SIM that is no longer on the
             // device
