@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
- * Copyright (C) 2023 The LineageOS Project
+ * Copyright (C) 2023-2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,7 +95,7 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
 
     if (photoInfo.getIsBlocked()) {
       // Whether the number is blocked takes precedence over the spam status.
-      request = requestManager.load(R.drawable.ic_block_grey_48dp);
+      request = requestManager.load(R.drawable.quantum_ic_block_vd_theme_24);
 
     } else if (photoInfo.getIsSpam()) {
       request = requestManager.load(R.drawable.quantum_ic_report_vd_red_24);
