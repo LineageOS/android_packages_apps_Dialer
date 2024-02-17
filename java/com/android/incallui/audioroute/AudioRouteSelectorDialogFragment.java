@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
- * Copyright (C) 2023 The LineageOS Project
+ * Copyright (C) 2023-2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.telecom.CallAudioState;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -157,7 +158,11 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
   private TextView createBluetoothItem(BluetoothDevice bluetoothDevice, boolean selected) {
     TextView textView =
         (TextView) getLayoutInflater().inflate(R.layout.audioroute_item, null, false);
-    textView.setText(BluetoothUtil.getAliasName(bluetoothDevice));
+    String alias = BluetoothUtil.getAliasName(bluetoothDevice);
+    if (TextUtils.isEmpty(alias)) {
+      alias = getString(R.string.audioroute_bluetooth);
+    }
+    textView.setText(alias);
     if (selected) {
       textView.setSelected(true);
     }
