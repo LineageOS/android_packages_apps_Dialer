@@ -14,12 +14,12 @@
   ~ limitations under the License
   -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-        android:width="24dp"
-        android:height="24dp"
-        android:viewportWidth="24.0"
-        android:viewportHeight="24.0"
-        android:tint="?attr/colorControlNormal">
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960"
+    android:tint="?attr/colorControlNormal">
     <path
         android:fillColor="@android:color/white"
-        android:pathData="M12,7L12,3L2,3v18h20L22,7L12,7zM6,19L4,19v-2h2v2zM6,15L4,15v-2h2v2zM6,11L4,11L4,9h2v2zM6,7L4,7L4,5h2v2zM10,19L8,19v-2h2v2zM10,15L8,15v-2h2v2zM10,11L8,11L8,9h2v2zM10,7L8,7L8,5h2v2zM20,19h-8v-2h2v-2h-2v-2h2v-2h-2L12,9h8v10zM18,11h-2v2h2v-2zM18,15h-2v2h2v-2z"/>
+        android:pathData="M80,840L80,120L480,120L480,280L880,280L880,840L80,840ZM160,760L240,760L240,680L160,680L160,760ZM160,600L240,600L240,520L160,520L160,600ZM160,440L240,440L240,360L160,360L160,440ZM160,280L240,280L240,200L160,200L160,280ZM320,760L400,760L400,680L320,680L320,760ZM320,600L400,600L400,520L320,520L320,600ZM320,440L400,440L400,360L320,360L320,440ZM320,280L400,280L400,200L320,200L320,280ZM480,760L800,760L800,360L480,360L480,440L560,440L560,520L480,520L480,600L560,600L560,680L480,680L480,760ZM640,520L640,440L720,440L720,520L640,520ZM640,680L640,600L720,600L720,680L640,680Z"/>
 </vector>
