@@ -71,10 +71,6 @@ public class MotorolaUtils {
     return isSupportingSprintHdCodec(context);
   }
 
-  public static boolean shouldShowHdIconInNotification(Context context) {
-    return isSupportingSprintHdCodec(context);
-  }
-
   public static boolean shouldShowWifiIconInCallLog(Context context, int features) {
     return (features & Calls.FEATURES_WIFI) == Calls.FEATURES_WIFI
         && isSupportingSprintWifiCall(context);
