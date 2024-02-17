@@ -1,25 +1,15 @@
 <!--
-  ~ Copyright (C) 2018 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-  -->
+  SPDX-FileCopyrightText: Material Design Authors / Google LLC
+  SPDX-License-Identifier: Apache-2.0
+-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-        android:width="24dp"
-        android:height="24dp"
-        android:viewportWidth="24.0"
-        android:viewportHeight="24.0"
-        android:tint="?attr/colorControlNormal">
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960"
+    android:tint="?attr/colorControlNormal"
+    android:autoMirrored="true">
     <path
         android:fillColor="@android:color/white"
-        android:pathData="M19.59,7L12,14.59 6.41,9H11V7H3v8h2v-4.59l7,7 9,-9z"/>
+        android:pathData="M480,697L200,417L200,600L120,600L120,280L440,280L440,360L256,360L480,584L784,280L840,337L480,697Z"/>
 </vector>
