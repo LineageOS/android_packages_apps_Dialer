@@ -630,12 +630,6 @@ public class StatusBarNotifier
             == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST
         || call.isVideoCall()) {
       return R.drawable.quantum_ic_videocam_vd_white_24;
-    } else if (call.hasProperty(PROPERTY_HIGH_DEF_AUDIO)
-        && MotorolaUtils.shouldShowHdIconInNotification(context)) {
-      // Normally when a call is ongoing the status bar displays an icon of a phone. This is a
-      // helpful hint for users so they know how to get back to the call. For Sprint HD calls, we
-      // replace this icon with an icon of a phone with a HD badge. This is a carrier requirement.
-      return R.drawable.ic_hd_call;
     } else if (call.hasProperty(Details.PROPERTY_HAS_CDMA_VOICE_PRIVACY)) {
       return R.drawable.quantum_ic_phone_locked_vd_theme_24;
     }
