@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c0d56e9_fba009bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-02-18T11:28:14Z",
+      "side": 1,
+      "message": "I can\u0027t test it myself besides the fact that a populated database (using the simulation component of dialer) doesn\u0027t show the play icons without this patch and does again with them. I\u0027d tend to either get someone to test very soon (TM) or blind merge and hope for the best :)",
+      "revId": "97871ce14e68ed0910f14609089c73f3c217764d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
