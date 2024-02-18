@@ -34,6 +34,24 @@
       "parentUuid": "488b75b9_7ac2abaf",
       "revId": "098f93044a52154299b489a5d00e954893e63bcc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d007d221_d82ae925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2024-02-18T11:40:28Z",
+      "side": 1,
+      "message": "nvm I forgot we now use the proper API call",
+      "parentUuid": "631a6805_ee47370a",
+      "revId": "098f93044a52154299b489a5d00e954893e63bcc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
