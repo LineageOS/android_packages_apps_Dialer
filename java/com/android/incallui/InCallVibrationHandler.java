@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
- * Copyright (C) 2023 The LineageOS Project
+ * Copyright (C) 2023-2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.os.VibratorManager;
@@ -145,6 +146,8 @@ public class InCallVibrationHandler extends Handler implements
       0, v1, p1, v2
     };
     VibrationEffect effect = VibrationEffect.createWaveform(pattern, -1);
-    vibrator.vibrate(effect);
+    VibrationAttributes attributes = VibrationAttributes.createForUsage(
+            VibrationAttributes.USAGE_COMMUNICATION_REQUEST);
+    vibrator.vibrate(effect, attributes);
   }
 }

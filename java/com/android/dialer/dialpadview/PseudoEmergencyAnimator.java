@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2023-2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +27,7 @@ import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
@@ -130,8 +132,11 @@ public class PseudoEmergencyAnimator {
     if (context != null) {
       Vibrator vibrator = context.getSystemService(Vibrator.class);
       if (vibrator != null && vibrator.hasVibrator()) {
-        vibrator.vibrate(VibrationEffect.createOneShot(milliseconds,
-                VibrationEffect.DEFAULT_AMPLITUDE));
+        VibrationEffect effect = VibrationEffect.createOneShot(milliseconds,
+                VibrationEffect.DEFAULT_AMPLITUDE);
+        VibrationAttributes attributes = VibrationAttributes.createForUsage(
+                VibrationAttributes.USAGE_COMMUNICATION_REQUEST);
+        vibrator.vibrate(effect, attributes);
       }
     }
   }
