@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2015 The Android Open Source Project
-     Copyright (C) 2023 The LineageOS Project
+     Copyright (C) 2023-2024 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 <com.android.dialer.dialpadview.DialpadView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dialpad_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -72,7 +73,8 @@
       android:id="@+id/digits_container"
       android:layout_width="match_parent"
       android:layout_height="?attr/dialpad_digits_adjustable_height"
-      android:orientation="horizontal">
+      android:orientation="horizontal"
+      tools:layout_height="50dp">
 
     <ImageButton
         android:id="@+id/dialpad_back"
@@ -102,7 +104,8 @@
         android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
         android:tintMode="src_in"
         android:visibility="gone"
-        app:tint="@color/dialer_theme_color_light" />
+        app:tint="@color/dialer_theme_color_light"
+        tools:visibility="visible"/>
 
       <FrameLayout android:layout_width="0dp"
           android:layout_height="match_parent"
@@ -143,6 +146,7 @@
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/dialpad_digits_padding"
         android:paddingRight="@dimen/dialpad_digits_padding"
+        android:layout_margin="@dimen/dialpad_overflow_margin"
         android:background="@drawable/btn_dialpad_key"
         android:contentDescription="@string/description_delete_button"
         android:src="@drawable/quantum_ic_backspace_vd_theme_24"
