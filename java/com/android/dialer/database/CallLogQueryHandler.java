@@ -157,12 +157,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     StringBuilder where = new StringBuilder();
     List<String> selectionArgs = new ArrayList<>();
 
-    // Always hide blocked calls.
-    where.append("(").append(Calls.TYPE).append(" != ?)");
-    selectionArgs.add(Integer.toString(Calls.BLOCKED_TYPE));
-
     // Ignore voicemails marked as deleted
-    where.append(" AND (").append(Voicemails.DELETED).append(" = 0)");
+    where.append("(").append(Voicemails.DELETED).append(" = 0)");
 
     if (newOnly) {
       where.append(" AND (").append(Calls.NEW).append(" = 1)");
