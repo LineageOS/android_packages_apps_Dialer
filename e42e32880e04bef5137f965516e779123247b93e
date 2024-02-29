@@ -69,6 +69,42 @@
       "parentUuid": "a77eae30_f182ad3b",
       "revId": "e42e32880e04bef5137f965516e779123247b93e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "078c95b8_ed6c99d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-02-29T13:16:06Z",
+      "side": 1,
+      "message": "Sounds like a nice feature that could be added. I was just trying to make our dialer behave like others I have seen/used",
+      "parentUuid": "961a392b_44ac4945",
+      "revId": "e42e32880e04bef5137f965516e779123247b93e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "251b8dbf_d641e91d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 30922
+      },
+      "writtenOn": "2024-02-29T13:16:06Z",
+      "side": 1,
+      "message": "I don\u0027t know of any other way to view them other than installing a 3rd-party dialer that does display them, thus this change.",
+      "parentUuid": "920580e6_58bd285e",
+      "revId": "e42e32880e04bef5137f965516e779123247b93e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
