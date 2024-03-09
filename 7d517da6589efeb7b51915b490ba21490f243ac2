@@ -16,6 +16,29 @@
       "message": "These are the minimal changes needed to access the VVM mailbox as well as to sync and receive new messages. There is definitely more to do as far as being able to change PIN, greeting update, etc. But this is a working MVP.",
       "revId": "7d517da6589efeb7b51915b490ba21490f243ac2",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cdd0b3c_3d710a9a",
+        "filename": "java/com/android/voicemail/impl/sms/AdvvmSmsReceiver.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-03-09T12:47:53Z",
+      "side": 1,
+      "message": "no tabs, spaces like the rest of the code",
+      "range": {
+        "startLine": 40,
+        "startChar": 1,
+        "endLine": 43,
+        "endChar": 3
+      },
+      "revId": "7d517da6589efeb7b51915b490ba21490f243ac2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
