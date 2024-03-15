@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
- * Copyright (C) 2023 The LineageOS Project
+ * Copyright (C) 2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,44 +17,21 @@
 
 package com.android.voicemail.impl.configui;
 
-import android.content.Intent;
-import android.preference.PreferenceActivity;
-import android.provider.VoicemailContract;
+import android.os.Bundle;
 
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
+import com.android.dialer.R;
 
 /** Activity launched by simulator->voicemail, provides debug features. */
 @SuppressWarnings("FragmentInjection") // not exported
-public class VoicemailSecretCodeActivity extends PreferenceActivity {
-
-  private Header syncHeader;
+public class VoicemailSecretCodeActivity extends AppCompatActivity {
 
   @Override
-  public void onBuildHeaders(List<Header> target) {
-    super.onBuildHeaders(target);
-    syncHeader = new Header();
-    syncHeader.title = "Sync";
-    target.add(syncHeader);
-
-    Header configOverride = new Header();
-    configOverride.fragment = ConfigOverrideFragment.class.getName();
-    configOverride.title = "VVM config override";
-    target.add(configOverride);
-  }
-
-  @Override
-  public void onHeaderClick(Header header, int position) {
-    if (header == syncHeader) {
-      Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
-      intent.setPackage(getPackageName());
-      sendBroadcast(intent);
-      return;
-    }
-    super.onHeaderClick(header, position);
-  }
-
-  @Override
-  protected boolean isValidFragment(String fragmentName) {
-    return true;
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setTheme(R.style.SettingsStyle);
+    getSupportFragmentManager().beginTransaction()
+      .replace(android.R.id.content, new VoicemailSecretCodeFragment())
+      .commit();
   }
 }

@@ -54,10 +54,9 @@ public class ConfigOverrideFragment extends PreferenceFragmentCompat
   private static final String CONFIG_OVERRIDE_KEY_PREFIX = "vvm_config_override_key_";
 
   @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     PreferenceManager.setDefaultValues(getActivity(), R.xml.vvm_config_override, false);
-    addPreferencesFromResource(R.xml.vvm_config_override);
+    setPreferencesFromResource(R.xml.vvm_config_override, rootKey);
 
     // add listener so the value of a EditTextPreference will be updated to the summary.
     for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
@@ -79,17 +78,6 @@ public class ConfigOverrideFragment extends PreferenceFragmentCompat
       EditTextPreference editTextPreference = (EditTextPreference) preference;
       editTextPreference.setSummary(editTextPreference.getText());
     }
-  }
-
-  @Override
-  public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-      setPreferencesFromResource(R.xml.vvm_config_override, rootKey);
-
-      for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
-        Preference preference = getPreferenceScreen().getPreference(i);
-        preference.setOnPreferenceChangeListener(this);
-        updatePreference(preference);
-      }
   }
 
   @Override
