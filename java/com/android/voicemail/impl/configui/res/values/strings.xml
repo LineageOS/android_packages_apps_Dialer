@@ -17,5 +17,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="vvm_config_override_load_current_key" translatable="false">vvm_config_override_load_current</string>
   <string name="vvm_config_override_enabled_key" translatable="false">vvm_config_override_enabled</string>
-
+  <string name="sync_preference_title">Sync</string>
+  <string name="config_override_preference_title">VVM config override</string>
 </resources>
