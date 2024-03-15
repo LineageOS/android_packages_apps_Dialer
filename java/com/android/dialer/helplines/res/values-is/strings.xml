@@ -20,6 +20,8 @@
     <string name="helplines_empty">Engar hjálparlínur fundust.\nSettu inn SIM-kort og prófaðu aftur</string>
     <string name="helplines_help">Hjálp</string>
     <string name="helplines_help_title">Það er öruggt að hringja í þessi númer</string>
+    <string name="helplines_help_message">Ekkert þessara númera kemur fram í símtalaferlinum þínum.\nÞú getur smellt á atriðin til að fá meiri upplýsingar</string>
+    <string name="helplines_help_more_message">Listinn yfir hjálparlínur byggist á upplýsingum sem þáttakendur fylla er inn handvirkt. Ef þú rekst á upplýsingar sem vantar eða eru rangar, skaltu endilega hafa samband við <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
     <string name="helpline_button_more">Meira</string>
     <string name="unknown_helpline_name">Óþekktur aðili</string>
     <string name="helpline_name">Heiti</string>
