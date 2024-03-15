@@ -37,8 +37,8 @@
     <string name="date_qs_lastyear">Ostatni rok</string>
     <string name="call_stats_date_filter">Dostosuj zakres czasu</string>
     <string name="call_stats_reset_filter">Zresetuj zakres czasu</string>
-    <string name="call_stats_sort_by_duration">Sortuj po długości połączenia</string>
-    <string name="call_stats_sort_by_count">Sortuj po liczbie połączeń</string>
+    <string name="call_stats_sort_by_duration">Sortuj według długości połączenia</string>
+    <string name="call_stats_sort_by_count">Sortuj według liczby połączeń</string>
     <string name="call_stats_title_for_number">Ten numer</string>
     <string name="call_stats_title_of_total">Wszystkich</string>
     <string name="call_stats_title_durations">Czasy połączeń</string>

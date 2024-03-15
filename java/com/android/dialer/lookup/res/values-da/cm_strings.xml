@@ -19,6 +19,6 @@
     <string name="lookup_settings_label">Slå telefonnummer op</string>
     <string name="enable_forward_lookup_title">Slå telefonnummer op, når du ringer</string>
     <string name="enable_forward_lookup_summary">Vis nærliggende steder, ved søgning i telefonen</string>
-    <string name="enable_reverse_lookup_title">Slå telefonnummer op, når du modtager opkald</string>
+    <string name="enable_reverse_lookup_title">Omvendt opslag</string>
     <string name="enable_reverse_lookup_summary">Slå information op om personen, eller stedet, for ukendte numre, ved indgående opkald</string>
 </resources>
