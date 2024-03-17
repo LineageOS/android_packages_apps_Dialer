@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0118f576_fec96957",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-03-17T18:11:52Z",
+      "side": 1,
+      "message": "In java/com/android/voicemail/impl/configui/VoicemailSecretCodeFragment.java\nI generally would implement Preference.OnPreferenceClickListener on that class and set \"this\" as a listener - having only one listener like it\u0027s usually being done, checking for the actually clicked preference by key (which should be declared as private statics) in a switch-case. Solves the line length but isn\u0027t supposed to be a fix for that ^^",
+      "revId": "6dea5d849806c9ddd872db23837b00de218de9fd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45b26b73_70ea8b9a",
+        "filename": "java/com/android/voicemail/impl/configui/VoicemailSecretCodeFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-03-17T18:11:52Z",
+      "side": 1,
+      "message": "line length",
+      "revId": "6dea5d849806c9ddd872db23837b00de218de9fd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
