@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a40c882_6dc52121",
+        "filename": "java/com/android/voicemail/impl/configui/VoicemailSecretCodeFragment.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-03-18T20:20:54Z",
+      "side": 1,
+      "message": "different indentation",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 31
+      },
+      "revId": "de8d6f52ffb47851e24457f2a7b77d1c2cca648c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b100c1fd_52ed51f9",
+        "filename": "java/com/android/voicemail/impl/configui/VoicemailSecretCodeFragment.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-03-18T20:20:54Z",
+      "side": 1,
+      "message": "usually a switch-case, but I guess it\u0027s fine",
+      "revId": "de8d6f52ffb47851e24457f2a7b77d1c2cca648c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
