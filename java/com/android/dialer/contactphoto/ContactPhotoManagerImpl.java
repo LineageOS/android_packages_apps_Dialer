@@ -370,7 +370,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
     if (DEBUG) {
       LogUtil.d("ContactPhotoManagerImpl.onTrimMemory", "onTrimMemory: " + level);
     }
-    if (level >= ComponentCallbacks2.TRIM_MEMORY_MODERATE) {
+    if (level >= ComponentCallbacks2.TRIM_MEMORY_BACKGROUND) {
       // Clear the caches.  Note all pending requests will be removed too.
       clear();
     }
