@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53db65c2_8f7b6661",
+        "filename": "java/com/android/voicemail/impl/configui/res/values/strings.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-04-01T12:21:09Z",
+      "side": 1,
+      "message": "These should be in lineage_strings.xml",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 78
+      },
+      "revId": "9cf5ef233b862fe11759c34c5f26ea49a0aa3d57",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
