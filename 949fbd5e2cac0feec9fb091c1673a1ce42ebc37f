@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01e32bbd_35a12b6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-04-01T12:21:25Z",
+      "side": 1,
+      "message": "See comment in https://review.lineageos.org/c/LineageOS/android_packages_apps_Dialer/+/386206",
+      "revId": "949fbd5e2cac0feec9fb091c1673a1ce42ebc37f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
