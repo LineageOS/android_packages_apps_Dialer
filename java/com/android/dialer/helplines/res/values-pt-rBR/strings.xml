@@ -15,11 +15,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="helplines_name">Linhas de ajuda</string>
+    <string name="helplines_name">Linhas de apoio</string>
     <string name="helplines_loading">Carregando\u2026</string>
+    <string name="helplines_empty">Nenhuma linha de apoio encontrada.\nInsira um cartão SIM e tente novamente</string>
     <string name="helplines_help">Ajuda</string>
     <string name="helplines_help_title">Estes números são seguros para chamar</string>
     <string name="helplines_help_message">Nenhum destes números aparecerá no seu histórico de chamadas.\nVocê pode clicar em qualquer um deles para obter mais informações</string>
+    <string name="helplines_help_more_message">A lista de linhas de apoio é preenchida com informações inseridas manualmente por colaboradores. Se você encontrar informações erradas ou faltando, entre em contato conosco em <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
     <string name="helpline_button_more">Mais</string>
     <string name="unknown_helpline_name">Organização desconhecida</string>
     <string name="helpline_name">Nome</string>
@@ -27,7 +29,7 @@
     <string name="helpline_categories">Categorias</string>
     <string name="helpline_number">Número</string>
     <string name="helpline_website">Site</string>
-    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Linha de Ajuda Narcóticos Anônimos">%1$s</xliff:g> (<xliff:g id="helpline_county" example="BR">%2$s</xliff:g>)</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
     <string name="helpline_language_cree">Cree</string>
     <string name="helpline_language_english">Inglês</string>
     <string name="helpline_language_french">Francês</string>
