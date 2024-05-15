@@ -25,7 +25,7 @@
     <string name="helpline_category_bullying">Bullying</string>
     <string name="helpline_category_children">Crianças</string>
     <string name="helpline_category_crime">Crimes</string>
-    <string name="helpline_category_crime_victims">Vítimas de crimes</string>
+    <string name="helpline_category_crime_victims">Vítimas do Crime</string>
     <string name="helpline_category_corruption">Corrupção</string>
     <string name="helpline_category_discrimination">Discriminação</string>
     <string name="helpline_category_domestic_violence">Violência doméstica</string>
@@ -46,6 +46,7 @@
     <string name="helpline_category_missing_children">Crianças desaparecidas</string>
     <string name="helpline_category_mothers">Mães</string>
     <string name="helpline_category_muslim">Muçulmano</string>
+    <string name="helpline_category_parents">Pais</string>
     <string name="helpline_category_pregnancy">Gravidez</string>
     <string name="helpline_category_psychological">Psicológico</string>
     <string name="helpline_category_religion">Religião</string>
@@ -57,7 +58,7 @@
     <string name="helpline_category_soldiers">Soldados</string>
     <string name="helpline_category_suicide">Prevenção ao suicídio</string>
     <string name="helpline_category_trans">Transgênero</string>
-    <string name="helpline_category_veterans">Veteranos de guerra</string>
+    <string name="helpline_category_veterans">Veteranos</string>
     <string name="helpline_category_violence">Violência</string>
     <string name="helpline_category_war">Guerra</string>
     <string name="helpline_category_women">Mulheres</string>

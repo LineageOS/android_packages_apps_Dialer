@@ -16,9 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_stats_detail_title">Estatísticas detalhadas do contato</string>
     <string name="call_stats_incoming">Recebidas: <xliff:g id="value">%s</xliff:g></string>
-    <string name="call_stats_outgoing">Discadas: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Efetuadas: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_missed">Perdidas: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_blocked">Bloqueadas: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
@@ -37,8 +36,8 @@
     <string name="date_qs_lastyear">Ano passado</string>
     <string name="call_stats_date_filter">Ajustar intervalo de tempo</string>
     <string name="call_stats_reset_filter">Redefinir intervalo de tempo</string>
-    <string name="call_stats_sort_by_duration">Ordenar por duração de chamada</string>
-    <string name="call_stats_sort_by_count">Ordenar por quantidade de chamadas</string>
+    <string name="call_stats_sort_by_duration">Classificar pela duração das chamadas</string>
+    <string name="call_stats_sort_by_count">Classificar pela quantidade de chamadas</string>
     <string name="call_stats_title_for_number">Este número</string>
     <string name="call_stats_title_of_total">Do total</string>
     <string name="call_stats_title_durations">Duração das chamadas</string>
