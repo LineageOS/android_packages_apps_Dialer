@@ -16,6 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Detalhes das estatísticas do contato</string>
     <string name="call_stats_incoming">Recebidas: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_outgoing">Efetuadas: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_missed">Perdidas: <xliff:g id="value">%s</xliff:g></string>
