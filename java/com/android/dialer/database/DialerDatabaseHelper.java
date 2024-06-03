@@ -67,7 +67,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    *   0-98   KitKat
    * </pre>
    */
-  public static final int DATABASE_VERSION = 11;
+  public static final int DATABASE_VERSION = 10;
 
   public static final String DATABASE_NAME = "dialer.db";
 
@@ -206,11 +206,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       oldVersion = 10;
     }
 
-    if (oldVersion < 11) {
-      db.execSQL("DROP TABLE IF EXISTS filtered_numbers_table");
-      oldVersion = 11;
-    }
-
     if (oldVersion != DATABASE_VERSION) {
       throw new IllegalStateException(
           "error upgrading the database to version " + DATABASE_VERSION);
@@ -237,6 +232,10 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
           "DialerDatabaseHelper.onDowngrade", "malformed database version..recreating database");
       setupTables(db);
       return;
+    }
+
+    if (oldVersion == 11) {
+      oldVersion = 10;
     }
 
     if (oldVersion == 70011) {
