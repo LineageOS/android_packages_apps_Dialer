@@ -16,6 +16,24 @@
       "message": "Does this update the db version in the database?",
       "revId": "63d9745d6a4a748c8fd3531213eac2886e01f59f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf59fc5f_50ec483d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-06-19T16:41:56Z",
+      "side": 1,
+      "message": "Yes, we have been doing that for a while for a different version bump: https://review.lineageos.org/c/LineageOS/android_packages_apps_Dialer/+/368446",
+      "parentUuid": "36758627_b435d803",
+      "revId": "63d9745d6a4a748c8fd3531213eac2886e01f59f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
