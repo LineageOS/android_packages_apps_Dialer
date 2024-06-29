@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
- * Copyright (C) 2023 The LineageOS Project
+ * Copyright (C) 2023-2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.res.XmlResourceParser;
 import android.os.Handler;
 import android.os.IBinder;
@@ -28,7 +29,10 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.android.dialer.R;
 import com.android.dialer.callrecord.CallRecording;
@@ -65,6 +69,7 @@ public class CallRecorder implements CallList.Listener {
   private Context context;
   private boolean initialized = false;
   private ICallRecorderService service = null;
+  private Pair<String, Long> pendingRecordLaunch = null;
 
   private final HashSet<RecordingProgressListener> progressListeners = new HashSet<>();
   private final Handler handler = new Handler(Looper.getMainLooper());
@@ -73,6 +78,11 @@ public class CallRecorder implements CallList.Listener {
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
       CallRecorder.this.service = ICallRecorderService.Stub.asInterface(service);
+      Pair<String, Long> pending = CallRecorder.this.pendingRecordLaunch;
+      if (pending != null) {
+        CallRecorder.this.startRecording(pending.first, pending.second);
+        CallRecorder.this.pendingRecordLaunch = null;
+      }
     }
 
     @Override
@@ -125,12 +135,14 @@ public class CallRecorder implements CallList.Listener {
   private void uninitialize() {
     if (initialized) {
       context.unbindService(connection);
+      service = null;
       initialized = false;
     }
   }
 
   public boolean startRecording(final String phoneNumber, final long creationTime) {
     if (service == null) {
+      pendingRecordLaunch = Pair.create(phoneNumber, creationTime);
       return false;
     }
 
@@ -179,6 +191,7 @@ public class CallRecorder implements CallList.Listener {
   }
 
   public void finishRecording() {
+    pendingRecordLaunch = null;
     if (service != null) {
       try {
         final CallRecording recording = service.stopRecording();
@@ -220,28 +233,56 @@ public class CallRecorder implements CallList.Listener {
 
   @Override
   public void onCallListChange(final CallList callList) {
-    if (!initialized && callList.getActiveCall() != null) {
+    DialerCall activeCall = callList.getActiveCall();
+    if (!initialized && activeCall != null) {
       // we'll come here if this is the first active call
       initialize();
+      if (isCallRecordAutostart()) {
+        startRecording(activeCall.getNumber(), activeCall.getCreationTimeMillis());
+      }
     } else {
-      // we can come down this branch to resume a call that was on hold
-      CallRecording active = getActiveRecording();
-      if (active != null) {
-        DialerCall call =
-            callList.getCallWithStateAndNumber(DialerCallState.ONHOLD, active.phoneNumber);
-        if (call != null) {
-          // The call associated with the active recording has been placed
-          // on hold, so stop the recording.
-          finishRecording();
+      String activePhoneNumber = getActiveRecordingPhoneNumber();
+      if (activeCall != null) {
+        if (!TextUtils.equals(activeCall.getNumber(), activePhoneNumber)) {
+          // the call is replaced by another one
+          if (activePhoneNumber != null) {
+            finishRecording();
+          }
+          if (isCallRecordAutostart()) {
+            startRecording(activeCall.getNumber(), activeCall.getCreationTimeMillis());
+          }
+        }
+      } else {
+        // the active call disappeared
+        if (activePhoneNumber != null) {
+          DialerCall call =
+                  callList.getCallWithStateAndNumber(DialerCallState.ONHOLD, activePhoneNumber);
+          if (call != null) {
+            // The call associated with the active recording has been placed
+            // on hold, so stop the recording.
+            finishRecording();
+          }
         }
       }
     }
   }
 
+  @Nullable
+  private String getActiveRecordingPhoneNumber() {
+    String activePhoneNumber = null;
+    CallRecording activeRecording = getActiveRecording();
+    if (activeRecording != null) {
+      activePhoneNumber = activeRecording.phoneNumber;
+    } else if (pendingRecordLaunch != null) {
+      activePhoneNumber = pendingRecordLaunch.first;
+    }
+    return activePhoneNumber;
+  }
+
   @Override
   public void onDisconnect(final DialerCall call) {
-    CallRecording active = getActiveRecording();
-    if (active != null && TextUtils.equals(call.getNumber(), active.phoneNumber)) {
+    String activePhoneNumber = getActiveRecordingPhoneNumber();
+    if (activePhoneNumber != null && TextUtils.equals(call.getNumber(), activePhoneNumber)) {
       // finish the current recording if the call gets disconnected
       finishRecording();
     }
@@ -330,5 +371,20 @@ public class CallRecorder implements CallList.Listener {
     } finally {
         parser.close();
     }
+  }
+
+  private boolean isCallRecordAutostart() {
+    if (!canRecordInCurrentCountry()) {
+      return false;
+    }
+
+    // This replicates PreferenceManager.getDefaultSharedPreferences, except
+    // that we need multi process preferences, as the pref is written in a separate
+    // process (com.android.dialer vs. com.android.incallui)
+    final String prefName = context.getPackageName() + "_preferences";
+    final SharedPreferences prefs = context.createDeviceProtectedStorageContext()
+            .getSharedPreferences(prefName, Context.MODE_MULTI_PROCESS);
+
+    return prefs.getBoolean(context.getString(R.string.call_recording_autostart_key), false);
   }
 }
