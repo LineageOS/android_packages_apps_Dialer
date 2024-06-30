@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a01460_51b56c53",
+        "filename": "java/com/android/dialer/app/res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-06-30T12:13:37Z",
+      "side": 1,
+      "message": "update copyright",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d158cba_a832a831",
+        "filename": "java/com/android/dialer/app/res/xml/sound_settings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-06-30T12:13:37Z",
+      "side": 1,
+      "message": "update copyright",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4607a6e0_84ac44f8",
+        "filename": "java/com/android/dialer/app/settings/SoundSettingsFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-06-30T12:13:37Z",
+      "side": 1,
+      "message": "line length",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf9b83fe_fea6858e",
+        "filename": "java/com/android/incallui/call/CallRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-06-30T12:13:37Z",
+      "side": 1,
+      "message": "Update copyright - 2023-2024",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e72c8ef0_26f279b4",
+        "filename": "java/com/android/incallui/call/CallRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-06-30T12:13:37Z",
+      "side": 1,
+      "message": "what shall we do with this comment?",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab2d4d6_a94f526a",
+        "filename": "java/com/android/incallui/call/CallRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2024-06-30T12:13:37Z",
+      "side": 1,
+      "message": "since android.content.Context is already imported, Context.MODE_MULTI_PROCESS would also work here and wouldn\u0027t require the static import just for this one use",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
