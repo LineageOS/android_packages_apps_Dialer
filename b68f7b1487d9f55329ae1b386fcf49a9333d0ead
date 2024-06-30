@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4dc0f060_960495b4",
+        "filename": "java/com/android/incallui/call/CallRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 33837
+      },
+      "writtenOn": "2024-06-30T15:14:20Z",
+      "side": 1,
+      "message": "It\u0027s not clear what to return. \nThe return value of `startRecording` isn\u0027t well-defined: it can return `true` if whether the recording is starting soon, or return `false` if whether it starts immediately. \nAlso, this return value isn\u0027t used at all.",
+      "parentUuid": "e72c8ef0_26f279b4",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ab2d4d6_a94f526a",
         "filename": "java/com/android/incallui/call/CallRecorder.java",
         "patchSetId": 1
