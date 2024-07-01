@@ -32,6 +32,6 @@
     <string name="call_via_dialog_title">Chamar via\u2026</string>
     <string name="call_log_stats_title">Estatísticas</string>
     <string name="action_menu_helplines">Linhas de ajuda</string>
-    <string name="default_dialer_text">Você deve definir o Telefone como o aplicativo de telefone padrão para usá-lo.</string>
+    <string name="default_dialer_text">Você deve definir o Telefone como o app de telefone padrão para usá-lo.</string>
     <string name="default_dialer_action">Definir como padrão</string>
 </resources>
