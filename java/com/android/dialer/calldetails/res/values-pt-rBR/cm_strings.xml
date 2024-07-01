@@ -19,5 +19,5 @@
         <item quantity="one">Reproduzir a gravação</item>
         <item quantity="other">Reproduzir as gravações</item>
     </plurals>
-    <string name="call_playback_no_app_found_toast">Não foi encontrado nenhum aplicativo para reproduzir a gravação selecionada.</string>
+    <string name="call_playback_no_app_found_toast">Não foi encontrado nenhum app para reproduzir a gravação selecionada.</string>
 </resources>
