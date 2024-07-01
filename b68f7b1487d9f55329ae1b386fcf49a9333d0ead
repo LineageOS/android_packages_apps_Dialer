@@ -18,6 +18,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fa75a65_abe19a8b",
+        "filename": "java/com/android/dialer/app/res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 33837
+      },
+      "writtenOn": "2024-07-01T13:29:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1a01460_51b56c53",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d158cba_a832a831",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-30T12:13:37Z",
       "side": 1,
       "message": "update copyright",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb432e3a_d9019599",
+        "filename": "java/com/android/dialer/app/res/xml/sound_settings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33837
+      },
+      "writtenOn": "2024-07-01T13:29:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d158cba_a832a831",
       "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
@@ -52,6 +88,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e35eee9e_6da94185",
+        "filename": "java/com/android/dialer/app/settings/SoundSettingsFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 33837
+      },
+      "writtenOn": "2024-07-01T13:29:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4607a6e0_84ac44f8",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf9b83fe_fea6858e",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-06-30T12:13:37Z",
       "side": 1,
       "message": "Update copyright - 2023-2024",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9676f90_ce1972d8",
+        "filename": "java/com/android/incallui/call/CallRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33837
+      },
+      "writtenOn": "2024-07-01T13:29:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf9b83fe_fea6858e",
       "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
@@ -104,6 +176,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd73253_1faf8c06",
+        "filename": "java/com/android/incallui/call/CallRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 33837
+      },
+      "writtenOn": "2024-07-01T13:29:19Z",
+      "side": 1,
+      "message": "Removed the comment as it doesn\u0027t seem important.",
+      "parentUuid": "4dc0f060_960495b4",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ab2d4d6_a94f526a",
@@ -117,6 +207,24 @@
       "writtenOn": "2024-06-30T12:13:37Z",
       "side": 1,
       "message": "since android.content.Context is already imported, Context.MODE_MULTI_PROCESS would also work here and wouldn\u0027t require the static import just for this one use",
+      "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67825f01_655a6356",
+        "filename": "java/com/android/incallui/call/CallRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 33837
+      },
+      "writtenOn": "2024-07-01T13:29:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ab2d4d6_a94f526a",
       "revId": "b68f7b1487d9f55329ae1b386fcf49a9333d0ead",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
