@@ -16,6 +16,24 @@
       "message": "Question: I don\u0027t see any check for canRecordInCurrentCountry() - is this already handled somewhere else I am missing? Because this should still be a factor when autorecording",
       "revId": "4160e2069b8328ebcde0e6891a0a6b1aeb870016",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dc7611f_ec88ce3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 33837
+      },
+      "writtenOn": "2024-07-07T10:44:09Z",
+      "side": 1,
+      "message": "`isCallRecordAutostart()` calls `canRecordInCurrentCountry()` and return false if it is not allowed.",
+      "parentUuid": "93a31f99_48f2e889",
+      "revId": "4160e2069b8328ebcde0e6891a0a6b1aeb870016",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
