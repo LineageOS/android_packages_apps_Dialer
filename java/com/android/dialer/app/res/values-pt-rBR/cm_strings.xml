@@ -17,9 +17,9 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="incall_category_title">Em chamada</string>
-    <string name="incall_enable_dnd_title">Ativar o modo Não Perturbe durante as chamadas</string>
-    <string name="incall_vibrate_outgoing_title">Vibrar quando a chamada for atendida</string>
-    <string name="incall_vibrate_call_waiting_title">Vibrar quando uma chamada estiver em espera</string>
+    <string name="incall_enable_dnd_title">Ativar o modo Não Perturbe</string>
+    <string name="incall_vibrate_outgoing_title">Vibrar ao atender</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrar com chamada em espera</string>
     <string name="incall_vibrate_hangup_title">Vibrar ao encerrar</string>
     <string name="incall_vibrate_45_title">Vibrar a cada minuto</string>
     <string name="incall_vibrate_45_summary">Vibrar aos 45 segundos de cada minuto durante chamadas efetuadas</string>
