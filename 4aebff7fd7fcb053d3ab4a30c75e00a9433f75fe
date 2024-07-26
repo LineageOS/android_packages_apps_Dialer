@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e653b3_2a54a7fa",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2024-07-26T18:08:36Z",
+      "side": 1,
+      "message": "final UserManager userManager \u003d\n        getContext().getSystemService(UserManager.class);",
+      "revId": "4aebff7fd7fcb053d3ab4a30c75e00a9433f75fe",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
