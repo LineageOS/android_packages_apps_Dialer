@@ -90,6 +90,7 @@
 
     <uses-permission android:name="com.android.dialer.permission.DIALER_ORIGIN" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
 
@@ -560,7 +561,7 @@
             android:name="com.android.incallui.InCallServiceImpl"
             android:directBootAware="true"
             android:exported="true"
-            android:foregroundServiceType="phoneCall"
+            android:foregroundServiceType="phoneCall|microphone"
             android:permission="android.permission.BIND_INCALL_SERVICE">
             <meta-data
                 android:name="android.telecom.IN_CALL_SERVICE_UI"
