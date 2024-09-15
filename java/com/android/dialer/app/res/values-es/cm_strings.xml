@@ -31,4 +31,7 @@
     <string name="call_via">Llamar a través de</string>
     <string name="call_via_dialog_title">Llamar a través de\u2026</string>
     <string name="call_log_stats_title">Estadísticas</string>
+    <string name="action_menu_helplines">Líneas de ayuda telefónica</string>
+    <string name="default_dialer_text">Debes establecer Teléfono como aplicación predeterminada de teléfono para poder usarla.</string>
+    <string name="default_dialer_action">Establecer como predeterminado</string>
 </resources>

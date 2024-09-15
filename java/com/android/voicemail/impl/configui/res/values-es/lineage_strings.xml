@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2013 The CyanogenMod Project
+<!-- Copyright (C) 2024 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,20 +14,6 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <plurals name="hour">
-        <item quantity="one">1 h</item>
-        <item quantity="other">%d h</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 min</item>
-        <item quantity="other">%d mins</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 seg</item>
-        <item quantity="other">%d segs</item>
-    </plurals>
-    <plurals name="call">
-        <item quantity="one">1 llamada</item>
-        <item quantity="other">%d llamadas</item>
-    </plurals>
+  <string name="sync_preference_title">Sincronización</string>
+  <string name="config_override_preference_title">Anulación de la configuración de VVM</string>
 </resources>
