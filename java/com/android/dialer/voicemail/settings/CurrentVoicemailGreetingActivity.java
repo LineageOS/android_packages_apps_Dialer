@@ -26,9 +26,9 @@ import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.R;
+import com.android.dialer.app.BaseActivity;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.widget.DialerToolbar;
 
@@ -36,7 +36,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 /** Activity to display current voicemail greeting and allow user to navigate to record a new one */
-public class CurrentVoicemailGreetingActivity extends AppCompatActivity {
+public class CurrentVoicemailGreetingActivity extends BaseActivity {
   public static final String VOICEMAIL_GREETING_FILEPATH_KEY = "canonVoicemailGreetingFilePathKey";
 
   private final ActivityResultLauncher<String> audioPermissionLauncher = registerForActivityResult(
@@ -61,6 +61,7 @@ public class CurrentVoicemailGreetingActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_current_voicemail_greeting);
+    setupInsets(findViewById(R.id.main_layout));
 
     playbackDisplay = findViewById(R.id.current_voicemail_greeting_recording_display);
     playbackProgressLabel = findViewById(R.id.playback_progress_text_view);

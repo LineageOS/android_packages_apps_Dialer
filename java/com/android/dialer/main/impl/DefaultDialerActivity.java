@@ -13,12 +13,12 @@ import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.R;
+import com.android.dialer.app.BaseActivity;
 import com.android.dialer.widget.EmptyContentView;
 
-public class DefaultDialerActivity extends AppCompatActivity implements
+public class DefaultDialerActivity extends BaseActivity implements
         EmptyContentView.OnEmptyViewActionButtonClickedListener {
 
     private RoleManager mRoleManager;
@@ -44,6 +44,8 @@ public class DefaultDialerActivity extends AppCompatActivity implements
         emptyContentView.setActionLabel(R.string.default_dialer_action);
         emptyContentView.setActionClickedListener(this);
         emptyContentView.setVisibility(View.VISIBLE);
+
+        setupInsets(findViewById(R.id.main_layout));
     }
 
     @Override

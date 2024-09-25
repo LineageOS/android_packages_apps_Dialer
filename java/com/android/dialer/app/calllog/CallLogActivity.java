@@ -97,6 +97,8 @@ public class CallLogActivity extends TransactionSafeActivity implements
 
     viewPagerTabs.setViewPager(viewPager);
     viewPager.setCurrentItem(startingTab);
+
+    setupInsets(findViewById(R.id.calllog_frame));
   }
 
   @Override

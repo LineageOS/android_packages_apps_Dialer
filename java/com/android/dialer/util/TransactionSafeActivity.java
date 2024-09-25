@@ -20,13 +20,14 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.dialer.app.BaseActivity;
 
 /**
  * A common superclass that keeps track of whether an {@link Activity} has saved its state yet or
  * not.
  */
-public abstract class TransactionSafeActivity extends AppCompatActivity {
+public abstract class TransactionSafeActivity extends BaseActivity {
 
   private boolean isSafeToCommitTransactions;
 

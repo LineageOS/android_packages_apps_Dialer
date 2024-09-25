@@ -43,9 +43,9 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.R;
+import com.android.dialer.app.BaseActivity;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
@@ -63,7 +63,7 @@ import java.lang.ref.WeakReference;
  * traditional voicemail through phone call. The intent to launch this activity must contain {@link
  * VoicemailClient#PARAM_PHONE_ACCOUNT_HANDLE}
  */
-public class VoicemailChangePinActivity extends AppCompatActivity
+public class VoicemailChangePinActivity extends BaseActivity
     implements OnClickListener, OnEditorActionListener, TextWatcher {
 
   private static final String TAG = "VmChangePinActivity";
@@ -328,6 +328,7 @@ public class VoicemailChangePinActivity extends AppCompatActivity
             .getVoicemailClient()
             .createPinChanger(getApplicationContext(), phoneAccountHandle);
     setContentView(R.layout.voicemail_change_pin);
+    setupInsets(findViewById(R.id.main_layout));
     setTitle(R.string.change_pin_title);
 
     readPinLength();

@@ -29,9 +29,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.R;
+import com.android.dialer.app.BaseActivity;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;
@@ -39,7 +39,7 @@ import com.android.dialer.widget.DialerToolbar;
 import com.android.dialer.widget.MessageFragment;
 
 /** Activity used to send post call messages after a phone call. */
-public class PostCallActivity extends AppCompatActivity implements MessageFragment.Listener {
+public class PostCallActivity extends BaseActivity implements MessageFragment.Listener {
 
   public static final String KEY_PHONE_NUMBER = "phone_number";
   public static final String KEY_MESSAGE = "message";
@@ -66,6 +66,8 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
   protected void onCreate(@Nullable Bundle bundle) {
     super.onCreate(bundle);
     setContentView(R.layout.post_call_activity);
+
+    setupInsets(findViewById(R.id.main_layout));
 
     ((DialerToolbar) findViewById(R.id.toolbar)).setTitle(R.string.post_call_message);
     useRcs = getIntent().getBooleanExtra(KEY_RCS_POST_CALL, false);

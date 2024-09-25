@@ -173,6 +173,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     initUiListeners();
     initLayout(savedInstanceState);
     SmartDialPrefix.initializeNanpSettings(activity);
+
+    activity.setupInsets(activity.findViewById(R.id.root_layout));
   }
 
   /** should be called before {@link AppCompatActivity#setContentView(int)}. */
