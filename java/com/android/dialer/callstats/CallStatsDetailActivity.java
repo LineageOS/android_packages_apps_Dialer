@@ -31,11 +31,11 @@ import android.view.View;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.android.dialer.R;
 import com.android.dialer.app.AccountSelectionActivity;
+import com.android.dialer.app.BaseActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.CallTypeIconsView;
@@ -57,7 +57,7 @@ import java.util.concurrent.Executors;
 /**
  * Activity to display detailed information about a callstat item
  */
-public class CallStatsDetailActivity extends AppCompatActivity implements
+public class CallStatsDetailActivity extends BaseActivity implements
     View.OnClickListener, View.OnLongClickListener {
   private static final String TAG = "CallStatsDetailActivity";
 
@@ -179,6 +179,8 @@ public class CallStatsDetailActivity extends AppCompatActivity implements
       long filterTo = launchIntent.getLongExtra(EXTRA_TO, -1);
       dateFilterView.setText(DateUtils.formatDateRange(this, filterFrom, filterTo, 0));
     }
+
+    setupInsets(findViewById(R.id.call_stats_detail));
   }
 
   @Override

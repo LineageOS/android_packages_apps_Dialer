@@ -23,11 +23,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dialer.R;
+import com.android.dialer.app.BaseActivity;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.SupportUiListener;
@@ -37,7 +37,7 @@ import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.widget.DialerToolbar;
 
 /** Activity holds RTT transcript. */
-public class RttTranscriptActivity extends AppCompatActivity {
+public class RttTranscriptActivity extends BaseActivity {
 
   public static final String EXTRA_TRANSCRIPT_ID = "extra_transcript_id";
   public static final String EXTRA_PRIMARY_TEXT = "extra_primary_text";
@@ -60,6 +60,7 @@ public class RttTranscriptActivity extends AppCompatActivity {
   protected void onCreate(@Nullable Bundle bundle) {
     super.onCreate(bundle);
     setContentView(R.layout.activity_rtt_transcript);
+    setupInsets(findViewById(R.id.main_layout));
     toolbar = findViewById(R.id.toolbar);
     toolbar.setBackgroundColor(getColor(R.color.rtt_transcript_primary_color));
     getWindow().setStatusBarColor(getColor(R.color.rtt_transcript_primary_color_dark));

@@ -33,13 +33,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.android.dialer.R;
+import com.android.dialer.app.BaseActivity;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.lookup.LookupSettingsFragment;
@@ -48,7 +48,7 @@ import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
 import com.android.voicemail.VoicemailClient;
 
 /** Activity for dialer settings. */
-public class DialerSettingsActivity extends AppCompatActivity implements
+public class DialerSettingsActivity extends BaseActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
   protected SharedPreferences preferences;
@@ -97,6 +97,8 @@ public class DialerSettingsActivity extends AppCompatActivity implements
         setTitle(R.string.dialer_settings_label);
       }
     });
+
+    setupInsets(findViewById(R.id.main_layout));
   }
 
   @Override
