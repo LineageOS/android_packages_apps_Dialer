@@ -20,13 +20,13 @@ package com.android.incallui;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.android.dialer.R;
+import com.android.dialer.app.BaseActivity;
 
 /** Shows the {@link ConferenceManagerFragment} */
-public class ManageConferenceActivity extends AppCompatActivity {
+public class ManageConferenceActivity extends BaseActivity {
 
   private boolean isVisible;
 
@@ -42,6 +42,7 @@ public class ManageConferenceActivity extends AppCompatActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     setContentView(R.layout.activity_manage_conference);
+    setupInsets(findViewById(R.id.manageConferencePanel));
     Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.manageConferencePanel);
     if (fragment == null) {
       fragment = new ConferenceManagerFragment();

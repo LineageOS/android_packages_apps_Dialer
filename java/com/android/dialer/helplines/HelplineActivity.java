@@ -41,11 +41,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dialer.R;
+import com.android.dialer.app.BaseActivity;
 import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.helplines.utils.HelplineUtils;
 
@@ -55,7 +55,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HelplineActivity extends AppCompatActivity {
+public class HelplineActivity extends BaseActivity {
 
     public static final String SHARED_PREFERENCES_KEY = "com.android.dialer.prefs";
 
@@ -87,6 +87,8 @@ public class HelplineActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+
+        setupInsets(findViewById(R.id.main_layout));
 
         showUi();
     }
