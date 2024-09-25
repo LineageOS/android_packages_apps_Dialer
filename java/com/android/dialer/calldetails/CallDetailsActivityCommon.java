@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dialer.R;
+import com.android.dialer.app.BaseActivity;
 import com.android.dialer.assisteddialing.ui.AssistedDialingSettingActivity;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.callintent.CallInitiationType;
@@ -69,7 +70,7 @@ import java.util.List;
  * Contains common logic shared between {@link OldCallDetailsActivity} and {@link
  * CallDetailsActivity}.
  */
-abstract class CallDetailsActivityCommon extends AppCompatActivity {
+abstract class CallDetailsActivityCommon extends BaseActivity {
 
   public static final String EXTRA_PHONE_NUMBER = "phone_number";
   public static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
@@ -112,6 +113,7 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setTheme(ThemeComponent.get(this).theme().getApplicationThemeRes());
     setContentView(R.layout.call_details_activity);
+    setupInsets(findViewById(R.id.main_layout));
     Toolbar toolbar = findViewById(R.id.toolbar);
     toolbar.setTitle(R.string.call_details);
     toolbar.setNavigationOnClickListener(v -> finish());
