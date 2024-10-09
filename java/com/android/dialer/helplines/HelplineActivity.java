@@ -48,6 +48,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.dialer.R;
 import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.helplines.utils.HelplineUtils;
+import com.android.dialer.util.DialerUtils;
 
 import org.lineageos.lib.phone.spn.Item;
 
@@ -71,6 +72,7 @@ public class HelplineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstance) {
         super.onCreate(savedInstance);
+        DialerUtils.disableEdgeToEdge(getWindow());
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {

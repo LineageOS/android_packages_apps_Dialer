@@ -49,6 +49,7 @@ import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.CallUtil;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.LinearColorBar;
 
 import java.util.concurrent.ExecutorService;
@@ -114,6 +115,7 @@ public class CallStatsDetailActivity extends AppCompatActivity implements
   @Override
   protected void onCreate(Bundle icicle) {
     super.onCreate(icicle);
+    DialerUtils.disableEdgeToEdge(getWindow());
 
     setContentView(R.layout.call_stats_detail);
 

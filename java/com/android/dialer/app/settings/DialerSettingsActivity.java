@@ -43,6 +43,7 @@ import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.lookup.LookupSettingsFragment;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
 import com.android.voicemail.VoicemailClient;
@@ -57,6 +58,7 @@ public class DialerSettingsActivity extends AppCompatActivity implements
   protected void onCreate(Bundle savedInstanceState) {
     LogUtil.enterBlock("DialerSettingsActivity.onCreate");
     super.onCreate(savedInstanceState);
+    DialerUtils.disableEdgeToEdge(getWindow());
     preferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 
     setContentView(R.layout.activity_settings);

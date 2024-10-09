@@ -29,11 +29,16 @@ import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
@@ -206,5 +211,15 @@ public class DialerUtils {
     } finally {
       a.recycle();
     }
+  }
+
+  public static void disableEdgeToEdge(Window window) {
+      View rootView = window.getDecorView().getRootView();
+      WindowCompat.setDecorFitsSystemWindows(window, false);
+      ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, windowInsets) -> {
+        Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+        v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+        return WindowInsetsCompat.CONSUMED;
+    });
   }
 }
