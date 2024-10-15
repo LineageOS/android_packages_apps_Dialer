@@ -16,6 +16,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_category_title">I-ghlao</string>
+    <string name="incall_enable_dnd_title">Cumasaigh Ná Cuir Isteach le linn glaonna</string>
+    <string name="incall_vibrate_outgoing_title">Creathadh ar fhreagra</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrate ar ghlao ag fanacht</string>
+    <string name="incall_vibrate_hangup_title">Creathadh ar crochadh suas</string>
+    <string name="incall_vibrate_45_title">Creathadh gach nóiméad</string>
+    <string name="incall_vibrate_45_summary">Creathadh ag an 45 soicind de gach nóiméad le linn glaonna amach</string>
+    <string name="incall_dnd_dialog_message">Chun Ná Cuir Isteach a chumasú, ní mór cead a thabhairt don aip Fón an stádas Ná Cuir Isteach a rialú.\nCeadaigh é le do thoil.</string>
+    <string name="allow">Ceadaigh</string>
+    <string name="deny">Diúltaigh</string>
+    <string name="call_recording_category_title">Taifeadadh glaonna</string>
+    <string name="call_recording_format">Formáid fuaime</string>
+    <string name="call_via">Glaoigh tríd</string>
+    <string name="call_via_dialog_title">Glaoigh ar\u2026</string>
+    <string name="call_log_stats_title">Staitisticí</string>
+    <string name="action_menu_helplines">Línte cabhrach</string>
     <string name="default_dialer_text">Ní mór duit Dialer a shocrú mar an aip ghutháin réamhshocraithe chun é a úsáid.</string>
     <string name="default_dialer_action">Socraigh mar réamhshocrú</string>
 </resources>
