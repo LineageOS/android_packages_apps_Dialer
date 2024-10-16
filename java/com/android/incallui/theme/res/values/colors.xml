@@ -64,4 +64,7 @@
   <color name="incall_background_multiwindow_spam">#E9C22E2E</color>
 
   <color name="incall_button_icon_color">@android:color/black</color>
+
+  <color name="incall_banner_icon_color">@android:color/system_neutral1_900</color>
+  <color name="incall_banner_timer_color">@android:color/system_neutral1_800</color>
 </resources>

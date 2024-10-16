@@ -5,4 +5,11 @@
     <color name="incall_background_gradient_bottom">@color/dialer_theme_color_dark</color>
     <color name="incall_background_multiwindow">@color/dialer_theme_color_dark</color>
     <color name="incall_button_icon_color">@android:color/black</color>
+    <!-- There is a nearby, more-convenient universe in which the following neutral colors are
+         automatically adapted and do not need to be specified separately in this -night variant.
+         If the RTT banner items become invisible again in the future, try changing these to
+         _900 and _800 respectively, or just removing them.
+         (That more-convenient behavior is already seen with searchbar_icon_color elsewhere.) -->
+    <color name="incall_banner_icon_color">@android:color/system_neutral1_100</color>
+    <color name="incall_banner_timer_color">@android:color/system_neutral1_200</color>
 </resources>
