@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dd5bdfe_a034e837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6360
+      },
+      "writtenOn": "2024-10-20T12:08:26Z",
+      "side": 1,
+      "message": "Check this once... maybe more activity needs this\nhttps://github.com/yaap/packages_apps_Dialer/commit/9e7ea60d65eca4143e731dbda944d3985a19eaec",
+      "revId": "977a0e1e9f21dbe08e01d0b053ceea741b25e950",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
