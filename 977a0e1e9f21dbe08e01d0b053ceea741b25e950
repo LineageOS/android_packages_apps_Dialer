@@ -16,6 +16,24 @@
       "message": "Check this once... maybe more activity needs this\nhttps://github.com/yaap/packages_apps_Dialer/commit/9e7ea60d65eca4143e731dbda944d3985a19eaec",
       "revId": "977a0e1e9f21dbe08e01d0b053ceea741b25e950",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec1ef7a2_3588cbba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19612
+      },
+      "writtenOn": "2024-10-21T06:11:34Z",
+      "side": 1,
+      "message": "Could you check and confirm if it does?",
+      "parentUuid": "0dd5bdfe_a034e837",
+      "revId": "977a0e1e9f21dbe08e01d0b053ceea741b25e950",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
