@@ -105,6 +105,7 @@ android_app {
         "org.apache.http.legacy.stubs.system",
     ],
     optimize: {
+        optimize: true,
         proguard_flags_files: [
             "java/com/android/dialer/common/proguard.flags",
             "java/com/android/dialer/proguard/proguard.flags",
@@ -114,6 +115,7 @@ android_app {
             "java/com/android/voicemail/impl/proguard.flags",
             "proguard.flags",
         ],
+        shrink_resources: true,
     },
     optional_uses_libs: ["org.apache.http.legacy"],
     plugins: [
