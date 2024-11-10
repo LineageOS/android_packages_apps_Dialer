@@ -36,7 +36,7 @@ public class BaseActivity extends AppCompatActivity {
                 view.getPaddingRight(),
                 systemInsets.bottom
             );
-            return insets;
+            return WindowInsetsCompat.CONSUMED;
         });
     }
 }
