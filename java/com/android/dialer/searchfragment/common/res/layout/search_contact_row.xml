@@ -30,7 +30,8 @@
       android:layout_width="@dimen/search_row_height"
       android:layout_height="@dimen/search_row_height"
       android:padding="@dimen/search_photo_padding"
-      android:clickable="false"/>
+      android:clickable="false"
+      android:forceDarkAllowed="false" />
 
   <LinearLayout
       android:orientation="vertical"
