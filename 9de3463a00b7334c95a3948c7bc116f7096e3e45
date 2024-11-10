@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d3d142_24dc45e3",
+        "filename": "java/com/android/dialer/lettertile/LetterTileDrawable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2024-11-10T09:28:52Z",
+      "side": 1,
+      "message": "not strictly needed, but whatever",
+      "range": {
+        "startLine": 335,
+        "startChar": 8,
+        "endLine": 335,
+        "endChar": 27
+      },
+      "revId": "9de3463a00b7334c95a3948c7bc116f7096e3e45",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
