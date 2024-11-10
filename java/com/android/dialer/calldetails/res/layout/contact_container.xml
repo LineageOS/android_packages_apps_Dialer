@@ -33,7 +33,8 @@
       android:layout_width="@dimen/call_details_contact_photo_size"
       android:layout_height="@dimen/call_details_contact_photo_size"
       android:padding="@dimen/call_details_contact_photo_padding"
-      android:focusable="true"/>
+      android:focusable="true"
+      android:forceDarkAllowed="false" />
 
   <LinearLayout
       android:id="@+id/contact_information"

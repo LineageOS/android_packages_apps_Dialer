@@ -30,7 +30,8 @@
       android:layout_width="48dp"
       android:layout_height="48dp"
       android:layout_gravity="center"
-      android:padding="4dp"/>
+      android:padding="4dp"
+      android:forceDarkAllowed="false" />
 
   <!--
       A container layout that contains a background and badges

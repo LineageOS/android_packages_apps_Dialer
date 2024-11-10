@@ -57,7 +57,8 @@
           android:layout_height="@dimen/call_subject_dialog_contact_photo_size"
           android:layout_marginEnd="@dimen/call_subject_dialog_margin"
           android:layout_gravity="top"
-          android:focusable="true"/>
+          android:focusable="true"
+          android:forceDarkAllowed="false" />
 
         <LinearLayout
           android:layout_width="match_parent"

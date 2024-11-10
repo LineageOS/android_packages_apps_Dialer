@@ -28,7 +28,8 @@
     android:layout_width="@dimen/contact_photo_size"
     android:layout_height="@dimen/contact_photo_size"
     android:layout_marginEnd="@dimen/call_log_list_item_info_margin_start"
-    android:paddingTop="2dp" />
+    android:paddingTop="2dp"
+    android:forceDarkAllowed="false" />
 
   <TextView
     android:id="@+id/name"
