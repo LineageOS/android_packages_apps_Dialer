@@ -39,7 +39,8 @@
         android:id="@+id/photo"
         android:layout_width="@dimen/photo_size"
         android:layout_height="@dimen/photo_size"
-        android:clickable="false"/>
+        android:clickable="false"
+        android:forceDarkAllowed="false" />
 
     <com.android.dialer.widget.BidiTextView
         android:id="@+id/contact_name"
