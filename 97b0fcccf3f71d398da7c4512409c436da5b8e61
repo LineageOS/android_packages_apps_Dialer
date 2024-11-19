@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9cfc92_1d86f6a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 31604
+      },
+      "writtenOn": "2024-11-19T15:22:56Z",
+      "side": 1,
+      "message": "Works. Can test by dialing a mobile number (can\u0027t be something like 611).",
+      "revId": "97b0fcccf3f71d398da7c4512409c436da5b8e61",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
