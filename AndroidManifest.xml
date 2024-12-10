@@ -114,7 +114,7 @@
     <application
         android:name="com.android.dialer.binary.aosp.AospDialerApplication"
         android:appCategory="social"
-        android:extractNativeLibs="false"
+        android:extractNativeLibs="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/applicationLabel"
