@@ -102,7 +102,7 @@ android_app {
     exclude_srcs: ["java/com/android/dialer/rootcomponentgenerator/*.java"],
     libs: [
         "auto_value_annotations",
-        "org.apache.http.legacy",
+        "org.apache.http.legacy.stubs.system",
     ],
     optimize: {
         proguard_flags_files: [
