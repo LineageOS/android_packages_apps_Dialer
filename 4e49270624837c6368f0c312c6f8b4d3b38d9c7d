@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea297b04_61ab117c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2025-02-25T14:10:50Z",
+      "side": 1,
+      "message": "isn\u0027t this more or less equivalent as removing code between\nboolean areSameSurfaces \u003d ...;\n...\nisDoneWithSurface \u003d false;",
+      "revId": "4e49270624837c6368f0c312c6f8b4d3b38d9c7d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
