@@ -19,6 +19,7 @@ package com.android.incallui.answer.impl;
 
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.graphics.SurfaceTexture;
 import android.view.TextureView;
 import android.view.View;
 
@@ -65,7 +66,32 @@ public class AnswerVideoCallScreen implements VideoCallScreen {
   public void onVideoScreenStart() {
     LogUtil.i("AnswerVideoCallScreen.onStart", null);
     delegate.onVideoCallScreenUiReady();
-    delegate.getLocalVideoSurfaceTexture().attachToTextureView(textureView);
+
+    if (textureView.isAvailable()) {
+        if (delegate.getLocalVideoSurfaceTexture() != null) {
+            delegate.getLocalVideoSurfaceTexture().attachToTextureView(textureView);
+        }
+    } else {
+      textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
+        @Override
+        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+          if (delegate.getLocalVideoSurfaceTexture() != null) {
+            delegate.getLocalVideoSurfaceTexture().attachToTextureView(textureView);
+          }
+        }
+
+        @Override
+        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+          return false;
+        }
+
+        @Override
+        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {}
+
+        @Override
+        public void onSurfaceTextureUpdated(SurfaceTexture surface) {}
+      });
+    }
   }
 
   @Override
