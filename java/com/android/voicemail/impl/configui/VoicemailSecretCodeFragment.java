@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The LineageOS Project
+ * Copyright (C) 2024-2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,8 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import android.content.Intent;
 import android.provider.VoicemailContract;
+
+import com.android.dialer.R;
 
 public class VoicemailSecretCodeFragment extends PreferenceFragmentCompat
     implements OnPreferenceClickListener {
