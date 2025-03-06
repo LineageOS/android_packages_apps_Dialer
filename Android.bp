@@ -1,5 +1,5 @@
 //
-// SPDX-FileCopyrightText: 2023 The LineageOS Project
+// SPDX-FileCopyrightText: 2023-2025 The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
 
@@ -245,6 +245,7 @@ android_app {
         "volley",
     ],
     use_embedded_native_libs: true,
+    use_resource_processor: true
 }
 
 java_library {

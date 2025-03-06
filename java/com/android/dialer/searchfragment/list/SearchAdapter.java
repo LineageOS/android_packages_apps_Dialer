@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
- * Copyright (C) 2023 The LineageOS Project
+ * Copyright (C) 2023-2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -202,14 +202,9 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
       super(itemView);
       Assert.isNotNull(allowClickListener);
       Assert.isNotNull(dismissClickListener);
-      itemView
-          .findViewById(
-              com.android.dialer.searchfragment.nearbyplaces.R.id.location_permission_allow)
-          .setOnClickListener(allowClickListener);
-      itemView
-          .findViewById(
-              com.android.dialer.searchfragment.nearbyplaces.R.id.location_permission_dismiss)
-          .setOnClickListener(dismissClickListener);
+      itemView.findViewById(R.id.location_permission_allow).setOnClickListener(allowClickListener);
+      itemView.findViewById(R.id.location_permission_dismiss)
+              .setOnClickListener(dismissClickListener);
     }
   }
 }
