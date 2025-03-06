@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
- * Copyright (C) 2023 The LineageOS Project
+ * Copyright (C) 2023-2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -176,8 +176,7 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
         String secondaryInfo =
             TextUtils.isEmpty(contact.getNumberLabel())
                 ? contact.getDisplayNumber()
-                : context.getString(
-                    com.android.dialer.contacts.resources.R.string.call_subject_type_and_number,
+                : context.getString(R.string.call_subject_type_and_number,
                     contact.getNumberLabel(),
                     contact.getDisplayNumber());
         numberView.setText(secondaryInfo);
