@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="incall_category_title">Em chamada</string>
+    <string name="incall_category_title">Durante chamada</string>
     <string name="incall_enable_dnd_title">Ativar o modo Não Perturbe</string>
     <string name="incall_vibrate_outgoing_title">Vibrar ao atender</string>
     <string name="incall_vibrate_call_waiting_title">Vibrar com chamada em espera</string>
-    <string name="incall_vibrate_hangup_title">Vibrar ao encerrar</string>
+    <string name="incall_vibrate_hangup_title">Vibrar ao desligar</string>
     <string name="incall_vibrate_45_title">Vibrar a cada minuto</string>
-    <string name="incall_vibrate_45_summary">Vibrar aos 45 segundos de cada minuto durante chamadas efetuadas</string>
-    <string name="incall_dnd_dialog_message">Para ativar o Não Perturbe, o app Telefone precisa da permissão \"Acesso ao Não Perturbe\".</string>
+    <string name="incall_vibrate_45_summary">Vibra aos 45 segundos de cada minuto durante chamadas efetuadas</string>
+    <string name="incall_dnd_dialog_message">Para ativar o Não Perturbe, o app Telefone precisa da permissão de \"Acesso ao Não Perturbe\". Por favor, permita.</string>
     <string name="allow">Permitir</string>
     <string name="deny">Negar</string>
     <string name="call_recording_category_title">Gravação de chamadas</string>
     <string name="call_recording_format">Formato de áudio</string>
-    <string name="call_via">Chamar via</string>
-    <string name="call_via_dialog_title">Chamar via\u2026</string>
+    <string name="call_via">Ligar via</string>
+    <string name="call_via_dialog_title">Ligar via\u2026</string>
     <string name="call_log_stats_title">Estatísticas</string>
     <string name="action_menu_helplines">Linhas de apoio</string>
     <string name="default_dialer_text">Você deve definir o Telefone como o app de telefone padrão para usá-lo.</string>

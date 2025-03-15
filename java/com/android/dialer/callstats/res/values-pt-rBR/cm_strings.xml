@@ -28,9 +28,9 @@
     <string name="call_stats_filter_to">Data final</string>
     <string name="call_stats_filter_picker_title">Intervalo do filtro</string>
     <string name="date_quick_selection">Seleção rápida</string>
-    <string name="date_qs_currentmonth">Mês atual</string>
-    <string name="date_qs_currentquarter">Trimestre atual</string>
-    <string name="date_qs_currentyear">Ano atual</string>
+    <string name="date_qs_currentmonth">Esse mês</string>
+    <string name="date_qs_currentquarter">Esse trimestre</string>
+    <string name="date_qs_currentyear">Esse ano</string>
     <string name="date_qs_lastweek">Semana passada</string>
     <string name="date_qs_lastmonth">Mês passado</string>
     <string name="date_qs_lastquarter">Trimestre passado</string>
@@ -38,11 +38,11 @@
     <string name="call_stats_date_filter">Ajustar intervalo de tempo</string>
     <string name="call_stats_reset_filter">Redefinir intervalo de tempo</string>
     <string name="call_stats_sort_by_duration">Classificar pela duração das chamadas</string>
-    <string name="call_stats_sort_by_count">Classificar pela quantidade de chamadas</string>
+    <string name="call_stats_sort_by_count">Classificar pelo número de chamadas</string>
     <string name="call_stats_title_for_number">Este número</string>
     <string name="call_stats_title_of_total">Do total</string>
     <string name="call_stats_title_durations">Duração das chamadas</string>
-    <string name="call_stats_title_count">Quantidade de chamadas</string>
+    <string name="call_stats_title_count">Número de chamadas</string>
     <string name="call_stats_title_average_duration">Duração média de chamada</string>
     <string name="recent_calls_no_items_in_range">Não há registro de chamadas no intervalo de tempo selecionado.</string>
 </resources>
