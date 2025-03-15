@@ -18,7 +18,7 @@
     <string name="nearby_places">Miejsca w pobliżu</string>
     <string name="lookup_settings_label">Wyszukiwanie numeru telefonu</string>
     <string name="enable_forward_lookup_title">Wyszukiwanie do przodu</string>
-    <string name="enable_forward_lookup_summary">Pokaż miejsca w pobliżu podczas wyszukiwania w dialerze</string>
+    <string name="enable_forward_lookup_summary">Pokazuj miejsca w pobliżu podczas wyszukiwania w dialerze</string>
     <string name="enable_reverse_lookup_title">Wyszukiwanie wstecz</string>
     <string name="enable_reverse_lookup_summary">Wyszukaj informacje o osobie lub miejscu dla nieznanych numerów połączeń przychodzących</string>
     <string name="forward_lookup_provider_title">Dostawca wyszukiwania w przód</string>
