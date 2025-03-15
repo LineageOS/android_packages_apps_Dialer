@@ -15,13 +15,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="nearby_places">Locais próximos</string>
-    <string name="lookup_settings_label">Pesquisa de número de telefone</string>
-    <string name="enable_forward_lookup_title">Pesquisa direta</string>
-    <string name="enable_forward_lookup_summary">Mostrar locais próximos ao pesquisar no discador</string>
-    <string name="enable_reverse_lookup_title">Pesquisa inversa</string>
-    <string name="enable_reverse_lookup_summary">Pesquisar informações sobre a pessoa ou local de números desconhecidos em chamadas recebidas</string>
-    <string name="forward_lookup_provider_title">Provedor de pesquisa direta</string>
-    <string name="reverse_lookup_provider_title">Provedor de pesquisa reversa</string>
-    <string name="lookup_disclaimer">As pesquisas podem enviar consultas através de um protocolo seguro (HTTPS) a sites remotos para coletar informações. A consulta pode incluir o número de telefone da outra pessoa ou a consulta da pesquisa</string>
+    <string name="nearby_places">Lugares proximos</string>
+    <string name="lookup_settings_label">Consulta de número de telefone</string>
+    <string name="enable_forward_lookup_title">Consulta direta</string>
+    <string name="enable_forward_lookup_summary">Mostrar lugares próximos ao pesquisar no discador</string>
+    <string name="enable_reverse_lookup_title">Consulta inversa</string>
+    <string name="enable_reverse_lookup_summary">Consultar informações sobre a pessoa ou o lugar de números desconhecidos em chamadas recebidas</string>
+    <string name="forward_lookup_provider_title">Provedor de consulta direta</string>
+    <string name="reverse_lookup_provider_title">Provedor de consulta reversa</string>
+    <string name="lookup_disclaimer">As consultas são enviadas através de um protocolo seguro (HTTPS) a sites remotos para coletar informações. A consulta pode incluir o número de telefone da outra pessoa ou o conteúdo da pesquisa</string>
 </resources>

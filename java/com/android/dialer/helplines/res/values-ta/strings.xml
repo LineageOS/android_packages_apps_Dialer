@@ -21,7 +21,7 @@
     <string name="helplines_help">உதவி</string>
     <string name="helplines_help_title">இவை அழைக்கப் பாதுகாப்பானவை</string>
     <string name="helplines_help_message">உம் அழைப்பு வரலாற்றில் இவ்வெண்கள் எவையும் தோன்றவில்லை.\nமேலுந்தெரிவலுக்கு நீங்கள் எந்த உருப்படியையும் சொடுக்கலாம்</string>
-    <string name="helplines_help_more_message">உதவி எண் பட்டியலில் நிரப்பப்பட்ட தெரிவல் பங்களிப்பாளரால் கைமுறையாகப் புதுபிக்கப்பட்டது. நீங்கள் ஏதேனும் விடுபட்டதையோ தவறானத் தெரிவலையோ எதிர்கொண்டால், <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g> என்ற முகவரியில் தயங்காமல் எங்களைத் தொடர்புகொள்க </string>
+    <string name="helplines_help_more_message">உதவி எண் பட்டியலில் நிரப்பப்பட்ட தெரிவல் பங்களிப்பாளரால் கைமுறையாகப் புதுபிக்கப்பட்டது. நீங்கள் ஏதேனும் விடுபட்டதையோ தவறானத் தெரிவலையோ எதிர்கொண்டால், <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g> என்ற முகவரியில் தயங்காமல் எங்களைத் தொடர்புகொள்ளவும்</string>
     <string name="helpline_button_more">மேலும்</string>
     <string name="unknown_helpline_name">அறியப்படா நிறுவனம்</string>
     <string name="helpline_name">பெயர்</string>
