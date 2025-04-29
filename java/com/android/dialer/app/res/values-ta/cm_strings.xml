@@ -21,8 +21,8 @@
     <string name="incall_vibrate_outgoing_title">மறுமொழியில் அதிர்வுறு</string>
     <string name="incall_vibrate_call_waiting_title">அழைப்புக் காத்திருப்பில் அதிர்வுறு</string>
     <string name="incall_vibrate_hangup_title">விடுகையில் அதிர்வுறு</string>
-    <string name="incall_vibrate_45_title">ஒவ்வொரு நுணுத்தமும் அதிர்வுறு</string>
-    <string name="incall_vibrate_45_summary">அழைப்பு வெளிசெல்லுதலில் ஒவ்வொரு நுணுத்ததின் 45 நொடிக்குறிப்பில் அதிர்வுறும்</string>
+    <string name="incall_vibrate_45_title">ஒவ்வொரு நிமிடமும் அதிர்வுறு</string>
+    <string name="incall_vibrate_45_summary">அழைப்பு வெளிசெல்லுதலில் ஒவ்வொரு நிமிடத்தின் 45 நொடிக்குறிப்பில் அதிர்வுறும்</string>
     <string name="incall_dnd_dialog_message">தொல்லை செய்யா நிலையை இயக்கும் பொருட்டு, தொலைபேசிச் செயலிக்கு அதனைக் கட்டுப்படுத்தும் அணுகல் அளித்திருக்க வேண்டும்;\nஅதை அனுமதிக்கவும்.</string>
     <string name="allow">அனுமதிக்க</string>
     <string name="deny">மறுக்க</string>
