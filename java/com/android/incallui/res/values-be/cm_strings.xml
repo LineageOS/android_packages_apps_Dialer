@@ -21,5 +21,4 @@
     <string name="onscreenCallRecordingText">Запіс выкліку - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Спыніць запіс</string>
     <string name="recording_warning_title">Уключыць запіс выклікаў?</string>
-    <string name="recording_warning_text">Заўвага: Вы поўнасцю адказваеце за выкананне любых законаў, палажэнняў і правіл, якія распаўсюджваюцца на выкарыстанне функцыі запісу тэлефонных размоў і выкарыстанне або распаўсюджванне гэтых запісаў.</string>
 </resources>
