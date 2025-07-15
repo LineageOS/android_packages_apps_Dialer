@@ -226,6 +226,36 @@ public class CallButtonPresenter
     TelecomAdapter.getInstance().setAudioRoute(route);
   }
 
+  public void enableSpeakerphone() {
+    // This function should not be called if bluetooth is available.
+    CallAudioState audioState = getCurrentAudioState();
+    if (0 != (CallAudioState.ROUTE_BLUETOOTH & audioState.getSupportedRouteMask())) {
+      // It's clear the UI is wrong, so update the supported mode once again.
+      LogUtil.e(
+          "CallButtonPresenter", "toggling speakerphone not allowed when bluetooth supported.");
+      inCallButtonUi.setAudioState(audioState);
+      return;
+    }
+
+    int newRoute = CallAudioState.ROUTE_SPEAKER;
+
+    setAudioRoute(newRoute);
+  }
+  public void disableSpeakerphone() {
+    // This function should not be called if bluetooth is available.
+    CallAudioState audioState = getCurrentAudioState();
+    if (0 != (CallAudioState.ROUTE_BLUETOOTH & audioState.getSupportedRouteMask())) {
+      // It's clear the UI is wrong, so update the supported mode once again.
+      LogUtil.e(
+          "CallButtonPresenter", "toggling speakerphone not allowed when bluetooth supported.");
+      inCallButtonUi.setAudioState(audioState);
+      return;
+    }
+
+    int newRoute = CallAudioState.ROUTE_WIRED_OR_EARPIECE;
+
+    setAudioRoute(newRoute);
+  }
   /** Function assumes that bluetooth is not supported. */
   @Override
   public void toggleSpeakerphone() {

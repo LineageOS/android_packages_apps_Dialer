@@ -264,6 +264,10 @@ public class InCallFragment extends Fragment
 
     inCallScreenDelegate.onInCallScreenDelegateInit(this);
     inCallScreenDelegate.onInCallScreenReady();
+    if (inCallButtonUiDelegate instanceof final com.android.incallui.CallButtonPresenter presenter) {
+	    presenter.enableSpeakerphone();
+	    presenter.disableSpeakerphone();
+    }
   }
 
   @Override
