@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">התעללות</string>
+    <string name="helpline_category_acohol">אלכוהול</string>
+    <string name="helpline_category_addiction">התמכרות</string>
+    <string name="helpline_category_adolescents">מתבגרים</string>
+    <string name="helpline_category_adults">מבוגרים</string>
+    <string name="helpline_category_aids">איידס</string>
+    <string name="helpline_category_birth">לידה</string>
+    <string name="helpline_category_bullying">בריונות</string>
+    <string name="helpline_category_children">ילדים</string>
+    <string name="helpline_category_crime">פשע</string>
+    <string name="helpline_category_crime_victims">קורבנות פשע</string>
+    <string name="helpline_category_corruption">שחיתות</string>
+    <string name="helpline_category_discrimination">אפליה</string>
+    <string name="helpline_category_domestic_violence">אלימות במשפחה</string>
+    <string name="helpline_category_drugs">סמים</string>
+    <string name="helpline_category_emotional_support">תמיכה רגשית</string>
+    <string name="helpline_category_family">משפחה</string>
+    <string name="helpline_category_gambling">הימור</string>
+    <string name="helpline_category_gender">מגדר</string>
+    <string name="helpline_category_generic">כללי</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">זכויות אדם</string>
+    <string name="helpline_category_human_trafficking">סחר בבני אדם</string>
+    <string name="helpline_category_immigration">הגירה</string>
+    <string name="helpline_category_legal_aid">סיוע משפטי</string>
+    <string name="helpline_category_lgbtq">להטב\"ק</string>
+    <string name="helpline_category_men">גבר</string>
+    <string name="helpline_category_mental_health">בריאות הנפש</string>
+    <string name="helpline_category_missing_children">ילד נעדר</string>
+    <string name="helpline_category_mothers">אמהות</string>
+    <string name="helpline_category_muslim">מוסלמי</string>
+    <string name="helpline_category_parents">הורים</string>
+    <string name="helpline_category_pregnancy">הריון</string>
+    <string name="helpline_category_psychological">פסיכולוגי</string>
+    <string name="helpline_category_religion">דת</string>
+    <string name="helpline_category_senior">קשישים</string>
+    <string name="helpline_category_sexual_abuse">התעללות מינית</string>
+    <string name="helpline_category_sexual_assault">תקיפה מינית</string>
+    <string name="helpline_category_sexual_rights">זכויות מיניות</string>
+    <string name="helpline_category_sexuality">מיניות</string>
+    <string name="helpline_category_soldiers">חיילים</string>
+    <string name="helpline_category_suicide">מניעת התאבדויות</string>
+    <string name="helpline_category_trans">טרנסג\'נדר</string>
+    <string name="helpline_category_veterans">וטרנים</string>
+    <string name="helpline_category_violence">אלימות</string>
+    <string name="helpline_category_war">מלחמה</string>
+    <string name="helpline_category_women">נשים</string>
+    <string name="helpline_category_youth">נוער</string>
+</resources>
