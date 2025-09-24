@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">خورلاش</string>
+    <string name="helpline_category_acohol">ھاراق</string>
+    <string name="helpline_category_addiction">خۇمار قىلىش</string>
+    <string name="helpline_category_adolescents">ئۆسمۈر</string>
+    <string name="helpline_category_adults">چوڭلار</string>
+    <string name="helpline_category_aids">ئەيدىز</string>
+    <string name="helpline_category_birth">تۇغۇلۇش</string>
+    <string name="helpline_category_bullying">بوزەك قىلىش</string>
+    <string name="helpline_category_children">بالىلار</string>
+    <string name="helpline_category_crime">جىنايەت</string>
+    <string name="helpline_category_crime_victims">جىنايەت زىيانلانغۇچىسى</string>
+    <string name="helpline_category_corruption">چىرىكلىك</string>
+    <string name="helpline_category_discrimination">كەمسىتىش</string>
+    <string name="helpline_category_domestic_violence">ئائىلە زوراۋانلىقى</string>
+    <string name="helpline_category_drugs">زەھەرلىك چېكىملىك</string>
+    <string name="helpline_category_emotional_support">ھېسسىي قوللاش</string>
+    <string name="helpline_category_family">ئائىلە</string>
+    <string name="helpline_category_gambling">قىمار</string>
+    <string name="helpline_category_gender">جىنسى</string>
+    <string name="helpline_category_generic">ئادەتتىكى</string>
+    <string name="helpline_category_hiv">ئەيدىز يۇقۇمدارى</string>
+    <string name="helpline_category_human_rights">كىشىلىك ھوقۇق</string>
+    <string name="helpline_category_human_trafficking">ئادەم ئەتكەسچىلىكى</string>
+    <string name="helpline_category_immigration">كۆچمەن</string>
+    <string name="helpline_category_legal_aid">قانۇن ياردىمى</string>
+    <string name="helpline_category_lgbtq">ھەمجىنس</string>
+    <string name="helpline_category_men">ئەر</string>
+    <string name="helpline_category_mental_health">روھىي ساغلاملىق</string>
+    <string name="helpline_category_missing_children">يىتكەن بالىلار</string>
+    <string name="helpline_category_mothers">ئانا</string>
+    <string name="helpline_category_muslim">مۇسۇلمان</string>
+    <string name="helpline_category_parents">ئاتا-ئانا</string>
+    <string name="helpline_category_pregnancy">ھامىلىدارلىق</string>
+    <string name="helpline_category_psychological">پىسخولوگىيەلىك</string>
+    <string name="helpline_category_religion">دىنى</string>
+    <string name="helpline_category_senior">ياشانغان</string>
+    <string name="helpline_category_sexual_abuse">جىنسىي پاراكەندىچىلىك</string>
+    <string name="helpline_category_sexual_assault">جىنسىي تاجاۋۇزچىلىق</string>
+    <string name="helpline_category_sexual_rights">جىنسىي ھوقۇق</string>
+    <string name="helpline_category_sexuality">شەھۋەت</string>
+    <string name="helpline_category_soldiers">ئەسكەر</string>
+    <string name="helpline_category_suicide">ئۆلۈۋېلىشنى توسۇش</string>
+    <string name="helpline_category_trans">جىنس ئۆزگەرتكۈچى</string>
+    <string name="helpline_category_veterans">كونا ئەسكەر</string>
+    <string name="helpline_category_violence">زوراۋانلىق</string>
+    <string name="helpline_category_war">ئۇرۇش</string>
+    <string name="helpline_category_women">ئايال</string>
+    <string name="helpline_category_youth">ياش</string>
+</resources>

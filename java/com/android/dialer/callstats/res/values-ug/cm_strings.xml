@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">ئالاقەداش ئىستاتىستىكا تەپسىلاتى</string>
+    <string name="call_stats_incoming">چاقىرىلغان: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">چاقىرغان: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">سۆزلەشمىگەن: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">توسۇلغان: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">جەمئىي: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">جەمئىي: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">باشلاش چېسلاسى</string>
+    <string name="call_stats_filter_to">ئاخىرلىشىش چېسلاسى</string>
+    <string name="call_stats_filter_picker_title">سۈزگۈچ دائىرىسى</string>
+    <string name="date_quick_selection">تېز تاللاش</string>
+    <string name="date_qs_currentmonth">نۆۋەتتىكى ئاي</string>
+    <string name="date_qs_currentquarter">نۆۋەتتىكى پەسىل</string>
+    <string name="date_qs_currentyear">نۆۋەتتىكى يىل</string>
+    <string name="date_qs_lastweek">ئالدىنقى ھەپتە</string>
+    <string name="date_qs_lastmonth">ئالدىنقى ئاي</string>
+    <string name="date_qs_lastquarter">ئالدىنقى پەسىل</string>
+    <string name="date_qs_lastyear">ئۆتكەن يىل</string>
+    <string name="call_stats_date_filter">تەڭشەلگەن ۋاقىت دائىرىسى</string>
+    <string name="call_stats_reset_filter">ۋاقىت دائىرىسىنى ئەسلىگە قايتۇر</string>
+    <string name="call_stats_sort_by_duration">سۆزلىشىش ۋاقتى بويىچە تەرتىپلە</string>
+    <string name="call_stats_sort_by_count">چاقىرىش قېتىم سانى بويىچە تەرتىپلە</string>
+    <string name="call_stats_title_for_number">بۇ نومۇر</string>
+    <string name="call_stats_title_of_total">جەمئىي</string>
+    <string name="call_stats_title_durations">سۆزلەشكەن ۋاقىت</string>
+    <string name="call_stats_title_count">چاقىرىش قېتىم سانى</string>
+    <string name="call_stats_title_average_duration">ئوتتۇرىچە سۆزلىشىش ۋاقتى</string>
+    <string name="recent_calls_no_items_in_range">تاللانغان ۋاقىت دائىرىسىدە ھېچقانداق چاقىرىش خاتىرىسى يوق.</string>
+</resources>
