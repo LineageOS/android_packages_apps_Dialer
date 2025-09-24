@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,11 +16,11 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <plurals name="play_recordings">
-        <item quantity="one">ניגון הקלטה</item>
-        <item quantity="two">ניגון הקלטות</item>
-        <item quantity="many">ניגון הקלטות</item>
-        <item quantity="other">ניגון הקלטות</item>
-    </plurals>
-    <string name="call_playback_no_app_found_toast">לא נמצא יישום לניגון ההקלטה שנבחרה.</string>
+    <string name="call_log_show_all_accounts">بارلىق ھېسابات</string>
+    <string name="call_log_all_calls_header">بارلىق چاقىرىش</string>
+    <string name="call_log_incoming_header">كەلگەن چاقىرىشلا</string>
+    <string name="call_log_outgoing_header">ئۇرۇلغان چاقىرىشلا</string>
+    <string name="call_log_missed_header">سۆزلەشمىگەن چاقىرىشلا</string>
+    <string name="call_log_voicemail_header">ئۈنخەت چاقىرىشلا</string>
+    <string name="call_log_blacklist_header">توسۇلغان چاقىرىشلا</string>
 </resources>
