@@ -40,5 +40,9 @@
     <string name="call_stats_sort_by_duration">מיון לפי משך שיחה</string>
     <string name="call_stats_sort_by_count">מיון לפי מספר שיחות</string>
     <string name="call_stats_title_for_number">מספר זה</string>
-    <string name="call_stats_title_of_total">מתוך</string>
+    <string name="call_stats_title_of_total">מסך של</string>
+    <string name="call_stats_title_durations">משכי שיחה</string>
+    <string name="call_stats_title_count">מספר שיחות</string>
+    <string name="call_stats_title_average_duration">משך שיחה ממוצע</string>
+    <string name="recent_calls_no_items_in_range">יומן השיחות שלך אינו מכיל שיחות בטווח הזמן שנבחר.</string>
 </resources>
