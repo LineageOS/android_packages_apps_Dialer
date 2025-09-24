@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2013 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,11 +15,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <plurals name="play_recordings">
-        <item quantity="one">ניגון הקלטה</item>
-        <item quantity="two">ניגון הקלטות</item>
-        <item quantity="many">ניגון הקלטות</item>
-        <item quantity="other">ניגון הקלטות</item>
+    <plurals name="hour">
+        <item quantity="one">1 سائەت</item>
+        <item quantity="other">%d سائەت</item>
     </plurals>
-    <string name="call_playback_no_app_found_toast">לא נמצא יישום לניגון ההקלטה שנבחרה.</string>
+    <plurals name="minute">
+        <item quantity="one">1 مىنۇت</item>
+        <item quantity="other">%d مىنۇت</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 سېكۇنت</item>
+        <item quantity="other">%d سېكۇنت</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 چاقىرىش</item>
+        <item quantity="other">%d چاقىرىش</item>
+    </plurals>
 </resources>

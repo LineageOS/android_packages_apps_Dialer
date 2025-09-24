@@ -18,7 +18,7 @@
     <string name="nearby_places">מקומות סמוכים</string>
     <string name="lookup_settings_label">חיפוש מספר טלפון</string>
     <string name="enable_forward_lookup_title">חיפוש מקדים</string>
-    <string name="enable_forward_lookup_summary">הצג מקומות סמוכים בעת חיפוש בחייגן</string>
+    <string name="enable_forward_lookup_summary">הצגת מקומות סמוכים בעת חיפוש בחייגן</string>
     <string name="enable_reverse_lookup_title">חיפוש הפוך</string>
     <string name="enable_reverse_lookup_summary">חפש מידע אודות אדם או מקום עבור מספרים לא ידועים בשיחות נכנסות</string>
     <string name="forward_lookup_provider_title">ספק חיפוש מקדים</string>
