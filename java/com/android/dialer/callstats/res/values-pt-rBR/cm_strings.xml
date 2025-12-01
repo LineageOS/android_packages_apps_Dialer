@@ -36,7 +36,7 @@
     <string name="date_qs_lastquarter">Trimestre passado</string>
     <string name="date_qs_lastyear">Ano passado</string>
     <string name="call_stats_date_filter">Ajustar intervalo de tempo</string>
-    <string name="call_stats_reset_filter">Redefinir intervalo de tempo</string>
+    <string name="call_stats_reset_filter">Reconfigurar intervalo de tempo</string>
     <string name="call_stats_sort_by_duration">Classificar pela duração das chamadas</string>
     <string name="call_stats_sort_by_count">Classificar pelo número de chamadas</string>
     <string name="call_stats_title_for_number">Este número</string>
