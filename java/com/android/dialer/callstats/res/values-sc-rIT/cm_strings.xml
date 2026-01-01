@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Detàllios de is istatìsticas de su cuntatu</string>
+    <string name="call_stats_incoming">In intrada: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">In essida: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Pèrdidas: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Blocadas: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Totale: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Totale: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Data de su cumintzu</string>
+    <string name="call_stats_filter_to">Data de fine</string>
+    <string name="call_stats_filter_picker_title">Intervallu</string>
+    <string name="date_quick_selection">Seletzione lestra</string>
+    <string name="date_qs_currentmonth">Custu mese</string>
+    <string name="date_qs_currentquarter">Custu trimestre</string>
+    <string name="date_qs_currentyear">Ocannu</string>
+    <string name="date_qs_lastweek">Sa chida colada</string>
+    <string name="date_qs_lastmonth">Su mese coladu</string>
+    <string name="date_qs_lastquarter">Su trimestre coladu</string>
+    <string name="date_qs_lastyear">S\'annu coladu</string>
+    <string name="call_stats_date_filter">Règula s\'intervallu</string>
+    <string name="call_stats_reset_filter">Torra a cunfigurare s\'intervallu</string>
+    <string name="call_stats_sort_by_duration">Assenta pro longària</string>
+    <string name="call_stats_sort_by_count">Assenta pro nùmeru de mutida</string>
+    <string name="call_stats_title_for_number">Custu nùmeru</string>
+    <string name="call_stats_title_of_total">In totale</string>
+    <string name="call_stats_title_durations">Durada mutidas</string>
+    <string name="call_stats_title_count">Contègiu mutidas</string>
+    <string name="call_stats_title_average_duration">Durada mèdia de is mutidas</string>
+    <string name="recent_calls_no_items_in_range">In su registru de is mutidas non nch\'at nissuna mutida in su perìudu de tempus seletzionadu.</string>
+</resources>

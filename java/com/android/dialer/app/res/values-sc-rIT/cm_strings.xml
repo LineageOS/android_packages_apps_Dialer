@@ -16,6 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_category_title">Mutende</string>
+    <string name="incall_enable_dnd_title">Ativa No istorbes durante is mutidas</string>
+    <string name="incall_vibrate_outgoing_title">Vibra a sa risposta</string>
+    <string name="incall_vibrate_call_waiting_title">Vibra cando pones in ispera</string>
+    <string name="incall_vibrate_hangup_title">Vibra cando sa mutida nch\'est finida</string>
+    <string name="incall_vibrate_45_title">Vibra onni minutu</string>
+    <string name="incall_vibrate_45_summary">Vibra a su de 45 segundos de onni minutu durante sas mutidas in essida</string>
+    <string name="incall_dnd_dialog_message">Pro ativare sa modalidade No istorbes, s\'aplicatzione Telèfonu si depet autorizare a controllare s\'istadu No istorbes.\nPermite s\'atzessu pro abilitare custa funtzione.</string>
     <string name="allow">Permiti</string>
     <string name="deny">Refuda</string>
     <string name="call_recording_category_title">Registratzione de sas mutidas</string>
@@ -23,4 +31,7 @@
     <string name="call_via">Muti cun</string>
     <string name="call_via_dialog_title">Muti cun\u2026</string>
     <string name="call_log_stats_title">Istatìsticas</string>
+    <string name="action_menu_helplines">Lìnias de agiudu</string>
+    <string name="default_dialer_text">Depes cunfigurare su Tecladu comente aplicatzione de telèfonu predefinida pro dd\'impreare.</string>
+    <string name="default_dialer_action">Cunfigura comente predeterminadu</string>
 </resources>
