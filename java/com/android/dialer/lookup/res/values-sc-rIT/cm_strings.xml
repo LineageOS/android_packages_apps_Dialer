@@ -15,5 +15,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="nearby_places">Logos a curtzu</string>
+    <string name="lookup_settings_label">Chirca nùmeros telefònicos</string>
+    <string name="enable_forward_lookup_title">Chirca dereta</string>
+    <string name="enable_forward_lookup_summary">Mustra logos a curtzu in su tecladu</string>
+    <string name="enable_reverse_lookup_title">Chirca invertida</string>
+    <string name="enable_reverse_lookup_summary">Chirca informatziones subra de una persone o logu pro is nùmeros disconnotos de is mutidas in intrada</string>
+    <string name="forward_lookup_provider_title">Frunidore de chirca dereta</string>
+    <string name="reverse_lookup_provider_title">Frunidore de chirca invertida</string>
     <string name="lookup_disclaimer">Sas chircas diant pòdere imbiare sos datos de chirca pro mèdiu de unu protocollu seguru (https) a sitos remotos pro otènnere sas informatziones. Sos datos diant pòdere incluire su nùmeru de telèfonu de s\'àtera persone o sos tèrmines de chirca</string>
 </resources>

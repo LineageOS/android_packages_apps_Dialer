@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Abusu</string>
+    <string name="helpline_category_acohol">Alcol</string>
+    <string name="helpline_category_addiction">Additzione</string>
+    <string name="helpline_category_adolescents">Adolescentes</string>
+    <string name="helpline_category_adults">Adultos</string>
+    <string name="helpline_category_aids">SIDA</string>
+    <string name="helpline_category_birth">Nàschida</string>
+    <string name="helpline_category_bullying">Bullismu</string>
+    <string name="helpline_category_children">Pitzocalla</string>
+    <string name="helpline_category_crime">Crìmines</string>
+    <string name="helpline_category_crime_victims">Vìtimas de crìmines</string>
+    <string name="helpline_category_corruption">Corrutzione</string>
+    <string name="helpline_category_discrimination">Discriminatzione</string>
+    <string name="helpline_category_domestic_violence">Violèntzia de domo</string>
+    <string name="helpline_category_drugs">Drogas</string>
+    <string name="helpline_category_emotional_support">Suportu emotivu</string>
+    <string name="helpline_category_family">Famìlia</string>
+    <string name="helpline_category_gambling">Iscummissas</string>
+    <string name="helpline_category_gender">Gènere</string>
+    <string name="helpline_category_generic">Genèricu</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Deretos umanos</string>
+    <string name="helpline_category_human_trafficking">Tràficu de persones</string>
+    <string name="helpline_category_immigration">Immigratzione</string>
+    <string name="helpline_category_legal_aid">Assistèntzia legale</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Òmines</string>
+    <string name="helpline_category_mental_health">Salude mentale</string>
+    <string name="helpline_category_missing_children">Criaturas isparèssidas</string>
+    <string name="helpline_category_mothers">Mammas</string>
+    <string name="helpline_category_muslim">Musulmanu</string>
+    <string name="helpline_category_parents">Genitores</string>
+    <string name="helpline_category_pregnancy">Gravidàntzia</string>
+    <string name="helpline_category_psychological">Psicològicu</string>
+    <string name="helpline_category_religion">Religione</string>
+    <string name="helpline_category_senior">Gente manna</string>
+    <string name="helpline_category_sexual_abuse">Abusu sessuale</string>
+    <string name="helpline_category_sexual_assault">Agressiones sessuales</string>
+    <string name="helpline_category_sexual_rights">Deretos sessuales</string>
+    <string name="helpline_category_sexuality">Sessualidade</string>
+    <string name="helpline_category_soldiers">Sordados</string>
+    <string name="helpline_category_suicide">Preventzione de suitzìdios</string>
+    <string name="helpline_category_trans">Transgènere</string>
+    <string name="helpline_category_veterans">Veteranos</string>
+    <string name="helpline_category_violence">Violèntzia</string>
+    <string name="helpline_category_war">Gherra</string>
+    <string name="helpline_category_women">Fèminas</string>
+    <string name="helpline_category_youth">Giovanesa</string>
+</resources>
