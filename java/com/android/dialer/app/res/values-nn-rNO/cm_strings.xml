@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_category_title">Under samtale</string>
+    <string name="incall_enable_dnd_title">Slå på «Ikkje forstyrr» under samtalar</string>
+    <string name="incall_vibrate_outgoing_title">Vibrer ved svar</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrer ved samtale ventar</string>
+    <string name="incall_vibrate_hangup_title">Vibrer ved avslutting</string>
+    <string name="incall_vibrate_45_title">Vibrer kvart minutt</string>
+    <string name="incall_vibrate_45_summary">Vibrerer etter 45 sekund kvart minutt i utgåande samtalar</string>
+    <string name="incall_dnd_dialog_message">For å slå på «Ikkje forstyrr», må Telefon-appen få løyve til å styra statusen for «Ikkje forstyrr».\nGjev løyve til dette no.</string>
+    <string name="allow">Gjev løyve</string>
+    <string name="deny">Avslå</string>
+    <string name="call_recording_category_title">Samtaleopptak</string>
+    <string name="call_recording_format">Lydformat</string>
+    <string name="call_via">Ring med</string>
+    <string name="call_via_dialog_title">Ring med \u2026</string>
+    <string name="call_log_stats_title">Statistikk</string>
+    <string name="action_menu_helplines">Hjelpelinjer</string>
+    <string name="default_dialer_text">Du må velja Telefon som standardapp for å bruka han.</string>
+    <string name="default_dialer_action">Vel som standard</string>
+</resources>
