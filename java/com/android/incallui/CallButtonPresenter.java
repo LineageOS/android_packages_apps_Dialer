@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
- * Copyright (C) 2023 The LineageOS Project
+ * Copyright (C) 2023-2026 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Trace;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccountHandle;
 
@@ -512,7 +513,9 @@ public class CallButtonPresenter
             // Most devices cannot make calls on 2 SIMs at the same time.
             && InCallPresenter.getInstance().getCallList().getAllCalls().size() == 1;
 
-    boolean showUpgradeToRtt = call.canUpgradeToRttCall();
+    boolean rttOn = Settings.Secure.getInt(
+            getContext().getContentResolver(), Settings.Secure.RTT_CALLING_MODE, 0) != 0;
+    boolean showUpgradeToRtt = rttOn && call.canUpgradeToRttCall();
     boolean enableUpgradeToRtt = showUpgradeToRtt && call.getState() == DialerCallState.ACTIVE;
 
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_AUDIO, true);
