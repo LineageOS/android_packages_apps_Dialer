@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="nearby_places">شوێنە نزیکەکان</string>
+    <string name="lookup_settings_label">گەڕان بەدوای ژمارەی تەلەفۆندا</string>
+    <string name="enable_forward_lookup_title">گەڕانی پێشوەخت (Forward lookup)</string>
+    <string name="enable_forward_lookup_summary">نیشاندانی شوێنە نزیکەکان لە کاتی گەڕان لە ناو ئەپی پەیوەندیدا</string>
+    <string name="enable_reverse_lookup_title">گەڕانی پێچەوانە (Reverse lookup)</string>
+    <string name="enable_reverse_lookup_summary">گەڕان بەدوای زانیاریی کەس یان شوێن بۆ ژمارە نەناسراوەکان لە کاتی پەیوەندییە هاتووەکاندا</string>
+    <string name="forward_lookup_provider_title">دابینکاری گەڕانی پێشوەخت</string>
+    <string name="reverse_lookup_provider_title">دابینکاری گەڕانی پێچەوانە</string>
+    <string name="lookup_disclaimer">کرداری گەڕانەکان لەوانەیە داواکارییەکان لە ڕێگەی پرۆتۆکۆڵێکی پارێزراوەوە (https) بۆ ماڵپەڕە دوورەکان بنێرن بۆ کۆکردنەوەی زانیاری. داواکارییەکە لەوانەیە ژمارەی تەلەفۆنی لایەنی بەرامبەر یان دەقی گەڕانەکەت لەخۆ بگرێت</string>
+</resources>

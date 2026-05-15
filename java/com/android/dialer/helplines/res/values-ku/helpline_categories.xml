@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">خراپ مامەڵەکردن (Abuse)</string>
+    <string name="helpline_category_acohol">ئەلکۆل</string>
+    <string name="helpline_category_addiction">ئالوودەبوون</string>
+    <string name="helpline_category_adolescents">هەرزەکاران</string>
+    <string name="helpline_category_adults">گەورەساڵان</string>
+    <string name="helpline_category_aids">ئایدز (AIDS)</string>
+    <string name="helpline_category_birth">لەدایکبوون</string>
+    <string name="helpline_category_bullying">ھەراسانکردن (Bullying)</string>
+    <string name="helpline_category_children">منداڵان</string>
+    <string name="helpline_category_crime">تاوان</string>
+    <string name="helpline_category_crime_victims">قوربانیانی تاوان</string>
+    <string name="helpline_category_corruption">گەندەڵی</string>
+    <string name="helpline_category_discrimination">جیاکاری</string>
+    <string name="helpline_category_domestic_violence">توندوتیژیی خێزانی</string>
+    <string name="helpline_category_drugs">ماددە هۆشبەرەکان</string>
+    <string name="helpline_category_emotional_support">پشتیوانیی سۆزداری</string>
+    <string name="helpline_category_family">خێزان</string>
+    <string name="helpline_category_gambling">قومارکردن</string>
+    <string name="helpline_category_gender">ڕەگەز</string>
+    <string name="helpline_category_generic">گشتی</string>
+    <string name="helpline_category_hiv">ئایدز (HIV)</string>
+    <string name="helpline_category_human_rights">مافەکانی مرۆڤ</string>
+    <string name="helpline_category_human_trafficking">بازرگانیکردن بە مرۆڤەوە</string>
+    <string name="helpline_category_immigration">کۆچبەری</string>
+    <string name="helpline_category_legal_aid">هاوکاریی یاسایی</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">پیاوان</string>
+    <string name="helpline_category_mental_health">تەندروستیی دەروونی</string>
+    <string name="helpline_category_missing_children">منداڵی ونبوو</string>
+    <string name="helpline_category_mothers">دایکان</string>
+    <string name="helpline_category_muslim">موسڵمان</string>
+    <string name="helpline_category_parents">باوان</string>
+    <string name="helpline_category_pregnancy">دووگیانی</string>
+    <string name="helpline_category_psychological">دەروونی</string>
+    <string name="helpline_category_religion">ئایین</string>
+    <string name="helpline_category_senior">کەسانی بەساڵاچوو</string>
+    <string name="helpline_category_sexual_abuse">خراپ بەکارهێنانی سێکسی</string>
+    <string name="helpline_category_sexual_assault">دەستدرێژیی سێکسی</string>
+    <string name="helpline_category_sexual_rights">مافە سێکسییەکان</string>
+    <string name="helpline_category_sexuality">سێکسییەتی</string>
+    <string name="helpline_category_soldiers">سەربازان</string>
+    <string name="helpline_category_suicide">خۆپاراستن لە خۆکوشتن</string>
+    <string name="helpline_category_trans">ڕەگەزگۆڕاو (Trans)</string>
+    <string name="helpline_category_veterans">سەربازە دێرینەکان</string>
+    <string name="helpline_category_violence">توندوتیژی</string>
+    <string name="helpline_category_war">جەنگ</string>
+    <string name="helpline_category_women">ژنان</string>
+    <string name="helpline_category_youth">گه‌نجان</string>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">هێڵەکانی یارمەتی</string>
+    <string name="helplines_loading">بارکردن…</string>
+    <string name="helplines_empty">هیچ هێڵێکی یارمەتی نەدۆزرایەوە.\nسیمکارتێک دابنێ و دووبارە هەوڵ بدەرەوە</string>
+    <string name="helplines_help">یارمەتی</string>
+    <string name="helplines_help_title">ئەمانە بۆ پەیوەندیکردن بێوەین</string>
+    <string name="helplines_help_message">هیچ کام لەم ژمارانە لە مێژووی پەیوەندییەکانتدا دەرناکەون.\nدەتوانیت کرتە لەسەر هەر بابەتێک بکەیت بۆ زانیاریی زیاتر</string>
+    <string name="helplines_help_more_message">لیستی هێڵەکانی یارمەتی بەو زانیارییانە پڕکراوەتەوە کە بە شێوەی دەستی لەلایەن بەشداربووانەوە نوێ دەکرێنەوە. ئەگەر ڕووبەڕووی هەر زانیارییەکی هەڵە یان کەمبوو بوویتەوە، تکایە پەیوەندیمان پێوە بکە لە ڕێگەی <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
+    <string name="helpline_button_more">زیاتر</string>
+    <string name="unknown_helpline_name">ڕێکخراوی نەناسراو</string>
+    <string name="helpline_name">ناو</string>
+    <string name="helpline_org">ڕێکخراو</string>
+    <string name="helpline_categories">پۆلەکان</string>
+    <string name="helpline_number">ژمارە</string>
+    <string name="helpline_website">ماڵپەڕ</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_language_cree">زمانی کری (Cree)</string>
+    <string name="helpline_language_english">ئینگلیزی</string>
+    <string name="helpline_language_french">فەڕەنسی</string>
+    <string name="helpline_language_german">ئەڵمانی</string>
+    <string name="helpline_language_inuktitut">زمانی ئینوکتیتوت (Inuktitut)</string>
+    <string name="helpline_language_ojibway">زمانی ئۆجیبوای (Ojibway)</string>
+    <string name="helpline_language_turkish">تورکی</string>
+</resources>
