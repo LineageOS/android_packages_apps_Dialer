@@ -18,7 +18,7 @@
     <string name="nearby_places">شوێنە نزیکەکان</string>
     <string name="lookup_settings_label">گەڕان بەدوای ژمارەی تەلەفۆندا</string>
     <string name="enable_forward_lookup_title">گەڕانی پێشوەخت (Forward lookup)</string>
-    <string name="enable_forward_lookup_summary">نیشاندانی شوێنە نزیکەکان لە کاتی گەڕان لە ناو ئەپی پەیوەندیدا</string>
+    <string name="enable_forward_lookup_summary">نیشاندانی شوێنە نزیکەکان لە کاتی گەڕان لە ناو بەرنامەی پەیوەندیدا</string>
     <string name="enable_reverse_lookup_title">گەڕانی پێچەوانە (Reverse lookup)</string>
     <string name="enable_reverse_lookup_summary">گەڕان بەدوای زانیاریی کەس یان شوێن بۆ ژمارە نەناسراوەکان لە کاتی پەیوەندییە هاتووەکاندا</string>
     <string name="forward_lookup_provider_title">دابینکاری گەڕانی پێشوەخت</string>
