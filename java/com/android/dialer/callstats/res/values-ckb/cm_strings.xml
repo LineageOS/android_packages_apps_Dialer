@@ -21,7 +21,7 @@
     <string name="call_stats_outgoing">ڕۆیشتووەکان: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_missed">وەڵام نەدراوەکان: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_blocked">بلۆککراوەکان: <xliff:g id="value">%s</xliff:g></string>
-    <string name="call_stats_percent">١٠٠٪</string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
     <string name="call_stats_header_total">سەرجەم: <xliff:g id="call_count">%1$s</xliff:g>، <xliff:g id="duration">%2$s</xliff:g></string>
     <string name="call_stats_header_total_callsonly">سەرجەم: <xliff:g id="call_count">%s</xliff:g></string>
     <string name="call_stats_filter_from">ڕێککەوتی دەستپێکردن</string>

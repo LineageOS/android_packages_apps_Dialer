@@ -19,9 +19,9 @@
     <string name="helplines_loading">بارکردن…</string>
     <string name="helplines_empty">هیچ هێڵێکی یارمەتی نەدۆزرایەوە.\nسیمکارتێک دابنێ و دووبارە هەوڵ بدەرەوە</string>
     <string name="helplines_help">یارمەتی</string>
-    <string name="helplines_help_title">ئەمانە بۆ پەیوەندیکردن بێوەین</string>
+    <string name="helplines_help_title">ئەمانە بۆ پەیوەندیکردن مەترسییان نییە</string>
     <string name="helplines_help_message">هیچ کام لەم ژمارانە لە مێژووی پەیوەندییەکانتدا دەرناکەون.\nدەتوانیت کرتە لەسەر هەر بابەتێک بکەیت بۆ زانیاریی زیاتر</string>
-    <string name="helplines_help_more_message">لیستی هێڵەکانی یارمەتی بەو زانیارییانە پڕکراوەتەوە کە بە شێوەی دەستی لەلایەن بەشداربووانەوە نوێ دەکرێنەوە. ئەگەر ڕووبەڕووی هەر زانیارییەکی هەڵە یان کەمبوو بوویتەوە، تکایە پەیوەندیمان پێوە بکە لە ڕێگەی <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
+    <string name="helplines_help_more_message">لیستی هێڵەکانی یارمەتی پڕ کراوەتەوە لەو زانیارییانەی کە لە لایەن بەشداربووانەوە بە شێوازی دەستی نوێ دەکرێنەوە. ئەگەر تێبینیی هەر زانیارییەکی ناتەواو یان هەڵەت کرد، تکایە بێدوودڵی لە ڕێگەی <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g> پەیوەندیمان پێوە بکە.</string>
     <string name="helpline_button_more">زیاتر</string>
     <string name="unknown_helpline_name">ڕێکخراوی نەناسراو</string>
     <string name="helpline_name">ناو</string>
