@@ -17,4 +17,7 @@
 <resources>
   <!-- Whether to check that the proximity is unblocked before showing the incoming call UI. -->
   <bool name="config_answer_proximity_sensor_enabled">true</bool>
+
+  <!-- Whether to ignore logical multi-cameras and only use physical cameras for video calls -->
+  <bool name="config_ignore_logical_cameras">false</bool>
 </resources>
