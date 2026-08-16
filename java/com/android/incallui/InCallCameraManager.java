@@ -21,6 +21,7 @@ import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.os.SystemProperties;
 
 import java.util.Collections;
 import java.util.Set;
@@ -130,6 +131,8 @@ public class InCallCameraManager {
       // Camera disabled by device policy.
       return;
     }
+    // Defaults to 'false' to follow default behaviour
+    boolean ignoreLogicalProp = SystemProperties.getBoolean("persist.vendor.camera.ignore_logical_vt", false);
 
     for (int i = 0; i < cameraIds.length; i++) {
       CameraCharacteristics c = null;
@@ -141,11 +144,33 @@ public class InCallCameraManager {
         // Camera disabled by device policy.
       }
       if (c != null) {
-        int facingCharacteristic = c.get(CameraCharacteristics.LENS_FACING);
-        if (facingCharacteristic == CameraCharacteristics.LENS_FACING_FRONT) {
-          frontFacingCameraId = cameraIds[i];
-        } else if (facingCharacteristic == CameraCharacteristics.LENS_FACING_BACK) {
-          rearFacingCameraId = cameraIds[i];
+        // 1. Check if this is a Logical Multi-Camera
+        int[] capabilities = c.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES);
+        boolean isLogical = false;
+        if (capabilities != null) {
+            for (int cap : capabilities) {
+                if (cap == CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES_LOGICAL_MULTI_CAMERA) {
+                    isLogical = true;
+                    break;
+                }
+            }
+        }
+
+        // 2. Ignore logical cameras IF the property is enabled
+        if (isLogical && ignoreLogicalProp) {
+            continue;
+        }
+        Integer facingCharacteristic = c.get(CameraCharacteristics.LENS_FACING);
+        if (facingCharacteristic != null) {
+            if (facingCharacteristic == CameraCharacteristics.LENS_FACING_FRONT && frontFacingCameraId == null) {
+                frontFacingCameraId = cameraIds[i];
+            } else if (facingCharacteristic == CameraCharacteristics.LENS_FACING_BACK && rearFacingCameraId == null) {
+                rearFacingCameraId = cameraIds[i];
+            }
+        }
+        if (frontFacingCameraId != null && rearFacingCameraId != null) {
+            Log.v(this, "Found both cameras. Front: " + frontFacingCameraId + ", Back: " + rearFacingCameraId);
+            break;
         }
       }
     }
