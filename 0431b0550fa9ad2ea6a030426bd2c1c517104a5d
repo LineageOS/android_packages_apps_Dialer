@@ -16,6 +16,23 @@
       "message": "Can we please have a stacktrace of what happens when a non-working logical camera is used?",
       "revId": "0431b0550fa9ad2ea6a030426bd2c1c517104a5d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "793056fa_a7db45d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2026-08-28T12:21:56Z",
+      "side": 1,
+      "message": "if some of the logical cameras are not working in apps, it might also make sense to use the aux camera app allowlist property/overlay we already have, such that these \"broken\" logical cameras don\u0027t get exposed to any other 3rd party apps either and this patch would not be necessary in that case.",
+      "revId": "0431b0550fa9ad2ea6a030426bd2c1c517104a5d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
