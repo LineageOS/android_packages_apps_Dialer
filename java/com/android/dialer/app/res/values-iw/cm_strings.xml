@@ -17,13 +17,13 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="incall_category_title">בשיחה</string>
-    <string name="incall_enable_dnd_title">הפעלת \'נא לא להפריע\' במהלך שיחה</string>
+    <string name="incall_enable_dnd_title">הפעלת \"לא להפריע\" במהלך שיחה</string>
     <string name="incall_vibrate_outgoing_title">רטט בעת מענה</string>
     <string name="incall_vibrate_call_waiting_title">רטט בעת שיחה ממתינה</string>
     <string name="incall_vibrate_hangup_title">רטט בניתוק השיחה</string>
     <string name="incall_vibrate_45_title">רטט כל דקה</string>
     <string name="incall_vibrate_45_summary">רטט בשניה ה-45 של כל דקה במהלך שיחה יוצאת</string>
-    <string name="incall_dnd_dialog_message">בשביל להפעיל \'נא לא להפריע\' יישום החייגן צריך הרשאות לשינוי מצב נא לא להפריע.\nנא לאשר זאת.</string>
+    <string name="incall_dnd_dialog_message">בשביל להפעיל את \"לא להפריע\" יישום החייגן צריך הרשאות לשינוי מצב נא לא להפריע.\nנא לאשר זאת.</string>
     <string name="allow">לאפשר</string>
     <string name="deny">חסימה</string>
     <string name="call_recording_category_title">הקלטת שיחות</string>
