@@ -34,7 +34,7 @@ import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.call.DialerCall;
 
-import org.lineageos.lib.phone.SensitivePhoneNumbers;
+import com.android.dialer.sensitivephone.SensitivePhoneNumbers;
 
 import java.util.Arrays;
 
@@ -150,8 +150,8 @@ public class CallerInfoUtils {
     if (ci == null || number == null) {
       return number;
     }
-    boolean isSensitiveNumber = SensitivePhoneNumbers.getInstance().isSensitiveNumber(context,
-        number, INVALID_SUBSCRIPTION_ID);
+    boolean isSensitiveNumber = SensitivePhoneNumbers.getInstance().isSensitiveNumber(number,
+        INVALID_SUBSCRIPTION_ID);
     if (isSensitiveNumber) {
       number = context.getString(R.string.unknown);
       ci.numberPresentation = TelecomManager.PRESENTATION_UNKNOWN;

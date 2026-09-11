@@ -96,8 +96,8 @@ class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
 
         @Override
         public boolean areItemsTheSame(int iOld, int iNew) {
-            String oldNumber = mOldList.get(iOld).getItem().getNumber();
-            String newNumber = mOldList.get(iNew).getItem().getNumber();
+            String oldNumber = mOldList.get(iOld).getItem().number;
+            String newNumber = mNewList.get(iNew).getItem().number;
             return oldNumber.equals(newNumber);
         }
 
@@ -146,7 +146,7 @@ class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
                 mLanguageView.setText(languages);
             }
 
-            String number = item.getItem().getNumber();
+            String number = item.getItem().number;
             if (!TextUtils.isEmpty(number)) {
                 mCallIcon.setVisibility(View.VISIBLE);
                 mCallIcon.setOnClickListener(v -> mListener.initiateCall(number));

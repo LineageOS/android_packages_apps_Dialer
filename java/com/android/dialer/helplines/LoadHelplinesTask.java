@@ -24,8 +24,9 @@ import android.telephony.SubscriptionManager;
 
 import androidx.annotation.NonNull;
 
-import org.lineageos.lib.phone.SensitivePhoneNumbers;
-import org.lineageos.lib.phone.spn.Item;
+import com.android.dialer.sensitivephone.SensitivePhoneNumbers;
+
+import org.lineageos.services.telecom.Item;
 
 import java.util.ArrayList;
 import java.util.Comparator;

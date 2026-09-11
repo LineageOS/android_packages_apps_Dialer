@@ -19,7 +19,7 @@ import android.content.res.Resources;
 
 import com.android.dialer.helplines.utils.HelplineUtils;
 
-import org.lineageos.lib.phone.spn.Item;
+import org.lineageos.services.telecom.Item;
 
 /* When loading all the items we modify the name based on the subscription.
  * Using the setter would modify it permanently, resulting in modifications on each load.

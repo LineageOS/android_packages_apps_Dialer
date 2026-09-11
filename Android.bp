@@ -241,7 +241,7 @@ android_app {
         "jsr305",
         "jsr330",
         "libphonenumber",
-        "org.lineageos.lib.phone",
+        "org.lineageos.services.telecom.stubs",
         "volley",
     ],
     use_embedded_native_libs: true,

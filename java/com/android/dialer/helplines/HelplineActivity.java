@@ -49,7 +49,7 @@ import com.android.dialer.app.BaseActivity;
 import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.helplines.utils.HelplineUtils;
 
-import org.lineageos.lib.phone.spn.Item;
+import org.lineageos.services.telecom.Item;
 
 import java.util.HashMap;
 import java.util.List;
@@ -196,11 +196,11 @@ public class HelplineActivity extends BaseActivity {
             Item item = helplineItem.getItem();
 
             fillOrHideDialogRow(helplineItem.getName(), dialogView, R.id.name_title, R.id.name);
-            fillOrHideDialogRow(item.getOrganization(), dialogView, R.id.org_title, R.id.org);
+            fillOrHideDialogRow(item.organization, dialogView, R.id.org_title, R.id.org);
             fillOrHideDialogRow(HelplineUtils.getCategories(getResources(), helplineItem),
                     dialogView, R.id.categories_title, R.id.categories);
-            fillOrHideDialogRow(item.getNumber(), dialogView, R.id.number_title, R.id.number);
-            fillOrHideDialogRow(item.getWebsite(), dialogView, R.id.website_title, R.id.website,
+            fillOrHideDialogRow(item.number, dialogView, R.id.number_title, R.id.number);
+            fillOrHideDialogRow(item.website, dialogView, R.id.website_title, R.id.website,
                     true);
 
             mDialog = new AlertDialog.Builder(HelplineActivity.this)

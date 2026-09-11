@@ -39,7 +39,7 @@ import com.android.dialer.util.IntentUtil;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.lineageos.lib.phone.SensitivePhoneNumbers;
+import com.android.dialer.sensitivephone.SensitivePhoneNumbers;
 
 /** Helper class to handle all post call actions. */
 public class PostCall {
@@ -187,8 +187,8 @@ public class PostCall {
     boolean callDisconnectedByUser = manager.getBoolean(KEY_POST_CALL_DISCONNECT_PRESSED, false);
     String number = manager.getString(KEY_POST_CALL_CALL_NUMBER, null);
 
-    boolean isSensitiveNumber = SensitivePhoneNumbers.getInstance().isSensitiveNumber(context,
-            number, INVALID_SUBSCRIPTION_ID);
+    boolean isSensitiveNumber = SensitivePhoneNumbers.getInstance().isSensitiveNumber(number,
+        INVALID_SUBSCRIPTION_ID);
 
     return disconnectTimeMillis != -1
         && connectTimeMillis != -1
