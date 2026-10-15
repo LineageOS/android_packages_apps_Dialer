@@ -22,7 +22,7 @@
     <string name="helpline_category_adults">گەورەساڵان</string>
     <string name="helpline_category_aids">ئایدز (AIDS)</string>
     <string name="helpline_category_birth">لەدایکبوون</string>
-    <string name="helpline_category_bullying">ھەراسانکردن (Bullying)</string>
+    <string name="helpline_category_bullying">هەراسانکردن</string>
     <string name="helpline_category_children">منداڵان</string>
     <string name="helpline_category_crime">تاوان</string>
     <string name="helpline_category_crime_victims">قوربانیانی تاوان</string>
@@ -62,5 +62,5 @@
     <string name="helpline_category_violence">توندوتیژی</string>
     <string name="helpline_category_war">جەنگ</string>
     <string name="helpline_category_women">ژنان</string>
-    <string name="helpline_category_youth">گه‌نجان</string>
+    <string name="helpline_category_youth">گەنجان</string>
 </resources>
