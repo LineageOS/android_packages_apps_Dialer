@@ -172,7 +172,13 @@ public class SoundSettingsFragment extends PreferenceFragmentCompat
     if (!Settings.System.canWrite(getContext())) {
       // If the user launches this setting fragment, then toggles the WRITE_SYSTEM_SETTINGS
       // AppOp, then close the fragment since there is nothing useful to do.
-      getActivity().onBackPressed();
+      // onResume() runs while the FragmentManager executes transactions, so don't
+      // call onBackPressed() here.
+      if (getParentFragmentManager().getBackStackEntryCount() > 0) {
+        getParentFragmentManager().popBackStack();
+      } else {
+        requireActivity().finish();
+      }
       return;
     }
 
