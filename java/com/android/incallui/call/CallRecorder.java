@@ -21,11 +21,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.res.XmlResourceParser;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -67,12 +69,14 @@ public class CallRecorder implements CallList.Listener {
   private ICallRecorderService service = null;
 
   private final HashSet<RecordingProgressListener> progressListeners = new HashSet<>();
+  private final HashSet<String> autoRecordedCallIds = new HashSet<>();
   private final Handler handler = new Handler(Looper.getMainLooper());
 
   private final ServiceConnection connection = new ServiceConnection() {
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
       CallRecorder.this.service = ICallRecorderService.Stub.asInterface(service);
+      maybeStartAutoRecording(CallList.getInstance());
     }
 
     @Override
@@ -127,6 +131,7 @@ public class CallRecorder implements CallList.Listener {
       context.unbindService(connection);
       initialized = false;
     }
+    autoRecordedCallIds.clear();
   }
 
   public boolean startRecording(final String phoneNumber, final long creationTime) {
@@ -224,6 +229,7 @@ public class CallRecorder implements CallList.Listener {
       // we'll come here if this is the first active call
       initialize();
     } else {
+      maybeStartAutoRecording(callList);
       // we can come down this branch to resume a call that was on hold
       CallRecording active = getActiveRecording();
       if (active != null) {
@@ -266,6 +272,27 @@ public class CallRecorder implements CallList.Listener {
 
   @Override
   public void onInternationalCallOnWifi(DialerCall call) {}
+
+  private void maybeStartAutoRecording(final CallList callList) {
+    final DialerCall call = callList.getActiveCall();
+    if (service == null || call == null || !autoRecordedCallIds.add(call.getId())
+        || isRecording()) {
+      return;
+    }
+    // Same conditions as the record button in CallButtonPresenter
+    if (!canRecordInCurrentCountry() || call.isVideoCall()
+        || call.getState() != DialerCallState.ACTIVE
+        || !context.getSystemService(UserManager.class).isUserUnlocked()) {
+      return;
+    }
+    // Same preferences as CallRecorderService.getAudioFormatChoice()
+    final String prefName = context.getPackageName() + "_preferences";
+    final SharedPreferences prefs = context.createDeviceProtectedStorageContext()
+            .getSharedPreferences(prefName, Context.MODE_MULTI_PROCESS);
+    if (prefs.getBoolean(context.getString(R.string.call_recording_auto_key), false)) {
+      startRecording(call.getNumber(), call.getCreationTimeMillis());
+    }
+  }
 
   // allow clients to listen for recording progress updates
   public interface RecordingProgressListener {
