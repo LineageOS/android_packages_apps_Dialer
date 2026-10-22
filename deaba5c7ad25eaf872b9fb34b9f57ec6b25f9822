@@ -16,6 +16,23 @@
       "message": "Not built yet. Reworks the abandoned change https://review.lineageos.org/c/LineageOS/android_packages_apps_Dialer/+/251235, using the call-state listener instead of simulating a button press.\nIf anyone can test it, please do 🙏 Otherwise I\u0027ll try an emulator build tomorrow, but it\u0027ll be my first time building LineageOS.",
       "revId": "deaba5c7ad25eaf872b9fb34b9f57ec6b25f9822",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f533a53_f3089c16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 36773
+      },
+      "writtenOn": "2026-10-22T21:12:05Z",
+      "side": 1,
+      "message": "Functionality works",
+      "revId": "deaba5c7ad25eaf872b9fb34b9f57ec6b25f9822",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
