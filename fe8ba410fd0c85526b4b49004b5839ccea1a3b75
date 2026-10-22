@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8506c175_be7c0bd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 38412
+      },
+      "writtenOn": "2026-10-22T23:07:26Z",
+      "side": 1,
+      "message": "Votes got reset by the new patchset, sorry. Could you take another look when you have time? (I only added a comment so no need to test I think)",
+      "revId": "fe8ba410fd0c85526b4b49004b5839ccea1a3b75",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
