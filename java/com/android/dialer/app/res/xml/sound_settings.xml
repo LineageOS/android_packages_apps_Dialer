@@ -91,6 +91,13 @@
             android:title="@string/call_recording_format"
             app:iconSpaceReserved="false" />
 
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="@string/call_recording_auto_key"
+            android:summary="@string/call_recording_auto_summary"
+            android:title="@string/call_recording_auto_title"
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
