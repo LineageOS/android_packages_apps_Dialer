@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ad7137_200cf7dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 38412
+      },
+      "writtenOn": "2026-10-23T16:12:08Z",
+      "side": 1,
+      "message": "Cherry-pick of lineage-24.0 change. The concerned files are identical on both branches, so it applied cleanly.\n\nIf you\u0027d rather keep new features on 24.0 only, feel free to abondon it 🙂",
+      "revId": "48e346a01a287558d810028704f3e9c416e8ad5d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
