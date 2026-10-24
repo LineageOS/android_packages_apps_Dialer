@@ -16,6 +16,23 @@
       "message": "Votes got reset by the new patchset, sorry. Could you take another look when you have time? (I only added a comment so no need to test I think)",
       "revId": "fe8ba410fd0c85526b4b49004b5839ccea1a3b75",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1b5334_89eab273",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 38412
+      },
+      "writtenOn": "2026-10-24T13:32:34Z",
+      "side": 1,
+      "message": "it works",
+      "revId": "fe8ba410fd0c85526b4b49004b5839ccea1a3b75",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
