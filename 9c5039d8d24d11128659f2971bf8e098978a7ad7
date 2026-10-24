@@ -16,6 +16,23 @@
       "message": "Verified again before and after this new patchset",
       "revId": "9c5039d8d24d11128659f2971bf8e098978a7ad7",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbb38d98_69f4a9c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 38412
+      },
+      "writtenOn": "2026-10-24T13:26:21Z",
+      "side": 1,
+      "message": "Code-Review+1\n\nRegistering the click listener makes the existing canWrite() check actually\nrun, and dropping the explicit super.onPreferenceTreeClick() call avoids\nopening the fragment twice when the listener returns false. Looks good.",
+      "revId": "9c5039d8d24d11128659f2971bf8e098978a7ad7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
