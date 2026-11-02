@@ -17,7 +17,6 @@
 package com.android.dialer.util;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +39,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
 
 import java.util.Iterator;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /** General purpose utility methods for the Dialer. */
 public class DialerUtils {
@@ -93,7 +93,7 @@ public class DialerUtils {
           LogUtil.i(
               "DialUtils.startActivityWithErrorToast",
               "showing outgoing WPS dialog before placing call");
-          AlertDialog.Builder builder = new AlertDialog.Builder(context);
+          MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
           builder.setMessage(R.string.outgoing_wps_warning);
           builder.setPositiveButton(
               R.string.dialog_continue, (dialog, which) -> placeCallOrMakeToast(context, intent));

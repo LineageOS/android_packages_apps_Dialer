@@ -235,6 +235,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             fab,
             bottomSheet);
     bottomNav.addOnTabSelectedListener(bottomNavTabListener);
+    bottomNav.setKeypadActions(fab::performClick, () -> searchController.closeSearch(true));
     // TODO(uabdullah): Handle case of when a sim is inserted/removed while the activity is open.
     boolean showVoicemailTab = canVoicemailTabBeShown(activity);
     bottomNav.showVoicemail(showVoicemailTab);
@@ -419,7 +420,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     Database.get(activity).getDatabaseHelper(activity).startSmartDialUpdateThread(forceUpdate);
     showPostCallPrompt();
 
-    if (searchController.isInSearch()
+    if ((searchController.isInSearch() && !bottomNav.isKeypadSelected())
         || callLogAdapterOnActionModeStateChangedListener.isActionModeStateEnabled()) {
       bottomNav.setVisibility(View.GONE);
     } else {
@@ -985,7 +986,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       selectedTab = TabIndex.CALL_LOG;
 
       Fragment fragment = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
-      showFragment(fragment == null ? new CallLogFragment() : fragment, CALL_LOG_TAG);
+      showFragment(fragment == null ? new HomeFragment() : fragment, CALL_LOG_TAG);
 
       fab.show();
       showPromotionBottomSheet(activity, bottomSheet);

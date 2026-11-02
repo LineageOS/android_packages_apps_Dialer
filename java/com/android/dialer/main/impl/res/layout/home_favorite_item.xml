@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/HomeFavoriteItem">
+
+  <com.google.android.material.imageview.ShapeableImageView
+      android:id="@+id/home_favorite_photo"
+      android:layout_width="56dp"
+      android:layout_height="56dp"
+      app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"/>
+
+  <TextView
+      android:id="@+id/home_favorite_name"
+      style="@style/HomeFavoriteName"/>
+</LinearLayout>

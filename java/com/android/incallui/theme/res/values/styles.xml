@@ -17,8 +17,10 @@
 
 <resources>
   <style name="Theme.InCallScreen" parent="@style/Dialer.Dark.ThemeBase.NoActionBar">
-    <item name="android:textColorPrimary">@android:color/white</item>
-    <item name="android:textColorSecondary">#DDFFFFFF</item>
+    <item name="android:textColorPrimary">@color/incall_text_primary_color</item>
+    <item name="android:textColorSecondary">@color/incall_text_secondary_color</item>
+    <item name="android:windowLightStatusBar">@bool/incall_light_system_bars</item>
+    <item name="android:windowLightNavigationBar">@bool/incall_light_system_bars</item>
     <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:navigationBarColor">@android:color/transparent</item>
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -29,6 +31,11 @@
     <item name="android:windowBackground">@color/dialer_theme_color_dark</item>
     <item name="android:windowShowWallpaper">true</item>
     <item name="bottomSheetDialogTheme">@style/TransparentBottomSheetDialogTheme</item>
+  </style>
+
+  <style name="InCallVideoOverlay" parent="">
+    <item name="android:textColorPrimary">@android:color/white</item>
+    <item name="android:textColorSecondary">#DDFFFFFF</item>
   </style>
 
   <style name="Theme.InCallScreen.ManageConference" parent="Dialer.ThemeBase.ActionBar">

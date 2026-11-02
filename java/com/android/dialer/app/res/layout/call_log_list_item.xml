@@ -29,15 +29,21 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="start"
-    android:layout_marginStart="@dimen/call_log_start_margin"
+    android:layout_marginStart="24dp"
     android:layout_marginEnd="@dimen/call_log_outer_margin"
     android:paddingTop="@dimen/call_log_day_group_padding_top"
     android:paddingBottom="@dimen/call_log_day_group_padding_bottom"
+    android:textColor="@color/home_header_text_color"
     style="@style/Dialer.TextAppearance.OVERLINE.Ellipsize"/>
 
-  <androidx.cardview.widget.CardView
+  <com.google.android.material.card.MaterialCardView
     android:id="@+id/call_log_row"
-    style="@style/CallLogCardStyle">
+    style="@style/Widget.Material3.CardView.Filled"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="1dp"
+    app:cardBackgroundColor="@color/dialer_search_bar_color">
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -49,10 +55,10 @@
         android:id="@+id/primary_action_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/call_log_start_margin"
-        android:paddingEnd="@dimen/call_log_outer_margin"
-        android:paddingTop="@dimen/call_log_vertical_padding"
-        android:paddingBottom="@dimen/call_log_vertical_padding"
+        android:paddingStart="16dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:focusable="true"
@@ -67,9 +73,8 @@
 
           <com.android.dialer.app.calllog.DialerQuickContactBadge
               android:id="@+id/quick_contact_photo"
-              android:layout_width="@dimen/contact_photo_size"
-              android:layout_height="@dimen/contact_photo_size"
-              android:paddingTop="2dp"
+              android:layout_width="40dp"
+              android:layout_height="40dp"
               android:nextFocusRight="@id/primary_action_view"
               android:focusable="true"
               android:forceDarkAllowed="false" />
@@ -77,8 +82,8 @@
           <ImageView
               android:id="@+id/quick_contact_checkbox"
               android:scaleType="fitCenter"
-              android:layout_width="@dimen/contact_photo_size"
-              android:layout_height="@dimen/contact_photo_size"
+              android:layout_width="40dp"
+              android:layout_height="40dp"
               android:visibility="gone"
               android:src="@drawable/ic_check_mark_48dp" />
 
@@ -167,6 +172,6 @@
 
     </LinearLayout>
 
-  </androidx.cardview.widget.CardView>
+  </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

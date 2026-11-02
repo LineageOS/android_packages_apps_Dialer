@@ -51,8 +51,7 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:gravity="center_vertical"
-        android:textSize="@dimen/text_size"
-        android:textColor="?android:attr/textColorPrimary"
-        android:fontFamily="@*android:string/config_bodyFontFamily"/>
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        android:textColor="?attr/colorOnSurface"/>
   </LinearLayout>
 </FrameLayout>

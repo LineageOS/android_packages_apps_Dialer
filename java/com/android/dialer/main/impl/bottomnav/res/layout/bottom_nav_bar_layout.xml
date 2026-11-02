@@ -16,37 +16,9 @@
   -->
 <com.android.dialer.main.impl.bottomnav.BottomNavBar
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.Material3Expressive.BottomNavigationView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/rounded_dialpad_bg_color"
-    android:elevation="8dp">
-
-  <include
-      android:id="@+id/speed_dial_tab"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      layout="@layout/bottom_nav_item"/>
-
-  <include
-      android:id="@+id/call_log_tab"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      layout="@layout/bottom_nav_item"/>
-
-  <include
-      android:id="@+id/contacts_tab"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      layout="@layout/bottom_nav_item"/>
-
-  <include
-      android:id="@+id/voicemail_tab"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      layout="@layout/bottom_nav_item"/>
-</com.android.dialer.main.impl.bottomnav.BottomNavBar>
+    app:labelVisibilityMode="labeled"
+    app:menu="@menu/bottom_nav_menu"/>

@@ -77,12 +77,15 @@ import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.CardGroup;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /** Adapter class to fill in data for the Call Log. */
 public class CallLogAdapter extends GroupingListAdapter
@@ -193,7 +196,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
   private void showDeleteSelectedItemsDialog() {
     SparseArray<String> voicemailsToDeleteOnConfirmation = selectedItems.clone();
-    new AlertDialog.Builder(activity)
+    new MaterialAlertDialogBuilder(activity)
         .setCancelable(true)
         .setTitle(
             activity
@@ -776,6 +779,10 @@ public class CallLogAdapter extends GroupingListAdapter
             } else {
               mViewHolder.dayGroupHeaderVisibility = View.GONE;
             }
+            CardGroup.apply(
+                (MaterialCardView) mViewHolder.callLogEntryView,
+                currentDayGroup != mDetails.previousGroup,
+                currentDayGroup != mDetails.nextGroup);
             render(mViewHolder, mDetails, mRowId);
           }
         });
@@ -822,6 +829,7 @@ public class CallLogAdapter extends GroupingListAdapter
     // Stash away the Ids of the calls so that we can support deleting a row in the call log.
     views.callIds = getCallIds(cursor, count);
     details.previousGroup = getPreviousDayGroup(cursor);
+    details.nextGroup = getNextDayGroup(cursor, count);
 
     // Store values used when the actions ViewStub is inflated on expansion.
     views.number = number;
@@ -1059,6 +1067,7 @@ public class CallLogAdapter extends GroupingListAdapter
     hiddenItemUris.add(uri);
 
     collapseExpandedCard();
+    notifyItemChanged(Math.max(0, viewHolder.getAdapterPosition() - 1));
     notifyItemChanged(viewHolder.getAdapterPosition());
     // The next item might have to update its day group label
     notifyItemChanged(viewHolder.getAdapterPosition() + 1);
@@ -1079,6 +1088,7 @@ public class CallLogAdapter extends GroupingListAdapter
   public void onVoicemailDeleteUndo(long rowId, int adapterPosition, Uri uri) {
     hiddenItemUris.remove(uri);
     hiddenRowIds.remove(rowId);
+    notifyItemChanged(Math.max(0, adapterPosition - 1));
     notifyItemChanged(adapterPosition);
     // The next item might have to update its day group label
     notifyItemChanged(adapterPosition + 1);
@@ -1106,6 +1116,18 @@ public class CallLogAdapter extends GroupingListAdapter
       return CallLogGroupBuilder.DAY_GROUP_NONE;
     }
     int result = getDayGroup(cursor.getLong(CallLogQuery.ID));
+    cursor.moveToPosition(startingPosition);
+    return result;
+  }
+
+  private int getNextDayGroup(Cursor cursor, int count) {
+    int startingPosition = cursor.getPosition();
+    cursor.moveToPosition(startingPosition + count - 1);
+    while (cursor.moveToNext() && hiddenRowIds.contains(cursor.getLong(CallLogQuery.ID))) {}
+    int result =
+        cursor.isAfterLast()
+            ? CallLogGroupBuilder.DAY_GROUP_NONE
+            : getDayGroup(cursor.getLong(CallLogQuery.ID));
     cursor.moveToPosition(startingPosition);
     return result;
   }

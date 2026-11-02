@@ -37,8 +37,8 @@ import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
-import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.DialerUtils;
+import com.google.android.material.color.MaterialColors;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -167,9 +167,13 @@ public class PhoneCallDetailsHelper {
     views.nameView.setTypeface(typeface);
     views.callLocationAndDate.setTypeface(typeface);
     views.callLocationAndDate.setTextColor(
-        details.isRead
-            ? ThemeComponent.get(context).theme().getTextColorSecondary()
-            : ThemeComponent.get(context).theme().getTextColorPrimary());
+        details.callTypes[0] == Calls.MISSED_TYPE
+            ? context.getColor(R.color.dialer_red)
+            : MaterialColors.getColor(
+                views.callLocationAndDate,
+                details.isRead
+                    ? android.R.attr.textColorSecondary
+                    : android.R.attr.textColorPrimary));
   }
 
   private void setNameView(PhoneCallDetailsViews views, PhoneCallDetails details) {

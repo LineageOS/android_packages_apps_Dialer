@@ -37,8 +37,8 @@ import java.util.Set;
 /** Fragment for the in call buttons (mute, speaker, ect.). */
 public class InCallButtonGridFragment extends Fragment {
 
-  private static final int BUTTON_COUNT = 6;
-  private static final int BUTTONS_PER_ROW = 3;
+  private static final int BUTTON_COUNT = 8;
+  private static final int ROW_BUTTON_COUNT = 3;
 
   private final CheckableLabeledButton[] buttons = new CheckableLabeledButton[BUTTON_COUNT];
   private OnButtonGridCreatedListener buttonGridListener;
@@ -60,12 +60,21 @@ public class InCallButtonGridFragment extends Fragment {
       LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle bundle) {
     View view = inflater.inflate(R.layout.incall_button_grid, parent, false);
 
-    buttons[0] = ((CheckableLabeledButton) view.findViewById(R.id.incall_first_button));
-    buttons[1] = ((CheckableLabeledButton) view.findViewById(R.id.incall_second_button));
-    buttons[2] = ((CheckableLabeledButton) view.findViewById(R.id.incall_third_button));
-    buttons[3] = ((CheckableLabeledButton) view.findViewById(R.id.incall_fourth_button));
-    buttons[4] = ((CheckableLabeledButton) view.findViewById(R.id.incall_fifth_button));
-    buttons[5] = ((CheckableLabeledButton) view.findViewById(R.id.incall_sixth_button));
+    ViewGroup row = view.findViewById(R.id.incall_button_row);
+    ViewGroup list = view.findViewById(R.id.incall_more_list);
+    for (int i = 0; i < BUTTON_COUNT; ++i) {
+      buttons[i] = (CheckableLabeledButton)
+          (i < ROW_BUTTON_COUNT ? row.getChildAt(i) : list.getChildAt(i - ROW_BUTTON_COUNT));
+    }
+    CheckableLabeledButton more = (CheckableLabeledButton) row.getChildAt(ROW_BUTTON_COUNT);
+    View panel = view.findViewById(R.id.incall_more_panel);
+    View.OnClickListener toggle = v -> {
+      boolean show = v == more && !more.isChecked();
+      more.setChecked(show);
+      panel.setVisibility(show ? View.VISIBLE : View.GONE);
+    };
+    more.setOnClickListener(toggle);
+    view.findViewById(R.id.incall_more_close).setOnClickListener(toggle);
 
     return view;
   }
@@ -116,7 +125,8 @@ public class InCallButtonGridFragment extends Fragment {
           ButtonChooserFactory.newButtonChooser(voiceNetworkType, false /* isWiFi */, phoneType);
     }
 
-    int numVisibleButtons = getResources().getInteger(R.integer.incall_num_rows) * BUTTONS_PER_ROW;
+    int numVisibleButtons =
+        getResources().getInteger(R.integer.incall_num_rows) == 0 ? 0 : BUTTON_COUNT;
     List<Integer> buttonsToPlace =
         buttonChooser.getButtonPlacement(numVisibleButtons, allowedButtons, disabledButtons);
 

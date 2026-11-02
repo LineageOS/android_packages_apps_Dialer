@@ -63,7 +63,7 @@ class ButtonChooserFactory {
         MappingInfo.builder(4).setSlotOrder(0).build());
     // RTT call is only supported on IMS and WiFi.
     mapping.put(
-        InCallButtonIds.BUTTON_UPGRADE_TO_RTT, MappingInfo.builder(3).setSlotOrder(0).build());
+        InCallButtonIds.BUTTON_UPGRADE_TO_RTT, MappingInfo.builder(6).setSlotOrder(0).build());
     mapping.put(
         InCallButtonIds.BUTTON_UPGRADE_TO_VIDEO, MappingInfo.builder(4).setSlotOrder(10).build());
     mapping.put(
@@ -118,13 +118,13 @@ class ButtonChooserFactory {
 
   private static Map<Integer, MappingInfo> createCommonMapping() {
     Map<Integer, MappingInfo> mapping = new ArrayMap<>();
-    mapping.put(InCallButtonIds.BUTTON_MUTE, MappingInfo.builder(0).build());
-    mapping.put(InCallButtonIds.BUTTON_DIALPAD, MappingInfo.builder(1).build());
+    mapping.put(InCallButtonIds.BUTTON_DIALPAD, MappingInfo.builder(0).build());
+    mapping.put(InCallButtonIds.BUTTON_MUTE, MappingInfo.builder(1).build());
     mapping.put(InCallButtonIds.BUTTON_AUDIO, MappingInfo.builder(2).build());
-    mapping.put(InCallButtonIds.BUTTON_RECORD_CALL, MappingInfo.builder(3).build());
-    mapping.put(InCallButtonIds.BUTTON_MERGE, MappingInfo.builder(4).setSlotOrder(5).build());
-    mapping.put(InCallButtonIds.BUTTON_ADD_CALL, MappingInfo.builder(4).build());
-    mapping.put(InCallButtonIds.BUTTON_SWAP_SIM, MappingInfo.builder(5).build());
+    mapping.put(InCallButtonIds.BUTTON_MERGE, MappingInfo.builder(3).setSlotOrder(5).build());
+    mapping.put(InCallButtonIds.BUTTON_ADD_CALL, MappingInfo.builder(3).build());
+    mapping.put(InCallButtonIds.BUTTON_RECORD_CALL, MappingInfo.builder(6).build());
+    mapping.put(InCallButtonIds.BUTTON_SWAP_SIM, MappingInfo.builder(7).build());
     return mapping;
   }
 }

@@ -46,7 +46,7 @@
         android:layout_toStartOf="@+id/fast_scroller_scroll_bar"
         android:gravity="center"
         android:textSize="48sp"
-        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textColor="?attr/colorOnPrimaryContainer"
         android:visibility="gone"
         android:background="@drawable/fast_scroller_container_background"/>
 

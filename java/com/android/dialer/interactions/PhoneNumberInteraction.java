@@ -19,7 +19,7 @@ package com.android.dialer.interactions;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -70,6 +70,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Initiates phone calls or a text message. If there are multiple candidates, this class shows a
@@ -526,7 +527,7 @@ public class PhoneNumberInteraction implements Loader.OnLoadCompleteListener<Cur
       final LayoutInflater inflater = activity.getLayoutInflater();
       @SuppressLint("InflateParams") // Allowed since dialog view is not available yet
       final View setPrimaryView = inflater.inflate(R.layout.set_primary_checkbox, null);
-      return new AlertDialog.Builder(activity)
+      return new MaterialAlertDialogBuilder(activity)
           .setAdapter(phonesAdapter, this)
           .setTitle(
               interactionType == ContactDisplayUtils.INTERACTION_SMS

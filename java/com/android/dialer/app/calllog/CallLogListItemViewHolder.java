@@ -21,14 +21,12 @@ import android.Manifest.permission;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
-import android.animation.ArgbEvaluator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.BlockedNumberContract;
 import android.provider.CallLog;
@@ -732,32 +730,21 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     if (shouldExpand == isExpanded) {
       return;
     }
-    Resources res = context.getResources();
     actionsView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
     int currentHeight = callLogEntryView.getMeasuredHeight();
     int additionalHeight = actionsView.getMeasuredHeight();
 
     int targetHeight;
-    int colorFrom, colorTo;
     TimeInterpolator interpolator;
     int targetVisibility;
-    float targetElevation;
     if (shouldExpand) {
       targetHeight = currentHeight + additionalHeight;
-      colorFrom = res.getColor(android.R.color.transparent, context.getTheme());
-      colorTo  = res.getColor(R.color.cardBackgroundColor, context.getTheme());
       interpolator = new AccelerateDecelerateInterpolator();
       targetVisibility = View.VISIBLE;
-      targetElevation = 4f;
     } else {
       targetHeight = currentHeight - additionalHeight;
-      colorFrom  = res.getColor(R.color.cardBackgroundColor, context.getTheme());
-      colorTo = res.getColor(android.R.color.transparent, context.getTheme());
       interpolator = new DecelerateInterpolator();
       targetVisibility = View.GONE;
-      targetElevation = 0f;
-      // need to do this before animating, otherwise the color changes are weird
-      callLogEntryView.setCardElevation(targetElevation);
     }
 
     ValueAnimator heightAnimator = ValueAnimator.ofInt(currentHeight, targetHeight);
@@ -768,19 +755,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     heightAnimator.setInterpolator(interpolator);
     heightAnimator.setDuration(200);
 
-    ValueAnimator colorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-    colorAnimator.setDuration(200);
-    colorAnimator.addUpdateListener(animator -> callLogEntryView.setCardBackgroundColor(
-            (int) animator.getAnimatedValue()));
-
     AnimatorSet animatorSet = new AnimatorSet();
-    animatorSet.playTogether(heightAnimator, colorAnimator);
+    animatorSet.play(heightAnimator);
     animatorSet.addListener(new AnimatorListenerAdapter() {
       @Override
       public void onAnimationEnd(Animator animation) {
         super.onAnimationEnd(animation);
         actionsView.setVisibility(targetVisibility);
-        callLogEntryView.setCardElevation(targetElevation);
 
         // we need to set this so we can expand again
         ViewGroup.LayoutParams params = callLogEntryView.getLayoutParams();

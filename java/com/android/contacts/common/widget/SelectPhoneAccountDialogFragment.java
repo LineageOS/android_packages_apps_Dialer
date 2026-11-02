@@ -54,6 +54,7 @@ import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.telecom.TelecomUtil;
 
 import java.util.Optional;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Dialog that allows the user to select a phone accounts for a given action. Optionally provides
@@ -122,7 +123,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     final CompoundButton.OnCheckedChangeListener checkListener =
             (check, isChecked) -> isDefaultChecked = isChecked;
 
-    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    AlertDialog.Builder builder = new MaterialAlertDialogBuilder(getActivity());
     ListAdapter selectAccountListAdapter =
         new SelectAccountListAdapter(
             builder.getContext(), R.layout.select_account_list_item, options);

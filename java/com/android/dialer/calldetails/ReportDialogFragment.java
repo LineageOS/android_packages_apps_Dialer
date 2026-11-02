@@ -27,7 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Pair;
 import androidx.fragment.app.DialogFragment;
 
@@ -39,7 +38,7 @@ import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
-import com.android.dialer.theme.base.ThemeComponent;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /** Dialog for reporting an inaccurate caller id information. */
 public class ReportDialogFragment extends DialogFragment {
@@ -77,27 +76,17 @@ public class ReportDialogFragment extends DialogFragment {
 
     lookupContactInfo(number);
 
-    AlertDialog reportDialog =
-        new AlertDialog.Builder(getActivity())
+    return new MaterialAlertDialogBuilder(getActivity())
             .setTitle(R.string.report_caller_id_dialog_title)
             .setPositiveButton(android.R.string.ok, (dialog, which) -> positiveClick(dialog))
             .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
             .setView(view)
             .create();
-
-    reportDialog.setOnShowListener(dialog -> onShow(getContext(), reportDialog));
-    return reportDialog;
   }
 
   private void positiveClick(DialogInterface dialog) {
     startReportCallerIdWorker();
     dialog.dismiss();
-  }
-
-  private static void onShow(Context context, AlertDialog dialog) {
-    int buttonTextColor = ThemeComponent.get(context).theme().getColorAccent();
-    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(buttonTextColor);
-    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(buttonTextColor);
   }
 
   private void lookupContactInfo(String number) {

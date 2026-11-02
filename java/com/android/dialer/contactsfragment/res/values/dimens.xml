@@ -24,7 +24,6 @@
 
   <dimen name="text_padding_start">16dp</dimen>
   <dimen name="text_padding_end">8dp</dimen>
-  <dimen name="text_size">16sp</dimen>
 
   <dimen name="fast_scroller_touch_target_width">20dp</dimen>
 

@@ -17,7 +17,7 @@
 
 package com.android.dialer.voicemail.listui.error;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +45,7 @@ import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.VoicemailVersionConstants;
 
 import java.util.Locale;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Create error message from {@link VoicemailStatus} for voicemail. This is will show different
@@ -162,7 +163,7 @@ public class VoicemailTosMessageCreator {
         "VoicemailTosMessageCreator.showDeclineVerizonTosDialog",
         "showing decline ToS dialog, status=" + status);
     final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    AlertDialog.Builder builder = new MaterialAlertDialogBuilder(context);
     builder.setTitle(R.string.terms_and_conditions_decline_dialog_title);
     builder.setMessage(getTosDeclinedDialogMessageId());
     builder.setPositiveButton(getTosDeclinedDialogDowngradeId(), (dialog, which) -> {
@@ -180,7 +181,7 @@ public class VoicemailTosMessageCreator {
   }
 
   private void showSetPinBeforeDeclineDialog(PhoneAccountHandle phoneAccountHandle) {
-    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    AlertDialog.Builder builder = new MaterialAlertDialogBuilder(context);
     builder.setMessage(R.string.verizon_terms_and_conditions_decline_set_pin_dialog_message);
     builder.setPositiveButton(
         R.string.verizon_terms_and_conditions_decline_set_pin_dialog_set_pin,

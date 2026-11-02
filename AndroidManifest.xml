@@ -164,7 +164,7 @@
             android:exported="true"
             android:label="@string/dialer_settings_label"
             android:parentActivityName="com.android.dialer.main.impl.MainActivity"
-            android:theme="@style/SettingsStyle">
+            android:theme="@style/SettingsStyle.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

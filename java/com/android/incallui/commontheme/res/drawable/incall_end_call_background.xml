@@ -3,8 +3,9 @@
   android:color="#80FFFFFF">
   <item>
     <shape
-      android:shape="oval">
+      android:shape="rectangle">
       <solid android:color="@color/dialer_end_call_button_color"/>
+      <corners android:radius="100dp"/>
     </shape>
   </item>
 </ripple>

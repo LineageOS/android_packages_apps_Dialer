@@ -17,6 +17,4 @@
     <item name="colorControlHighlight">@color/dialer_ripple_color</item>
     <item name="android:windowLightStatusBar">false</item>
   </style>
-
-  <style name="DialerActionBarBaseTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>

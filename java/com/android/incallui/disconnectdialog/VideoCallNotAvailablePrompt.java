@@ -16,7 +16,6 @@
 
 package com.android.incallui.disconnectdialog;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.telecom.DisconnectCause;
@@ -31,6 +30,7 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.precall.PreCall;
 import com.android.incallui.call.DialerCall;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /** Prompt user to make voice call if video call is not currently available. */
 public class VideoCallNotAvailablePrompt implements DisconnectDialog {
@@ -54,7 +54,7 @@ public class VideoCallNotAvailablePrompt implements DisconnectDialog {
     CharSequence title = context.getString(R.string.video_call_not_available_title);
 
     Dialog dialog =
-        new AlertDialog.Builder(context)
+        new MaterialAlertDialogBuilder(context)
             .setTitle(title)
             .setMessage(context.getString(R.string.video_call_not_available_message))
             .setPositiveButton(
