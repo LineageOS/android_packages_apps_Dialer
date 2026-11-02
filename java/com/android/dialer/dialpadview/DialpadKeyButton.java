@@ -28,7 +28,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
-import android.widget.FrameLayout;
+import com.google.android.material.card.MaterialCardView;
 
 /**
  * Custom class for dialpad buttons.
@@ -45,7 +45,7 @@ import android.widget.FrameLayout;
  *     action
  *     <ul>
  */
-public class DialpadKeyButton extends FrameLayout {
+public class DialpadKeyButton extends MaterialCardView {
 
   /** Accessibility manager instance used to check touch exploration state. */
   private AccessibilityManager accessibilityManager;

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="incall_button_background_color">@android:color/system_neutral1_50</color>
+    <color name="incall_button_background_color">@android:color/system_primary_dark</color>
+    <color name="incall_button_unchecked_color">@android:color/system_surface_container_dark</color>
+    <color name="incall_sheet_color">@android:color/system_surface_bright_dark</color>
     <color name="incall_end_call_icon_color">@android:color/black</color>
 </resources>

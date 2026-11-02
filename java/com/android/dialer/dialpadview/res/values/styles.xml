@@ -63,14 +63,16 @@
     <item name="android:layout_gravity">center</item>
   </style>
 
-  <style name="DialpadKeyButtonStyle">
+  <style name="DialpadKeyButtonStyle" parent="Widget.Material3.CardView.Filled">
     <item name="android:soundEffectsEnabled">false</item>
     <item name="android:clickable">true</item>
     <item name="android:layout_width">0dp</item>
     <item name="android:layout_height">match_parent</item>
     <item name="android:layout_weight">15</item>
     <item name="android:minHeight">@dimen/dialpad_key_height</item>
-    <item name="android:background">@drawable/btn_dialpad_key</item>
+    <item name="android:layout_margin">4dp</item>
+    <item name="cardBackgroundColor">@color/dialpad_key_bg_color</item>
+    <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Material3.Corner.Full</item>
     <item name="android:focusable">true</item>
   </style>
 
@@ -80,6 +82,19 @@
     <item name="android:layout_gravity">center</item>
     <item name="android:gravity">center</item>
     <item name="android:orientation">vertical</item>
+  </style>
+
+  <style name="DialpadCallButton" parent="Widget.Material3Expressive.ExtendedFloatingActionButton.Small">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:contentDescription">@string/description_dial_button</item>
+    <item name="android:text">@string/call</item>
+    <item name="android:textColor">@color/dialer_call_icon_color</item>
+    <item name="android:visibility">invisible</item>
+    <item name="backgroundTint">@color/dialer_call_green</item>
+    <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Material3.Corner.Full</item>
+    <item name="icon">@drawable/quantum_ic_call_vd_theme_24</item>
+    <item name="iconTint">@color/dialer_call_icon_color</item>
   </style>
 
   <style name="DeviceIdBody">

@@ -33,7 +33,7 @@
         android:id="@id/incall_contact_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="40dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -45,11 +45,12 @@
           android:elevation="2dp"/>
 
       <include
-          layout="@layout/incall_contactgrid_top_row"
+          layout="@layout/incall_contactgrid_bottom_row"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="@dimen/incall_window_margin_horizontal"
-          android:layout_marginEnd="@dimen/incall_window_margin_horizontal"/>
+          android:layout_marginEnd="@dimen/incall_window_margin_horizontal"
+          android:layout_marginBottom="12dp"/>
 
       <!-- We have to keep deprecated singleLine to allow long text being truncated with ellipses.
                  a bug -->
@@ -57,17 +58,18 @@
           android:id="@id/contactgrid_contact_name"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="4dp"
+          android:layout_marginBottom="8dp"
           android:layout_marginStart="@dimen/incall_window_margin_horizontal"
           android:layout_marginEnd="@dimen/incall_window_margin_horizontal"
           android:singleLine="true"
           android:textAppearance="@style/Dialer.Incall.TextAppearance.Large"
+          android:textSize="44sp"
           app:autoResizeText_minTextSize="28sp"
           tools:ignore="Deprecated"
           tools:text="Jake Peralta"/>
 
       <include
-          layout="@layout/incall_contactgrid_bottom_row"
+          layout="@layout/incall_contactgrid_top_row"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="@dimen/incall_window_margin_horizontal"
@@ -90,7 +92,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/incall_paginator"
         android:layout_below="@+id/incall_contact_grid"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:clipChildren="false"/>
 
     <com.android.incallui.incall.impl.InCallPaginator
         android:id="@+id/incall_paginator"
@@ -110,14 +113,24 @@
         android:clipToPadding="false"
         tools:background="@android:color/white"
         tools:visibility="gone"/>
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/incall_end_call"
-        style="@style/Incall.Button.End"
-        android:layout_marginTop="36dp"
-        android:layout_marginBottom="36dp"
+        style="@style/Widget.Material3Expressive.Button"
+        android:layout_width="152dp"
+        android:layout_height="72dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:contentDescription="@string/incall_content_description_end_call"/>
+        android:contentDescription="@string/incall_content_description_end_call"
+        app:backgroundTint="@color/dialer_end_call_button_color"
+        app:icon="@drawable/quantum_ic_call_end_vd_theme_36"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="32dp"
+        app:iconTint="@color/incall_end_call_icon_color"/>
   </RelativeLayout>
 
   <FrameLayout

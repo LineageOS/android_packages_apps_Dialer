@@ -27,4 +27,13 @@
   <!-- Content description for the button that displays the dialpad
        [CHAR LIMIT=NONE] -->
   <string name="dialpad_button_content_description">key pad</string>
+
+  <string name="home_filter_all">All</string>
+  <string name="home_filter_missed">Missed</string>
+  <string name="home_filter_contacts">Contacts</string>
+  <string name="home_filter_incoming">Incoming</string>
+  <string name="home_filter_outgoing">Outgoing</string>
+  <string name="home_favorites">Favorites</string>
+  <string name="home_view_contacts">View contacts</string>
+  <string name="home_add_favorite">Add</string>
 </resources>

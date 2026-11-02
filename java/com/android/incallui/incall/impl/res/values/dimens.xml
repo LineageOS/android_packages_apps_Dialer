@@ -16,13 +16,16 @@
   -->
 
 <resources>
-  <dimen name="incall_button_label_margin">8dp</dimen>
-  <dimen name="incall_button_elevation">0dp</dimen>
+  <dimen name="incall_button_label_margin">4dp</dimen>
   <dimen name="incall_button_padding">4dp</dimen>
   <dimen name="incall_button_vertical_padding">8dp</dimen>
   <dimen name="incall_avatar_size">0dp</dimen>
-  <dimen name="incall_labeled_button_size">48dp</dimen>
-  <dimen name="incall_labeled_button_icon_size">36dp</dimen>
+  <dimen name="incall_labeled_button_size">68dp</dimen>
+  <dimen name="incall_labeled_button_icon_size">32dp</dimen>
+  <dimen name="incall_more_icon_size">40dp</dimen>
+  <dimen name="incall_more_image_size">24dp</dimen>
+  <dimen name="incall_more_label_margin">16dp</dimen>
+  <dimen name="incall_more_label_size">16sp</dimen>
   <dimen name="tools_button_height">76dp</dimen>
   <dimen name="incall_window_margin_horizontal">24dp</dimen>
 

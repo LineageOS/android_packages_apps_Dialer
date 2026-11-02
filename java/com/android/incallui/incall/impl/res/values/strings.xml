@@ -40,6 +40,8 @@
      [CHAR LIMIT=12] -->
   <string name="incall_label_dialpad">Keypad</string>
 
+  <string name="incall_label_more">More</string>
+
   <!-- Talkback text for speaker button status. [CHAR LIMIT=12] -->
   <string name="incall_talkback_speaker_on">, is on</string>
 

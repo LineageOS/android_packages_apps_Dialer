@@ -27,9 +27,9 @@
   </style>
 
   <style name="Dialpad.Themed">
-    <item name="dialpad_text_color">@color/dialer_theme_color_light</item>
-    <item name="dialpad_text_color_primary">@color/dialer_theme_color_light</item>
-    <item name="dialpad_text_color_secondary">?android:attr/textColorSecondary</item>
+    <item name="dialpad_text_color">@color/dialpad_digit_color</item>
+    <item name="dialpad_text_color_primary">@color/dialpad_digit_color</item>
+    <item name="dialpad_text_color_secondary">@color/dialpad_icon_color</item>
     <item name="dialpad_background">@drawable/rounded_dialpad_bg</item>
   </style>
 </resources>
