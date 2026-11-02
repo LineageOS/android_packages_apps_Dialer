@@ -28,7 +28,7 @@
   </style>
 
   <!-- This Checkbox style helps align checkboxes with the common list element layout(Image + text) -->
-  <style name="DialerCheckboxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+  <style name="DialerCheckboxStyle" parent="Widget.Material3.CompoundButton.CheckBox">
     <item name="android:layout_marginStart">20dp</item>
     <item name="android:paddingLeft">12dp</item>
   </style>

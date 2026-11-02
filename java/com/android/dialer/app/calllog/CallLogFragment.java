@@ -507,7 +507,14 @@ public class CallLogFragment extends Fragment
         messageId = R.string.call_log_voicemail_empty;
         break;
       case CallLogQueryHandler.CALL_TYPE_ALL:
+      case CallLogQueryHandler.CALL_TYPE_CONTACTS:
         messageId = R.string.call_log_all_empty;
+        break;
+      case Calls.INCOMING_TYPE:
+        messageId = R.string.call_log_incoming_empty;
+        break;
+      case Calls.OUTGOING_TYPE:
+        messageId = R.string.call_log_outgoing_empty;
         break;
       default:
         throw new IllegalArgumentException(
@@ -525,6 +532,15 @@ public class CallLogFragment extends Fragment
 
   public CallLogAdapter getAdapter() {
     return adapter;
+  }
+
+  public void setCallTypeFilter(int filterType) {
+    callTypeFilter = filterType;
+    if (adapter != null) {
+      updateEmptyMessage(filterType);
+      scrollToTop = true;
+      fetchCalls();
+    }
   }
 
   @Override

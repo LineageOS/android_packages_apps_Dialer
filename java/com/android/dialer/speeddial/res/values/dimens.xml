@@ -15,6 +15,6 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="expanded_search_bar_height">64dp</dimen>
-  <dimen name="expanded_search_bar_height_minus">-64dp</dimen>
+  <dimen name="expanded_search_bar_height">80dp</dimen>
+  <dimen name="expanded_search_bar_height_minus">-80dp</dimen>
 </resources>

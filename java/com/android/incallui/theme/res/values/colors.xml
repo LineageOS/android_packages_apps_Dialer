@@ -51,11 +51,11 @@
     <item>#841F10</item>
   </array>
 
-  <color name="incall_background_gradient_top">@android:color/system_accent1_600</color>
-  <color name="incall_background_gradient_middle">@android:color/system_accent1_500</color>
-  <color name="incall_background_gradient_bottom">@android:color/system_accent1_400</color>
+  <color name="incall_background_gradient_top">@color/dialer_theme_color_dark</color>
+  <color name="incall_background_gradient_middle">@color/dialer_theme_color_dark</color>
+  <color name="incall_background_gradient_bottom">@color/dialer_theme_color_dark</color>
 
-  <color name="incall_background_multiwindow">@android:color/system_accent1_500</color>
+  <color name="incall_background_multiwindow">@color/dialer_theme_color_dark</color>
 
   <color name="incall_background_gradient_spam_top">#E5A30B0B</color>
   <color name="incall_background_gradient_spam_middle">#D6C01111</color>
@@ -63,7 +63,10 @@
 
   <color name="incall_background_multiwindow_spam">#E9C22E2E</color>
 
-  <color name="incall_button_icon_color">@android:color/black</color>
+  <color name="incall_button_icon_color">@android:color/system_on_primary_light</color>
+  <color name="incall_text_primary_color">@android:color/system_on_surface_light</color>
+  <color name="incall_text_secondary_color">@android:color/system_on_surface_variant_light</color>
+  <bool name="incall_light_system_bars">true</bool>
 
   <color name="incall_banner_icon_color">@android:color/system_neutral1_900</color>
   <color name="incall_banner_timer_color">@android:color/system_neutral1_800</color>

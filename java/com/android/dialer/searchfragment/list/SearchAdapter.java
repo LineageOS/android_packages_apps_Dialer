@@ -36,6 +36,8 @@ import com.android.dialer.searchfragment.cp2.SearchContactViewHolder;
 import com.android.dialer.searchfragment.directories.DirectoryContactViewHolder;
 import com.android.dialer.searchfragment.list.SearchCursorManager.RowType;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlaceViewHolder;
+import com.android.dialer.widget.CardGroup;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
@@ -102,6 +104,15 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
+    int type = getItemViewType(position);
+    if (type == RowType.CONTACT_ROW
+        || type == RowType.NEARBY_PLACES_ROW
+        || type == RowType.DIRECTORY_ROW) {
+      CardGroup.apply(
+          (MaterialCardView) holder.itemView,
+          position == 0 || getItemViewType(position - 1) != type,
+          position == getItemCount() - 1 || getItemViewType(position + 1) != type);
+    }
     if (holder instanceof SearchContactViewHolder) {
       ((SearchContactViewHolder) holder).bind(searchCursorManager.getCursor(position), query);
     } else if (holder instanceof NearbyPlaceViewHolder) {

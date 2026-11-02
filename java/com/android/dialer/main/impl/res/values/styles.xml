@@ -16,26 +16,20 @@
   -->
 <resources>
 
-  <style name="LaunchTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
-    <item name="android:colorPrimary">@color/dialer_primary_color</item>
-    <item name="colorPrimary">@color/dialer_primary_color</item>
-    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
-    <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
-    <item name="android:windowLightStatusBar">true</item>
-  </style>
+  <style name="LaunchTheme" parent="Dialer.ThemeBase.NoActionBar"/>
 
   <!-- Activities should use this theme as their style -->
   <style name="MainActivityTheme" parent="MainActivityThemeBase">
     <!-- Used to change the navigation bar color -->
-    <item name="android:windowLightNavigationBar">true</item>
-    <item name="android:navigationBarColor">@color/rounded_dialpad_bg_color</item>
+    <item name="android:windowLightNavigationBar">?attr/isLightTheme</item>
+    <item name="android:navigationBarColor">@color/dialer_nav_bar_color</item>
     <item name="android:navigationBarDividerColor">@null</item>
   </style>
 
   <style name="MainActivityTheme.Dark" parent="MainActivityThemeBase.Dark">
     <!-- Used to change the navigation bar color -->
-    <item name="android:windowLightNavigationBar">true</item>
-    <item name="android:navigationBarColor">@color/rounded_dialpad_bg_color</item>
+    <item name="android:windowLightNavigationBar">?attr/isLightTheme</item>
+    <item name="android:navigationBarColor">@color/dialer_nav_bar_color</item>
     <item name="android:navigationBarDividerColor">@null</item>
   </style>
 
@@ -44,7 +38,6 @@
     <!-- Required for actionmode/multiselect to render properly. -->
     <!-- TODO(a bug): Check to see if we can remove this after NewVoicemailFragment launches -->
     <item name="actionModeStyle">@style/MainActionModeStyle</item>
-    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
     <item name="dialpad_style">@style/Dialpad.Themed</item>
     <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
@@ -54,18 +47,39 @@
     <!-- Required for actionmode/multiselect to render properly. -->
     <!-- TODO(a bug): Check to see if we can remove this after NewVoicemailFragment launches -->
     <item name="actionModeStyle">@style/MainActionModeStyle</item>
-    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     <item name="dialpad_style">@style/Dialpad.Themed</item>
   </style>
 
   <!-- Colors our actionbar in action mode to dialer theme color. -->
-  <style name="MainActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
-    <item name="background">?android:attr/colorPrimary</item>
-    <item name="titleTextStyle">@style/ActionModeTitleTextStyle</item>
-  </style>
+  <style name="MainActionModeStyle" parent="Widget.Material3.ActionMode"/>
 
   <!-- Colors our actionbar text in action mode to dialer white text color. -->
-  <style name="ActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
+
+  <style name="HomeFilterChip" parent="Widget.Material3.Chip.Filter">
+    <item name="chipBackgroundColor">@color/home_chip_background</item>
+    <item name="chipSurfaceColor">@android:color/transparent</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
+
+  <style name="HomeFavoriteItem">
+    <item name="android:layout_width">80dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:background">?android:attr/selectableItemBackground</item>
+    <item name="android:gravity">center_horizontal</item>
+    <item name="android:orientation">vertical</item>
+    <item name="android:paddingTop">8dp</item>
+    <item name="android:paddingBottom">8dp</item>
+  </style>
+
+  <style name="HomeFavoriteName">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginTop">8dp</item>
+    <item name="android:ellipsize">end</item>
+    <item name="android:gravity">center</item>
+    <item name="android:maxLines">1</item>
     <item name="android:textColor">?android:attr/textColorPrimary</item>
+    <item name="android:textSize">14sp</item>
   </style>
 </resources>

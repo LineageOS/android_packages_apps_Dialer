@@ -37,6 +37,7 @@ import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.util.ArraySet;
+import android.view.ContextThemeWrapper;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -1225,7 +1226,9 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       inCallActivity.showDialogOrToastForDisconnectedCall(
           new DisconnectMessage(inCallActivity, call));
     } else {
-      CharSequence message = new DisconnectMessage(context, call).toastMessage;
+      CharSequence message =
+          new DisconnectMessage(new ContextThemeWrapper(context, R.style.Theme_InCallScreen), call)
+              .toastMessage;
       if (message != null) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
       }

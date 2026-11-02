@@ -53,6 +53,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.List;
 import java.util.Set;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /** Disambiguation dialog for favorite contacts in {@link SpeedDialFragment}. */
 public class DisambigDialog extends DialogFragment {
@@ -82,7 +83,7 @@ public class DisambigDialog extends DialogFragment {
     container = view.findViewById(R.id.communication_avenue_container);
     rememberThisChoice = view.findViewById(R.id.remember_this_choice_checkbox);
     insertOptions(container.findViewById(R.id.communication_avenue_container), channels);
-    return new AlertDialog.Builder(getActivity()).setView(view).create();
+    return new MaterialAlertDialogBuilder(getActivity()).setView(view).create();
   }
 
   @Override

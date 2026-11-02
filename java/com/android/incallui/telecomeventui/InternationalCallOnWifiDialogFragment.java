@@ -17,7 +17,7 @@
 
 package com.android.incallui.telecomeventui;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -36,6 +36,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.storage.StorageComponent;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Dialog that may be shown when users place an outgoing call to an international number while on
@@ -111,7 +112,7 @@ public class InternationalCallOnWifiDialogFragment extends DialogFragment {
     alwaysWarn.setChecked(preferences.getBoolean(ALWAYS_SHOW_WARNING_PREFERENCE_KEY, false));
 
     AlertDialog alertDialog =
-        new AlertDialog.Builder(getActivity())
+        new MaterialAlertDialogBuilder(getActivity())
             .setCancelable(false)
             .setView(dialogView)
             .setPositiveButton(

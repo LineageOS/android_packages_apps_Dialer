@@ -36,6 +36,7 @@ import com.android.dialer.util.PermissionsUtil;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /** Dialog that clears the frequently contacted list after confirming with the user. */
 public class ClearFrequentsDialog extends DialogFragment {
@@ -71,7 +72,7 @@ public class ClearFrequentsDialog extends DialogFragment {
           handler.post(progressDialog::dismiss);
         });
     };
-    return new AlertDialog.Builder(getActivity())
+    return new MaterialAlertDialogBuilder(getActivity())
         .setTitle(R.string.clearFrequentsConfirmation_title)
         .setMessage(R.string.clearFrequentsConfirmation)
         .setNegativeButton(android.R.string.cancel, null)

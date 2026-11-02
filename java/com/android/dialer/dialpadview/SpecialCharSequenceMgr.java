@@ -65,6 +65,7 @@ import com.android.dialer.util.PermissionsUtil;
 
 import java.util.List;
 import java.util.Locale;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Helper class to listen for some magic character sequences that are handled specially by Dialer.
@@ -335,7 +336,7 @@ public class SpecialCharSequenceMgr {
                 : telephonyManager.getMeid());
       }
 
-      new AlertDialog.Builder(context)
+      new MaterialAlertDialogBuilder(context)
           .setTitle(labelResId)
           .setView(customView)
           .setPositiveButton(android.R.string.ok, null)

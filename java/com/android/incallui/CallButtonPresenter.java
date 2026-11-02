@@ -17,7 +17,6 @@
 
 package com.android.incallui;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -57,6 +56,7 @@ import com.android.incallui.incall.protocol.InCallButtonUi;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 import com.android.incallui.multisim.SwapSimWorker;
 import com.android.incallui.videotech.utils.VideoUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /** Logic for call buttons. */
 public class CallButtonPresenter
@@ -304,7 +304,7 @@ public class CallButtonPresenter
       final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
       boolean warningPresented = prefs.getBoolean(KEY_RECORDING_WARNING_PRESENTED, false);
       if (!warningPresented) {
-        new AlertDialog.Builder(getActivity())
+        new MaterialAlertDialogBuilder(getActivity())
             .setTitle(R.string.recording_warning_title)
             .setMessage(R.string.recording_warning_text)
             .setPositiveButton(R.string.onscreenCallRecordText, (dialog, which) -> {

@@ -20,10 +20,16 @@ package com.android.dialer.assisteddialing.ui;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
+import com.android.dialer.app.settings.MaterialListPreferenceDialogFragment;
 
 /** The Settings Activity for Assisted Dialing. */
-public class AssistedDialingSettingActivity extends AppCompatActivity {
+public class AssistedDialingSettingActivity extends AppCompatActivity
+    implements PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback {
 
   @Override
   protected void onCreate(Bundle bundle) {
@@ -33,6 +39,12 @@ public class AssistedDialingSettingActivity extends AppCompatActivity {
         .beginTransaction()
         .replace(android.R.id.content, new AssistedDialingSettingFragment())
         .commit();
+  }
+
+  @Override
+  public boolean onPreferenceDisplayDialog(@NonNull PreferenceFragmentCompat caller,
+                                           @NonNull Preference pref) {
+    return MaterialListPreferenceDialogFragment.show(caller, pref);
   }
 
   @Override

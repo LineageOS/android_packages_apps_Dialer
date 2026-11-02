@@ -34,15 +34,13 @@
     <item name="android:textColorSecondary">@color/dialer_dark_secondary_text_color</item>
     <item name="android:textColorPrimaryInverse">@color/dialer_primary_text_color</item>
     <item name="android:textColorSecondaryInverse">@color/dialer_secondary_text_color</item>
-    <item name="android:textColorHint">@color/google_grey_600</item>
+    <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
 
     <!-- These will be automatically used to color most Appcompat/Material widgets. -->
     <item name="android:colorPrimary">@color/dialer_dark_theme_color</item>
-    <item name="colorPrimary">@color/dialer_dark_theme_color</item>
     <item name="android:colorPrimaryDark">@color/dialer_dark_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_dark_theme_color_dark</item>
     <item name="android:colorAccent">@color/dialer_dark_theme_color</item>
-    <item name="colorAccent">@color/dialer_dark_theme_color</item>
 
     <!-- Used to automatically style check/selected checkbox, switches and radio buttons -->
     <item name="colorControlActivated">?android:attr/colorAccent</item>

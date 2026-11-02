@@ -23,7 +23,7 @@
        Note that this must inherit from Theme.AppCompat. We inherit from Theme.AppCompat.Light so
        that the colors of the disambiguation dialog match the colors when it is shown via the
        favorites tiles tab. -->
-  <style name="CallContactsTheme" parent="Theme.AppCompat.Light">
+  <style name="CallContactsTheme" parent="Theme.Material3Expressive.DynamicColors.DayNight.NoActionBar">
     <item name="android:windowNoTitle">true</item>
     <item name="android:backgroundDimEnabled">false</item>
     <item name="android:windowBackground">@android:color/transparent</item>

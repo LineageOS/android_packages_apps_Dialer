@@ -16,7 +16,7 @@
   -->
 <resources>
   <!-- Update to Theme.AppCompat.Light.NoActionBar once we no longer depend on ActionBars. -->
-  <style name="Dialer" parent="Theme.AppCompat.Light">
+  <style name="Dialer" parent="Theme.Material3Expressive.DynamicColors.DayNight">
     <!-- Used to automatically style all buttons in Dialer -->
     <item name="android:textAppearanceButton">@style/DialerButtonTextStyle</item>
     <item name="android:colorButtonNormal">?android:attr/colorPrimary</item>
@@ -29,7 +29,7 @@
     <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
   </style>
 
-  <style name="Dialer.Dark" parent="Theme.AppCompat">
+  <style name="Dialer.Dark" parent="Theme.Material3Expressive.DynamicColors.DayNight">
     <!-- Used to automatically style all buttons in Dialer -->
     <item name="android:textAppearanceButton">@style/DialerButtonTextStyle</item>
     <item name="android:colorButtonNormal">?android:attr/colorPrimary</item>
@@ -50,11 +50,5 @@
 
   <!-- Used to style all Dialer's AlertDialogs. Every button is awarded this for free if the parent
      activity's theme extends from Dialer.ThemeBase(.NoActionBar) or doesn't specify a theme. -->
-  <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-    <item name="android:textColorPrimary">@color/dialer_primary_text_color</item>
-    <item name="android:colorAccent">@color/dialer_theme_color</item>
-    <item name="colorAccent">@color/dialer_theme_color</item>
-    <item name="android:textColorSecondary">@color/dialer_secondary_text_color</item>
-    <item name="android:windowBackground">@drawable/dialog_background</item>
-  </style>
+  <style name="AlertDialogTheme" parent="ThemeOverlay.Material3Expressive.Dialog.Alert"/>
 </resources>
