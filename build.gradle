@@ -1,0 +1,204 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.4'
+        classpath PROTOBUF_CLASS_PATH
+    }
+}
+
+plugins {
+    id "com.google.protobuf" version "0.9.1"
+}
+
+ext {
+    guavaVersion = '31.0.1-jre'
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        flatDir {
+            dirs "prebuilts"
+        }
+    }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    namespace = "com.android.dialer"
+    compileSdk 35
+
+    defaultConfig {
+        minSdkVersion 33
+        targetSdkVersion 35
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = ['assets/quantum/res',
+                           'java/com/android/contacts/common/res',
+                           'java/com/android/dialer/about/res',
+                           'java/com/android/dialer/app/res',
+                           'java/com/android/dialer/assisteddialing/res',
+                           'java/com/android/dialer/assisteddialing/ui/res',
+                           'java/com/android/dialer/blocking/res',
+                           'java/com/android/dialer/blockreportspam/res',
+                           'java/com/android/dialer/calldetails/res',
+                           'java/com/android/dialer/calllog/ui/res',
+                           'java/com/android/dialer/calllog/ui/menu/res',
+                           'java/com/android/dialer/calllogutils/res',
+                           'java/com/android/dialer/callrecord/res',
+                           'java/com/android/dialer/callstats/res',
+                           'java/com/android/dialer/clipboard/res',
+                           'java/com/android/dialer/common/res',
+                           'java/com/android/dialer/contactphoto/res',
+                           'java/com/android/dialer/contacts/displaypreference/res/',
+                           'java/com/android/dialer/contacts/resources/res/',
+                           'java/com/android/dialer/contactsfragment/res/',
+                           'java/com/android/dialer/dialpadview/res/',
+                           'java/com/android/dialer/dialpadview/theme/res/',
+                           'java/com/android/dialer/glidephotomanager/impl/res/',
+                           'java/com/android/dialer/helplines/res/',
+                           'java/com/android/dialer/historyitemactions/res/',
+                           'java/com/android/dialer/interactions/res/',
+                           'java/com/android/dialer/lettertile/res/',
+                           'java/com/android/dialer/lookup/res/',
+                           'java/com/android/dialer/main/impl/res/',
+                           'java/com/android/dialer/main/impl/bottomnav/res/',
+                           'java/com/android/dialer/main/impl/toolbar/res/',
+                           'java/com/android/dialer/notification/res/',
+                           'java/com/android/dialer/oem/res/',
+                           'java/com/android/dialer/phonenumberutil/res/',
+                           'java/com/android/dialer/postcall/res/',
+                           'java/com/android/dialer/precall/impl/res/',
+                           'java/com/android/dialer/preferredsim/impl/res/',
+                           'java/com/android/dialer/preferredsim/suggestion/res/',
+                           'java/com/android/dialer/promotion/impl/res/',
+                           'java/com/android/dialer/rtt/res/',
+                           'java/com/android/dialer/searchfragment/common/res/',
+                           'java/com/android/dialer/searchfragment/cp2/res/',
+                           'java/com/android/dialer/searchfragment/directories/res/',
+                           'java/com/android/dialer/searchfragment/list/res/',
+                           'java/com/android/dialer/searchfragment/nearbyplaces/res/',
+                           'java/com/android/dialer/searchfragment/remote/res/',
+                           'java/com/android/dialer/shortcuts/res/',
+                           'java/com/android/dialer/spam/promo/res/',
+                           'java/com/android/dialer/spannable/res/',
+                           'java/com/android/dialer/speeddial/res/',
+                           'java/com/android/dialer/theme/res',
+                           'java/com/android/dialer/theme/common/res',
+                           'java/com/android/dialer/util/res',
+                           'java/com/android/dialer/voicemail/listui/res',
+                           'java/com/android/dialer/voicemail/listui/error/res',
+                           'java/com/android/dialer/voicemail/settings/res',
+                           'java/com/android/dialer/widget/res',
+                           'java/com/android/incallui/answer/impl/res',
+                           'java/com/android/incallui/answer/impl/affordance/res',
+                           'java/com/android/incallui/answer/impl/answermethod/res',
+                           'java/com/android/incallui/answer/impl/hint/res',
+                           'java/com/android/incallui/audioroute/res',
+                           'java/com/android/incallui/commontheme/res',
+                           'java/com/android/incallui/contactgrid/res',
+                           'java/com/android/incallui/disconnectdialog/res',
+                           'java/com/android/incallui/hold/res',
+                           'java/com/android/incallui/theme/res',
+                           'java/com/android/incallui/incall/impl/res',
+                           'java/com/android/incallui/res',
+                           'java/com/android/incallui/rtt/impl/res',
+                           'java/com/android/incallui/sessiondata/res',
+                           'java/com/android/incallui/spam/res',
+                           'java/com/android/incallui/telecomeventui/res',
+                           'java/com/android/incallui/video/res',
+                           'java/com/android/incallui/video/impl/res',
+                           'java/com/android/voicemail/impl/configui/res/',
+                           'java/com/android/voicemail/impl/res/'
+            ]
+            java.srcDirs = ['java']
+            assets.srcDirs = ['assets']
+            manifest.srcFile 'AndroidManifest.xml'
+            proto.srcDirs = ['java']
+        }
+
+        test {
+            java.srcDirs = ['tests']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildToolsVersion '35.0.0'
+}
+
+dependencies {
+    implementation 'androidx.preference:preference:1.2.1'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.auto.value:auto-value-annotations:1.10.4'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation 'com.google.protobuf:protobuf-java:3.19.3'
+    implementation "com.google.guava:guava:$guavaVersion"
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.13.25'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'org.jetbrains:annotations:24.0.1'
+    implementation 'com.google.dagger:dagger:2.28.3'
+    implementation name: 'apache-mime4j-core-0.8.9'
+    implementation name: 'apache-mime4j-dom-0.8.9'
+    implementation name: 'commons-io-2.13.0'
+
+}
+
+/*tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:unchecked'
+//    options.deprecation = true
+}*/
+/*
+protobuf {
+    generatedFilesBaseDir = "$projectDir/generated"
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
+    plugins {
+        javalite {
+            artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0"
+        }
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.0.3'
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java
+            }
+            task.plugins {
+                grpc {}
+            }
+        }
+    }
+}*/
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.21.7"
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+}
