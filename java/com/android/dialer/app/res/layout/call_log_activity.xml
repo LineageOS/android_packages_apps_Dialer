@@ -21,15 +21,12 @@
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground"
     android:orientation="vertical">
-  <com.android.contacts.common.list.ViewPagerTabs
+  <com.google.android.material.tabs.TabLayout
       android:id="@+id/viewpager_header"
-      style="@style/DialtactsActionBarTabTextStyle"
+      style="@style/Widget.Material3.TabLayout"
       android:layout_width="match_parent"
-      android:layout_height="@dimen/tab_height"
-      android:layout_gravity="top"
-      android:elevation="@dimen/tab_elevation"
-      android:orientation="horizontal"
-      android:textAllCaps="false"/>
+      android:layout_height="wrap_content"
+      android:background="?android:attr/colorBackground"/>
   <androidx.viewpager.widget.ViewPager
       android:id="@+id/call_log_pager"
       android:layout_width="match_parent"

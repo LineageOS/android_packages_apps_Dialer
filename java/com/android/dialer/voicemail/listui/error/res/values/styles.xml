@@ -48,9 +48,8 @@
     <item name="android:minHeight">48dp</item>
   </style>
 
-  <style name="RaisedErrorActionStyle" parent="Widget.AppCompat.Button.Colored">
+  <style name="RaisedErrorActionStyle" parent="Widget.Material3Expressive.Button">
     <item name="android:layout_width">wrap_content</item>
-    <item name="android:colorButtonNormal">?android:attr/colorPrimary</item>
     <item name="android:textSize">14sp</item>
     <item name="android:layout_height">@dimen/call_log_action_height</item>
   </style>

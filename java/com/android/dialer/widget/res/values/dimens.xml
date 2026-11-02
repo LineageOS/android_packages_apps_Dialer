@@ -32,4 +32,7 @@
   <!-- Floating Action Button -->
   <dimen name="floating_action_button_margin_right">16dp</dimen>
   <dimen name="floating_action_button_width">56dp</dimen>
+
+  <dimen name="card_group_corner_radius">16dp</dimen>
+  <dimen name="card_group_inner_corner_radius">4dp</dimen>
 </resources>

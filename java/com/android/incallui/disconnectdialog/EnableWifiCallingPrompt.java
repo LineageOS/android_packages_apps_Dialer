@@ -16,7 +16,6 @@
 
 package com.android.incallui.disconnectdialog;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
@@ -30,6 +29,7 @@ import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.call.DialerCall;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /** Prompts the user to enable Wi-Fi calling. */
 public class EnableWifiCallingPrompt implements DisconnectDialog {
@@ -60,7 +60,7 @@ public class EnableWifiCallingPrompt implements DisconnectDialog {
     DisconnectCause cause = call.getDisconnectCause();
     CharSequence message = cause.getDescription();
     Dialog dialog =
-        new AlertDialog.Builder(context)
+        new MaterialAlertDialogBuilder(context)
             .setMessage(message)
             .setPositiveButton(
                 R.string.incall_enable_wifi_calling_button,

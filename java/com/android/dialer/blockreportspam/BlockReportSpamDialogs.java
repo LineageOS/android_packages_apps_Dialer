@@ -31,6 +31,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.android.dialer.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /** Creates dialog fragments to block a number and/or report it as spam/not spam. */
 public final class BlockReportSpamDialogs {
@@ -43,7 +44,7 @@ public final class BlockReportSpamDialogs {
   /** Creates a dialog with the default cancel button listener (which dismisses the dialog). */
   private static AlertDialog.Builder createDialogBuilder(
       Activity activity, final DialogFragment fragment) {
-    return new AlertDialog.Builder(activity)
+    return new MaterialAlertDialogBuilder(activity)
         .setCancelable(true)
         .setNegativeButton(android.R.string.cancel, (dialog, which) -> fragment.dismiss());
   }

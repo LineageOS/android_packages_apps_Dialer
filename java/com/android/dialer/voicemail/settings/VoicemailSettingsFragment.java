@@ -17,7 +17,7 @@
 
 package com.android.dialer.voicemail.settings;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -46,6 +46,7 @@ import com.android.voicemail.VoicemailComponent;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Optional;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Fragment for voicemail settings. Requires {@link VoicemailClient#PARAM_PHONE_ACCOUNT_HANDLE} set
@@ -303,7 +304,7 @@ public class VoicemailSettingsFragment extends PreferenceFragmentCompat
 
   private void showDisableConfirmationDialog() {
     LogUtil.i(TAG, "showDisableConfirmationDialog");
-    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+    AlertDialog.Builder builder = new MaterialAlertDialogBuilder(getContext());
     builder.setTitle(R.string.confirm_disable_voicemail_dialog_title);
     builder.setMessage(R.string.confirm_disable_voicemail_dialog_message);
     builder.setPositiveButton(R.string.confirm_disable_voicemail_accept_dialog_label,

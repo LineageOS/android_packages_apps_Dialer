@@ -76,36 +76,30 @@
       android:orientation="horizontal"
       tools:layout_height="50dp">
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/dialpad_back"
+        style="@style/Widget.Material3Expressive.Button.IconButton.Standard"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/dialpad_overflow_margin"
-        android:paddingStart="@dimen/dialpad_digits_menu_left_padding"
-        android:paddingEnd="@dimen/dialpad_digits_menu_right_padding"
-        android:background="@drawable/btn_dialpad_key"
         android:contentDescription="@string/description_dialpad_back"
-        android:gravity="center"
-        android:src="@drawable/quantum_ic_close_vd_theme_24"
-        android:tintMode="src_in"
         android:visibility="gone"
-        app:tint="@color/dialer_theme_color_light" />
+        app:icon="@drawable/quantum_ic_close_vd_theme_24"
+        app:iconTint="@color/dialpad_icon_color"/>
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/dialpad_overflow"
+        style="@style/Widget.Material3Expressive.Button.IconButton.Standard"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/dialpad_overflow_margin"
-        android:paddingStart="@dimen/dialpad_digits_menu_left_padding"
-        android:paddingEnd="@dimen/dialpad_digits_menu_right_padding"
-        android:background="@drawable/btn_dialpad_key"
         android:contentDescription="@string/description_dialpad_overflow"
-        android:gravity="center"
-        android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-        android:tintMode="src_in"
         android:visibility="gone"
-        app:tint="@color/dialer_theme_color_light"
-        tools:visibility="visible"/>
+        tools:visibility="visible"
+        app:icon="@drawable/quantum_ic_more_vert_vd_theme_24"
+        app:iconTint="@color/dialpad_icon_color"/>
 
       <FrameLayout android:layout_width="0dp"
           android:layout_height="match_parent"
@@ -140,19 +134,16 @@
             android:textSize="?attr/dialpad_digits_adjustable_text_size"
             ex:resizing_text_min_size="@dimen/dialpad_digits_text_min_size"/>
       </FrameLayout>
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/deleteButton"
+        style="@style/Widget.Material3Expressive.Button.IconButton.Standard"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/dialpad_digits_padding"
-        android:paddingRight="@dimen/dialpad_digits_padding"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/dialpad_overflow_margin"
-        android:background="@drawable/btn_dialpad_key"
         android:contentDescription="@string/description_delete_button"
-        android:src="@drawable/quantum_ic_backspace_vd_theme_24"
-        android:state_enabled="false"
-        android:tintMode="src_in"
-        app:tint="@color/dialer_theme_color_light" />
+        app:icon="@drawable/quantum_ic_backspace_vd_theme_24"
+        app:iconTint="@color/dialpad_icon_color"/>
   </LinearLayout>
 
   <View

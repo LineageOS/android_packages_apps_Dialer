@@ -20,7 +20,7 @@ package com.android.dialer.app.settings;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -48,6 +48,7 @@ import androidx.preference.SwitchPreferenceCompat;
 import com.android.dialer.R;
 import com.android.dialer.callrecord.impl.CallRecorderService;
 import com.android.dialer.util.SettingsUtil;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class SoundSettingsFragment extends PreferenceFragmentCompat
     implements Preference.OnPreferenceChangeListener {
@@ -214,7 +215,7 @@ public class SoundSettingsFragment extends PreferenceFragmentCompat
     } else if (preference == enableDndInCall) {
       boolean newValue = (Boolean) objValue;
       if (newValue && !notificationManager.isNotificationPolicyAccessGranted()) {
-        new AlertDialog.Builder(getContext())
+        new MaterialAlertDialogBuilder(getContext())
             .setMessage(R.string.incall_dnd_dialog_message)
             .setPositiveButton(R.string.allow, (dialog, which) -> {
               dialog.dismiss();

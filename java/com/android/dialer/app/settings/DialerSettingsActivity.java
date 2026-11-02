@@ -46,10 +46,12 @@ import com.android.dialer.lookup.LookupSettingsFragment;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
 import com.android.voicemail.VoicemailClient;
+import com.google.android.material.appbar.MaterialToolbar;
 
 /** Activity for dialer settings. */
 public class DialerSettingsActivity extends BaseActivity implements
-        PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+        PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
+        PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback {
 
   protected SharedPreferences preferences;
 
@@ -60,6 +62,9 @@ public class DialerSettingsActivity extends BaseActivity implements
     preferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 
     setContentView(R.layout.activity_settings);
+    MaterialToolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
     Intent intent = getIntent();
     Uri data = intent.getData();
@@ -99,6 +104,12 @@ public class DialerSettingsActivity extends BaseActivity implements
     });
 
     setupInsets(findViewById(R.id.main_layout));
+  }
+
+  @Override
+  public boolean onPreferenceDisplayDialog(@NonNull PreferenceFragmentCompat caller,
+                                           @NonNull Preference pref) {
+    return MaterialListPreferenceDialogFragment.show(caller, pref);
   }
 
   @Override

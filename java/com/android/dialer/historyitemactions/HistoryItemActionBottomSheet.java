@@ -37,7 +37,7 @@ import androidx.annotation.NonNull;
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.compat.android.support.design.bottomsheet.BottomSheetStateCompat;
-import com.android.dialer.theme.base.ThemeComponent;
+import com.google.android.material.color.MaterialColors;
 import com.android.dialer.widget.ContactPhotoView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -237,7 +237,7 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
     if (module.tintDrawable()) {
       ((ImageView) moduleView.findViewById(R.id.module_image))
           .setImageTintList(
-              ColorStateList.valueOf(ThemeComponent.get(getContext()).theme().getColorIcon()));
+              ColorStateList.valueOf(MaterialColors.getColor(moduleView, R.attr.colorIcon)));
     }
     moduleView.setOnClickListener(this);
     moduleView.setTag(module);

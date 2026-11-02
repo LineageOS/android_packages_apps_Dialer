@@ -17,7 +17,7 @@
 
 package com.android.incallui;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -41,6 +41,7 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 
 import java.lang.ref.WeakReference;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /** Dialog that shown to user when receiving RTT request mid call. */
 public class RttRequestDialogFragment extends DialogFragment {
@@ -88,7 +89,7 @@ public class RttRequestDialogFragment extends DialogFragment {
         .setOnClickListener(v -> onPositiveButtonClick());
 
     AlertDialog alertDialog =
-        new AlertDialog.Builder(getActivity())
+        new MaterialAlertDialogBuilder(getActivity())
             .setCancelable(false)
             .setView(dialogView)
             .setTitle(R.string.rtt_request_dialog_title)

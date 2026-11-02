@@ -185,7 +185,7 @@ public class InCallFragment extends Fragment
             view,
             (ImageView) view.findViewById(R.id.contactgrid_avatar),
             getResources().getDimensionPixelSize(R.dimen.incall_avatar_size),
-            true /* showAnonymousAvatar */);
+            false /* showAnonymousAvatar */);
     contactGridManager.onMultiWindowModeChanged(getActivity().isInMultiWindowMode());
 
     paginator = (InCallPaginator) view.findViewById(R.id.incall_paginator);

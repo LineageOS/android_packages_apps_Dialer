@@ -15,8 +15,8 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="search_bar_margin">8dp</dimen>
-  <dimen name="collapsed_search_bar_height">48dp</dimen>
+  <dimen name="search_bar_margin">12dp</dimen>
+  <dimen name="collapsed_search_bar_height">56dp</dimen>
   <!-- collapsed + margin * 2 -->
-  <dimen name="expanded_search_bar_height">64dp</dimen>
+  <dimen name="expanded_search_bar_height">80dp</dimen>
 </resources>

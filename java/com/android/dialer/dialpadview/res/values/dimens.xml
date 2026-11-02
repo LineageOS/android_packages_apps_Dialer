@@ -18,7 +18,7 @@
   <!-- Text dimensions for dialpad keys -->
   <dimen name="dialpad_key_pound_size">23sp</dimen>
   <dimen name="dialpad_key_star_size">36sp</dimen>
-  <dimen name="dialpad_key_height">64dp</dimen>
+  <dimen name="dialpad_key_height">72dp</dimen>
   <dimen name="dialpad_symbol_margin_bottom">13dp</dimen>
   <dimen name="dialpad_digits_text_min_size">24sp</dimen>
   <dimen name="dialpad_digits_padding">16dp</dimen>
@@ -27,7 +27,7 @@
   <dimen name="dialpad_voicemail_icon_size">18dp</dimen>
   <dimen name="dialpad_key_button_translate_y">100dp</dimen>
   <dimen name="dialpad_overflow_margin">8dp</dimen>
-  <dimen name="dialpad_space_above_keys">14dp</dimen>
+  <dimen name="dialpad_space_above_keys">6dp</dimen>
   <dimen name="dialpad_space_below_keys">8dp</dimen>
 
   <!-- Top/Bottom padding around the ILD rate display box. -->

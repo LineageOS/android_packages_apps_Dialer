@@ -19,8 +19,6 @@ package com.android.dialer.main.impl.bottomnav;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
@@ -30,13 +28,16 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.main.impl.MainActivity;
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
 /** Dialer Bottom Nav Bar for {@link MainActivity}. */
-public final class BottomNavBar extends LinearLayout {
+public final class BottomNavBar extends BottomNavigationView {
 
   /** Index for each tab in the bottom nav. */
   @Retention(RetentionPolicy.SOURCE)
@@ -57,44 +58,35 @@ public final class BottomNavBar extends LinearLayout {
 
   private final List<OnBottomNavTabSelectedListener> listeners = new ArrayList<>();
 
-  private BottomNavItem speedDial;
-  private BottomNavItem callLog;
-  private BottomNavItem contacts;
-  private BottomNavItem voicemail;
+  private Runnable openKeypad = () -> {};
+  private Runnable closeKeypad = () -> {};
   private @TabIndex int selectedTab;
 
   public BottomNavBar(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
+    setOnItemSelectedListener(
+        item -> {
+          if (item.getItemId() == R.id.keypad_tab) {
+            openKeypad.run();
+            return false;
+          }
+          closeKeypad.run();
+          selectTab(item.getItemId() == R.id.voicemail_tab ? TabIndex.VOICEMAIL : TabIndex.CALL_LOG);
+          return true;
+        });
   }
 
-  @Override
-  protected void onFinishInflate() {
-    super.onFinishInflate();
-    speedDial = findViewById(R.id.speed_dial_tab);
-    callLog = findViewById(R.id.call_log_tab);
-    contacts = findViewById(R.id.contacts_tab);
-    voicemail = findViewById(R.id.voicemail_tab);
-
-    speedDial.setup(R.string.tab_title_speed_dial, R.drawable.quantum_ic_star_outline_vd_theme_24,
-            R.drawable.quantum_ic_star_vd_theme_24);
-    callLog.setup(R.string.tab_title_call_history, R.drawable.quantum_ic_access_time_vd_theme_24,
-            R.drawable.quantum_ic_clock_filled_vd_theme_24);
-    contacts.setup(R.string.tab_all_contacts, R.drawable.quantum_ic_people_outline_vd_theme_24,
-            R.drawable.quantum_ic_people_vd_theme_24);
-    voicemail.setup(R.string.tab_title_voicemail, R.drawable.quantum_ic_voicemail_vd_theme_24,
-            R.drawable.quantum_ic_voicemail_vd_theme_24);
-
-    speedDial.setOnClickListener(v -> selectTab(TabIndex.SPEED_DIAL));
-    callLog.setOnClickListener(v -> selectTab(TabIndex.CALL_LOG));
-    contacts.setOnClickListener(v -> selectTab(TabIndex.CONTACTS));
-    voicemail.setOnClickListener(v -> selectTab(TabIndex.VOICEMAIL));
+  public void setKeypadActions(Runnable open, Runnable close) {
+    openKeypad = open;
+    closeKeypad = close;
   }
 
-  private void setSelected(View view) {
-    speedDial.setSelected(view == speedDial);
-    callLog.setSelected(view == callLog);
-    contacts.setSelected(view == contacts);
-    voicemail.setSelected(view == voicemail);
+  public void setKeypadSelected(boolean selected) {
+    getMenu().findItem(selected ? R.id.keypad_tab : getTabId(selectedTab)).setChecked(true);
+  }
+
+  public boolean isKeypadSelected() {
+    return getSelectedItemId() == R.id.keypad_tab;
   }
 
   /**
@@ -103,22 +95,11 @@ public final class BottomNavBar extends LinearLayout {
    * @param tab {@link TabIndex}
    */
   public void selectTab(@TabIndex int tab) {
-    if (tab == TabIndex.SPEED_DIAL) {
-      selectedTab = TabIndex.SPEED_DIAL;
-      setSelected(speedDial);
-    } else if (tab == TabIndex.CALL_LOG) {
-      selectedTab = TabIndex.CALL_LOG;
-      setSelected(callLog);
-    } else if (tab == TabIndex.CONTACTS) {
-      selectedTab = TabIndex.CONTACTS;
-      setSelected(contacts);
-    } else if (tab == TabIndex.VOICEMAIL) {
-      selectedTab = TabIndex.VOICEMAIL;
-      setSelected(voicemail);
-    } else {
+    if (tab == TabIndex.NONE) {
       throw new IllegalStateException("Invalid tab: " + tab);
     }
-
+    selectedTab = tab == TabIndex.VOICEMAIL ? TabIndex.VOICEMAIL : TabIndex.CALL_LOG;
+    getMenu().findItem(getTabId(selectedTab)).setChecked(true);
     updateListeners(selectedTab);
   }
 
@@ -126,36 +107,26 @@ public final class BottomNavBar extends LinearLayout {
    * Displays or hides the voicemail tab.
    *
    * <p>In the event that the voicemail tab was earlier visible but is now no longer visible, we
-   * move to the speed dial tab.
+   * move to the call log tab.
    *
    * @param showTab whether to hide or show the voicemail
    */
   public void showVoicemail(boolean showTab) {
     LogUtil.i("OldMainActivityPeer.showVoicemail", "showing Tab:%b", showTab);
-    int voicemailpreviousVisibility = voicemail.getVisibility();
-    voicemail.setVisibility(showTab ? View.VISIBLE : View.GONE);
-    int voicemailcurrentVisibility = voicemail.getVisibility();
-
-    if (voicemailpreviousVisibility != voicemailcurrentVisibility
-        && voicemailpreviousVisibility == View.VISIBLE
-        && getSelectedTab() == TabIndex.VOICEMAIL) {
-      LogUtil.i("OldMainActivityPeer.showVoicemail", "hid VM tab and moved to speed dial tab");
-      selectTab(TabIndex.SPEED_DIAL);
+    getMenu().findItem(R.id.voicemail_tab).setVisible(showTab);
+    if (!showTab && selectedTab == TabIndex.VOICEMAIL) {
+      selectTab(TabIndex.CALL_LOG);
     }
   }
 
   public void setNotificationCount(@TabIndex int tab, int count) {
-    if (tab == TabIndex.SPEED_DIAL) {
-      speedDial.setNotificationCount(count);
-    } else if (tab == TabIndex.CALL_LOG) {
-      callLog.setNotificationCount(count);
-    } else if (tab == TabIndex.CONTACTS) {
-      contacts.setNotificationCount(count);
-    } else if (tab == TabIndex.VOICEMAIL) {
-      voicemail.setNotificationCount(count);
-    } else {
-      throw new IllegalStateException("Invalid tab: " + tab);
-    }
+    BadgeDrawable badge = getOrCreateBadge(getTabId(tab));
+    badge.setNumber(count);
+    badge.setVisible(count > 0);
+  }
+
+  private static int getTabId(@TabIndex int tab) {
+    return tab == TabIndex.VOICEMAIL ? R.id.voicemail_tab : R.id.call_log_tab;
   }
 
   public void addOnTabSelectedListener(OnBottomNavTabSelectedListener listener) {

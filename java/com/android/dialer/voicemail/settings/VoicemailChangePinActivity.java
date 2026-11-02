@@ -17,7 +17,7 @@
 
 package com.android.dialer.voicemail.settings;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
@@ -57,6 +57,7 @@ import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
 
 import java.lang.ref.WeakReference;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Dialog to change the voicemail PIN. The TUI (Telephony User Interface) PIN is used when accessing
@@ -523,7 +524,7 @@ public class VoicemailChangePinActivity extends BaseActivity
   }
 
   private void showError(CharSequence message, @Nullable OnDismissListener callback) {
-    new AlertDialog.Builder(this)
+    new MaterialAlertDialogBuilder(this)
         .setMessage(message)
         .setPositiveButton(android.R.string.ok, null)
         .setOnDismissListener(callback)

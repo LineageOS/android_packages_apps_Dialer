@@ -23,7 +23,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+import android.text.Spannable;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -33,7 +37,6 @@ import androidx.annotation.IntDef;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dialer.R;
-import com.android.dialer.common.Assert;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.searchfragment.common.Projections;
@@ -99,8 +102,9 @@ public final class SearchContactViewHolder extends RecyclerView.ViewHolder
                 label,
                 number);
 
-    nameOrNumberView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name, context));
-    numberView.setText(QueryBoldingUtil.getNumberWithQueryBolded(query, secondaryInfo));
+    nameOrNumberView.setText(
+        highlight(QueryBoldingUtil.getNameWithQueryBolded(query, name, context)));
+    numberView.setText(highlight(QueryBoldingUtil.getNumberWithQueryBolded(query, secondaryInfo)));
     setCallToAction(cursor, query);
 
     if (shouldShowPhoto(cursor)) {
@@ -157,23 +161,27 @@ public final class SearchContactViewHolder extends RecyclerView.ViewHolder
 
   private void setCallToAction(SearchCursor cursor, String query) {
     currentAction = getCallToAction(context, cursor, query);
-    switch (currentAction) {
-      case CallToAction.NONE:
-        callToActionView.setVisibility(View.GONE);
-        callToActionView.setOnClickListener(null);
-        break;
-      case CallToAction.VIDEO_CALL:
-        callToActionView.setVisibility(View.VISIBLE);
-        callToActionView.setImageDrawable(
-            context.getDrawable(R.drawable.quantum_ic_videocam_vd_white_24));
-        callToActionView.setContentDescription(
-            context.getString(R.string.description_search_video_call));
-        callToActionView.setOnClickListener(this);
-        break;
-      default:
-        throw Assert.createIllegalStateFailException(
-            "Invalid Call to action type: " + currentAction);
+    boolean video = currentAction == CallToAction.VIDEO_CALL;
+    callToActionView.setVisibility(View.VISIBLE);
+    callToActionView.setImageResource(
+        video ? R.drawable.quantum_ic_videocam_vd_white_24 : R.drawable.quantum_ic_call_vd_theme_24);
+    callToActionView.setContentDescription(
+        context.getString(video ? R.string.description_search_video_call : R.string.call));
+    callToActionView.setOnClickListener(this);
+  }
+
+  private CharSequence highlight(CharSequence text) {
+    if (text instanceof Spannable) {
+      Spannable spannable = (Spannable) text;
+      for (StyleSpan span : spannable.getSpans(0, text.length(), StyleSpan.class)) {
+        spannable.setSpan(
+            new ForegroundColorSpan(context.getColor(R.color.home_header_text_color)),
+            spannable.getSpanStart(span),
+            spannable.getSpanEnd(span),
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+      }
     }
+    return text;
   }
 
   private static @CallToAction int getCallToAction(
@@ -189,16 +197,8 @@ public final class SearchContactViewHolder extends RecyclerView.ViewHolder
 
   @Override
   public void onClick(View view) {
-    if (view == callToActionView) {
-      switch (currentAction) {
-        case CallToAction.VIDEO_CALL:
-          listener.placeVideoCall(number, position);
-          break;
-        case CallToAction.NONE:
-        default:
-          throw Assert.createIllegalStateFailException(
-              "Invalid Call to action type: " + currentAction);
-      }
+    if (view == callToActionView && currentAction == CallToAction.VIDEO_CALL) {
+      listener.placeVideoCall(number, position);
     } else {
       listener.placeVoiceCall(number, position);
     }

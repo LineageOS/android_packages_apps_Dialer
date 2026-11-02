@@ -255,6 +255,10 @@
   <!-- Text displayed when the list of missed calls is empty -->
   <string name="call_log_missed_empty">You have no missed calls.</string>
 
+  <string name="call_log_incoming_empty">You have no incoming calls.</string>
+
+  <string name="call_log_outgoing_empty">You have no outgoing calls.</string>
+
   <!-- Text displayed when the list of voicemails is empty -->
   <string name="call_log_voicemail_empty">Your voicemail inbox is empty.</string>
 

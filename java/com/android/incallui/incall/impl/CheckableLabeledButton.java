@@ -17,30 +17,28 @@
 
 package com.android.incallui.incall.impl;
 
-import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.SoundEffectConstants;
 import android.widget.Checkable;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.android.dialer.R;
+import com.google.android.material.button.MaterialButton;
 
 /** A button to show on the incall screen */
 public class CheckableLabeledButton extends LinearLayout implements Checkable {
@@ -50,12 +48,11 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
   private boolean broadcasting;
   private boolean isChecked;
   private OnCheckedChangeListener onCheckedChangeListener;
-  private ImageView iconView;
+  private MaterialButton iconView;
   @DrawableRes
   private int iconResource = 0;
   private TextView labelView;
-  private Drawable background;
-  private Drawable backgroundMore;
+  private int iconSize;
 
   public CheckableLabeledButton(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -67,58 +64,63 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
   }
 
   private void init(Context context, AttributeSet attrs) {
-    setOrientation(VERTICAL);
-    setGravity(Gravity.CENTER_HORIZONTAL);
-    Drawable icon;
-    CharSequence labelText;
-    boolean enabled;
-
-    backgroundMore = ResourcesCompat.getDrawable(getResources(),
-            R.drawable.incall_button_background_more, context.getTheme());
-    background = ResourcesCompat.getDrawable(getResources(),
-            R.drawable.incall_button_background, context.getTheme());
-
+    boolean vertical = getOrientation() == VERTICAL;
     TypedArray typedArray =
         context.obtainStyledAttributes(attrs, R.styleable.CheckableLabeledButton);
-    icon = typedArray.getDrawable(R.styleable.CheckableLabeledButton_incall_icon);
-    labelText = typedArray.getString(R.styleable.CheckableLabeledButton_incall_labelText);
-    enabled = typedArray.getBoolean(R.styleable.CheckableLabeledButton_android_enabled, true);
+    Drawable icon = typedArray.getDrawable(R.styleable.CheckableLabeledButton_incall_icon);
+    CharSequence labelText =
+        typedArray.getString(R.styleable.CheckableLabeledButton_incall_labelText);
+    boolean enabled = typedArray.getBoolean(R.styleable.CheckableLabeledButton_android_enabled, true);
     typedArray.recycle();
 
-    int paddingSize = getResources().getDimensionPixelOffset(R.dimen.incall_button_padding);
-    setPadding(paddingSize, paddingSize, paddingSize, paddingSize);
+    iconSize = getResources().getDimensionPixelSize(
+        vertical ? R.dimen.incall_labeled_button_size : R.dimen.incall_more_icon_size);
 
-    int iconSize = getResources().getDimensionPixelSize(R.dimen.incall_labeled_button_size);
-    int imageSize = getResources().getDimensionPixelSize(R.dimen.incall_labeled_button_icon_size);
-    int iconPadding = (iconSize - imageSize) / 2;
-
-    iconView = new ImageView(context, null, android.R.style.Widget_Material_Button_Colored);
+    iconView = new MaterialButton(context);
     LayoutParams iconParams = generateDefaultLayoutParams();
-    iconParams.width = iconSize;
+    iconParams.width = vertical ? LayoutParams.MATCH_PARENT : iconSize;
     iconParams.height = iconSize;
     iconView.setLayoutParams(iconParams);
-    iconView.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
-    iconView.setImageDrawable(icon);
-    iconView.setImageTintMode(Mode.SRC_IN);
-    iconView.setImageTintList(
+    iconView.setInsetTop(0);
+    iconView.setInsetBottom(0);
+    iconView.setPadding(0, 0, 0, 0);
+    iconView.setIcon(icon);
+    iconView.setIconSize(getResources().getDimensionPixelSize(
+        vertical ? R.dimen.incall_labeled_button_icon_size : R.dimen.incall_more_image_size));
+    iconView.setIconPadding(0);
+    iconView.setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
+    iconView.setIconTint(
         getResources().getColorStateList(R.color.incall_button_icon, context.getTheme()));
-
-    iconView.setBackground(
-        getResources().getDrawable(R.drawable.incall_button_background, context.getTheme()));
+    iconView.setBackgroundTintList(
+        new ColorStateList(
+            new int[][] {CHECKED_STATE_SET, new int[] {}},
+            new int[] {
+              context.getColor(R.color.incall_button_background_color),
+              context.getColor(
+                  vertical ? R.color.incall_button_unchecked_color : R.color.incall_sheet_color)
+            }));
+    iconView.setCornerRadius(iconSize / 2);
+    iconView.setClickable(false);
+    iconView.setFocusable(false);
+    iconView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
     iconView.setDuplicateParentStateEnabled(true);
-    iconView.setElevation(getResources().getDimension(R.dimen.incall_button_elevation));
-    iconView.setStateListAnimator(
-        AnimatorInflater.loadStateListAnimator(context, R.animator.incall_button_elevation));
     addView(iconView);
 
     labelView = new TextView(context);
     LayoutParams labelParams = generateDefaultLayoutParams();
     labelParams.width = LayoutParams.WRAP_CONTENT;
     labelParams.height = LayoutParams.WRAP_CONTENT;
-    labelParams.topMargin =
-        context.getResources().getDimensionPixelOffset(R.dimen.incall_button_label_margin);
     labelView.setLayoutParams(labelParams);
     labelView.setTextAppearance(R.style.Dialer_Incall_TextAppearance_Label);
+    if (vertical) {
+      labelParams.topMargin =
+          getResources().getDimensionPixelOffset(R.dimen.incall_button_label_margin);
+    } else {
+      labelParams.setMarginStart(
+          getResources().getDimensionPixelOffset(R.dimen.incall_more_label_margin));
+      labelView.setTextSize(
+          TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.incall_more_label_size));
+    }
     labelView.setText(labelText);
     labelView.setSingleLine();
     labelView.setMaxEms(9);
@@ -134,26 +136,33 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
   }
 
   @Override
+  public void setVisibility(int visibility) {
+    super.setVisibility(
+        visibility == INVISIBLE && getOrientation() == HORIZONTAL ? GONE : visibility);
+  }
+
+  @Override
   public void refreshDrawableState() {
     super.refreshDrawableState();
     iconView.setAlpha(isEnabled() ? 1f : DISABLED_STATE_OPACITY);
+    iconView.setCornerRadius(isChecked() ? iconSize / 3 : iconSize / 2);
     labelView.setAlpha(isEnabled() ? 1f : DISABLED_STATE_OPACITY);
   }
 
   public void setCheckedColor(@ColorInt int color) {
-    iconView.setImageTintList(
+    iconView.setIconTint(
         new ColorStateList(
             new int[][] {new int[] {android.R.attr.state_checked}, new int[] {}},
             new int[] {color, Color.WHITE}));
   }
 
   public Drawable getIconDrawable() {
-    return iconView.getDrawable();
+    return iconView.getIcon();
   }
 
   public void setIconDrawable(@DrawableRes int drawableRes) {
     if (iconResource != drawableRes) {
-      iconView.setImageResource(drawableRes);
+      iconView.setIconResource(drawableRes);
       iconResource = drawableRes;
     }
   }
@@ -168,7 +177,8 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
 
   /** Shows or hides a little down arrow to indicate that the button will pop up a menu. */
   public void setShouldShowMoreIndicator(boolean shouldShow) {
-    iconView.setBackground(shouldShow ? backgroundMore : background);
+    labelView.setCompoundDrawablesRelativeWithIntrinsicBounds(
+        0, 0, shouldShow ? R.drawable.incall_ic_arrow_drop_down : 0, 0);
   }
 
   @Override

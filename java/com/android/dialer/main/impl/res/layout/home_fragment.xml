@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <com.google.android.material.appbar.AppBarLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@android:color/transparent"
+      android:elevation="0dp"
+      android:stateListAnimator="@null">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_scrollFlags="scroll">
+
+      <HorizontalScrollView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/home_filters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp"
+            app:checkedChip="@+id/home_filter_all"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+          <com.google.android.material.chip.Chip
+              android:id="@+id/home_filter_all"
+              style="@style/HomeFilterChip"
+              android:text="@string/home_filter_all"/>
+
+          <com.google.android.material.chip.Chip
+              android:id="@+id/home_filter_missed"
+              style="@style/HomeFilterChip"
+              android:text="@string/home_filter_missed"/>
+
+          <com.google.android.material.chip.Chip
+              android:id="@+id/home_filter_contacts"
+              style="@style/HomeFilterChip"
+              android:text="@string/home_filter_contacts"/>
+
+          <com.google.android.material.chip.Chip
+              android:id="@+id/home_filter_incoming"
+              style="@style/HomeFilterChip"
+              android:text="@string/home_filter_incoming"/>
+
+          <com.google.android.material.chip.Chip
+              android:id="@+id/home_filter_outgoing"
+              style="@style/HomeFilterChip"
+              android:text="@string/home_filter_outgoing"/>
+        </com.google.android.material.chip.ChipGroup>
+      </HorizontalScrollView>
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingStart="20dp"
+          android:paddingTop="8dp"
+          android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/home_favorites_header"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableEnd="@drawable/ic_expand_less_24"
+            android:drawablePadding="4dp"
+            android:drawableTint="@color/home_header_text_color"
+            android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
+            android:gravity="center_vertical"
+            android:text="@string/home_favorites"
+            android:textColor="@color/home_header_text_color"
+            android:textSize="14sp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/home_view_contacts"
+            style="@style/Widget.Material3Expressive.Button.TonalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="@string/home_view_contacts"/>
+      </RelativeLayout>
+
+      <HorizontalScrollView
+          android:id="@+id/home_favorites"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/home_favorites_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+          <LinearLayout
+              android:id="@+id/home_add_favorite"
+              style="@style/HomeFavoriteItem">
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3Expressive.Button.IconButton.Tonal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:focusable="false"
+                android:importantForAccessibility="no"
+                app:icon="@drawable/quantum_ic_person_add_vd_theme_24"
+                app:materialSizeOverlay="@style/SizeOverlay.Material3Expressive.Button.IconButton.Medium"/>
+
+            <TextView
+                style="@style/HomeFavoriteName"
+                android:text="@string/home_add_favorite"/>
+          </LinearLayout>
+        </LinearLayout>
+      </HorizontalScrollView>
+    </LinearLayout>
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <FrameLayout
+      android:id="@+id/home_call_log_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

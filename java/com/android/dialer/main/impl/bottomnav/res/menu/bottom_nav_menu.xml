@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+      android:id="@+id/call_log_tab"
+      android:icon="@drawable/ic_home_24"
+      android:title="@string/tab_title_home"/>
+  <item
+      android:id="@+id/voicemail_tab"
+      android:icon="@drawable/quantum_ic_voicemail_vd_theme_24"
+      android:title="@string/tab_title_voicemail"
+      android:visible="false"/>
+  <item
+      android:id="@+id/keypad_tab"
+      android:icon="@drawable/quantum_ic_dialpad_vd_theme_24"
+      android:title="@string/tab_title_keypad"/>
+</menu>

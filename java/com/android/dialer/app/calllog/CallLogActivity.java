@@ -31,7 +31,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.R;
 import com.android.dialer.callstats.CallStatsFragment;
 import com.android.dialer.callstats.DoubleDatePickerDialog;
@@ -39,6 +38,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.util.ViewUtil;
+import com.google.android.material.tabs.TabLayout;
 
 /** Activity for viewing call history. */
 public class CallLogActivity extends TransactionSafeActivity implements
@@ -49,7 +49,6 @@ public class CallLogActivity extends TransactionSafeActivity implements
   private static final int TAB_INDEX_STATS = 2;
   private static final int TAB_INDEX_COUNT = 3;
   private ViewPager viewPager;
-  private ViewPagerTabs viewPagerTabs;
   private ViewPagerAdapter viewPagerAdapter;
   private CallLogFragment allCallsFragment;
   private CallLogFragment missedCallsFragment;
@@ -93,9 +92,7 @@ public class CallLogActivity extends TransactionSafeActivity implements
     viewPager.setOffscreenPageLimit(1);
     viewPager.setOnPageChangeListener(this);
 
-    viewPagerTabs = findViewById(R.id.viewpager_header);
-
-    viewPagerTabs.setViewPager(viewPager);
+    ((TabLayout) findViewById(R.id.viewpager_header)).setupWithViewPager(viewPager);
     viewPager.setCurrentItem(startingTab);
 
     setupInsets(findViewById(R.id.calllog_frame));
@@ -160,21 +157,16 @@ public class CallLogActivity extends TransactionSafeActivity implements
   }
 
   @Override
-  public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-    viewPagerTabs.onPageScrolled(position, positionOffset, positionOffsetPixels);
-  }
+  public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
   @Override
   public void onPageSelected(int position) {
     updateMissedCalls(position);
     selectedPageIndex = position;
-    viewPagerTabs.onPageSelected(position);
   }
 
   @Override
-  public void onPageScrollStateChanged(int state) {
-    viewPagerTabs.onPageScrollStateChanged(state);
-  }
+  public void onPageScrollStateChanged(int state) {}
 
   @Override
   public void onDateSet(long from, long to) {
