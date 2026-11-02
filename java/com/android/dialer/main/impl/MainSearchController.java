@@ -222,6 +222,7 @@ public class MainSearchController implements SearchBarListener {
     }
 
     fab.show();
+    bottomNav.setKeypadSelected(false);
     toolbar.slideDown(animate, fragmentContainer);
     toolbar.transferQueryFromDialpad(dialpadFragment.getQuery());
     activity.setTitle(R.string.main_activity_label);
@@ -261,7 +262,7 @@ public class MainSearchController implements SearchBarListener {
   public void onDialpadShown() {
     LogUtil.enterBlock("MainSearchController.onDialpadShown");
     dialpadFragment.slideUp(true);
-    hideBottomNav();
+    bottomNav.setKeypadSelected(true);
   }
 
   /**
@@ -311,7 +312,7 @@ public class MainSearchController implements SearchBarListener {
   }
 
   /** Calls {@link #hideDialpad(boolean)}, removes the search fragment and clears the dialpad. */
-  private void closeSearch(boolean animate) {
+  public void closeSearch(boolean animate) {
     LogUtil.enterBlock("MainSearchController.closeSearch");
     if (searchFragment == null) {
       LogUtil.e("MainSearchController.closeSearch", "Search fragment is null.");
@@ -335,7 +336,7 @@ public class MainSearchController implements SearchBarListener {
     }
     showBottomNav();
     updateStatusBarColor(android.R.attr.statusBarColor);
-    toolbar.collapse(animate);
+    toolbar.collapse(false);
     activity.getSupportFragmentManager().beginTransaction().hide(searchFragment).commit();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
@@ -397,7 +398,7 @@ public class MainSearchController implements SearchBarListener {
     LogUtil.enterBlock("MainSearchController.openSearch");
 
     fab.hide();
-    toolbar.expand(/* animate=*/ true, query, /* requestFocus */ true);
+    toolbar.expand(/* animate=*/ false, query, /* requestFocus */ true);
     toolbar.showKeyboard();
     hideBottomNav();
     updateStatusBarColor(android.R.attr.colorBackgroundFloating);

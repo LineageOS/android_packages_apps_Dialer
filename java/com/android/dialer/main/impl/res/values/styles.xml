@@ -28,14 +28,14 @@
   <style name="MainActivityTheme" parent="MainActivityThemeBase">
     <!-- Used to change the navigation bar color -->
     <item name="android:windowLightNavigationBar">true</item>
-    <item name="android:navigationBarColor">@color/rounded_dialpad_bg_color</item>
+    <item name="android:navigationBarColor">@color/dialer_nav_bar_color</item>
     <item name="android:navigationBarDividerColor">@null</item>
   </style>
 
   <style name="MainActivityTheme.Dark" parent="MainActivityThemeBase.Dark">
     <!-- Used to change the navigation bar color -->
     <item name="android:windowLightNavigationBar">true</item>
-    <item name="android:navigationBarColor">@color/rounded_dialpad_bg_color</item>
+    <item name="android:navigationBarColor">@color/dialer_nav_bar_color</item>
     <item name="android:navigationBarDividerColor">@null</item>
   </style>
 
@@ -67,5 +67,33 @@
   <!-- Colors our actionbar text in action mode to dialer white text color. -->
   <style name="ActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
+  </style>
+
+  <style name="HomeFilterChip" parent="Widget.Material3.Chip.Filter">
+    <item name="chipBackgroundColor">@color/home_chip_background</item>
+    <item name="chipSurfaceColor">@android:color/transparent</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
+
+  <style name="HomeFavoriteItem">
+    <item name="android:layout_width">80dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:background">?android:attr/selectableItemBackground</item>
+    <item name="android:gravity">center_horizontal</item>
+    <item name="android:orientation">vertical</item>
+    <item name="android:paddingTop">8dp</item>
+    <item name="android:paddingBottom">8dp</item>
+  </style>
+
+  <style name="HomeFavoriteName">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginTop">8dp</item>
+    <item name="android:ellipsize">end</item>
+    <item name="android:gravity">center</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
+    <item name="android:textSize">14sp</item>
   </style>
 </resources>

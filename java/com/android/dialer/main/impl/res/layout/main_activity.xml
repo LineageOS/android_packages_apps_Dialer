@@ -45,6 +45,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
     <com.android.dialer.widget.DialerFloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -57,6 +61,7 @@
         app:tint="@color/dialer_fab_icon_color"
         android:contentDescription="@string/dialpad_button_content_description"
         app:backgroundTint="@color/dialer_theme_color_light"/>
+    </FrameLayout>
 
     <include android:id="@+id/promotion_bottom_sheet"
         layout="@layout/promotion_bottom_sheet"/>
@@ -75,6 +80,7 @@
       android:id="@+id/dialpad_fragment_container"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_above="@+id/bottom_nav_bar"
       android:elevation="10dp"/>
 
   <!-- TODO(calderwoodra): investigate what this is for and why we want it. -->

@@ -4,7 +4,10 @@
     <color name="incall_background_gradient_middle">@color/dialer_theme_color_dark</color>
     <color name="incall_background_gradient_bottom">@color/dialer_theme_color_dark</color>
     <color name="incall_background_multiwindow">@color/dialer_theme_color_dark</color>
-    <color name="incall_button_icon_color">@android:color/black</color>
+    <color name="incall_button_icon_color">@android:color/system_on_primary_dark</color>
+    <color name="incall_text_primary_color">@android:color/system_on_surface_dark</color>
+    <color name="incall_text_secondary_color">@android:color/system_on_surface_variant_dark</color>
+    <bool name="incall_light_system_bars">false</bool>
     <!-- There is a nearby, more-convenient universe in which the following neutral colors are
          automatically adapted and do not need to be specified separately in this -night variant.
          If the RTT banner items become invisible again in the future, try changing these to

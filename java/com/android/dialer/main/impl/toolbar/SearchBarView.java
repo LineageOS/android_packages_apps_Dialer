@@ -26,7 +26,6 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,11 +37,13 @@ import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.util.DialerUtils;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.shape.RelativeCornerSize;
 
 import java.util.Optional;
 
 /** Search bar for {@link MainToolbar}. Mostly used to handle expand and collapse animation. */
-final class SearchBarView extends FrameLayout {
+final class SearchBarView extends MaterialCardView {
 
   private static final int ANIMATION_DURATION = 200;
   private static final float EXPAND_MARGIN_FRACTION_START = 0.8f;
@@ -144,7 +145,7 @@ final class SearchBarView extends FrameLayout {
             if (requestFocus) {
               searchBox.requestFocus();
             }
-            setBackgroundResource(R.drawable.search_bar_background);
+            setShapeAppearanceModel(getShapeAppearanceModel().withCornerSize(0));
           }
         });
     animator.start();
@@ -176,7 +177,8 @@ final class SearchBarView extends FrameLayout {
             super.onAnimationEnd(animation);
             searchBox.setText("");
             searchBoxExpanded.setVisibility(INVISIBLE);
-            setBackgroundResource(R.drawable.search_bar_background_rounded_corners);
+            setShapeAppearanceModel(
+                getShapeAppearanceModel().withCornerSize(new RelativeCornerSize(0.5f)));
           }
         });
     animator.start();

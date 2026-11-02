@@ -54,6 +54,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
    * type. Exception: excludes Calls.VOICEMAIL_TYPE.
    */
   public static final int CALL_TYPE_ALL = -1;
+  public static final int CALL_TYPE_CONTACTS = -2;
 
   private static final int NUM_LOGS_TO_DISPLAY = 1000;
   /** The token for the query to fetch the old entries from the call log. */
@@ -170,6 +171,10 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     } else {
       where.append(" AND NOT ");
       where.append("(" + Calls.TYPE + " = " + Calls.VOICEMAIL_TYPE + ")");
+    }
+
+    if (callType == CALL_TYPE_CONTACTS) {
+      where.append(" AND (").append(Calls.CACHED_NAME).append(" != '')");
     }
 
     if (newerThan > 0) {

@@ -167,9 +167,11 @@ public class PhoneCallDetailsHelper {
     views.nameView.setTypeface(typeface);
     views.callLocationAndDate.setTypeface(typeface);
     views.callLocationAndDate.setTextColor(
-        details.isRead
-            ? ThemeComponent.get(context).theme().getTextColorSecondary()
-            : ThemeComponent.get(context).theme().getTextColorPrimary());
+        details.callTypes[0] == Calls.MISSED_TYPE
+            ? context.getColor(R.color.dialer_red)
+            : details.isRead
+                ? ThemeComponent.get(context).theme().getTextColorSecondary()
+                : ThemeComponent.get(context).theme().getTextColorPrimary());
   }
 
   private void setNameView(PhoneCallDetailsViews views, PhoneCallDetails details) {

@@ -22,7 +22,6 @@ import android.util.AttributeSet;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
@@ -56,7 +55,7 @@ public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemCl
   @Override
   protected void onFinishInflate() {
     super.onFinishInflate();
-    ImageButton optionsMenuButton = findViewById(R.id.main_options_menu_button);
+    View optionsMenuButton = findViewById(R.id.main_options_menu_button);
     overflowMenu = new MainToolbarMenu(getContext(), optionsMenuButton);
     overflowMenu.inflate(R.menu.main_menu);
     overflowMenu.setOnMenuItemClickListener(this);

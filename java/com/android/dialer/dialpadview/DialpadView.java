@@ -23,7 +23,6 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.RippleDrawable;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
@@ -36,7 +35,6 @@ import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -87,7 +85,7 @@ public class DialpadView extends LinearLayout {
 
   private EditText digits;
   private TextView digitsHint;
-  private ImageButton delete;
+  private View delete;
   private View overflowMenuButton;
   private ViewGroup rateContainer;
   private TextView ildCountry;
@@ -140,7 +138,7 @@ public class DialpadView extends LinearLayout {
     setupKeypad();
     digits = (EditText) findViewById(R.id.digits);
     digitsHint = findViewById(R.id.digits_hint);
-    delete = (ImageButton) findViewById(R.id.deleteButton);
+    delete = findViewById(R.id.deleteButton);
     overflowMenuButton = findViewById(R.id.dialpad_overflow);
     rateContainer = (ViewGroup) findViewById(R.id.rate_container);
     ildCountry = (TextView) rateContainer.findViewById(R.id.ild_country);
@@ -194,16 +192,13 @@ public class DialpadView extends LinearLayout {
         numberContentDescription = spannable;
       }
 
-      final RippleDrawable rippleBackground =
-          (RippleDrawable) getContext().getDrawable(R.drawable.btn_dialpad_key);
       if (rippleColor != null) {
-        rippleBackground.setColor(rippleColor);
+        dialpadKey.setRippleColor(rippleColor);
       }
 
       numberView.setText(numberString);
       numberView.setElegantTextHeight(false);
       dialpadKey.setContentDescription(numberContentDescription);
-      dialpadKey.setBackground(rippleBackground);
 
       TextView primaryLettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
       TextView secondaryLettersView =
@@ -324,7 +319,7 @@ public class DialpadView extends LinearLayout {
     return digitsHint;
   }
 
-  public ImageButton getDeleteButton() {
+  public View getDeleteButton() {
     return delete;
   }
 
