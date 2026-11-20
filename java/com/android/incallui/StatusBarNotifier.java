@@ -307,6 +307,8 @@ public class StatusBarNotifier
       return;
     }
 
+    final Person person = buildPerson(contactInfo, call, contentTitle, largeIcon);
+
     if (largeIcon != null) {
       largeIcon = getRoundedIcon(largeIcon);
     }
@@ -371,10 +373,12 @@ public class StatusBarNotifier
       addDismissUpgradeRequestAction(builder);
       addAcceptUpgradeRequestAction(builder);
     } else {
-      createIncomingCallNotification(call, callState, callAudioState, builder);
+      createCallNotification(call, callState, callAudioState, person, builder);
     }
 
-    addPersonReference(builder, contactInfo, call);
+    if (person.getUri() != null) {
+      builder.addPerson(person);
+    }
 
     Trace.beginSection("fire notification");
     // Fire off the notification
@@ -408,23 +412,41 @@ public class StatusBarNotifier
     Trace.endSection();
   }
 
-  private void createIncomingCallNotification(
-      DialerCall call, int state, CallAudioState callAudioState, Notification.Builder builder) {
+  /**
+   * Applies {@link Notification.CallStyle} so that the system treats this as a call notification
+   * (status bar call chip, ranking, non-dismissible, system-provided answer/decline buttons).
+   */
+  private void createCallNotification(
+      DialerCall call,
+      int state,
+      CallAudioState callAudioState,
+      Person person,
+      Notification.Builder builder) {
     setNotificationWhen(call, state, builder);
 
     // Add hang up option for any active calls (active | onhold), outgoing calls (dialing).
     if (state == DialerCallState.ACTIVE
         || state == DialerCallState.ONHOLD
         || DialerCallState.isDialing(state)) {
-      addHangupAction(builder);
+      LogUtil.d("StatusBarNotifier.createCallNotification", "using ongoing CallStyle");
+      builder.setStyle(
+          Notification.CallStyle.forOngoingCall(
+                  person, createNotificationPendingIntent(context, ACTION_HANG_UP_ONGOING_CALL))
+              .setIsVideo(call.isVideoCall()));
       addSpeakerAction(builder, callAudioState);
     } else if (state == DialerCallState.INCOMING || state == DialerCallState.CALL_WAITING) {
-      addDismissAction(builder);
-      if (call.isVideoCall()) {
-        addVideoCallAction(builder);
-      } else {
-        addAnswerAction(builder);
-      }
+      LogUtil.d("StatusBarNotifier.createCallNotification", "using incoming CallStyle");
+      PendingIntent declineIntent =
+          createNotificationPendingIntent(context, ACTION_DECLINE_INCOMING_CALL);
+      PendingIntent answerIntent =
+          createNotificationPendingIntent(
+              context,
+              call.isVideoCall()
+                  ? ACTION_ANSWER_VIDEO_INCOMING_CALL
+                  : ACTION_ANSWER_VOICE_INCOMING_CALL);
+      builder.setStyle(
+          Notification.CallStyle.forIncomingCall(person, declineIntent, answerIntent)
+              .setIsVideo(call.isVideoCall()));
     }
   }
 
@@ -544,8 +566,16 @@ public class StatusBarNotifier
     return preferredName;
   }
 
-  private void addPersonReference(
-      Notification.Builder builder, ContactCacheEntry contactInfo, DialerCall call) {
+  /**
+   * Builds the {@link Person} describing the other party. It is used both by
+   * {@link Notification.CallStyle} (which requires a non-empty name) and as the notification's
+   * person reference (used e.g. by DND to identify starred contacts).
+   */
+  private Person buildPerson(
+      ContactCacheEntry contactInfo,
+      DialerCall call,
+      @Nullable String contentTitle,
+      @Nullable Bitmap photo) {
     // Query {@link Contacts#CONTENT_LOOKUP_URI} directly with work lookup key is not allowed.
     // So, do not pass {@link Contacts#CONTENT_LOOKUP_URI} to NotificationManager to avoid
     // NotificationManager using it.
@@ -555,9 +585,15 @@ public class StatusBarNotifier
     } else if (!TextUtils.isEmpty(call.getNumber())) {
       uri = Uri.fromParts(PhoneAccount.SCHEME_TEL, call.getNumber(), null).toString();
     }
-    if (uri != null) {
-      builder.addPerson(new Person.Builder().setUri(uri).build());
+
+    CharSequence name =
+        TextUtils.isEmpty(contentTitle) ? context.getText(R.string.unknown) : contentTitle;
+
+    Person.Builder personBuilder = new Person.Builder().setName(name).setUri(uri);
+    if (photo != null) {
+      personBuilder.setIcon(Icon.createWithBitmap(photo));
     }
+    return personBuilder.build();
   }
 
   /** Gets a large icon from the contact info object to display in the notification. */
@@ -770,50 +806,6 @@ public class StatusBarNotifier
     return spannable;
   }
 
-  private void addAnswerAction(Notification.Builder builder) {
-    LogUtil.d(
-        "StatusBarNotifier.addAnswerAction",
-        "will show \"answer\" action in the incoming call Notification");
-    PendingIntent answerVoicePendingIntent =
-        createNotificationPendingIntent(context, ACTION_ANSWER_VOICE_INCOMING_CALL);
-    builder.addAction(
-        new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_call_vd_theme_24),
-                getActionText(
-                    R.string.notification_action_answer, R.color.notification_action_accept),
-                answerVoicePendingIntent)
-            .build());
-  }
-
-  private void addDismissAction(Notification.Builder builder) {
-    LogUtil.d(
-        "StatusBarNotifier.addDismissAction",
-        "will show \"decline\" action in the incoming call Notification");
-    PendingIntent declinePendingIntent =
-        createNotificationPendingIntent(context, ACTION_DECLINE_INCOMING_CALL);
-    builder.addAction(
-        new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_close_vd_theme_24),
-                getActionText(
-                    R.string.notification_action_dismiss, R.color.notification_action_dismiss),
-                declinePendingIntent)
-            .build());
-  }
-
-  private void addHangupAction(Notification.Builder builder) {
-    LogUtil.d(
-        "StatusBarNotifier.addHangupAction",
-        "will show \"hang-up\" action in the ongoing active call Notification");
-    PendingIntent hangupPendingIntent =
-        createNotificationPendingIntent(context, ACTION_HANG_UP_ONGOING_CALL);
-    builder.addAction(
-        new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_call_end_vd_theme_24),
-                context.getText(R.string.notification_action_end_call),
-                hangupPendingIntent)
-            .build());
-  }
-
   private void addSpeakerAction(Notification.Builder builder, CallAudioState callAudioState) {
     if ((callAudioState.getSupportedRouteMask() & CallAudioState.ROUTE_BLUETOOTH)
         == CallAudioState.ROUTE_BLUETOOTH) {
@@ -852,22 +844,6 @@ public class StatusBarNotifier
                 Icon.createWithResource(context, R.drawable.quantum_ic_phone_in_talk_vd_theme_24),
                 context.getText(R.string.notification_action_speaker_off),
                 speakerOffPendingIntent)
-            .build());
-  }
-
-  private void addVideoCallAction(Notification.Builder builder) {
-    LogUtil.i(
-        "StatusBarNotifier.addVideoCallAction",
-        "will show \"video\" action in the incoming call Notification");
-    PendingIntent answerVideoPendingIntent =
-        createNotificationPendingIntent(context, ACTION_ANSWER_VIDEO_INCOMING_CALL);
-    builder.addAction(
-        new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_videocam_vd_white_24),
-                getActionText(
-                    R.string.notification_action_answer_video,
-                    R.color.notification_action_answer_video),
-                answerVideoPendingIntent)
             .build());
   }
 
